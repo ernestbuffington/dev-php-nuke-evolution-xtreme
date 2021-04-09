@@ -47,6 +47,7 @@
       Validation                               v1.1.0       10/17/2005
       Extra Functions                          v1.0.0       12/22/2005
 	  NSN Center Blocks                        v2.2.1       05/26/2009
+	  Titanium Mod                             v1.0.0       04/09/2021
  ************************************************************************/
 
 if(defined('NUKE_EVO')) return;
@@ -242,6 +243,12 @@ require_once(NUKE_INCLUDE_DIR.'functions_cache.php');
 
 require_once(NUKE_INCLUDE_DIR.'functions_evo.php');
 require_once(NUKE_INCLUDE_DIR.'functions_evo_custom.php');
+
+# added Titanium Mod v1.0 START
+require_once(NUKE_INCLUDE_DIR.'functions_titanium.php');
+require_once(NUKE_INCLUDE_DIR.'functions_titanium_custom.php');
+# added Titanium Mod v1.0 END
+
 include_once(NUKE_INCLUDE_DIR.'validation.php');
 
 // We globalize the $cookie and $userinfo variables,
