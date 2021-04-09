@@ -61,4 +61,4 @@ If you need help with an install do not hesitate to submit a request by clicking
 <p><strong>The PHP-Nuke Evolution Xtreme Team </strong>(This is the US Support Team)<br />
 <a href="https://dev-php-nuke-evolution-xtreme.86it.us/index.php" rel="nofollow">http://dev-php-nuke-evolution-xtreme.86it.us/index.php</a></p>
 
-# Note : This repo does not carry the same code used in other countries. This for the United States Only
+# Note : This repo does not carry the same code used in other countries. This is strictly the US version of Nuke-Evolution!
