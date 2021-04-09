@@ -349,7 +349,7 @@ switch($op)
 /*****[END]********************************************
  [ Mod:     Forum Logout                       v1.0.0 ]
  ******************************************************/
-        $user = "";
+		$user = "";
         //include_once(NUKE_BASE_DIR.'header.php');
         if (!empty($redirect)) {
             //echo "<META HTTP-EQUIV=\"refresh\" content=\"2;URL=modules.php?name=$redirect\">";

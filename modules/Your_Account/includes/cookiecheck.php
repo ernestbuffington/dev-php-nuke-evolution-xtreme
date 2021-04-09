@@ -140,7 +140,7 @@ function ShowCookies() {
 global $ya_config,$module_name;
 
 include_once(NUKE_BASE_DIR.'header.php');
-Show_CNBYA_menu();
+//Show_CNBYA_menu();
 OpenTable();
 
 $CookieArray    = $HTTP_COOKIE_VARS;
@@ -155,15 +155,19 @@ $CookieArray = $_COOKIE;
     echo "<table cellspacing=\"0\" cellpadding=\"5\" border=\"1\" align=\"left\"><tr><td colspan=\"2\">";
     echo "<span class=\"title\">"._YA_CURRENTCOOKIE."</span></td></tr>";
     echo "<tr><td nowrap=\"nowrap\"><strong>"._YA_COOKIENAME."</strong></td><td width=\"100%\"><strong>"._YA_COOKIEVAL."</strong></td></tr>";
-    if (is_array($CookieArray) && !empty($CookieArray)) {
-        while(list($cName,$cValue) = each($CookieArray)) {
+    
+	if (is_array($CookieArray) && !empty($CookieArray)) 
+	{
+        while(list($cName,$cValue) = each($CookieArray)) 
+		{
             $cName     = str_replace(" ","",$cName);
             if (empty($cValue)) $cValue = "(empty)";
-            $cMore     = substr("$cValue", 36, 1);
+            $cMore     = substr("$cValue", 50, 1);
             if (!empty($cMore)) 
-            $cValue = substr("$cValue", 0, 35)." ( . . . )";
+            $cValue = substr("$cValue", 0, 50)." ( . . . )";
             echo "<tr><td align=\"left\" nowrap=\"nowrap\">$cName</td><td width=\"100%\" align=\"left\">$cValue</td></tr>";
         }
+		
     echo "</table></td><td valign=\"top\"><input type=\"submit\" name=\"submit\" value='"._YA_COOKIEDELTHESE."'></td></form></tr></table>";
     }
     else {
@@ -180,10 +184,10 @@ $CookieArray = "";
 function DeleteCookies() {
 global $ya_config,$module_name,$prefix,$user,$username,$CookieArray,$cookie;
 include_once(NUKE_BASE_DIR.'header.php');
-Show_CNBYA_menu();
+//Show_CNBYA_menu();
 OpenTable();
 
-    $r_uid        = $cookie[0];
+    $r_uid         = $cookie[0];
     $r_username    = $cookie[1];
     echo $r_username;
     echo $r_uid;
@@ -233,5 +237,4 @@ unset( $_COOKIE[session_name()] );
 CloseTable();
 include_once(NUKE_BASE_DIR.'footer.php');
 }
-
 ?>

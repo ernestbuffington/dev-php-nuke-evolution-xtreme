@@ -266,23 +266,60 @@ global $admin, $sid, $tipath, $theme_name;
 $posted = _POSTEDON.' '.$datetime.' '._BY.' ';
 $posted .= get_author($aid);
 
-echo '<article>'
-    .'  <section id="flex-container">'
-    .'      <div class="st1"></div>'
-    .'      <div class="st2"><div style="padding-top: 14px;"><span class="storytitle">'.$title.'</span></div></div>'
-    .'      <div class="st3"></div>'
-    .'  </section>'
-    .'  <section id="flex-container">'
-    .'      <div class="st4"></div>'
-    .'      <div class="st5" class="col-12"><span class="content" style="vertical-align: top">'.$content.'</span><br /><br /></div>'
-    .'      <div class="st6"></div>'
-    .'  </section>'
-    .'  <section id="flex-container">'
-    .'      <div class="st7"></div>'
-    .'      <div class="st8"><div class="postedoption">'.$posted.'</div></div>'
-    .'      <div class="st9"></div>'
-    .'  </section>'
-    .'</article>';
+echo '<article>';
+
+echo '  <section id="flex-container">';
+echo '      <div class="st1"></div>';
+echo '      <div class="st2"><div style="padding-top: 14px;"><span class="storytitle">'.$title.'</span></div></div>';
+echo '      <div class="st3"></div>';
+echo '  </section>';
+
+echo '  <section id="flex-container">';
+echo '      <div class="st4"></div>';
+echo '      <div class="st5" class="col-12"><span class="content" style="vertical-align: top">'.$content.'</span><br /><br /><div align="right">'.$posted.'</div><br />';
+
+if ( defined('facebook') ):
+  global $sid, $appID, $my_url;
+  #facebook comment plugins START
+  echo '<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId='.$appID.'&autoLogAppEvents=1" nonce="JBKXliWW"></script>'."\n";
+
+  echo '<div id="fb-root"></div>'."\n";
+  echo '<div class="fb-like" 
+        data-href="https://'.$my_url.'/modules.php?name=News&amp;file=article&amp;sid='.$sid.'" 
+		data-width="" 
+		data-layout="button_count" 
+		data-action="like" 
+		data-size="small" 
+		data-share="true">
+		
+		</div>';	
+
+  echo '<div style="background-color: #454545" 
+             class="fb-comments" 
+             data-colorscheme="light" 
+             data-href="https://'.$my_url.'/modules.php?name=News&amp;file=article&amp;sid='.$sid.'" 
+			 data-width="100%" 
+			 data-numposts="5">
+			 
+			 </div>'."\n"; 
+  #facebook comment plugin END
+endif;
+
+echo '</div>';
+echo '<div class="st6"></div>';
+echo '</section>';
+
+echo '<section id="flex-container">';
+echo '<div class="st7"></div>';
+
+echo '<div class="st8">';
+
+echo '<div class="postedoption"></div></div>';
+
+echo '<div class="st9"></div>';
+echo '</section>';
+
+echo '</article>';
 }
 
 /*-------------------*/
