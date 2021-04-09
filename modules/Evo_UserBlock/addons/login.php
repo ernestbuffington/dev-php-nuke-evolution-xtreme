@@ -1,7 +1,8 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /************************************************************************
    Nuke-Evolution: Server Info Administration
@@ -20,7 +21,7 @@ if(!defined('NUKE_EVO')) {
    die ("Illegal File Access");
 }
 
-global $evouserinfo_login, $lang_evo_userblock;
+global $evouserinfo_login, $lang_evo_userblock, $appID;
 
 function evouserinfo_login () {
    global $lang_evo_userblock, $evouserinfo_login;
@@ -65,20 +66,57 @@ function evouserinfo_login () {
     $evouserinfo_login .= "<tr><td align=\"center\"><input class=\"evo-login-submit\" type=\"submit\" value=\"".$lang_evo_userblock['BLOCK']['LOGIN']['LOGIN']."\"></td></tr></table></form>\n";
 }
 
-
+?>
+<style>
+.myFblogin{
+	text-align:center;
+}
+</style>
+<?
 if (!is_user()) 
 {
     evouserinfo_login();
+
+    if ( defined('facebook') ): 
+    
+	  if(isset($_COOKIE['fbsr_' . $appID])):
+	  // do nothing
+	  else:
+	    $evouserinfo_login .= '<div class="myFblogin">';
+        $evouserinfo_login .= 'Login to our facebook app';
+        $evouserinfo_login .= '<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>';
+	    $evouserinfo_login .= '</div>';
+	  endif;
+	
+	endif;
+
 } 
 else 
 {
     $evouserinfo_login .= '<div style="padding-left: 10px;">';
-    $evouserinfo_login .= '  <i class="fa fa-angle-double-right fa-right-arrows" aria-hidden="true"></i>&nbsp;<a href="modules.php?name=Your_Account&amp;op=logout">'.$lang_evo_userblock['BLOCK']['LOGIN']['LOGOUT'].'</a>';
+    $evouserinfo_login .= '  <font color="violet"><i class="fas fa-sign-out-alt" aria-hidden="true"></i></font>&nbsp;&nbsp;<a href="modules.php?name=Your_Account&amp;op=logout">'.$lang_evo_userblock['BLOCK']['LOGIN']['LOGOUT'].'</a>';
     $evouserinfo_login .= '</div>';
 
     $evouserinfo_login .= '<div style="padding-left: 10px;">';
-    $evouserinfo_login .= '  <i class="fa fa-angle-double-right fa-right-arrows" aria-hidden="true"></i>&nbsp;<a href="modules.php?name=Your_Account&op=ShowCookiesRedirect">'.$lang_evo_userblock['BLOCK']['LOGIN']['COOKIES'].'</a>';
+    $evouserinfo_login .= '  <font color="red"><i class="fas fa-user-times"></i></font>&nbsp;<a href="modules.php?name=Your_Account&op=delete">'.$lang_evo_userblock['BLOCK']['LOGIN']['DELETE'].'</a>';
     $evouserinfo_login .= '</div>';
-}
 
+    $evouserinfo_login .= '<div style="padding-left: 10px;">';
+    $evouserinfo_login .= '  <font color="tan"><i class="fas fa-cookie" aria-hidden="true"></i></font>&nbsp;&nbsp;<a href="modules.php?name=Your_Account&op=ShowCookiesRedirect">'.   $lang_evo_userblock['BLOCK']['LOGIN']['COOKIES'].'</a>';
+    $evouserinfo_login .= '</div>';
+
+    if ( defined('facebook') ): 
+	  
+	  if(isset($_COOKIE['fbsr_' . $appID])):
+	  // do nothing
+	  else:
+        $evouserinfo_login .= '<hr>';
+	    $evouserinfo_login .= '<div class="myFblogin">';
+        $evouserinfo_login .= 'Login to our facebook app';
+        $evouserinfo_login .= '<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>';
+	    $evouserinfo_login .= '</div>';
+	  endif;
+	
+	endif;
+}
 ?>

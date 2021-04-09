@@ -24,8 +24,9 @@ $lang_evo_userblock['BLOCK']['LOGIN']['LOST'] = 'Lost Password';
 $lang_evo_userblock['BLOCK']['LOGIN']['LOGIN'] = 'Login';
 $lang_evo_userblock['BLOCK']['LOGIN']['USERNAME'] = 'Username';
 $lang_evo_userblock['BLOCK']['LOGIN']['PASSWORD'] = 'Password';
-$lang_evo_userblock['BLOCK']['LOGIN']['LOGOUT'] = 'Logout';
-$lang_evo_userblock['BLOCK']['LOGIN']['COOKIES'] = 'Clear Cookies';
+$lang_evo_userblock['BLOCK']['LOGIN']['LOGOUT'] = 'Log Me Out';
+$lang_evo_userblock['BLOCK']['LOGIN']['COOKIES'] = 'View My Cookies';
+$lang_evo_userblock['BLOCK']['LOGIN']['DELETE'] = 'Deactivate Account';
 
 //Online
 $lang_evo_userblock['BLOCK']['ONLINE']['BREAK'] = ':';
