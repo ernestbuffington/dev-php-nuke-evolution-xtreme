@@ -33,8 +33,8 @@
 
 <h5>NOTE</h5>
 
-<p><a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=77" rel="nofollow" target="_top">Fresh install</a><br />
-<a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=77" rel="nofollow" target="_top">Upgrade</a></p>
+<p><a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=77" rel="nofollow" target="_tab">Fresh install</a><br />
+<a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=77" rel="nofollow" target="_tab">Upgrade</a></p>
 
 <h2>Security</h2>
 
@@ -44,16 +44,16 @@
 
 <h2>Help</h2>
 
-<p>If you are having issues with your installation please do not hesitate to submit a report by clicking <a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=RequestSubmit&amp;project_id=77" target="_top">HERE</a><br />
-If you need help with an install do not hesitate to submit a request by clicking <a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=RequestSubmit&amp;project_id=77" target="_top">HERE</a></p>
+<p>If you are having issues with your installation please do not hesitate to submit a report by clicking <a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=RequestSubmit&amp;project_id=77" target="_tab">HERE</a><br />
+If you need help with an install do not hesitate to submit a request by clicking <a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=RequestSubmit&amp;project_id=77" target="_tab">HERE</a></p>
 
 <h2>Feedback, Bugs, and Improvements</h2>
 
 <p>If you have any suggestions, feedback, or ideas you feel will be a nice contribution to PHP-Nuke Evolution Xtreme please use the following links</p>
 
-<p><a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=RequestSubmit&amp;project_id=77" target="_top">Help improve it</a><br />
-<a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=ReportSubmit&amp;project_id=77" target="_top">Report a bug</a><br />
-<a href="https://www.86it.us/modules.php?name=Feedback" target="_top">Your feedback</a></p>
+<p><a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=RequestSubmit&amp;project_id=77" target="_tab">Help improve it</a><br />
+<a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=ReportSubmit&amp;project_id=77" target="_tab">Report a bug</a><br />
+<a href="https://www.86it.us/modules.php?name=Feedback" target="_tab">Your feedback</a></p>
 
 <hr />
 <p>Thanks for using our enhanced PHP-Nuke Web Portal System and we hope you enjoy it&nbsp;&nbsp;</p>
