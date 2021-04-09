@@ -1,0 +1,17 @@
+General purpose self-explanatory file with news headlines
+%%
+efewfewf
+/modules.php?name=News&file=article&sid=4
+Monday, January 07
+Lonestar
+
+0
+
+%%
+trhtrhtrh
+/modules.php?name=News&file=article&sid=2
+Sunday, January 06
+Lonestar
+
+0
+
