@@ -45,15 +45,29 @@ function head()
     global $sitename, $ab_config, $modheader, $cache;
 
     $ThemeSel = get_theme();
-    echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n";
-    // echo '<!DOCTYPE html>';
-    // echo "<html lang=\""._LANGCODE."\" dir=\""._LANG_DIRECTION."\">\n";
-    echo '<head>'."\n";
+    
+	if (@file_exists(NUKE_THEMES_DIR.$ThemeSel.'/includes/mimetype.php'))  
+    include(NUKE_THEMES_DIR.$ThemeSel.'/includes/mimetype.php');
+	else 
+	{
+      echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd" />'."\n";
+      echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="'._LANGCODE.'">'."\n";
+      echo '<html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="https://www.facebook.com/2008/fbml" />'."\n"; 
+      echo "<!-- START <head> -->\n";
+      echo '<head>'."\n";
+      echo '<!--[if IE]>'."\n";
+      echo '<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />'."\n";
+      echo '<![endif]-->'."\n";
+      echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />'."\n";
+      echo '<meta http-equiv="Content-Language" content="'._LANGCODE.'" />'."\n";
+      echo '<meta http-equiv="Content-Style-Type" content="text/css" />'."\n";
+      echo '<meta http-equiv="Content-Script-Type" content="text/javascript" />'."\n";
+    }	
+    include_once(NUKE_INCLUDE_DIR.'meta.php');
 
     # function to grab the page title.
     the_pagetitle();
 
-    include_once(NUKE_INCLUDE_DIR.'meta.php');
     include_once(NUKE_INCLUDE_DIR.'javascript.php');
     include_once(NUKE_THEMES_DIR.$ThemeSel.'/theme.php');
 
