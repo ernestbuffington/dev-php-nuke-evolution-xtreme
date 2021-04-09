@@ -53,7 +53,7 @@ If you need help with an install do not hesitate to submit a request by clicking
 
 <p><a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=RequestSubmit&amp;project_id=77" target="_tab">Help improve the US version of PHP-Nuke Evolution</a><br />
 <a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=ReportSubmit&amp;project_id=77" target="_tab">Report a PHP-Nuke Evolution bug</a><br />
-<a href="https://www.86it.us/modules.php?name=Feedback" target="_tab">Your feedback</a></p>
+<a href="https://www.86it.us/modules.php?name=Feedback" target="_tab">Your PHP-Nuke Evolution feedback</a></p>
 
 <hr />
 <p>Thanks for using our enhanced PHP-Nuke Web Portal System and we hope you enjoy it&nbsp;&nbsp;</p>
