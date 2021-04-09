@@ -68,7 +68,8 @@ function head()
     include_once(NUKE_INCLUDE_DIR.'meta.php');
 
     # function to grab the page title.
-    the_pagetitle();
+    //the_pagetitle();
+	title_and_meta_tags();
 
     include_once(NUKE_INCLUDE_DIR.'javascript.php');
     include_once(NUKE_THEMES_DIR.$ThemeSel.'/theme.php');

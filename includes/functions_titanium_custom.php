@@ -30,7 +30,7 @@ endif;
  */
 function title_and_meta_tags()
 {
-	global $sitename, $appID, $name, $sid, $file, $db, $prefix;
+	global $sitename, $appID, $name, $sid, $file, $db, $prefix, $nukeurl, $domain;
 	
 	$ThemeSel           = get_theme();
 	$item_delim         = "&raquo;";
@@ -45,31 +45,31 @@ function title_and_meta_tags()
 	else:
 	   if ($appID > 0): # This will not load if there is not a facebook app id.
 	      
-		             $facebookappid = "<meta property=\"fb:app_id\" content=\"".$appID."\">\n";
-		            $facebook_admin = "<meta property=\"fb:admins\" content=\"3788797984541781\">\n"; # TheGhost's facebook user ID
-	            $facebook_page_type = "<meta property=\"og:type\" content=\"website\">\n";
-		  $google_site_verification = '<meta name="google-site-verification" content="o99pC0eeVthNETkL6I5knTEX4nTAOeBeJno4ZD-EvzY" />'."\n";
+		             $facebookappid = "<meta property=\"fb:app_id\" content=\"".$appID."\" />\n";
+		            $facebook_admin = "<meta property=\"fb:admins\" content=\"3788797984541781\" />\n"; # TheGhost's facebook user ID
+	            $facebook_page_type = "<meta property=\"og:type\" content=\"website\" />\n";
+		  //$google_site_verification = '<meta name="google-site-verification" content="o99pC0eeVthNETkL6I5knTEX4nTAOeBeJno4ZD-EvzY" />'."\n";
 		  
 		  if(!defined('HOME_FILE')):
 
 	        # PHP-Nuke Titanium Shout Box Module v1.0
 			if($module_name == Shout_Box):
-			$facebook_ogimage_normal = '<meta property="og:image" content="'.HTTP.'themes/'.$ThemeSel.'/includes/facebook/'.$module_name.'/'.$module_name.'FB.png">'."\n";
-		    $facebook_ogimage = '<meta property="og:image:secure_url" content="'.HTTPS.'themes/'.$ThemeSel.'/includes/facebook/'.$module_name.'/'.$module_name.'FB.png">'."\n";
+			$facebook_ogimage_normal = '<meta property="og:image" content="https://'.$domain.'/themes/'.$ThemeSel.'/includes/facebook/'.$module_name.'/'.$module_name.'FB.png" />'."\n";
+		    $facebook_ogimage = '<meta property="og:image:secure_url" content="https://'.$domain.'/themes/'.$ThemeSel.'/includes/facebook/'.$module_name.'/'.$module_name.'FB.png" />'."\n";
 	        $newpagetitle= $sitename.' '.$item_delim.' Shout Box';
 			$facebook_og_title = '<meta property="og:title" content="'.$newpagetitle.'">'."\n";  
             $facebook_ogdescription = "<meta property=\"og:description\" content=\"PHP-Nuke Titanium ".$item_delim." Shout Box Module v1.0\" />\n";
 			else:
-			$facebook_ogimage_normal = '<meta property="og:image" content="'.HTTP.'themes/'.$ThemeSel.'/includes/facebook/'.$module_name.'/'.$module_name.'.png">'."\n";
-			$facebook_ogimage = '<meta property="og:image:secure_url" content="'.HTTPS.'themes/'.$ThemeSel.'/includes/facebook/'.$module_name.'/'.$module_name.'.png">'."\n";
+			$facebook_ogimage_normal = '<meta property="og:image" content="https://'.$domain.'/themes/'.$ThemeSel.'/includes/facebook/'.$module_name.'/'.$module_name.'.png" />'."\n";
+			$facebook_ogimage = '<meta property="og:image:secure_url" content="https://'.$domain.'/themes/'.$ThemeSel.'/includes/facebook/'.$module_name.'/'.$module_name.'.png" />'."\n";
             endif;
 	        
 			
-			$facebookimagetype = '<meta property="og:image:type" content="image/png">'."\n";
-            $facebook_ogimage_width = '<meta property="og:image:width" content="200">'."\n";
-            $facebook_ogimage_height = '<meta property="og:image:height" content="200">'."\n";
-		    $facebookimage_alt = '<meta property="og:image:alt" content="Title png File">'."\n";
-			$facebook_ogurl = "<meta property=\"og:url\" content=\"".HTTPS."modules.php?name=$name\" />\n";
+			$facebookimagetype = '<meta property="og:image:type" content="image/png" />'."\n";
+            $facebook_ogimage_width = '<meta property="og:image:width" content="200" />'."\n";
+            $facebook_ogimage_height = '<meta property="og:image:height" content="200" />'."\n";
+		    $facebookimage_alt = '<meta property="og:image:alt" content="https://'.$domain.'/modules.php?name='.$name.'" />'."\n";
+			$facebook_ogurl = "<meta property=\"og:url\" content=\"https://".$domain."/modules.php?name=$name\" />\n";
 			
             if ($file == 'article' && isset($sid) && is_numeric($sid)):
 	        
@@ -81,21 +81,21 @@ function title_and_meta_tags()
 
                  if ($sitename == $top):
 			     $newpagetitle= "$sitename $item_delim $art";
-				 $facebook_og_title = '<meta property="og:title" content="'.$newpagetitle.'">'."\n";
+				 $facebook_og_title = '<meta property="og:title" content="'.$newpagetitle.'" />'."\n";
 			     else:
 			     $newpagetitle= "$sitename $item_delim $top $item_delim $art";
-				 $facebook_og_title = '<meta property="og:title" content="'.$newpagetitle.'">'."\n";
+				 $facebook_og_title = '<meta property="og:title" content="'.$newpagetitle.'" />'."\n";
                  endif;
 	             
-				 $facebook_ogimage_normal = '<meta property="og:image" content="'.HTTP.'themes/'.$ThemeSel.'/includes/facebook/'.$module_name.'/'.$module_name.'.png">'."\n";
-	             $facebook_ogimage = '<meta property="og:image:secure_url" content="'.HTTPS.'themes/'.$ThemeSel.'/includes/facebook/'.$module_name.'/'.$module_name.'.png">'."\n";
+				 $facebook_ogimage_normal = '<meta property="og:image" content="https://'.$domain.'/themes/'.$ThemeSel.'/includes/facebook/'.$module_name.'/'.$module_name.'.png" />'."\n";
+	             $facebook_ogimage = '<meta property="og:image:secure_url" content="https://'.$domain.'/themes/'.$ThemeSel.'/includes/facebook/'.$module_name.'/'.$module_name.'.png" />'."\n";
                  
-				 $facebook_ogurl = "<meta property=\"og:url\" content=\"".HTTPS."modules.php?name=$name&file=article&sid=$sid\">\n";
-              	         $facebook_ia_markup_url = "<meta property=\"ia:markup_url\" content=\"".HTTPS."modules.php?name=$name&file=article&sid=$sid\">\n";
-              	 $facebook_ia_markup_url_dev = "<meta property=\"ia:markup_url_dev\" content=\"".HTTPS."modules.php?name=$name&file=article&sid=$sid\">\n";
-                           $facebook_ia_rules_url = "<meta property=\"ia:rules_url\" content=\"".HTTPS."modules.php?name=$name&file=article&sid=$sid\">\n";
-				   $facebook_ia_rules_url_dev = "<meta property=\"ia:rules_url_dev\" content=\"".HTTPS."modules.php?name=$name&file=article&sid=$sid\">\n";
-				 //$facebook_page_id = "<meta property=\"fb:pages\" content=\"".HTTPS."modules.php?name=$name&file=article&sid=$sid\">\n";
+				 $facebook_ogurl = "<meta property=\"og:url\" content=\"https://".$domain."/modules.php?name=$name&file=article&sid=$sid\" />\n";
+              	         $facebook_ia_markup_url = "<meta property=\"ia:markup_url\" content=\"https://".$domain."/modules.php?name=$name&file=article&sid=$sid\" />\n";
+              	 $facebook_ia_markup_url_dev = "<meta property=\"ia:markup_url_dev\" content=\"https://".$domain."/modules.php?name=$name&file=article&sid=$sid\" />\n";
+                           $facebook_ia_rules_url = "<meta property=\"ia:rules_url\" content=\"https://".$domain."/modules.php?name=$name&file=article&sid=$sid\" />\n";
+				   $facebook_ia_rules_url_dev = "<meta property=\"ia:rules_url_dev\" content=\"https://".$domain."/modules.php?name=$name&file=article&sid=$sid\">\n";
+				 //$facebook_page_id = "<meta property=\"fb:pages\" content=\"".HTTPS."modules.php?name=$name&file=article&sid=$sid\" />\n";
 			     
 				 list($hometext) = $db->sql_ufetchrow("SELECT `hometext` FROM `".$prefix."_stories` WHERE `sid`='".$sid."'", SQL_NUM);
 
@@ -110,22 +110,22 @@ function title_and_meta_tags()
 	      
 		  # do all this shit if you are on the index.php page
 		  else:
-	             $facebook_ogimage_normal = '<meta property="og:image" content="'.HTTP.'themes/'.$ThemeSel.'/includes/facebook/Index/Index.png">'."\n";
-	        $facebook_ogimage = '<meta property="og:image:secure_url" content="'.HTTPS.'themes/'.$ThemeSel.'/includes/facebook/Index/Index.png">'."\n";
-			$facebookimagetype = '<meta property="og:image:type" content="image/png">'."\n";
-            $facebook_ogimage_width = '<meta property="og:image:width" content="200">'."\n";
-            $facebook_ogimage_height = '<meta property="og:image:height" content="200">'."\n";
-		    $facebookimage_alt = '<meta property="og:image:alt" content="Title png File">'."\n";
-			$facebook_ogurl = "<meta property=\"og:url\" content=\"".HTTPS."index.php\" />\n";
+	             $facebook_ogimage_normal = '<meta property="og:image" content="https://'.$domain.'/themes/'.$ThemeSel.'/includes/facebook/Index/Index.png" />'."\n";
+	        $facebook_ogimage = '<meta property="og:image:secure_url" content="https://'.$domain.'/themes/'.$ThemeSel.'/includes/facebook/Index/Index.png" />'."\n";
+			$facebookimagetype = '<meta property="og:image:type" content="image/png" />'."\n";
+            $facebook_ogimage_width = '<meta property="og:image:width" content="200" />'."\n";
+            $facebook_ogimage_height = '<meta property="og:image:height" content="200" />'."\n";
+		    $facebookimage_alt = '<meta property="og:image:alt" content="Title png File" />'."\n";
+			$facebook_ogurl = "<meta property=\"og:url\" content=\"https://".$domain."/index.php\" />\n";
 		    
-                    $facebook_ia_markup_url = "<meta property=\"ia:markup_url\" content=\"".HTTPS."index.php\">\n";
-            $facebook_ia_markup_url_dev = "<meta property=\"ia:markup_url_dev\" content=\"".HTTPS."index.php\">\n";
-                      $facebook_ia_rules_url = "<meta property=\"ia:rules_url\" content=\"".HTTPS."index.php\">\n";
-			  $facebook_ia_rules_url_dev = "<meta property=\"ia:rules_url_dev\" content=\"".HTTPS."index.php\">\n";
+                    $facebook_ia_markup_url = "<meta property=\"ia:markup_url\" content=\"https://".$domain."/index.php\" />\n";
+            $facebook_ia_markup_url_dev = "<meta property=\"ia:markup_url_dev\" content=\"https://".$domain."/index.php\" />\n";
+                      $facebook_ia_rules_url = "<meta property=\"ia:rules_url\" content=\"https://".$domain."/index.php\" />\n";
+			  $facebook_ia_rules_url_dev = "<meta property=\"ia:rules_url_dev\" content=\"https://".$domain."/index.php\" />\n";
 		    //$facebook_page_id = "<meta property=\"fb:pages\" content=\"".HTTPS."index.php\">\n";
             $facebook_ogdescription = "<meta property=\"og:description\" content=\"Programmers Making Connections. Coders Making a Difference. We have a new look, come visit us today...\" />\n";
 	        $newpagetitle= "$sitename $item_delim $top $item_delim $art";
-			$facebook_og_title = '<meta property="og:title" content="'.$newpagetitle.'">'."\n";
+			$facebook_og_title = '<meta property="og:title" content="'.$newpagetitle.'" />'."\n";
 
 			
 			if (@file_exists(TITANIUM_THEMES_DIR.'/includes/facebook/Index/Index.php')): # Added by Ernest Buffington  
@@ -136,7 +136,7 @@ function title_and_meta_tags()
 	   $newpagetitle = ($module_name) ? $item_delim .' '.$module_name_str : '';
     endif;
 	
-    echo $google_site_verification;
+    //echo $google_site_verification;
 	if ($appID > 0):
 	echo $facebook_admin;
 	echo $facebook_page_type;
