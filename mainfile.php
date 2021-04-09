@@ -184,6 +184,9 @@ if (CAN_MOD_INI) {
     ini_set('zlib.output_compression', 0);
 }
 
+if (@file_exists(NUKE_BASE_DIR.'fbconfig.php'))  
+@require_once(NUKE_BASE_DIR.'fbconfig.php');
+
 // Include config file
 @require_once(NUKE_BASE_DIR.'config.php');
 if(!$directory_mode) {
