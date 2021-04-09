@@ -18,5 +18,6 @@ Disallow: /modules/
 Disallow: /themes/
 Disallow: /admin.php
 Disallow: /config.php
+Disallow: /fbconfig.php
 Disallow: /ips.php
 Disallow: /trap.php

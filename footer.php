@@ -150,6 +150,14 @@ function footmsg() {
     }
 	echo $footmsg;
     $has_echoed = 1;
+	
+    if ( defined('facebook') ):
+    echo "\n<!-- START facebook connector -->\n";
+    echo '<div id="status">'."\n";
+    echo '</div>'."\n";
+    echo '<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>'."\n";
+    echo "<!-- END facebook connector -->\n\n";	
+    endif;
 }
 
 /*****[BEGIN]******************************************

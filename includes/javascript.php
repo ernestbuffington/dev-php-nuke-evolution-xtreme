@@ -1,6 +1,6 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
 
 /************************************************************************/
@@ -81,9 +81,126 @@ if(!defined('FORUM_ADMIN'))
 /*****[BEGIN]******************************************
  [ Mod:     IE Embed Fix                       v1.0.0 ]
  ******************************************************/
-echo "<!--[if IE]><script defer=\"defer\" type=\"text/javascript\" src=\"includes/embed_fix.js\"></script>\n<![endif]-->";
+/*echo "<!--[if IE]><script defer=\"defer\" type=\"text/javascript\" src=\"includes/embed_fix.js\"></script>\n<![endif]-->";*/
 /*****[END]********************************************
  [ Mod:     IE Embed Fix                       v1.0.0 ]
+ ******************************************************/
+
+/*****[BEGIN]******************************************
+ [ Mod:     Facebook Mod                       v1.0.0 ]
+ ******************************************************/
+global $fb, $portaladmin, $appID, $api_version, $appSecret, $my_url, $connected;
+if ($appID > 0) { # This will not load if there is not a facebook app id.
+echo "\n<script type=\"text/javascript\">\n";
+echo "<!--\n";
+##################################################################################################################
+## titaniumAPI                                                                                                  ##
+##################################################################################################################
+echo "function titaniumAPI() {\n";                   // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+echo "console.log('Welcome!  Fetching your information.... ');\n";
+echo "FB.api('/me', function(response) {\n";
+echo "console.log('Successful login for: ' + response.name);\n";
+    // this error comes with the following
+    // Uncaught TypeError: Cannot set property 'innerHTML' of null
+    // echo "document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';\n";
+echo "});\n";
+echo "}\n";
+##################################################################################################################
+## statusChangeCallback                                                                                         ##
+##################################################################################################################
+echo "function statusChangeCallback(response) {\n";  // Called with the results from FB.getLoginStatus().
+echo "console.log('statusChangeCallback');\n";
+echo "console.log(response);\n";                   // The current login status of the person.
+echo "if (response.status === 'connected') {\n";   // Logged into your webpage and Facebook.
+echo "titaniumAPI();\n";  
+echo "} else {\n";                                 // Not logged into your webpage or we are unable to tell.
+echo "document.getElementById('status').innerHTML = 'Please log ' +\n";
+echo "'into this webpage.';\n";
+echo "}\n";
+echo "}\n\n";
+##################################################################################################################
+## checkLoginState                                                                                              ##
+##################################################################################################################
+echo "function checkLoginState() {\n";               // Called when a person is finished with the Login Button.
+echo "FB.getLoginStatus(function(response) {\n";     // See the onlogin handler
+echo "statusChangeCallback(response);\n";
+echo "});\n";
+echo "}\n\n";
+
+
+
+##################################################################################################################
+## Facebook Init                                                                                                ##
+##################################################################################################################
+echo "window.fbAsyncInit = function() {\n";
+echo "FB.init({\n";
+echo "appId      : '{$appID}',\n"; # the value for this comes from the config.php file in the root.
+echo "cookie     : true,\n";
+echo "xfbml      : true,\n";
+echo "version    : '{$api_version}'\n";  # the value for this comes from the config.php file in the root.
+echo "});\n";
+##################################################################################################################
+### Facebook Login Status                                                                                       ##
+##################################################################################################################
+echo "FB.getLoginStatus(function(response)\n"; 
+echo "{\n";
+ 
+   echo "statusChangeCallback(response);\n";
+   
+   echo "if (response.status === 'connected')\n";
+   echo "{\n";
+			 // connected
+             echo "var uid = response.authResponse.userID;\n";
+             echo "var accessToken = response.authResponse.accessToken;\n";
+             echo "console.log(response.authResponse.accessToken);\n";
+   echo "}\n";
+   echo "else\n"; 
+   echo "if (response.status === 'not_authorized')\n";
+   echo "{\n";
+             // not_authorized
+   echo "}\n";
+   echo "else\n";
+   echo "{\n";
+             // not_logged_in
+   echo "}\n";
+echo "});\n";
+##################################################################################################################
+## Facebook Log Page View                                                                                       ##
+##################################################################################################################
+echo "FB.AppEvents.logPageView();\n";   
+##################################################################################################################
+##################################################################################################################
+##################################################################################################################
+echo "};\n";
+
+echo "(function(d, s, id){\n";
+echo "var js, fjs = d.getElementsByTagName(s)[0];\n";
+echo "if (d.getElementById(id)) {return;}\n";
+echo "js = d.createElement(s); js.id = id;\n";
+echo "js.src = 'https://connect.facebook.net/en_US/sdk.js';\n";
+
+//Just one of the many ways facebook fucks us all, this would not load or even show up!
+//Failed to load resource: the server responded with a status of 500 ()
+//echo "js.src = 'https://connect.facebook.net/en_US/debug.js';\n"; This
+
+echo "fjs.parentNode.insertBefore(js, fjs);\n";
+echo "}(document, 'script', 'facebook-jssdk'));\n";
+echo "//-->\n";
+echo "</script>\n\n";
+
+  # Check for user facebook cookie? Are you logged in with our facebook app or not!
+  if(isset($_COOKIE['fbsr_' . $appID]))
+  $connected = '::: Thanks for logging into our facebook app :::';
+  else	
+  $connected = '::: You aren\'t logged into our facebook app :::';
+
+}
+/* echo "\n<script type=\"text/javascript\">\n"; */
+/* echo "<!--\n";                                */
+/* echo "//-->\n";                               */
+/* echo "</script>\n\n";                         */
+/*****[END]********************************************
+ [ Mod:     Facebook Mod                       v1.0.0 ]
  ******************************************************/
 
 if (isset($userpage)) {
@@ -105,7 +222,7 @@ if (defined('MODULE_FILE') && !defined("HOME_FILE") AND file_exists("modules/".$
     echo "<!--\n";
     echo "function openwindow(){\n";
     echo "    window.open (\"modules/".$name."/copyright.php\",\"Copyright\",\"toolbar=no,location=no,directories=no,status=no,scrollbars=yes,resizable=no,copyhistory=no,width=400,height=200\");\n";
-    echo "}\n";
+    echo "}\n\n";
     echo "//-->\n";
     echo "</script>\n\n";
 }
@@ -124,8 +241,10 @@ if (!defined('ADMIN_FILE'))
 /*****[BEGIN]******************************************
  [ Mod:     Advanced Security Code Control     v1.0.0 ]
  ******************************************************/
-// if ( get_evo_option('recap_site_key') && get_evo_option('recap_priv_key') )
-//     echo "<script src='https://www.google.com/recaptcha/api.js".(!empty(get_evo_option('recap_lang')) ? "?hl=".get_evo_option('recap_lang') : "")."' defer></script>";
+if(get_evo_option('recap_site_key') && get_evo_option('recap_priv_key'))
+{
+    echo "<script src='https://www.google.com/recaptcha/api.js".(!empty(get_evo_option('recap_lang')) ? "?hl=".get_evo_option('recap_lang') : "")."' defer></script>";
+}
  /*****[END]*******************************************
  [ Mod:     Advanced Security Code Control     v1.0.0 ]
  ******************************************************/
@@ -133,19 +252,15 @@ if (!defined('ADMIN_FILE'))
 /*****[BEGIN]******************************************
  [ Mod:     IE PNG Fix                         v1.0.0 ]
  ******************************************************/
-// $arcade_on = (isset($_GET['file']) && $_GET['file'] == 'arcade_games') ? true : (isset($_POST['file']) && $_POST['file'] == 'arcade_games') ? true : false;
+$arcade_on = (isset($_GET['file']) && $_GET['file'] == 'arcade_games') ? true : (isset($_POST['file']) && $_POST['file'] == 'arcade_games') ? true : false;
 
-// if (!$arcade_on) {
-//     $arcade_on = (isset($_GET['do']) && $_GET['do'] == 'newscore') ? true : (isset($_POST['do']) && $_POST['do'] == 'newscore') ? true : false;
-// }
-
-// if (!$arcade_on) {
-//     echo "<!--[if lt IE 7]><script type=\"text/javascript\" src=\"".NUKE_JQUERY_SCRIPTS_DIR."javascript/pngfix.js\"></script><![endif]-->\n";
-// }
+if (!$arcade_on) {
+    $arcade_on = (isset($_GET['do']) && $_GET['do'] == 'newscore') ? true : (isset($_POST['do']) && $_POST['do'] == 'newscore') ? true : false;
+}
 /*****[END]********************************************
  [ Mod:     IE PNG Fix                         v1.0.0 ]
  ******************************************************/
-
+ 
 /*****[BEGIN]******************************************
  [ Mod:     Password Strength Meter            v1.0.0 ]
  ******************************************************/
@@ -412,22 +527,38 @@ include(NUKE_JQUERY_INCLUDE_DIR.'jquery.tooltipster.php');
 /*****[END]********************************************
  [ Mod:     jQuery                             v1.5.0 ]
  ******************************************************/
-
-addJSToBody(NUKE_JQUERY_SCRIPTS_DIR.'Evo.EE.js','file');
-addJSToBody(NUKE_JQUERY_SCRIPTS_DIR.'Evo.EE.CMD.js','file');
+echo "\n\n<!--                                                                                
+@@@@@@@  @@@  @@@  @@@@@@@@   @@@@@@@@  @@@  @@@   @@@@@@    @@@@@@   @@@@@@@  
+@@@@@@@  @@@  @@@  @@@@@@@@  @@@@@@@@@  @@@  @@@  @@@@@@@@  @@@@@@@   @@@@@@@  
+  @@!    @@!  @@@  @@!       !@@        @@!  @@@  @@!  @@@  !@@         @@!    
+  !@!    !@!  @!@  !@!       !@!        !@!  @!@  !@!  @!@  !@!         !@!    
+  @!!    @!@!@!@!  @!!!:!    !@! @!@!@  @!@!@!@!  @!@  !@!  !!@@!!      @!!    
+  !!!    !!!@!!!!  !!!!!:    !!! !!@!!  !!!@!!!!  !@!  !!!   !!@!!!     !!!    
+  !!:    !!:  !!!  !!:       :!!   !!:  !!:  !!!  !!:  !!!       !:!    !!:    
+  :!:    :!:  !:!  :!:       :!:   !::  :!:  !:!  :!:  !:!      !:!     :!:    
+   ::    ::   :::   :: ::::   ::: ::::  ::   :::  ::::: ::  :::: ::      ::    
+   :      :   : :  : :: ::    :: :: :    :   : :   : :  :   :: : :       :     
+                                                                                -->\n";
+# Easter Egg Hunt added by who I'm not sure but it's cute
+#addJSToBody(NUKE_JQUERY_SCRIPTS_DIR.'Evo.EE.js','file');
+#addJSToBody(NUKE_JQUERY_SCRIPTS_DIR.'Evo.EE.CMD.js','file');
+echo "\n<!-- Validate DeeZ Nuts -->\n\n\n";
 
 global $analytics;
+
+/* This is garbage as far as I can see - to much fucking work to get it working.
 if (!empty($analytics)) {
-    echo "<script type=\"text/javascript\">
-            var gaJsHost = ((\"https:\" == document.location.protocol) ? \"https://ssl.\" : \"http://www.\");
-            document.write(unescape(\"%3Cscript src='\" + gaJsHost + \"google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E\"));
-          </script>
-          <script type=\"text/javascript\">
-            var pageTracker = _gat._getTracker(\"".$analytics."\");
-            pageTracker._initData();
-            pageTracker._trackPageview();
-          </script>";
+   echo "<script type=\"text/javascript\">
+           var gaJsHost = ((\"https:\" == document.location.protocol) ? \"https://ssl.\" : \"http://www.\");
+           document.write(unescape(\"%3Cscript src='\" + gaJsHost + \"google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E\"));
+         </script>
+         <script type=\"text/javascript\">
+           var pageTracker = _gat._getTracker(\"".$analytics."\");
+           pageTracker._initData();
+           pageTracker._trackPageview();
+         </script>";
 }
+*/
 
 global $more_js;
 if (!empty($more_js)) {

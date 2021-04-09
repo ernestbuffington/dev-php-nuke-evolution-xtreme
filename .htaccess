@@ -19,10 +19,17 @@ DirectoryIndex index.php index.html
 Options +FollowSymlinks
 <IfModule mod_rewrite.c> 
 RewriteEngine on
+##################################################################################################
+# Force SSL - no insecure data connections!                                                      ##### Added By Ernest Allen Buffington 08/05/2019
+##################################################################################################
+RewriteCond %{HTTPS} off
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+RewriteRule (.*) https://%{HTTP_HOST}:443%{REQUEST_URI}
+
 # -------------------------------------------
 # Security Rewrites
 # -------------------------------------------
-
 RewriteCond %{THE_REQUEST} (\?act\=) [NC,OR]
 RewriteCond %{THE_REQUEST} (sql_login) [NC,OR]
 RewriteCond %{THE_REQUEST} (basepath) [OR]
@@ -99,6 +106,12 @@ RewriteRule ^.*$ http://127.0.0.1 [R,L]
 
 # Disable config.php viewing from browser
 <files ~ "\config.php$">
+    deny from all
+</files>
+
+# Protect your facebook app information
+# Disable fbconfig.php viewing from browser
+<files ~ "\fbconfig.php$">
     deny from all
 </files>
 
