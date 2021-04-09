@@ -77,7 +77,7 @@ if (!is_user())
 {
     evouserinfo_login();
 
-    if ( defined('facebook') ): 
+    if(isset($appID)): 
     
 	  if(isset($_COOKIE['fbsr_' . $appID])):
 	  // do nothing
@@ -105,7 +105,7 @@ else
     $evouserinfo_login .= '  <font color="tan"><i class="fas fa-cookie" aria-hidden="true"></i></font>&nbsp;&nbsp;<a href="modules.php?name=Your_Account&op=ShowCookiesRedirect">'.   $lang_evo_userblock['BLOCK']['LOGIN']['COOKIES'].'</a>';
     $evouserinfo_login .= '</div>';
 
-    if ( defined('facebook') ): 
+    if(isset($appID)): 
 	  
 	  if(isset($_COOKIE['fbsr_' . $appID])):
 	  // do nothing

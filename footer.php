@@ -38,7 +38,7 @@ if(!defined('HEADER')) return;
 define('NUKE_FOOTER', true);
 
 function footmsg() {
-    global $foot1, $foot2, $foot3, $copyright, $total_time, $start_time, $footmsg, $db, $queries_count, $use_cache, $usrclearcache, $debugger, $debug, $cache, $use_cache, $start_mem;
+    global $appID, $foot1, $foot2, $foot3, $copyright, $total_time, $start_time, $footmsg, $db, $queries_count, $use_cache, $usrclearcache, $debugger, $debug, $cache, $use_cache, $start_mem;
     static $has_echoed;
     if(isset($has_echoed) && $has_echoed == 1) { return; }
         $footmsg = "<span class=\"footmsg\"><br />\n";
@@ -151,7 +151,7 @@ function footmsg() {
 	echo $footmsg;
     $has_echoed = 1;
 	
-    if ( defined('facebook') ):
+    if(isset($appID)):
     echo "\n<!-- START facebook connector -->\n";
     echo '<div id="status">'."\n";
     echo '</div>'."\n";

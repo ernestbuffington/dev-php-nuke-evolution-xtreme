@@ -278,9 +278,9 @@ echo '  <section id="flex-container">';
 echo '      <div class="st4"></div>';
 echo '      <div class="st5" class="col-12"><span class="content" style="vertical-align: top">'.$content.'</span><br /><br /><div align="right">'.$posted.'</div><br />';
 
-if ( defined('facebook') ):
-  global $sid, $appID, $my_url;
-  #facebook comment plugins START
+#facebook comment plugins START
+global $sid, $appID, $my_url;
+if(isset($appID)):
   echo '<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId='.$appID.'&autoLogAppEvents=1" nonce="JBKXliWW"></script>'."\n";
 
   echo '<div id="fb-root"></div>'."\n";
@@ -302,8 +302,8 @@ if ( defined('facebook') ):
 			 data-numposts="5">
 			 
 			 </div>'."\n"; 
-  #facebook comment plugin END
 endif;
+#facebook comment plugin END
 
 echo '</div>';
 echo '<div class="st6"></div>';

@@ -9,7 +9,7 @@
 if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) 
     exit('Access Denied');
 
-global $customlang, $ThemeInfo, $banners;
+global $appID, $customlang, $ThemeInfo, $banners;
 
 if(blocks_visible('right') && !defined('ADMIN_FILE')):
 echo '</div>'
@@ -35,7 +35,7 @@ echo '<div class="flex-item"><img src="'.xtremev3_ftr_images.'FTR_01.png" style=
 echo '<div class="flex-item" style="width: 100%; height: 71px; background-image: url('.xtremev3_ftr_images.'FTR_Bg_Stretch.png)">';
 echo '<div align="left" style="line-height: 28px; padding-top:8px; padding-left:20px;">';
 
-if ( defined('facebook') ):
+if(isset($appID)):
 echo "\n<!-- START facebook connector status id -->\n";
 echo '<div align="center" id="status">'."\n";
 echo '</div>'."\n";
@@ -86,7 +86,7 @@ echo '</div>';
         update_modules();
     endif;
 
-if ( defined('facebook') ):
+if(isset($appID)):
 echo "\n<!-- START facebook connector -->\n";
 echo '<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>'."\n";
 echo "<!-- END facebook connector -->\n\n";

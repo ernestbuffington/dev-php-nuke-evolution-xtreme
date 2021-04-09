@@ -3,8 +3,8 @@
 # do not encode script tags with from & to &amp; - leave theme alone,
 function facebook_likes()
 {
-if ( defined('facebook') ):	
 global $sid, $appID, $my_url;
+if(isset($appID)):	
 echo '<div id="fb-root"></div>'."\n";
 echo '<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId='.$appID.'&autoLogAppEvents=1" nonce="dv0pyfMc"></script>'."\n";
 
@@ -13,8 +13,8 @@ endif;
 }
 function facebook_comments() 
 {
-if ( defined('facebook') ):	
-  global $sid, $appID, $my_url;
+global $sid, $appID, $my_url;
+if(isset($appID)):		
   #facebook comment plugin START
   echo '<div id="fb-root"></div>'."\n";
   echo '<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0&appId='.$appID.'&autoLogAppEvents=1" nonce="JBKXliWW"></script>'."\n";
@@ -43,7 +43,7 @@ function title_and_meta_tags()
 	
 	# if the user is visiting a module, change the page title to the module name.
 	else:
-	   if ($appID > 0): # This will not load if there is not a facebook app id.
+	   if (isset($appID)): # This will not load if there is not a facebook app id.
 	      
 		             $facebookappid = "<meta property=\"fb:app_id\" content=\"".$appID."\" />\n";
 		            $facebook_admin = "<meta property=\"fb:admins\" content=\"3788797984541781\" />\n"; # TheGhost's facebook user ID
@@ -137,7 +137,7 @@ function title_and_meta_tags()
     endif;
 	
     //echo $google_site_verification;
-	if ($appID > 0):
+	if(isset($appID)):
 	echo $facebook_admin;
 	echo $facebook_page_type;
     echo $facebookappid;
@@ -156,7 +156,7 @@ function title_and_meta_tags()
 	echo $facebook_ogdescription;
 	echo $facebook_og_title;
 	endif;
-	
+
 	echo '<title>'.$sitename.' '.$newpagetitle.'</title>';
 }
 
