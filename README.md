@@ -11,7 +11,7 @@
 <h2>Changes in the US Version</h2>
 
 <ul>
-	<li>04/09/2021 Friday @ 2:21 am added <strong>Auto MimeType</strong> which allows the suport of themes that use XHTML or HTML</li>
+	<li>04/09/2021 Friday @ 2:21 am added <strong>Auto MimeType</strong> which allows the support of themes that use XHTML or HTML</li>
 </ul>
 
 
