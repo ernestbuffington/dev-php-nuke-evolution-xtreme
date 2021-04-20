@@ -1,3 +1,5 @@
+<h1>PHP-Nuke Evolution Xtreme</h1>
+
 <h2>Changes in the US Version</h2>
 
 <ul>
