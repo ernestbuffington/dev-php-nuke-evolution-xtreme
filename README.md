@@ -18,7 +18,7 @@
 	<li>Client API library version (mysqlnd 7.4.16)</li>
 	<li>OpenSSL support</li>
 	<li>ZLib Support</li>
-	<li>Minimum of 100 MB/s web space</li>
+	<li>Minimum of 345 MB/s (362,663,936 bytes) of web space</li>
 	<li>Minimum of 5 GB/s bandwidth (5 TB/s or unmetered is recommended)</li>
 </ul>
 
