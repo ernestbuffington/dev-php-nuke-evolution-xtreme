@@ -477,7 +477,7 @@ INSERT INTO `nuke_bbconfig` (`config_name`, `config_value`) VALUES
 ('site_desc', ''),
 ('cookie_name', 'nukeevo'),
 ('cookie_path', '/'),
-('cookie_domain', 'MySite.com'),
+('cookie_domain', 'MySite.86it.us'),
 ('cookie_secure', '0'),
 ('session_length', '3600'),
 ('allow_html', '1'),
@@ -500,8 +500,8 @@ INSERT INTO `nuke_bbconfig` (`config_name`, `config_value`) VALUES
 ('max_inbox_privmsgs', '100'),
 ('max_sentbox_privmsgs', '100'),
 ('max_savebox_privmsgs', '100'),
-('board_email_sig', 'Thanks, Webmaster@MySite.com'),
-('board_email', 'Webmaster@MySite.com'),
+('board_email_sig', 'Thanks, Webmaster@MySite.86it.us'),
+('board_email', 'Webmaster@MySite.86it.us'),
 ('smtp_delivery', '0'),
 ('smtp_host', ''),
 ('require_activation', '0'),
@@ -528,7 +528,7 @@ INSERT INTO `nuke_bbconfig` (`config_name`, `config_value`) VALUES
 ('smtp_password', ''),
 ('record_online_users', '2'),
 ('record_online_date', '1034668530'),
-('server_name', 'MySite.com'),
+('server_name', 'MySite.86it.us'),
 ('server_port', '80'),
 ('script_path', '/modules/Forums/'),
 ('version', '.0.23'),
@@ -632,8 +632,8 @@ INSERT INTO `nuke_bbconfig` (`config_name`, `config_value`) VALUES
 ('ftr_active', '0'),
 ('ftr_who', '2'),
 ('ftr_installed', '1241642769'),
-('global_title', 'Nuke-Evolution Xtreme!'),
-('global_announcement', 'Evolution Xtreme brings you a fully loaded version of Nuke-Evolution.'),
+('global_title', 'PHP-Nuke Evolution Xtreme!'),
+('global_announcement', 'PHP-Nuke Evolution Xtreme brings you a hardened safer and more secure version of PHP-Nuke. It is the fully loaded highly modified US version and it now comes with the complete support of The 86it Developers Network. Building an online presence has never been easier!'),
 ('global_enable', '1'),
 ('marquee_disable', '0'),
 ('version_check_delay', '1241641548'),
@@ -1284,7 +1284,21 @@ CREATE TABLE `nuke_bbposts_text` (
 --
 
 INSERT INTO `nuke_bbposts_text` (`post_id`, `bbcode_uid`, `post_subject`, `post_text`) VALUES
-(2, '635640fe4f', 'Welcome to Nuke-Evolution Xtreme!', 'Thanks for installing Nuke-Evolution Xtreme Edition. The Evo Xtreme Team has put a lot of hard work into this release to make it the fastest, most functional and most secure version of PHP-Nuke ever. We encourage you to read through all of the included documentation so you fully understand the power within Evo.\n\nInside the original archive you downloaded you will find several folders containing helpful information.\n\nThe first is the &quot;Install&quot; folder which we hope you are already familiar with. This folder contains three documents which help you properly install and configure your new Evo site. If you haven\'t fully gone through these already please do it now!\n\nThe second is the &quot;Help&quot; folder. Inside this folder you will find some very helpful documents that our team has put together to explain some of the features inside Evo. You will also find some documents that will help resolve a few errors you may run in to due to browser settings or improperly setup software.\n\nThe third is the &quot;Theme Edits&quot; folder. If you would like to convert a PHP-Nuke theme to work with Evo you must follow the provided instructions within this folder.\n\nWe trust that Evo will be the best Nuke software you have ever run. Enjoy and be sure to stop by www.evolution-xtreme.com for support, updates or just to say hi!\n\n- The Nuke-Evolution Team');
+(2, '635640fe4f', 'Welcome to PHP-Nuke Evolution Xtreme!', '
+
+Thanks for installing PHP-Nuke Evolution Xtreme. The 86it Developers Network and the UK Evo Xtreme Team have put a lot of hard work into the current version of this CMS. They have done just about everything imaginable to make it the fastest, most functional, and most secure version of PHP-Nuke ever. 
+
+We encourage you to read through all of the included documentation so you fully understand the power within PHP-Nuke Evolution Xtreme. Inside the original archive, you downloaded you will find several folders containing helpful information. The first is the Install folder which we hope you are already familiar with. This folder contains three documents that will help you properly install and configure your new portal/website. If you haven't fully gone through these already please do it now!
+
+The second is the Help folder. Inside this folder, you will find some very helpful documents that our teams have put together to explain some of the features inside PHP-Nuke Evolution Xtreme. You will also find some documents that will help resolve a few errors that you may run into due to browser settings or improper software settings.
+
+The third is the Theme Edits folder. If you would like to convert a PHP-Nuke theme to work with PHP-Nuke Evolution Xtreme you must follow the provided instructions within this folder.
+
+We trust that PHP-Nuke Evolution Xtreme will be the best Nuke software you have ever run. Enjoy and be sure to use the following link [url=https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&op=Project&project_id=77](CLICK HERE)[/url] for help with your current install, updates, or just to say hello!
+
+Sincerely,
+The 86it Developers Network
+The US PHP-Nuke Evolution Xtreme Team');
 
 -- --------------------------------------------------------
 
@@ -1429,9 +1443,9 @@ CREATE TABLE `nuke_bbranks` (
 --
 
 INSERT INTO `nuke_bbranks` (`rank_id`, `rank_title`, `rank_min`, `rank_special`, `rank_image`) VALUES
-(1, 'Site Admin', -1, 1, 'images/ranks/administrator.png'),
-(2, 'Moderator', -1, 1, 'images/ranks/moderator.png'),
-(3, 'Member', -1, 1, 'images/ranks/regular-member.png');
+(1, 'Portal Admin', -1, 1, 'images/ranks/administrator.png'),
+(2, 'Portal Moderator', -1, 1, 'images/ranks/moderator.png'),
+(3, 'Portal Member', -1, 1, 'images/ranks/regular-member.png');
 
 -- --------------------------------------------------------
 
@@ -2619,7 +2633,7 @@ CREATE TABLE `nuke_config` (
 --
 
 INSERT INTO `nuke_config` (`sitename`, `nukeurl`, `site_logo`, `slogan`, `startdate`, `adminmail`, `anonpost`, `default_Theme`, `foot1`, `foot2`, `foot3`, `commentlimit`, `anonymous`, `minpass`, `pollcomm`, `articlecomm`, `broadcast_msg`, `my_headlines`, `top`, `storyhome`, `user_news`, `oldnum`, `ultramode`, `banners`, `backend_title`, `backend_language`, `language`, `locale`, `multilingual`, `useflags`, `notify`, `notify_email`, `notify_subject`, `notify_message`, `notify_from`, `moderate`, `admingraphic`, `httpref`, `httprefmax`, `CensorMode`, `CensorReplace`, `copyright`, `Version_Num`, `admin_pos`, `admin_log_lines`, `error_log_lines`, `cache_data`) VALUES
-('My Site', 'http://-------------.---', 'logo.png', 'Your Slogan here', 'December 2018', 'Webmaster@MySite.com', 0, 'XtremeV3', '<a href=\"modules.php?name=Spambot_Killer\" target=\"_blank\">Spambot Killer</a> | <a href=\"modules.php?name=Site_Map\" target=\"_blank\">Site Map</a><br />', '<a href=\"rss.php?feed=news\" target=\"_blank\"><img border=\"0\" src=\"images/powered/feed_20_news.png\" width=\"94\" height=\"15\" alt=\"[News Feed]\" title=\"News Feed\" /></a> <a href=\"rss.php?feed=forums\" target=\"_blank\"><img border=\"0\" src=\"images/powered/feed_20_forums.png\" width=\"94\" height=\"15\" alt=\"[Forums Feed]\" title=\"Forums Feed\" /></a> <a href=\"rss.php?feed=downloads\" target=\"_blank\" /><img border=\"0\" src=\"images/powered/feed_20_down.png\" width=\"94\" height=\"15\" alt=\"[Downloads Feed]\" title=\"Downloads Feed\" /></a> <a href=\"rss.php?feed=weblinks\" target=\"_blank\"><img border=\"0\" src=\"images/powered/feed_20_links.png\" width=\"94\" height=\"15\" alt=\"[Web Links Feed]\" title=\"Web Links Feed\" /></a> <a href=\"http://htmlpurifier.org/\"><img src=\"images/powered/html_purifier_powered.png\" alt=\"Powered by HTML Purifier\" border=\"0\" /></a> <a href=\"http://tool.motoricerca.info/robots-checker.phtml?checkreferer=1\" target=\"_blank\"><img border=\"0\" src=\"images/powered/valid-robots.png\" width=\"80\" height=\"15\" alt=\"[Validate robots.txt]\" title=\"Validate robots.txt\" /></a>', '', 4096, 'Anonymous', 5, 1, 1, 1, 1, 10, 10, 1, 30, 1, 0, 'Powered by Evolution Xtreme 3.0.1b', 'en-us', 'english', 'en_US', 1, 0, 0, 'webmaster@---------.---', 'NEWS for my site', 'Hey! You got a new submission for your site.', 'webmaster', 0, 1, 1, 1000, 3, '*****', 'PHP-Nuke Copyright &copy; 2006 by Francisco Burzi.<br>All logos, trademarks and posts in this site are property of their respective owners, all the rest &copy; 2006 by the site owner.<br>Powered by <a href=\"http://www.nuke-evolution.com\" target=\"_blank\">Nuke Evolution 2.0.7</a> - <a href=\"https://www.evolution-xtreme.com\" target=\"_blank\">Nuke-Evolution Xtreme 3.0.1b Edition</a>.<br>', '7.6.0', 1, 0, 0, '');
+('My Portal', 'http://mysite.86it.us', 'logo.png', 'Your Portal Slogan Here', 'June 2017', 'Webmaster@MySite.86it.us', 0, 'Z3b', '', '', '', 4096, 'Anonymous', 5, 1, 1, 1, 1, 10, 10, 1, 30, 1, 0, 'Powered by PHP-Nuke Evolution Xtreme 3.0.1b', 'en-us', 'english', 'en_US', 1, 0, 0, 'webmaster@mysite.86it.us', 'Blog for my site', 'Hey! You\'ve got a new submission for your site.', 'webmaster', 0, 1, 1, 1000, 3, '*****', 'PHP-Nuke Copyright &copy; 2006 by Francisco Burzi.<br>All logos, trademarks and posts in this site are property of their respective owners, all the rest &copy; 2006 by the portal owner.<br>Powered by <a href=\"https://dev-php-nuke-evolution-xtreme.86it.us\" target=\"_blank\">PHP-Nuke Evolution Xtreme v3.0.1b</a>', '7.6.0', 1, 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -2809,7 +2823,7 @@ INSERT INTO `nuke_evolution` (`evo_field`, `evo_value`) VALUES
 ('adminssl', '0'),
 ('poll_random', '0'),
 ('poll_days', '30'),
-('censor_words', 'ass asshole arse bitch bullshit c0ck clit cock crap cum cunt fag faggot fuck fucker fucking fuk fuking motherfucker pussy shit tits twat'),
+('censor_words', 'fuckhead cocksucker cuntlapper cumguzzler c0ck clit cock cum cunt fag faggot fuck fucker fucking fuk fuking motherfucker pussy shit tits twat turdball'),
 ('censor', '0'),
 ('usrclearcache', '0'),
 ('cache_last_cleared', '1536324841'),
@@ -3123,7 +3137,7 @@ CREATE TABLE `nuke_file_repository_themes` (
 --
 
 INSERT INTO `nuke_file_repository_themes` (`theme_name`, `cell`, `head`, `per_row`, `show_left`) VALUES
-('XtremeV3', 0, 0, 2, 0);
+('Z3b', 0, 0, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -6250,7 +6264,7 @@ CREATE TABLE `nuke_themes` (
 --
 
 INSERT INTO `nuke_themes` (`theme_name`, `groups`, `permissions`, `custom_name`, `active`, `theme_info`) VALUES
-('XtremeV3', '', 1, 'XtremeV3', 1, '1368:::#454545:::#383838:::#383838:::#383838:::#ccc:::#ccc:::Go to Theme Options to Edit Footer Message Line 1:::Go to Theme Options to Edit Footer Message Line 2:::#f5a405:::dark');
+('Z3b', '', 1, 'Z3b', 1, '1368:::#454545:::#383838:::#383838:::#383838:::#ccc:::#ccc:::Go to Theme Options to Edit Footer Message Line 1:::Go to Theme Options to Edit Footer Message Line 2:::#f5a405:::dark');
 
 -- --------------------------------------------------------
 
