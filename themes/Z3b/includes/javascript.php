@@ -83,11 +83,11 @@ global $domain;
 
         <h1 class="modal-title" id="CenterTitle">
         <font size="2" class="display-1" color="#000000"><i class="bi bi-arrow-right-square-fill"></i> Theme: <?=THEME?>
-                 <br /><i class="bi bi-arrow-right-square-fill"></i> Copyright Domain: <?=$domain?>
-                 <br /><i class="bi bi-arrow-right-square-fill"></i> Intended Use: For Sale $89.95
-                 <br /><i class="bi bi-arrow-right-square-fill"></i> Designed For: PHP-Nuke Titanium
+                 <br /><i class="bi bi-arrow-right-square-fill"></i> Copyright: PHP-Nuke Evolution Xtreme (US Version)
+                 <br /><i class="bi bi-arrow-right-square-fill"></i> Intended Use: Default Theme
+                 <br /><i class="bi bi-arrow-right-square-fill"></i> Designed For: Nuke-Evolution Xtreme v3.0.0b <> v3.0.1b
                  <br /><i class="bi bi-arrow-right-square-fill"></i> Core Engine: Nuke-Evolution Xtreme v3.0.1b
-                 <br /><i class="bi bi-arrow-right-square-fill"></i> Creation Date: 4/15/2021 5:13am
+                 <br /><i class="bi bi-arrow-right-square-fill"></i> Creation Date: 4/20/2021 4:56pm
                  <br /><i class="bi bi-arrow-right-square-fill"></i> Created By: Ernest Buffington aka TheGhost
         </font>
         </h1>
@@ -104,7 +104,7 @@ global $domain;
 
   <font size="1" color="black"><strong>
   This is a very versatile theme layout and can be configured in many different ways. We will help you in any possible way provided you're a network member. If we are hosting your website or portal then you are eligible for free help. As far as configuring this theme for your web portal, just send a private message to TheGhost aka Ernest Buffington and he will help you get started.  We hope you enjoy this theme and we look forward to making thousands more and we hope they are as nice as this one.
-  Special thanks go out to DISTINEDESIGNES.COM as they inspired this theme.</div>
+  Special thanks goes out to DISTINEDESIGNES.COM as they inspired this theme.</div>
   </font></strong>
 
   

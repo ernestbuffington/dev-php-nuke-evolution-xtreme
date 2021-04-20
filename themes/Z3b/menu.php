@@ -133,6 +133,7 @@ if (is_user())
 {
 echo '<li class="has-sub"><a href="#"><i class="fas fa-bomb"></i> MY LINKS</a>';
 echo '<ul>';
+echo '<li><a href="modules.php?name=Your_Account"><i class="fa fa-fw fa-registered"></i> My Account</a></li>';
 echo '<li><a href="modules.php?name=Private_Messages"><i class="fas fa-envelope"></i> My Inbox</a></li>';
 echo '<li><a href="modules.php?name=Groups"><i class="fas fa-user-secret"></i> My Groups</a></li>';
 echo '<li><a href="modules.php?name=Image_Repository"><i class="fa fa-fw fa-image"></i> My Images</a></li>';
@@ -166,8 +167,8 @@ echo '<li><a href="admin.php?op=ABDBOptimize"><i class="fas fa-radiation-alt"></
 echo '</ul>';
 echo '</li>';
 }
+echo '<li>'.(( !is_user() ) ? '<a href="modules.php?name=Your_Account&op=new_user"><i class="fa fa-fw fa-registered"></i> REGISTER NEW ACCOUNT</a>' : '').'</li>';
 
-echo '<li>'.(( !is_user() ) ? '<a href="modules.php?name=Your_Account&op=new_user"><i class="fa fa-fw fa-registered"></i> REGISTER NEW ACCOUNT</a>' : '<a href="modules.php?name=Your_Account"><i class="fa fa-fw fa-registered"></i> MY ACCOUNT</a>').'</li>';
 echo '</ul>';
 echo '</div>';
 ?>

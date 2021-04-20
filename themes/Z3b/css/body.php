@@ -283,7 +283,7 @@ color: rgb(104, 182, 4);
   text-decoration: none;
   font-size: 13px;
   font-weight: 500;
-  color: #F1F1F1; /* Changes Button Text Color */
+  color: #ffffff; /* Changes Button Text Color */
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -291,7 +291,7 @@ color: rgb(104, 182, 4);
 #cssmenu > ul > li:hover > a,
 #cssmenu > ul > li > a:hover {
   color: #D29A2B;
-  background: #0a4b86;
+  background: #03070a;
   background: rgba(0, 0, 0, 0.4); /* Changes Hover Background Transparency */
   -webkit-transition: color 0.6s linear, background 0.6s linear;
   -moz-transition: color 0.6s linear, background 0.6s linear;
@@ -309,7 +309,7 @@ color: rgb(104, 182, 4);
   width: 0;
   height: 0;
   border: 6px solid transparent;
-  border-top-color: green; /* Changes Arrow Color */
+  border-top-color: #f599a4; /* Changes Arrow Color */
   right: 17px; /* Changes Arrow Spacing Right */
   top: 18px; /* Changes Arrow Height Alignment */
 }
@@ -379,7 +379,7 @@ color: rgb(104, 182, 4);
 }
 
 #cssmenu > ul > li:hover > ul {
-  top: 29px; /* Changes Submenu Spacing 52px Default */
+  top: 29px; /* Changes Submenu Spacing 0px Default */
   left: 0;
   opacity: 1;
 }
@@ -414,9 +414,9 @@ color: rgb(104, 182, 4);
   text-decoration: none;
   font-weight: 400;
   padding: 11px 25px;
-  width: 190px; /* Changes Width of Sub Menu */
+  width: 175px; /* Changes Width of Sub Menu */
   color: #868686;
-  background: #181818;
+  background: #152735;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1), 1px 1px 1px rgba(0, 0, 0, 0.1), -1px 1px 1px rgba(0, 0, 0, 0.1);
 }
 

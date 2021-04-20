@@ -195,7 +195,7 @@ echo '</div>';
 
 # MENU SYSTEM
 #######################################################################################################################################################
-echo '<div class="box_bottom" style="width: 100%; height: 29px; background-image: url('.theme_hdr_images.'HDRnav_Bg_Stretch.png)">';                  #
+echo '<div class="box_bottom" style="width: 100%; height: 29px; background-image: url('.theme_hdr_images.'menu_stretch.png)">';                       #
 include(theme_dir.'menu.php');                                                                                                                        #
 echo '</div>';                                                                                                                                        #
 #######################################################################################################################################################
