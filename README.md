@@ -1,9 +1,12 @@
 <h1>PHP-Nuke Evolution Xtreme</h1>
 
-<h2>Changes in the US Version</h2>
+<h2>Major Changes in the US Version of Nuke Evolution Xtreme</h2>
 
 <ul>
-	<li>04/09/2021 Friday @ 2:21 am added <strong>Auto MimeType</strong> which allows the support of themes that use XHTML or HTML</li>
+	<li>Titanium Mod v1</li>
+	<li>Titanium Facebook SDK v5</li>
+	<li>Titanium Google SDK v5</li>
+	<li>86it Network Developer Support Mod v1</li>
 </ul>
 
 
