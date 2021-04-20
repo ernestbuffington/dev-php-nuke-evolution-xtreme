@@ -1,7 +1,8 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /************************************************************************/
 /* PHP-NUKE: Web Portal System                                          */
@@ -74,24 +75,24 @@
 				echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _WEBLINKS_RETURNMAIN . "</a> ]</div>\n";
 			
 			CloseTable();
-			echo "<br />";
+			//echo "<br />";
 			OpenTable();
 			
 				$ThemeSel = get_theme();
-				if (file_exists("themes/$ThemeSel/images/link-logo.gif")) 
+				if (file_exists("themes/$ThemeSel/images/Web_links/Web_Links.png")) 
 				{
-					echo "<center><a href=\"modules.php?name=Web_Links\"><img src=\"themes/$ThemeSel/images/link-logo.gif\" border=\"0\" alt=\"\"></a><br /><br />";
+					echo "<center><a href=\"modules.php?name=Web_Links\"><img style=\"max-height: 50px;\" src=\"themes/$ThemeSel/images/Web_links/Web_Links.png\" border=\"0\" alt=\"\"></a><br /><br />";
 				} 
 				else 
 				{
-					echo "<center><a href=\"modules.php?name=Web_Links\"><img src=\"modules/Web_Links/images/link-logo.gif\" border=\"0\" alt=\"\"></a><br /><br />";
+					echo "<center><a href=\"modules.php?name=Web_Links\"><img style=\"max-height: 50px;\" src=\"modules/Web_Links/images/Web_links/Web_Links.png\" border=\"0\" alt=\"\"></a><br /><br />";
 				}
 				$result = $db->sql_query("SELECT * FROM " . $prefix . "_links_links");
 				$numrows = $db->sql_numrows($result);
 				echo "<span class=\"content\">" . _THEREARE . " <strong>$numrows</strong> " . _LINKSINDB . "</span></center>";
 			
 			CloseTable();
-			echo "<br />";
+			//echo "<br />";
 			$result2 = $db->sql_query("SELECT requestid,lid,cid,title,url,description,modifysubmitter FROM " . $prefix . "_links_modrequest WHERE brokenlink='1'");
 			$totalbrokenlinks = $db->sql_numrows($result2);
 			$result3 = $db->sql_query("SELECT requestid,lid,cid,title,url,description,modifysubmitter FROM " . $prefix . "_links_modrequest WHERE brokenlink='0'");
@@ -104,7 +105,7 @@
 				echo "<a href=\"".$admin_file.".php?op=LinksLinkCheck\">" . _VALIDATELINKS . "</a> ]</span></center>";
 	
     		CloseTable();	
-    		echo "<br />";
+    		//echo "<br />";
 			$result4 = $db->sql_query("SELECT lid, cid, sid, title, url, description, name, email, submitter FROM " . $prefix . "_links_newlink ORDER BY lid");
 			$numrows = $db->sql_numrows($result4);
     		if ($numrows > 0) 
@@ -162,7 +163,7 @@
 					echo "</select><input type=\"hidden\" name=\"op\" value=\"LinksAddLink\"><input type=\"submit\" value=" . _ADD . "> [ <a href=\"".$admin_file.".php?op=LinksDelNew&amp;lid=$lid\">" . _DELETE . "</a> ]</form><br /><hr noshade><br />";
     			}
     			CloseTable();
-    			echo "<br />";
+    			//echo "<br />";
 			} 
 			else 
 			{
@@ -181,7 +182,7 @@
 			echo "</form>";
 			
 			CloseTable();
-			echo "<br />";
+			//echo "<br />";
 
 // Add a New Sub-Category
     $result6 = $db->sql_query("SELECT * FROM " . $prefix . "_links_categories");
@@ -206,7 +207,7 @@
         ."<input type=\"submit\" value=\"" . _ADD . "\"><br />"
         ."</form>";
     CloseTable();
-    echo "<br />";
+    //echo "<br />";
     } else {
     }
 
@@ -238,7 +239,7 @@
         ."<center><input type=\"submit\" value=\"" . _ADDURL . "\"><br />"
         ."</form>";
     CloseTable();
-    echo "<br />";
+    //echo "<br />";
     } else {
     }
 
@@ -263,7 +264,7 @@
         ."<input type=\"submit\" value=\"" . _MODIFY . "\">"
         ."</form>";
     CloseTable();
-    echo "<br />";
+    //echo "<br />";
     } else {
     }
 
@@ -291,7 +292,7 @@
  [ Other:    Admin Web Links Dropdown          v1.0.0 ]
  ******************************************************/
     CloseTable();
-    echo "<br />";
+    //echo "<br />";
     } else {
     }
 
@@ -328,7 +329,7 @@
         ."<input type=\"submit\" value=\"" . _EZTRANSFER . "\"><br />"
         ."</form>";
     CloseTable();
-    echo "<br />";
+    //echo "<br />";
     } else {
     }
 
@@ -351,14 +352,14 @@ function LinksModLink($lid) {
     echo "<br /><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _WEBLINKS_RETURNMAIN . "</a> ]</div>\n";
 	CloseTable();
-	echo "<br />";
+	//echo "<br />";
     global $anonymous;
     $lid = intval($lid);
     $result = $db->sql_query("SELECT cid, title, url, description, name, email, hits FROM " . $prefix . "_links_links WHERE lid='$lid'");
     OpenTable();
     echo "<center><span class=\"title\"><strong>" . _WEBLINKSADMIN . "</strong></span></center>";
     CloseTable();
-    echo "<br />";
+    //echo "<br />";
     OpenTable();
     echo "<center><span class=\"option\"><strong>" . _MODLINK . "</strong></span></center><br /><br />";
     while($row = $db->sql_fetchrow($result)) {
@@ -397,7 +398,7 @@ function LinksModLink($lid) {
     ."<input type=\"hidden\" name=\"op\" value=\"LinksModLinkS\">"
     ."<input type=\"submit\" value=\"" . _MODIFY . "\"> [ <a href=\"".$admin_file.".php?op=LinksDelLink&amp;lid=$lid\">" . _DELETE . "</a> ]</form><br />";
     CloseTable();
-    echo "<br />";
+    //echo "<br />";
     /* Modify or Add Editorial */
     $resulted2 = $db->sql_query("SELECT adminid, editorialtimestamp, editorialtext, editorialtitle FROM " . $prefix . "_links_editorials WHERE linkid='$lid'");
         $recordexist = $db->sql_numrows($resulted2);
@@ -432,7 +433,7 @@ function LinksModLink($lid) {
                 }
         }
     CloseTable();
-    echo "<br />";
+    //echo "<br />";
     OpenTable();
     /* Show Comments */
     $result4 = $db->sql_query("SELECT ratingdbid, ratinguser, ratingcomments, ratingtimestamp FROM " . $prefix . "_links_votedata WHERE ratinglid = '$lid' AND ratingcomments != '' ORDER BY ratingtimestamp DESC");
@@ -544,7 +545,7 @@ function LinksModLink($lid) {
     }
     echo "</form>";
     CloseTable();
-    echo "<br />";
+    //echo "<br />";
     include_once(NUKE_BASE_DIR.'footer.php');
 }
 
@@ -578,7 +579,7 @@ function LinksEditBrokenLinks($lid) {
     echo "<br /><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _WEBLINKS_RETURNMAIN . "</a> ]</div>\n";
 	CloseTable();
-	echo "<br />";
+	//echo "<br />";
     OpenTable();
     echo "<center><span class=\"option\"><strong>" . _EZBROKENLINKS . "</strong></span></center><br /><br />";
     $row = $db->sql_fetchrow($db->sql_query("SELECT requestid, lid, cid, title, url, description, modifysubmitter FROM " . $prefix . "_links_modrequest WHERE brokenlink='1' ORDER BY requestid"));
@@ -619,7 +620,7 @@ function LinksEditBrokenLinks($lid) {
     }
     echo "</select><input type=\"hidden\" name=\"op\" value=\"LinksModLinkS\"><input type=\"submit\" value=" . _MODIFY . "> [ <a href=\"".$admin_file.".php?op=LinksDelNew&amp;lid=$lid\">" . _DELETE . "</a> ]</form><br /><hr noshade><br />";
     CloseTable();
-    echo "<br />";
+    //echo "<br />";
     include_once(NUKE_BASE_DIR.'footer.php');
 }
 
@@ -741,11 +742,11 @@ function LinksListModRequests() {
     echo "<br /><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _WEBLINKS_RETURNMAIN . "</a> ]</div>\n";
 	CloseTable();
-	echo "<br />";
+	//echo "<br />";
     OpenTable();
     echo "<center><span class=\"title\"><strong>" . _WEBLINKSADMIN . "</strong></span></center>";
     CloseTable();
-    echo "<br />";
+    //echo "<br />";
     OpenTable();
     $result = $db->sql_query("SELECT requestid, lid, cid, sid, title, url, description, modifysubmitter FROM " . $prefix . "_links_modrequest WHERE brokenlink='0' ORDER BY requestid");
     $totalmodrequests = $db->sql_numrows($result);
@@ -956,11 +957,11 @@ function LinksModCat($cat) {
     echo "<br /><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _WEBLINKS_RETURNMAIN . "</a> ]</div>\n";
 	CloseTable();
-	echo "<br />";
+	//echo "<br />";
     OpenTable();
     echo "<center><span class=\"title\"><strong>" . _WEBLINKSADMIN . "</strong></span></center>";
     CloseTable();
-    echo "<br />";
+    //echo "<br />";
     $cat = explode("-", $cat);
     if (empty($cat[1])) {
         $cat[1] = 0;
@@ -1054,7 +1055,7 @@ function LinksDelCat($cid, $sid, $sub, $ok=0) {
     echo "<br /><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _WEBLINKS_RETURNMAIN . "</a> ]</div>\n";
 	CloseTable();
-	echo "<br />";
+	//echo "<br />";
     OpenTable();
     echo "<br /><center><span class=\"option\">";
     echo "<strong>" . _EZTHEREIS . " $nbsubcat " . _EZSUBCAT . " " . _EZATTACHEDTOCAT . "</strong><br />";
@@ -1092,7 +1093,7 @@ function LinksAddCat($new_cat_title, $cdescription) {
     echo "<br /><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _WEBLINKS_RETURNMAIN . "</a> ]</div>\n";
 	CloseTable();
-	echo "<br />";
+	//echo "<br />";
     OpenTable();
     echo "<br /><center><span class=\"option\">"
         ."<strong>" . _ERRORTHECATEGORY . " $new_cat_title " . _ALREADYEXIST . "</strong><br /><br />"
@@ -1117,7 +1118,7 @@ function LinksAddSubCat($cid, $new_sub_title, $cdescription) {
     echo "<br /><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _WEBLINKS_RETURNMAIN . "</a> ]</div>\n";
 	CloseTable();
-	echo "<br />";
+	//echo "<br />";
     OpenTable();
     echo "<br /><center>";
     echo "<span class=\"option\">"
@@ -1140,7 +1141,7 @@ function LinksAddEditorial($linkid, $editorialtitle, $editorialtext) {
     echo "<br /><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _WEBLINKS_RETURNMAIN . "</a> ]</div>\n";
 	CloseTable();
-	echo "<br />";
+	//echo "<br />";
     OpenTable();
     echo "<center><br />"
     ."<span class=option>"
@@ -1162,7 +1163,7 @@ function LinksModEditorial($linkid, $editorialtitle, $editorialtext) {
     echo "<br /><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _WEBLINKS_RETURNMAIN . "</a> ]</div>\n";
 	CloseTable();
-	echo "<br />";
+	//echo "<br />";
     OpenTable();
     echo "<br /><center>"
     ."<span class=\"option\">"
@@ -1182,7 +1183,7 @@ function LinksDelEditorial($linkid) {
     echo "<br /><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _WEBLINKS_RETURNMAIN . "</a> ]</div>\n";
 	CloseTable();
-	echo "<br />";
+	//echo "<br />";
     OpenTable();
     echo "<br /><center>"
     ."<span class=\"option\">"
@@ -1200,11 +1201,11 @@ function LinksLinkCheck() {
     echo "<br /><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _WEBLINKS_RETURNMAIN . "</a> ]</div>\n";
 	CloseTable();
-	echo "<br />";
+	//echo "<br />";
     OpenTable();
     echo "<center><span class=\"title\"><strong>" . _WEBLINKSADMIN . "</strong></span></center>";
     CloseTable();
-    echo "<br />";
+    //echo "<br />";
     OpenTable();
     echo "<center><span class=\"option\"><strong>" . _LINKVALIDATION . "</strong></span></center><br />"
     ."<table width=\"100%\" align=\"center\"><tr><td colspan=\"2\" align=\"center\">"
@@ -1230,11 +1231,11 @@ function LinksValidate($cid, $sid, $ttitle) {
     echo "<br /><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _WEBLINKS_RETURNMAIN . "</a> ]</div>\n";
 	CloseTable();
-	echo "<br />";
+	//echo "<br />";
     OpenTable();
     echo "<center><span class=\"title\"><strong>" . _WEBLINKSADMIN . "</strong></span></center>";
     CloseTable();
-    echo "<br />";
+   // echo "<br />";
     OpenTable();
     $transfertitle = str_replace ("_", "", $ttitle);
     /* Check ALL Links */
@@ -1289,11 +1290,11 @@ function LinksAddLink($new, $lid, $xtitle, $url, $cat, $description, $name, $ema
     echo "<br /><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _WEBLINKS_RETURNMAIN . "</a> ]</div>\n";
 	CloseTable();
-	echo "<br />";
+	//echo "<br />";
     OpenTable();
     echo "<center><span class=\"title\"><strong>" . _WEBLINKSADMIN . "</strong></span></center>";
     CloseTable();
-    echo "<br />";
+    //echo "<br />";
     OpenTable();
     echo "<br /><center>"
         ."<span class=\"option\">"
@@ -1310,11 +1311,11 @@ function LinksAddLink($new, $lid, $xtitle, $url, $cat, $description, $name, $ema
     echo "<br /><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _WEBLINKS_RETURNMAIN . "</a> ]</div>\n";
 	CloseTable();
-	echo "<br />";
+	//echo "<br />";
     OpenTable();
     echo "<center><span class=\"title\"><strong>" . _WEBLINKSADMIN . "</strong></span></center>";
     CloseTable();
-    echo "<br />";
+    //echo "<br />";
     OpenTable();
     echo "<br /><center>"
         ."<span class=\"option\">"
@@ -1331,11 +1332,11 @@ function LinksAddLink($new, $lid, $xtitle, $url, $cat, $description, $name, $ema
     echo "<br /><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _WEBLINKS_RETURNMAIN . "</a> ]</div>\n";
 	CloseTable();
-	echo "<br />";
+	//echo "<br />";
     OpenTable();
     echo "<center><span class=\"title\"><strong>" . _WEBLINKSADMIN . "</strong></span></center>";
     CloseTable();
-    echo "<br />";
+    //echo "<br />";
     OpenTable();
     echo "<br /><center>"
         ."<span class=\"option\">"
@@ -1352,11 +1353,11 @@ function LinksAddLink($new, $lid, $xtitle, $url, $cat, $description, $name, $ema
     echo "<br /><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _WEBLINKS_RETURNMAIN . "</a> ]</div>\n";
 	CloseTable();
-	echo "<br />";
+	//echo "<br />";
     OpenTable();
     echo "<center><span class=\"title\"><strong>" . _WEBLINKSADMIN . "</strong></span></center>";
     CloseTable();
-    echo "<br />";
+    //echo "<br />";
     OpenTable();
     echo "<br /><center>"
         ."<span class=\"option\">"
@@ -1382,7 +1383,7 @@ function LinksAddLink($new, $lid, $xtitle, $url, $cat, $description, $name, $ema
     echo "<br /><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _WEBLINKS_RETURNMAIN . "</a> ]</div>\n";
 	CloseTable();
-	echo "<br />";
+	//echo "<br />";
     OpenTable();
     echo "<br /><center>";
     echo "<span class=\"option\">";

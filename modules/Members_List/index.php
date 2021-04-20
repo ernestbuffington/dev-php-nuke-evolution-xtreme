@@ -10,9 +10,10 @@
 	Modifications: Lonestar (http://lonestar-modules.com)	
 */
 
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /***************************************************************************
  *                              memberlist.php

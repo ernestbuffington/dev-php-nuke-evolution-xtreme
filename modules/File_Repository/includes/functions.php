@@ -151,8 +151,8 @@ else:
 	$more_js .= '<link rel="stylesheet" href="'._FILE_REPOSITORY_CSS.'tagit.ui-zendesk.css" type="text/css" />';
 	$more_js .= '<script type="text/javascript" src="'._FILE_REPOSITORY_JS.'tag-it.min.js"></script>'."\n";
 
-	// $more_js .= '<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>'."\n";
-	// $more_js .= '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" type="text/css" />';
+	/* $more_js .= '<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>'."\n"; */
+	/* $more_js .= '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" type="text/css" />'; */
 
 endif;
 

@@ -30,13 +30,13 @@ if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
 |                                                         |
 | Default: localhost                                      |
 ---------------------------------------------------------*/
-$dbhost = '';
+$dbhost = 'localhost';
 /*----[ $dbname ] ----------------------------------------
 | The name of your database that will hold Evo's tables   |
 |                                                         |
 | Default: xxx_evo                                        |
 ---------------------------------------------------------*/
-$dbname = '';
+$dbname = 'nukeevo_db';
 
 /*----[ $dbuname ] ---------------------------------------
 | The username linked to your database, must have correct |
@@ -44,7 +44,7 @@ $dbname = '';
 |                                                         |
 | Default: xxx_evo                                        |
 ---------------------------------------------------------*/
-$dbuname = '';
+$dbuname = 'nukeevo_user';
 
 /*----[ $dbpass ] ----------------------------------------
 | The password associated with your db usersname          |

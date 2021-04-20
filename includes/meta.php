@@ -61,13 +61,17 @@ if(($metatags = $cache->load('metatags', 'config')) === false)
 /*****[END]********************************************
  [ Base:    Caching System                     v3.0.0 ]
  ******************************************************/
+
+$metastring .= '<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">'."\n";
+
 /**
  * Only add the meta tag below if the theme is bootstrap made.
  */
 if(defined('BOOTSTRAP'))
-$metastring .= '<meta name="viewport" content="width=device-width", maximum-scale="1.0", user-scalable="no" />'."\n";
+$metastring .= '<meta name="viewport" content="width=device-width, maximum-scale=1.0; user-scalable=no" />'."\n";
 else
-$metastring .= '<meta name="viewport" content="width=device-width", initial-scale="1.0" />'."\n";
+$metastring .= '<meta name="viewport" content="width=device-width, initial-scale=1.0" />'."\n";
+
 
 for($i=0,$j=count($metatags);$i<$j;$i++) 
 {
@@ -85,4 +89,3 @@ for($i=0,$j=count($metatags);$i<$j;$i++)
 $metastring .= '<meta name="generator" content="The US Version of PHP-Nuke Evolution Xtreme Copyright (c) 2021 by Ernest Buffington and The 86it Developers Network. This is free software, and you may redistribute it under the GPL (https://github.com/ernestbuffington/dev-php-nuke-evolution-xtreme/blob/main/LICENSE). PHP-Nuke Evolution Xtreme comes with absolutely no warranty, for details, see the license (https://github.com/ernestbuffington/dev-php-nuke-evolution-xtreme/blob/main/LICENSE). Powered by the US version of PHP-Nuke Evolution Xtreme (https://github.com/ernestbuffington/dev-php-nuke-evolution-xtreme) This is based on Thatware written by David Norman and the loose framework of PHP-Nuke written by Francisco Burzi." />'."\n";
 
 echo $metastring;
-?>

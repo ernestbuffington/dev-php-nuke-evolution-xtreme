@@ -1,7 +1,8 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /***************************************************************************
  *                              template.php
@@ -758,9 +759,10 @@ class Stats_template {
         $filename = $this->cachedir . $this->filename[$handle] . '.' . $phpEx;
 
         $data = '<?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
- =======================================================================*/' . "\nif (\$this->security()) {\n" . $data . "\n}\n?".">";
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
+ =======================================================================*/
+' . "\nif (\$this->security()) {\n" . $data . "\n}\n?".">";
 
         $fp = fopen($filename, 'w+');
         fwrite ($fp, $data);

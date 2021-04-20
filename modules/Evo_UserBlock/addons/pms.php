@@ -1,6 +1,6 @@
 <?php
 /*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+ PHP-Nuke Titanium v3.0.0 : Enhanced PHP-Nuke Web Portal System
  =======================================================================*/
 
 /************************************************************************
@@ -26,7 +26,7 @@ if (is_user()):
 
     global $userinfo;    
     $evouserinfo_pms  = '<div style="padding-left: 10px;">';
-    $evouserinfo_pms .= '  <i class="fa fa-angle-double-right fa-right-arrows" aria-hidden="true"></i>&nbsp;'.$lang_evo_userblock['BLOCK']['PMS']['INBOX'].'<span style="float:right"><a title="'.$lang_evo_userblock['BLOCK']['PMS']['OPEN_INBOX'].'" href="modules.php?name=Private_Messages">'.has_new_or_unread_private_messages().'</a></span>';
+    $evouserinfo_pms .= '  <i class="fas fa-envelope" aria-hidden="true"></i>&nbsp;'.$lang_evo_userblock['BLOCK']['PMS']['INBOX'].'<span style="float:right"><a title="'.$lang_evo_userblock['BLOCK']['PMS']['OPEN_INBOX'].'" href="modules.php?name=Private_Messages">'.has_new_or_unread_private_messages().'</a></span>';
     $evouserinfo_pms .= '</div>';
 
 endif;

@@ -1,6 +1,6 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
 
 /************************************************************************/
@@ -24,13 +24,13 @@
 -=[Base]=-
       Nuke Patched                             v3.1.0       06/26/2005
  ************************************************************************/
-
-if(!defined('ADMIN_FILE')) {
-   die ("Illegal File Access");
-}
+if(!defined('ADMIN_FILE'))
+die ("Illegal File Access");
 
 global $prefix, $db, $admin_file, $cache, $userinfo;
-if (!is_admin()) {
+
+if (!is_admin()) 
+{
     echo "Access Denied";
     die();
 }
@@ -84,7 +84,8 @@ function blocks_update($data)
     return 1;
 }
 
-function status_update($data) {
+function status_update($data) 
+{
     global $prefix, $db, $cache;
     $data = explode(':', $data);
     $bid = $data[0];
@@ -96,7 +97,9 @@ function status_update($data) {
     $cache->resync();
     return 1;
 }
-function AddBlock($data) {
+
+function AddBlock($data) 
+{
     global $cache, $db, $prefix, $admin_file;
 
     $data['title'] = Fix_Quotes($data['title']);
@@ -152,13 +155,16 @@ function AddBlock($data) {
     $cache->resync();
     redirect("$admin_file.php?op=blocks");
 }
-function deleteBlock($bid) {
+
+function deleteBlock($bid) 
+{
     global $db, $prefix;
     $db->sql_query("DELETE FROM " . $prefix . "_blocks WHERE bid = '" . $bid . "'");
     return true;
 }
 
-function BlocksAdmin() {
+function BlocksAdmin() 
+{
     global $prefix, $db, $Sajax, $admin_file, $admlang;
 
     define('USE_DRAG_DROP',true);
@@ -169,24 +175,12 @@ function BlocksAdmin() {
     $element_ids[] = 'd';
     $element_ids[] = 'r';
     include_once(NUKE_BASE_DIR.'header.php');
+
     OpenTable();
-    echo "<div align=\"center\">\n<a href=\"$admin_file.php?op=blocks\">" . _BLOCK_ADMIN_HEADER . "</a></div>\n";
-    echo "<br /><br />";
+    echo "<div align=\"center\">\n[ <a href=\"$admin_file.php?op=blocks\">" . _BLOCK_ADMIN_HEADER . "</a> ]</div>\n";
     echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _BLOCK_RETURNMAIN . "</a> ]</div>\n";
     CloseTable();
-    echo "<br />";
-    OpenTable();
-    echo "<div align=\"center\">\n";
-    echo "<span style=\"background-color : #bf0909;\">"._BLOCK_TITLE."</span>&nbsp;-&nbsp;"._BLOCK_INACTIVE."<br />\n";
-    // echo "<img src=\"images/admin/modules/delete.gif\" border=\"0\" alt=\"\" />&nbsp;-&nbsp;"._BLOCK_LINK_DELETE."<br />\n";
-    echo get_evo_icon('evo-sprite delete')."&nbsp;-&nbsp;"._BLOCK_LINK_DELETE."<br />\n";
-    echo get_evo_icon('evo-sprite edit')."&nbsp;-&nbsp;"._BLOCK_EDIT."<br /><br />\n"; // <i class="far fa-trash-alt"></i>
-    echo _BLOCK_ADMIN_NOTE;
-    echo "<br /><br />";
-    echo "<input type=\"submit\" value=\"Refresh Screen\" onclick=\"window.location.reload()\" />";
-    echo "</div>\n";
-    CloseTable();
-    echo "<br />";
+
     OpenTable();
 
     $result = $db->sql_query('SELECT bid, bkey, title, url, bposition, weight, active, blanguage, blockfile, view FROM '.$prefix.'_blocks ORDER BY weight');
@@ -270,6 +264,24 @@ function BlocksAdmin() {
     echo "</td></tr>";
     echo "</table>\n";
     CloseTable();
+
+    OpenTable();
+    echo "<div align=\"center\">\n";
+    echo "<span style=\"background-color : #bf0909;\">"._BLOCK_TITLE."</span>&nbsp;-&nbsp;"._BLOCK_INACTIVE."<br />\n";
+    // echo "<img src=\"images/admin/modules/delete.gif\" border=\"0\" alt=\"\" />&nbsp;-&nbsp;"._BLOCK_LINK_DELETE."<br />\n";
+    echo get_evo_icon('evo-sprite delete')."&nbsp;-&nbsp;"._BLOCK_LINK_DELETE."<br />\n";
+    echo get_evo_icon('evo-sprite edit')."&nbsp;-&nbsp;"._BLOCK_EDIT."<br /><br />\n"; // <i class="far fa-trash-alt"></i>
+    echo _BLOCK_ADMIN_NOTE;
+    echo "<br /><br />";
+    echo "<input type=\"submit\" value=\"Refresh Screen\" onclick=\"window.location.reload()\" />";
+    echo "</div>\n";
+    CloseTable();
+
+    OpenTable();
+    echo "<div align=\"center\">\n[ <a href=\"$admin_file.php?op=blocks\">" . _BLOCK_ADMIN_HEADER . "</a> ]</div>\n";
+    echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _BLOCK_RETURNMAIN . "</a> ]</div>\n";
+    CloseTable();
+
     include_once(NUKE_BASE_DIR.'footer.php');
 }
 
@@ -312,7 +324,13 @@ function NewBlock($bid='') {
        $bid++;
     }
     include_once(NUKE_BASE_DIR.'header.php');
+    
     OpenTable();
+    echo "<div align=\"center\">\n[ <a href=\"$admin_file.php?op=blocks\">" . _BLOCK_ADMIN_HEADER . "</a> ]</div>\n";
+    echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _BLOCK_RETURNMAIN . "</a> ]</div>\n";
+    CloseTable();
+	
+	OpenTable();
     if (!isset($edit)) {
        echo "<title>".$admlang['blocks']['new']."</title>\n";
     } else {
@@ -451,6 +469,12 @@ function NewBlock($bid='') {
     }
     echo "</form>\n";
     CloseTable();
+
+    OpenTable();
+    echo "<div align=\"center\">\n[ <a href=\"$admin_file.php?op=blocks\">" . _BLOCK_ADMIN_HEADER . "</a> ]</div>\n";
+    echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _BLOCK_RETURNMAIN . "</a> ]</div>\n";
+    CloseTable();
+
     include_once(NUKE_BASE_DIR.'footer.php');
 }
 

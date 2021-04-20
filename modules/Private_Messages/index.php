@@ -1,7 +1,8 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /***************************************************************************
  *                               privmsgs.php
@@ -48,15 +49,18 @@
 	  XtraColors                               v1.0.0       05/26/2009
  ************************************************************************/
 
-if (!defined('MODULE_FILE')) {
+if (!defined('MODULE_FILE')) 
+{
    die('You can\'t access this file directly...');
 }
 
-if (isset($privmsg_id)) {
+if (isset($privmsg_id)) 
+{
     $privmsg_id = intval($privmsg_id);
 }
 
-if (!empty($pm_uname)) {
+if (!empty($pm_uname)) 
+{
     $sql = "SELECT user_id from ".$user_prefix."_users WHERE username='$pm_uname'";
     $result = $db->sql_query($sql);
     $row = $db->sql_fetchrow($result);
@@ -70,15 +74,15 @@ $sql_title = "SELECT custom_title from ".$prefix."_modules where title='$name'";
 $result_title = $db->sql_query($sql_title);
 $row_title = $db->sql_fetchrow($result_title);
 
-if (empty($row_title['custom_title'])) {
+if (empty($row_title['custom_title'])) 
     $mod_name = str_replace("_", " ", $name);
-} else {
+else 
     $mod_name = $row_title['custom_title'];
-}
+
 if (!(isset($popup)) || ($popup != "1")) {
     $module_name = basename(dirname(__FILE__));
     require(NUKE_FORUMS_DIR.'nukebb.php');
-    // title($sitename.': '.$mod_name);
+     title($sitename.': '.$mod_name);
     // if (is_user()) {
     //     include(NUKE_MODULES_DIR.'Your_Account/navbar.php');
     //     OpenTable();

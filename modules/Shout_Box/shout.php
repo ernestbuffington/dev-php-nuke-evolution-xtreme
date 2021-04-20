@@ -571,7 +571,7 @@ function ShoutBox($ShoutSubmit, $ShoutComment, $shoutuid) {
             }
         }
         // You may not remove or edit this copyright!!! Doing so violates the GPL license.
-        $mid_content .= "<tr><td align=\"right\"><a title=\"Free scripts!\" target=\"_blank\" href=\"http://www.ourscripts.net\"><span style=\"font-size: 9;\">Shout Box &copy;</span></a></td></tr></table>";
+        $mid_content .= "<tr><td align=\"right\"><a title=\"Free scripts!\" target=\"_blank\" href=\"https://ourscripts.86it.us\"><span style=\"font-size: 9;\">Shout Box &copy;</span></a></td></tr></table>";
         // end copyright.
         // end mid content
         // start bottom content $bottom_content

@@ -1,7 +1,8 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /************************************************************************/
 /* PHP-NUKE: Web Portal System                                          */
@@ -353,28 +354,44 @@ function editmsg($mid) {
 /*****[BEGIN]******************************************
  [ Mod:    phpBB User Groups Integration       v1.0.0 ]
  ******************************************************/
-function savemsg($mid, $title, $content, $mdate, $expire, $active, $view, $groups, $chng_date, $mlanguage) {
+function savemsg($mid, $title, $content, $mdate, $expire, $active, $view, $groups, $chng_date, $mlanguage) 
+{
     global $prefix, $db, $admin_file;
-    if($view == 6) { $ingroups = implode("-",$groups); }
-    if($view < 6) { $ingroups = ""; }
-/*****[END]********************************************
- [ Mod:    phpBB User Groups Integration       v1.0.0 ]
- ******************************************************/
+
+    if($view == 6) 
+	{ 
+	  $ingroups = implode("-",$groups); 
+	}
+    
+	if($view < 6) 
+	{ 
+	  $ingroups = ""; 
+	}
+
     $mid = intval($mid);
     $title = Fix_Quotes($title);
     $content = Fix_Quotes($content);
-    if ($chng_date == 1) {
+
+    if ($chng_date == 1) 
+	{
         $newdate = time();
-    } elseif ($chng_date == 0) {
+    } 
+	elseif ($chng_date == 0) 
+	{
         $newdate = $mdate;
     }
-/*****[BEGIN]******************************************
- [ Mod:    phpBB User Groups Integration       v1.0.0 ]
- ******************************************************/
-    $result = $db->sql_query("update " . $prefix . "_message set title='$title', content='$content', date='$newdate', expire='$expire', active='$active', view='$view', groups='$ingroups', mlanguage='$mlanguage' WHERE mid='$mid'");
-/*****[END]********************************************
- [ Mod:    phpBB User Groups Integration       v1.0.0 ]
- ******************************************************/
+
+    $result = $db->sql_query("UPDATE ".$prefix."_message SET title='$title', 
+	                                                     content='$content', 
+														    date='$newdate', 
+														   expire='$expire', 
+														   active='$active', 
+														       view='$view',
+														 groups='$ingroups', 
+													  mlanguage='$mlanguage' 
+													  WHERE 
+													  mid='$mid'");
+
     Header("Location: ".$admin_file.".php?op=messages");
 }
 

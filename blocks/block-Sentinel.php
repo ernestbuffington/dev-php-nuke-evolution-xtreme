@@ -1,11 +1,12 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /********************************************************/
 /* NukeSentinel(tm)                                     */
-/* By: NukeScripts(tm) (http://www.nukescripts.net)     */
+/* By: NukeScripts(tm) (http://nukescripts.86it.us)     */
 /* Copyright (c) 2000-2008 by NukeScripts(tm)           */
 /* See CREDITS.txt for ALL contributors                 */
 /********************************************************/
@@ -33,6 +34,6 @@ while (list($ip_addr, $ip_reason) = $db->sql_fetchrow($result)) {
   $content .= '<br />'."\n";
 }
 $db->sql_freeresult($result);
-$content .= '<hr /><center><a href="http://www.nukescripts.net" target="_blank">'._AB_NUKESENTINEL.'</a></center>'."\n";
+$content .= '<hr /><center><a href="http://nukescripts.86it.us" target="_blank">'._AB_NUKESENTINEL.'</a></center>'."\n";
 
 ?>

@@ -100,7 +100,9 @@ echo "function titaniumAPI() {\n";                   // Testing Graph API after 
 echo "console.log('Welcome!  Fetching your information.... ');\n";
 echo "FB.api('/me', function(response) {\n";
 echo "console.log('Successful login for: ' + response.name);\n";
-echo "document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';\n";
+    // this error comes with the following
+    // Uncaught TypeError: Cannot set property 'innerHTML' of null
+    // echo "document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';\n";
 echo "});\n";
 echo "}\n";
 ##################################################################################################################

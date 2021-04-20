@@ -3,7 +3,7 @@
 /********************************************************/
 /* NukeSentinel(tm)                                     */
 /* By: NukeScripts Network (webmaster@nukescripts.net)  */
-/* http://www.nukescripts.net                           */
+/* http://nukescripts.86it.us                           */
 /* Copyright © 2000-2007 by NukeScripts Network         */
 /* See CREDITS.txt for ALL contributors                 */
 /********************************************************/

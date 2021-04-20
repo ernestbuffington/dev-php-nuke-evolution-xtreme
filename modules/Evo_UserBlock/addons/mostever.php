@@ -1,6 +1,6 @@
 <?php
 /*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+ PHP-Nuke Titanium v3.0.0 : Enhanced PHP-Nuke Web Portal System
  =======================================================================*/
 
 /************************************************************************
@@ -60,15 +60,15 @@ $block_mostever = evouserinfo_get_mostonline();
 
 $evouserinfo_mostever .= '<div style="font-weight: bold">'.$lang_evo_userblock['BLOCK']['MOST']['MOST'].'</div>';
 $evouserinfo_mostever .= '<div style="padding-left: 10px;">';
-$evouserinfo_mostever .= '  <i class="fa fa-angle-double-right fa-right-arrows" aria-hidden="true"></i>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['GUESTS'].'<span style="float:right">'.number_format($block_mostever['nonmembers']).'</span>';
+$evouserinfo_mostever .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['GUESTS'].'<span style="float:right">'.number_format($block_mostever['nonmembers']).'</span>';
 $evouserinfo_mostever .= '</div>';
 
 $evouserinfo_mostever .= '<div style="padding-left: 10px;">';
-$evouserinfo_mostever .= '  <i class="fa fa-angle-double-right fa-right-arrows" aria-hidden="true"></i>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['MEMBERS'].'<span style="float:right">'.number_format($block_mostever['members']).'</span>';
+$evouserinfo_mostever .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['MEMBERS'].'<span style="float:right">'.number_format($block_mostever['members']).'</span>';
 $evouserinfo_mostever .= '</div>';
 
 $evouserinfo_mostever .= '<div style="padding-left: 10px;">';
-$evouserinfo_mostever .= '  <i class="fa fa-angle-double-right fa-right-arrows" aria-hidden="true"></i>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['TOTAL'].'<span style="float:right">'.number_format($block_mostever['total']).'</span>';
+$evouserinfo_mostever .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['TOTAL'].'<span style="float:right">'.number_format($block_mostever['total']).'</span>';
 $evouserinfo_mostever .= '</div>';
 
 ?>

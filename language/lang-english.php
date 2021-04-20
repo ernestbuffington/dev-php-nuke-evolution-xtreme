@@ -1,7 +1,8 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /**************************************************************************/
 /* PHP-NUKE: Advanced Content Management System                           */
@@ -21,6 +22,9 @@
 /**************************************************************************/
 
 define('_EMPTY_MESSAGE','You must enter a message first');
+define('_YOUHAVE_1_MSGS','You Have %s New Private Message');
+define('_YOUHAVE_X_MSGS','You Have %s New Private Messages');
+define('_YOUHAVE_NO_MSGS','You Have <strong><span class="blink-one"><font color="yellow">0</font></span></strong> NEW Messages, Nobody Likes You!');
 
 // new common language defines.
 define('_S_ADMIN_PANEL','Admin Panel');

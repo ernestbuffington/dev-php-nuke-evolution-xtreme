@@ -1,11 +1,12 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /********************************************************/
 /* NukeSentinel(tm)                                     */
-/* By: NukeScripts(tm) (http://www.nukescripts.net)     */
+/* By: NukeScripts(tm) (http://nukescripts.86it.us)     */
 /* Copyright (c) 2000-2008 by NukeScripts(tm)           */
 /* See CREDITS.txt for ALL contributors                 */
 /********************************************************/
@@ -72,11 +73,21 @@ function blankmenu() {
   echo '<center><br /><img src="modules/NukeSentinel/images/welcome.png" height="132" width="120" alt="" title="" /></center>'."\n";
 }
 
-function mastermenu() {
+function mastermenu() 
+{
   global $ab_config, $getAdmin, $prefix, $db, $op, $admin, $admin_file;
+
   $sapi_name = strtolower(php_sapi_name());
-  $checkrow = $db->sql_numrows($db->sql_query("SELECT * FROM `".$prefix."_nsnst_ip2country`"));
-  if($checkrow > 0) { $tableexist = 1; } else { $tableexist = 0; }
+  $checkrow = $db->sql_numrows($db->sql_query("SELECT * FROM ".$prefix."_nsnst_ip2country"));
+  
+  if($checkrow > 0) 
+  { 
+    $tableexist = 1; 
+  } 
+  else 
+  { 
+    $tableexist = 0; 
+  }
   echo '<table summary="" align="center" border="0" cellpadding="2" cellspacing="2" width="90%">'."\n";
   echo '<tr>'."\n";
   echo '<td valign="top" width="50%">'."\n";
@@ -471,12 +482,12 @@ function OpenMenu($adsection="") {
   echo '<table summary="" width="100%" border="0" cellspacing="1" cellpadding="4">'."\n";
   $nsnstcopy  = "<strong>Module's Name:</strong> NukeSentinel(tm)<br />";
   $nsnstcopy .= "<strong>License:</strong> Copyright &#169; 2000-2008 NukeSentinel(tm) Team<br />";
-  $nsnstcopy .= "<strong>Author's Name:</strong> <a href='http://www.nukescripts.net' title='NukeSentinel(tm) available at NukeScripts(tm)' target='_blank'>NukeScripts(tm)</a><br />";
+  $nsnstcopy .= "<strong>Author's Name:</strong> <a href='https://nukescripts.86it.us' title='NukeSentinel(tm) available at NukeScripts(tm)' target='_blank'>NukeScripts(tm)</a><br />";
   $nsnstcopy .= "<strong>Module's Description:</strong> Advanced site security proudly produced by: NukeScripts(tm), Raven PHPScripts, &amp; NukeResources.";
   if($ab_config['disable_switch'] == 1) { $nsnststatus = _AB_DISABLED; } else { $nsnststatus = _AB_ENABLED; }
   if(!empty($adsection)) { $adsection = ": ".$adsection; }
   echo '<tr>'."\n";
-  echo '<td align="center" colspan="2"><a href="http://www.nukescripts.net/modules.php?name=Downloads" target="_blank"><span class="title"><strong>'._AB_NUKESENTINEL.'</strong></span></a><span class="title"><strong> '.$ab_config['version_number'].': '.$nsnststatus.$adsection.'</strong></span> ';
+  echo '<td align="center" colspan="2"><a href="https://nukescripts.86it.us/modules.php?name=File_Repository" target="_blank"><span class="title"><strong>'._AB_NUKESENTINEL.'</strong></span></a><span class="title"><strong> '.$ab_config['version_number'].': '.$nsnststatus.$adsection.'</strong></span> ';
   if($ab_config['help_switch'] > 0) {
     echo "<a href=\"javascript:void(0);\" onclick=\"return overlib('".addslashes($nsnstcopy)."', STICKY, CENTERPOPUP, CAPTION, 'Module Copyright &#169; Information', STATUS, 'NukeSentinel(tm): Copyright Information', WIDTH, 400, FGCOLOR, '#ffffff', BGCOLOR, '#000000', TEXTCOLOR, '#000000', CAPCOLOR, '#ffffff', CLOSECOLOR, '#ffffff', CAPICON, 'modules/NukeSentinel/images/copyicon.png', BORDER, '2', TEXTFONT, 'Lucida Sans, Arial', TEXTSIZE, '12px', CLOSEFONT, 'Lucida Sans, Arial', CLOSESIZE, '12px', CAPTIONFONT, 'Lucida Sans, Arial', CAPTIONSIZE, '12px');\"><img src='modules/NukeSentinel/images/copyicon.png' border='0' height='16' width='16' alt='' title='' /></a>";
   } else {
@@ -484,7 +495,7 @@ function OpenMenu($adsection="") {
   }
   echo '</td>'."\n";
   echo '</tr>'."\n";
-  echo '<tr><td align="center" colspan="3"><strong><a href="http://www.nukescripts.net/versions/nsnst.txt" target="new">'._AB_NEWVER.'</a></strong></td></tr>'."\n";
+  echo '<tr><td align="center" colspan="3"><strong><a href="https://nukescripts.86it.us/versions/nsnst.txt" target="new">'._AB_NEWVER.'</a></strong></td></tr>'."\n";
   echo '<tr><td align="center" valign="top" width="66%">'."\n";
 }
 

@@ -452,7 +452,7 @@ function get_footer()
  * @param string $length The caption you wish to display.
  * @return string The lightbox data "attr" that jQuery will look for and use the correct lightbox.
  */
-function get_image_viewer( $slideshow = '', $caption = '' )
+function get_image_viewer($slideshow = '',$caption = '')
 {
 	switch( get_evo_option( 'img_viewer' ) ):
 
@@ -596,29 +596,7 @@ function the_rating( $size, $rating, $msg = false )
 	return '<span class="star-rating '.$size.'-stars-'.$rating.'"'.(($msg) ? '  alt="'.$msg.'" title="'.$msg.'"' : '').'></span>';
 }
 
-/**
- * Customize function: Used for dynamic page titles, This replaces the old Dynamic Titles mod, which required multiple database queries.
- *
- * @since 2.0.9e
- */
-function the_pagetitle()
-{
-	global $sitename;
-	$item_delim         = "&raquo;";
-	// $module_name        = $_GET['name'];
-	$module_name 		= get_query_var( 'name', 'get', 'string', '' );
-	$module_name_str    = str_replace(array('-','_'),' ',$module_name);
 
-	# if the user is in the administration panel, simply change the page title to administration.
-	if (defined('ADMIN_FILE')):
-		$newpagetitle = $item_delim.' Administration';
-
-	# if the user is visiting a module, change the page title to the module name.
-	else:
-		$newpagetitle = ($module_name) ? $item_delim .' '.$module_name_str : '';
-	endif;    
-	echo '<title>'.$sitename.' '.$newpagetitle.'</title>';
-}
 
 /**
  * Custom function: do a quick check to see if the logged in users has new or unread private messages.
@@ -677,17 +655,15 @@ function get_theme_option($name, $type='string')
  * @param bool    $force_refresh         Choose whether to force an update, Default: false.
  * @return array  Return a json object with all the version information.
  */
-function cache_json_data( $version_check_url, $local_cache_location, $force_refresh = false, $headers = [], $cache_time = 86400 ) 
+function cache_json_data($version_check_url,$local_cache_location,$force_refresh = false,$headers = [],$cache_time = 86400) 
 {
-	$url 	= $version_check_url;
-	$cache 	= $local_cache_location;
+	$url = $version_check_url;
+	$cache = $local_cache_location;
 
-	if ( file_exists( $cache ) ):
-
-		if ( ( time() - filemtime( $cache ) ) > ( $cache_time ) || 0 == filesize( $cache ) ):
+	if(file_exists($cache)):
+		if ((time() - filemtime($cache) ) > ($cache_time) || 0 == filesize($cache)):
 			$force_refresh = true;
 		endif;
-
 	endif;
 
 	if ( $force_refresh || !file_exists( $cache ) ):
@@ -1326,5 +1302,4 @@ function bootstrap_pagination() {
     endif;
 
 }
-
 ?>

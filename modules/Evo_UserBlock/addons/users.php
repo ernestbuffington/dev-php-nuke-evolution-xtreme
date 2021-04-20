@@ -1,7 +1,8 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /************************************************************************
    Nuke-Evolution: Server Info Administration
@@ -93,23 +94,23 @@ function evouserinfo_users ()
     $evouserinfo_users = '<div style="font-weight: bold">'.$lang_evo_userblock['BLOCK']['USERS']['MEMBERSHIPS'].'</div>';
 
     $evouserinfo_users .= '<div style="padding-left: 10px;">';
-    $evouserinfo_users .= '  <i class="fa fa-angle-double-right fa-right-arrows" aria-hidden="true"></i>&nbsp;'.$lang_evo_userblock['BLOCK']['USERS']['NEW_TODAY'].'<span style="float:right">'.number_format($today).'</span>';
+    $evouserinfo_users .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['USERS']['NEW_TODAY'].'<span style="float:right">'.number_format($today).'</span>';
     $evouserinfo_users .= '</div>';
 
     $evouserinfo_users .= '<div style="padding-left: 10px;">';
-    $evouserinfo_users .= '  <i class="fa fa-angle-double-right fa-right-arrows" aria-hidden="true"></i>&nbsp;'.$lang_evo_userblock['BLOCK']['USERS']['NEW_YESTERDAY'].'<span style="float:right">'.number_format($yesterday).'</span>';
+    $evouserinfo_users .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['USERS']['NEW_YESTERDAY'].'<span style="float:right">'.number_format($yesterday).'</span>';
     $evouserinfo_users .= '</div>';
 
     $evouserinfo_users .= '<div style="padding-left: 10px;">';
-    $evouserinfo_users .= '  <i class="fa fa-angle-double-right fa-right-arrows" aria-hidden="true"></i>&nbsp;'.$lang_evo_userblock['BLOCK']['USERS']['WAITING'].'<span style="float:right">'.number_format($waiting).'</span>';
+    $evouserinfo_users .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['USERS']['WAITING'].'<span style="float:right">'.number_format($waiting).'</span>';
     $evouserinfo_users .= '</div>';
 
     $evouserinfo_users .= '<div style="padding-left: 10px;">';
-    $evouserinfo_users .= '  <i class="fa fa-angle-double-right fa-right-arrows" aria-hidden="true"></i>&nbsp;'.$lang_evo_userblock['BLOCK']['USERS']['TOTAL'].'<span style="float:right">'.number_format($total).'</span>';
+    $evouserinfo_users .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['USERS']['TOTAL'].'<span style="float:right">'.number_format($total).'</span>';
     $evouserinfo_users .= '</div>';
 
     $evouserinfo_users .= '<div style="padding-left: 10px;">';
-    $evouserinfo_users .= '  <i class="fa fa-angle-double-right fa-right-arrows" aria-hidden="true"></i>&nbsp;'.$lang_evo_userblock['BLOCK']['USERS']['LATEST'].'<span style="float:right"><a href="modules.php?name=Profile&amp;mode=viewprofile&amp;u='.$new_user_id.'">'.$new_user.'</a></span>';
+    $evouserinfo_users .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['USERS']['LATEST'].'<span style="float:right"><a href="modules.php?name=Profile&amp;mode=viewprofile&amp;u='.$new_user_id.'">'.$new_user.'</a></span>';
     $evouserinfo_users .= '</div>';
 }
 

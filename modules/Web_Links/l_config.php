@@ -1,7 +1,8 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /************************************************************************/
 /* PHP-NUKE: Web Portal System                                          */
@@ -47,5 +48,4 @@ $mostpoplinks = 25;                  //Either # of links OR percentage to show (
 $featurebox = 1;                     //1 to Show Feature Link Box on links Main Page? (1=Yes 0=No)
 $linkvotemin = 5;                    //Number votes needed to make the 'top 10' list
 $blockunregmodify = 1;               //Block unregistered users from suggesting links changes? (1=Yes 0=No)
-
 ?>

@@ -1,6 +1,6 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
 /************************************************************************/
 /* PHP-NUKE: Web Portal System                                          */
@@ -31,11 +31,36 @@
       Color Toggle                             v1.0.0       11/25/2005
  ************************************************************************/
 
-if(!defined('IN_SETTINGS')) {
-  exit('Access Denied');
-}
+if(!defined('IN_SETTINGS'))exit('Access Denied');
 
-global $admin, $httpref, $httprefmax, $pollcomm, $articlecomm, $minpass, $my_headlines, $user_news, $adminssl, $queries_count, $use_colors, $lock_modules, $banners, $lazy_tap, $wysiwyg, $img_resize, $img_width, $img_height, $collapse, $collapsetype, $analytics, $use_stream, $html_auth, $use_floating_admin, $arrow_color, $img_viewer, $admLang;
+      global $admin, 
+           $httpref, 
+        $httprefmax, 
+          $pollcomm, 
+       $articlecomm, 
+           $minpass, 
+      $my_headlines, 
+         $user_news, 
+          $adminssl, 
+     $queries_count, 
+        $use_colors, 
+      $lock_modules, 
+           $banners, 
+	      $lazy_tap, 
+	       $wysiwyg, 
+        $img_resize, 
+         $img_width, 
+        $img_height, 
+          $collapse, 
+      $collapsetype, 
+         $analytics, 
+        $use_stream, 
+         $html_auth, 
+$use_floating_admin, 
+       $arrow_color, 
+	    $img_viewer, 
+		   $admLang;
+
 echo '  <tr>'.PHP_EOL;
 echo '    <td class="catHead" colspan="3" style="font-weight: bold; text-align: center; text-transform: uppercase;">'.$admlang['misc']['header'].'</td>'.PHP_EOL;
 echo '  </tr>'.PHP_EOL;
@@ -82,13 +107,15 @@ echo '        <tr>'.PHP_EOL;
 echo '          <td class="row1" style="width: 50%;">'.$admlang['misc']['banners'].'</td>'.PHP_EOL;
 echo '          <td class="row1" style="width: 50%;">'.yesno_option('xbanners', $banners).'</td>'.PHP_EOL;
 echo '        </tr>'.PHP_EOL;
+
 # Mod:     Custom Text Area
 $admin_wysiwyg = new Wysiwyg('','');
 echo '        <tr>'.PHP_EOL;
-echo '          <td class="row1" style="width: 50%;">'.$admlang['misc']['textarea'].'</td>'.PHP_EOL;
+echo '          <td class="row1" style="width: 50%;">Blog Area Editor</td>'.PHP_EOL;
 echo '          <td class="row1" style="width: 50%;">'.$admin_wysiwyg->getSelect().'</td>'.PHP_EOL;
 echo '        </tr>'.PHP_EOL;
 # Base:    HTMLPurifier God Admin Bypass
+
 if (is_god($admin)) 
 {
   echo '        <tr>'.PHP_EOL;
@@ -149,12 +176,12 @@ echo '          </td>'.PHP_EOL;
 echo '        </tr>'.PHP_EOL;
 
 
-echo '        <tr>'.PHP_EOL;
-echo '          <td class="row1" style="width: 50%;">'.$admlang['misc']['analytics'].'</td>'.PHP_EOL;
-echo '          <td class="row1" style="width: 50%;"><input type="text" name="xanalytics" value="'.$analytics.'" size="25" maxlength="50"></td>'.PHP_EOL;
-echo '        </tr>'.PHP_EOL;
-echo '      </table>'.PHP_EOL;
-echo '    </td>'.PHP_EOL;
-echo '  </tr>'.PHP_EOL;
+//echo '        <tr>'.PHP_EOL;
+//echo '          <td class="row1" style="width: 50%;">'.$admlang['misc']['analytics'].'</td>'.PHP_EOL;
+//echo '          <td class="row1" style="width: 50%;"><input type="text" name="xanalytics" value="'.$analytics.'" size="25" maxlength="50"></td>'.PHP_EOL;
+//echo '        </tr>'.PHP_EOL;
+//echo '      </table>'.PHP_EOL;
+//echo '    </td>'.PHP_EOL;
+//echo '  </tr>'.PHP_EOL;
 
 ?>

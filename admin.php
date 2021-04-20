@@ -1,6 +1,6 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
 
 /************************************************************************/
@@ -46,29 +46,29 @@
 define('ADMIN_FILE', true);
 define('VALIDATE', true);
 
-require_once(dirname(__FILE__) . '/mainfile.php');
-require_once(NUKE_ADMIN_DIR.'functions.php');
-
-global $sitename, $currentlang, $domain, $admin_file, $identify;
-
-// if(isset($aid) && ($aid) && (!isset($admin) || empty($admin)) && $op != 'login'){
-if( $op!='login' && ((isset($aid) && ($aid)) && (!isset($admin) || empty($admin))) ) {
+if(isset($aid) && ($aid) && (!isset($admin) || empty($admin)) && $op != 'login')
+{
     unset($aid, $admin);
     die('Access Denied');
 }
 
+// Include functions
+require_once(dirname(__FILE__) . '/mainfile.php');
+require_once(NUKE_ADMIN_DIR.'functions.php');
+
+global $domain, $admin_file, $identify;
+
 /*****[BEGIN]******************************************
  [ Mod:    Admin IP Lock                       v2.1.0 ]
  ******************************************************/
-/*=====
-  For more information on how to use this please see the help file in the help/features folder
-  =====*/
 include(NUKE_BASE_DIR.'ips.php');
 
-if (isset($ips) && is_array($ips)){
+if (isset($ips) && is_array($ips))
+{
     $ip_check = implode('|^',$ips);
 	
-    if (!preg_match("/^".$ip_check."/",$identify->get_ip())){
+    if (!preg_match("/^".$ip_check."/",$identify->get_ip()))
+	{
         unset($aid);
         unset($admin);
 /*****[BEGIN]******************************************
@@ -157,21 +157,19 @@ if ((isset($aid)) && (isset($pwd)) && (isset($op)) && ($op == "login")){
             log_write('admin', 'Attempted to login with "' . $aid . '"/"' . $txt_pwd . '" but failed', 'Security Breach');
             unset($txt_pwd);
 
-            // echo get_evo_option( 'admin_fc_status' );
+            global $admin_fc_status, $admin_fc_attempts, $admin_fc_timeout, $prefix;
+			if($admin_fc_status == 1):
 
-            global $admin_fc_status, $admin_fc_attempts, $admin_fc_timeout;
-			if ( get_evo_option( 'admin_fc_status' ) == 1 ):
-
-				$ip = get_user_IP();
+				$ip = $_SERVER['REMOTE_ADDR'];
 				$fcdate = date("mdYHi");
-				$fc = dburow("SELECT * FROM `"._FAILED_LOGIN_INFO_TABLE."` WHERE fc_ip = '$ip'");
-
+				$fc = $db->sql_ufetchrow("SELECT * FROM `". $prefix ."_admin_fc` WHERE fc_ip = '$ip'");
+			
 				if (empty($fc)):
-					dbquery("INSERT INTO `"._FAILED_LOGIN_INFO_TABLE."` VALUES ('$fcdate', '$ip', '1')");
+					$db->sql_query("INSERT INTO `" . $prefix . "_admin_fc` VALUES ('$fcdate', '$ip', '1')");
 				else:
 
 					$fc_tries = $fc['fc_attempts'] + 1;
-					dbquery("UPDATE `"._FAILED_LOGIN_INFO_TABLE."` SET `fc_datetime`='$fcdate', `fc_ip`='$ip', `fc_attempts`='$fc_tries' WHERE fc_ip = '$ip'");
+					$db->sql_query("UPDATE `" . $prefix . "_admin_fc` SET `fc_datetime`='$fcdate', `fc_ip`='$ip', `fc_attempts`='$fc_tries' WHERE fc_ip = '$ip'");
 
 				endif;
 
@@ -281,11 +279,7 @@ if ($admintest){
             deleteNotice($id);
         break;
         case "GraphicAdmin":
-            if ( defined('BOOTSTRAP') ):
-                administration_panel();
-            else:
-                GraphicAdmin();
-            endif;
+            GraphicAdmin();
         break;
         case "adminMain":
 /*****[BEGIN]******************************************
@@ -334,26 +328,14 @@ if ($admintest){
                 }
             }
             $db->sql_freeresult($result);
-
-            /**
-             * Themes administration
-             */
-            $result = $db->sql_query("SELECT theme_name FROM ".$prefix."_themes ORDER BY theme_name ASC");
-            while(list($themes_name) = $db->sql_fetchrow($result,SQL_BOTH)){
-                if (is_mod_admin($themes_name) && (file_exists(NUKE_THEMES_DIR.$themes_name.'/admin/index.php') AND file_exists(NUKE_THEMES_DIR.$themes_name.'/admin/links.php') AND file_exists(NUKE_THEMES_DIR.$themes_name.'/admin/case.php'))){
-                     include(NUKE_THEMES_DIR.$themes_name.'/admin/case.php');
-                }
-            }
-            $db->sql_freeresult($result);
-            
         break;
     }
 } else {
     switch($op) {
         default:
-            // if (!stristr($_SERVER['HTTP_USER_AGENT'], 'WebTV')) {
-            //     header('HTTP/1.0 403 Forbidden');
-            // }
+            if (!stristr($_SERVER['HTTP_USER_AGENT'], 'WebTV')) {
+                header('HTTP/1.0 403 Forbidden');
+            }
 			login();
         break;
     }

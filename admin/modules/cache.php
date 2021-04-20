@@ -1,6 +1,6 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
 
 /************************************************************************
@@ -20,15 +20,14 @@
 -=[Base]=-
       Nuke Patched                             v3.1.0       06/26/2005
  ************************************************************************/
-
-if (!defined('ADMIN_FILE')) {
-   die ("Illegal File Access");
-}
+if (!defined('ADMIN_FILE')) 
+die ("Illegal File Access");
 
 define('CACHE_ADMIN', true);
 global $prefix, $db, $evoconfig;
 
-function cache_header() {
+function cache_header() 
+{
     global $admin_file, $evoconfig, $usrclearcache, $cache;
 
     $enabled = ($cache->valid) ? "<font color=\"green\">" . _CACHE_ENABLED . "</font>" : "<font color=\"red\">" . _CACHE_DISABLED . "</font> (<a href=\"$admin_file.php?op=howto_enable_cache\">" . _CACHE_HOWTOENABLE . "</a>)";
@@ -61,12 +60,11 @@ function cache_header() {
             $cache_type =  _CACHE_DISABLED;
         break;
     }
-        OpenTable();
-    echo "<div align=\"center\">\n<a href=\"$admin_file.php?op=cache\">" . _CACHE_HEADER . "</a></div>\n";
-    echo "<br /><br />";
+    OpenTable();
+    echo "<div align=\"center\">\n[ <a href=\"$admin_file.php?op=cache\">" . _CACHE_HEADER . "</a> ]</div>\n";
     echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _CACHE_RETURN . "</a> ]</div>\n";
     CloseTable();
-    echo "<br />";
+
     OpenTable();
         echo "<center>"
         ."<table border='0' width='70%'><tr><td>"

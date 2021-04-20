@@ -20,9 +20,10 @@
     on other sites.
 */
 
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /*****[CHANGES]**********************************************************
 -=[Base]=-
@@ -198,21 +199,34 @@ function get_smilies() {
     return $smilies;
 }
 
-function set_smilies($message, $url='') {
+function set_smilies($message, $url='') 
+{
     static $orig, $repl;
-    if (!isset($orig)) {
+
+    if (!isset($orig)) 
+	{
         global $smilies_path, $smilies_desc, $nukeurl;
-        $orig = $repl = array();
+    
+	    $orig = $repl = array();
         $smilies = get_smilies();
         $url = (empty($url)) ? $nukeurl : $url;
-        if (!empty($url) && substr($url, -1) != '/') { $url .= '/'; }
-        for ($i = 0; $i < count($smilies); $i++) {
+    
+	    if (!empty($url) && substr($url, -1) != '/') 
+		{ 
+		  $url .= '/modules/Forums/images/smiles/'; # this had only a forward slash / and was not displaying the smilies on the main page correctly.
+		                                            # TheGhost fixed this 03/19/2021 at 5:55pm
+		}
+        
+		for ($i = 0; $i < count($smilies); $i++) 
+		{
             $smilies[$i]['code'] = str_replace('#', '\#', preg_quote($smilies[$i]['code']));
             $orig[] = "#([\s])".$smilies[$i]['code']."([\s<])#si";
             $repl[] = '\\1<img src="' . $url . $smilies_path . $smilies[$i]['smile_url'] . '" alt="'.get_codelang($smilies[$i]['emoticon'],$smilies_desc).'" title="'.get_codelang($smilies[$i]['emoticon'],$smilies_desc).'" border="0" />\\2';
         }
     }
-    if (count($orig)) {
+    
+	if (count($orig)) 
+	{
         $message = preg_replace($orig, $repl, " $message ");
         $message = substr($message, 1, -1);
     }
@@ -253,13 +267,19 @@ function makeclickable($text)
     return($ret);
 }
 
-function htmlprepare($str, $nl2br=false, $spchar=ENT_QUOTES, $nohtml=false) {
-    if ($nohtml) { $str = strip_tags($str, $nohtml); } # $nohtml : <a><br><strong><i><img><li><ol><p><strong><u><ul>
-    $str = htmlspecialchars($str,$spchar,'utf-8'); # htmlentities sucks cos it converts all chars
-    if ($nl2br) 
-    { 
-        $str = nl2br($str); 
-    }
+function htmlprepare($str, $nl2br=false, $spchar=ENT_QUOTES, $nohtml=false) 
+{
+    if ($nohtml) 
+	$str = strip_tags($str, $nohtml); 
+	
+	# $nohtml : <a><br><strong><i><img><li><ol><p><strong><u><ul>
+	# htmlentities sucks cos it converts all chars <- not TheGhost's opinion becuase it does what it is written to do.
+	
+    $str = htmlspecialchars($str,$spchar,'utf-8');     
+    
+	if ($nl2br) 
+    $str = nl2br($str); 
+
     return trim($str);
 }
 

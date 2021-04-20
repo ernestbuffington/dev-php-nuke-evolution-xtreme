@@ -1,7 +1,8 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /***************************************************************************
  *                             lang_functions.php
@@ -318,9 +319,10 @@ function set_lang_entry($language, $module_id, $key, $value)
     if (!file_exists($language_file))
     {
         $contents = "<?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
- =======================================================================*/\n\n\n?>";
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
+ =======================================================================*/
+\n\n\n?>";
     }
     else
     {
@@ -404,9 +406,10 @@ function set_lang_block($language, $module_id, $lang_block)
     if (!file_exists($language_file))
     {
         $contents = "<?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
- =======================================================================*/\n\n\n?>";
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
+ =======================================================================*/
+\n\n\n?>";
     }
     else
     {
@@ -522,9 +525,10 @@ function lang_add_new_key($language, $module_id, $add_key, $add_value)
     if (!file_exists($language_file))
     {
         $contents = "<?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
- =======================================================================*/\n\n\n?>";
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
+ =======================================================================*/
+\n\n\n?>";
     }
     else
     {
@@ -632,9 +636,10 @@ function delete_lang_key($language, $module_id, $key_name)
     if (!file_exists($language_file))
     {
         $contents = "<?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
- =======================================================================*/\n\n\n?>";
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
+ =======================================================================*/
+\n\n\n?>";
     }
     else
     {
@@ -718,9 +723,10 @@ function add_empty_language($new_language)
         if (!file_exists($language_file))
         {
             $contents = "<?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
- =======================================================================*/\n\n\n?>";
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
+ =======================================================================*/
+\n\n\n?>";
         }
         else
         {
@@ -848,9 +854,10 @@ function add_new_language_predefined($new_language, $modules)
         if (!file_exists($language_file))
         {
             $contents = "<?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
- =======================================================================*/\n\n\n?>";
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
+ =======================================================================*/
+\n\n\n?>";
         }
         else
         {

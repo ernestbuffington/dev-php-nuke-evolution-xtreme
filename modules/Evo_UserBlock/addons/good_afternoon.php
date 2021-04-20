@@ -1,6 +1,6 @@
 <?php
 /*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+ PHP-Nuke Titanium v3.0.0 : Enhanced PHP-Nuke Web Portal System
  =======================================================================*/
 
 /************************************************************************
@@ -26,7 +26,8 @@ global $evouserinfo_addons, $evouserinfo_good_afternoon, $lang_evo_userblock;
 function evouserinfo_create_date($format, $gmepoch, $tz)
 {
     global $board_config, $lang, $userdata, $pc_dateTime;
-    static $translate;
+    
+	static $translate;
     
     if (!defined('ANONYMOUS')) {
         define('ANONYMOUS', 1);
@@ -41,7 +42,8 @@ function evouserinfo_create_date($format, $gmepoch, $tz)
     if ( empty($translate) && $board_config['default_lang'] != 'english' && is_array($lang['datetime']))
     {
         @reset($lang['datetime']);
-        while ( list($match, $replace) = @each($lang['datetime']) )
+    
+	    while ( list($match, $replace) = @each($lang['datetime']) )
         {
             $translate[$match] = $replace;
         }
@@ -89,7 +91,8 @@ function evouserinfo_create_date($format, $gmepoch, $tz)
                 return ( !empty($translate) ) ? strtr(@gmdate($format, $gmepoch + (3600 * $tz)), $translate) : @gmdate($format, $gmepoch + (3600 * $tz));
                 break;
         }
-    } else
+    } 
+	else
     {
         switch ( $board_config['default_time_mode'] )
         {
@@ -131,33 +134,46 @@ function evouserinfo_create_date($format, $gmepoch, $tz)
     }
 }
 
-if (is_user()) {
+if(is_user()) 
+{
     global $userinfo;
     $uname = UsernameColor($userinfo['username']);
-} else {
+} 
+else 
+{
     $uname = $lang_evo_userblock['BLOCK']['ANON'];
 }
 
 global $userinfo;
-if(is_user() && isset($userinfo) && is_array($userinfo)) {
+
+if(is_user() && isset($userinfo) && is_array($userinfo)) 
+{
     $evouserinfo_time = evouserinfo_create_date('G', time(), $userinfo['user_timezone']);
-} else {
+} 
+else 
+{
     global $board_config;
+
     $evouserinfo_time = evouserinfo_create_date('G', time(), $board_config['board_timezone']);
 }
 
 $evouserinfo_good_afternoon = "<div align=\"center\">";
 //Morning
-if ($evouserinfo_time >= 0 && $evouserinfo_time <= 11) {
+if ($evouserinfo_time >= 0 && $evouserinfo_time <= 11) 
+{
     $evouserinfo_good_afternoon .= $lang_evo_userblock['BLOCK']['AFTERNOON']['MORNING']."&nbsp;";
 //Afternoon
-} else if ($evouserinfo_time >= 12 && $evouserinfo_time <= 17) {
+} 
+else 
+if ($evouserinfo_time >= 12 && $evouserinfo_time <= 17) {
     $evouserinfo_good_afternoon .= $lang_evo_userblock['BLOCK']['AFTERNOON']['AFTERNOON']."&nbsp;";
 //Evening
-} else if ($evouserinfo_time >= 18 && $evouserinfo_time <= 23) {
+} 
+else 
+if ($evouserinfo_time >= 18 && $evouserinfo_time <= 23) {
     $evouserinfo_good_afternoon .= $lang_evo_userblock['BLOCK']['AFTERNOON']['EVENING']."&nbsp;";
 }
 //Username
-$evouserinfo_good_afternoon .= "<br />".$uname."</div>";
+$evouserinfo_good_afternoon .= "<br /><strong>".$uname."</strong></div>";
 $evouserinfo_good_afternoon .= "<br />\n";
 ?>

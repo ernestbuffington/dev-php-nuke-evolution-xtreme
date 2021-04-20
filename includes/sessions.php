@@ -1,7 +1,8 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /***************************************************************************
  *                                sessions.php
@@ -222,80 +223,81 @@ function select_session_url($session_page, $url_qs, $url_ps, $specific, $level, 
             $new_url     = explode('.', $url_ps);
             $page        = str_replace('/', '', $new_url[0]);
             $location    = ($location) ? $location : '<a href="'. (($url_qs) ? $url_ps .'?'. $url_qs : $url_ps) .'" class="copyright">'. ucwords(strtolower($page)) .'</a>';
-        #==== End: Integration For Other Mods
+            
+			#==== End: Integration For Other Mods
             }
 
-        $location     = trim($location);
-        $url_qs     = trim($url_qs );
-        $url_ps     = trim($url_ps);
-            if (!$location || ( (!$url_qs) && (!$url_ps) ) )
-                $location = sprintf($lang['BSH_Index'], '<a href="index.'. $phpEx .'" class="copyright">', '</a>');
+            $location     = trim($location);
+            $url_qs     = trim($url_qs );
+            $url_ps     = trim($url_ps);
+            
+			if (!$location || ( (!$url_qs) && (!$url_ps) ) )
+            $location = sprintf($lang['BSH_Index'], '<a href="index.'. $phpEx .'" class="copyright">', '</a>');
 
-    return '<span class="gensmall">'. $location .'</span>';
+            return '<span class="gensmall">'. $location .'</span>';
         }
 
-    function strip_session_sid()
+        function strip_session_sid()
         {
-    global $HTTP_SERVER_VARS;
+           global $HTTP_SERVER_VARS;
 
-        if (isset($HTTP_SERVER_VARS['QUERY_STRING']))
+           if (isset($HTTP_SERVER_VARS['QUERY_STRING']))
             $qs = str_replace('%09', '%20', $HTTP_SERVER_VARS['QUERY_STRING']);
-        elseif (getenv('QUERY_STRING'))
+           elseif (getenv('QUERY_STRING'))
             $qs = str_replace('%09', '%20', getenv('QUERY_STRING'));
-        else
+           else
             $qs = 'unknown';
 
-        if (@strstr($qs, '?sid=') || @strstr($qs, '&sid='))
+            if (@strstr($qs, '?sid=') || @strstr($qs, '&sid='))
             {
-            if (@strstr($qs, '?sid='))
+                if (@strstr($qs, '?sid='))
                 {
-            $new_qs = explode('?sid=', $qs);
-            return $new_qs[0];
+                  $new_qs = explode('?sid=', $qs);
+                  return $new_qs[0];
                 }
-            if (@strstr($qs, '&sid='))
+                
+				if (@strstr($qs, '&sid='))
                 {
-            $new_qs = explode('&sid=', $qs);
-            return $new_qs[0];
+                  $new_qs = explode('&sid=', $qs);
+                  return $new_qs[0];
                 }
             }
-        elseif ($qs != 'unknown')
-            return $qs;
-        else
-            return '';
+           elseif ($qs != 'unknown') 
+           return $qs;
+           else
+           return '';
         }
 
-    function set_session_url($id)
+        function set_session_url($id)
         {
-    global $db;
-    global $HTTP_GET_VARS, $HTTP_SERVER_VARS;
+          global $db;
+          global $HTTP_GET_VARS, $HTTP_SERVER_VARS;
 
-    $php_self         = $HTTP_SERVER_VARS['PHP_SELF'];
-    $query_string     = strip_session_sid();
+          $php_self         = $HTTP_SERVER_VARS['PHP_SELF'];
+          $query_string     = strip_session_sid();
 
-        if (isset($HTTP_GET_VARS[POST_USERS_URL]))
+          if (isset($HTTP_GET_VARS[POST_USERS_URL]))
             $specific = intval($HTTP_GET_VARS[POST_USERS_URL]);
 
-        if (isset($HTTP_GET_VARS[POST_FORUM_URL]))
+          if (isset($HTTP_GET_VARS[POST_FORUM_URL]))
             $specific = intval($HTTP_GET_VARS[POST_FORUM_URL]);
 
-        if (isset($HTTP_GET_VARS[POST_GROUPS_URL]))
+          if (isset($HTTP_GET_VARS[POST_GROUPS_URL]))
             $specific = intval($HTTP_GET_VARS[POST_GROUPS_URL]);
 
-        if (isset($HTTP_GET_VARS[POST_CAT_URL]))
+          if (isset($HTTP_GET_VARS[POST_CAT_URL]))
             $specific = intval($HTTP_GET_VARS[POST_CAT_URL]);
 
-        if (isset($HTTP_GET_VARS[POST_TOPIC_URL]))
+          if (isset($HTTP_GET_VARS[POST_TOPIC_URL]))
             $specific = intval($HTTP_GET_VARS[POST_TOPIC_URL]);
 
-        if (isset($HTTP_GET_VARS[POST_POST_URL]))
+          if (isset($HTTP_GET_VARS[POST_POST_URL]))
             $specific = intval($HTTP_GET_VARS[POST_POST_URL]);
 
-        if (!isset($specific))
+          if (!isset($specific))
             $specific = 0;
 
-    $q = "UPDATE ". SESSIONS_TABLE ."
-          SET session_url_qs = '$query_string', session_url_ps = '$php_self', session_url_specific = '$specific'
-          WHERE session_id = '$id'";
+    $q = "UPDATE ". SESSIONS_TABLE ." SET session_url_qs = '$query_string', session_url_ps = '$php_self', session_url_specific = '$specific' WHERE session_id = '$id'";
     $db->sql_query($q);
 }
 /*****[END]********************************************

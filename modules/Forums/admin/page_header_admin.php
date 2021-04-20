@@ -1,7 +1,8 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /***************************************************************************
  *                           page_header_admin.php
@@ -35,6 +36,16 @@ if (!defined('IN_PHPBB'))
 
 define('HEADER_INC', true);
 
+/*****[BEGIN]******************************************
+ [ Mod:     Forum Admin Style Selection        v1.0.0 ]
+ ******************************************************/
+$Theme = get_theme();
+$style = ($board_config['use_theme_style']) ? "./../../../themes/$Theme/style/style.css" : "./../templates/subSilver/subSilver.css";
+
+/*****[END]********************************************
+ [ Mod:     Forum Admin Style Selection        v1.0.0 ]
+ ******************************************************/
+
 $template->set_filenames(array(
         'header' => 'admin/page_header.tpl')
 );
@@ -42,14 +53,6 @@ $template->set_filenames(array(
 // Format Timezone. We are unable to use array_pop here, because of PHP3 compatibility
 $l_timezone = explode('.', $board_config['board_timezone']);
 $l_timezone = (count($l_timezone) > 1 && $l_timezone[count($l_timezone)-1] != 0) ? $lang[sprintf('%.1f', $board_config['board_timezone'])] : $lang[number_format($board_config['board_timezone'])];
-/*****[BEGIN]******************************************
- [ Mod:     Forum Admin Style Selection        v1.0.0 ]
- ******************************************************/
-$Theme = get_theme();
-$style = ($board_config['use_theme_style']) ? "./../../../themes/$Theme/style/style.css" : "./../templates/subSilver/subSilver.css";
-/*****[END]********************************************
- [ Mod:     Forum Admin Style Selection        v1.0.0 ]
- ******************************************************/
 //
 // The following assigns all _common_ variables that may be used at any point
 // in a template. Note that all URL's should be wrapped in append_sid, as

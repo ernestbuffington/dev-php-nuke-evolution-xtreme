@@ -1,12 +1,13 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /********************************************************/
 /* NSN Supporters                                       */
 /* By: NukeScripts Network (webmaster@nukescripts.net)  */
-/* http://www.nukescripts.net                           */
+/* http://nukescripts.86it.us                           */
 /* Copyright (c) 2000-2005 by NukeScripts Network         */
 /********************************************************/
 

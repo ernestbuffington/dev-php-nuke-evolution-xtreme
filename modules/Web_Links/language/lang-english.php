@@ -1,7 +1,8 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /**************************************************************************/
 /* PHP-NUKE: Advanced Content Management System                           */
@@ -38,10 +39,10 @@ define("_NOMATCHES","No matches found to your query");
 define("_SCOMMENTS","Comments");
 define("_DESCRIPTION","Description");
 define("_TO","To");
-define("_ADDLINK","Add Link");
-define("_NEW","New");
-define("_POPULAR","Popular");
-define("_TOPRATED","Top Rated");
+define("_ADDLINK","Add A Link");
+define("_NEW","New Links");
+define("_POPULAR","Popular Links");
+define("_TOPRATED","Top Rated Links");
 define("_RANDOM","Random");
 define("_LINKSMAIN","Links Main");
 define("_LINKCOMMENTS","Link Comments");
@@ -85,7 +86,7 @@ define("_2WEEKS","2 Weeks");
 define("_30DAYS","30 Days");
 define("_SHOW","Show");
 define("_TOTALFORLAST","Total new links for last");
-// define("_DAYS","days");
+define("_DAYS","days");
 define("_ADDEDON","Added on");
 define("_RATING","Rating");
 define("_RATESITE","Rate this Site");
@@ -100,7 +101,7 @@ define("_SORTLINKSBY","Sort Links by");
 define("_SITESSORTED","Sites currently sorted by");
 define("_POPULARITY","Popularity");
 define("_SELECTPAGE","Select Page");
-// define("_MAIN","Main");
+define("_MAIN","Links Main");
 define("_NEWTODAY","New Today");
 define("_NEWLAST3DAYS","New last 3 days");
 define("_NEWTHISWEEK","New This Week");

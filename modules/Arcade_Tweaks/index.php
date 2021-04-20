@@ -1,7 +1,8 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /**
  * 
@@ -705,9 +706,10 @@ function setCheckboxes(do_check)
 </script>
 
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
     menu();
     OpenTable();
     MakePageDBLinks(0, count($gamesdata), $filesbypage, $cstart);
@@ -1117,9 +1119,10 @@ function setCheckboxes(do_check)
 //-->
 </script>
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
         $catid = intval($catid);
         $sql = "SELECT * FROM " . $prefix . "_bbgames WHERE arcade_catid=$catid ORDER BY `game_name`";
         $result = $db->sql_query($sql) or die("Cannot read Games Table");

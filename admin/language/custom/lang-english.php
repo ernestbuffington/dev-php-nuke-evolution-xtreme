@@ -1,7 +1,8 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /*****[CHANGES]**********************************************************
 -=[Base]=-
@@ -186,7 +187,7 @@ define("_CACHE_NO", "No");
 define("_CACHE_YES", "Yes");
 define("_CACHE_GOOD", "Good");
 define("_CACHE_BAD", "Your cache is NOT chmodded!");
-define("_CACHE_HEADER", "Nuke-Evolution Cache :: Admin Panel");
+define("_CACHE_HEADER", "Admin Cache Panel");
 define("_CACHE_STATUS", "Cache Status:");
 define("_CACHE_DIR_STATUS", "Cache Directory Status:");
 define("_CACHE_NUM_FILES", "Number of cached items:");
@@ -345,7 +346,7 @@ define('_THEMES_USER_SELECT', 'Select User Theme');
 /*****[BEGIN]******************************************
  [ Other:    Database Manager                  v2.0.0 ]
  ******************************************************/
-define("_DATABASE_ADMIN_HEADER", "Nuke-Evolution Backup :: Admin Panel");
+define("_DATABASE_ADMIN_HEADER", "Database Backup Panel");
 define("_DATABASE_RETURNMAIN", "Return to Main Administration");
 define("_DATABASE", "Database");
 define("_ACTIONRESULTS", "Here are the results of your");
@@ -368,7 +369,7 @@ OPTIMIZE works in the following way:<ul>
 <li>If the table has deleted or split rows, repair the table.</li>
 <li>If the index pages are not sorted, sort them.</li>
 <li>If the statistics are not up to date (and the repair couldn\'t be done by sorting the index), update them.</li>
-</ul><strong>Note:</strong> the table is locked during the time in which OPTIMIZE is running!');
+</ul><strong>Note:</strong> the table is locked during the time in which OPTIMIZE is running!<br /><strong>Note:</strong> This admin backup module has been updated for PHP 7.xx');
 define("_IMPORTFILE","Import SQL File");
 define("_IMPORTSQL", "Import");
 define("_DBACTION", "Action");
@@ -429,7 +430,7 @@ define('_EVO_USERINFO','Evo UserInfo Block');
 /*****[BEGIN]******************************************
  [ Base:    Blocks                             v.1.0.0]
  ******************************************************/
-define('_BLOCK_ADMIN_HEADER', 'Nuke-Evolution Blocks :: Admin Panel');
+define('_BLOCK_ADMIN_HEADER', 'Admin Blocks Panel');
 define('_BLOCK_RETURNMAIN', 'Return to Main Administration');
 define('_BLOCK_ADMIN_NOTE', 'Please note that when you activate or deactivate a block here<br />that it will be instant to users but not to you, until you refresh your screen!');
 define('_BLOCK_INACTIVE','Block is not active<br />(Double click to activate/deactivate)');

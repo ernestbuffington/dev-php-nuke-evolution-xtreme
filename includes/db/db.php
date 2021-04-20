@@ -1,5 +1,4 @@
 <?php
-
 /* -- -----------------------------------------------------------
  * // Nuke-Evolution Xtreme: Enhanced PHP-Nuke Web Portal System
  * -- -----------------------------------------------------------
@@ -24,15 +23,9 @@
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  */
-
-if (!defined('NUKE_EVO') || isset($_REQUEST['dbtype'])) {
-    die('Quit trying to hack my website!');
-}
-
-if (!isset($dbtype)) {
-    $dbtype = 'mysql';
-}
-
+if (!defined('NUKE_EVO') || isset($_REQUEST['dbtype'])) 
+die('Quit trying to hack my website!');
+$dbtype = 'mysqli';
 $dbtype = strtolower($dbtype);
 
 if (file_exists(NUKE_DB_DIR . $dbtype . '.php')) {
@@ -41,18 +34,24 @@ if (file_exists(NUKE_DB_DIR . $dbtype . '.php')) {
     die('Invalid Database Type Specified!');
 }
 
-if (!isset($db)) {
-    $db = new sql_db($dbhost, $dbuname, $dbpass, $dbname, false);
+$db = new sql_db($dbhost, $dbuname, $dbpass, $dbname, false);
+
+# Enable 86it Network Support START
+if ( defined('network') ):
+$db2 = new sql_db($dbhost2, $dbuname2, $dbpass2, $dbname2, false);
+endif;
+# Enable 86it Network Support END 
+
+if (!$db->db_connect_id) 
+{
+exit("<br /><br /><div align='center'><img src='images/logo.gif'><br /><br /><strong>There seems to be a problem with the MySQL server, sorry for the inconvenience.<br /><br />We should be back shortly.</strong></div>");
 }
 
-if (!$db->db_connect_id) {
-    exit("<br /><br /><div align='center'><img src='images/logo.gif'><br /><br /><strong>There seems to be a problem with the MySQL server, sorry for the inconvenience.<br /><br />We should be back shortly.</strong></div>");
+# Enable 86it Network Support START
+if ( defined('network') ):
+if (!$db2->db_connect_id) 
+{
+exit("<br /><br /><div align='center'><img src='images/logo.gif'><br /><br /><strong>There seems to be a problem with the MySQL server, sorry for the inconvenience.<br /><br />We should be back shortly.</strong></div>");
 }
-
-if ($dbtype == 'mysql') {
-    if (version_compare($db->mysql_version, '4.1.0', '<')) {
-        exit("<br /><br /><div align='center'><img src='images/logo.gif'><br /><br /><strong>We are sorry but the the MySQL version you are attempting to use is to old and is not supported by Nuke-Evolution nor by MySQL.com any more.<br /><br />Please ask your host to upgrade or switch hosts.</div>");
-    }
-
-    $db->set_charset();
-}
+endif;
+# Enable 86it Network Support END

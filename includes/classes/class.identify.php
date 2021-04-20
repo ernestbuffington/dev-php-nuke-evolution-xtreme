@@ -1,8 +1,9 @@
 <?php
 
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /*    MOO CMS, Copyright (c) 2005 The MOO Dev. Group. All rights reserved.
 

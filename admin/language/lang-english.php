@@ -1,6 +1,6 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
 
 /**************************************************************************/
@@ -38,7 +38,6 @@ $admlang['livefeed']['save']                 = 'Save Live Feed Data';
 $admlang['livefeed']['title']				 = 'Title';
 $admlang['livefeed']['refresh']				 = 'Refresh feed';
 
-
 $admlang['modblock']['delete'] = 'Delete category';
 $admlang['modblock']['edit'] = 'Edit category';
 $admlang['modblock']['is_inactive'] = 'Module is not active<br />(Double click to activate/deactivate)'; 
@@ -63,29 +62,15 @@ $admlang['modblock']['sort_down'] = 'Move Category Down';
  [ Base:    Modules                            v.1.0.0]
  ******************************************************/
 
-
-$admlang['logged_out'] = 'You are now logged out!';
-
-
-$admlang['admin_id'] = 'Admin ID';
-// define("_ADMINID","Admin ID");
-
-$admlang['admin_login_header'] = 'Administration System Login';
-// define("_ADMINLOGIN","Administration System Login");
-
-$admlang['admin_login_persistent'] = 'Log me on automatically each visit';
-
-$admlang['edit_admins'] = 'Edit Admins';
-
+$admlang['logged_out']                  = 'You are now logged out!';
+$admlang['admin_id']                    = 'Admin ID';
+$admlang['admin_login_header']          = 'Administration System Login';
+$admlang['admin_login_persistent']      = 'Log me on automatically each visit';
+$admlang['edit_admins']                 = 'Edit Admins';
 $admlang['blocks']['link'] 				= 'Blocks';
-$admlang['blocks']['header'] = 'Blocks Administration';
-
-
+$admlang['blocks']['header']            = 'Blocks Administration';
 $admlang['blocks']['new'] 				= 'Add a New Block';
-
-
 $admlang['blocks']['visible'] 			= 'Visible Blocks';
-
 $admlang['blocks']['centerup'] 			= 'Center Up';
 $admlang['blocks']['centerdown'] 		= 'Center Down';
 $admlang['blocks']['left_block'] 		= 'Left Block';
@@ -104,11 +89,10 @@ $admlang['headlines']['add'] = 'Add Headline';
 $admlang['headlines']['edit'] = 'Edit Headlines';
 $admlang['headlines']['delete_warn'] = 'WARNING: Are you sure you want to delete this Headline?';
 
-$admlang['authors']['header'] 			= 'Author\'s Administration';
+$admlang['authors']['header'] 			= 'Admin Author\'s Panel';
 $admlang['authors']['author'] 			= 'Author';
 $admlang['authors']['add'] 				= 'Add a New Administrator';
 $admlang['authors']['delete'] 			= 'Delete Author';
-$admlang['authors']['delete_sure'] 		= 'Are you sure you want to delete';
 $admlang['authors']['changes'] 			= '(For Changes Only)';
 $admlang['authors']['god'] 				= '* (GOD account can\'t be deleted)';
 $admlang['authors']['main'] 			= 'God Admin *';
@@ -119,7 +103,6 @@ $admlang['authors']['required'] 		= 'Required field';
 $admlang['authors']['submit'] 			= 'Add new Author';
 $admlang['authors']['superadmin']		= 'Super Admin';
 $admlang['authors']['superwarn']		= 'WARNING: If Super Admin is checked, the user will get full access! (excludes Edit Admins and Nuke Sentinel)';
-
 
 // define("_NOFUNCTIONS","---------");
 // define("_PASSWDNOMATCH","Sorry, the new passwords doesn't match. Go Back and Try Again");
@@ -437,32 +420,18 @@ $admlang['admin']['total_downloads'] 	= 'Downloads';
 $admlang['admin']['admin_intrusion'] 	= 'Admin Intrusion';
 $admlang['admin']['admin_error_log'] 	= 'Error Log';
 $admlang['admin']['admin_honey_pot'] 	= 'Honey Pot';
-$admlang['admin']['honey_pot_bots_stopped'] = '%s bots stopped!';
+$admlang['admin']['honey_pot_bots_stopped'] = 'stopped %s bots!';
 $admlang['admin']['version_is_current'] = 'You have the current version';
 $admlang['admin']['version_is_out-of-date'] = 'New Version Available';
 
 # VERSION CHECKER
 $admlang['admin']['version_check_run'] 	= 'Run Now';
 // define('_RUNNOW','Run Now');
-$admlang['admin']['version_check'] 		= 'Evolution Xtreme Version Checker';
+$admlang['admin']['version_check'] 		= 'Nuke-Evolution Xtreme Version Checker';
 // define('_VERSION_CHECK','Evolution Xtreme Version Checker');
 $admlang['admin']['no_rights'] 	= 'Sorry %s but you have been given no administration rights. Please contact the site administrator if you feel this is a mistake!';
 // define("_NO_ADMIN_RIGHTS","Sorry %s but you have been given no administration rights. Please contact the site administrator if you feel this is a mistake!");
 
-$admlang['authors']['header'] 			= 'Author\'s Administration';
-$admlang['authors']['author'] 			= 'Author';
-$admlang['authors']['add'] 				= 'Add a New Administrator';
-$admlang['authors']['delete'] 			= 'Delete Author';
-$admlang['authors']['changes'] 			= '(For Changes Only)';
-$admlang['authors']['god'] 				= '* (GOD account can\'t be deleted)';
-$admlang['authors']['main'] 			= 'God Admin *';
-$admlang['authors']['modify']			= 'Modify Info';
-$admlang['authors']['can_not'] 			= 'Can not be changed later.';
-$admlang['authors']['option1'] 			= 'Option';
-$admlang['authors']['required'] 		= 'Required field';
-$admlang['authors']['submit'] 			= 'Add new Author';
-$admlang['authors']['superadmin']		= 'Super Admin';
-$admlang['authors']['superwarn']		= 'WARNING: If Super Admin is checked, the user will get full access! (excludes Edit Admins and Nuke Sentinel)';
 
 /**
  * Mod: Live feed (Live news directly from Evolution Xtreme project site.)

@@ -1,7 +1,8 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /***************************************************************************
  *                              admin_users.php
@@ -988,7 +989,8 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
                                 $error_msg = ( !empty($error_msg) ) ? $error_msg . "<br />" . $l_avatar_size : $l_avatar_size;
                         }
                 }
-                else if( $user_avatar_remoteurl != "" && empty($avatar_sql) && !$error )
+                else 
+				if( $user_avatar_remoteurl != "" && empty($avatar_sql) && !$error )
                 {
                         if( !preg_match("#^http:\/\/#i", $user_avatar_remoteurl) )
                         {
@@ -1005,7 +1007,8 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($HTTP_POST_VARS['username']) 
                                 $error_msg = ( !empty($error_msg) ) ? $error_msg . "<br />" . $lang['Wrong_remote_avatar_format'] : $lang['Wrong_remote_avatar_format'];
                         }
                 }
-                else if( $user_avatar_local != "" && empty($avatar_sql) && !$error )
+                else 
+				if( $user_avatar_local != "" && empty($avatar_sql) && !$error )
                 {
                         $avatar_sql = ", user_avatar = '" . str_replace("\'", "''", phpbb_ltrim(basename($user_avatar_category), "'") . '/' . phpbb_ltrim(basename($user_avatar_local), "'")) . "', user_avatar_type = " . USER_AVATAR_GALLERY;
                 }

@@ -587,7 +587,7 @@ define("_YA_COOKIEVAL","Cookie Value:");
 define("_YA_COOKIESTAT","Cookie Status:");
 define("_YA_COOKIEDEL1","The following cookies have been deleted:");
 define("_YA_COOKIEDEL2","deleted");
-define("_YA_COOKIEDELTHESE","Delete these Cookies");
+define("_YA_COOKIEDELTHESE","Delete My Cookies");
 define("_YA_COOKIEDELALL","Delete All Cookies");
 define("_YA_COOKIESHOWALL","Show Current Cookies");
 define("_LOGIN","Login");

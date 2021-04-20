@@ -1,7 +1,8 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 /************************************************************************/
 /* PHP-NUKE: Web Portal System                                          */
 /* ===========================                                          */
@@ -259,8 +260,10 @@ function save_settings($sub)
             $xlock_modules = intval($_POST['xlock_modules']);
             $xbanners = intval($_POST['xbanners']);
             $xlazytap = intval($_POST['xlazytap']);
-            $xtextarea = $_POST['xtextarea'];
-            $ximg_resize = intval($_POST['ximg_resize']);
+            
+			$xtextarea = $_POST['xtextarea'];
+            
+			$ximg_resize = intval($_POST['ximg_resize']);
             $ximg_width = intval($_POST['ximg_width']);
             $ximg_height = intval($_POST['ximg_height']);
             lazy_tap_check($xlazytap);
@@ -274,8 +277,10 @@ function save_settings($sub)
             $db->sql_query("UPDATE "._EVOCONFIG_TABLE." SET evo_value='".$xqueries_count."' WHERE evo_field='queries_count'");
             $db->sql_query("UPDATE "._EVOCONFIG_TABLE." SET evo_value='".$xuse_colors."' WHERE evo_field='use_colors'");
             $db->sql_query("UPDATE "._EVOCONFIG_TABLE." SET evo_value='".$xlock_modules."' WHERE evo_field='lock_modules'");
-            $db->sql_query("UPDATE "._EVOCONFIG_TABLE." SET evo_value='".$xtextarea."' WHERE evo_field='textarea'");
-            $db->sql_query("UPDATE "._EVOCONFIG_TABLE." SET evo_value='".$xlazytap."' WHERE evo_field='lazy_tap'");
+            
+			$db->sql_query("UPDATE "._EVOCONFIG_TABLE." SET evo_value='".$xtextarea."' WHERE evo_field='textarea'");
+			
+			$db->sql_query("UPDATE "._EVOCONFIG_TABLE." SET evo_value='".$xlazytap."' WHERE evo_field='lazy_tap'");
             $db->sql_query("UPDATE "._EVOCONFIG_TABLE." SET evo_value='".$ximg_resize."' WHERE evo_field='img_resize'");
             $db->sql_query("UPDATE "._EVOCONFIG_TABLE." SET evo_value='".$ximg_width."' WHERE evo_field='img_width'");
             $db->sql_query("UPDATE "._EVOCONFIG_TABLE." SET evo_value='".$ximg_height."' WHERE evo_field='img_height'");

@@ -1,6 +1,6 @@
 <?php
 /*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+ PHP-Nuke Titanium v3.0.0 : Enhanced PHP-Nuke Web Portal System
  =======================================================================*/
 
 /************************************************************************
@@ -15,6 +15,8 @@
 
    Notes         : Evo User Block Who Is Online Module
 ************************************************************************/
+
+// ONLINE STATS
 
 if(!defined('NUKE_EVO')) {
    die ("Illegal File Access");
@@ -44,23 +46,26 @@ function evouserinfo_get_members_online ()
         $where 			= (is_admin()) ? $where : $num.'.&nbsp;';
         $user_from 		= $session['user_from'];
         $user_flag 		= str_replace('.png','',$session['user_from_flag']);
-        if ($evouserinfo_addons['online_country_flag'] == 'yes'):
-            $user_flag      = (($session['user_from_flag']) ? '<span class="countries '.$user_flag.'" title="'.$user_from.'"></span>&nbsp;' : '');
+        
+		if ($evouserinfo_addons['online_country_flag'] == 'yes'):
+        $user_flag = (($session['user_from_flag']) ? '<span class="countries '.$user_flag.'" title="'.$user_from.'"></span>&nbsp;' : '');
         else:
-            $user_flag      = '';
+        $user_flag = '';
         endif;
 
         switch( $session['user_avatar_type'] ):
         
             case USER_AVATAR_UPLOAD:
-                $poster_avatar = ( $board_config['allow_avatar_upload'] ) ? '<img src="'.$board_config['avatar_path'].'/'.$session['user_avatar'].'" alt="" border="0" />' : '';
-                break;
+            $poster_avatar = ( $board_config['allow_avatar_upload'] ) 
+			? '<img src="'.$board_config['avatar_path'].'/'.$session['user_avatar'].'" alt="" border="0" />' : '';
+            break;
             case USER_AVATAR_REMOTE:
-                $poster_avatar = '<img src="'.$session['user_avatar'].'" style="width: '.$board_config['avatar_max_width'].'; height: '.$board_config['avatar_max_height'].';" alt="" border="0" />';
-                break;
+            $poster_avatar = '<img src="'.$session['user_avatar'].'" style="width: '.$board_config['avatar_max_width'].'; height: '.$board_config['avatar_max_height'].';" alt="" border="0" />';
+            break;
             case USER_AVATAR_GALLERY:
-                $poster_avatar = ( $board_config['allow_avatar_local'] ) ? '<img src="'.$board_config['avatar_gallery_path'].'/'.$session['user_avatar'].'" alt="" border="0" />' : '';
-                break;
+            $poster_avatar = ( $board_config['allow_avatar_local'] ) 
+			? '<img src="'.$board_config['avatar_gallery_path'].'/'.$session['user_avatar'].'" alt="" border="0" />' : '';
+            break;
         
         endswitch;
 
@@ -71,18 +76,45 @@ function evouserinfo_get_members_online ()
         if ($evouserinfo_addons['online_tooltip'] == 'yes'):
 
 	        $tooltip_userinfo_overlay  = '<div style="width: 300px;">';
-	        $tooltip_userinfo_overlay .= '  <div class="user_tooltip">'.$lang_evo_userblock['BLOCK']['LOGIN']['USERNAME'].'<span>'.$uname_color.'</span></div>';
-	        $tooltip_userinfo_overlay .= '  <div class="user_tooltip">'.$lang_evo_userblock['BLOCK']['ONLINE']['EMAIL'].'<span>'.(($session['user_viewemail'] == 1) ? '<a href="mailto:'.$session['user_email'].'">'.$session['user_email'].'</a>' : $lang_evo_userblock['BLOCK']['ONLINE']['HIDDEN']).'</span></div>';
-	        $tooltip_userinfo_overlay .= '  <div class="user_tooltip">'.$lang_evo_userblock['BLOCK']['ONLINE']['SINCE'].'<span>'.$session['user_regdate'].'</span></div>';
-	        $tooltip_userinfo_overlay .= '  <div class="user_tooltip">'.$lang_evo_userblock['BLOCK']['ONLINE']['POST_COUNT'].'<span><a href="modules.php?name=Forums&amp;file=search&amp;search_author='.$uname.'">'.$session['user_posts'].'</a></span></div>';
-	        $tooltip_userinfo_overlay .= '  <div class="user_tooltip">'.$lang_evo_userblock['BLOCK']['ONLINE']['THEME'].'<span>'.(($session['theme']) ? $session['theme'] : $Default_Theme).'</span></div>';
-	        $tooltip_userinfo_overlay .= '  <div class="user_tooltip">'.$lang_evo_userblock['BLOCK']['ONLINE']['VIEWING'].'<span>'.(($session['module']) ? '<a href="'.$session['url'].'">'.str_replace('_',' ',$session['module']).'</a>' : '<a href="'.$session['url'].'">'.$lang_evo_userblock['BLOCK']['ONLINE']['HOME'].'</a>').'</span></div>';
-	        // if (is_admin()):
-	        // 	$tooltip_userinfo_overlay .= '  <div class="user_tooltip">'.$lang_evo_userblock['BLOCK']['ONLINE']['IP'].'<span>'.$session['host_addr'].'</span></div>';
-	        // endif;
+	        
+			# user name in tool tip
+			$tooltip_userinfo_overlay .= '  <div class="user_tooltip">'.$lang_evo_userblock['BLOCK']['LOGIN']['USERNAME'].'<span>'.$uname_color.'</span></div>';
+	        
+	         # admins can always see what someones email address is
+			 if (is_admin()):
+			$tooltip_userinfo_overlay .= '  <div class="user_tooltip">'.$lang_evo_userblock['BLOCK']['ONLINE']['EMAIL'].'<span>'.(($session['user_viewemail'] == 0) 
+			? '<a href="mailto:'.$session['user_email'].'">'.$session['user_email'].'</a>' : $lang_evo_userblock['BLOCK']['ONLINE']['HIDDEN']).'</span></div>';
+             else: 
+			$tooltip_userinfo_overlay .= '  <div class="user_tooltip">'.$lang_evo_userblock['BLOCK']['ONLINE']['EMAIL'].'<span>'.(($session['user_viewemail'] == 1) 
+			? '<a href="mailto:'.$session['user_email'].'">'.$session['user_email'].'</a>' : $lang_evo_userblock['BLOCK']['ONLINE']['HIDDEN']).'</span></div>';
+	         endif;
+	        
+			# member since in tool tip view
+			$tooltip_userinfo_overlay .= '  <div class="user_tooltip">'.$lang_evo_userblock['BLOCK']['ONLINE']['SINCE'].'<span>'.$session['user_regdate'].'</span></div>';
+	        
+			# post count in tooltip view
+			$tooltip_userinfo_overlay .= '  <div class="user_tooltip">'.$lang_evo_userblock['BLOCK']['ONLINE']['POST_COUNT'].'<span>
+			<a href="modules.php?name=Forums&amp;file=search&amp;search_author='.$uname.'">'.$session['user_posts'].'</a></span></div>';
+	        
+			# current users theme in tooltip view
+			$tooltip_userinfo_overlay .= '  <div class="user_tooltip">'.$lang_evo_userblock['BLOCK']['ONLINE']['THEME'].'<span>'.(($session['theme']) 
+			? $session['theme'] : $Default_Theme).'</span></div>';
+	        
+			# what the person in the online list are viewing at the moment - should only be available for admins
+			if (is_admin()):
+			$tooltip_userinfo_overlay .= '  <div class="user_tooltip">'.$lang_evo_userblock['BLOCK']['ONLINE']['VIEWING'].'<span>'.(($session['module']) 
+			? '<a href="'.$session['url'].'">'.str_replace('_',' ',$session['module']).'</a>' : 
+			'<a href="'.$session['url'].'">'.$lang_evo_userblock['BLOCK']['ONLINE']['HOME'].'</a>').'</span></div>';
+	         endif;
+			 
+			 # ip address in tooltips for the person visting the website
+			 if (is_admin()):
+	         $tooltip_userinfo_overlay .= '  <div class="user_tooltip">'.$lang_evo_userblock['BLOCK']['ONLINE']['IP'].'<span>'.$session['host_addr'].'</span></div>';
+	         endif;
 	        $tooltip_userinfo_overlay .= '</div>';
 
-	        $tooltip_userinfo = ' class="tooltip-html-side-interact" title="'.str_replace('"','\'',$tooltip_userinfo_overlay).'"';
+	        # add the overlay
+			$tooltip_userinfo = ' class="tooltip-html-side-interact" title="'.str_replace('"','\'',$tooltip_userinfo_overlay).'"';
 
 	    else:
 	    	$tooltip_userinfo = ' title="'.$lang_evo_userblock['BLOCK']['ONLINE']['VIEW'].'&nbsp;'.$uname.'\'s '.$lang_evo_userblock['BLOCK']['ONLINE']['PROFILE'].'"';
@@ -91,25 +123,37 @@ function evouserinfo_get_members_online ()
         if ($session['user_allow_viewonline']):
         
             if ($level == 2):
-            	$admin_user_level_image = ( $evouserinfo_addons['online_user_level_image'] == 'yes' ) ? '&nbsp;<img style="width: 32px; height: 8px" src="images/evo_userinfo/admin.gif" alt="">' : '';
-                $out['text'] .= $where.$user_flag.'<a href="modules.php?name=Profile&amp;mode=viewprofile&amp;u='.$session['user_id'].'"'.$tooltip_userinfo.'>'.$uname_color.'</a>'.$admin_user_level_image.'<br />';
+            $admin_user_level_image = 
+			( $evouserinfo_addons['online_user_level_image'] == 'yes' ) 
+			? '&nbsp;<img style="width: 32px; height: 8px" src="images/evo_userinfo/admin.gif" alt="">' : '';
+            $out['text'] .= $where.$user_flag.'<a href="modules.php?name=Profile&amp;mode=viewprofile&amp;u=
+			'.$session['user_id'].'"'.$tooltip_userinfo.'>'.$uname_color.'</a>'.$admin_user_level_image.'<br />';
             elseif ($level == 3):
-            	$staff_user_level_image = ( $evouserinfo_addons['online_user_level_image'] == 'yes' ) ? '&nbsp;<img style="width: 32px; height: 8px" src="images/evo_userinfo/staff.gif" alt="">' : '';
-                $out['text'] .= $where.$user_flag.'<a href="modules.php?name=Profile&amp;mode=viewprofile&amp;u='.$session['user_id'].'"'.$tooltip_userinfo.'>'.$uname_color.'</a>'.$staff_user_level_image.'<br />';
+            $staff_user_level_image = 
+			( $evouserinfo_addons['online_user_level_image'] == 'yes' ) 
+			? '&nbsp;<img style="width: 32px; height: 8px" src="images/evo_userinfo/staff.gif" alt="">' : '';
+            $out['text'] .= $where.$user_flag.'<a href="modules.php?name=Profile&amp;mode=viewprofile&amp;u=
+			'.$session['user_id'].'"'.$tooltip_userinfo.'>'.$uname_color.'</a>'.$staff_user_level_image.'<br />';
             else:
-                $out['text'] .= $where.$user_flag.'<a href="modules.php?name=Profile&amp;mode=viewprofile&amp;u='.$session['user_id'].'"'.$tooltip_userinfo.'>'.$uname_color.'</a><br />';
+            $out['text'] .= $where.$user_flag.'<a href="modules.php?name=Profile&amp;mode=viewprofile&amp;u='.$session['user_id'].'"'.$tooltip_userinfo.'>'.$uname_color.'</a><br />';
             endif;
         
-        elseif (is_admin() || $userinfo['user_id'] == $session['user_id']):
+            elseif (is_admin() || $userinfo['user_id'] == $session['user_id']):
         
             if ($level == 2):
-            	$admin_user_level_image = ( $evouserinfo_addons['online_user_level_image'] == 'yes' ) ? '&nbsp;<img style="width: 32px; height: 8px" src="images/evo_userinfo/admin.gif" alt="">' : '';
-                $out['text'] .= $where.$user_flag.'<a href="modules.php?name=Profile&amp;mode=viewprofile&amp;u='.$session['user_id'].'"'.$tooltip_userinfo.'><i>'.$uname_color.'</i></a>'.$admin_user_level_image.'<br />';
+            $admin_user_level_image = 
+			( $evouserinfo_addons['online_user_level_image'] == 'yes' ) 
+			? '&nbsp;<img style="width: 32px; height: 8px" src="images/evo_userinfo/admin.gif" alt="">' : '';
+            $out['text'] .= $where.$user_flag.'<a href="modules.php?name=Profile&amp;mode=viewprofile&amp;u=
+			'.$session['user_id'].'"'.$tooltip_userinfo.'><i>'.$uname_color.'</i></a>'.$admin_user_level_image.'<br />';
             elseif ($level == 3):
-            	$staff_user_level_image = ( $evouserinfo_addons['online_user_level_image'] == 'yes' ) ? '&nbsp;<img style="width: 32px; height: 8px" src="images/evo_userinfo/staff.gif" alt="">' : '';
-                $out['text'] .= $where.$user_flag.'<a href="modules.php?name=Profile&amp;mode=viewprofile&amp;u='.$session['user_id'].'"'.$tooltip_userinfo.'><i>'.$uname_color.'</i></a>'.$staff_user_level_image.'<br />';
+            $staff_user_level_image = 
+			( $evouserinfo_addons['online_user_level_image'] == 'yes' ) 
+			? '&nbsp;<img style="width: 32px; height: 8px" src="images/evo_userinfo/staff.gif" alt="">' : '';
+            $out['text'] .= $where.$user_flag.'<a href="modules.php?name=Profile&amp;mode=viewprofile&amp;u=
+			'.$session['user_id'].'"'.$tooltip_userinfo.'><i>'.$uname_color.'</i></a>'.$staff_user_level_image.'<br />';
             else:
-                $out['text'] .= $where.$user_flag.'<a href="modules.php?name=Profile&amp;mode=viewprofile&amp;u='.$session['user_id'].'"'.$tooltip_userinfo.'><i>'.$uname_color.'</i></a><br />';
+            $out['text'] .= $where.$user_flag.'<a href="modules.php?name=Profile&amp;mode=viewprofile&amp;u='.$session['user_id'].'"'.$tooltip_userinfo.'><i>'.$uname_color.'</i></a><br />';
             endif;
             $hidden++;
 
@@ -140,11 +184,12 @@ function evouserinfo_get_guests_online ($start)
         $module = $session['module'];
         $url = $session['url'];
         $url = str_replace("&", "&amp;", $url);
-        // $where = '<a data-user-country="'.$session['host_addr'].'" href="'.$url.'" alt="'.$module.'" title="'.$module.'">'.$num.'</a>.&nbsp;';
-        // $where = (is_admin()) ? $where : $num.'.&nbsp;';
+           //$where = '<a data-user-country="'.$session['host_addr'].'" href="'.$url.'" alt="'.$module.'" title="'.$module.'">'.$num.'</a>.&nbsp;';
+           //$where = (is_admin()) ? $where : $num.'.&nbsp;';
         $where 			= '<a href="'.$url.'" alt="'.$module.'" title="'.$module.'">'.$num.'</a>.&nbsp;';
         $where 			= (is_admin()) ? $where : $num.'.&nbsp;';
-        if(!is_admin()):
+        
+		if(!is_admin()):
             $out['text'] .= $where.$lang_evo_userblock['BLOCK']['ONLINE']['GUEST']."<br />\n";
         else:
         
@@ -173,27 +218,27 @@ function evouserinfo_online_display ($members, $guests)
         $out .= '<div style="font-weight: bold">'.$lang_evo_userblock['BLOCK']['ONLINE']['STATS'].'</div>';
 
         $out .= '<div style="padding-left: 10px;">';
-        $out .= '  <i class="fa fa-angle-double-right fa-right-arrows" aria-hidden="true"></i>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['MEMBERS'].'<span style="float:right">'.$members['total'].'</span>';
+        $out .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['MEMBERS'].'<span style="float:right">'.$members['total'].'</span>';
         $out .= '</div>';
 
         if($evouserinfo_addons['online_show_hv'] == 'yes'):
 
             $out .= '<div style="padding-left: 10px;">';
-            $out .= '  <i class="fa fa-angle-double-right fa-right-arrows" aria-hidden="true"></i>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['VISIBLE'].'<span style="float:right">'.$members['visible'].'</span>';
+            $out .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['VISIBLE'].'<span style="float:right">'.$members['visible'].'</span>';
             $out .= '</div>';
 
             $out .= '<div style="padding-left: 10px;">';
-            $out .= '  <i class="fa fa-angle-double-right fa-right-arrows" aria-hidden="true"></i>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['HIDDEN'].'<span style="float:right">'.$members['hidden'].'</span>';
+            $out .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['HIDDEN'].'<span style="float:right">'.$members['hidden'].'</span>';
             $out .= '</div>';
 
         endif;
 
         $out .= '<div style="padding-left: 10px;">';
-        $out .= '  <i class="fa fa-angle-double-right fa-right-arrows" aria-hidden="true"></i>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['GUESTS'].'<span style="float:right">'.$guests['total'].'</span>';
+        $out .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['GUESTS'].'<span style="float:right">'.$guests['total'].'</span>';
         $out .= '</div>';
 
         $out .= '<div style="padding-left: 10px;">';
-        $out .= '  <i class="fa fa-angle-double-right fa-right-arrows" aria-hidden="true"></i>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['TOTAL'].'<span style="float:right">'.($guests['total']+$members['total']).'</span><hr />';
+        $out .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['TOTAL'].'<span style="float:right">'.($guests['total']+$members['total']).'</span><hr />';
         $out .= '</div>';
     
     endif;
@@ -227,7 +272,7 @@ function evouserinfo_online_display ($members, $guests)
 }
 
 $evouserinfo_online_members = evouserinfo_get_members_online();
-$evouserinfo_online_guests  = evouserinfo_get_guests_online($evouserinfo_online_members['total']+1);
-$evouserinfo_online         = evouserinfo_online_display($evouserinfo_online_members, $evouserinfo_online_guests);
+$evouserinfo_online_guests = evouserinfo_get_guests_online($evouserinfo_online_members['total']+1);
+$evouserinfo_online = evouserinfo_online_display($evouserinfo_online_members, $evouserinfo_online_guests);
 
 ?>

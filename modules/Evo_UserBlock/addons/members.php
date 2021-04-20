@@ -1,6 +1,6 @@
 <?php
 /*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+ PHP-Nuke Titanium v3.0.0 : Enhanced PHP-Nuke Web Portal System
  =======================================================================*/
 
 /************************************************************************
@@ -27,24 +27,65 @@ function evouserinfo_members ()
     global $userinfo, $db, $prefix, $user_prefix, $evouserinfo_members, $lang_evo_userblock;
     
     $evouserinfo_members = '<div style="font-weight: bold">'.$lang_evo_userblock['BLOCK']['MEMBERS']['MEMBERS'].'</div>';
-    list($uid) = $db->sql_ufetchrow("select `user_id` from `".$user_prefix."_users` where `username`='".$userinfo['username']."'");
-    $result = $db->sql_query("select `group_name` from ".$prefix."_bbgroups left join ".$prefix."_bbuser_group on ".$prefix."_bbuser_group.group_id=".$prefix."_bbgroups.group_id where ".$prefix."_bbuser_group.user_id='$uid' and ".$prefix."_bbgroups.group_description != 'Personal User'");
 
-    if ($db->sql_numrows($result) == 0):
-        $evouserinfo_members .= '<div style="padding-left: 10px;">';
-        $evouserinfo_members .= '  <i class="fa fa-angle-double-right fa-right-arrows" aria-hidden="true"></i>&nbsp;'._GRNONE.'</span>';
-        $evouserinfo_members .= '</div>';  
-    else:
+    $in_group = array();
     
-        while(list($group_name) = $db->sql_fetchrow($result)):
+	# Select all groups where the user is a member
+    if (isset($userinfo['groups'])) 
+	{
+	   foreach ($userinfo['groups'] as $id1 => $name) 
+	   {
+          $in_group[] = $id1;
+    
+	      if (!empty($name))
+		  {
+		    $group_name = GroupColor($name);
+			$evouserinfo_members .= '<div style="padding-left: 10px;">';
+		    $evouserinfo_members .= '<font title="'.$id1.'" class="tooltip-html-side-interact tooltipstered" color="lime"><i title="'.$id1.'" alt="'.$id1.'" class="fas fa-users"></i></font> ';
+            $evouserinfo_members .= '<a class="tooltip-html-side-interact tooltipstered" title="'.$name.'" href="modules.php?name=Groups&amp;g='.$id1 . '"><strong>' . $group_name . '</strong></a><br />';
+			$evouserinfo_members .= '</div>';
         
-            $evouserinfo_members .= '<div style="padding-left: 10px;">';
-            $evouserinfo_members .= '  <i class="fa fa-angle-double-right fa-right-arrows" aria-hidden="true"></i>&nbsp;'.GroupColor($group_name).'</span>';
-            $evouserinfo_members .= '</div>';
-        
-        endwhile;
+		  }
+       }
+    }
 
-    endif;
+
+    # Select all groups where the user has a pending membership.
+    if(is_user()) 
+	{
+	   $result = $db->sql_query('SELECT g.group_id, 
+	                                  g.group_name, 
+								      g.group_type
+            
+			               FROM '.$prefix.'_bbgroups g, 
+			               '.$prefix.'_bbuser_group ug
+            
+			               WHERE ug.user_id = '.$userinfo['user_id'].'
+				           AND ug.group_id = g.group_id
+				           AND ug.user_pending = 1
+				           AND g.group_single_user = 0
+			               ORDER BY g.group_name, ug.user_id'); 
+    
+	   if ($db->sql_numrows($result)) 
+	   {
+
+	      $evouserinfo_members .= '<div style="font-weight: bold">'.$lang_evo_userblock['BLOCK']['MEMBERS']['PENDING'].'</div>'; 
+       
+	      while( $row = $db->sql_fetchrow($result) ) 
+		  {
+            $in_group[] = $row['group_id'];
+
+		    $group_name = GroupColor($row['group_name']);
+		    $evouserinfo_members .= '<div style="padding-left: 10px;">';
+			$evouserinfo_members .= '<font title="'.$row['group_id'].'" class="tooltip-html-side-interact tooltipstered" color="lightgrey"><i title="'.$row['group_id'].'" alt="'.$row['group_id'].'" class="fas fa-users"></i></font> ';
+		    $evouserinfo_members .= '<a class="tooltip-html-side-interact tooltipstered" title="'.$row['group_name'].'" href="modules.php?name=Groups&amp;g='.$row['group_id'] . '"><strong>' . $group_name . '</strong></a><br />';
+			$evouserinfo_members .= '</div>';
+          }
+        
+       }
+	    
+		$db->sql_freeresult($result);
+   }
 }
 
 if (is_user()):
@@ -52,5 +93,5 @@ if (is_user()):
 else:
     $evouserinfo_members = '';
 endif;
-
 ?>
+

@@ -1,7 +1,8 @@
 <?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 
 /***************************************************************************
 *                           admin_stats_lang.php
@@ -109,9 +110,10 @@ if ($mode == 'export_module')
     fwrite($fp, pack("C*", 0xCC, 0xFC, 0xFF), 3);
     
     $content = '<?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
- =======================================================================*/' . "\n\n";
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
+ =======================================================================*/
+' . "\n\n";
     $content .= '// [' . $language . ']' . "\n";
     $content .= '// [module:' . $short_name . ']' . "\n";
 
@@ -177,9 +179,10 @@ else if ($mode == 'export_lang')
     fwrite($fp, 'LANGPACK', 8);
     fwrite($fp, pack("C*", 0xCC, 0xFC, 0xFF), 3);
     $content = '<?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
- =======================================================================*/' . "\n\n";
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
+ =======================================================================*/
+' . "\n\n";
     $content .= '// [' . $language . ']' . "\n";
 
     for ($i = 0; $i < $num_rows; $i++)
@@ -248,9 +251,10 @@ else if ($mode == 'export_everything')
     fwrite($fp, 'LANGPACK', 8);
     fwrite($fp, pack("C*", 0xCC, 0xFC, 0xFF), 3);
     $content = '<?php
-/*=======================================================================
- Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
- =======================================================================*/' . "\n\n";
+/*======================================================================= 
+  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
+ =======================================================================*/
+' . "\n\n";
     
     foreach ($languages as $language)
     {

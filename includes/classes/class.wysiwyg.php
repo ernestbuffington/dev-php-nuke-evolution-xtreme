@@ -33,6 +33,11 @@ class Wysiwyg
 	function __construct($form, $field, $width='99.8%', $height='200px', $value='', $smilies=true)
 	{
 		global $wysiwyg;
+		
+		global $name;
+        if(($name == Forums) || ($name == Private_Messages))
+		$wysiwyg = 'bbcode';
+		
 		if (!empty($wysiwyg) && $wysiwyg != 'bbcode' && $wysiwyg != 'none') 
 		{
 			if (file_exists(NUKE_INCLUDE_DIR."wysiwyg/$wysiwyg/$wysiwyg.php")) 
@@ -78,6 +83,11 @@ class Wysiwyg
 	function getSelect()
 	{
 		global $wysiwyg;
+
+		global $name;
+        if(($name == Forums) || ($name == Private_Messages))
+		$wysiwyg = 'bbcode';
+
 		return select_box('xtextarea', $wysiwyg, $this->getEditors());
 	}
 
@@ -86,6 +96,11 @@ class Wysiwyg
 		$editors = array('' => _NONE);
 		$editors['bbcode'] = 'BBCode';
 		$wysiwygs = dir(NUKE_INCLUDE_DIR.'wysiwyg');
+
+		global $name;
+        if(($name == Forums) || ($name == Private_Messages))
+		$dir = 'bbcode';
+		
 		while ($dir = $wysiwygs->read()) 
 		{
 			if ($dir[0] != '.' && is_dir(NUKE_INCLUDE_DIR."wysiwyg/$dir") && file_exists(NUKE_INCLUDE_DIR."wysiwyg/$dir/$dir.php")) 
@@ -103,35 +118,6 @@ class Wysiwyg
 
 		# FORM CHECKING HAS BEEN MOVED TO HERE, AS THERE IS NOW MORE THAN ONE EDITOR TO USE
 		# FORM CHECKING SHOULD BE LEFT HERE, SO THAT IT CAN BE USED FOR BOTH THE BBCODE TABLE AND THE STANDARD TABLE
-		// if($this->bypass)
-		// {
-			
-		// }
-		// else
-		// {
-		// 	$JStoBody = '<script type="text/javascript">'.PHP_EOL;
-		// 	$JStoBody .= 'nuke_jq(function($)'.PHP_EOL;
-		// 	$JStoBody .= '{'.PHP_EOL;
-		// 	$JStoBody .= '  $("#preview,#submit,#'.$this->bypass.'").one(function(event)'.PHP_EOL;
-		// 	$JStoBody .= '  {';
-		// 	$JStoBody .= '    formErrors = false;'.PHP_EOL;
-		// 	$JStoBody .= '    if ($("#'.$this->field.'").val().length < 2)'.PHP_EOL;
-		// 	$JStoBody .= '    {'.PHP_EOL;
-		// 	// $JStoBody .= '      formErrors = "'.$lang['Empty_message'].'";'.PHP_EOL;
-		// 	# ADD NEW GLOBAL "EMPTY MESSAGE BOX" ALERT FOR BLOCK, AND MESSAGES ADMIN.
-		// 	$JStoBody .= '      formErrors = "Must enter a message";'.PHP_EOL;
-		// 	$JStoBody .= '    }'.PHP_EOL;
-		// 	$JStoBody .= '    if (formErrors)'.PHP_EOL;
-		// 	$JStoBody .= '    {'.PHP_EOL;
-		// 	$JStoBody .= '      event.preventDefault();'.PHP_EOL;
-		// 	$JStoBody .= '      alert(formErrors);'.PHP_EOL;
-		// 	$JStoBody .= '    }'.PHP_EOL;
-		// 	$JStoBody .= '  });'.PHP_EOL;
-		// 	$JStoBody .= '});'.PHP_EOL;
-		// 	$JStoBody .= '</script>'.PHP_EOL;
-		// 	addJSToBody($JStoBody,'inline');
-		// }
-
 		if (!empty($this->editor)) 
 		{
 			if ($this->pass) 

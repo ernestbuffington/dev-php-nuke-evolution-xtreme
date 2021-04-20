@@ -14,7 +14,8 @@ get_lang($module_name);
 
 include_once(NUKE_BASE_DIR.'header.php');
 global $prefix, $db;
-   OpenTable();
+title($sitename.' '.'eCalendar');
+OpenTable();
 
    
 $month = (int) ($_GET['month'] ? $_GET['month'] : date('m'));
