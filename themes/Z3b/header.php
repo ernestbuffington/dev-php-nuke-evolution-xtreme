@@ -160,8 +160,8 @@ echo "<!-- HEADER TOP END -->\n\n\n\n\n";
 
 # ad banner for left side of header - 86it ads only! 
 //echo '<div class="banner_left">'.ads(3).'</div>'; 
-echo '<div class="banner_left"><img src="'.HTTPS.'themes/'.$theme_name.'/header/evolution.png" width="350" alt="Evo" longdesc="../../index.php" />';
-echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="'.HTTPS.'themes/'.$theme_name.'/header/buzzard2.png" width="92" alt="Evo" longdesc="../../index.php" /></div>';
+echo '<div class="banner_left"><img src="'.HTTPS.'themes/'.$theme_name.'/header/evolution.png" width="350" alt="Xtreme" longdesc="PHP-Nuke Evolution Xtreme" />';
+echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="'.HTTPS.'themes/'.$theme_name.'/header/buzzard2.png" width="92" alt="Buzzard" longdesc="Buzzard (Patients My Ass)" /></div>';
 # programming logos start
 ?>
 <br /><div align="center" class="logo" id="logo"><svg width="64" viewBox="0 0 128 128">
