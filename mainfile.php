@@ -66,7 +66,7 @@ define("_LANGCODE","en");
 define("_MIME", "text/html"); 
 
 # Define File
-define_once('NUKE_EVO', '2.0.9f');
+define_once('NUKE_EVO', '3.0.1b');
 # Network Support
 define_once('NUKE_TITANIUM', '3.0.0');
 # Network Support

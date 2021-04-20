@@ -5,9 +5,9 @@
 <title>Live Feed from PHP-Nuke Titanium Hub</title>
 </head>
 <body> 
-<strong>CURENT VERSION</strong> v2.0.9f<br /><br />
+<strong>CURENT VERSION</strong> v3.0.1b<br /><br />
 <strong>PHP-Nuke Evolution Xtreme GitHub Repsoitory</strong> (US Version)<br />
-This is the Current US Version of PHP-Nuke Evolution Xtreme v2.0.9f-beta often known as Nuke-Evolution Xtreme. This is a hardened version of PHP-Nuke and is secure and safe.<br />
+This is the Current US Version of PHP-Nuke Evolution Xtreme v3.0.1-beta often known as Nuke-Evolution Xtreme. This is a hardened version of PHP-Nuke and is secure and safe.<br />
 <a href="https://github.com/ernestbuffington/dev-php-nuke-evolution-xtreme" target="_blank">https://github.com/ernestbuffington/dev-php-nuke-evolution-xtreme</a>
 <hr>
 <br />

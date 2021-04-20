@@ -86,7 +86,7 @@ global $domain;
                  <br /><i class="bi bi-arrow-right-square-fill"></i> Copyright Domain: <?=$domain?>
                  <br /><i class="bi bi-arrow-right-square-fill"></i> Intended Use: For Sale $89.95
                  <br /><i class="bi bi-arrow-right-square-fill"></i> Designed For: PHP-Nuke Titanium
-                 <br /><i class="bi bi-arrow-right-square-fill"></i> Core Engine: Nuke-Evolution Xtreme v2.0.9f
+                 <br /><i class="bi bi-arrow-right-square-fill"></i> Core Engine: Nuke-Evolution Xtreme v3.0.1b
                  <br /><i class="bi bi-arrow-right-square-fill"></i> Creation Date: 4/15/2021 5:13am
                  <br /><i class="bi bi-arrow-right-square-fill"></i> Created By: Ernest Buffington aka TheGhost
         </font>
