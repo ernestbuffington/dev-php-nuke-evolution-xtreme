@@ -56,8 +56,13 @@ function title_and_meta_tags()
 			if($module_name == "Shout_Box"):
 			
 			# each module has a logo image file START
+			if (@file_exists(NUKE_MODULES_DIR.$module_name.'/images/logo.png')): 
 			$facebook_ogimage_normal = '<meta property="og:image" content="'.HTTP.'modules/'.$module_name.'/images/logo.png" />'."\n";
-	               $facebook_ogimage = '<meta property="og:image:secure_url" content=content="'.HTTP.'modules/'.$module_name.'/images/logo.png" />'."\n";
+	        $facebook_ogimage = '<meta property="og:image:secure_url" content=content="'.HTTP.'modules/'.$module_name.'/images/logo.png" />'."\n";
+			else:
+			$facebook_ogimage_normal = '<meta property="og:image" content="'.HTTP.'modules/Blog/images/logo.png" />'."\n";
+	        $facebook_ogimage = '<meta property="og:image:secure_url" content=content="'.HTTP.'modules/Blog/images/logo.png" />'."\n";
+			endif;
             # each module has a logo image file END
 			
 	        $newpagetitle= $sitename.' '.$item_delim.' Shout Box';
@@ -78,8 +83,13 @@ function title_and_meta_tags()
 			elseif($module_name == "Google-Site-Map"):
 			
 			# each module has a logo image file START
+			if (@file_exists(NUKE_MODULES_DIR.$module_name.'/images/logo.png')): 
 			$facebook_ogimage_normal = '<meta property="og:image" content="'.HTTP.'modules/'.$module_name.'/images/logo.png" />'."\n";
 	        $facebook_ogimage = '<meta property="og:image:secure_url" content=content="'.HTTP.'modules/'.$module_name.'/images/logo.png" />'."\n";
+			else:
+			$facebook_ogimage_normal = '<meta property="og:image" content="'.HTTP.'modules/Blog/images/logo.png" />'."\n";
+	        $facebook_ogimage = '<meta property="og:image:secure_url" content=content="'.HTTP.'modules/Blog/images/logo.png" />'."\n";
+			endif;
             # each module has a logo image file END
 	        
 			$newpagetitle = $sitename.' '.$item_delim.' Google Site Map v1.0';
@@ -97,8 +107,14 @@ function title_and_meta_tags()
 
             
 			else:
+			
+			if (@file_exists(NUKE_MODULES_DIR.$module_name.'/images/logo.png')): 
 			$facebook_ogimage_normal = '<meta property="og:image" content="'.HTTP.'modules/'.$module_name.'/images/logo.png" />'."\n";
 	        $facebook_ogimage = '<meta property="og:image:secure_url" content=content="'.HTTP.'modules/'.$module_name.'/images/logo.png" />'."\n";
+			else:
+			$facebook_ogimage_normal = '<meta property="og:image" content="'.HTTP.'modules/Blog/images/logo.png" />'."\n";
+	        $facebook_ogimage = '<meta property="og:image:secure_url" content=content="'.HTTP.'modules/Blog/images/logo.png" />'."\n";
+			endif;
 
 			$facebookimagetype = '<meta property="og:image:type" content="image/png" />'."\n";
             $facebook_ogimage_width = '<meta property="og:image:width" content="1200" />'."\n";
@@ -222,7 +238,7 @@ function title_and_meta_tags()
             $structured_data .= '  "@id": "'.HTTPS.'index.php"'."\n";
             $structured_data .= '  },'."\n\n";
 				 
-			$structured_data .= '  "headline": "Welcome to The 86it Developers Network 86it™",'."\n\n";
+			$structured_data .= '  "headline": "Welcome to '.$sitename.'",'."\n\n";
             $structured_data .= '  "image": ['."\n";
             $structured_data .= '  "'.HTTPS.'images/google/1x1.png",'."\n";
             $structured_data .= '  "'.HTTPS.'images/google/4x3.png",'."\n";
