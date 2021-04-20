@@ -3,7 +3,6 @@
   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
 
-
 /************************************************************************/
 /* PHP-NUKE: Web Portal System                                          */
 /* ===========================                                          */
@@ -28,6 +27,5 @@ if (!defined('ADMIN_FILE')) {
 global $admin_file;
 $module_name = basename(dirname(dirname(__FILE__)));
 get_lang($module_name);
-adminmenu($admin_file.'.php?op=NetworkBannersAdmin', _NETWORK_BANNERS, 'bomb-icon.png');
-
+adminmenu($admin_file.'.php?op=NetworkBannersAdmin', _NETWORK_BANNERS, 'NetworkBannersAdmin.png');
 ?>

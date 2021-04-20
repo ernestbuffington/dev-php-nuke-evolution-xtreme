@@ -27,6 +27,6 @@ if (!defined('ADMIN_FILE')) {
 global $admin_file;
 $module_name = basename(dirname(dirname(__FILE__)));
 get_lang($module_name);
-adminmenu($admin_file.'.php?op=BannersAdmin', _BANNERS, 'advertising.png');
+adminmenu($admin_file.'.php?op=BannersAdmin', _BANNERS, 'icon.png');
 
 ?>

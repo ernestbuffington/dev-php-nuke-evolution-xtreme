@@ -43,7 +43,7 @@
   </div>
 </div>
 
-<div style="text-align: center; margin-top: -10px;">Evolution-Xtreme Installer 1.0.2 Copyright &copy; 2019 Evolution-Xtreme.com</div>
+<div style="text-align: center; margin-top: -10px;">PHP-Nuke Evolution Xtreme (US Version) Installer 3.0.1b Copyright &copy; 2021 The 86it Developers Network</div>
 
  </body>
 </html>

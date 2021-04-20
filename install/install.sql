@@ -6264,7 +6264,7 @@ CREATE TABLE `nuke_themes` (
 --
 
 INSERT INTO `nuke_themes` (`theme_name`, `groups`, `permissions`, `custom_name`, `active`, `theme_info`) VALUES
-('Z3b', '', 1, 'Z3b', 1, '1368:::#454545:::#383838:::#383838:::#383838:::#ccc:::#ccc:::Go to Theme Options to Edit Footer Message Line 1:::Go to Theme Options to Edit Footer Message Line 2:::#f5a405:::dark');
+('Z3b', '', 1, 'Z3b', 1, '93%:::#454545:::#383838:::#383838:::#383838:::#ccc:::#ccc:::Go to Theme Options to Edit Footer Message Line 1:::Go to Theme Options to Edit Footer Message Line 2:::#f5a405:::dark');
 
 -- --------------------------------------------------------
 
@@ -6286,7 +6286,7 @@ CREATE TABLE `nuke_topics` (
 --
 
 INSERT INTO `nuke_topics` (`topicid`, `topicname`, `topicimage`, `topictext`, `counter`) VALUES
-(1, 'evolution', 'nuke.png', 'Nuke-Evolution', 0);
+(1, 'evolution', 'titanium_edition.png', 'PHP-Nuke Evolution Xtreme', 0);
 
 -- --------------------------------------------------------
 

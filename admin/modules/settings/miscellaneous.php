@@ -180,7 +180,7 @@ echo '        </tr>'.PHP_EOL;
 //echo '          <td class="row1" style="width: 50%;">'.$admlang['misc']['analytics'].'</td>'.PHP_EOL;
 //echo '          <td class="row1" style="width: 50%;"><input type="text" name="xanalytics" value="'.$analytics.'" size="25" maxlength="50"></td>'.PHP_EOL;
 //echo '        </tr>'.PHP_EOL;
-//echo '      </table>'.PHP_EOL;
+echo '      </table>'.PHP_EOL;
 //echo '    </td>'.PHP_EOL;
 //echo '  </tr>'.PHP_EOL;
 
