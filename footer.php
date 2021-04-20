@@ -72,16 +72,17 @@ $do_gzip_compress,
 	return; 
 
 global $powered_by;
-$powered_by = '<font size="3">PHP-Nuke Titanium Copyright &copy; 2010 2021 by Ernest Buffington.<br /> 
+$powered_by = '<font size="3">PHP-Nuke Evolution Xtreme Copyright &copy; 2010 2021<br /> by Ernest Buffington and The 86it Developers Network.<br /> 
  All logos, trademarks and posts in this site are property of their respective owners, all the rest <br />&copy; '.date('l jS \of F Y h:i:s A').' by Brandon Maintenance Management, LLC.<br />
- Powered by PHP-Nuke Titanium Dev 4<br /><br />
+ Powered by PHP-Nuke Evolution Xtreme v3.0.1b<br /><br />
  <strong>CREDITS</strong><br />
  PHP-Nuke Copyright &copy; 2006 by Francisco Burzi.<br /> 
+ Bob Marion of NukeScripts.Net<br />  
+ Ernest Buffington of 86it.us<br>
  PHP-Nuke Evolution Basic<br /> 
  PHP-Nuke Evolution Xtreme UK Version<br />
  PHP-Nuke Evolution Xtreme US Version<br />
- Bob Marion of NukeScripts.Net<br />  
- Ernest Buffington of 86it.us<br>
+ PHP-Nuke Titanium US Version<br />
  </font>
  ';
 

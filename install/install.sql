@@ -6194,11 +6194,14 @@ CREATE TABLE `nuke_stories` (
 --
 
 INSERT INTO `nuke_stories` (`sid`, `catid`, `aid`, `title`, `time`, `hometext`, `bodytext`, `comments`, `counter`, `topic`, `informant`, `notes`, `ihome`, `alanguage`, `acomm`, `haspoll`, `pollID`, `score`, `ratings`, `associated`, `ticon`, `writes`) VALUES
-(1, 0, 'admin', 'Welcome to Nuke Evolution Xtreme 3.0.1b', '2018-11-03 05:56:20', 'Thank you for choosing nuke evolution, we hope you enjoy using our cms and we appreciate feedback and donations.
+(1, 0, 'admin', 'Welcome to Nuke Evolution Xtreme 3.0.1b', '2021-04-20 12:00:00', 'Thank you for choosing PHP-Nuke Evolution Xtreme, we hope you enjoy using the US version of PHP-Nuke Evolution Xtreme and we also very much appreciate all the Feedback and Donations. We ask that you please enjoy the fruits of our labor, The 86it Developers Network thanks you, and we want you to know that we are here and will support you 100% in your endeavor to build a new online presence.
 
 [b]NOTE:[/b] Your admin and user accounts have already been logged in for you so please visit [url=admin.php]this link[/url] to get started. 
 
-You can remove this new story by going into the News Administration or by clicking the delete image below.', '', 0, 0, 1, 'coRpSE', '', 0, '', 0, 0, 0, 0, 0, '', 0, 1);
+You can edit or remove this blog message by going into the Blog Admin Panel located in the Admin area, or look below and you can edit by clicking the pencil or the x to delete this.
+
+Thank You,
+The 86it Dev Team', '', 0, 0, 1, 'webmaster', '', 0, '', 0, 0, 0, 0, 0, '', 0, 1);
 
 -- --------------------------------------------------------
 
