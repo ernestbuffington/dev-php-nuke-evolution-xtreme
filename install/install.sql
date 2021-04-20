@@ -177,10 +177,10 @@ CREATE TABLE `nuke_bbadvanced_username_color` (
 --
 
 INSERT INTO `nuke_bbadvanced_username_color` (`group_id`, `group_name`, `group_color`, `group_weight`) VALUES
-(1, 'Administrators', 'd12727', 1),
-(2, 'Moderators', 'd38d01', 2),
-(3, 'VIP', '00aa00', 3),
-(4, 'Member', '00b3ff', 4);
+(1, 'Admins Team', 'd12727', 1),
+(2, 'Moderators Team', 'd38d01', 2),
+(3, 'VIP Members', '00aa00', 3),
+(4, 'Portal Access', '00b3ff', 4);
 
 -- --------------------------------------------------------
 
@@ -319,9 +319,9 @@ INSERT INTO `nuke_bbattachments_config` (`config_name`, `config_value`) VALUES
 ('attach_version', '2.4.5'),
 ('default_upload_quota', '0'),
 ('default_pm_quota', '0'),
-('ftp_server', 'ftp.yoursite.com'),
+('ftp_server', 'ftp.yoursite.86it.us'),
 ('ftp_path', '/public_html/modules/Forums/files'),
-('download_path', 'http://www.yoursite.com/modules/Forums/files'),
+('download_path', 'http://www.yoursite.86it.us/modules/Forums/files'),
 ('ftp_user', ''),
 ('ftp_pass', ''),
 ('ftp_pasv_mode', '1'),
@@ -3309,7 +3309,7 @@ CREATE TABLE `nuke_honeypot_config` (
 --
 
 INSERT INTO `nuke_honeypot_config` (`usehp`, `botlisting`, `perpage`, `pagenumberpos`, `headcolor`, `rowcolor1`, `rowcolor2`, `pagebgcolor`, `pagebordercolor`, `fontcolor`, `fontcolor2`, `check1`, `check2`, `check3`, `check4`, `check5`, `check6`, `c7opt1`, `c7opt2`, `c7amount`, `c8opt1`, `c8opt2`, `usebsapi`, `c8apikey`, `fs9opt1`, `fs9opt2`, `fs9apikey`, `check3time`, `check4question`, `check4answer`, `usefeedback`, `email`, `version`) VALUES
-(1, 1, '30', 2, '#a92828', '#e48600', '#f8ce55', '#f8ce55', '#a92828', '#000000', '#000000', 1, 1, 1, 0, 1, 1, 1, 1, '5', 0, 0, 0, '', 0, 0, '', '30', '', '', 0, 'admin@YourSite.com', '2.2');
+(1, 1, '30', 2, '#a92828', '#e48600', '#f8ce55', '#f8ce55', '#a92828', '#000000', '#000000', 1, 1, 1, 0, 1, 1, 1, 1, '5', 0, 0, 0, '', 0, 0, '', '30', '', '', 0, 'webmaster@YourSite.86it.us', '2.2');
 
 -- --------------------------------------------------------
 
@@ -4083,7 +4083,7 @@ CREATE TABLE `nuke_nsnst_config` (
 --
 
 INSERT INTO `nuke_nsnst_config` (`config_name`, `config_value`) VALUES
-('admin_contact', 'webmaster@yoursite.com'),
+('admin_contact', 'webmaster@yoursite.86it.us'),
 ('block_perpage', '50'),
 ('block_sort_column', 'date'),
 ('block_sort_direction', 'desc'),
