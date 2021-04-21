@@ -1,3 +1,35 @@
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `network_bookmarks`
+--
+
+CREATE TABLE `network_bookmarks` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `name` varchar(256) NOT NULL,
+  `category_id` int(11) NOT NULL DEFAULT 0,
+  `url` varchar(256) NOT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `mod_date` date NOT NULL DEFAULT '0000-00-00',
+  `popup` tinyint(3) UNSIGNED NOT NULL DEFAULT 1
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `network_bookmarks_cat`
+--
+
+CREATE TABLE `network_bookmarks_cat` (
+  `category_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `name` varchar(256) NOT NULL,
+  `description` varchar(256) NOT NULL,
+  `mod_date` date NOT NULL DEFAULT '0000-00-00'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
 --
 -- Table structure for table `nuke_admin_fc`
 --
