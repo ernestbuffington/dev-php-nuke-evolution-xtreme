@@ -29,6 +29,19 @@ CREATE TABLE `network_bookmarks_cat` (
   `mod_date` date NOT NULL DEFAULT '0000-00-00'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+ALTER TABLE `network_bookmarks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+ALTER TABLE `network_bookmarks_cat`
+  ADD PRIMARY KEY (`category_id`),
+  ADD KEY `user_id` (`user_id`);
+
+ALTER TABLE `network_bookmarks`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+
+ALTER TABLE `network_bookmarks_cat`
+  MODIFY `category_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- Table structure for table `nuke_admin_fc`
