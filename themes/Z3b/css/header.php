@@ -63,7 +63,6 @@ echo "/* When we are done we will move this code to style.css */\n\n";
 global $screen_width, $screen_height;
 
 ?>
-
 .banner_box
 {
 z-index: 780;

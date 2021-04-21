@@ -26,7 +26,7 @@ endif;
 /**
  * Customize function: Used for dynamic page titles, This replaces the old Dynamic Titles mod, which required multiple database queries.
  *
- * @since Titanium v3.0.0
+ * @since Titanium v3.0.1b
  */
 function title_and_meta_tags()
 {
@@ -348,6 +348,7 @@ function get_titanium_timeago( $ptime )
 {
     $estimate_time = time() - $ptime;
 
+
     if( $estimate_time < 1 )
         return 'Secs';
 
@@ -364,10 +365,10 @@ function get_titanium_timeago( $ptime )
     {
         $d = $estimate_time / $secs;
 
-        if( $d >= 1 )
-        {
-            $r = round( $d );                                                                             // └════┘
-            return '<div align="center"><strong>'.$r.'</strong><br />' . ' ' . $str . ( $r > 1 ? 's' : '' ) . ' <br /> </div>';
+     if( $d >= 1 )
+     {
+       $r = round( $d );                                                                             // └════┘
+       return '<font color="orange"><div align="center"><strong><font color="lightgreen">'.$r.'</font></strong><br />' . ' ' . $str . ( $r > 1 ? 's' : '' ) . ' </font><br /><font color="gold"><i class="bi bi-alarm"></i></font> </div>';
         }
     }
 }

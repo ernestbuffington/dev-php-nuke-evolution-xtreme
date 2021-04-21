@@ -1,18 +1,18 @@
 <?php
 /*=======================================================================
- PHP-Nuke Titanium v3.0.0 : Enhanced PHP-Nuke Web Portal System
+ PHP-Nuke Titanium v3.0.1b : Enhanced PHP-Nuke Web Portal System
  =======================================================================*/
  
 /************************************************************************
-   PHP-Nuke Titanium v3.0.0
+   PHP-Nuke Titanium v3.0.1b
    ======================================================================
    Copyright (c) 2019 by The PHP-Nuke Titanium Team
   
-   Filename      : block-Titanium_Last_Seen.php
+   Filename      : block-Titanium_Visitor_Log.php
    Author        : Ernest Buffington / lonestar 
    Websites      : (hub.86it,us)     /(lonestar-modules.com)
-   Version       : 3.0.0
-   Date          : 08.13.2019 (mm.dd.yyyy)
+   Version       : 3.0.1b
+   Date          : 04.21.2021 (mm.dd.yyyy)
                                                                         
    Notes         : Simple block to allow people to see who was last seen 
                  : on the website.
