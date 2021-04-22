@@ -51,7 +51,7 @@ $dbuname = 'nukeevo_user';
 |                                                         |
 | Default: null                                           |
 ---------------------------------------------------------*/
-$dbpass = 'xwdNPADv86user';  
+$dbpass = '';  
 
 /*----[ $dbtype ] ----------------------------------------
 | The type of SQL server you prefer to use                |
