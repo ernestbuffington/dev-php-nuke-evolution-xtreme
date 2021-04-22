@@ -990,10 +990,11 @@ function headlines($bid, $side=0, $row='') {
     }
 }
 
-function blog_ultramode() {
+function blog_ultramode() 
+{
     global $db, $prefix, $multilingual, $currentlang;
     $querylang = ($multilingual == 1) ? "AND (s.alanguage='".$currentlang."' OR s.alanguage='')" : "";
-    $sql = "SELECT s.sid, s.catid, s.aid, s.title, s.time, s.hometext, s.comments, s.topic, s.ticon, t.topictext, t.topicimage FROM `".$prefix."_stories` s LEFT JOIN `".$prefix."_topics` t ON t.topicid = s.topic WHERE s.ihome = '0' ".$querylang." ORDER BY s.time DESC LIMIT 0,10";
+    $sql = "SELECT s.sid, s.catid, s.aid, s.title, s.datePublished, s.dateModified, s.hometext, s.comments, s.topic, s.ticon, t.topictext, t.topicimage FROM `".$prefix."_stories` s LEFT JOIN `".$prefix."_topics` t ON t.topicid = s.topic WHERE s.ihome = '0' ".$querylang." ORDER BY s.time DESC LIMIT 0,10";
     $result = $db->sql_query($sql);
     
 	while ($row = $db->sql_fetchrow($result, SQL_ASSOC)) 
@@ -1001,7 +1002,10 @@ function blog_ultramode() {
         $rsid = $row['sid'];
         $raid = $row['aid'];
         $rtitle = htmlspecialchars(stripslashes($row['title']));
-        $rtime = $row['time'];
+        
+		$rtime = $row['datePublished'];
+		$rmodified = $row['dateModified'];
+		
         $rcomments = $row['comments'];
         $topictext = $row['topictext'];
         $topicimage = ($row['ticon']) ? stripslashes($row['topicimage']) : '';
@@ -1026,14 +1030,17 @@ function blog_ultramode() {
 function ultramode() {
     global $db, $prefix, $multilingual, $currentlang;
     $querylang = ($multilingual == 1) ? "AND (s.alanguage='".$currentlang."' OR s.alanguage='')" : "";
-    $sql = "SELECT s.sid, s.catid, s.aid, s.title, s.time, s.hometext, s.comments, s.topic, s.ticon, t.topictext, t.topicimage FROM `".$prefix."_stories` s LEFT JOIN `".$prefix."_topics` t ON t.topicid = s.topic WHERE s.ihome = '0' ".$querylang." ORDER BY s.time DESC LIMIT 0,10";
+    $sql = "SELECT s.sid, s.catid, s.aid, s.title, s.datePublished, s.dateModified, s.hometext, s.comments, s.topic, s.ticon, t.topictext, t.topicimage FROM `".$prefix."_stories` s LEFT JOIN `".$prefix."_topics` t ON t.topicid = s.topic WHERE s.ihome = '0' ".$querylang." ORDER BY s.time DESC LIMIT 0,10";
     $result = $db->sql_query($sql);
     while ($row = $db->sql_fetchrow($result, SQL_ASSOC)) {
         $rsid = $row['sid'];
         $raid = $row['aid'];
         $rtitle = htmlspecialchars(stripslashes($row['title']));
-        $rtime = $row['time'];
-        $rcomments = $row['comments'];
+		
+        $rtime = $row['datePublished'];
+		$rmodified = $row['dateModified'];
+        
+		$rcomments = $row['comments'];
         $topictext = $row['topictext'];
         $topicimage = ($row['ticon']) ? stripslashes($row['topicimage']) : '';
         $rtime = formatTimestamp($rtime, 'l, F d');
