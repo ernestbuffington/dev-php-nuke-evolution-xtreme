@@ -170,7 +170,7 @@ $topicimage = '';
 
 echo "<table width=\"100%\" ><tr><td valign=\"top\" width=\"100%\">\n";
 
-themearticle($aaid, $informant, $datetime, $title, $counter, $bodytext, $topic, $topicname, $topicimage, $topictext);
+themearticle($aaid, $informant, $datetime, $modified, $title, $counter, $bodytext, $topic, $topicname, $topicimage, $topictext);
 
 include_once("modules/$module_name/associates.php");
 

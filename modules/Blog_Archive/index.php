@@ -42,7 +42,7 @@ function select_month()
 	echo '<div align="center"><span class="title"><strong>'._STORIESARCHIVE.'</strong></span><br /><br /></div>';
 	echo '<div align="center"><span class="content">'._SELECTMONTH2VIEW.'</span><br /><br /></div><br /><br />';
     
-	$result = $db->sql_query("SELECT datePublished FROM ".$prefix."_stories ORDER BY time DESC");
+	$result = $db->sql_query("SELECT datePublished FROM ".$prefix."_stories ORDER BY datePublished DESC");
     
 	echo "<ul>";
 
@@ -128,12 +128,14 @@ function select_month()
 function show_month($year, $month, $month_l) 
 {
     global $userinfo, $prefix, $user_prefix, $db, $bgcolor1, $bgcolor2, $user, $cookie, $sitename, $multilingual, $language, $module_name, $articlecomm;
-    $year = intval($year);
+    
+	$year = intval($year);
     $month = htmlentities($month);
     $month_l = htmlentities($month_l);
 
     include_once(NUKE_BASE_DIR.'header.php');
-    title($sitename.' '._STORIESARCHIVE);
+    
+	title($sitename.' '._STORIESARCHIVE);
     
 	$month_title = "$sitename: $month_l $year";
 	
@@ -170,7 +172,19 @@ function show_month($year, $month, $month_l)
         ."<td bgcolor=\"$bgcolor2\" align=\"center\"><strong>"._DATE."</strong></td>"
         ."<td bgcolor=\"$bgcolor2\" align=\"center\"><strong>"._ACTIONS."</strong></td></tr>";
     
-	$result = $db->sql_query("SELECT sid, catid, title, datePublished, dateModified, comments, counter, topic, alanguage, score, ratings FROM ".$prefix."_stories WHERE time >= '$year-$month-01 00:00:00' AND time <= '$year-$month-31 23:59:59' ORDER BY sid DESC");
+	$result = $db->sql_query("SELECT sid, 
+	                               catid, 
+								   title, 
+						   datePublished, 
+						    dateModified, 
+							    comments, 
+								 counter, 
+								   topic, 
+							   alanguage, 
+							       score, 
+								 ratings 
+	FROM ".$prefix."_stories 
+	WHERE datePublished >= '$year-$month-01 00:00:00' AND datePublished <= '$year-$month-31 23:59:59' ORDER BY sid DESC");
     
 	while ($row = $db->sql_fetchrow($result)) 
 	{
@@ -246,7 +260,7 @@ function show_month($year, $month, $month_l)
     ."<br /><br /><br /><hr size=\"1\" noshade>"
     ."<span class=\"content\">"._SELECTMONTH2VIEW."</span><br /><br />";
     
-	$result2 = $db->sql_query("SELECT datePublsihed FROM ".$prefix."_stories ORDER BY time DESC");
+	$result2 = $db->sql_query("SELECT datePublished FROM ".$prefix."_stories ORDER BY datePublished DESC");
     
 	echo "<ul>";
     
@@ -254,7 +268,7 @@ function show_month($year, $month, $month_l)
     
 	while($row2 = $db->sql_fetchrow($result2)) 
 	{
-        $time = $row2['datePublsihed'];
+        $time = $row2['datePublished'];
         
 		preg_match ("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2}) ([0-9]{1,2})\:([0-9]{1,2})\:([0-9]{1,2})/i", $time, $getdate);
     
@@ -477,7 +491,7 @@ function show_all($min)
 	echo "<hr size=\"1\" noshade>"
     ."<span class=\"content\">"._SELECTMONTH2VIEW."</span><br /><br />";
    
-    $result2 = $db->sql_query("SELECT time FROM ".$prefix."_stories ORDER BY time DESC");
+    $result2 = $db->sql_query("SELECT datePublished FROM ".$prefix."_stories ORDER BY datePublished DESC");
    
     echo "<ul>";
    

@@ -162,7 +162,7 @@ if($catid != 0)
 
 echo "<table width=\"100%\" border=\"0\"><tr><td valign=\"top\" width=\"100%\">\n";
 
-themearticle($aid['name'], $informant, $datetime, $title, $counter, $bodytext, $topic, $topicname, $topicimage, $topictext);
+themearticle($aid['name'], $informant, $datetime, $modified, $title, $counter, $bodytext, $topic, $topicname, $topicimage, $topictext);
 
 echo "</td><td>&nbsp;</td><td valign=\"top\">\n";
 

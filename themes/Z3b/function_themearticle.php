@@ -59,7 +59,7 @@ if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
 /*--------------------------*/
 /* Theme Article 
 /*--------------------------*/
-function themearticle($aid, $informant, $datetime, $title, $counter, $thetext, $topic, $topicname, $topicimage, $topictext, $writes = false) 
+function themearticle($aid, $informant, $datetime, $modified, $title, $counter, $thetext, $topic, $topicname, $topicimage, $topictext, $writes = false) 
 {
     global $admin, $sid, $tipath, $theme_name, $appID, $my_url;
     global $digits_color, $digits_txt_color;

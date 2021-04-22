@@ -1606,16 +1606,52 @@ function editStory($sid)
 
     $aid = substr($aid, 0,25);
     $sid = intval($sid);
-    list($aaid) = $db->sql_ufetchrow("select aid from ".$prefix."_stories where sid='$sid'", SQL_NUM);
-    $aaid = substr($aaid, 0,25);
+    
+	list($aaid) = $db->sql_ufetchrow("select aid from ".$prefix."_stories where sid='$sid'", SQL_NUM);
+    
+	$aaid = substr($aaid, 0,25);
 
     if (is_mod_admin($module_name)) 
 	{
         include(NUKE_BASE_DIR.'header.php');
     
-        $result = $db->sql_query("SELECT catid, title, hometext, bodytext, topic, notes, ihome, alanguage, acomm, ticon, writes, aid, informant, time, sid FROM ".$prefix."_stories where sid='$sid'");
-        list($catid, $subject, $hometext, $bodytext, $topic, $notes, $ihome, $alanguage, $acomm, $topic_icon, $writes, $aid, $informant, $time, $sid) = $db->sql_fetchrow($result);
-        $catid = intval($catid);
+        $result = $db->sql_query("SELECT catid, 
+		                                 title, 
+									  hometext, 
+									  bodytext, 
+									     topic, 
+										 notes, 
+										 ihome, 
+									 alanguage, 
+									     acomm, 
+										 ticon, 
+										writes, 
+										   aid, 
+									 informant, 
+								 datePublished,
+								  dateModified, 
+										   sid 
+	    FROM ".$prefix."_stories 
+		WHERE sid='$sid'");
+		
+        list($catid, 
+		   $subject, 
+		  $hometext, 
+		  $bodytext, 
+		     $topic, 
+			 $notes, 
+			 $ihome, 
+		 $alanguage, 
+		     $acomm, 
+		$topic_icon, 
+		    $writes, 
+			   $aid, 
+		 $informant, 
+		      $time,
+		  $modified,  
+			   $sid) = $db->sql_fetchrow($result);
+        
+		$catid = intval($catid);
         $subject = stripslashes($subject);
         $hometext = stripslashes($hometext);
         $bodytext = stripslashes($bodytext);
@@ -1625,8 +1661,10 @@ function editStory($sid)
         $aid = $aid;
         $topic_icon = intval($topic_icon);
         $writes = intval($writes);
-        $result2=$db->sql_query("select topicimage from ".$prefix."_topics where topicid='$topic'");
-        list($topicimage) = $db->sql_fetchrow($result2);
+        
+		$result2=$db->sql_query("select topicimage from ".$prefix."_topics where topicid='$topic'");
+        
+		list($topicimage) = $db->sql_fetchrow($result2);
         
 		OpenTable();
 
@@ -1654,7 +1692,7 @@ function editStory($sid)
         
 		$informant = UsernameColor($informant);
         
-		themearticle($aid, $informant, $time, $subject, $counter, $hometext_bb, $topic, $topicname, $topicimage, $topictext);
+		themearticle($aid, $informant, $time, $modified, $subject, $counter, $hometext_bb, $topic, $topicname, $topicimage, $topictext);
         
 		echo "<br />"
             ."<form action=\"".$admin_file.".php\" method=\"post\" name=\"postnews\">"
@@ -2348,7 +2386,7 @@ function previewAdminStory($automated, $year, $day, $month, $hour, $min, $subjec
 
     $informant = UsernameColor($informant);
     
-	themearticle($aid, $informant, $time, $subject, $counter, $hometext_bb, $topic, $topicname, $topicimage, $topictext);
+	themearticle($aid, $informant, $time, $modified, $subject, $counter, $hometext_bb, $topic, $topicname, $topicimage, $topictext);
     
 	echo "<br /><br /><strong>"._TITLE."</strong><br />"
         ."<input type=\"text\" name=\"subject\" size=\"50\" value=\"$subject\"><br /><br />"
