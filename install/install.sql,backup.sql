@@ -1,7 +1,7 @@
 -- --------------------------------------------------------
 
 --
--- Table structure for table `network_bookmarks`
+-- Table structure for table `network_bookmarks` 
 --
 
 CREATE TABLE `network_bookmarks` (
