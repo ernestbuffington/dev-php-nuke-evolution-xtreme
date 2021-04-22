@@ -1,6 +1,6 @@
 <?php
 /*=======================================================================
- PHP-Nuke Titanium v3.0.0
+ Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
  =======================================================================*/
 
 /************************************************************************/
@@ -15,77 +15,67 @@
 /* the Free Software Foundation; either version 2 of the License.       */
 /*                                                                      */
 /************************************************************************/
-/* Additional security checking code 2003 by chatserv                   */
-/* http://www.nukefixes.com -- http://www.nukeresources.com             */
+/*         Additional security & Abstraction layer conversion           */
+/*                           2003 chatserv                              */
+/*      http://www.nukefixes.com -- http://www.nukeresources.com        */
 /************************************************************************/
-
-/*****[CHANGES]**********************************************************
--=[Base]=-
-      Nuke Patched                             v3.1.0       06/26/2005
-	  Titanium Patched                         v3.0.0       08/14/2019
- ************************************************************************/
 /********************************************************/
-/* Titanium Blogs                                       */
+/* NSN News                                             */
 /* By: NukeScripts Network (webmaster@nukescripts.net)  */
-/* http://nukescripts.86it.us                           */
-/* Copyright (c) 2000-2005 by NukeScripts Network       */
+/* http://www.nukescripts.net                           */
+/* Copyright (c) 2000-2005 by NukeScripts Network         */
 /********************************************************/
 
-if (!defined('ADMIN_FILE')) 
-die ("Access Denied");
+if (!defined('ADMIN_FILE')) {
+   die ("Access Denied");
+}
 
 global $prefix, $db, $admdata;
-
 $module_name = basename(dirname(dirname(__FILE__)));
+if(is_mod_admin($module_name)) {
 
-if(is_mod_admin($module_name)) 
-{
-  include_once(NUKE_INCLUDE_DIR.'nsnne_func.php');
-  $ne_config = ne_get_configs();
+include_once(NUKE_INCLUDE_DIR.'nsnne_func.php');
+$ne_config = ne_get_configs();
 
 /*********************************************************/
 /* Topics Manager Functions                              */
 /*********************************************************/
 
-function topicsmanager() 
-{
+function topicsmanager() {
     global $prefix, $db, $admin_file, $tipath;
-
     include(NUKE_BASE_DIR."header.php");
-
     OpenTable();
-
-    echo "<center><span class=\"title\"><strong>"._TOPICSMANAGER . "</strong></span></center>";
-	echo "<br />";
+	echo "<div align=\"center\">\n<a href=\"$admin_file.php?op=topicsmanager\">" . _TOPICS_ADMIN_HEADER . "</a></div>\n";
+    echo "<br /><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _TOPICS_RETURNMAIN . "</a> ]</div>\n";
-
+	CloseTable();
+	echo "<br />";
+    OpenTable();
+    echo "<center><span class=\"title\"><strong>"._TOPICSMANAGER . "</strong></span></center>";
+    CloseTable();
+    echo "<br />";
+    OpenTable();
     echo "<center><span class=\"option\"><strong>"._CURRENTTOPICS . "</strong></span><br />"._CLICK2EDIT . "</span></center><br />"
         ."<table border=\"0\" width=\"100%\" align=\"center\" cellpadding=\"2\">";
     $count = 0;
     $result = $db->sql_query("SELECT topicid, topicname, topicimage, topictext from " . $prefix . "_topics order by topicname");
-
-    while ($row = $db->sql_fetchrow($result)) 
-	{
+    while ($row = $db->sql_fetchrow($result)) {
         $topicid = intval($row['topicid']);
         $topicname = $row['topicname'];
         $topicimage = $row['topicimage'];
         $topictext = $row['topictext'];
-    
-	    echo "<td align=\"center\" width='17%' valign='top'>"
+        echo "<td align=\"center\" width='17%' valign='top'>"
             ."<a href=\"".$admin_file.".php?op=topicedit&amp;topicid=$topicid\"><img src=\"$tipath$topicimage\" border=\"0\" alt=\"\" /></a><br />"
             ."<span class=\"content\"><strong>$topictext</td>";
-    
-	    $count++;
-    
-	    if ($count == 6) 
-		{
+        $count++;
+        if ($count == 6) {
             echo "</tr><tr>";
             $count = 0;
         }
     }
     echo "</table>";
     CloseTable();
- 
+    echo "<br /><a name=\"Add\"></a>";
     OpenTable();
     echo "<center><span class=\"option\"><strong>"._ADDATOPIC . "</strong></span></center><br />"
             ."<form action=\"".$admin_file.".php\" method=\"post\">"
@@ -97,23 +87,17 @@ function topicsmanager()
         ."<input type=\"text\" name=\"topictext\" size=\"40\" maxlength=\"40\" value=\"$topictext\"><br /><br />"
         ."<strong>"._TOPICIMAGE . ":</strong><br />"
         ."<select name=\"topicimage\">";
- 
     $handle=opendir($tipath);
- 
-    while ($file = readdir($handle)) 
-	{
-        if ( (preg_match("~^([_0-9a-zA-Z]+)([.]{1})([_0-9a-zA-Z]{3})$~",$file)) AND $file != "AllTopics.png") {
+    while ($file = readdir($handle)) {
+        if ( (preg_match("~^([_0-9a-zA-Z]+)([.]{1})([_0-9a-zA-Z]{3})$~",$file)) AND $file != "AllTopics.gif") {
             $tlist .= "$file ";
         }
     }
     closedir($handle);
     $tlist = explode(" ", $tlist);
     sort($tlist);
-    
-	for ($i=0; $i < count($tlist); $i++) 
-	{
-        if(!empty($tlist[$i])) 
-		{
+    for ($i=0; $i < count($tlist); $i++) {
+        if(!empty($tlist[$i])) {
             echo "<option name=\"topicimage\" value=\"$tlist[$i]\">$tlist[$i]\n";
         }
     }
@@ -122,8 +106,7 @@ function topicsmanager()
         ."<input type=\"submit\" value=\""._ADDTOPIC . "\">"
         ."</form>";
     CloseTable();
-    
-	include(NUKE_BASE_DIR."footer.php");
+    include(NUKE_BASE_DIR."footer.php");
 }
 
 function topicedit($topicid) {
@@ -157,7 +140,7 @@ function topicedit($topicid) {
         ."<select name=\"topicimage\">";
     $handle=opendir($tipath);
     while ($file = readdir($handle)) {
-        if ( (preg_match("#^([_0-9a-zA-Z]+)([.]{1})([_0-9a-zA-Z]{3})$#",$file)) AND $file != "AllTopics.png") {
+        if ( (preg_match("#^([_0-9a-zA-Z]+)([.]{1})([_0-9a-zA-Z]{3})$#",$file)) AND $file != "AllTopics.gif") {
             $tlist .= "$file ";
         }
     }
@@ -224,7 +207,7 @@ function relatededit($tid, $rid) {
         $topicimage = $row2['topicimage'];
     OpenTable();
     echo "<center>"
-        ."<img src=\"images/Blog_Topics/$topicimage\" align=\"right\" alt=\"$topictext\" />"
+        ."<img src=\"images/topics/$topicimage\" align=\"right\" alt=\"$topictext\" />"
         ."<span class=\"option\"><strong>"._EDITRELATED . "</strong></span><br />"
         ."<strong>"._TOPIC . ":</strong> $topictext</center>"
         ."<form action=\"".$admin_file.".php\" method=\"post\">"
@@ -311,7 +294,7 @@ function topicdelete($topicid, $ok=0) {
         $topicimage = $row3['topicimage'];
         $topictext = $row3['topictext'];
         OpenTable();
-        echo "<center><img src=\"images/Blog_Topics/$topicimage\" alt=\"$topictext\" /><br /><br />"
+        echo "<center><img src=\"images/topics/$topicimage\" alt=\"$topictext\" /><br /><br />"
             ."<strong>" . _DELETETOPIC . " $topictext</strong><br /><br />"
             ."" . _TOPICDELSURE . " <i>$topictext</i>?<br />"
             ."" . _TOPICDELSURE1 . "<br /><br />"

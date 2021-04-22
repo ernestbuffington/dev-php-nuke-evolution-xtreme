@@ -74,6 +74,9 @@ $theme_name = basename(dirname(__FILE__));
 #--------------------------#
 include(NUKE_THEMES_DIR.$theme_name.'/theme_info.php');
 
+# your admin id - this will normally be 2
+$portaladmin = 2;
+
        global $powered_by, 
       $my_welcome_message, 
            $eighty_six_it, 
@@ -90,12 +93,12 @@ $make_xtreme_avatar_small,
 
     list($portaladminname, 
 	              $avatar, 
-				   $email) = $db->sql_ufetchrow("SELECT `username`,`user_avatar`, `user_email` FROM `nuke_users` WHERE `user_id`=".$portaladmin."", SQL_NUM);
+				   $email) = $db->sql_ufetchrow("SELECT `username`,`user_avatar`, `user_email` FROM `nuke_users` WHERE `user_id`=$portaladmin", SQL_NUM);
 				   
 # be sure and set your user number in the config.php file.
 //$my_welcome_message = '<a class = "welcome" href="'.$domain.'">Welcome to The 86it Developers Network</a>';
 //$my_welcome_message = '<a class = "welcome" href="'.$domain.'">Welcome to '.$portaladminname.'\'s 86it Portal</a>';
-$my_welcome_message = '<a class = "welcome" href="'.HTTPS.'">Welcome to PHP-Nuke Evolution Xtreme <font color="#FF9900" size="3">86it™</font></a>';
+$my_welcome_message = '<a class = "welcome" href="'.HTTPS.'">Welcome to PHP-Nuke Evolution Xtreme <font color="#FF9900" size="1">(US Version)</font></a>';
 
 # This is to tell the main portal menu to look for the images
 # in the theme dir "theme_name/images/menu"

@@ -42,10 +42,13 @@ function PrintPage($sid)
     global $site_logo, $nukeurl, $sitename, $datetime, $prefix, $db, $module_name;
 
     $sid = intval($sid);
-    $row = $db->sql_fetchrow($db->sql_query("SELECT title, time, hometext, bodytext, topic, notes FROM ".$prefix."_stories WHERE sid='$sid'"));
+    $row = $db->sql_fetchrow($db->sql_query("SELECT title, datePublished, dateModified, hometext, bodytext, topic, notes FROM ".$prefix."_stories WHERE sid='$sid'"));
     $title = stripslashes(check_html($row["title"], "nohtml"));
-    $time = $row["time"];
-    $hometext = decode_bbcode(set_smilies(stripslashes($row["hometext"])), 1, true);
+    
+	$time = $row["datePublished"];
+    $modified = $row["dateModified"];
+	
+	$hometext = decode_bbcode(set_smilies(stripslashes($row["hometext"])), 1, true);
     $bodytext = decode_bbcode(set_smilies(stripslashes($row["bodytext"])), 1, true);
     $topic = intval($row["topic"]);
     $notes = stripslashes($row["notes"]);

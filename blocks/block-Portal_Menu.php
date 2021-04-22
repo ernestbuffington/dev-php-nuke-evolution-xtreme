@@ -1025,19 +1025,19 @@ function menu_over_popup(page,nom,option) {
 					}
 				}
 				else //News module
-				if($nomdumodule=="News" && $newdaysinthisgroup[$som_groupmenu][$keyinthisgroup]!="-1") 
+				if($nomdumodule=="Blog" && $newdaysinthisgroup[$som_groupmenu][$keyinthisgroup]!="-1") 
 				{
 				    global $db, $prefix;
 					
 					$where = (strstr("^new_topic=[0-9]*$",$temponomdumodule[1])) ? " WHERE ".str_replace("new_","",$temponomdumodule[1])."" : "";
 				
-					$sqlimgnew="SELECT time FROM ".$prefix."_stories".$where." order by time desc limit 1";
+					$sqlimgnew="SELECT datePublished FROM ".$prefix."_stories".$where." order by datePublished desc limit 1";
 				
 					$resultimgnew=$db->sql_query($sqlimgnew);
 				
 					$rowimgnew = $db->sql_fetchrow($resultimgnew);
 				
-					if($rowimgnew['time']) 
+					if($rowimgnew['datePublished']) 
 					{
 						strstr ("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})", $rowimgnew['time'], $datetime);
 						$zedate = mktime($datetime[4],$datetime[5],$datetime[6],$datetime[2],$datetime[3],$datetime[1]);
@@ -1051,11 +1051,11 @@ function menu_over_popup(page,nom,option) {
 				else // Blogs module
 				if($nomdumodule=="Blogs" && $newdaysinthisgroup[$som_groupmenu][$keyinthisgroup]!="-1") {
 					$where = (strstr("^new_topic=[0-9]*$",$temponomdumodule[1])) ? " WHERE ".str_replace("new_","",$temponomdumodule[1])."" : "";
-					$sqlimgnew="SELECT time FROM ".$prefix."_blogs".$where." order by time desc limit 1";
+					$sqlimgnew="SELECT datePublished FROM ".$prefix."_blogs".$where." order by datePublished desc limit 1";
 					$resultimgnew=$db->sql_query($sqlimgnew);
 					$rowimgnew = $db->sql_fetchrow($resultimgnew);
-					if($rowimgnew['time']) {
-						strstr ("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})", $rowimgnew['time'], $datetime);
+					if($rowimgnew['datePublished']) {
+						strstr ("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})", $rowimgnew['datePublished'], $datetime);
 						$zedate = mktime($datetime[4],$datetime[5],$datetime[6],$datetime[2],$datetime[3],$datetime[1]);
 						//$now=time();
 						if(intval(($now-$zedate)/86400) <= $newdaysinthisgroup[$som_groupmenu][$keyinthisgroup]) {

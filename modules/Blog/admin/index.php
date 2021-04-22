@@ -1905,7 +1905,7 @@ function lastTwenty()
 	echo "<div align=\"center\">\n<a href=\"$admin_file.php?op=adminStory\"><strong>Add New Blog</strong></a></div><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _NEWS_RETURNMAIN . "</a> ]</div><br />";
     
-	$result6 = $db->sql_query("SELECT sid, aid, title, time, topic, informant, alanguage FROM ".$prefix."_stories ORDER BY time DESC LIMIT 0,100");
+	$result6 = $db->sql_query("SELECT sid, aid, title, datePublished, dateModified, topic, informant, alanguage FROM ".$prefix."_stories ORDER BY time DESC LIMIT 0,100");
     
 	echo "<div align=\"center\"><table border=\"1\" width=\"100%\">";
     
@@ -1915,8 +1915,11 @@ function lastTwenty()
         $aid = $row6["aid"];
         $said = substr("$aid", 0,25);
         $title = $row6["title"];
-        $time = $row6["time"];
-        $topic = $row6["topic"];
+        
+		$time = $row6["datePublished"];
+		$modified = $row6["dateModified"];
+        
+		$topic = $row6["topic"];
         $informant = $row6["informant"];
         $alanguage = $row6["alanguage"];
         $row7 = $db->sql_fetchrow($db->sql_query("SELECT topicname FROM ".$prefix."_topics WHERE topicid='$topic'"));
@@ -2696,8 +2699,8 @@ function postAdminStory($automated,
 		                                                 '$catid', 
 														   '$aid', 
 													   '$subject', 
-													        now(),
-														    now(),		 
+													         NULL,
+														     NULL,		 
 													  '$hometext', 
 													  '$bodytext', 
 													          '0', 
@@ -2719,7 +2722,7 @@ function postAdminStory($automated,
 		
         // Copyright (c) 2000-2005 by NukeScripts Network
 
-        $result = $db->sql_query("select sid from ".$prefix."_stories WHERE title='$subject' order by time DESC limit 0,1");
+        $result = $db->sql_query("select sid from ".$prefix."_stories WHERE title='$subject' order by datePublished DESC limit 0,1");
         
 		list($artid) = $db->sql_fetchrow($result);
         

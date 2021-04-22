@@ -56,7 +56,7 @@ if ($save AND is_user())
 if ($op == "Reply") 
 redirect("modules.php?name=$module_name&file=comments&op=Reply&pid=0&sid=$sid&mode=$mode&order=$order&thold=$thold");
 
-$sql = "select catid, aid, time, title, counter, hometext, bodytext, topic, informant, notes, acomm, haspoll, pollID, score, ratings FROM ".$prefix."_stories where sid='$sid'";
+$sql = "select catid, aid, datePublished, dateModified, title, counter, hometext, bodytext, topic, informant, notes, acomm, haspoll, pollID, score, ratings FROM ".$prefix."_stories where sid='$sid'";
 $result = $db->sql_query($sql);
 
 if ($numrows = $db->sql_numrows($result) != 1) 
@@ -73,7 +73,8 @@ $aid['name'] = stripslashes($row["aid"]);
 
 $aid['color'] = UsernameColor($aid['name']);
 
-$time = $row["time"];
+$time = $row["datePublished"];
+$modified = $row["dateModified"];
 
 $title = $row["title"];
 

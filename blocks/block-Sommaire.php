@@ -743,13 +743,13 @@ $cache->save('sommaire_row3', 'block', $row3);
                                             }
                                         }
                                     }
-                                    elseif ($nomdumodule=="News" && $newdaysinthisgroup[$som_groupmenu][$keyinthisgroup]!="-1") {
+                                    elseif ($nomdumodule=="Blog" && $newdaysinthisgroup[$som_groupmenu][$keyinthisgroup]!="-1") {
                                         $where = (preg_match("/^new_topic=[0-9]*$/",$temponomdumodule[1])) ? " WHERE ".str_replace("new_","",$temponomdumodule[1])."" : "";
-                                        $sqlimgnew="SELECT time FROM ".$prefix."_stories".$where." ORDER BY time DESC LIMIT 1";
+                                        $sqlimgnew="SELECT datePublished FROM ".$prefix."_stories".$where." ORDER BY datePublished DESC LIMIT 1";
                                         $resultimgnew=$db->sql_query($sqlimgnew);
                                         $rowimgnew = $db->sql_fetchrow($resultimgnew);
-                                        if ($rowimgnew['time']) {
-                                            preg_match ("/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})/", $rowimgnew['time'], $datetime);
+                                        if ($rowimgnew['datePublished']) {
+                                            preg_match ("/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})/", $rowimgnew['datePublished'], $datetime);
                                             $zedate = mktime($datetime[4],$datetime[5],$datetime[6],$datetime[2],$datetime[3],$datetime[1]);
                                             $now=time();
                                             if(intval(($now-$zedate)/86400) <= $newdaysinthisgroup[$som_groupmenu][$keyinthisgroup]) {

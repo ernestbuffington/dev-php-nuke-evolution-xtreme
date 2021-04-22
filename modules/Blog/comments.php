@@ -821,9 +821,12 @@ function reply($pid, $sid, $mode, $order, $thold) {
     } 
 	else 
 	{
-        $row2 = $db->sql_fetchrow($db->sql_query("SELECT time, title, hometext, bodytext, informant, notes FROM ".$prefix."_stories WHERE sid='$sid'"));
-        $date = $row2["time"];
-        $subject = stripslashes(check_html($row2["title"], "nohtml"));
+        $row2 = $db->sql_fetchrow($db->sql_query("SELECT datePublished, dateModified, title, hometext, bodytext, informant, notes FROM ".$prefix."_stories WHERE sid='$sid'"));
+        
+		$date = $row2["datePublished"];
+		$modified = $row2["dateModified"];
+        
+		$subject = stripslashes(check_html($row2["title"], "nohtml"));
         $temp_comment = stripslashes($row2["hometext"]);
         $comment2 = stripslashes($row2["bodytext"]);
         $name = stripslashes($row2["informant"]);

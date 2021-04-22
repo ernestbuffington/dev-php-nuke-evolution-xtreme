@@ -38,7 +38,7 @@ require_once(dirname(__FILE__).'/mainfile.php');
 
 function head() 
 {
-    global $define_theme_xtreme_209e, 
+    global $define_theme_xtreme_209e,
 						  $ab_config, 
 						  $modheader, 
 						       $name, 

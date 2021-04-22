@@ -105,7 +105,7 @@ if ( $_POST['msnl_stats'] == "yes" && $msnl_sTemplateNm != "notemplate" ) {
 		
 	}
 
-	//Total News Stories
+	//Total Blogs
 	
 	$sql										= "SELECT * FROM `".$prefix."_stories`";
 	$result2 								= msnl_fSQLCall( $sql );

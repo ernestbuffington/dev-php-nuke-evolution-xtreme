@@ -66,7 +66,8 @@ if ($db->sql_numrows($result) > 0)
         $topicid = intval($row['topicid']);
         $topicimage = stripslashes($row['topicimage']);
         $topictext = stripslashes(check_html($row['topictext'], "nohtml"));
-        if(file_exists("themes/".$ThemeSel."/images/Blog_Topics/".$topicimage)) 
+        
+		if(file_exists("themes/".$ThemeSel."/images/topics/".$topicimage)) 
 		{
           $t_image = "themes/".$ThemeSel."/";
         } 

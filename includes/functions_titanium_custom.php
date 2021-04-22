@@ -174,7 +174,7 @@ function title_and_meta_tags()
                    $structured_data .= '  "'.HTTPS.'images/google/16x9.png"'."\n";
                    $structured_data .= '  ],'."\n\n";
 				 
-                         list($time) = $db->sql_ufetchrow("SELECT `time` FROM `".$prefix."_stories` WHERE `sid`='".$sid."'", SQL_NUM);
+                         list($time) = $db->sql_ufetchrow("SELECT `datePublished` FROM `".$prefix."_stories` WHERE `sid`='".$sid."'", SQL_NUM);
 				   $structured_data .= '  "datePublished": "'.$time.'",'."\n";
 				          list($dtm) = $db->sql_ufetchrow("SELECT `dateModified` FROM `".$prefix."_stories` WHERE `sid`='".$sid."'", SQL_NUM);
                    $structured_data .= '  "dateModified": "'.$dtm.'",'."\n\n";
@@ -244,7 +244,11 @@ function title_and_meta_tags()
                    $structured_data .= '  ],'."\n\n";
 			               list($dp) = $db->sql_ufetchrow("SELECT `datePublished` FROM `".$prefix."_config`", SQL_NUM);	 
 			       $structured_data .= '  "datePublished": "'.$dp.'",'."\n";
-			             list($dmod) = $db->sql_ufetchrow("SELECT `dateModified` FROM `".$prefix."_config`", SQL_NUM);	 
+			             list($dmod) = $db->sql_ufetchrow("SELECT `dateModified` FROM `".$prefix."_config`", SQL_NUM);
+						 if(empty($dmod)) # u need to add this to save edit General Site Settings
+						 {
+							$db->sql_query("INSERT INTO `".$prefix."_config`(dateModified) VALUES (null)"); 
+						 }	 
                    $structured_data .= '  "dateModified": "'.$dmod.'",'."\n\n";
                  
 			       $structured_data .= '  "author": {'."\n";

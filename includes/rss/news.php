@@ -1,8 +1,7 @@
 <?php
-/*======================================================================= 
-  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
+/*=======================================================================
+ Nuke-Evolution Basic: Enhanced PHP-Nuke Web Portal System
  =======================================================================*/
-
 
 /************************************************************************
    Nuke-Evolution: News Feed 2.0
@@ -70,26 +69,25 @@ echo "<sy:updatePeriod>hourly</sy:updatePeriod>\n";
 echo "<sy:updateFrequency>1</sy:updateFrequency>\n";
 echo "<sy:updateBase>".$now."</sy:updateBase>\n\n";
 
-$result = $db->sql_query("SELECT s.sid, t.topicname, s.informant, s.title, s.time, s.hometext
+$result = $db->sql_query("SELECT s.sid, t.topicname, s.informant, s.title, s.datePublished, s.dateModified, s.hometext
                           FROM ".$prefix."_stories s, ".$prefix."_topics t
                           WHERE s.topic = t.topicid
                           ORDER BY sid
                           DESC LIMIT 10"
           );
 
-while ($row = $db->sql_fetchrow($result)) {
+while ($row = $db->sql_fetchrow($result)) 
+{
     $rsid = intval($row['sid']);
     $topicname = $row['topicname'];
     $informant = $row['informant'];
     $title = $row['title'];
-    $time = $row['time'];
-    $hometext = $row['hometext'];
-    //$hometext = ereg_replace('\x99', '', $hometext); // Needs improvement
+    $time = $row['datePublished'];
+	$modified = $row['dateModified']; # need to figure out the format for dat modified and add it to the item below!
+	$hometext = $row['hometext'];
     $hometext = decode_bb_all($hometext);
     $hometext = decode_rss_rest($hometext);
-
-    // Format: 2004-08-02T12:15:23-06:00 (W3C Compliant)
-    $date = date("Y-m-d\TH:i:s", strtotime($time));
+    $date = date("Y-m-d\TH:i:s", strtotime($time)); # Format: 2004-08-02T12:15:23-06:00 (W3C Compliant)
     $date = $date . $gmtstr;
 
     echo "<item>\n";
@@ -105,5 +103,4 @@ while ($row = $db->sql_fetchrow($result)) {
 
 echo "</channel>\n";
 echo "</rss>\n";
-
 ?>

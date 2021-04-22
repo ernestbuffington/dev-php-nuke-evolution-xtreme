@@ -117,7 +117,7 @@ addJSToBody(theme_js_dir.'menu.min.js');
 
 # This is where we set the poster background and full screen video START
 echo '<div class="fullscreen-bg">';
-echo '<video loop autoplay poster="themes/'.$theme_name.'/backgrounds/z3_video_backgrond.png" class="fullscreen-bg__video">';
+echo '<video loop autoplay poster="themes/'.$theme_name.'/backgrounds/z3_video_background.png" class="fullscreen-bg__video">';
 echo '<source src="themes/'.$theme_name.'/video/z3_background_video.mp4" type="video/mp4">';
 echo '</video>';
 echo '</div>';

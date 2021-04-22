@@ -84,9 +84,8 @@ if ($op == "Reply")
 	redirect("modules.php?name=$module_name&file=comments&op=Reply&pid=0&sid=".$sid.$display);
 }
 
-$result = $db->sql_query("select catid, aid, time, title, counter, hometext, bodytext, topic, informant, notes, acomm, haspoll, pollID, score, ratings, ticon FROM ".$prefix."_stories where sid='$sid'");
+$result = $db->sql_query("select catid, aid, datePublished, dateModified, title, counter, hometext, bodytext, topic, informant, notes, acomm, haspoll, pollID, score, ratings, ticon FROM ".$prefix."_stories where sid='$sid'");
 
-//Causes trouble, has to be fixed - So you say , explain next time numb nut! Also when you comment use your name or e-mail
 $numrows = $db->sql_numrows($result);
 
 if (!empty($sid) && $numrows != 1) 
@@ -96,7 +95,10 @@ $row = $db->sql_fetchrow($result);
 $db->sql_freeresult($result);
 $aaid = stripslashes($row['aid']);
 $catid = intval($row["catid"]);
-$time = $row["time"];
+
+$time = $row["datePublished"];
+$modified = $row["dateModified"];
+
 $title = stripslashes(check_html($row["title"], "nohtml"));
 $counter = $row["counter"];
 

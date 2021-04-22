@@ -42,7 +42,7 @@ if ($month < 10) {
 }
 $year = $today['year'];
 $tdate = "$year-$month-$day";
-list($sid, $title) = $db->sql_ufetchrow("SELECT sid, title FROM ".$prefix."_stories WHERE (time LIKE '%$tdate%') $querylang ORDER BY counter DESC LIMIT 0,1", SQL_NUM);
+list($sid, $title) = $db->sql_ufetchrow("SELECT sid, title FROM ".$prefix."_stories WHERE (datePublished LIKE '%$tdate%') $querylang ORDER BY counter DESC LIMIT 0,1", SQL_NUM);
 $fsid = intval($sid);
 $ftitle = stripslashes($title);
 $content = "<span class=\"content\">";
@@ -63,7 +63,7 @@ if ((!$fsid) AND (!$ftitle)) {
     $r_options .= "&amp;mode=".$mode;
     $r_options .= "&amp;order=".$order;
     $r_options .= "&amp;thold=".$thold;
-    $content .= "<a href=\"modules.php?name=News&amp;file=article&amp;sid=$fsid$r_options\">$ftitle</a></span>";
+    $content .= "<a href=\"modules.php?name=Blog&amp;file=article&amp;sid=$fsid$r_options\">$ftitle</a></span>";
 }
 
 ?>

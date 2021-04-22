@@ -133,7 +133,7 @@ switch ($op)
 
         $db->sql_freeresult($result);
 
-        $querylang = (!isset($querylang) || empty($querylang)) ? 'WHERE `time` <= now()' : $querylang . ' AND `time` <= now()';
+        $querylang = (!isset($querylang) || empty($querylang)) ? 'WHERE `datePublished` <= now()' : $querylang . ' AND `datePublished` <= now()';
         $result = $db->sql_query("SELECT * FROM ".$prefix."_stories $querylang ORDER BY sid DESC LIMIT $min,$storynum");
 
         if($neconfig["columns"] == 1) // DUAL BLOG
@@ -143,7 +143,7 @@ switch ($op)
         
 		while ($artinfo = $db->sql_fetchrow($result)) 
 		{
-            $artinfo["time"] = formatTimestamp($artinfo["time"]);
+            $artinfo["datePublished"] = formatTimestamp($artinfo["datePublished"]);
         
 		    if(!empty($subject))
             $subject = stripslashes(check_html($subject, "nohtml"));
@@ -293,7 +293,18 @@ switch ($op)
                 
 				echo "<td valign='top' width='50%'>";
             
-			    themeindex($artinfo["aid"], $informant, $datetime, $artinfo["title"], $artinfo["counter"], $artinfo["topic"], $artinfo["hometext"], $artinfo["notes"], $morelink, $topicname, $topicimage, $topictext);
+			    themeindex($artinfo["aid"], 
+				                $informant, 
+								 $datetime, 
+						 $artinfo["title"], 
+					   $artinfo["counter"], 
+					     $artinfo["topic"], 
+					  $artinfo["hometext"], 
+					     $artinfo["notes"], 
+						         $morelink, 
+								$topicname, 
+							   $topicimage, 
+							    $topictext);
             
 			    echo "</td>\n";
                 $a++;
@@ -307,7 +318,18 @@ switch ($op)
 				echo "<td>&nbsp;</td>"; 
             } 
 			else // SINGLE BLOG
-            themeindex($artinfo["aid"], $informant, $datetime, $artinfo["title"], $artinfo["counter"], $artinfo["topic"], $artinfo["hometext"], $artinfo["notes"], $morelink, $topicname, $topicimage, $topictext);
+            themeindex($artinfo["aid"], 
+			                $informant, 
+							 $datetime, 
+					 $artinfo["title"], 
+				   $artinfo["counter"], 
+				     $artinfo["topic"], 
+				  $artinfo["hometext"], 
+				     $artinfo["notes"], 
+					         $morelink, 
+							$topicname, 
+						   $topicimage, 
+						    $topictext);
         }
         
 		$db->sql_freeresult($result);

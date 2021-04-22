@@ -60,18 +60,46 @@ function ne_get_configs(){
     return $config;
 }
 
-function automated_news() {
+function automated_news() 
+{
     global $prefix, $multilingual, $currentlang, $db;
-    $result = $db->sql_query('SELECT * FROM '.$prefix.'_autonews WHERE time<="'.date('Y-m-d G:i:s', time()).'"');
-    while ($row2 = $db->sql_fetchrow($result)) {
+    
+	$result = $db->sql_query('SELECT * FROM '.$prefix.'_autonews WHERE datePublished<="'.date('Y-m-d G:i:s', time()).'"');
+    
+	while ($row2 = $db->sql_fetchrow($result)) 
+	{
         $title = addslashes($row2['title']);
         $hometext = addslashes($row2['hometext']);
         $bodytext = addslashes($row2['bodytext']);
         $notes = addslashes($row2['notes']);
-        $db->sql_query("INSERT INTO ".$prefix."_stories VALUES (NULL, '$row2[catid]', '$row2[aid]', '$title', '$row2[time]', '$hometext', '$bodytext', '0', '0', '$row2[topic]', '$row2[informant]', '$notes', '$row2[ihome]', '$row2[alanguage]', '$row2[acomm]', '0', '0', '0', '0', '$row2[associated]', '0', '1')");
+
+        $db->sql_query("INSERT INTO ".$prefix."_stories VALUES (NULL, 
+		                                              '$row2[catid]', 
+													    '$row2[aid]', 
+														    '$title', 
+											  '$row2[datePublished]',
+											   '$row2[dateModified]', 
+													     '$hometext', 
+														 '$bodytext', 
+														         '0', 
+																 '0', 
+													  '$row2[topic]', 
+												  '$row2[informant]', 
+												            '$notes', 
+													  '$row2[ihome]', 
+												  '$row2[alanguage]', 
+												      '$row2[acomm]', 
+													             '0', 
+																 '0', 
+																 '0', 
+																 '0', 
+												 '$row2[associated]', 
+												                 '0', 
+																 '1')");
     }
-    if ($db->sql_numrows($result)) {
-        $db->sql_query('DELETE FROM '.$prefix.'_autonews WHERE time<="'.date('Y-m-d G:i:s', time()).'"');
+    if ($db->sql_numrows($result)) 
+	{
+        $db->sql_query('DELETE FROM '.$prefix.'_autonews WHERE datePublished<="'.date('Y-m-d G:i:s', time()).'"');
     }
     $db->sql_freeresult($result);
 }

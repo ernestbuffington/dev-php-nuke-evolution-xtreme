@@ -196,8 +196,20 @@ function save_settings($sub)
                 CloseTable();
                 include_once("footer.php");
             }
-            $db->sql_query("UPDATE ".$prefix."_config SET sitename='$xsitename', nukeurl='$xnukeurl', site_logo='$xsite_logo', slogan='$xslogan', startdate='$xstartdate', adminmail='$xadminmail', anonpost='$xanonpost', top='$xtop', storyhome='$xstoryhome', oldnum='$xoldnum', ultramode='$xultramode', locale='$xlocale'");
-        break;
+            $db->sql_query("UPDATE ".$prefix."_config SET sitename='$xsitename', 
+			                                                nukeurl='$xnukeurl', 
+														site_logo='$xsite_logo', 
+														      slogan='$xslogan', 
+														startdate='$xstartdate',
+														adminmail='$xadminmail', 
+														  anonpost='$xanonpost', 
+														            top='$xtop', 
+														storyhome='$xstoryhome', 
+														      oldnum='$xoldnum', 
+													    ultramode='$xultramode', 
+														      locale='$xlocale'");
+		
+		break;
 
         case 2:
             $xcensor = intval($_POST['xcensor']);
@@ -380,7 +392,14 @@ function save_settings($sub)
             $db->sql_query("UPDATE "._EVOCONFIG_TABLE." SET evo_value='".$ximg_viewer."' WHERE evo_field='img_viewer'");
             break;
     }
-    $cache->delete('nukeconfig', 'config');
+
+	# This should have been in the very 1st relase of Evolution	added by Ernest Buffington
+	# Anytime you modify the settings for the website it updates the proper fields.
+	# This information is used to tell the crawlers/bots when the website was last updated on the index page.
+	# Reference : https://stackoverflow.com/questions/267658/having-both-a-created-and-last-updated-timestamp-columns-in-mysql-4-0												  
+    $db->sql_query("INSERT INTO ".$prefix."_config(datePublished, dateModified) values(null, null)");
+	
+	$cache->delete('nukeconfig', 'config');
     $cache->delete('evoconfig', 'config');
     redirect($admin_file.'.php?op=Configure&sub='.$sub);
 }

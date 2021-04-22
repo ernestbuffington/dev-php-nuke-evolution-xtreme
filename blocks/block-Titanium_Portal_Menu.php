@@ -1394,19 +1394,19 @@ echo "<!--  END Titanium Portal Menu Javascript Functions v5.01 -->\n\n\n\n";
 					}
 				}
 				else # News module
-				if($nomdumodule == "News" && $newdaysinthisgroup[$som_groupmenu][$keyinthisgroup]!="-1") 
+				if($nomdumodule == "Blog" && $newdaysinthisgroup[$som_groupmenu][$keyinthisgroup]!="-1") 
 				{
 				    global $db, $prefix;
 					
 				    $where = (preg_match("/^cid=[0-9]*$/",$temponomdumodule[2])) ? " WHERE ".str_replace("new_","",$temponomdumodule[1])."" : "";
 				
-					$sqlimgnew="SELECT time FROM ".$prefix."_stories".$where." order by time desc limit 1";
+					$sqlimgnew="SELECT datePublished FROM ".$prefix."_stories".$where." order by datePublished desc limit 1";
 				
 					$resultimgnew=$db->sql_query($sqlimgnew);
 				
 					$rowimgnew = $db->sql_fetchrow($resultimgnew);
 				
-					if($rowimgnew['time']) 
+					if($rowimgnew['datePublished']) 
 					{
 						preg_match ("/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})/", $rowimgnew['date'], $datetime);
 						$zedate = mktime($datetime[4],$datetime[5],$datetime[6],$datetime[2],$datetime[3],$datetime[1]);
@@ -1425,13 +1425,13 @@ echo "<!--  END Titanium Portal Menu Javascript Functions v5.01 -->\n\n\n\n";
 					
 					$where = (preg_match("/^new_topic=[0-9]*$/",$temponomdumodule[1])) ? " WHERE ".str_replace("new_","",$temponomdumodule[1])."" : "";
 
-					$sqlimgnew="SELECT time FROM ".$prefix."_stories".$where." order by time desc limit 1";
+					$sqlimgnew="SELECT datePublished FROM ".$prefix."_stories".$where." order by datePublished desc limit 1";
 				
 					$resultimgnew=$db->sql_query($sqlimgnew);
 				
 					$rowimgnew = $db->sql_fetchrow($resultimgnew);
 				
-					if($rowimgnew['time']) 
+					if($rowimgnew['datePublished']) 
 					{
 						preg_match ("/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})/", $rowimgnew['date'], $datetime);
 						$zedate = mktime($datetime[4],$datetime[5],$datetime[6],$datetime[2],$datetime[3],$datetime[1]);

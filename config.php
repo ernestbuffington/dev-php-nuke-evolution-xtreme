@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 /*=======================================================================
  Nuke-Evolution Xtreme: Enhanced PHP-Nuke Web Portal System
@@ -51,7 +51,7 @@ $dbuname = 'nukeevo_user';
 |                                                         |
 | Default: null                                           |
 ---------------------------------------------------------*/
-$dbpass = '';
+$dbpass = 'xwdNPADv86user';  
 
 /*----[ $dbtype ] ----------------------------------------
 | The type of SQL server you prefer to use                |
