@@ -64,11 +64,16 @@ function removeComment ($tid, $sid, $ok=0)
     if($ok) 
 	{
         $tid = intval($tid);
-        $result = $db->sql_query("SELECT date from ".$prefix."_comments where pid='$tid'");
-        $numresults = $db->sql_numrows($result);
-        $sid = intval($sid);
-        $db->sql_query("update ".$prefix."_stories set comments=comments-1-'$numresults' where sid='$sid'");
-        removeSubComments($tid);
+		
+        $result = $db->sql_query("SELECT datePublished from ".$prefix."_comments WHERE pid='$tid'");
+        
+		$numresults = $db->sql_numrows($result);
+        
+		$sid = intval($sid);
+        
+		$db->sql_query("UPDATE ".$prefix."_stories SET comments=comments-1-'$numresults' where sid='$sid'");
+        
+		removeSubComments($tid);
     
 	    if ($ultramode) 
         blog_ultramode();
@@ -78,11 +83,14 @@ function removeComment ($tid, $sid, $ok=0)
 	else 
 	{
         include(NUKE_BASE_DIR.'header.php');
-        GraphicAdmin();
-        title( _REMOVECOMMENTS);
-        OpenTable();
-        echo "<center>" . _SURETODELCOMMENTS;
-        echo "<br /><br />[ <a href=\"javascript:history.go(-1)\">" . _NO . "</a> | <a href=\"".$admin_file.".php?op=RemoveComment&amp;tid=$tid&amp;sid=$sid&amp;ok=1\">" . _YES . "</a> ]</center>";
+     
+	    GraphicAdmin();
+     
+	    title( _REMOVECOMMENTS);
+     
+	    OpenTable();
+        echo "<div align=\"center\">" . _SURETODELCOMMENTS;
+        echo "<br /><br />[ <a href=\"javascript:history.go(-1)\">" . _NO . "</a> | <a href=\"".$admin_file.".php?op=RemoveComment&amp;tid=$tid&amp;sid=$sid&amp;ok=1\">" . _YES . "</a> ]</div>";
         CloseTable();
         include(NUKE_BASE_DIR.'footer.php');
     }
@@ -122,10 +130,10 @@ function RemovePollComment ($tid, $pollID, $ok=0)
 	{
         include(NUKE_BASE_DIR.'header.php');
         GraphicAdmin();
-        title("<center><span class=\"title\"><strong>" . _REMOVECOMMENTS . "</strong></span></center>");
+        title("<div align=\"center\"><span class=\"title\"><strong>" . _REMOVECOMMENTS . "</strong></span></div>");
         OpenTable();
-        echo "<center>"._SURETODELCOMMENTS."";
-        echo "<br /><br />[ <a href=\"javascript:history.go(-1)\">"._NO."</a> | <a href=\"".$admin_file.".php?op=RemovePollComment&amp;tid=$tid&amp;pollID=$pollID&amp;ok=1\">"._YES."</a> ]</center>";
+        echo "<div align=\"center\">"._SURETODELCOMMENTS."";
+        echo "<br /><br />[ <a href=\"javascript:history.go(-1)\">"._NO."</a> | <a href=\"".$admin_file.".php?op=RemovePollComment&amp;tid=$tid&amp;pollID=$pollID&amp;ok=1\">"._YES."</a> ]</div>";
         CloseTable();
         include(NUKE_BASE_DIR.'footer.php');
     }

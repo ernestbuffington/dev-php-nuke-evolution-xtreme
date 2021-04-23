@@ -64,7 +64,7 @@ exit('Access Denied');
 
 global $theme_title;
 
-$theme_title = 'Z3b v1.0';
+$theme_title = 'Z3b v1.0 Theme';
 define('THEME', $theme_title);
 
 $theme_name = basename(dirname(__FILE__));

@@ -506,15 +506,51 @@ function autoEdit($anid)
     $sid = intval($sid);
     $aid = substr($aid, 0,25);
 
-    list($aaid) = $db->sql_ufetchrow("select aid from ".$prefix."_stories where sid='$sid'", SQL_NUM);
-    $aaid = substr($aaid, 0,25);
+    list($aaid) = $db->sql_ufetchrow("SELECT aid from ".$prefix."_stories WHERE sid='$sid'", SQL_NUM);
+    
+	$aaid = substr($aaid, 0,25);
 
     if (is_mod_admin($module_name)) 
 	{
       include(NUKE_BASE_DIR.'header.php');
 
-      $result = $db->sql_query("select catid, aid, title, time, hometext, bodytext, topic, informant, notes, ihome, alanguage, acomm, ticon, writes FROM ".$prefix."_autonews where anid='$anid'");
-      list($catid, $aid, $title, $time, $hometext, $bodytext, $topic, $informant, $notes, $ihome, $alanguage, $acomm, $topic_icon, $writes) = $db->sql_fetchrow($result);
+      $result = $db->sql_query("SELECT 
+	                            
+								 catid, 
+								   aid, 
+								 title, 
+						 datePublished, 
+						  dateModified, 
+						      hometext, 
+							  bodytext, 
+							     topic, 
+							 informant, 
+							     notes, 
+								 ihome, 
+							 alanguage, 
+							     acomm, 
+								 ticon, 
+								writes 
+								
+								FROM ".$prefix."_autonews 
+								
+								WHERE anid='$anid'");
+								
+      list($catid, 
+	         $aid, 
+		   $title, 
+		    $time, 
+	    $modified, 
+		$hometext, 
+		$bodytext, 
+		   $topic, 
+	   $informant, 
+	       $notes, 
+		   $ihome, 
+	   $alanguage, 
+	       $acomm, 
+	  $topic_icon, 
+	      $writes) = $db->sql_fetchrow($result);
 
       $catid = intval($catid);
       $aid = substr($aid, 0,25);
@@ -523,7 +559,8 @@ function autoEdit($anid)
       $acomm = intval($acomm);
       $topic_icon = intval($topic_icon);
       $writes = intval($writes);
-      preg_match ("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2}) ([0-9]{1,2})\:([0-9]{1,2})\:([0-9]{1,2})/", $time, $datetime);
+      
+	  preg_match ("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2}) ([0-9]{1,2})\:([0-9]{1,2})\:([0-9]{1,2})/", $time, $datetime);
 
       OpenTable();
 	  
@@ -778,8 +815,10 @@ function autoSaveEdit($anid, $year, $day, $month, $hour, $min, $title, $hometext
 
     $sid = intval($sid);
     $aid = substr($aid, 0,25);
-    list($aaid) = $db->sql_ufetchrow("select aid from ".$prefix."_stories where sid='$sid'", SQL_NUM);
-    $aaid = substr($aaid, 0,25);
+	
+    list($aaid) = $db->sql_ufetchrow("SELECT aid from ".$prefix."_stories WHERE sid='$sid'", SQL_NUM);
+    
+	$aaid = substr($aaid, 0,25);
 
     if (is_mod_admin($module_name)) 
 	{
@@ -792,10 +831,28 @@ function autoSaveEdit($anid, $year, $day, $month, $hour, $min, $title, $hometext
 	  $sec = "00";
       $date = "$year-$month-$day $hour:$min:$sec";
       $title = Fix_Quotes($title);
+	  $modified = NULL;
       $hometext = Fix_Quotes($hometext);
       $bodytext = Fix_Quotes($bodytext);
       $notes = Fix_Quotes($notes);
-      $result = $db->sql_query("update ".$prefix."_autonews set catid='$catid', title='$title', time='$date', hometext='$hometext', bodytext='$bodytext', topic='$topic', notes='$notes', ihome='$ihome', alanguage='$alanguage', acomm='$acomm', ticon='$topic_icon', writes='$writes' where anid='$anid'");
+    
+	  $result = $db->sql_query("UPDATE ".$prefix."_autonews set 
+	 
+	       catid='$catid', 
+	       title='$title', 
+	datePublished='$date',
+ dateModified='$modified',   
+     hometext='$hometext', 
+     bodytext='$bodytext', 
+           topic='$topic', 
+		   notes='$notes', 
+		   ihome='$ihome', 
+   alanguage='$alanguage', 
+           acomm='$acomm', 
+	  ticon='$topic_icon', 
+	     writes='$writes' 
+	 
+	 WHERE anid='$anid'");
 
      if (!$result) 
      exit();
@@ -861,7 +918,19 @@ function displayStory($qid)
     
 	$date = "$tmonth $tday, $tyear @ $thour:$tmin:$tsec";
     $qid = intval($qid);
-    $result = $db->sql_query("SELECT qid, uid, uname, subject, story, storyext, topic, alanguage FROM ".$prefix."_queue where qid='$qid'");
+    
+	$result = $db->sql_query("SELECT qid, 
+	                                 uid, 
+								   uname, 
+								 subject, 
+								   story, 
+								storyext, 
+								   topic, 
+							    alanguage 
+								
+								FROM ".$prefix."_queue 
+								
+								WHERE qid='$qid'");
 
     list($qid, $uid, $uname, $subject, $story, $storyext, $topic, $alanguage) = $db->sql_fetchrow($result);
 
@@ -900,9 +969,11 @@ function displayStory($qid)
  ******************************************************/
     if ($uname != $anonymous) 
 	{
-      $res = $db->sql_query("select user_email from ".$user_prefix."_users where username='$uname'");
-      list($email) = $db->sql_fetchrow($res);
-      echo "&nbsp;&nbsp;<span class=\"content\">[ <a href=\"mailto:$email?Subject=Re: $subject\">"._EMAILUSER."</a> | <a href='modules.php?name=Your_Account&op=userinfo&username=$uname'>"._USERPROFILE."</a> | <a href=\"modules.php?name=Private_Messages&amp;mode=post&amp;u=$uid\">"._SENDPM."</a> ]</span>";
+      $res = $db->sql_query("SELECT user_email from ".$user_prefix."_users WHERE username='$uname'");
+      
+	  list($email) = $db->sql_fetchrow($res);
+      
+	  echo "&nbsp;&nbsp;<span class=\"content\">[ <a href=\"mailto:$email?Subject=Re: $subject\">"._EMAILUSER."</a> | <a href='modules.php?name=Your_Account&op=userinfo&username=$uname'>"._USERPROFILE."</a> | <a href=\"modules.php?name=Private_Messages&amp;mode=post&amp;u=$uid\">"._SENDPM."</a> ]</span>";
     }
     
 	echo "<br /><br /><strong>"._TITLE."</strong><br />"
@@ -1109,7 +1180,29 @@ function displayStory($qid)
     include(NUKE_BASE_DIR.'footer.php');
 }
 
-function previewStory($automated, $year, $day, $month, $hour, $min, $qid, $uid, $author, $subject, $hometext, $bodytext, $topic, $notes, $catid, $ihome, $alanguage, $acomm, $topic_icon, $writes, $pollTitle, $optionText, $assotop) 
+function previewStory($automated, 
+                           $year, 
+						    $day, 
+						  $month, 
+						   $hour, 
+						    $min, 
+						    $qid, 
+							$uid, 
+						 $author, 
+						$subject, 
+					   $hometext, 
+					   $bodytext, 
+					      $topic, 
+						  $notes, 
+						  $catid, 
+						  $ihome, 
+					  $alanguage, 
+					      $acomm, 
+					 $topic_icon, 
+					     $writes, 
+					  $pollTitle, 
+					 $optionText, 
+					    $assotop) 
 {
     global $user, $admin_file, $boxstuff, $anonymous, $bgcolor1, $bgcolor2, $user_prefix, $prefix, $db, $multilingual, $Version_Num;
 
@@ -1199,7 +1292,7 @@ function previewStory($automated, $year, $day, $month, $hour, $min, $qid, $uid, 
     echo "</td></tr></table></td></tr></table>"
         ."<br /><strong>"._TOPIC."</strong> <select name=\"topic\">";
     
-	$toplist = $db->sql_query("select topicid, topictext from ".$prefix."_topics order by topictext");
+	$toplist = $db->sql_query("SELECT topicid, topictext FROM ".$prefix."_topics order by topictext");
     
 	echo "<option value=\"\">"._ALLTOPICS."</option>\n";
 
@@ -1420,7 +1513,29 @@ function previewStory($automated, $year, $day, $month, $hour, $min, $qid, $uid, 
     include(NUKE_BASE_DIR.'footer.php');
 }
 
-function postStory($automated, $year, $day, $month, $hour, $min, $qid, $uid, $author, $subject, $hometext, $bodytext, $topic, $notes, $catid, $ihome, $alanguage, $acomm, $topic_icon, $writes, $pollTitle, $optionText, $assotop) 
+function postStory($automated, 
+                        $year, 
+						 $day, 
+					   $month, 
+					    $hour, 
+						 $min, 
+						 $qid, 
+						 $uid, 
+					  $author, 
+					 $subject, 
+					$hometext, 
+					$bodytext, 
+					   $topic, 
+					   $notes, 
+					   $catid, 
+					   $ihome, 
+				   $alanguage, 
+				       $acomm, 
+				  $topic_icon, 
+				      $writes, 
+				   $pollTitle, 
+				  $optionText, 
+				     $assotop) 
 {
     global $aid, $admin_file, $ultramode, $prefix, $db, $user_prefix, $Version_Num, $ne_config, $adminmail, $sitename, $nukeurl, $cache;
 
@@ -1444,6 +1559,8 @@ function postStory($automated, $year, $day, $month, $hour, $min, $qid, $uid, $au
 		$sec = "00";
         $date = "$year-$month-$day $hour:$min:$sec";
         
+		$modified = "$year-$month-$day $hour:$min:$sec";
+		
 		if ($uid == 1) 
 		$author = "";
         
@@ -1454,23 +1571,45 @@ function postStory($automated, $year, $day, $month, $hour, $min, $qid, $uid, $au
         $hometext = Fix_Quotes($hometext);
         $bodytext = Fix_Quotes($bodytext);
         $notes = Fix_Quotes($notes);
-        // Copyright (c) 2000-2005 by NukeScripts Network
-        $new_sql  = "insert into ".$prefix."_autonews values (NULL, '$catid', '$aid', '$subject', '$date', '$hometext', '$bodytext', '$topic', '$author', '$notes', '$ihome', '$alanguage', '$acomm', '$topic_icon', '$writes'";
-        $new_sql .= ", '$associated'";
-        $new_sql .= ")";
+        
+		// Copyright (c) 2000-2005 by NukeScripts Network
+        $new_sql  = "INSERT INTO ".$prefix."_autonews values (NULL, 
+		                                                   '$catid', 
+														     '$aid', 
+														 '$subject', 
+														    '$date',
+													    '$modified', 
+													    '$hometext', 
+													    '$bodytext', 
+													       '$topic', 
+														  '$author', 
+														   '$notes', 
+														   '$ihome', 
+													   '$alanguage', 
+													       '$acomm', 
+													  '$topic_icon', 
+													      '$writes'";
+        
+		$new_sql .= ", '$associated'";
+ 		$new_sql .= ")";
+		
         $result = $db->sql_query($new_sql);
-        // Copyright (c) 2000-2005 by NukeScripts Network
+        
+		// Copyright (c) 2000-2005 by NukeScripts Network ??
         if (!$result) 
 	    return; 
 		
-        $result = $db->sql_query("select sid from ".$prefix."_stories WHERE title='$subject' order by time DESC limit 0,1");
-        list($artid) = $db->sql_fetchrow($result);
-        $artid = intval($artid);
+        $result = $db->sql_query("SELECT sid from ".$prefix."_stories WHERE title='$subject' order by time DESC limit 0,1");
+        
+		list($artid) = $db->sql_fetchrow($result);
+        
+		$artid = intval($artid);
         
 		if ($uid != 1) 
 		{
-            $db->sql_query("update ".$user_prefix."_users set counter=counter+1 where user_id='$uid'");
-            // Copyright (c) 2000-2005 by NukeScripts Network
+            $db->sql_query("UPDATE ".$user_prefix."_users SET counter=counter+1 WHERE user_id='$uid'");
+            
+			// Copyright (c) 2000-2005 by NukeScripts Network
             if($ne_config["notifyauth"] == 1) 
 			{
                 $urow = $db->sql_fetchrow($db->sql_query("SELECT username, user_email FROM ".$user_prefix."_users WHERE user_id='$uid'"));
@@ -1490,13 +1629,13 @@ function postStory($automated, $year, $day, $month, $hour, $min, $qid, $uid, $au
             }
             // Copyright (c) 2000-2005 by NukeScripts Network
         }
-        $db->sql_query("update ".$prefix."_authors set counter=counter+1 where aid='$aid'");
+        $db->sql_query("UPDATE ".$prefix."_authors SET counter=counter+1 WHERE aid='$aid'");
         
 		if ($ultramode) 
 	    blog_ultramode(); 
         
 		$qid = intval($qid);
-        $db->sql_query("delete from ".$prefix."_queue where qid='$qid'");
+        $db->sql_query("DELETE FROM ".$prefix."_queue WHERE qid='$qid'");
 
 /*****[BEGIN]******************************************
  [ Base:    Caching System                     v3.0.0 ]
@@ -1550,13 +1689,32 @@ function postStory($automated, $year, $day, $month, $hour, $min, $qid, $uid, $au
         }
 
         // Copyright (c) 2000-2005 by NukeScripts Network
-        $new_sql  = "insert into ".$prefix."_stories values (NULL, '$catid', '$aid', '$subject', now(), '$hometext', '$bodytext', '0', '0', '$topic', '$author', '$notes', '$ihome', '$alanguage', '$acomm', '$haspoll', '$id', '0', '0'";
+        $new_sql  = "INSERT INTO ".$prefix."_stories VALUES (NULL, 
+		                                                  '$catid', 
+														    '$aid', 
+													    '$subject', 
+													         now(),
+															 now(), 
+													   '$hometext', 
+													   '$bodytext', 
+													           '0', 
+														  	   '0', 
+														  '$topic', 
+														 '$author', 
+														  '$notes', 
+														  '$ihome', 
+													  '$alanguage', 
+													      '$acomm', 
+													    '$haspoll', 
+													         '$id', 
+															   '0', 
+															   '0'";
         $new_sql .= ", '$associated'";
         $new_sql .= ",'$topic_id', '$writes')";
         $result = $db->sql_query($new_sql);
-        // Copyright (c) 2000-2005 by NukeScripts Network
-
-        $result = $db->sql_query("select sid from ".$prefix."_stories WHERE title='$subject' order by time DESC limit 0,1");
+        
+		// Copyright (c) 2000-2005 by NukeScripts Network
+        $result = $db->sql_query("SELECT sid from ".$prefix."_stories WHERE title='$subject' order by time DESC limit 0,1");
        
 	    list($artid) = $db->sql_fetchrow($result);
        
@@ -1568,9 +1726,9 @@ function postStory($automated, $year, $day, $month, $hour, $min, $qid, $uid, $au
        
 		if ($uid != 1) 
 		{
-            $db->sql_query("update ".$user_prefix."_users set counter=counter+1 where user_id='$uid'");
-            // Copyright (c) 2000-2005 by NukeScripts Network
-        
+            $db->sql_query("UPDATE ".$user_prefix."_users SET counter=counter+1 WHERE user_id='$uid'");
+            
+			// Copyright (c) 2000-2005 by NukeScripts Network
 		    if($ne_config["notifyauth"] == 1) 
 			{
                 $urow = $db->sql_fetchrow($db->sql_query("SELECT username, user_email FROM ".$user_prefix."_users WHERE user_id='$uid'"));
@@ -1589,9 +1747,9 @@ function postStory($automated, $year, $day, $month, $hour, $min, $qid, $uid, $au
                 @evo_mail($Mto, $Msubject, $Mbody, $Mheaders);
             }
             // Copyright (c) 2000-2005 by NukeScripts Network
-            $db->sql_query("update ".$user_prefix."_users set counter=counter+1 where user_id='$uid'");
+            $db->sql_query("UPDATE ".$user_prefix."_users SET counter=counter+1 WHERE user_id='$uid'");
         }
-        $db->sql_query("update ".$prefix."_authors set counter=counter+1 where aid='$aid'");
+        $db->sql_query("UPDATE ".$prefix."_authors SET counter=counter+1 WHERE aid='$aid'");
         
 		if ($ultramode) 
 	    blog_ultramode(); 
@@ -1607,7 +1765,7 @@ function editStory($sid)
     $aid = substr($aid, 0,25);
     $sid = intval($sid);
     
-	list($aaid) = $db->sql_ufetchrow("select aid from ".$prefix."_stories where sid='$sid'", SQL_NUM);
+	list($aaid) = $db->sql_ufetchrow("SELECT aid FROM ".$prefix."_stories WHERE sid='$sid'", SQL_NUM);
     
 	$aaid = substr($aaid, 0,25);
 
@@ -1662,7 +1820,7 @@ function editStory($sid)
         $topic_icon = intval($topic_icon);
         $writes = intval($writes);
         
-		$result2=$db->sql_query("select topicimage from ".$prefix."_topics where topicid='$topic'");
+		$result2=$db->sql_query("SELECT topicimage from ".$prefix."_topics WHERE topicid='$topic'");
         
 		list($topicimage) = $db->sql_fetchrow($result2);
         
@@ -1838,25 +1996,31 @@ function editStory($sid)
 function removeStory($sid, $ok=0) 
 {
     global $ultramode, $aid, $prefix, $db, $admin_file, $module_name;
-    $sid = intval($sid);
+    
+	$sid = intval($sid);
     $aid = substr($aid, 0,25);
-    list($aaid) = $db->sql_ufetchrow("select aid from ".$prefix."_stories where sid='$sid'", SQL_NUM);
-    $aaid = substr($aaid, 0,25);
+    
+	list($aaid) = $db->sql_ufetchrow("SELECT aid from ".$prefix."_stories WHERE sid='$sid'", SQL_NUM);
+    
+	$aaid = substr($aaid, 0,25);
 
     if (is_mod_admin($module_name)) 
 	{
         if($ok) 
 		{
+			list($counter) = $db->sql_ufetchrow("SELECT counter from ".$prefix."_authors WHERE aid='$aaid'", SQL_NUM);
             $counter--;
-            $db->sql_query("DELETE FROM ".$prefix."_stories where sid='$sid'");
-            $db->sql_query("DELETE FROM ".$prefix."_comments where sid='$sid'");
-            $db->sql_query("update ".$prefix."_poll_desc set artid='0' where artid='$sid'");
-            $result = $db->sql_query("update ".$prefix."_authors set counter='$counter' where aid='$aid'");
+    
+	        $db->sql_query("DELETE FROM ".$prefix."_stories WHERE sid='$sid'");
+            $db->sql_query("DELETE FROM ".$prefix."_comments WHERE sid='$sid'");
+            $db->sql_query("UPDATE ".$prefix."_poll_desc SET artid='0' where artid='$sid'");
+           
+		    $result = $db->sql_query("UPDATE ".$prefix."_authors SET counter='$counter' WHERE aid='$aaid'");
         
 		    if ($ultramode) 
             blog_ultramode();
 
-            redirect($admin_file.".php?op=adminStory");
+            redirect("modules.php?name=Blog");
         } 
 		else 
 		{
@@ -1898,7 +2062,8 @@ function changeStory($sid, $subject, $hometext, $bodytext, $topic, $notes, $cati
 {
 
     global $aid, $ultramode, $prefix, $db, $Version_Num, $admin_file, $module_name;
-    // Copyright (c) 2000-2005 by NukeScripts Network
+    
+	// Copyright (c) 2000-2005 by NukeScripts Network
     if($version_Num >= 6.6) 
 	{ 
 	  for ($i=0; $i<count($assotop); $i++) 
@@ -1909,7 +2074,7 @@ function changeStory($sid, $subject, $hometext, $bodytext, $topic, $notes, $cati
 	$sid = intval($sid);
     $aid = substr($aid, 0,25);
     
-	list($aaid) = $db->sql_ufetchrow("select aid from ".$prefix."_stories where sid='$sid'", SQL_NUM);
+	list($aaid) = $db->sql_ufetchrow("SELECT aid from ".$prefix."_stories WHERE sid='$sid'", SQL_NUM);
     
 	$aaid = substr($aaid, 0,25);
     
@@ -1920,10 +2085,25 @@ function changeStory($sid, $subject, $hometext, $bodytext, $topic, $notes, $cati
         $bodytext = Fix_Quotes($bodytext);
         $notes = Fix_Quotes($notes);
         $topic = (empty($topic)) ? '1' : $topic;
-        // Copyright (c) 2000-2005 by NukeScripts Network
-        $db->sql_query("update ".$prefix."_stories set catid='$catid', title='$subject', hometext='$hometext', bodytext='$bodytext', topic='$topic', notes='$notes', ihome='$ihome', alanguage='$alanguage', acomm='$acomm', ticon='$topic_icon', writes='$writes' where sid='$sid'");
-        $db->sql_query("update ".$prefix."_stories set associated='$associated' where sid='$sid'");
-        // Copyright (c) 2000-2005 by NukeScripts Network
+        
+		// Copyright (c) 2000-2005 by NukeScripts Network
+        $db->sql_query("UPDATE ".$prefix."_stories SET catid='$catid', 
+		                                             title='$subject', 
+												 hometext='$hometext', 
+												 bodytext='$bodytext', 
+												       topic='$topic', 
+													   notes='$notes', 
+													   ihome='$ihome', 
+											   alanguage='$alanguage', 
+											           acomm='$acomm', 
+												  ticon='$topic_icon', 
+												     writes='$writes' 
+												
+												    WHERE sid='$sid'");
+        
+		$db->sql_query("UPDATE ".$prefix."_stories SET associated='$associated' WHERE sid='$sid'");
+        
+		// Copyright (c) 2000-2005 by NukeScripts Network
         if ($ultramode) { blog_ultramode(); }
         redirect($admin_file.".php?op=adminStory");
     }
@@ -1943,7 +2123,18 @@ function lastTwenty()
 	echo "<div align=\"center\">\n<a href=\"$admin_file.php?op=adminStory\"><strong>Add New Blog</strong></a></div><br />";
 	echo "<div align=\"center\">\n[ <a href=\"$admin_file.php\">" . _NEWS_RETURNMAIN . "</a> ]</div><br />";
     
-	$result6 = $db->sql_query("SELECT sid, aid, title, datePublished, dateModified, topic, informant, alanguage FROM ".$prefix."_stories ORDER BY time DESC LIMIT 0,100");
+	$result6 = $db->sql_query("SELECT sid, 
+	                                  aid, 
+									title, 
+							datePublished, 
+							 dateModified, 
+							        topic, 
+								informant, 
+								alanguage 
+							   
+							   FROM ".$prefix."_stories 
+							   
+							   ORDER BY datePublished DESC LIMIT 0,100");
     
 	echo "<div align=\"center\"><table border=\"1\" width=\"100%\">";
     
@@ -2027,7 +2218,13 @@ function programmedBlogs()
         echo "<div align=\"center\"><strong>"._AUTOMATEDARTICLES."</strong></div><br />";
         
 		$count = 0;
-        $result5 = $db->sql_query("SELECT anid, aid, title, time, alanguage FROM ".$prefix."_autonews $queryalang ORDER BY time ASC");
+        $result5 = $db->sql_query("SELECT anid, 
+		                                   aid, 
+										 title, 
+								 datePublished, 
+									 alanguage 
+									 
+									FROM ".$prefix."_autonews $queryalang ORDER BY datePublished ASC");
 
         while (list($anid, $aid, $listtitle, $time, $alanguage) = $db->sql_fetchrow($result5)) 
 		{
@@ -2051,9 +2248,11 @@ function programmedBlogs()
 				if (is_mod_admin('Blog')) 
 				{
                     if ($aid == $said) 
-                        echo "<tr><td nowrap>&nbsp;(<a href=\"".$admin_file.".php?op=autoEdit&amp;anid=$anid\">"._EDIT."</a>-<a href=\"".$admin_file.".php?op=autoDelete&amp;anid=$anid\">"._DELETE."</a>)&nbsp;</td><td width=\"100%\">&nbsp;$title&nbsp;</td><td align=\"center\">&nbsp;$alanguage&nbsp;</td><td nowrap>&nbsp;$time&nbsp;</td></tr>"; /* Multilingual Code : added column to display language */
+                        echo "<tr><td nowrap>&nbsp;(<a href=\"".$admin_file.".php?op=autoEdit&amp;anid=$anid\">"._EDIT."</a>-<a href=\"".$admin_file.".php?op=autoDelete&amp;anid=$anid\">"._DELETE."</a>)&nbsp;</td><td width=\"100%\">&nbsp;$title&nbsp;</td><td align=\"center\">&nbsp;$alanguage&nbsp;</td><td nowrap>&nbsp;$time&nbsp;</td></tr>"; 
+					/* Multilingual Code : added column to display language */
 					else 
-                        echo "<tr><td>&nbsp;("._NOFUNCTIONS.")&nbsp;</td><td width=\"100%\">&nbsp;$title&nbsp;</td><td align=\"center\">&nbsp;$alanguage&nbsp;</td><td nowrap>&nbsp;$time&nbsp;</td></tr>"; /* Multilingual Code : added column to display language */
+                        echo "<tr><td>&nbsp;("._NOFUNCTIONS.")&nbsp;</td><td width=\"100%\">&nbsp;$title&nbsp;</td><td align=\"center\">&nbsp;$alanguage&nbsp;</td><td nowrap>&nbsp;$time&nbsp;</td></tr>"; 
+				   /* Multilingual Code : added column to display language */
                 } 
 				else 
                     echo "<tr><td width=\"100%\">&nbsp;$title&nbsp;</td><td align=\"center\">&nbsp;$alanguage&nbsp;</td><td nowrap>&nbsp;$time&nbsp;</td></tr>"; /* Multilingual Code : added column to display language */
@@ -2133,7 +2332,7 @@ function adminStory()
 /*****[END]********************************************
  [ Mod:     Blog BBCodes                       v1.0.0 ]
  ******************************************************/
-    $toplist = $db->sql_query("select topicid, topictext from ".$prefix."_topics order by topictext");
+    $toplist = $db->sql_query("SELECT topicid, topictext from ".$prefix."_topics ORDER by topictext");
     
 	echo "<select name=\"topic\">";
     echo "<option value=\"\">"._SELECTTOPIC."</option>\n";
@@ -2313,10 +2512,29 @@ function adminStory()
     include(NUKE_BASE_DIR.'footer.php');
 }
 
-function previewAdminStory($automated, $year, $day, $month, $hour, $min, $subject, $hometext, $bodytext, $topic, $catid, $ihome, $alanguage, $acomm, $topic_icon, $writes, $pollTitle, $optionText, $assotop) 
+function previewAdminStory($automated, 
+                                $year, 
+								 $day, 
+							   $month, 
+							    $hour, 
+								 $min, 
+							 $subject, 
+							$hometext, 
+							$bodytext, 
+							   $topic, 
+							   $catid, 
+							   $ihome, 
+						   $alanguage, 
+						       $acomm, 
+						  $topic_icon, 
+						      $writes, 
+						   $pollTitle, 
+						  $optionText, 
+						     $assotop) 
 {
     global $user, $admin_file, $bgcolor1, $bgcolor2, $prefix, $db, $alanguage, $multilingual, $Version_Num;
-    include(NUKE_BASE_DIR.'header.php');
+    
+	include(NUKE_BASE_DIR.'header.php');
 
     if ($topic<1) 
     $topic = 1;
@@ -2392,7 +2610,7 @@ function previewAdminStory($automated, $year, $day, $month, $hour, $min, $subjec
         ."<input type=\"text\" name=\"subject\" size=\"50\" value=\"$subject\"><br /><br />"
         ."<strong>"._TOPIC."</strong><select name=\"topic\">";
     
-	$toplist = $db->sql_query("select topicid, topictext from ".$prefix."_topics order by topictext");
+	$toplist = $db->sql_query("SELECT topicid, topictext FROM ".$prefix."_topics ORDER by topictext");
     
 	echo "<option value=\"\">"._ALLTOPICS."</option>\n";
     
@@ -2644,8 +2862,11 @@ function postAdminStory($automated,
         $month = "0$month";
         
 		$sec = "00";
-        $date = "$year-$month-$day $hour:$min:$sec";
-        $notes = "";
+        
+		$date = "$year-$month-$day $hour:$min:$sec";
+		$modified = "$year-$month-$day $hour:$min:$sec";
+        
+		$notes = "";
         $author = $aid;
         $subject = Fix_Quotes($subject);
         $subject = str_replace("\"", "''", $subject);
@@ -2654,11 +2875,12 @@ function postAdminStory($automated,
         $notes = Fix_Quotes($notes);
         
 		// Copyright (c) 2000-2005 by NukeScripts Network
-        $new_sql  = "insert into ".$prefix."_autonews values (NULL, 
+        $new_sql  = "INSERT INTO ".$prefix."_autonews values (NULL, 
 		                                                   '$catid', 
 														     '$aid', 
 													     '$subject', 
-														    '$date', 
+														    '$date',
+														'$modified', 
 													    '$hometext', 
 														'$bodytext', 
 														   '$topic', 
@@ -2676,7 +2898,7 @@ function postAdminStory($automated,
         if (!$result) 
 	    exit(); 
         
-		$result = $db->sql_query("update ".$prefix."_authors set counter=counter+1 where aid='$aid'");
+		$result = $db->sql_query("UPDATE ".$prefix."_authors SET counter=counter+1 WHERE aid='$aid'");
         
 		if ($ultramode) 
         blog_ultramode();
@@ -2733,12 +2955,12 @@ function postAdminStory($automated,
         
 		
 		// Copyright (c) 2000-2005 by NukeScripts Network 
-        $new_sql  = "insert into ".$prefix."_stories values (NULL, 
+        $new_sql  = "INSERT INTO ".$prefix."_stories values (NULL, 
 		                                                 '$catid', 
 														   '$aid', 
 													   '$subject', 
-													         NULL,
-														     NULL,		 
+													        now(),
+														    now(),		 
 													  '$hometext', 
 													  '$bodytext', 
 													          '0', 
@@ -2760,7 +2982,7 @@ function postAdminStory($automated,
 		
         // Copyright (c) 2000-2005 by NukeScripts Network
 
-        $result = $db->sql_query("select sid from ".$prefix."_stories WHERE title='$subject' order by datePublished DESC limit 0,1");
+        $result = $db->sql_query("SELECT sid from ".$prefix."_stories WHERE title='$subject' ORDER by datePublished DESC limit 0,1");
         
 		list($artid) = $db->sql_fetchrow($result);
         
@@ -2771,7 +2993,7 @@ function postAdminStory($automated,
 	    if (!$result) 
         exit();
         
-		$result = $db->sql_query("update ".$prefix."_authors set counter=counter+1 where aid='$aid'");
+		$result = $db->sql_query("UPDATE ".$prefix."_authors SET counter=counter+1 WHERE aid='$aid'");
         
 		if ($ultramode) 
         blog_ultramode();
@@ -2934,7 +3156,29 @@ switch($op)
     break;
 
     case "PreviewAgain":
-    previewStory($automated, $year, $day, $month, $hour, $min, $qid, $uid, $author, $subject, $hometext, $bodytext, $topic, $notes, $catid, $ihome, $alanguage, $acomm, $topic_icon, $writes, $pollTitle, $optionText, $assotop);
+    previewStory($automated, 
+	                  $year, 
+					   $day, 
+					 $month, 
+					  $hour, 
+					   $min, 
+					   $qid, 
+					   $uid, 
+					$author, 
+				   $subject, 
+				  $hometext, 
+				  $bodytext, 
+				     $topic, 
+					 $notes, 
+					 $catid, 
+					 $ihome, 
+				 $alanguage, 
+				     $acomm, 
+			    $topic_icon, 
+				    $writes, 
+				 $pollTitle, 
+				$optionText, 
+				   $assotop);
     break;
 
     case "PostStory":
@@ -2949,7 +3193,19 @@ switch($op)
     break;
 
     case "ChangeStory":
-    changeStory($sid, $subject, $hometext, $bodytext, $topic, $notes, $catid, $ihome, $alanguage, $acomm, $topic_icon, $writes, $assotop);
+    changeStory($sid, 
+	        $subject, 
+		   $hometext, 
+		   $bodytext, 
+		      $topic, 
+			  $notes, 
+			  $catid, 
+			  $ihome, 
+		  $alanguage, 
+		      $acomm, 
+		 $topic_icon, 
+		     $writes, 
+			$assotop);
     break;
 
     case "DeleteStory":

@@ -184,7 +184,7 @@ switch ($op) {
 /*****[BEGIN]******************************************
  [ Mod:    Advanced Username Color             v1.0.5 ]
  ******************************************************/
-                themeindex($artinfo["aid"], $informant, $datetime, $artinfo["title"], $artinfo["counter"], $artinfo["topic"], $artinfo["hometext"], $artinfo["notes"], $morelink, $topicname, $topicimage, $topictext);
+                themeindex($artinfo["aid"], $informant, $datetime, $modified, $artinfo["title"], $artinfo["counter"], $artinfo["topic"], $artinfo["hometext"], $artinfo["notes"], $morelink, $topicname, $topicimage, $topictext);
 /*****[END]********************************************
  [ Mod:    Advanced Username Color             v1.0.5 ]
  ******************************************************/
@@ -195,7 +195,7 @@ switch ($op) {
 /*****[BEGIN]******************************************
  [ Mod:    Advanced Username Color             v1.0.5 ]
  ******************************************************/
-                themeindex($artinfo["aid"], $informant, $datetime, $artinfo["title"], $artinfo["counter"], $artinfo["topic"], $artinfo["hometext"], $artinfo["notes"], $morelink, $topicname, $topicimage, $topictext);
+                themeindex($artinfo["aid"], $informant, $datetime, $modified, $artinfo["title"], $artinfo["counter"], $artinfo["topic"], $artinfo["hometext"], $artinfo["notes"], $morelink, $topicname, $topicimage, $topictext);
 /*****[END]********************************************
  [ Mod:    Advanced Username Color             v1.0.5 ]
  ******************************************************/

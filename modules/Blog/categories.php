@@ -251,7 +251,7 @@ switch ($op)
 
                 echo "<td valign='top' width='50%'>";
 
-                themeindex($artinfo["aid"], $informant, $datetime, $artinfo["title"], $artinfo["counter"], $artinfo["topic"], $artinfo["hometext"], $artinfo["notes"], $morelink, $topicname, $topicimage, $topictext);
+                themeindex($artinfo["aid"], $informant, $datetime, $modified, $artinfo["title"], $artinfo["counter"], $artinfo["topic"], $artinfo["hometext"], $artinfo["notes"], $morelink, $topicname, $topicimage, $topictext);
 
                 echo "</td>\n";
 
@@ -266,7 +266,7 @@ switch ($op)
 				echo "<td>&nbsp;</td>"; 
             } 
 			else // SINGLE 
-            themeindex($artinfo["aid"], $informant, $datetime, $artinfo["title"], $artinfo["counter"], $artinfo["topic"], $artinfo["hometext"], $artinfo["notes"], $morelink, $topicname, $topicimage, $topictext);
+            themeindex($artinfo["aid"], $informant, $datetime, $modified, $artinfo["title"], $artinfo["counter"], $artinfo["topic"], $artinfo["hometext"], $artinfo["notes"], $morelink, $topicname, $topicimage, $topictext);
         }
         $db->sql_freeresult($result);
         

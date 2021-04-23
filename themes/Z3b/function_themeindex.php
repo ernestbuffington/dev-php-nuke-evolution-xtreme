@@ -59,7 +59,7 @@ if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
 /*--------------------------*/
 /* Theme Index
 /*--------------------------*/
-function themeindex($aid, $informant, $time, $title, $counter, $topic, $thetext, $notes, $morelink, $topicname, $topicimage, $topictext, $writes = false) 
+function themeindex($aid, $informant, $time, $modified, $title, $counter, $topic, $thetext, $notes, $morelink, $topicname, $topicimage, $topictext, $writes = false) 
 {
     global $anonymous, $tipath, $theme_name, $sid, $ThemeSel, $nukeurl, $customlang;
     global $digits_color, $digits_txt_color;
