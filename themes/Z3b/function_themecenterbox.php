@@ -61,8 +61,74 @@ if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
 /*--------------------------*/
 function themecenterbox($title, $content) 
 {
-OpenTable();
-  echo '<div align="center"><span class="option"><strong>'.$title.'</strong></span></div>'.$content;
-CloseTable();
+global $theme_name;	
+print '<table class=blockz cellSpacing="0" cellPadding="0" border="0" width="100%">'."\n";
+print '<tr><td width="39" style="background: repeat-x; background-image: url('.HTTPS.'themes/'.$theme_name.'/tables/OpenTable/invisible_pixel.gif);">'."\n";
+print '<img src="'.HTTPS.'themes/'.$theme_name.'/tables/OpenTable/tlc.png" border="0" width="39" height="50"></td>'."\n";
+
+print '<td valign="top" align="center" style="background: repeat-x; background-image: url('.HTTPS.'themes/'.$theme_name.'/tables/OpenTable/topmiddle.png);"><br><strong>'.$title.'</strong></td>'."\n";
+
+print '<td align="right" width="39">'."\n";
+print '<img src="'.HTTPS.'themes/'.$theme_name.'/tables/OpenTable/trc.png" border="0" width="39" height="50"></td>'."\n";
+print '</tr>'."\n";
+print '<tr><td colSpan="3">'."\n";
+print '<table cellSpacing="0" cellPadding="0" width="100%" border="0">'."\n";
+print '<tr>'."\n";
+print '<td width="23" height="3" background="'.HTTPS.'themes/'.$theme_name.'/tables/OpenTable/leftside.png">'."\n";
+print '<img src="'.HTTPS.'themes/'.$theme_name.'/tables/OpenTable/leftside.png" border="0" width="23" height="3"></td>'."\n";
+print '<td width="100%">'."\n";
+print '<table cellSpacing="0" cellPadding="8" width="100%" border="0" style="border-collapse: collapse" bordercolor="#111111">'."\n";
+print '<tr>'."\n";
+print '<td width="100%" bgcolor="#0b151f">'."\n";
+
+# This stays no matter what START
+echo "<!-- CONTENT START -->\n\n\n\n\n";
+print '<div align="center">';
+print '<table style="background-color: none; height:100%; width:99%;" class="googlesitemap" align="center" border="5" cellpadding="15" cellspacing="20" dir="ltr" id="googlesitemap">';
+print '<tbody>';
+print '<tr>';
+print '<td>';
+
+//content START
+echo '<div align="left" id="text">';
+echo ''.$content.'</div>';
+//content END
+
+print '</td>';
+print '</tr>';
+print '</tbody>';
+print '</table>';
+print '</div>';
+
+echo "\n\n\n\n\n<!-- CONTENT END -->\n";
+# This stays no matter what END	
+
+print '</td>';
+print '</tr>';
+print '</table>';
+print '</td>';
+print '<td width="23" height="3" background="'.HTTPS.'themes/'.$theme_name.'/tables/CloseTable/rightside.png">'."\n";
+print '<img src="'.HTTPS.'themes/'.$theme_name.'/tables/CloseTable/rightside.png" border="0" width="23" height="3"></td>'."\n";
+print '</tr>'."\n";
+print '</table>'."\n";
+print '</td>'."\n";
+print '</tr>'."\n";
+print '<tr>'."\n";
+
+print '<td width="39" style="background: repeat-x; background-image: url('.HTTPS.'themes/'.$theme_name.'/tables/OpenTable/invisible_pixel.gif);">'."\n";
+print '<img src="'.HTTPS.'themes/'.$theme_name.'/tables/CloseTable/lbc.png" border="0" width="39" height="50"></td>'."\n";
+
+print '<td align="center" background="'.HTTPS.'themes/'.$theme_name.'/tables/CloseTable/bm.png"></td>'."\n";
+
+print '<td width="39" style="background: repeat-x; background-image: url('.HTTPS.'themes/'.$theme_name.'/tables/OpenTable/invisible_pixel.gif);">'."\n";
+print '<img src="'.HTTPS.'themes/'.$theme_name.'/tables/CloseTable/brc.png" border="0" width="39" height="50"></td>'."\n";
+
+print '</tr>'."\n";
+print '</table>'."\n";
+
+# This sets the space between blogs listed START
+print '<div align="center" style="padding-top:6px;">';
+print '</div>';
+# This sets the space between blogs listed END
 }
 ?>
