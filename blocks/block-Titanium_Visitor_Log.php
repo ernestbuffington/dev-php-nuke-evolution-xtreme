@@ -68,17 +68,13 @@ while($whosbeen = $db->sql_fetchrow($result)):
 
 	   }
 	}
-
-    # testing database lookup <span class="countries '.$whosbeen['user_from_flag'].'"></span>
-	//list($shit) = $db->sql_ufetchrow("SELECT `user_id` FROM `".$prefix."_users` WHERE `username`='".$whosbeen['username']."'", SQL_NUM);
-	//list($notes) = $db->sql_ufetchrow("SELECT `user_admin_notes` FROM `".$prefix."_users` WHERE `user_id`='".$shit."'", SQL_NUM);
 	
 	$content .= '<td width="45px"><a href="modules.php?name=Profile&mode=viewprofile&u='.$whosbeen['user_id'].'">'.$avatar.'</a></td>';
     $content .= '<td><a class="turdball" style="text-decoration: none;" href="modules.php?name=Profile&mode=viewprofile&u='.$whosbeen['user_id'].'">
-	<strong>&nbsp;&nbsp;'.UsernameColor($whosbeen['username']).'<br />&nbsp;&nbsp;<a style="text-decoration: none;" href="modules.php?name=Private_Messages&mode=post&u='.$whosbeen['user_id'].'"><font size="5" color="orange"><i class="bi bi-envelope"></i>&nbsp;<font color="gold" size="5"><i class="bi bi-mailbox"></i></font></font>
+	<strong>&nbsp;&nbsp;'.UsernameColor($whosbeen['username']).'<br />&nbsp;&nbsp;<a style="text-decoration: none;" href="modules.php?name=Private_Messages&mode=post&u='.$whosbeen['user_id'].'"><font size="5" color="orange"><i class="bi bi-envelope"></i><font color="gold" size="5"><i class="bi bi-arrow-right-short"></i><i class="bi bi-mailbox"></i></font></font>
 	
 	&nbsp;<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;<font size="3" color="gold"><i class="bi bi-arrow-90deg-up"></i></font><font class="gensmall"> PM </font></span>
+	&nbsp;&nbsp;<font size="5" color="gold"><i class="bi bi-arrow-up-short"></i></font><font class="gensmall">SEND PM </font></span>
 	</a></td>';
 	$content .= '<td><div align="top" style="padding-left:10px;"><br />'.get_titanium_timeago($whosbeen['last_visit']).'<br /></div></td>';
 	$content .= '</tr>'; 
