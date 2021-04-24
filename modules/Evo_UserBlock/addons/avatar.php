@@ -32,7 +32,6 @@ if ($make_xtreme_avatar_small == true)
 
 $evouserinfo_avatar = '<div style="text-align:center">';
 
-// did a little re-write for the endif nerd that wants to write php like it was written in PHP version 4 - Timothy V Trella 08/06/2019 RIP
 if (is_user() && $userinfo['user_avatar'])
 {
 	switch( $userinfo['user_avatar_type'])
@@ -40,25 +39,25 @@ if (is_user() && $userinfo['user_avatar'])
 		# user_allowavatar = 1
 		case USER_AVATAR_UPLOAD:
 			$evouserinfo_avatar .= ( $board_config['allow_avatar_upload'] ) 
-			? '<img style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '.$board_config['avatar_max_width'].'px;" src="' 
+			? '<img class="rounded-corners-user-info" style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '.$board_config['avatar_max_width'].'px;" src="' 
 			. $board_config['avatar_path'] . '/' . $userinfo['user_avatar'] . '" alt="" border="0" />' : '';
 			break;
 		# user_allowavatar = 2
 		case USER_AVATAR_REMOTE:
-			$evouserinfo_avatar .= '<img style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '.$board_config['avatar_max_width'].'px;" src="
+			$evouserinfo_avatar .= '<img class="rounded-corners-user-info" style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '.$board_config['avatar_max_width'].'px;" src="
 			'.avatar_resize($userinfo['user_avatar']).'" alt="" border="0" />';
 			break;
 		# user_allowavatar = 3
 		case USER_AVATAR_GALLERY:
-			$evouserinfo_avatar .= ( $board_config['allow_avatar_local'] ) ? '<img style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '
+			$evouserinfo_avatar .= ( $board_config['allow_avatar_local'] ) ? '<img class="rounded-corners-user-info" style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '
 			.$board_config['avatar_max_width'].'px;" src="' . $board_config['avatar_gallery_path'] . '/' . (($userinfo['user_avatar'] == 'blank.gif' || $userinfo['user_avatar'] 
 			== 'gallery/blank.gif') ? 'blank.png' : $userinfo['user_avatar']) . '" alt="" border="0" />' : '';
 			break;
    }
 }
 else
-$evouserinfo_avatar .= '<img style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '
+$evouserinfo_avatar .= '<img class="rounded-corners-user-info" style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '
 .$board_config['avatar_max_width'].'px;" src="'.$board_config['default_avatar_users_url'].'" alt="" border="0" />';
 
-$evouserinfo_avatar .= '</div><br />';
+$evouserinfo_avatar .= '</div>';
 ?>

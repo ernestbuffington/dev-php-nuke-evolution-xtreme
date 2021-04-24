@@ -61,7 +61,7 @@ if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
 /*--------------------------*/
 function themeindex($aid, $informant, $time, $modified, $title, $counter, $topic, $thetext, $notes, $morelink, $topicname, $topicimage, $topictext, $writes = false) 
 {
-    global $anonymous, $tipath, $theme_name, $sid, $ThemeSel, $nukeurl, $customlang;
+    global $anonymous, $blogadmin, $tipath, $theme_name, $sid, $ThemeSel, $nukeurl, $customlang;
     global $digits_color, $digits_txt_color;
 
     if (!empty($topicimage)):
@@ -131,6 +131,8 @@ print '<td>';
 //content
 echo '<div align="left" id="text">';
 echo ''.$content.'</div>';	
+
+print blog_signature($aid);
 
 echo '<div align="right">'.$posted.'<img src="themes/'.$theme_name.'/images/invisible_pixel.gif" alt="" width="4" height="1" border="0" /><br />'.$datetime.' '.$topictext.' | '.$morelink.' '.$reads.'<img src="themes/'.$theme_name.'/images/invisible_pixel.gif" alt="" width="4" height="1" border="0" /></div>';
 

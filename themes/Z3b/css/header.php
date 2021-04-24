@@ -63,6 +63,21 @@ echo "/* When we are done we will move this code to style.css */\n\n";
 global $screen_width, $screen_height;
 
 ?>
+/*---------------------------------------------------------------*/
+/* Main Theme Body                                               */
+/*---------------------------------------------------------------*/
+img.rounded-corners {
+  border-radius: 20px; 
+}
+
+img.rounded-corners-last-vistors {
+  border-radius: 9px; 
+}
+
+img.rounded-corners-user-info {
+  border-radius: 20px; 
+}
+
 .banner_box
 {
 z-index: 780;

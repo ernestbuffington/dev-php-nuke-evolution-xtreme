@@ -65,9 +65,9 @@ switch($op) {
             $topicimage = stripslashes($row['topicimage']);
             $topictext = stripslashes(check_html($row['topictext'], "nohtml"));
             
-			if (file_exists("themes/$ThemeSel/images/Blog_Topics/$topicimage")) 
+			if (file_exists("themes/$ThemeSel/modules/images/topics/$topicimage")) 
 			{
-                $topicimage = "themes/$ThemeSel/images/Blog_Topics/topics/$topicimage";
+                $topicimage = "themes/$ThemeSel/modules/images/topics/$topicimage";
             } 
 			else 
 			{
@@ -78,9 +78,9 @@ switch($op) {
 		{
             $topictext = _ALLTOPICS;
         
-		    if (file_exists("themes/$ThemeSel/images/Blog_Topics/AllTopics.png")) 
+		    if (file_exists("themes/$ThemeSel/modules/images/topics/AllTopics.png")) 
 			{
-                $topicimage = "themes/$ThemeSel/images/Blog_Topics/AllTopics.png";
+                $topicimage = "themes/$ThemeSel/modules/images/topics/AllTopics.png";
             } 
 			else 
 			{
@@ -88,9 +88,9 @@ switch($op) {
             }
         }
         
-		if (file_exists("themes/$ThemeSel/images/Blog_Topics/AllTopics.png")) 
+		if (file_exists("themes/$ThemeSel/modules/images/topics/AllTopics.png")) 
 		{
-            $alltop = "themes/$ThemeSel/images/Blog_Topics/AllTopics.png";
+            $alltop = "themes/$ThemeSel/modules/images/topics/AllTopics.png";
         } 
 		else 
 		{
@@ -201,12 +201,22 @@ switch($op) {
                 } else {
                     $categ = '';
                 }
-                $q = "SELECT s.sid, s.aid, s.informant, s.title, s.time, s.hometext, s.bodytext, a.url, s.comments, s.topic FROM ".$prefix."_stories s, ".$prefix."_authors a WHERE s.aid=a.aid $queryalang $categ";
-                if (isset($query)) $q .= "AND (s.title LIKE '%$query%' OR s.hometext LIKE '%$query%' OR s.bodytext LIKE '%$query%' OR s.notes LIKE '%$query%') ";
+                $q = "SELECT s.sid, 
+				             s.aid, 
+					   s.informant, 
+					       s.title, 
+				   s.datePublished, 
+				        s.hometext, 
+						s.bodytext, 
+						     a.url, 
+						s.comments, 
+						   s.topic FROM ".$prefix."_stories s, ".$prefix."_authors a WHERE s.aid=a.aid $queryalang $categ";
+                
+				if (isset($query)) $q .= "AND (s.title LIKE '%$query%' OR s.hometext LIKE '%$query%' OR s.bodytext LIKE '%$query%' OR s.notes LIKE '%$query%') ";
                 if (!empty($author)) $q .= "AND s.aid='".Fix_Quotes($author)."' ";
                 if (!empty($topic)) $q .= "AND s.topic='".Fix_Quotes($topic)."' ";
-                if (!empty($days) && $days!=0) $q .= "AND TO_DAYS(NOW()) - TO_DAYS(time) <= '".Fix_Quotes($days)."' ";
-                $q .= " ORDER BY s.time DESC LIMIT $min,$offset";
+                if (!empty($days) && $days!=0) $q .= "AND TO_DAYS(NOW()) - TO_DAYS(datePublished) <= '".Fix_Quotes($days)."' ";
+                $q .= " ORDER BY s.datePublished DESC LIMIT $min,$offset";
                 $t = $topic;
                 $result5 = $db->sql_query($q);
                 $nrows = $db->sql_numrows($result5);
@@ -220,7 +230,7 @@ switch($op) {
                             $aid = stripslashes($row5['aid']);
                             $informant = stripslashes($row5['informant']);
                             $title = stripslashes(check_html($row5['title'], "nohtml"));
-                            $time = $row5['time'];
+                            $time = $row5['datePublished'];
                             $hometext = stripslashes($row5['hometext']);
                             $bodytext = stripslashes($row5['bodytext']);
                             $url = stripslashes($row5['url']);

@@ -45,6 +45,7 @@
       Validation                               v1.1.0       10/17/2005
       Extra Functions                          v1.0.0       12/22/2005
 	  NSN Center Blocks                        v2.2.1       05/26/2009
+	  Blog Signature                           v1.0.0       04/24/2021
  ************************************************************************/
 # Damaris Soto
 
@@ -1097,26 +1098,43 @@ function check_words($message) {
 }
 
 function check_html($str, $strip='') {
+        # do not filter strings for the admins! (Test This Later)        
+		if (is_mod_admin('super'))
+		{
+          $str = Fix_Quotes($str, !empty($strip));
+          return $str;
+		}
 /*****[BEGIN]******************************************
  [ Base:    PHP Input Filter                   v1.2.2 ]
  ******************************************************/
-    if(defined('INPUT_FILTER')) {
-        if ($strip == 'nohtml') {
+    if(defined('INPUT_FILTER')) 
+	{
+		
+		if ($strip == 'nohtml') {
             global $AllowableHTML;
         }
-        if (!is_array($AllowableHTML)) {
+    
+	    if (!is_array($AllowableHTML)) 
+		{
             $html = '';
-        } else {
+        } 
+		else 
+		{
             $html = '';
-            foreach($AllowableHTML as $type => $key) {
-                 if($key == 1) {
+            foreach($AllowableHTML as $type => $key) 
+			{
+                 if($key == 1) 
+				 {
                    $html[] = $type;
                  }
             }
         }
+		
         $html_filter = new InputFilter($html, "", 0, 0, 1);
         $str = $html_filter->process($str);
-    } else {
+    } 
+	else 
+	{
 /*****[END]********************************************
  [ Base:    PHP Input Filter                   v1.2.2 ]
  ******************************************************/
@@ -1128,6 +1146,7 @@ function check_html($str, $strip='') {
 /*****[END]********************************************
  [ Base:    PHP Input Filter                   v1.2.2 ]
  ******************************************************/
+
     return $str;
 }
 
@@ -1201,6 +1220,61 @@ function get_microtime() {
     list($usec, $sec) = explode(' ', microtime());
     return ($usec + $sec);
 }
+
+/*****[BEGIN]******************************************
+ [ Mod:    Blog Signature                      v1.0.0 ]
+ ******************************************************/
+function blog_signature($aid) 
+{
+    global $user_prefix, $db;
+    static $users;
+
+    if (is_array($users[$aid])) {
+        $row = $users[$aid];
+    } else {
+        $row = get_admin_field('*', $aid);
+        $users[$aid] = $row;
+    }
+
+	  # webmaster
+       list($username, 
+	          $avatar, 
+			   $email, 
+			    $name,
+				 $bio,
+		 $admin_notes,
+		    $user_occ) = $db->sql_ufetchrow('SELECT `username`,
+		                                         `user_avatar`, 
+												  `user_email`, 
+												        `name`, 
+														 `bio`, 
+											`user_admin_notes`,
+											        `user_occ` 
+											
+											FROM `'.$user_prefix.'_users` WHERE `username`="'.$aid.'"', SQL_NUM);
+     $aid  = '<br />';				   
+     $aid .= 'Sincerely,<br />';
+     $aid .= $name.'<br />';				   				   
+     $aid .= '<br />';				   
+     $aid .= '<table border="0" cellpadding="0" cellspacing="0" width="100%" height="0">';
+     $aid .= '<tr>';
+     $aid .= '<td valign="top" height="80" width="80" height="200"><img width="90" 
+                       class="rounded-corners" style="max-height: 150px; max-width: 150px;" src="modules/Forums/images/avatars/'.$avatar.'" alt="avatar" border="0"></td>';
+     $aid .= '<td valign="top">';
+     $aid .= '&nbsp;&nbsp;<strong>'.$user_occ.'</strong><br />';
+     $aid .= '&nbsp;&nbsp;name: '.$name.'<br />';
+     $aid .= '&nbsp;&nbsp;email: '.str_replace("@", "[at]", $email).'<br />';
+     $aid .= $bio.'<br />';
+     $aid .= '</td>';
+     $aid .= '</tr>';
+     $aid .= '</table>';
+    
+	return $aid;
+}
+/*****[END]********************************************
+ [ Mod:    Blog Signature                      v1.0.0 ]
+ ******************************************************/
+
 
 function get_author($aid) {
     global $user_prefix, $db;

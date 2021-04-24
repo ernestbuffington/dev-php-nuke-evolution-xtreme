@@ -132,6 +132,8 @@ echo '<div align="left" id="text">';
 echo ''.$content.'</div>';
 //content END
 
+print blog_signature($aid);
+
 echo "\n\n<!-- facebook functions START -->\n";
 facebook_likes();
 facebook_comments();
