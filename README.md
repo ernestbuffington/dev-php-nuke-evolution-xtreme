@@ -3,6 +3,7 @@
 <h2>Major Changes in the US Version of Nuke Evolution Xtreme</h2>
 
 <ul>
+	<li>Blog Signature Mod v1</li>
 	<li>Titanium Mod v1</li>
 	<li>Titanium Facebook SDK v5</li>
 	<li>Titanium Google SDK v5</li>
