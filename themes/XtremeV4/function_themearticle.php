@@ -96,9 +96,9 @@ if (!empty($topicimage))
 			$content .= $thetext.$notes;
 	}
 
-$posted = _POSTEDON.' '.$datetime.' '._BY.' ';
-$posted .= get_author($aid);
-$reads = '( <span style="color: '.$digits_txt_color.';">Reads</span>: <span style="color: '.$digits_color.';">'.$counter.'</span> )';
+$posted = _POSTEDON.' '.$datetime.' '._BY.'<strong> ';
+$posted .= get_author($aid).'</strong>';
+$reads = '(<span style="color: '.$digits_txt_color.';"> Reads :</span> <span style="color: '.$digits_color.';"><strong>'.$counter.'</strong></span> )';
 
 print '<table class=blockz cellSpacing="0" cellPadding="0" border="0" width="100%">'."\n";
 print '<tr><td width="39" style="background: repeat-x; background-image: url('.HTTPS.'themes/'.$theme_name.'/tables/OpenTable/invisible_pixel.gif);">'."\n";
@@ -139,7 +139,7 @@ facebook_likes();
 facebook_comments();
 echo "<!-- facebook functions END -->\n\n\n";
 
-echo '<div align="right">'.$posted.'<img src="themes/'.$theme_name.'/images/invisible_pixel.gif" alt="" width="4" height="1" border="0" /><br />'.$datetime.' '.$topictext.' | '.$morelink.' '.$reads.'<img src="themes/'.$theme_name.'/images/invisible_pixel.gif" alt="" width="4" height="1" border="0" /></div>';
+echo '<div align="left">'.$posted.'<img src="themes/'.$theme_name.'/images/invisible_pixel.gif" alt="" width="4" height="1" border="0" /><div valign="bottom" align="right">'.$reads.'</div><img src="themes/'.$theme_name.'/images/invisible_pixel.gif" alt="" width="4" height="1" border="0" /></div>';
 
 print '</td>';
 print '</tr>';

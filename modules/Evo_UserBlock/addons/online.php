@@ -27,16 +27,44 @@ global $evouserinfo_addons, $evouserinfo_online;
 function evouserinfo_get_members_online () 
 {
     global $prefix, $db, $lang_evo_userblock, $evouserinfo_addons, $user_prefix, $userinfo, $board_config, $Default_Theme;
-    $sql = "SELECT w.uname, w.module, w.url, w.host_addr, u.user_from, u.user_rank, u.user_id, u.user_level, u.user_allow_viewonline, u.user_from_flag, u.user_avatar, u.user_avatar_type, u.user_allowavatar, u.user_email, u.user_viewemail, u.user_regdate, u.user_posts, u.theme FROM ".$prefix."_session AS w LEFT JOIN ".$user_prefix."_users AS u ON u.username = w.uname WHERE w.guest = '0' OR w.guest = '2' ORDER BY u.user_level DESC, u.user_rank DESC, u.username";
-    $result = $db->sql_query($sql);
+    $sql = "SELECT w.uname, 
+	              w.module, 
+				     w.url, 
+			   w.host_addr, 
+			   u.user_from, 
+			   u.user_rank, 
+			     u.user_id, 
+			  u.user_level, 
+   u.user_allow_viewonline, 
+          u.user_from_flag, 
+		     u.user_avatar, 
+		u.user_avatar_type, 
+		u.user_allowavatar, 
+		      u.user_email, 
+		  u.user_viewemail, 
+		    u.user_regdate, 
+			  u.user_posts, 
+			       u.theme FROM ".$prefix."_session 
+				   
+				   AS w LEFT JOIN ".$user_prefix."_users AS u 
+				   ON u.username = w.uname 
+				   WHERE w.guest = '0' 
+				   OR w.guest = '2' 
+				   
+				   ORDER BY u.user_level 
+				   
+				   DESC, u.user_rank DESC, u.username";
+    
+	$result = $db->sql_query($sql);
     $i = 1;
     $hidden = 0;
     $out = array();
     $out['text'] = '';
-    while ($session = $db->sql_fetchrow($result)) 
-    {
-        $num 			= ($i < 10) ? '0'.$i : $i;
-        $uname 			= $session['uname'];
+    
+	while ($session = $db->sql_fetchrow($result)) 
+    {                                   # spacer
+        $num 			= ($i < 10) ? '&nbsp;&nbsp;'.'0'.$i : $i;
+		$uname 			= $session['uname'];
         $uname_color 	= UsernameColor($session['uname']);
         $level 			= $session['user_level'];
         $module 		= $session['module'];
@@ -218,32 +246,32 @@ function evouserinfo_online_display ($members, $guests)
         $out .= '<div style="font-weight: bold">'.$lang_evo_userblock['BLOCK']['ONLINE']['STATS'].'</div>';
 
         $out .= '<div style="padding-left: 10px;">';
-        $out .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['MEMBERS'].'<span style="float:right">'.$members['total'].'</span>';
-        $out .= '</div>';
+        $out .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['MEMBERS'].'<span style="float:right">'.$members['total'].'&nbsp;&nbsp;</span>';
+        $out .= '</div>'; 
 
         if($evouserinfo_addons['online_show_hv'] == 'yes'):
 
             $out .= '<div style="padding-left: 10px;">';
-            $out .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['VISIBLE'].'<span style="float:right">'.$members['visible'].'</span>';
+            $out .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['VISIBLE'].'<span style="float:right">'.$members['visible'].'&nbsp;&nbsp;</span>';
             $out .= '</div>';
 
             $out .= '<div style="padding-left: 10px;">';
-            $out .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['HIDDEN'].'<span style="float:right">'.$members['hidden'].'</span>';
+            $out .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['HIDDEN'].'<span style="float:right">'.$members['hidden'].'&nbsp;&nbsp;</span>';
             $out .= '</div>';
 
         endif;
 
         $out .= '<div style="padding-left: 10px;">';
-        $out .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['GUESTS'].'<span style="float:right">'.$guests['total'].'</span>';
+        $out .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['GUESTS'].'<span style="float:right">'.$guests['total'].'&nbsp;&nbsp;</span>';
         $out .= '</div>';
 
         $out .= '<div style="padding-left: 10px;">';
-        $out .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['TOTAL'].'<span style="float:right">'.($guests['total']+$members['total']).'</span><hr />';
+        $out .= '<font color="gold"><i class="fas fa-radiation-alt" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['TOTAL'].'<span style="float:right">'.($guests['total']+$members['total']).'&nbsp;&nbsp;</span><hr />';
         $out .= '</div>';
     
     endif;
 
-    $out .= '<div style="font-weight: bold">'.$lang_evo_userblock['BLOCK']['ONLINE']['ONLINE'].'</div>';
+    $out .= '<div style="font-weight: bold">Member(s) Online</div>';
 
     if($evouserinfo_addons['online_scroll'] == 'yes'):
     
@@ -255,14 +283,14 @@ function evouserinfo_online_display ($members, $guests)
     
         if ($members['total'] > 0):
 
-            $out .= '<div style="font-weight: bold">'.$lang_evo_userblock['BLOCK']['ONLINE']['MEMBERS'].'</div>';
+            //$out .= '<div style="font-weight: bold">&nbsp;&nbsp;Portal '.$lang_evo_userblock['BLOCK']['ONLINE']['MEMBERS'].'</div>';
             $out .= '<div>'.$members['text'].'</div>';
 
         endif;
 
         if ($guests['total'] > 0):
 
-            $out .= '<div style="font-weight: bold">'.$lang_evo_userblock['BLOCK']['ONLINE']['GUESTS'].'</div>';
+            $out .= '<div style="font-weight: bold">&nbsp;&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['GUESTS'].'</div>';
             $out .= '<div>'.$guests['text'].'</div>';
 
         endif;

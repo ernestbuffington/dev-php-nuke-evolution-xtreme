@@ -22,6 +22,7 @@ if(!defined('NUKE_EVO')) {
 
 global $evouserinfo_addons, $evouserinfo_members;
 
+# group memberships
 function evouserinfo_members () 
 {
     global $userinfo, $db, $prefix, $user_prefix, $evouserinfo_members, $lang_evo_userblock;
@@ -41,8 +42,10 @@ function evouserinfo_members ()
 		  {
 		    $group_name = GroupColor($name);
 			$evouserinfo_members .= '<div style="padding-left: 10px;">';
-		    $evouserinfo_members .= '<font title="'.$id1.'" class="tooltip-html-side-interact tooltipstered" color="lime"><i title="'.$id1.'" alt="'.$id1.'" class="fas fa-users"></i></font> ';
-            $evouserinfo_members .= '<a class="tooltip-html-side-interact tooltipstered" title="'.$name.'" href="modules.php?name=Groups&amp;g='.$id1 . '"><strong>' . $group_name . '</strong></a><br />';
+		    $evouserinfo_members .= '<font title="'.$id1.'" class="tooltip-html-side-interact tooltipstered" 
+			color="lime"><i title="'.$id1.'" alt="'.$id1.'" class="fas fa-users"></i></font> ';
+            $evouserinfo_members .= '<a class="tooltip-html-side-interact tooltipstered" 
+			title="'.$name.'" href="modules.php?name=Groups&amp;g='.$id1 . '"><strong>' . $group_name . '</strong></a><br />';
 			$evouserinfo_members .= '</div>';
         
 		  }
@@ -77,8 +80,10 @@ function evouserinfo_members ()
 
 		    $group_name = GroupColor($row['group_name']);
 		    $evouserinfo_members .= '<div style="padding-left: 10px;">';
-			$evouserinfo_members .= '<font title="'.$row['group_id'].'" class="tooltip-html-side-interact tooltipstered" color="lightgrey"><i title="'.$row['group_id'].'" alt="'.$row['group_id'].'" class="fas fa-users"></i></font> ';
-		    $evouserinfo_members .= '<a class="tooltip-html-side-interact tooltipstered" title="'.$row['group_name'].'" href="modules.php?name=Groups&amp;g='.$row['group_id'] . '"><strong>' . $group_name . '</strong></a><br />';
+			$evouserinfo_members .= '<font title="'.$row['group_id'].'" class="tooltip-html-side-interact tooltipstered" 
+			color="lightgrey"><i title="'.$row['group_id'].'" alt="'.$row['group_id'].'" class="fas fa-users"></i></font> ';
+		    $evouserinfo_members .= '<a class="tooltip-html-side-interact tooltipstered" title="'.$row['group_name'].'" 
+			href="modules.php?name=Groups&amp;g='.$row['group_id'] . '"><strong>' . $group_name . '</strong></a><br />';
 			$evouserinfo_members .= '</div>';
           }
         

@@ -64,21 +64,25 @@ function evouserinfo_posts () {
     $evouserinfo_posts = '<div style="font-weight: bold">'.$lang_evo_userblock['BLOCK']['POSTS']['FORUMS'].'</div>';
 
     $evouserinfo_posts .= '<div style="padding-left: 10px;">';
-    $evouserinfo_posts .= '  <font color="red"><i class="fas fa-chart-bar" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['POSTS']['POSTS'].'<span style="float:right">'.number_format($posts).'</span>';
+    $evouserinfo_posts .= '  <font color="red"><i class="fas fa-chart-bar" 
+	aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['POSTS']['POSTS'].'<span style="float:right">'.number_format($posts).'&nbsp;&nbsp;</span>';
     $evouserinfo_posts .= '</div>';
 
     $evouserinfo_posts .= '<div style="padding-left: 10px;">';
-    $evouserinfo_posts .= '  <font color="yellow"><i class="fas fa-chart-bar" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['POSTS']['TOPICS'].'<span style="float:right">'.number_format($topics).'</span>';
+    $evouserinfo_posts .= '  <font color="yellow"><i class="fas fa-chart-bar" 
+	aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['POSTS']['TOPICS'].'<span style="float:right">'.number_format($topics).'&nbsp;&nbsp;</span>';
     $evouserinfo_posts .= '</div>';
 
     if (is_user()):
 
       $evouserinfo_posts .= '<div style="padding-left: 10px;">';
-      $evouserinfo_posts .= '  <font color="lime"><i class="fas fa-chart-bar" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['POSTS']['UR_TOPICS'].'<span style="float:right">'.evouserinfo_ur_total_topics().'</span>';
+      $evouserinfo_posts .= '  <font color="lime"><i class="fas fa-chart-bar" 
+	  aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['POSTS']['UR_TOPICS'].'<span style="float:right">'.evouserinfo_ur_total_topics().'&nbsp;&nbsp;</span>';
       $evouserinfo_posts .= '</div>';
 
       $evouserinfo_posts .= '<div style="padding-left: 10px;">';
-      $evouserinfo_posts .= '  <font color="orange"><i class="fas fa-chart-bar" aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['POSTS']['UR_POSTS'].'<span style="float:right">'.number_format($userinfo['user_posts']).'</span>';
+      $evouserinfo_posts .= '  <font color="orange"><i class="fas fa-chart-bar" 
+	  aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['POSTS']['UR_POSTS'].'<span style="float:right">'.number_format($userinfo['user_posts']).'&nbsp;&nbsp;</span>';
       $evouserinfo_posts .= '</div>';
 
     endif;

@@ -94,10 +94,10 @@ function themeindex($aid, $informant, $time, $modified, $title, $counter, $topic
 
     endif;
 
-$posted = sprintf($customlang['global']['posted_by'], get_author($aid), $time);
+$posted = sprintf($customlang['global']['posted_by'], '<strong>'.get_author($aid).'</strong>', $time);
 $datetime = substr($morelink, 0, strpos($morelink, '|')-strlen($morelink));
 $morelink = substr($morelink, strlen($datetime)+2);
-$reads = '( <span style="color: '.$digits_txt_color.';">'.$customlang['global']['reads'].'</span>: <span style="color: '.$digits_color.';">'.$counter.'</span> )';
+$reads = '( <span style="color: '.$digits_txt_color.';">'.$customlang['global']['reads'].'</span>: <span style="color: '.$digits_color.';"><strong>'.$counter.'</strong></span> )';
 
 echo "\n\n<!-- function themeindex START -->\n";
 
