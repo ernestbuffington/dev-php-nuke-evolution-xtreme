@@ -67,7 +67,7 @@ exit('Access Denied');
 #-----------------------------#
 global $theme_title, $theme_author, $theme_date, $theme_name, $theme_download_link;
 # Theme Name
-$theme_title = 'Xtreme v4.0 Theme';
+$theme_title = 'Xtreme v4.0';
 define('THEME', $theme_title);
 # Theme Author
 $theme_author = 'Ernest Allen Buffington';
