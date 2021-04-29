@@ -97,6 +97,20 @@ class Google_Service_AIPlatformNotebooks_Resource_ProjectsLocationsInstances ext
     return $this->call('getIamPolicy', array($params), "Google_Service_AIPlatformNotebooks_Policy");
   }
   /**
+   * Check if a notebook instance is healthy. (instances.getInstanceHealth)
+   *
+   * @param string $name Required. Format:
+   * `projects/{project_id}/locations/{location}/instances/{instance_id}`
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_AIPlatformNotebooks_GetInstanceHealthResponse
+   */
+  public function getInstanceHealth($name, $optParams = array())
+  {
+    $params = array('name' => $name);
+    $params = array_merge($params, $optParams);
+    return $this->call('getInstanceHealth', array($params), "Google_Service_AIPlatformNotebooks_GetInstanceHealthResponse");
+  }
+  /**
    * Check if a notebook instance is upgradable. (instances.isUpgradeable)
    *
    * @param string $notebookInstance Required. Format:
@@ -178,6 +192,21 @@ class Google_Service_AIPlatformNotebooks_Resource_ProjectsLocationsInstances ext
     $params = array('name' => $name, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
     return $this->call('reset', array($params), "Google_Service_AIPlatformNotebooks_Operation");
+  }
+  /**
+   * Rollbacks a notebook instance to the previous version. (instances.rollback)
+   *
+   * @param string $name Required. Format:
+   * `projects/{project_id}/locations/{location}/instances/{instance_id}`
+   * @param Google_Service_AIPlatformNotebooks_RollbackInstanceRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_AIPlatformNotebooks_Operation
+   */
+  public function rollback($name, Google_Service_AIPlatformNotebooks_RollbackInstanceRequest $postBody, $optParams = array())
+  {
+    $params = array('name' => $name, 'postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('rollback', array($params), "Google_Service_AIPlatformNotebooks_Operation");
   }
   /**
    * Updates the guest accelerators of a single Instance.
@@ -293,6 +322,22 @@ class Google_Service_AIPlatformNotebooks_Resource_ProjectsLocationsInstances ext
     $params = array('resource' => $resource, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
     return $this->call('testIamPermissions', array($params), "Google_Service_AIPlatformNotebooks_TestIamPermissionsResponse");
+  }
+  /**
+   * Updates the Shielded instance configuration of a single Instance.
+   * (instances.updateShieldedInstanceConfig)
+   *
+   * @param string $name Required. Format:
+   * `projects/{project_id}/locations/{location}/instances/{instance_id}`
+   * @param Google_Service_AIPlatformNotebooks_UpdateShieldedInstanceConfigRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_AIPlatformNotebooks_Operation
+   */
+  public function updateShieldedInstanceConfig($name, Google_Service_AIPlatformNotebooks_UpdateShieldedInstanceConfigRequest $postBody, $optParams = array())
+  {
+    $params = array('name' => $name, 'postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('updateShieldedInstanceConfig', array($params), "Google_Service_AIPlatformNotebooks_Operation");
   }
   /**
    * Upgrades a notebook instance to the latest version. (instances.upgrade)

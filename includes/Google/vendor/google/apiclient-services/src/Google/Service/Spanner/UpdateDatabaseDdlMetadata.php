@@ -20,7 +20,10 @@ class Google_Service_Spanner_UpdateDatabaseDdlMetadata extends Google_Collection
   protected $collection_key = 'statements';
   public $commitTimestamps;
   public $database;
+  protected $progressType = 'Google_Service_Spanner_OperationProgress';
+  protected $progressDataType = 'array';
   public $statements;
+  public $throttled;
 
   public function setCommitTimestamps($commitTimestamps)
   {
@@ -38,6 +41,20 @@ class Google_Service_Spanner_UpdateDatabaseDdlMetadata extends Google_Collection
   {
     return $this->database;
   }
+  /**
+   * @param Google_Service_Spanner_OperationProgress[]
+   */
+  public function setProgress($progress)
+  {
+    $this->progress = $progress;
+  }
+  /**
+   * @return Google_Service_Spanner_OperationProgress[]
+   */
+  public function getProgress()
+  {
+    return $this->progress;
+  }
   public function setStatements($statements)
   {
     $this->statements = $statements;
@@ -45,5 +62,13 @@ class Google_Service_Spanner_UpdateDatabaseDdlMetadata extends Google_Collection
   public function getStatements()
   {
     return $this->statements;
+  }
+  public function setThrottled($throttled)
+  {
+    $this->throttled = $throttled;
+  }
+  public function getThrottled()
+  {
+    return $this->throttled;
   }
 }

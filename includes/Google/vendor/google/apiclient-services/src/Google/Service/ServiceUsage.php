@@ -32,15 +32,9 @@
  */
 class Google_Service_ServiceUsage extends Google_Service
 {
-  /** View and manage your data across Google Cloud Platform services. */
+  /** See, edit, configure, and delete your Google Cloud Platform data. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
-  /** View your data across Google Cloud Platform services. */
-  const CLOUD_PLATFORM_READ_ONLY =
-      "https://www.googleapis.com/auth/cloud-platform.read-only";
-  /** Manage your Google API service configuration. */
-  const SERVICE_MANAGEMENT =
-      "https://www.googleapis.com/auth/service.management";
 
   public $operations;
   public $services;

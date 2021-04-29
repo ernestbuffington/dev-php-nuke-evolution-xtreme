@@ -314,8 +314,8 @@ class Google_Service_Compute_Resource_RegionInstanceGroupManagers extends Google
    * the `nextPageToken` returned by a previous list request to get the next page
    * of results.
    * @opt_param bool returnPartialSuccess Opt-in for partial success behavior
-   * which provides partial results in case of failure. The default value is false
-   * and the logic is the same as today.
+   * which provides partial results in case of failure. The default value is
+   * false.
    * @return Google_Service_Compute_RegionInstanceGroupManagerList
    */
   public function listRegionInstanceGroupManagers($project, $region, $optParams = array())
@@ -377,8 +377,8 @@ class Google_Service_Compute_Resource_RegionInstanceGroupManagers extends Google
    * the `nextPageToken` returned by a previous list request to get the next page
    * of results.
    * @opt_param bool returnPartialSuccess Opt-in for partial success behavior
-   * which provides partial results in case of failure. The default value is false
-   * and the logic is the same as today.
+   * which provides partial results in case of failure. The default value is
+   * false.
    * @return Google_Service_Compute_RegionInstanceGroupManagersListErrorsResponse
    */
   public function listErrors($project, $region, $instanceGroupManager, $optParams = array())
@@ -437,8 +437,8 @@ class Google_Service_Compute_Resource_RegionInstanceGroupManagers extends Google
    * the `nextPageToken` returned by a previous list request to get the next page
    * of results.
    * @opt_param bool returnPartialSuccess Opt-in for partial success behavior
-   * which provides partial results in case of failure. The default value is false
-   * and the logic is the same as today.
+   * which provides partial results in case of failure. The default value is
+   * false.
    * @return Google_Service_Compute_RegionInstanceGroupManagersListInstancesResponse
    */
   public function listManagedInstances($project, $region, $instanceGroupManager, $optParams = array())
@@ -498,8 +498,8 @@ class Google_Service_Compute_Resource_RegionInstanceGroupManagers extends Google
    * the `nextPageToken` returned by a previous list request to get the next page
    * of results.
    * @opt_param bool returnPartialSuccess Opt-in for partial success behavior
-   * which provides partial results in case of failure. The default value is false
-   * and the logic is the same as today.
+   * which provides partial results in case of failure. The default value is
+   * false.
    * @return Google_Service_Compute_RegionInstanceGroupManagersListInstanceConfigsResp
    */
   public function listPerInstanceConfigs($project, $region, $instanceGroupManager, $optParams = array())
@@ -544,10 +544,9 @@ class Google_Service_Compute_Resource_RegionInstanceGroupManagers extends Google
     return $this->call('patch', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Insert or patch (for the ones that already exist) per-instance configs for
-   * the managed instance group. perInstanceConfig.instance serves as a key used
-   * to distinguish whether to perform insert or patch.
-   * (regionInstanceGroupManagers.patchPerInstanceConfigs)
+   * Inserts or patches per-instance configs for the managed instance group.
+   * perInstanceConfig.name serves as a key used to distinguish whether to perform
+   * insert or patch. (regionInstanceGroupManagers.patchPerInstanceConfigs)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request, should conform
@@ -578,12 +577,12 @@ class Google_Service_Compute_Resource_RegionInstanceGroupManagers extends Google
     return $this->call('patchPerInstanceConfigs', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Flags the specified instances in the managed instance group to be immediately
-   * recreated. The instances are deleted and recreated using the current instance
-   * template for the managed instance group. This operation is marked as DONE
-   * when the flag is set even if the instances have not yet been recreated. You
-   * must separately verify the status of the recreating action with the
-   * listmanagedinstances method.
+   * Flags the specified VM instances in the managed instance group to be
+   * immediately recreated. Each instance is recreated using the group's current
+   * configuration. This operation is marked as DONE when the flag is set even if
+   * the instances have not yet been recreated. You must separately verify the
+   * status of each instance by checking its currentAction field; for more
+   * information, see Checking the status of managed instances.
    *
    * If the group is part of a backend service that has enabled connection
    * draining, it can take up to 60 seconds after the connection draining duration
@@ -723,10 +722,9 @@ class Google_Service_Compute_Resource_RegionInstanceGroupManagers extends Google
     return $this->call('setTargetPools', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Insert or update (for the ones that already exist) per-instance configs for
-   * the managed instance group. perInstanceConfig.instance serves as a key used
-   * to distinguish whether to perform insert or patch.
-   * (regionInstanceGroupManagers.updatePerInstanceConfigs)
+   * Inserts or updates per-instance configs for the managed instance group.
+   * perInstanceConfig.name serves as a key used to distinguish whether to perform
+   * insert or patch. (regionInstanceGroupManagers.updatePerInstanceConfigs)
    *
    * @param string $project Project ID for this request.
    * @param string $region Name of the region scoping this request, should conform

@@ -24,7 +24,7 @@
  *
  * <p>
  * For more information about this service, see the API
- * <a href="https://cloud.google.com/bigquery/" target="_blank">Documentation</a>
+ * <a href="https://cloud.google.com/bigquery-transfer/" target="_blank">Documentation</a>
  * </p>
  *
  * @author Google, Inc.
@@ -37,7 +37,7 @@ class Google_Service_BigQueryDataTransfer extends Google_Service
   /** View your data in Google BigQuery. */
   const BIGQUERY_READONLY =
       "https://www.googleapis.com/auth/bigquery.readonly";
-  /** View and manage your data across Google Cloud Platform services. */
+  /** See, edit, configure, and delete your Google Cloud Platform data. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
   /** View your data across Google Cloud Platform services. */

@@ -31,7 +31,7 @@
  */
 class Google_Service_Storagetransfer extends Google_Service
 {
-  /** View and manage your data across Google Cloud Platform services. */
+  /** See, edit, configure, and delete your Google Cloud Platform data. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
 
@@ -120,6 +120,16 @@ class Google_Service_Storagetransfer extends Google_Service
             ),'patch' => array(
               'path' => 'v1/{+jobName}',
               'httpMethod' => 'PATCH',
+              'parameters' => array(
+                'jobName' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'run' => array(
+              'path' => 'v1/{+jobName}:run',
+              'httpMethod' => 'POST',
               'parameters' => array(
                 'jobName' => array(
                   'location' => 'path',

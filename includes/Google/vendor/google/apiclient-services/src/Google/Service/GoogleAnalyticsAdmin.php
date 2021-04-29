@@ -39,7 +39,7 @@ class Google_Service_GoogleAnalyticsAdmin extends Google_Service
   /** View Google Analytics user permissions. */
   const ANALYTICS_MANAGE_USERS_READONLY =
       "https://www.googleapis.com/auth/analytics.manage.users.readonly";
-  /** View your Google Analytics data. */
+  /** See and download your Google Analytics data. */
   const ANALYTICS_READONLY =
       "https://www.googleapis.com/auth/analytics.readonly";
 
@@ -163,6 +163,16 @@ class Google_Service_GoogleAnalyticsAdmin extends Google_Service
               'path' => 'v1alpha/accounts:provisionAccountTicket',
               'httpMethod' => 'POST',
               'parameters' => array(),
+            ),'searchChangeHistoryEvents' => array(
+              'path' => 'v1alpha/{+account}:searchChangeHistoryEvents',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'account' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
             ),
           )
         )
@@ -369,17 +379,7 @@ class Google_Service_GoogleAnalyticsAdmin extends Google_Service
         'androidAppDataStreams',
         array(
           'methods' => array(
-            'create' => array(
-              'path' => 'v1alpha/{+parent}/androidAppDataStreams',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'parent' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-              ),
-            ),'delete' => array(
+            'delete' => array(
               'path' => 'v1alpha/{+name}',
               'httpMethod' => 'DELETE',
               'parameters' => array(
@@ -470,6 +470,14 @@ class Google_Service_GoogleAnalyticsAdmin extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'pageToken' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
               ),
             ),'patch' => array(
               'path' => 'v1alpha/{+name}',
@@ -557,17 +565,7 @@ class Google_Service_GoogleAnalyticsAdmin extends Google_Service
         'iosAppDataStreams',
         array(
           'methods' => array(
-            'create' => array(
-              'path' => 'v1alpha/{+parent}/iosAppDataStreams',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'parent' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-              ),
-            ),'delete' => array(
+            'delete' => array(
               'path' => 'v1alpha/{+name}',
               'httpMethod' => 'DELETE',
               'parameters' => array(

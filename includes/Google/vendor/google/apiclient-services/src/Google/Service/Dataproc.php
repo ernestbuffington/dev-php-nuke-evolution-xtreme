@@ -30,7 +30,7 @@
  */
 class Google_Service_Dataproc extends Google_Service
 {
-  /** View and manage your data across Google Cloud Platform services. */
+  /** See, edit, configure, and delete your Google Cloud Platform data. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
 
@@ -486,6 +486,26 @@ class Google_Service_Dataproc extends Google_Service
                   'required' => true,
                 ),
               ),
+            ),'injectCredentials' => array(
+              'path' => 'v1/{+project}/{+region}/{+cluster}:injectCredentials',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'project' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'region' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'cluster' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
             ),'list' => array(
               'path' => 'v1/projects/{projectId}/regions/{region}/clusters',
               'httpMethod' => 'GET',
@@ -550,6 +570,46 @@ class Google_Service_Dataproc extends Google_Service
               'httpMethod' => 'POST',
               'parameters' => array(
                 'resource' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'start' => array(
+              'path' => 'v1/projects/{projectId}/regions/{region}/clusters/{clusterName}:start',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'projectId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'region' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'clusterName' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'stop' => array(
+              'path' => 'v1/projects/{projectId}/regions/{region}/clusters/{clusterName}:stop',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'projectId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'region' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'clusterName' => array(
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,

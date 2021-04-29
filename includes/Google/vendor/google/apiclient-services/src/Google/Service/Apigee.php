@@ -22,8 +22,8 @@
  * Use the Apigee API to programmatically develop and manage APIs with a set of
  * RESTful operations. Develop and secure API proxies, deploy and undeploy API
  * proxy revisions, monitor APIs, configure environments, manage users, and
- * more. Get started using the APIs. *Note:* This product is available as a free
- * trial for a time period of 60 days.</p>
+ * more. Note: This product is available as a free trial for a time period of 60
+ * days.</p>
  *
  * <p>
  * For more information about this service, see the API
@@ -34,7 +34,7 @@
  */
 class Google_Service_Apigee extends Google_Service
 {
-  /** View and manage your data across Google Cloud Platform services. */
+  /** See, edit, configure, and delete your Google Cloud Platform data. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
 
@@ -43,6 +43,7 @@ class Google_Service_Apigee extends Google_Service
   public $organizations_analytics_datastores;
   public $organizations_apiproducts;
   public $organizations_apiproducts_attributes;
+  public $organizations_apiproducts_rateplans;
   public $organizations_apis;
   public $organizations_apis_deployments;
   public $organizations_apis_keyvaluemaps;
@@ -58,6 +59,7 @@ class Google_Service_Apigee extends Google_Service
   public $organizations_developers_apps_keys_apiproducts;
   public $organizations_developers_apps_keys_create;
   public $organizations_developers_attributes;
+  public $organizations_developers_subscriptions;
   public $organizations_envgroups;
   public $organizations_envgroups_attachments;
   public $organizations_environments;
@@ -82,11 +84,13 @@ class Google_Service_Apigee extends Google_Service
   public $organizations_environments_sharedflows_revisions;
   public $organizations_environments_stats;
   public $organizations_environments_targetservers;
+  public $organizations_environments_traceConfig_overrides;
   public $organizations_hostQueries;
   public $organizations_hostStats;
   public $organizations_instances;
   public $organizations_instances_attachments;
   public $organizations_instances_canaryevaluations;
+  public $organizations_instances_natAddresses;
   public $organizations_keyvaluemaps;
   public $organizations_operations;
   public $organizations_optimizedHostStats;
@@ -148,6 +152,16 @@ class Google_Service_Apigee extends Google_Service
                   'type' => 'string',
                 ),
               ),
+            ),'delete' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'DELETE',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
             ),'get' => array(
               'path' => 'v1/{+name}',
               'httpMethod' => 'GET',
@@ -187,6 +201,16 @@ class Google_Service_Apigee extends Google_Service
               'httpMethod' => 'GET',
               'parameters' => array(
                 'parent' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'setAddons' => array(
+              'path' => 'v1/{+org}:setAddons',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'org' => array(
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
@@ -419,6 +443,86 @@ class Google_Service_Apigee extends Google_Service
             ),'updateApiProductAttribute' => array(
               'path' => 'v1/{+name}',
               'httpMethod' => 'POST',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),
+          )
+        )
+    );
+    $this->organizations_apiproducts_rateplans = new Google_Service_Apigee_Resource_OrganizationsApiproductsRateplans(
+        $this,
+        $this->serviceName,
+        'rateplans',
+        array(
+          'methods' => array(
+            'create' => array(
+              'path' => 'v1/{+parent}/rateplans',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'parent' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'delete' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'DELETE',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'get' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'list' => array(
+              'path' => 'v1/{+parent}/rateplans',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'parent' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'count' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'expand' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
+                ),
+                'orderBy' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'startKey' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'state' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+              ),
+            ),'update' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'PUT',
               'parameters' => array(
                 'name' => array(
                   'location' => 'path',
@@ -1222,6 +1326,64 @@ class Google_Service_Apigee extends Google_Service
           )
         )
     );
+    $this->organizations_developers_subscriptions = new Google_Service_Apigee_Resource_OrganizationsDevelopersSubscriptions(
+        $this,
+        $this->serviceName,
+        'subscriptions',
+        array(
+          'methods' => array(
+            'create' => array(
+              'path' => 'v1/{+parent}/subscriptions',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'parent' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'expire' => array(
+              'path' => 'v1/{+name}:expire',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'get' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'list' => array(
+              'path' => 'v1/{+parent}/subscriptions',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'parent' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'count' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'startKey' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+              ),
+            ),
+          )
+        )
+    );
     $this->organizations_envgroups = new Google_Service_Apigee_Resource_OrganizationsEnvgroups(
         $this,
         $this->serviceName,
@@ -1430,6 +1592,16 @@ class Google_Service_Apigee extends Google_Service
                   'type' => 'integer',
                 ),
               ),
+            ),'getTraceConfig' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
             ),'setIamPolicy' => array(
               'path' => 'v1/{+resource}:setIamPolicy',
               'httpMethod' => 'POST',
@@ -1508,6 +1680,20 @@ class Google_Service_Apigee extends Google_Service
                   'required' => true,
                 ),
               ),
+            ),'updateTraceConfig' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'PATCH',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'updateMask' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+              ),
             ),
           )
         )
@@ -1526,6 +1712,10 @@ class Google_Service_Apigee extends Google_Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ),
+                'disableCache' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
                 ),
                 'type' => array(
                   'location' => 'query',
@@ -2539,6 +2729,78 @@ class Google_Service_Apigee extends Google_Service
           )
         )
     );
+    $this->organizations_environments_traceConfig_overrides = new Google_Service_Apigee_Resource_OrganizationsEnvironmentsTraceConfigOverrides(
+        $this,
+        $this->serviceName,
+        'overrides',
+        array(
+          'methods' => array(
+            'create' => array(
+              'path' => 'v1/{+parent}/overrides',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'parent' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'delete' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'DELETE',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'get' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'list' => array(
+              'path' => 'v1/{+parent}/overrides',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'parent' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'pageToken' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+              ),
+            ),'patch' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'PATCH',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'updateMask' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+              ),
+            ),
+          )
+        )
+    );
     $this->organizations_hostQueries = new Google_Service_Apigee_Resource_OrganizationsHostQueries(
         $this,
         $this->serviceName,
@@ -2718,6 +2980,11 @@ class Google_Service_Apigee extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
+                'environments' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
+                ),
               ),
             ),'delete' => array(
               'path' => 'v1/{+name}',
@@ -2853,6 +3120,74 @@ class Google_Service_Apigee extends Google_Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ),
+              ),
+            ),
+          )
+        )
+    );
+    $this->organizations_instances_natAddresses = new Google_Service_Apigee_Resource_OrganizationsInstancesNatAddresses(
+        $this,
+        $this->serviceName,
+        'natAddresses',
+        array(
+          'methods' => array(
+            'activate' => array(
+              'path' => 'v1/{+name}:activate',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'create' => array(
+              'path' => 'v1/{+parent}/natAddresses',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'parent' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'delete' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'DELETE',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'get' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'list' => array(
+              'path' => 'v1/{+parent}/natAddresses',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'parent' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'pageToken' => array(
+                  'location' => 'query',
+                  'type' => 'string',
                 ),
               ),
             ),

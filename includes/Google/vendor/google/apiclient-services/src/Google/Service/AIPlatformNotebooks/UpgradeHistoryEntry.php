@@ -17,14 +17,25 @@
 
 class Google_Service_AIPlatformNotebooks_UpgradeHistoryEntry extends Google_Model
 {
+  public $action;
   public $containerImage;
   public $createTime;
   public $framework;
   public $snapshot;
   public $state;
+  public $targetImage;
+  public $targetVersion;
   public $version;
   public $vmImage;
 
+  public function setAction($action)
+  {
+    $this->action = $action;
+  }
+  public function getAction()
+  {
+    return $this->action;
+  }
   public function setContainerImage($containerImage)
   {
     $this->containerImage = $containerImage;
@@ -64,6 +75,22 @@ class Google_Service_AIPlatformNotebooks_UpgradeHistoryEntry extends Google_Mode
   public function getState()
   {
     return $this->state;
+  }
+  public function setTargetImage($targetImage)
+  {
+    $this->targetImage = $targetImage;
+  }
+  public function getTargetImage()
+  {
+    return $this->targetImage;
+  }
+  public function setTargetVersion($targetVersion)
+  {
+    $this->targetVersion = $targetVersion;
+  }
+  public function getTargetVersion()
+  {
+    return $this->targetVersion;
   }
   public function setVersion($version)
   {

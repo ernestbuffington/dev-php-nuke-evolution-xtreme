@@ -33,6 +33,10 @@ class Google_Service_CloudRun_Resource_ProjectsLocationsDomainmappings extends G
    * project ID or number.
    * @param Google_Service_CloudRun_DomainMapping $postBody
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param string dryRun Indicates that the server should validate the
+   * request and populate default values without persisting the request. Supported
+   * values: `all`
    * @return Google_Service_CloudRun_DomainMapping
    */
   public function create($parent, Google_Service_CloudRun_DomainMapping $postBody, $optParams = array())
@@ -49,6 +53,9 @@ class Google_Service_CloudRun_Resource_ProjectsLocationsDomainmappings extends G
    * @param array $optParams Optional parameters.
    *
    * @opt_param string apiVersion Cloud Run currently ignores this parameter.
+   * @opt_param string dryRun Indicates that the server should validate the
+   * request and populate default values without persisting the request. Supported
+   * values: `all`
    * @opt_param string kind Cloud Run currently ignores this parameter.
    * @opt_param string propagationPolicy Specifies the propagation policy of
    * delete. Cloud Run currently ignores this setting, and deletes in the

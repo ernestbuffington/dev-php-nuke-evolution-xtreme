@@ -50,7 +50,8 @@ class Google_Service_CloudHealthcare_Resource_ProjectsLocationsDatasetsDicomStor
    * identification fails for some DICOM instances. The output DICOM store will
    * not contain these failed resources. Failed resource totals are tracked in
    * Operation.metadata. Error details are also logged to Cloud Logging (see
-   * [Viewing logs](/healthcare/docs/how-tos/logging)). (dicomStores.deidentify)
+   * [Viewing error logs in Cloud Logging](/healthcare/docs/how-tos/logging)).
+   * (dicomStores.deidentify)
    *
    * @param string $sourceStore Source DICOM store resource name. For example, `pr
    * ojects/{project_id}/locations/{location_id}/datasets/{dataset_id}/dicomStores
@@ -82,8 +83,9 @@ class Google_Service_CloudHealthcare_Resource_ProjectsLocationsDatasetsDicomStor
   /**
    * Exports data to the specified destination by copying it from the DICOM store.
    * Errors are also logged to Cloud Logging. For more information, see [Viewing
-   * logs](/healthcare/docs/how-tos/logging). The metadata field type is
-   * OperationMetadata. (dicomStores.export)
+   * error logs in Cloud Logging](https://cloud.google.com/healthcare/docs/how-
+   * tos/logging). The metadata field type is OperationMetadata.
+   * (dicomStores.export)
    *
    * @param string $name The DICOM store resource name from which to export the
    * data. For example, `projects/{project_id}/locations/{location_id}/datasets/{d
@@ -138,9 +140,10 @@ class Google_Service_CloudHealthcare_Resource_ProjectsLocationsDatasetsDicomStor
   }
   /**
    * Imports data into the DICOM store by copying it from the specified source.
-   * Errors are logged to Cloud Logging. For more information, see [Viewing
-   * logs](/healthcare/docs/how-tos/logging). The metadata field type is
-   * OperationMetadata. (dicomStores.import)
+   * Errors are logged to Cloud Logging. For more information, see [Viewing error
+   * logs in Cloud Logging](https://cloud.google.com/healthcare/docs/how-
+   * tos/logging). The metadata field type is OperationMetadata.
+   * (dicomStores.import)
    *
    * @param string $name The name of the DICOM store resource into which the data
    * is imported. For example, `projects/{project_id}/locations/{location_id}/data
@@ -163,11 +166,30 @@ class Google_Service_CloudHealthcare_Resource_ProjectsLocationsDatasetsDicomStor
    * @param array $optParams Optional parameters.
    *
    * @opt_param string filter Restricts stores returned to those matching a
-   * filter. Syntax:
-   * https://cloud.google.com/appengine/docs/standard/python/search/query_strings
-   * Only filtering on labels is supported. For example, `labels.key=value`.
+   * filter. The following syntax is available: * A string field value can be
+   * written as text inside quotation marks, for example `"query text"`. The only
+   * valid relational operation for text fields is equality (`=`), where text is
+   * searched within the field, rather than having the field be equal to the text.
+   * For example, `"Comment = great"` returns messages with `great` in the comment
+   * field. * A number field value can be written as an integer, a decimal, or an
+   * exponential. The valid relational operators for number fields are the
+   * equality operator (`=`), along with the less than/greater than operators
+   * (`<`, `<=`, `>`, `>=`). Note that there is no inequality (`!=`) operator. You
+   * can prepend the `NOT` operator to an expression to negate it. * A date field
+   * value must be written in `yyyy-mm-dd` form. Fields with date and time use the
+   * RFC3339 time format. Leading zeros are required for one-digit months and
+   * days. The valid relational operators for date fields are the equality
+   * operator (`=`) , along with the less than/greater than operators (`<`, `<=`,
+   * `>`, `>=`). Note that there is no inequality (`!=`) operator. You can prepend
+   * the `NOT` operator to an expression to negate it. * Multiple field query
+   * expressions can be combined in one query by adding `AND` or `OR` operators
+   * between the expressions. If a boolean operator appears within a quoted
+   * string, it is not treated as special, it's just another part of the character
+   * string to be matched. You can prepend the `NOT` operator to an expression to
+   * negate it. Only filtering on labels is supported. For example,
+   * `labels.key=value`.
    * @opt_param int pageSize Limit on the number of DICOM stores to return in a
-   * single response. If zero the default page size of 100 is used.
+   * single response. If not specified, 100 is used. May not be larger than 1000.
    * @opt_param string pageToken The next_page_token value returned from the
    * previous List request, if any.
    * @return Google_Service_CloudHealthcare_ListDicomStoresResponse

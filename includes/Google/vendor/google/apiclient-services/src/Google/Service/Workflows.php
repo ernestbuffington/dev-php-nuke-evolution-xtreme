@@ -16,7 +16,7 @@
  */
 
 /**
- * Service definition for Workflows (v1beta).
+ * Service definition for Workflows (v1).
  *
  * <p>
  * Orchestrate Workflows consisting of Google Cloud APIs, SaaS APIs or private
@@ -31,7 +31,7 @@
  */
 class Google_Service_Workflows extends Google_Service
 {
-  /** View and manage your data across Google Cloud Platform services. */
+  /** See, edit, configure, and delete your Google Cloud Platform data. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
 
@@ -51,7 +51,7 @@ class Google_Service_Workflows extends Google_Service
     $this->rootUrl = $rootUrl ?: 'https://workflows.googleapis.com/';
     $this->servicePath = '';
     $this->batchPath = 'batch';
-    $this->version = 'v1beta';
+    $this->version = 'v1';
     $this->serviceName = 'workflows';
 
     $this->projects_locations = new Google_Service_Workflows_Resource_ProjectsLocations(
@@ -61,7 +61,7 @@ class Google_Service_Workflows extends Google_Service
         array(
           'methods' => array(
             'get' => array(
-              'path' => 'v1beta/{+name}',
+              'path' => 'v1/{+name}',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'name' => array(
@@ -71,7 +71,7 @@ class Google_Service_Workflows extends Google_Service
                 ),
               ),
             ),'list' => array(
-              'path' => 'v1beta/{+name}/locations',
+              'path' => 'v1/{+name}/locations',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'name' => array(
@@ -103,7 +103,7 @@ class Google_Service_Workflows extends Google_Service
         array(
           'methods' => array(
             'delete' => array(
-              'path' => 'v1beta/{+name}',
+              'path' => 'v1/{+name}',
               'httpMethod' => 'DELETE',
               'parameters' => array(
                 'name' => array(
@@ -113,7 +113,7 @@ class Google_Service_Workflows extends Google_Service
                 ),
               ),
             ),'get' => array(
-              'path' => 'v1beta/{+name}',
+              'path' => 'v1/{+name}',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'name' => array(
@@ -123,7 +123,7 @@ class Google_Service_Workflows extends Google_Service
                 ),
               ),
             ),'list' => array(
-              'path' => 'v1beta/{+name}/operations',
+              'path' => 'v1/{+name}/operations',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'name' => array(
@@ -155,7 +155,7 @@ class Google_Service_Workflows extends Google_Service
         array(
           'methods' => array(
             'create' => array(
-              'path' => 'v1beta/{+parent}/workflows',
+              'path' => 'v1/{+parent}/workflows',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'parent' => array(
@@ -169,7 +169,7 @@ class Google_Service_Workflows extends Google_Service
                 ),
               ),
             ),'delete' => array(
-              'path' => 'v1beta/{+name}',
+              'path' => 'v1/{+name}',
               'httpMethod' => 'DELETE',
               'parameters' => array(
                 'name' => array(
@@ -179,7 +179,7 @@ class Google_Service_Workflows extends Google_Service
                 ),
               ),
             ),'get' => array(
-              'path' => 'v1beta/{+name}',
+              'path' => 'v1/{+name}',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'name' => array(
@@ -189,7 +189,7 @@ class Google_Service_Workflows extends Google_Service
                 ),
               ),
             ),'list' => array(
-              'path' => 'v1beta/{+parent}/workflows',
+              'path' => 'v1/{+parent}/workflows',
               'httpMethod' => 'GET',
               'parameters' => array(
                 'parent' => array(
@@ -215,7 +215,7 @@ class Google_Service_Workflows extends Google_Service
                 ),
               ),
             ),'patch' => array(
-              'path' => 'v1beta/{+name}',
+              'path' => 'v1/{+name}',
               'httpMethod' => 'PATCH',
               'parameters' => array(
                 'name' => array(

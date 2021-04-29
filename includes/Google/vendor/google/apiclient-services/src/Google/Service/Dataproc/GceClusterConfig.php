@@ -18,6 +18,8 @@
 class Google_Service_Dataproc_GceClusterConfig extends Google_Collection
 {
   protected $collection_key = 'tags';
+  protected $confidentialInstanceConfigType = 'Google_Service_Dataproc_ConfidentialInstanceConfig';
+  protected $confidentialInstanceConfigDataType = '';
   public $internalIpOnly;
   public $metadata;
   public $networkUri;
@@ -28,10 +30,26 @@ class Google_Service_Dataproc_GceClusterConfig extends Google_Collection
   protected $reservationAffinityDataType = '';
   public $serviceAccount;
   public $serviceAccountScopes;
+  protected $shieldedInstanceConfigType = 'Google_Service_Dataproc_ShieldedInstanceConfig';
+  protected $shieldedInstanceConfigDataType = '';
   public $subnetworkUri;
   public $tags;
   public $zoneUri;
 
+  /**
+   * @param Google_Service_Dataproc_ConfidentialInstanceConfig
+   */
+  public function setConfidentialInstanceConfig(Google_Service_Dataproc_ConfidentialInstanceConfig $confidentialInstanceConfig)
+  {
+    $this->confidentialInstanceConfig = $confidentialInstanceConfig;
+  }
+  /**
+   * @return Google_Service_Dataproc_ConfidentialInstanceConfig
+   */
+  public function getConfidentialInstanceConfig()
+  {
+    return $this->confidentialInstanceConfig;
+  }
   public function setInternalIpOnly($internalIpOnly)
   {
     $this->internalIpOnly = $internalIpOnly;
@@ -107,6 +125,20 @@ class Google_Service_Dataproc_GceClusterConfig extends Google_Collection
   public function getServiceAccountScopes()
   {
     return $this->serviceAccountScopes;
+  }
+  /**
+   * @param Google_Service_Dataproc_ShieldedInstanceConfig
+   */
+  public function setShieldedInstanceConfig(Google_Service_Dataproc_ShieldedInstanceConfig $shieldedInstanceConfig)
+  {
+    $this->shieldedInstanceConfig = $shieldedInstanceConfig;
+  }
+  /**
+   * @return Google_Service_Dataproc_ShieldedInstanceConfig
+   */
+  public function getShieldedInstanceConfig()
+  {
+    return $this->shieldedInstanceConfig;
   }
   public function setSubnetworkUri($subnetworkUri)
   {

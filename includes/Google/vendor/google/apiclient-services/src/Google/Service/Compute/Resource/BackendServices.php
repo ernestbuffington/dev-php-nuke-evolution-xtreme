@@ -108,8 +108,8 @@ class Google_Service_Compute_Resource_BackendServices extends Google_Service_Res
    * the `nextPageToken` returned by a previous list request to get the next page
    * of results.
    * @opt_param bool returnPartialSuccess Opt-in for partial success behavior
-   * which provides partial results in case of failure. The default value is false
-   * and the logic is the same as today.
+   * which provides partial results in case of failure. The default value is
+   * false.
    * @return Google_Service_Compute_BackendServiceAggregatedList
    */
   public function aggregatedList($project, $optParams = array())
@@ -286,8 +286,8 @@ class Google_Service_Compute_Resource_BackendServices extends Google_Service_Res
    * the `nextPageToken` returned by a previous list request to get the next page
    * of results.
    * @opt_param bool returnPartialSuccess Opt-in for partial success behavior
-   * which provides partial results in case of failure. The default value is false
-   * and the logic is the same as today.
+   * which provides partial results in case of failure. The default value is
+   * false.
    * @return Google_Service_Compute_BackendServiceList
    */
   public function listBackendServices($project, $optParams = array())
@@ -328,7 +328,8 @@ class Google_Service_Compute_Resource_BackendServices extends Google_Service_Res
     return $this->call('patch', array($params), "Google_Service_Compute_Operation");
   }
   /**
-   * Sets the security policy for the specified backend service.
+   * Sets the Google Cloud Armor security policy for the specified backend
+   * service. For more information, see Google Cloud Armor Overview
    * (backendServices.setSecurityPolicy)
    *
    * @param string $project Project ID for this request.

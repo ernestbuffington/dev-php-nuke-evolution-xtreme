@@ -116,6 +116,14 @@ abstract class AsymmetricKey
     protected static $engines = [];
 
     /**
+     * Key Comment
+     *
+     * @var null|string
+     * @access private
+     */
+    private $comment;
+
+    /**
      * The constructor
      */
     protected function __construct()
@@ -173,11 +181,62 @@ abstract class AsymmetricKey
         }
 
         $components['format'] = $format;
+        $comment = isset($components['comment']) ? $components['comment'] : null;
         $new = static::onLoad($components);
         $new->format = $format;
+        $new->comment = $comment;
         return $new instanceof PrivateKey ?
             $new->withPassword($password) :
             $new;
+    }
+
+    /**
+     * Loads a private key
+     *
+     * @return PrivateKey
+     * @access public
+     * @param string|array $key
+     * @param string $password optional
+     */
+    public function loadPrivateKey($key, $password = '')
+    {
+        $key = self::load($key, $password);
+        if (!$key instanceof PrivateKey) {
+            throw new NoKeyLoadedException('The key that was loaded was not a private key');
+        }
+        return $key;
+    }
+
+    /**
+     * Loads a public key
+     *
+     * @return PublicKey
+     * @access public
+     * @param string|array $key
+     */
+    public function loadPublicKey($key)
+    {
+        $key = self::load($key);
+        if (!$key instanceof PublicKey) {
+            throw new NoKeyLoadedException('The key that was loaded was not a public key');
+        }
+        return $key;
+    }
+
+    /**
+     * Loads parameters
+     *
+     * @return AsymmetricKey
+     * @access public
+     * @param string|array $key
+     */
+    public function loadParameters($key)
+    {
+        $key = self::load($key);
+        if (!$key instanceof PrivateKey && !$key instanceof PublicKey) {
+            throw new NoKeyLoadedException('The key that was loaded was not a parameter');
+        }
+        return $key;
     }
 
     /**
@@ -210,6 +269,58 @@ abstract class AsymmetricKey
         return $new instanceof PrivateKey ?
             $new->withPassword($password) :
             $new;
+    }
+
+    /**
+     * Loads a private key
+     *
+     * @return PrivateKey
+     * @access public
+     * @param string $type
+     * @param string $key
+     * @param string $password optional
+     */
+    public function loadPrivateKeyFormat($type, $key, $password = false)
+    {
+        $key = self::loadFormat($type, $key, $password);
+        if (!$key instanceof PrivateKey) {
+            throw new NoKeyLoadedException('The key that was loaded was not a private key');
+        }
+        return $key;
+    }
+
+    /**
+     * Loads a public key
+     *
+     * @return PublicKey
+     * @access public
+     * @param string $type
+     * @param string $key
+     */
+    public function loadPublicKeyFormat($type, $key)
+    {
+        $key = self::loadFormat($type, $key);
+        if (!$key instanceof PublicKey) {
+            throw new NoKeyLoadedException('The key that was loaded was not a public key');
+        }
+        return $key;
+    }
+
+    /**
+     * Loads parameters
+     *
+     * @return AsymmetricKey
+     * @access public
+     * @param string $type
+     * @param string|array $key
+     */
+    public function loadParametersFormat($type, $key)
+    {
+        $key = self::loadFormat($type, $key);
+        if (!$key instanceof PrivateKey && !$key instanceof PublicKey) {
+            throw new NoKeyLoadedException('The key that was loaded was not a parameter');
+        }
+        return $key;
     }
 
     /**
@@ -250,6 +361,9 @@ abstract class AsymmetricKey
                     continue;
                 }
                 $name = $file->getBasename('.php');
+                if ($name[0] == '.') {
+                    continue;
+                }
                 $type = 'phpseclib3\Crypt\\' . static::ALGORITHM . '\\Formats\\' . $format . '\\' . $name;
                 $reflect = new \ReflectionClass($type);
                 if ($reflect->isTrait()) {
@@ -319,6 +433,19 @@ abstract class AsymmetricKey
 
         $meta = new \ReflectionClass($this->format);
         return $meta->getShortName();
+    }
+
+    /**
+     * Returns the key's comment
+     *
+     * Not all key formats support comments. If you want to set a comment use toString()
+     *
+     * @access public
+     * @return null|string
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 
     /**

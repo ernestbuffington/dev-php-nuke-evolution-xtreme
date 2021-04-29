@@ -103,7 +103,7 @@ class Google_Service_DisplayVideo_Resource_AdvertisersChannelsSites extends Goog
    * are: * `urlOrAppId` (default) The default sorting order is ascending. To
    * specify descending order for a field, a suffix " desc" should be added to the
    * field name. Example: `urlOrAppId desc`.
-   * @opt_param int pageSize Requested page size. Must be between `1` and `100`.
+   * @opt_param int pageSize Requested page size. Must be between `1` and `10000`.
    * If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT`
    * if an invalid value is specified.
    * @opt_param string pageToken A token identifying a page of results the server
@@ -119,5 +119,24 @@ class Google_Service_DisplayVideo_Resource_AdvertisersChannelsSites extends Goog
     $params = array('advertiserId' => $advertiserId, 'channelId' => $channelId);
     $params = array_merge($params, $optParams);
     return $this->call('list', array($params), "Google_Service_DisplayVideo_ListSitesResponse");
+  }
+  /**
+   * Replaces all of the sites under a single channel. The operation will replace
+   * the sites under a channel with the sites provided in
+   * ReplaceSitesRequest.new_sites. (sites.replace)
+   *
+   * @param string $advertiserId The ID of the advertiser that owns the parent
+   * channel.
+   * @param string $channelId Required. The ID of the parent channel whose sites
+   * will be replaced.
+   * @param Google_Service_DisplayVideo_ReplaceSitesRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_DisplayVideo_ReplaceSitesResponse
+   */
+  public function replace($advertiserId, $channelId, Google_Service_DisplayVideo_ReplaceSitesRequest $postBody, $optParams = array())
+  {
+    $params = array('advertiserId' => $advertiserId, 'channelId' => $channelId, 'postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('replace', array($params), "Google_Service_DisplayVideo_ReplaceSitesResponse");
   }
 }

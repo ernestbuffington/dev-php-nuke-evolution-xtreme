@@ -39,14 +39,19 @@ class Google_Service_AIPlatformNotebooks_Instance extends Google_Collection
   public $metadata;
   public $name;
   public $network;
+  public $nicType;
   public $noProxyAccess;
   public $noPublicIp;
   public $noRemoveDataDisk;
   public $postStartupScript;
   public $proxyUri;
   public $serviceAccount;
+  public $serviceAccountScopes;
+  protected $shieldedInstanceConfigType = 'Google_Service_AIPlatformNotebooks_ShieldedInstanceConfig';
+  protected $shieldedInstanceConfigDataType = '';
   public $state;
   public $subnet;
+  public $tags;
   public $updateTime;
   protected $upgradeHistoryType = 'Google_Service_AIPlatformNotebooks_UpgradeHistoryEntry';
   protected $upgradeHistoryDataType = 'array';
@@ -215,6 +220,14 @@ class Google_Service_AIPlatformNotebooks_Instance extends Google_Collection
   {
     return $this->network;
   }
+  public function setNicType($nicType)
+  {
+    $this->nicType = $nicType;
+  }
+  public function getNicType()
+  {
+    return $this->nicType;
+  }
   public function setNoProxyAccess($noProxyAccess)
   {
     $this->noProxyAccess = $noProxyAccess;
@@ -263,6 +276,28 @@ class Google_Service_AIPlatformNotebooks_Instance extends Google_Collection
   {
     return $this->serviceAccount;
   }
+  public function setServiceAccountScopes($serviceAccountScopes)
+  {
+    $this->serviceAccountScopes = $serviceAccountScopes;
+  }
+  public function getServiceAccountScopes()
+  {
+    return $this->serviceAccountScopes;
+  }
+  /**
+   * @param Google_Service_AIPlatformNotebooks_ShieldedInstanceConfig
+   */
+  public function setShieldedInstanceConfig(Google_Service_AIPlatformNotebooks_ShieldedInstanceConfig $shieldedInstanceConfig)
+  {
+    $this->shieldedInstanceConfig = $shieldedInstanceConfig;
+  }
+  /**
+   * @return Google_Service_AIPlatformNotebooks_ShieldedInstanceConfig
+   */
+  public function getShieldedInstanceConfig()
+  {
+    return $this->shieldedInstanceConfig;
+  }
   public function setState($state)
   {
     $this->state = $state;
@@ -278,6 +313,14 @@ class Google_Service_AIPlatformNotebooks_Instance extends Google_Collection
   public function getSubnet()
   {
     return $this->subnet;
+  }
+  public function setTags($tags)
+  {
+    $this->tags = $tags;
+  }
+  public function getTags()
+  {
+    return $this->tags;
   }
   public function setUpdateTime($updateTime)
   {

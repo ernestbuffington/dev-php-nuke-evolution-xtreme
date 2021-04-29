@@ -20,6 +20,7 @@ class Google_Service_GoogleAnalyticsAdmin_GoogleAnalyticsAdminV1alphaListFirebas
   protected $collection_key = 'firebaseLinks';
   protected $firebaseLinksType = 'Google_Service_GoogleAnalyticsAdmin_GoogleAnalyticsAdminV1alphaFirebaseLink';
   protected $firebaseLinksDataType = 'array';
+  public $nextPageToken;
 
   /**
    * @param Google_Service_GoogleAnalyticsAdmin_GoogleAnalyticsAdminV1alphaFirebaseLink[]
@@ -34,5 +35,13 @@ class Google_Service_GoogleAnalyticsAdmin_GoogleAnalyticsAdminV1alphaListFirebas
   public function getFirebaseLinks()
   {
     return $this->firebaseLinks;
+  }
+  public function setNextPageToken($nextPageToken)
+  {
+    $this->nextPageToken = $nextPageToken;
+  }
+  public function getNextPageToken()
+  {
+    return $this->nextPageToken;
   }
 }

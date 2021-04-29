@@ -32,17 +32,19 @@ class Google_Service_CloudIdentity_Resource_DevicesDeviceUsersClientStates exten
    * name](https://cloud.google.com/apis/design/resource_names) of the ClientState
    * in format:
    * `devices/{device_id}/deviceUsers/{device_user_id}/clientStates/{partner_id}`,
-   * where device_id is the unique ID assigned to the Device, device_user_id is
-   * the unique ID assigned to the User and partner_id identifies the partner
+   * where `device_id` is the unique ID assigned to the Device, `device_user_id`
+   * is the unique ID assigned to the User and `partner_id` identifies the partner
    * storing the data. To get the client state for devices belonging to your own
    * organization, the `partnerId` is in the format: `customerId-*anystring*`.
    * Where the `customerId` is your organization's customer ID and `anystring` is
    * any suffix. This suffix is used in setting up Custom Access Levels in
    * Context-Aware Access. You may use `my_customer` instead of the customer ID
-   * for devices managed by your own organization.
+   * for devices managed by your own organization. You may specify `-` in place of
+   * the `{device_id}`, so the ClientState resource name can be:
+   * `devices/-/deviceUsers/{device_user_resource_id}/clientStates/{partner_id}`.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string customer Required. [Resource
+   * @opt_param string customer Optional. [Resource
    * name](https://cloud.google.com/apis/design/resource_names) of the customer.
    * If you're using this API for your own organization, use
    * `customers/my_customer` If you're using this API to manage another
@@ -66,7 +68,7 @@ class Google_Service_CloudIdentity_Resource_DevicesDeviceUsersClientStates exten
    * devices/{device}/deviceUsers/{deviceUser}
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string customer Required. [Resource
+   * @opt_param string customer Optional. [Resource
    * name](https://cloud.google.com/apis/design/resource_names) of the customer.
    * If you're using this API for your own organization, use
    * `customers/my_customer` If you're using this API to manage another
@@ -89,7 +91,10 @@ class Google_Service_CloudIdentity_Resource_DevicesDeviceUsersClientStates exten
     return $this->call('list', array($params), "Google_Service_CloudIdentity_GoogleAppsCloudidentityDevicesV1ListClientStatesResponse");
   }
   /**
-   * Updates the client state for the device user (clientStates.patch)
+   * Updates the client state for the device user **Note**: This method is
+   * available only to customers who have one of the following SKUs: Enterprise
+   * Standard, Enterprise Plus, Enterprise for Education, and Cloud Identity
+   * Premium (clientStates.patch)
    *
    * @param string $name Output only. [Resource
    * name](https://cloud.google.com/apis/design/resource_names) of the ClientState
@@ -110,7 +115,7 @@ class Google_Service_CloudIdentity_Resource_DevicesDeviceUsersClientStates exten
    * @param Google_Service_CloudIdentity_GoogleAppsCloudidentityDevicesV1ClientState $postBody
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string customer Required. [Resource
+   * @opt_param string customer Optional. [Resource
    * name](https://cloud.google.com/apis/design/resource_names) of the customer.
    * If you're using this API for your own organization, use
    * `customers/my_customer` If you're using this API to manage another

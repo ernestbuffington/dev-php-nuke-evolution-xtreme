@@ -28,13 +28,17 @@ class Google_Service_Directory_Resource_Orgunits extends Google_Service_Resource
   /**
    * Removes an organizational unit. (orgunits.delete)
    *
-   * @param string $customerId The unique ID for the customer's G Suite account.
-   * As an account administrator, you can also use the `my_customer` alias to
-   * represent your account's `customerId`. The `customerId` is also returned as
-   * part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+   * @param string $customerId The unique ID for the customer's Google Workspace
+   * account. As an account administrator, you can also use the `my_customer`
+   * alias to represent your account's `customerId`. The `customerId` is also
+   * returned as part of the [Users resource](/admin-
+   * sdk/directory/v1/reference/users).
    * @param string $orgUnitPath The full path of the organizational unit or its
    * unique ID.
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param bool allowPlus Parses org unit path without url decode to allow
+   * for plus in ou name
    */
   public function delete($customerId, $orgUnitPath, $optParams = array())
   {
@@ -45,13 +49,17 @@ class Google_Service_Directory_Resource_Orgunits extends Google_Service_Resource
   /**
    * Retrieves an organizational unit. (orgunits.get)
    *
-   * @param string $customerId The unique ID for the customer's G Suite account.
-   * As an account administrator, you can also use the `my_customer` alias to
-   * represent your account's `customerId`. The `customerId` is also returned as
-   * part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+   * @param string $customerId The unique ID for the customer's Google Workspace
+   * account. As an account administrator, you can also use the `my_customer`
+   * alias to represent your account's `customerId`. The `customerId` is also
+   * returned as part of the [Users resource](/admin-
+   * sdk/directory/v1/reference/users).
    * @param string $orgUnitPath The full path of the organizational unit or its
    * unique ID.
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param bool allowPlus Parses org unit path without url decode to allow
+   * for plus in ou name
    * @return Google_Service_Directory_OrgUnit
    */
   public function get($customerId, $orgUnitPath, $optParams = array())
@@ -63,10 +71,11 @@ class Google_Service_Directory_Resource_Orgunits extends Google_Service_Resource
   /**
    * Adds an organizational unit. (orgunits.insert)
    *
-   * @param string $customerId The unique ID for the customer's G Suite account.
-   * As an account administrator, you can also use the `my_customer` alias to
-   * represent your account's `customerId`. The `customerId` is also returned as
-   * part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+   * @param string $customerId The unique ID for the customer's Google Workspace
+   * account. As an account administrator, you can also use the `my_customer`
+   * alias to represent your account's `customerId`. The `customerId` is also
+   * returned as part of the [Users resource](/admin-
+   * sdk/directory/v1/reference/users).
    * @param Google_Service_Directory_OrgUnit $postBody
    * @param array $optParams Optional parameters.
    * @return Google_Service_Directory_OrgUnit
@@ -81,10 +90,11 @@ class Google_Service_Directory_Resource_Orgunits extends Google_Service_Resource
    * Retrieves a list of all organizational units for an account.
    * (orgunits.listOrgunits)
    *
-   * @param string $customerId The unique ID for the customer's G Suite account.
-   * As an account administrator, you can also use the `my_customer` alias to
-   * represent your account's `customerId`. The `customerId` is also returned as
-   * part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+   * @param string $customerId The unique ID for the customer's Google Workspace
+   * account. As an account administrator, you can also use the `my_customer`
+   * alias to represent your account's `customerId`. The `customerId` is also
+   * returned as part of the [Users resource](/admin-
+   * sdk/directory/v1/reference/users).
    * @param array $optParams Optional parameters.
    *
    * @opt_param string orgUnitPath The full path to the organizational unit or its
@@ -103,14 +113,18 @@ class Google_Service_Directory_Resource_Orgunits extends Google_Service_Resource
    * Updates an organizational unit. This method supports [patch semantics
    * ](/admin-sdk/directory/v1/guides/performance#patch) (orgunits.patch)
    *
-   * @param string $customerId The unique ID for the customer's G Suite account.
-   * As an account administrator, you can also use the `my_customer` alias to
-   * represent your account's `customerId`. The `customerId` is also returned as
-   * part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+   * @param string $customerId The unique ID for the customer's Google Workspace
+   * account. As an account administrator, you can also use the `my_customer`
+   * alias to represent your account's `customerId`. The `customerId` is also
+   * returned as part of the [Users resource](/admin-
+   * sdk/directory/v1/reference/users).
    * @param string $orgUnitPath The full path of the organizational unit or its
    * unique ID.
    * @param Google_Service_Directory_OrgUnit $postBody
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param bool allowPlus Parses org unit path without url decode to allow
+   * for plus in ou name
    * @return Google_Service_Directory_OrgUnit
    */
   public function patch($customerId, $orgUnitPath, Google_Service_Directory_OrgUnit $postBody, $optParams = array())
@@ -122,14 +136,18 @@ class Google_Service_Directory_Resource_Orgunits extends Google_Service_Resource
   /**
    * Updates an organizational unit. (orgunits.update)
    *
-   * @param string $customerId The unique ID for the customer's G Suite account.
-   * As an account administrator, you can also use the `my_customer` alias to
-   * represent your account's `customerId`. The `customerId` is also returned as
-   * part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+   * @param string $customerId The unique ID for the customer's Google Workspace
+   * account. As an account administrator, you can also use the `my_customer`
+   * alias to represent your account's `customerId`. The `customerId` is also
+   * returned as part of the [Users resource](/admin-
+   * sdk/directory/v1/reference/users).
    * @param string $orgUnitPath The full path of the organizational unit or its
    * unique ID.
    * @param Google_Service_Directory_OrgUnit $postBody
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param bool allowPlus Parses org unit path without url decode to allow
+   * for plus in ou name
    * @return Google_Service_Directory_OrgUnit
    */
   public function update($customerId, $orgUnitPath, Google_Service_Directory_OrgUnit $postBody, $optParams = array())

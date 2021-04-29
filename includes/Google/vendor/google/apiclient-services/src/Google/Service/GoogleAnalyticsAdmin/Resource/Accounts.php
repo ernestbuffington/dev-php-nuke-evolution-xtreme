@@ -46,8 +46,7 @@ class Google_Service_GoogleAnalyticsAdmin_Resource_Accounts extends Google_Servi
     return $this->call('delete', array($params), "Google_Service_GoogleAnalyticsAdmin_GoogleProtobufEmpty");
   }
   /**
-   * Lookup for a single Account. Throws "Target not found" if no such account
-   * found, or if caller does not have permissions to access it. (accounts.get)
+   * Lookup for a single Account. (accounts.get)
    *
    * @param string $name Required. The name of the account to lookup. Format:
    * accounts/{account} Example: "accounts/100"
@@ -111,8 +110,10 @@ class Google_Service_GoogleAnalyticsAdmin_Resource_Accounts extends Google_Servi
    * @param Google_Service_GoogleAnalyticsAdmin_GoogleAnalyticsAdminV1alphaAccount $postBody
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string updateMask The list of fields to be updated. Omitted fields
-   * will not be updated.
+   * @opt_param string updateMask Required. The list of fields to be updated.
+   * Field names must be in snake case (e.g., "field_to_update"). Omitted fields
+   * will not be updated. To replace the entire entity, use one path with the
+   * string "*" to match all fields.
    * @return Google_Service_GoogleAnalyticsAdmin_GoogleAnalyticsAdminV1alphaAccount
    */
   public function patch($name, Google_Service_GoogleAnalyticsAdmin_GoogleAnalyticsAdminV1alphaAccount $postBody, $optParams = array())
@@ -133,5 +134,21 @@ class Google_Service_GoogleAnalyticsAdmin_Resource_Accounts extends Google_Servi
     $params = array('postBody' => $postBody);
     $params = array_merge($params, $optParams);
     return $this->call('provisionAccountTicket', array($params), "Google_Service_GoogleAnalyticsAdmin_GoogleAnalyticsAdminV1alphaProvisionAccountTicketResponse");
+  }
+  /**
+   * Searches through all changes to an account or its children given the
+   * specified set of filters. (accounts.searchChangeHistoryEvents)
+   *
+   * @param string $account Required. The account resource for which to return
+   * change history resources.
+   * @param Google_Service_GoogleAnalyticsAdmin_GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_GoogleAnalyticsAdmin_GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsResponse
+   */
+  public function searchChangeHistoryEvents($account, Google_Service_GoogleAnalyticsAdmin_GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsRequest $postBody, $optParams = array())
+  {
+    $params = array('account' => $account, 'postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('searchChangeHistoryEvents', array($params), "Google_Service_GoogleAnalyticsAdmin_GoogleAnalyticsAdminV1alphaSearchChangeHistoryEventsResponse");
   }
 }

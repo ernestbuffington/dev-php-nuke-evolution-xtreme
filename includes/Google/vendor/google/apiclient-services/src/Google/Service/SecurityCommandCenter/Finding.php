@@ -17,6 +17,7 @@
 
 class Google_Service_SecurityCommandCenter_Finding extends Google_Model
 {
+  public $canonicalName;
   public $category;
   public $createTime;
   public $eventTime;
@@ -26,9 +27,18 @@ class Google_Service_SecurityCommandCenter_Finding extends Google_Model
   public $resourceName;
   protected $securityMarksType = 'Google_Service_SecurityCommandCenter_SecurityMarks';
   protected $securityMarksDataType = '';
+  public $severity;
   public $sourceProperties;
   public $state;
 
+  public function setCanonicalName($canonicalName)
+  {
+    $this->canonicalName = $canonicalName;
+  }
+  public function getCanonicalName()
+  {
+    return $this->canonicalName;
+  }
   public function setCategory($category)
   {
     $this->category = $category;
@@ -98,6 +108,14 @@ class Google_Service_SecurityCommandCenter_Finding extends Google_Model
   public function getSecurityMarks()
   {
     return $this->securityMarks;
+  }
+  public function setSeverity($severity)
+  {
+    $this->severity = $severity;
+  }
+  public function getSeverity()
+  {
+    return $this->severity;
   }
   public function setSourceProperties($sourceProperties)
   {

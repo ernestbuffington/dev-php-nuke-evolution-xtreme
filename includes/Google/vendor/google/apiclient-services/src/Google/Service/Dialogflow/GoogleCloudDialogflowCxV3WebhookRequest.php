@@ -23,13 +23,20 @@ class Google_Service_Dialogflow_GoogleCloudDialogflowCxV3WebhookRequest extends 
   protected $fulfillmentInfoDataType = '';
   protected $intentInfoType = 'Google_Service_Dialogflow_GoogleCloudDialogflowCxV3WebhookRequestIntentInfo';
   protected $intentInfoDataType = '';
+  public $languageCode;
   protected $messagesType = 'Google_Service_Dialogflow_GoogleCloudDialogflowCxV3ResponseMessage';
   protected $messagesDataType = 'array';
   protected $pageInfoType = 'Google_Service_Dialogflow_GoogleCloudDialogflowCxV3PageInfo';
   protected $pageInfoDataType = '';
   public $payload;
+  protected $sentimentAnalysisResultType = 'Google_Service_Dialogflow_GoogleCloudDialogflowCxV3WebhookRequestSentimentAnalysisResult';
+  protected $sentimentAnalysisResultDataType = '';
   protected $sessionInfoType = 'Google_Service_Dialogflow_GoogleCloudDialogflowCxV3SessionInfo';
   protected $sessionInfoDataType = '';
+  public $text;
+  public $transcript;
+  public $triggerEvent;
+  public $triggerIntent;
 
   public function setDetectIntentResponseId($detectIntentResponseId)
   {
@@ -66,6 +73,14 @@ class Google_Service_Dialogflow_GoogleCloudDialogflowCxV3WebhookRequest extends 
   public function getIntentInfo()
   {
     return $this->intentInfo;
+  }
+  public function setLanguageCode($languageCode)
+  {
+    $this->languageCode = $languageCode;
+  }
+  public function getLanguageCode()
+  {
+    return $this->languageCode;
   }
   /**
    * @param Google_Service_Dialogflow_GoogleCloudDialogflowCxV3ResponseMessage[]
@@ -104,6 +119,20 @@ class Google_Service_Dialogflow_GoogleCloudDialogflowCxV3WebhookRequest extends 
     return $this->payload;
   }
   /**
+   * @param Google_Service_Dialogflow_GoogleCloudDialogflowCxV3WebhookRequestSentimentAnalysisResult
+   */
+  public function setSentimentAnalysisResult(Google_Service_Dialogflow_GoogleCloudDialogflowCxV3WebhookRequestSentimentAnalysisResult $sentimentAnalysisResult)
+  {
+    $this->sentimentAnalysisResult = $sentimentAnalysisResult;
+  }
+  /**
+   * @return Google_Service_Dialogflow_GoogleCloudDialogflowCxV3WebhookRequestSentimentAnalysisResult
+   */
+  public function getSentimentAnalysisResult()
+  {
+    return $this->sentimentAnalysisResult;
+  }
+  /**
    * @param Google_Service_Dialogflow_GoogleCloudDialogflowCxV3SessionInfo
    */
   public function setSessionInfo(Google_Service_Dialogflow_GoogleCloudDialogflowCxV3SessionInfo $sessionInfo)
@@ -116,5 +145,37 @@ class Google_Service_Dialogflow_GoogleCloudDialogflowCxV3WebhookRequest extends 
   public function getSessionInfo()
   {
     return $this->sessionInfo;
+  }
+  public function setText($text)
+  {
+    $this->text = $text;
+  }
+  public function getText()
+  {
+    return $this->text;
+  }
+  public function setTranscript($transcript)
+  {
+    $this->transcript = $transcript;
+  }
+  public function getTranscript()
+  {
+    return $this->transcript;
+  }
+  public function setTriggerEvent($triggerEvent)
+  {
+    $this->triggerEvent = $triggerEvent;
+  }
+  public function getTriggerEvent()
+  {
+    return $this->triggerEvent;
+  }
+  public function setTriggerIntent($triggerIntent)
+  {
+    $this->triggerIntent = $triggerIntent;
+  }
+  public function getTriggerIntent()
+  {
+    return $this->triggerIntent;
   }
 }

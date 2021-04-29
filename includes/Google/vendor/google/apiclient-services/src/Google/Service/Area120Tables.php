@@ -23,7 +23,7 @@
  *
  * <p>
  * For more information about this service, see the API
- * <a href="https://tables.area120.google.com" target="_blank">Documentation</a>
+ * <a href="https://support.google.com/area120-tables/answer/10011390" target="_blank">Documentation</a>
  * </p>
  *
  * @author Google, Inc.
@@ -33,7 +33,7 @@ class Google_Service_Area120Tables extends Google_Service
   /** See, edit, create, and delete all of your Google Drive files. */
   const DRIVE =
       "https://www.googleapis.com/auth/drive";
-  /** View and manage Google Drive files and folders that you have opened or created with this app. */
+  /** See, edit, create, and delete only the specific Google Drive files you use with this app. */
   const DRIVE_FILE =
       "https://www.googleapis.com/auth/drive.file";
   /** See and download all your Google Drive files. */
@@ -45,6 +45,9 @@ class Google_Service_Area120Tables extends Google_Service
   /** View your Google Spreadsheets. */
   const SPREADSHEETS_READONLY =
       "https://www.googleapis.com/auth/spreadsheets.readonly";
+  /** See, edit, create, and delete your tables in Tables by Area 120. */
+  const TABLES =
+      "https://www.googleapis.com/auth/tables";
 
   public $tables;
   public $tables_rows;
@@ -85,6 +88,10 @@ class Google_Service_Area120Tables extends Google_Service
               'path' => 'v1alpha1/tables',
               'httpMethod' => 'GET',
               'parameters' => array(
+                'orderBy' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
                 'pageSize' => array(
                   'location' => 'query',
                   'type' => 'integer',
@@ -106,6 +113,16 @@ class Google_Service_Area120Tables extends Google_Service
           'methods' => array(
             'batchCreate' => array(
               'path' => 'v1alpha1/{+parent}/rows:batchCreate',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'parent' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'batchDelete' => array(
+              'path' => 'v1alpha1/{+parent}/rows:batchDelete',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'parent' => array(
@@ -170,6 +187,14 @@ class Google_Service_Area120Tables extends Google_Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ),
+                'filter' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'orderBy' => array(
+                  'location' => 'query',
+                  'type' => 'string',
                 ),
                 'pageSize' => array(
                   'location' => 'query',

@@ -27,12 +27,16 @@ class Google_Service_Dataproc_ClusterConfig extends Google_Collection
   protected $endpointConfigDataType = '';
   protected $gceClusterConfigType = 'Google_Service_Dataproc_GceClusterConfig';
   protected $gceClusterConfigDataType = '';
+  protected $gkeClusterConfigType = 'Google_Service_Dataproc_GkeClusterConfig';
+  protected $gkeClusterConfigDataType = '';
   protected $initializationActionsType = 'Google_Service_Dataproc_NodeInitializationAction';
   protected $initializationActionsDataType = 'array';
   protected $lifecycleConfigType = 'Google_Service_Dataproc_LifecycleConfig';
   protected $lifecycleConfigDataType = '';
   protected $masterConfigType = 'Google_Service_Dataproc_InstanceGroupConfig';
   protected $masterConfigDataType = '';
+  protected $metastoreConfigType = 'Google_Service_Dataproc_MetastoreConfig';
+  protected $metastoreConfigDataType = '';
   protected $secondaryWorkerConfigType = 'Google_Service_Dataproc_InstanceGroupConfig';
   protected $secondaryWorkerConfigDataType = '';
   protected $securityConfigType = 'Google_Service_Dataproc_SecurityConfig';
@@ -108,6 +112,20 @@ class Google_Service_Dataproc_ClusterConfig extends Google_Collection
     return $this->gceClusterConfig;
   }
   /**
+   * @param Google_Service_Dataproc_GkeClusterConfig
+   */
+  public function setGkeClusterConfig(Google_Service_Dataproc_GkeClusterConfig $gkeClusterConfig)
+  {
+    $this->gkeClusterConfig = $gkeClusterConfig;
+  }
+  /**
+   * @return Google_Service_Dataproc_GkeClusterConfig
+   */
+  public function getGkeClusterConfig()
+  {
+    return $this->gkeClusterConfig;
+  }
+  /**
    * @param Google_Service_Dataproc_NodeInitializationAction[]
    */
   public function setInitializationActions($initializationActions)
@@ -148,6 +166,20 @@ class Google_Service_Dataproc_ClusterConfig extends Google_Collection
   public function getMasterConfig()
   {
     return $this->masterConfig;
+  }
+  /**
+   * @param Google_Service_Dataproc_MetastoreConfig
+   */
+  public function setMetastoreConfig(Google_Service_Dataproc_MetastoreConfig $metastoreConfig)
+  {
+    $this->metastoreConfig = $metastoreConfig;
+  }
+  /**
+   * @return Google_Service_Dataproc_MetastoreConfig
+   */
+  public function getMetastoreConfig()
+  {
+    return $this->metastoreConfig;
   }
   /**
    * @param Google_Service_Dataproc_InstanceGroupConfig

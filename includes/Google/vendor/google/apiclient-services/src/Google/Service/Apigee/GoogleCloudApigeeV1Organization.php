@@ -18,15 +18,19 @@
 class Google_Service_Apigee_GoogleCloudApigeeV1Organization extends Google_Collection
 {
   protected $collection_key = 'environments';
+  protected $addonsConfigType = 'Google_Service_Apigee_GoogleCloudApigeeV1AddonsConfig';
+  protected $addonsConfigDataType = '';
   public $analyticsRegion;
   public $attributes;
   public $authorizedNetwork;
+  public $billingType;
   public $caCertificate;
   public $createdAt;
   public $customerName;
   public $description;
   public $displayName;
   public $environments;
+  public $expiresAt;
   public $lastModifiedAt;
   public $name;
   public $projectId;
@@ -34,9 +38,24 @@ class Google_Service_Apigee_GoogleCloudApigeeV1Organization extends Google_Colle
   protected $propertiesDataType = '';
   public $runtimeDatabaseEncryptionKeyName;
   public $runtimeType;
+  public $state;
   public $subscriptionType;
   public $type;
 
+  /**
+   * @param Google_Service_Apigee_GoogleCloudApigeeV1AddonsConfig
+   */
+  public function setAddonsConfig(Google_Service_Apigee_GoogleCloudApigeeV1AddonsConfig $addonsConfig)
+  {
+    $this->addonsConfig = $addonsConfig;
+  }
+  /**
+   * @return Google_Service_Apigee_GoogleCloudApigeeV1AddonsConfig
+   */
+  public function getAddonsConfig()
+  {
+    return $this->addonsConfig;
+  }
   public function setAnalyticsRegion($analyticsRegion)
   {
     $this->analyticsRegion = $analyticsRegion;
@@ -60,6 +79,14 @@ class Google_Service_Apigee_GoogleCloudApigeeV1Organization extends Google_Colle
   public function getAuthorizedNetwork()
   {
     return $this->authorizedNetwork;
+  }
+  public function setBillingType($billingType)
+  {
+    $this->billingType = $billingType;
+  }
+  public function getBillingType()
+  {
+    return $this->billingType;
   }
   public function setCaCertificate($caCertificate)
   {
@@ -108,6 +135,14 @@ class Google_Service_Apigee_GoogleCloudApigeeV1Organization extends Google_Colle
   public function getEnvironments()
   {
     return $this->environments;
+  }
+  public function setExpiresAt($expiresAt)
+  {
+    $this->expiresAt = $expiresAt;
+  }
+  public function getExpiresAt()
+  {
+    return $this->expiresAt;
   }
   public function setLastModifiedAt($lastModifiedAt)
   {
@@ -162,6 +197,14 @@ class Google_Service_Apigee_GoogleCloudApigeeV1Organization extends Google_Colle
   public function getRuntimeType()
   {
     return $this->runtimeType;
+  }
+  public function setState($state)
+  {
+    $this->state = $state;
+  }
+  public function getState()
+  {
+    return $this->state;
   }
   public function setSubscriptionType($subscriptionType)
   {

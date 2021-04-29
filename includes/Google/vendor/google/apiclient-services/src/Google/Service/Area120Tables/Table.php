@@ -17,11 +17,15 @@
 
 class Google_Service_Area120Tables_Table extends Google_Collection
 {
-  protected $collection_key = 'columns';
+  protected $collection_key = 'savedViews';
   protected $columnsType = 'Google_Service_Area120Tables_ColumnDescription';
   protected $columnsDataType = 'array';
+  public $createTime;
   public $displayName;
   public $name;
+  protected $savedViewsType = 'Google_Service_Area120Tables_SavedView';
+  protected $savedViewsDataType = 'array';
+  public $updateTime;
 
   /**
    * @param Google_Service_Area120Tables_ColumnDescription[]
@@ -36,6 +40,14 @@ class Google_Service_Area120Tables_Table extends Google_Collection
   public function getColumns()
   {
     return $this->columns;
+  }
+  public function setCreateTime($createTime)
+  {
+    $this->createTime = $createTime;
+  }
+  public function getCreateTime()
+  {
+    return $this->createTime;
   }
   public function setDisplayName($displayName)
   {
@@ -52,5 +64,27 @@ class Google_Service_Area120Tables_Table extends Google_Collection
   public function getName()
   {
     return $this->name;
+  }
+  /**
+   * @param Google_Service_Area120Tables_SavedView[]
+   */
+  public function setSavedViews($savedViews)
+  {
+    $this->savedViews = $savedViews;
+  }
+  /**
+   * @return Google_Service_Area120Tables_SavedView[]
+   */
+  public function getSavedViews()
+  {
+    return $this->savedViews;
+  }
+  public function setUpdateTime($updateTime)
+  {
+    $this->updateTime = $updateTime;
+  }
+  public function getUpdateTime()
+  {
+    return $this->updateTime;
   }
 }

@@ -31,7 +31,7 @@
  */
 class Google_Service_Games extends Google_Service
 {
-  /** View and manage its own configuration data in your Google Drive. */
+  /** See, create, and delete its own configuration data in your Google Drive. */
   const DRIVE_APPDATA =
       "https://www.googleapis.com/auth/drive.appdata";
   /** Create, edit, and delete your Google Play Games activity. */
@@ -48,7 +48,6 @@ class Google_Service_Games extends Google_Service
   public $revisions;
   public $scores;
   public $snapshots;
-  public $snapshotsExtended;
   public $stats;
 
   /**
@@ -207,6 +206,19 @@ class Google_Service_Games extends Google_Service
                   'type' => 'string',
                 ),
                 'platformType' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+              ),
+            ),'getEndPoint' => array(
+              'path' => 'games/v1/applications/getEndPoint',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'applicationId' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'endPointType' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -620,26 +632,6 @@ class Google_Service_Games extends Google_Service
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
-                ),
-              ),
-            ),
-          )
-        )
-    );
-    $this->snapshotsExtended = new Google_Service_Games_Resource_SnapshotsExtended(
-        $this,
-        $this->serviceName,
-        'snapshotsExtended',
-        array(
-          'methods' => array(
-            'resolveSnapshotHead' => array(
-              'path' => 'games/v1/snapshotsExtended/{snapshotName}:resolveHead',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'snapshotName' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
                 ),
               ),
             ),

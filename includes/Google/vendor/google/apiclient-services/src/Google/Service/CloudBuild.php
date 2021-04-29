@@ -30,7 +30,7 @@
  */
 class Google_Service_CloudBuild extends Google_Service
 {
-  /** View and manage your data across Google Cloud Platform services. */
+  /** See, edit, configure, and delete your Google Cloud Platform data. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
 
@@ -394,6 +394,25 @@ class Google_Service_CloudBuild extends Google_Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ),
+              ),
+            ),'webhook' => array(
+              'path' => 'v1/projects/{projectId}/triggers/{trigger}:webhook',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'projectId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'trigger' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'secret' => array(
+                  'location' => 'query',
+                  'type' => 'string',
                 ),
               ),
             ),

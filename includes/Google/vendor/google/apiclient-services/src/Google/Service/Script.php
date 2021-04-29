@@ -45,7 +45,7 @@ class Google_Service_Script extends Google_Service
   /** View and manage the provisioning of users on your domain. */
   const ADMIN_DIRECTORY_USER =
       "https://www.googleapis.com/auth/admin.directory.user";
-  /** View and manage your Google Docs documents. */
+  /** See, create, and edit all Google Docs documents you have access to. */
   const DOCUMENTS =
       "https://www.googleapis.com/auth/documents";
   /** See, edit, create, and delete all of your Google Drive files. */
@@ -81,7 +81,7 @@ class Google_Service_Script extends Google_Service
   /** See, edit, create, and delete your spreadsheets in Google Drive. */
   const SPREADSHEETS =
       "https://www.googleapis.com/auth/spreadsheets";
-  /** View your email address. */
+  /** See your primary Google Account email address. */
   const USERINFO_EMAIL =
       "https://www.googleapis.com/auth/userinfo.email";
 

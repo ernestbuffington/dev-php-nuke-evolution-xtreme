@@ -19,8 +19,8 @@
  * Service definition for ServiceControl (v2).
  *
  * <p>
- * Provides control plane functionality to managed services, such as logging,
- * monitoring, and status checks.</p>
+ * Provides admission control and telemetry reporting for services integrated
+ * with Service Infrastructure.</p>
  *
  * <p>
  * For more information about this service, see the API
@@ -31,7 +31,7 @@
  */
 class Google_Service_ServiceControl extends Google_Service
 {
-  /** View and manage your data across Google Cloud Platform services. */
+  /** See, edit, configure, and delete your Google Cloud Platform data. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
   /** Manage your Google Service Control data. */

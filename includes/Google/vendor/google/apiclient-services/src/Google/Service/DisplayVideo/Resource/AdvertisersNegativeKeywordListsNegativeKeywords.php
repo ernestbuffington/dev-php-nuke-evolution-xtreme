@@ -105,7 +105,7 @@ class Google_Service_DisplayVideo_Resource_AdvertisersNegativeKeywordListsNegati
    * are: * `keywordValue` (default) The default sorting order is ascending. To
    * specify descending order for a field, a suffix " desc" should be added to the
    * field name. Example: `keywordValue desc`.
-   * @opt_param int pageSize Requested page size. Must be between `1` and `100`.
+   * @opt_param int pageSize Requested page size. Must be between `1` and `1000`.
    * If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT`
    * if an invalid value is specified.
    * @opt_param string pageToken A token identifying a page of results the server
@@ -119,5 +119,25 @@ class Google_Service_DisplayVideo_Resource_AdvertisersNegativeKeywordListsNegati
     $params = array('advertiserId' => $advertiserId, 'negativeKeywordListId' => $negativeKeywordListId);
     $params = array_merge($params, $optParams);
     return $this->call('list', array($params), "Google_Service_DisplayVideo_ListNegativeKeywordsResponse");
+  }
+  /**
+   * Replaces all negative keywords in a single negative keyword list. The
+   * operation will replace the keywords in a negative keyword list with keywords
+   * provided in ReplaceNegativeKeywordsRequest.new_negative_keywords.
+   * (negativeKeywords.replace)
+   *
+   * @param string $advertiserId Required. The ID of the DV360 advertiser to which
+   * the parent negative keyword list belongs.
+   * @param string $negativeKeywordListId Required. The ID of the parent negative
+   * keyword list to which the negative keywords belong.
+   * @param Google_Service_DisplayVideo_ReplaceNegativeKeywordsRequest $postBody
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_DisplayVideo_ReplaceNegativeKeywordsResponse
+   */
+  public function replace($advertiserId, $negativeKeywordListId, Google_Service_DisplayVideo_ReplaceNegativeKeywordsRequest $postBody, $optParams = array())
+  {
+    $params = array('advertiserId' => $advertiserId, 'negativeKeywordListId' => $negativeKeywordListId, 'postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('replace', array($params), "Google_Service_DisplayVideo_ReplaceNegativeKeywordsResponse");
   }
 }

@@ -32,7 +32,7 @@
  */
 class Google_Service_DeploymentManager extends Google_Service
 {
-  /** View and manage your data across Google Cloud Platform services. */
+  /** See, edit, configure, and delete your Google Cloud Platform data. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
   /** View your data across Google Cloud Platform services. */
@@ -182,10 +182,6 @@ class Google_Service_DeploymentManager extends Google_Service
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
-                ),
-                'returnPartialSuccess' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
                 ),
               ),
             ),'patch' => array(
@@ -347,10 +343,6 @@ class Google_Service_DeploymentManager extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'returnPartialSuccess' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
             ),
           )
@@ -401,10 +393,6 @@ class Google_Service_DeploymentManager extends Google_Service
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
-                ),
-                'returnPartialSuccess' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
                 ),
               ),
             ),
@@ -467,10 +455,6 @@ class Google_Service_DeploymentManager extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'returnPartialSuccess' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
               ),
             ),
           )
@@ -506,10 +490,6 @@ class Google_Service_DeploymentManager extends Google_Service
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
-                ),
-                'returnPartialSuccess' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
                 ),
               ),
             ),

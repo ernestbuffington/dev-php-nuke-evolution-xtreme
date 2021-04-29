@@ -23,13 +23,20 @@ class Google_Service_Dialogflow_GoogleCloudDialogflowCxV3beta1WebhookRequest ext
   protected $fulfillmentInfoDataType = '';
   protected $intentInfoType = 'Google_Service_Dialogflow_GoogleCloudDialogflowCxV3beta1WebhookRequestIntentInfo';
   protected $intentInfoDataType = '';
+  public $languageCode;
   protected $messagesType = 'Google_Service_Dialogflow_GoogleCloudDialogflowCxV3beta1ResponseMessage';
   protected $messagesDataType = 'array';
   protected $pageInfoType = 'Google_Service_Dialogflow_GoogleCloudDialogflowCxV3beta1PageInfo';
   protected $pageInfoDataType = '';
   public $payload;
+  protected $sentimentAnalysisResultType = 'Google_Service_Dialogflow_GoogleCloudDialogflowCxV3beta1WebhookRequestSentimentAnalysisResult';
+  protected $sentimentAnalysisResultDataType = '';
   protected $sessionInfoType = 'Google_Service_Dialogflow_GoogleCloudDialogflowCxV3beta1SessionInfo';
   protected $sessionInfoDataType = '';
+  public $text;
+  public $transcript;
+  public $triggerEvent;
+  public $triggerIntent;
 
   public function setDetectIntentResponseId($detectIntentResponseId)
   {
@@ -66,6 +73,14 @@ class Google_Service_Dialogflow_GoogleCloudDialogflowCxV3beta1WebhookRequest ext
   public function getIntentInfo()
   {
     return $this->intentInfo;
+  }
+  public function setLanguageCode($languageCode)
+  {
+    $this->languageCode = $languageCode;
+  }
+  public function getLanguageCode()
+  {
+    return $this->languageCode;
   }
   /**
    * @param Google_Service_Dialogflow_GoogleCloudDialogflowCxV3beta1ResponseMessage[]
@@ -104,6 +119,20 @@ class Google_Service_Dialogflow_GoogleCloudDialogflowCxV3beta1WebhookRequest ext
     return $this->payload;
   }
   /**
+   * @param Google_Service_Dialogflow_GoogleCloudDialogflowCxV3beta1WebhookRequestSentimentAnalysisResult
+   */
+  public function setSentimentAnalysisResult(Google_Service_Dialogflow_GoogleCloudDialogflowCxV3beta1WebhookRequestSentimentAnalysisResult $sentimentAnalysisResult)
+  {
+    $this->sentimentAnalysisResult = $sentimentAnalysisResult;
+  }
+  /**
+   * @return Google_Service_Dialogflow_GoogleCloudDialogflowCxV3beta1WebhookRequestSentimentAnalysisResult
+   */
+  public function getSentimentAnalysisResult()
+  {
+    return $this->sentimentAnalysisResult;
+  }
+  /**
    * @param Google_Service_Dialogflow_GoogleCloudDialogflowCxV3beta1SessionInfo
    */
   public function setSessionInfo(Google_Service_Dialogflow_GoogleCloudDialogflowCxV3beta1SessionInfo $sessionInfo)
@@ -116,5 +145,37 @@ class Google_Service_Dialogflow_GoogleCloudDialogflowCxV3beta1WebhookRequest ext
   public function getSessionInfo()
   {
     return $this->sessionInfo;
+  }
+  public function setText($text)
+  {
+    $this->text = $text;
+  }
+  public function getText()
+  {
+    return $this->text;
+  }
+  public function setTranscript($transcript)
+  {
+    $this->transcript = $transcript;
+  }
+  public function getTranscript()
+  {
+    return $this->transcript;
+  }
+  public function setTriggerEvent($triggerEvent)
+  {
+    $this->triggerEvent = $triggerEvent;
+  }
+  public function getTriggerEvent()
+  {
+    return $this->triggerEvent;
+  }
+  public function setTriggerIntent($triggerIntent)
+  {
+    $this->triggerIntent = $triggerIntent;
+  }
+  public function getTriggerIntent()
+  {
+    return $this->triggerIntent;
   }
 }

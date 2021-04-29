@@ -26,22 +26,6 @@
 class Google_Service_GoogleAnalyticsAdmin_Resource_PropertiesIosAppDataStreams extends Google_Service_Resource
 {
   /**
-   * Creates an iOS app data stream with the specified location and attributes.
-   * (iosAppDataStreams.create)
-   *
-   * @param string $parent Required. The parent resource where this ios app data
-   * stream will be created. Format: properties/123
-   * @param Google_Service_GoogleAnalyticsAdmin_GoogleAnalyticsAdminV1alphaIosAppDataStream $postBody
-   * @param array $optParams Optional parameters.
-   * @return Google_Service_GoogleAnalyticsAdmin_GoogleAnalyticsAdminV1alphaIosAppDataStream
-   */
-  public function create($parent, Google_Service_GoogleAnalyticsAdmin_GoogleAnalyticsAdminV1alphaIosAppDataStream $postBody, $optParams = array())
-  {
-    $params = array('parent' => $parent, 'postBody' => $postBody);
-    $params = array_merge($params, $optParams);
-    return $this->call('create', array($params), "Google_Service_GoogleAnalyticsAdmin_GoogleAnalyticsAdminV1alphaIosAppDataStream");
-  }
-  /**
    * Deletes an iOS app stream on a property. (iosAppDataStreams.delete)
    *
    * @param string $name Required. The name of the iOS app data stream to delete.
@@ -57,9 +41,7 @@ class Google_Service_GoogleAnalyticsAdmin_Resource_PropertiesIosAppDataStreams e
     return $this->call('delete', array($params), "Google_Service_GoogleAnalyticsAdmin_GoogleProtobufEmpty");
   }
   /**
-   * Lookup for a single IosAppDataStream Throws "Target not found" if no such iOS
-   * app data stream found, or if the caller does not have permissions to access
-   * it. (iosAppDataStreams.get)
+   * Lookup for a single IosAppDataStream (iosAppDataStreams.get)
    *
    * @param string $name Required. The name of the iOS app data stream to lookup.
    * Format: properties/{property_id}/iosAppDataStreams/{stream_id} Example:
@@ -108,8 +90,10 @@ class Google_Service_GoogleAnalyticsAdmin_Resource_PropertiesIosAppDataStreams e
    * @param Google_Service_GoogleAnalyticsAdmin_GoogleAnalyticsAdminV1alphaIosAppDataStream $postBody
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string updateMask The list of fields to be updated. Omitted fields
-   * will not be updated.
+   * @opt_param string updateMask Required. The list of fields to be updated.
+   * Field names must be in snake case (e.g., "field_to_update"). Omitted fields
+   * will not be updated. To replace the entire entity, use one path with the
+   * string "*" to match all fields.
    * @return Google_Service_GoogleAnalyticsAdmin_GoogleAnalyticsAdminV1alphaIosAppDataStream
    */
   public function patch($name, Google_Service_GoogleAnalyticsAdmin_GoogleAnalyticsAdminV1alphaIosAppDataStream $postBody, $optParams = array())

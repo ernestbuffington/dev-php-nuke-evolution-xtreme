@@ -23,14 +23,14 @@
  *
  * <p>
  * For more information about this service, see the API
- * <a href="https://www.envoyproxy.io/docs/envoy/latest/configuration/overview/v2_overview#management-server" target="_blank">Documentation</a>
+ * <a href="https://cloud.google.com/traffic-director" target="_blank">Documentation</a>
  * </p>
  *
  * @author Google, Inc.
  */
 class Google_Service_TrafficDirectorService extends Google_Service
 {
-  /** View and manage your data across Google Cloud Platform services. */
+  /** See, edit, configure, and delete your Google Cloud Platform data. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
 

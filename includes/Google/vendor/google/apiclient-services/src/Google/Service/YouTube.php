@@ -73,7 +73,6 @@ class Google_Service_YouTube extends Google_Service
   public $playlistItems;
   public $playlists;
   public $search;
-  public $sponsors;
   public $subscriptions;
   public $superChatEvents;
   public $tests;
@@ -765,42 +764,6 @@ class Google_Service_YouTube extends Google_Service
                   'type' => 'string',
                 ),
                 'streamId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-              ),
-            ),'control' => array(
-              'path' => 'youtube/v3/liveBroadcasts/control',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'id' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                  'required' => true,
-                ),
-                'displaySlate' => array(
-                  'location' => 'query',
-                  'type' => 'boolean',
-                ),
-                'offsetTimeMs' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'onBehalfOfContentOwner' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'onBehalfOfContentOwnerChannel' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'walltime' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -1577,39 +1540,6 @@ class Google_Service_YouTube extends Google_Service
                   'type' => 'string',
                 ),
                 'videoType' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-              ),
-            ),
-          )
-        )
-    );
-    $this->sponsors = new Google_Service_YouTube_Resource_Sponsors(
-        $this,
-        $this->serviceName,
-        'sponsors',
-        array(
-          'methods' => array(
-            'list' => array(
-              'path' => 'youtube/v3/sponsors',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'part' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                  'repeated' => true,
-                  'required' => true,
-                ),
-                'filter' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'maxResults' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
-                'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),

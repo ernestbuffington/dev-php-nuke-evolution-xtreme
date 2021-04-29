@@ -45,10 +45,10 @@ class Google_Service_PeopleService extends Google_Service
   /** View your street addresses. */
   const USER_ADDRESSES_READ =
       "https://www.googleapis.com/auth/user.addresses.read";
-  /** View your complete date of birth. */
+  /** See and download your exact date of birth. */
   const USER_BIRTHDAY_READ =
       "https://www.googleapis.com/auth/user.birthday.read";
-  /** View your email addresses. */
+  /** See and download all of your Google Account email addresses. */
   const USER_EMAILS_READ =
       "https://www.googleapis.com/auth/user.emails.read";
   /** See your gender. */
@@ -57,10 +57,10 @@ class Google_Service_PeopleService extends Google_Service
   /** See your education, work history and org info. */
   const USER_ORGANIZATION_READ =
       "https://www.googleapis.com/auth/user.organization.read";
-  /** View your phone numbers. */
+  /** See and download your personal phone numbers. */
   const USER_PHONENUMBERS_READ =
       "https://www.googleapis.com/auth/user.phonenumbers.read";
-  /** View your email address. */
+  /** See your primary Google Account email address. */
   const USERINFO_EMAIL =
       "https://www.googleapis.com/auth/userinfo.email";
   /** See your personal info, including any personal info you've made publicly available. */
@@ -98,6 +98,10 @@ class Google_Service_PeopleService extends Google_Service
               'path' => 'v1/contactGroups:batchGet',
               'httpMethod' => 'GET',
               'parameters' => array(
+                'groupFields' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
                 'maxMembers' => array(
                   'location' => 'query',
                   'type' => 'integer',
@@ -135,6 +139,10 @@ class Google_Service_PeopleService extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
+                'groupFields' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
                 'maxMembers' => array(
                   'location' => 'query',
                   'type' => 'integer',
@@ -144,6 +152,10 @@ class Google_Service_PeopleService extends Google_Service
               'path' => 'v1/contactGroups',
               'httpMethod' => 'GET',
               'parameters' => array(
+                'groupFields' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
                 'pageSize' => array(
                   'location' => 'query',
                   'type' => 'integer',
@@ -232,6 +244,23 @@ class Google_Service_PeopleService extends Google_Service
                   'type' => 'string',
                 ),
               ),
+            ),'search' => array(
+              'path' => 'v1/otherContacts:search',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'query' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'readMask' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+              ),
             ),
           )
         )
@@ -242,7 +271,19 @@ class Google_Service_PeopleService extends Google_Service
         'people',
         array(
           'methods' => array(
-            'createContact' => array(
+            'batchCreateContacts' => array(
+              'path' => 'v1/people:batchCreateContacts',
+              'httpMethod' => 'POST',
+              'parameters' => array(),
+            ),'batchDeleteContacts' => array(
+              'path' => 'v1/people:batchDeleteContacts',
+              'httpMethod' => 'POST',
+              'parameters' => array(),
+            ),'batchUpdateContacts' => array(
+              'path' => 'v1/people:batchUpdateContacts',
+              'httpMethod' => 'POST',
+              'parameters' => array(),
+            ),'createContact' => array(
               'path' => 'v1/people:createContact',
               'httpMethod' => 'POST',
               'parameters' => array(
@@ -364,6 +405,28 @@ class Google_Service_PeopleService extends Google_Service
                 'syncToken' => array(
                   'location' => 'query',
                   'type' => 'string',
+                ),
+              ),
+            ),'searchContacts' => array(
+              'path' => 'v1/people:searchContacts',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'query' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'readMask' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'sources' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
                 ),
               ),
             ),'searchDirectoryPeople' => array(
