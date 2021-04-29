@@ -123,8 +123,16 @@ if ($config['button_standard'] == 1){
 
 if ($config['button_banner'] == 1){
     $num = 0;
-    $result = $db->sql_query("SELECT `id`, `site_name`, `site_url`, `site_image`, `site_description`, `site_hits`, `site_status`, `date_added` FROM `".$prefix."_link_us` WHERE `site_status` = '1' AND `button_type` = '2'");
-    $numrows = $db->sql_numrows($result);
+    $result = $db->sql_query("SELECT `id`, 
+	                          `site_name`, 
+							   `site_url`, 
+							 `site_image`, 
+					   `site_description`, 
+					          `site_hits`, 
+							`site_status`, 
+							 `date_added` FROM `".$prefix."_link_us` WHERE `site_status` = '1' AND `button_type` = '2'");
+    
+	$numrows = $db->sql_numrows($result);
 
     if ($numrows > 0) {
         echo "<br /><br />";
