@@ -1,0 +1,111 @@
+ div#wrapper1 {
+   text-align: left;    
+   width: 600px;
+   height: 90%;  
+   margin: 2px;  
+	box-shadow: 10px 10px 5px #888888;
+	border: 1px solid;
+	border-radius: 6px;
+
+ } div#wrapper2 {
+    text-align: left;    
+    width: 600px;  
+    margin: 2px;  
+ 	box-shadow: 10px 10px 5px #888888;
+ 	border: 1px solid;
+ 	border-radius: 6px;
+ 
+  }
+ div#form{
+ 	position: absolute;
+ 	top:200px;
+	left:120px;
+ }
+ div.top{
+ 	float:left;
+
+ }
+ div.topleft {
+ 	float: left;
+	font-size: 14px;
+	font-weight: bold;
+	font-family: Arial;
+	text-align:center;
+ }
+ div.topright {
+	float: left;
+	width: 430px;
+	font-size:12px;
+	font-family: Arial;
+	text-align:center;
+ }
+ 
+ div.bottom{
+ 	display:block;
+	font-size:12px;
+	font-family: Arial;
+	text-align:center;
+ }
+ div.shade{
+ 	background-color: #efefef;
+	display:block;
+ }
+ div.noshade{
+  	background-color: #ffffff;
+	display: block;
+}
+
+div.timeTotal{
+	display: block;
+	font-size:12px;
+	font-weight: bold;
+	font-family: Arial Narrow;
+	text-align:right;
+	text-decoration: underline;
+}
+
+ .H2 {
+	font-size: 16PX;
+	font-weight: bold;
+	font-family: Arial Black;
+	text-decoration:underline
+ }
+ 
+ .H3{
+ 	font-size: 14PX;
+ 	font-weight: bold;
+ 	font-family: Arial; 
+ }
+ legend#formlegend{
+ 	font-size: 30px;
+ 	font-weight: normal;
+	font-family: Arial;
+ }
+.fieldset
+{
+    border:2px solid green;
+    width:300px;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;	
+    border-radius:8px;	
+}
+
+ label.formLabel{
+ 	font-weight: bold;
+ 	font-size: 16px;
+	font-family: Arial;
+ }
+ .warning{
+ 	font-size: 12px;
+	color: red;
+	font-family: Arial Narrow;
+ }
+ .padding{
+ 	padding-right: 30px;
+ }
+ input#userid #password{
+ 	font-family: MS serif;
+	font-size: 16px;
+	font-weight: normal;
+ }
+ 
