@@ -2,6 +2,7 @@
 /*======================================================================= 
   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 /************************************************************************/
 /* PHP-NUKE: Advanced Content Management System                         */
 /* ============================================                         */
@@ -53,8 +54,6 @@
       SiteMap Mod                              v1.0.0       04/26/2021
 	  Dynamic CSS, JS and PHPCSS               v1.0.0       04/29/2021
  ************************************************************************/
-# Damaris Soto
-
 if((defined('NUKE_EVO')) || (defined('NUKE_TITANIUM')))return;
 if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME']))exit('Access Denied');
 
