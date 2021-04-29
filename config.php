@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /*=======================================================================
  Nuke-Evolution Xtreme: Enhanced PHP-Nuke Web Portal System

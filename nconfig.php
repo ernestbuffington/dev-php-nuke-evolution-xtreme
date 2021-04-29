@@ -16,20 +16,16 @@
 /************************************************************************/
 if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) exit('Access Denied');
 
-# Network database globals
 global $dbhost2, $dbname2, $dbuname2, $db2, $network_prefix; 
 
-# Un-Comment the following line to enable 86it Network support!
+# un-comment this to enable network support
 //define('network', 'enabled');
+
 if ( defined('network') ):
-# ip address of domain of MySQL server use local host if we are hosting your web portal!
 $dbhost2 = 'localhost';
-# Network database - This never changes
 $dbname2 = 'hub_db';
-# Database user name - one will be assined to you - request one from the webmaster!
-$dbuname2 = 'some_database_user';
-$dbpass2 = 'some_database_password';
-# This never changes
-$network_prefix = 'network'; 
+$dbuname2 = 'hub_user';
+$dbpass2 = ''; # Ask the webmaster at https://dev-php-nuke-evolution-xtreme.86it.us for a database password!
+$network_prefix = 'network';
 endif;
 ?>

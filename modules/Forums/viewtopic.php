@@ -1724,7 +1724,7 @@ for($i = 0; $i < $total_posts; $i++)
 
     $poster_avatar = '';
 /*****[BEGIN]******************************************
- [ Mod:     View/Disable Avatars/Signatures    v1.1.2 ]
+ [ Mod:     View/Disable Avatars/Signatures    v1.1.2 ] 
  [ Mod:     Display Poster Information Once    v2.0.0 ]
  ******************************************************/
     if ( $postrow[$i]['user_avatar_type'] && $poster_id != ANONYMOUS && $postrow[$i]['user_allowavatar'] && $userdata['user_showavatars'] && !$leave_out['show_avatar_once'])
@@ -1733,25 +1733,25 @@ for($i = 0; $i < $total_posts; $i++)
  [ Mod:     Display Poster Information Once    v2.0.0 ]
  ******************************************************/
     {
-        switch( $postrow[$i]['user_avatar_type'] )
+        switch( $postrow[$i]['user_avatar_type'] ) 
         {
             case USER_AVATAR_UPLOAD:
-                // $poster_avatar = ( $board_config['allow_avatar_upload'] ) ? '<img class="forum-avatar" style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '.$board_config['avatar_max_width'].'px;" src="' . $board_config['avatar_path'] . '/' . $postrow[$i]['user_avatar'] . '" alt="" border="0" />' : '';
-                $poster_avatar = ( $board_config['allow_avatar_upload'] ) ? '<img class="forum-avatar" src="' . $board_config['avatar_path'] . '/' . $postrow[$i]['user_avatar'] . '" alt="" border="0" />' : '';
-                break;
+                $poster_avatar = ( $board_config['allow_avatar_upload'] ) 
+				? '<img width="200" class="rounded-corners-forum" src="' . $board_config['avatar_path'] . '/' . $postrow[$i]['user_avatar'] . '" alt="" border="0" />' : '';
+                break; 
 /*****[BEGIN]******************************************
- [ Mod:     Remote Avatar Resize               v2.0.0 ]
+ [ Mod:     Remote Avatar Resize               v2.0.0 ] 
  ******************************************************/
             case USER_AVATAR_REMOTE:
-                // $poster_avatar = '<img class="forum-avatar" style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '.$board_config['avatar_max_width'].'px;" src="' . resize_avatar($postrow[$i]['user_avatar']) . '" alt="" border="0" />';
-                $poster_avatar = '<img class="forum-avatar" src="' . resize_avatar($postrow[$i]['user_avatar']) . '" alt="" border="0" />';
+                $poster_avatar = '<img width="200" class="rounded-corners-forum" src="' . resize_avatar($postrow[$i]['user_avatar']) . '" alt="" border="0" />';
                 break;
 /*****[END]********************************************
  [ Mod:     Remote Avatar Resize               v2.0.0 ]
  ******************************************************/
             case USER_AVATAR_GALLERY:
-                // $poster_avatar = ( $board_config['allow_avatar_local'] ) ? '<img class="forum-avatar" style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '.$board_config['avatar_max_width'].'px;" src="' . $board_config['avatar_gallery_path'] . '/' . (($postrow[$i]['user_avatar'] == 'blank.gif' || $postrow[$i]['user_avatar'] == 'gallery/blank.gif') ? 'blank.png' : $postrow[$i]['user_avatar']) . '" alt="" border="0" />' : '';
-                $poster_avatar = ( $board_config['allow_avatar_local'] ) ? '<img class="forum-avatar" src="' . $board_config['avatar_gallery_path'] . '/' . (($postrow[$i]['user_avatar'] == 'blank.gif' || $postrow[$i]['user_avatar'] == 'gallery/blank.gif') ? 'blank.png' : $postrow[$i]['user_avatar']) . '" alt="" border="0" />' : '';
+                $poster_avatar = ( $board_config['allow_avatar_local'] ) 
+				? '<img width="200" class="rounded-corners-forum" src="' . $board_config['avatar_gallery_path'] . '/' . (($postrow[$i]['user_avatar'] == 'blank.gif' 
+				|| $postrow[$i]['user_avatar'] == 'gallery/blank.gif') ? 'blank.png' : $postrow[$i]['user_avatar']) . '" alt="" border="0" />' : '';
                 break;
         }
     }

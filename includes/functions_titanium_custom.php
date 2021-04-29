@@ -95,7 +95,7 @@ function title_and_meta_tags()
 			         $newpagetitle = $sitename.' '.$item_delim.' Google Site Map v1.0';
 			    $facebook_og_title = '<meta property="og:title" content="'.$newpagetitle.'" />'."\n";
 			  
-           $facebook_ogdescription = '<meta property="og:description" content="Google Site Map v1.0 written by Ernest Buffington, have a look!" />'."\n";
+           $facebook_ogdescription = '<meta property="og:description" content="Google Site Map Generator v1.0 written by Ernest Buffington, have a look!" />'."\n";
 
 			    $facebookimagetype = '<meta property="og:image:type" content="image/png" />'."\n";
            $facebook_ogimage_width = '<meta property="og:image:width" content="1200" />'."\n";

@@ -53,7 +53,7 @@
 //Note due to all the windows.onload use womAdd('function_name()'); instead
 
 if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
-    exit('Access Denied');
+  exit('Access Denied');
 }
 
 include_once(NUKE_INCLUDE_DIR.'styles.php');

@@ -27,7 +27,7 @@ global $blockslang;
  * Language Defines: block-Honey_Pot.php
  * @since 2.0.9e
  */
-$blockslang['honeypot']['bots_stopped'] = 'We have stopped %s[%s]%s bots!';
+$blockslang['honeypot']['bots_stopped'] = '<font color="#feac00">We have %s <font color="#fe8e01">%s</font> %s Bots<br /> in the Honey Pot!</font>';
 $blockslang['honeypot']['bots_in_pot'] = 'Bots in the pot!';
 
 /**

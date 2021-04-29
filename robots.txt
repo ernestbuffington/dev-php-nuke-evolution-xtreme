@@ -22,3 +22,5 @@ Disallow: /fbconfig.php
 Disallow: /nconfig.php
 Disallow: /ips.php
 Disallow: /trap.php
+
+Sitemap: https://yourwebsite.com/xmls/sitemap/sitemap-index.xml

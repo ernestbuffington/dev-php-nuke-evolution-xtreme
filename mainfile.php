@@ -13,6 +13,7 @@
 /* it under the terms of the GNU General Public License as published by */
 /* the Free Software Foundation; either version 2 of the License.       */
 /************************************************************************/
+
 /*****[CHANGES]**********************************************************
 -=[Base]=-
       NukeSentinel                             v2.5.08      07/11/2006
@@ -46,42 +47,25 @@
       Extra Functions                          v1.0.0       12/22/2005
 	  NSN Center Blocks                        v2.2.1       05/26/2009
 	  Blog Signature                           v1.0.0       04/24/2021
+      SiteMap Mod                              v1.0.0       04/26/2021
  ************************************************************************/
 # Damaris Soto
 
-if(defined('NUKE_EVO')) 
-return;
-
-# Network Module Support
-if(defined('NUKE_TITANIUM')) 
-return;
-
-if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME']))
-exit('Access Denied');
-
-# Network Support
-#character set define XHTML1.0
-define("_CHARSET","utf-8");
-define("_LANG_DIRECTION","ltr");
-define("_LANGCODE","en");
-define("_MIME", "text/html"); 
+if((defined('NUKE_EVO')) || (defined('NUKE_TITANIUM')))return;
+if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME']))exit('Access Denied');
 
 # Define File
 define_once('NUKE_EVO', '3.0.1b');
 # Network Support
-define_once('NUKE_TITANIUM', '3.0.1b');
+define_once('NUKE_TITANIUM', '4.0.0a');
 # Network Support
 define_once('TITANIUM_BUILD', '4021');
-
 define_once('CUR_EVO', 'NUKE_EVO');
-
 # Network Support
 define_once('CUR_TITANIUM', 'NUKE_TITANIUM');
-
 define_once('EVO_EDITION', 'xtreme');
-
 # Network Support
-define_once('TITANIUM_EDITION', 'Client');
+define_once('TITANIUM_EDITION', 'Network');
 
 define('PHPVERS', @phpversion());
 define_once('EVO_VERSION', NUKE_EVO . ' ' . EVO_EDITION);
@@ -146,7 +130,7 @@ if (isset($_COOKIE['DONATION'])):
     header($type . 'modules.php?name=Donations&op=thankyou');
 endif;
 
-# absolute path Mod - Start  01/01/2012 by Ernest Allen Buffington                                                                                                    #       
+# absolute path Mod - Start  01/01/2012 by Ernest Allen Buffington #
 $rel_path=array();
 $rel_path['file']   = str_replace('\\', "/", realpath(dirname(__FILE__)));
 $server_ary         = pathinfo(realpath(basename($_SERVER['PHP_SELF'])));
@@ -188,9 +172,6 @@ define('TITANIUM_BASE_DIR', dirname(__FILE__) . '/');
 # HTTP & HTTPS
 define('HTTPS', $href_path . '/');
 define('HTTP', $href_path_http . '/');
-
-# HTPPS for Titanium Network
-define('HTTPS-MUSIC', 'https://music.86it.us/');
 
 # Modules Directory
 define('MODULES', TITANIUM_BASE_DIR . 'modules/');
@@ -325,16 +306,10 @@ if (!function_exists('classAutoloader')):
     spl_autoload_register('classAutoloader');
 endif;
 
-//Check for these functions to see if we can use the new captcha
-// if(function_exists('imagecreatetruecolor') && function_exists('imageftbbox')) {
-//     define('CAPTCHA',true);
-// }
-
 if (CAN_MOD_INI):
     ini_set('magic_quotes_sybase', 0);
     ini_set('zlib.output_compression', 0);
 endif;
-
 
 # Enable 86it Network Support START
 if (@file_exists(NUKE_BASE_DIR.'nconfig.php')):  
@@ -483,6 +458,7 @@ endforeach;
 /*****[END]********************************************
  [ Base:    Language Selector                  v3.0.0 ]
  ******************************************************/
+ 
 $adminmail = stripslashes($adminmail);
 $foot1 = stripslashes($foot1);
 $foot2 = stripslashes($foot2);
@@ -506,6 +482,7 @@ $admingraphic = intval($admingraphic);
 $httpref = intval($httpref);
 $httprefmax = intval($httprefmax);
 $domain = str_replace('http://', '', $nukeurl);
+
 if(isset($default_Theme)) $Default_Theme = $default_Theme;
 if (CAN_MOD_INI) ini_set('sendmail_from', $adminmail);
 
@@ -1260,7 +1237,7 @@ function blog_signature($aid)
      $aid .= '<tr>';
      $aid .= '<td valign="top" height="80" width="80" height="200"><img width="90" 
                        class="rounded-corners" style="max-height: 150px; max-width: 150px;" src="modules/Forums/images/avatars/'.$avatar.'" alt="avatar" border="0"></td>';
-     $aid .= '<td valign="top">';
+     $aid .= '<td align="top">';
      $aid .= '&nbsp;&nbsp;<strong>'.$user_occ.'</strong><br />';
      $aid .= '&nbsp;&nbsp;name: '.$name.'<br />';
      $aid .= '&nbsp;&nbsp;email: '.str_replace("@", "[at]", $email).'<br />';

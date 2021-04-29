@@ -34,16 +34,16 @@ $content .= '<div class="center">';
 if ( $side == 'c' || $side == 'd' ):
 	$content .= '  <img src="'.get_evo_image('hp_banner.png', 'honeypot').'" style="height: 110px; width: 369px" alt="'.$blockslang['honeypot']['bots_in_pot'].'" title="'.$blockslang['honeypot']['bots_in_pot'].'" />';
 else:
-	$content .= '  <img src="'.get_evo_image('hp_banner2.png', 'honeypot').'" style="height: 109px; width: 120px" alt="'.$blockslang['honeypot']['bots_in_pot'].'" title="'.$blockslang['honeypot']['bots_in_pot'].'" />';
+	$content .= '  <img src="'.get_evo_image('honey_pot.png', 'honeypot').'" style="height: 109px; opacity: 0.4; width: 120px" alt="'.$blockslang['honeypot']['bots_in_pot'].'" title="'.$blockslang['honeypot']['bots_in_pot'].'" />';
 endif;
 
 if ( $blocksession[1]['count'] > 0 && is_admin() ):
-	$content .= '  <hr>'.sprintf($blockslang['honeypot']['bots_stopped'],'<span class="textbold">', '<a href="'.get_admin_filename().'.php?op=honeypot">'.$blocksession[1]['count'].'</a>', '</span>');
+	$content .= '<br />'.sprintf($blockslang['honeypot']['bots_stopped'],'<span class="textbold">', '<a class="gold" href="'.get_admin_filename().'.php?op=honeypot">'.$blocksession[1]['count'].'</a>', '</span>');
 else:
-	$content .= '  <hr>'.sprintf($blockslang['honeypot']['bots_stopped'],'<span class="textbold">', $blocksession[1]['count'], '</span>');
+	$content .= '<br />'.sprintf($blockslang['honeypot']['bots_stopped'],'<span class="textbold">', $blocksession[1]['count'], '</span>');
 endif;
 
-$content .= '  <hr><a href="https://www.headshotdomain.net" target="_blank">HeadShotDomain</a>';
+$content .= '<br /><br /><font size ="1"><a data-toggle="btn-tooltip" data-placement="top" data-html="true" title="Nuke Honey Pot v2.2&#013;By CoRpSe&#013;" href="https://www.headshotdomain.net" target="_blank"><i class="far fa-copyright"></i> Nuke Honey Pot v2.2</a></font>';
 $content .= '</div>';
 
 ?>

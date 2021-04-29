@@ -144,7 +144,8 @@ $botblock2 = $_POST["company"];
 if (!empty($botblock2)) {
 $reason = $botblock2;
 $potnum = "1";
-$db->sql_query("INSERT INTO `" . $prefix . "_honeypot` VALUES ('', '$ya_username', '$ya_realname', '$ya_user_email', '$ip', '$date', '$potnum', '$reason')");
+$db->sql_query("INSERT INTO `" . $prefix . "_honeypot` VALUES (NULL, '$ya_username', '$ya_realname', '$ya_user_email', '$ip', '$date', '$potnum', '$reason')");
+
 OpenTable();
 if (file_exists('./includes/honeypot/flash.js')) {
 echo "<script type=\"text/javascript\" src=\"./includes/honeypot/flash.js\"></script>";
@@ -187,7 +188,8 @@ if (!empty($botblock)) {
 
 $reason = _HONEYPOT_ANSWEREDWITH." $botblock";
 $potnum = "2";
-$db->sql_query("INSERT INTO `" . $prefix . "_honeypot` VALUES ('', '$ya_username', '$ya_realname', '$ya_user_email', '$ip', '$date', '$potnum', '$reason')");
+
+$db->sql_query("INSERT INTO `" . $prefix . "_honeypot` VALUES (NULL, '$ya_username', '$ya_realname', '$ya_user_email', '$ip', '$date', '$potnum', '$reason')");
 
 OpenTable();
 echo "<p class='center'>"._HONEYPOT_YOUHAVEFAILED." <br /> "._HONEYPOT_HOEYPOT."</p>" , PHP_EOL
@@ -216,7 +218,8 @@ if ($givenanswer != $answercheck) {
 
 $reason = _HONEYPOT_ANSWEREDWITH." \" $givenanswer \"";
 $potnum = "3";
-$db->sql_query("INSERT INTO `" . $prefix . "_honeypot` VALUES ('', '$ya_username', '$ya_realname', '$ya_user_email', '$ip', '$date', '$potnum', '$reason')");
+
+$db->sql_query("INSERT INTO `" . $prefix . "_honeypot` VALUES (NULL, '$ya_username', '$ya_realname', '$ya_user_email', '$ip', '$date', '$potnum', '$reason')");
 
 OpenTable();
 echo "<p class='center'>"._HONEYPOT_QUESTIONCHECK_FAILED."</p>" , PHP_EOL
@@ -260,7 +263,9 @@ $pattern = '/<appears>yes<\/appears>/';
 if (preg_match($pattern, $sfsresponse)) {
 $potnum = "4";
 $reason = _HONEYPOT_SFS_API_CHECK;
-$db->sql_query("INSERT INTO `" . $prefix . "_honeypot` VALUES ('', '$ya_username', '$ya_realname', '$ya_user_email', '$ip', '$date', '$potnum', '$reason')");
+
+$db->sql_query("INSERT INTO `" . $prefix . "_honeypot` VALUES (NULL, '$ya_username', '$ya_realname', '$ya_user_email', '$ip', '$date', '$potnum', '$reason')");
+
 OpenTable();
 echo '<div style="text-align:center;">' , _HONEYPOT_SFS_API_BLOCKED , '</div>' , PHP_EOL
  , '<br /><br /><br />' , PHP_EOL
@@ -304,7 +309,9 @@ $pattern = '/<isspammer>true<\/isspammer>/';
 if (preg_match($pattern, $fsresponse)) {
 $potnum = "7";
 $reason = _HONEYPOT_BSREASON;
-$db->sql_query("INSERT INTO `" . $prefix . "_honeypot` VALUES ('', '$ya_username', '$ya_realname', '$ya_user_email', '$ip', '$date', '$potnum', '$reason')");
+
+$db->sql_query("INSERT INTO `" . $prefix . "_honeypot` VALUES (NULL, '$ya_username', '$ya_realname', '$ya_user_email', '$ip', '$date', '$potnum', '$reason')");
+
 OpenTable();
 echo '<div style="text-align:center;">' , _HONEYPOT_FS_BLOCKED , '</div>' , PHP_EOL
  , '<br /><br />' , PHP_EOL
@@ -354,7 +361,9 @@ elseif($c8opt1 == 1 && $c8opt2 == 1){$botdatattype = ($botdata[3] > 0 || $botdat
 if($botdatattype){
 $potnum = "6";
 $reason = _HONEYPOT_BSREASON;
-$db->sql_query("INSERT INTO `" . $prefix . "_honeypot` VALUES ('', '$ya_username', '$ya_realname', '$ya_user_email', '$ip', '$date', '$potnum', '$reason')");
+
+$db->sql_query("INSERT INTO `" . $prefix . "_honeypot` VALUES (NULL, '$ya_username', '$ya_realname', '$ya_user_email', '$ip', '$date', '$potnum', '$reason')");
+
 OpenTable();
 echo '<div style="text-align:center;">' , _HONEYPOT_BS_BLOCKED , '</div>' , PHP_EOL
  , '<br /><br /><br />' , PHP_EOL

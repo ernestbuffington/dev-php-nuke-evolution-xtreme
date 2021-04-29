@@ -87,7 +87,17 @@ $powered_by = '<font size="3">PHP-Nuke Evolution Xtreme Copyright &copy; 2010 20
  ';
 
         $footmsg = "<span class=\"footmsg\">\n";
-        
+     
+	 global $theme_title, $theme_author, $theme_date, $theme_name, $theme_download_link, $name; 
+	 if(($name) && $name === 'Forums'):
+	 $footmsg .= '<br />';
+     $footmsg .= 'Forums Powered by <a href="http://dev-phpbb2.86it.us/" target="_tab">phpBB Titanium v2.0.23n</a> | Core &copy; 2001, 2019 phpBB Group<br />';
+     endif;
+$footmsg .= '<a class="tooltip-html copyright" href="'.$theme_download_link.'" data-toggle="modal" data-target="'.$theme_download_link.'" title="'.$theme_title.''; 
+$footmsg .= '<br/>Designed By: '.$theme_author.'<br />Created '.$theme_date.'<br />&copy; '.$theme_author.'<br/>All Rights Reserved">&copy; Copyright Information</a><br/>';
+
+	 
+	    
 $footmsg .= '<font size="5"><strong><a class="greatminds" href="modules.php?name=Google-Site-Map" target="_self"><font color="#4285f4">G</font><font color="#ea4335">o</font><font color="#fbbc05">o</font><font color="#4285f4">g</font><font color="#34a853">l</font><font color="#ea4335">e</font> <font color="#4285f4">S</font><font color="#ea4335">i</font><font color="#fbbc05">t</font><font color="#4285f4">e</font><font color="#ea4335">m</font><font color="#34a853">a</font><font color="#ea4335">p</font></a></strong></font><br />';
 		
 		if (!empty($foot1)) {
@@ -225,6 +235,7 @@ $footmsg .= '<font size="5"><strong><a class="greatminds" href="modules.php?name
 		
 	echo $footmsg;
     $has_echoed = 1;
+
 
 echo "\n<!-- START facebook connector -->\n";
 if ( defined('facebook') ):

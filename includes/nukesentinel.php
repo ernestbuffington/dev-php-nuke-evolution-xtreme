@@ -333,10 +333,12 @@ if($blocker_row['activate'] > 0) {
   }
   // Check for News attack
   // Copyright 2004(c) ChatServ
-  if (stristr($nsnst_const['query_string'],'%25') AND ($name=="News" || $name=="Reviews")) {
+  if (stristr($nsnst_const['query_string'],'%25') AND ($name=="News" || $name=="Reviews" || $name=="Blog")) {
 	block_ip($blocker_row);
   }
-  if (string_bypass('feed=news') && string_bypass('name=gallery2')) {
+
+  if (string_bypass('feed=news') && string_bypass('name=gallery2')) 
+  {
 	  // Check for XSS attack
 	  if ( ((stristr($nsnst_const['query_string'], "http://") || stristr($nsnst_const['query_string'], "https://")) && substr($_SERVER['REQUEST_URI'],0,strlen("/index.php?url=")) != '/index.php?url=') OR
 	  (stristr($nsnst_const['query_string'], "cmd=") AND !stristr($nsnst_const['query_string'], "&cmd")) OR
@@ -346,7 +348,22 @@ if($blocker_row['activate'] > 0) {
 		block_ip($blocker_row);
 	  }
   }
+
+  if (string_bypass('feed=blog') && string_bypass('name=gallery2')) 
+  {
+	  // Check for XSS attack
+	  if ( ((stristr($nsnst_const['query_string'], "http://") || stristr($nsnst_const['query_string'], "https://")) && substr($_SERVER['REQUEST_URI'],0,strlen("/index.php?url=")) != '/index.php?url=') OR
+	  (stristr($nsnst_const['query_string'], "cmd=") AND !stristr($nsnst_const['query_string'], "&cmd")) OR
+	  (stristr($nsnst_const['query_string'], "exec") AND !stristr($nsnst_const['query_string'], "execu")) OR
+	  stristr($nsnst_const['query_string'],"concat") AND
+	  !stristr($nsnst_const['query_string'], "../")) {
+		block_ip($blocker_row);
+	  }
+  }
+
+
 }
+
 
 /*if(!is_admin() && string_bypass('feed=news') && string_bypass('name=gallery2')) {
   // Check for SCRIPTING attack

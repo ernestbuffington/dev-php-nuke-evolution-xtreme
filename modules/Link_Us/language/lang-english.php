@@ -70,7 +70,7 @@ $lang_new[$module_name]['ADDED'] = 'Added';
 $lang_new[$module_name]['VISITS'] = 'Visits';
 $lang_new[$module_name]['CLICKS'] = 'Clicks';
 $lang_new[$module_name]['DESCRIPTION'] = 'Description';
-$lang_new[$module_name]['STANDARD_BUTTONS'] = 'Standard Size Buttons';
+$lang_new[$module_name]['STANDARD_BUTTONS'] = 'Standard Size Buttons are witdth=88 height=31';
 $lang_new[$module_name]['BANNER_BUTTONS'] = 'Banner Size Buttons';
 $lang_new[$module_name]['RESOURCE_BUTTONS'] = 'Resource Buttons';
 $lang_new[$module_name]['NO_ACTIVE_SITES'] = 'No Active Sites';

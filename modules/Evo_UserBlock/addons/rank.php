@@ -28,10 +28,10 @@ function evouserinfo_rank ()
 /*****[BEGIN]******************************************
  [ Mod:    Multiple Ranks And Staff View       v2.0.3 ]
  ******************************************************/
-if (!function_exists('generate_ranks')):
+if (!function_exists('generate_ranks')){
     require_once(NUKE_INCLUDE_DIR.'functions_mg_ranks.php');
     $ranks_sql = query_ranks();
-endif;
+}
 
 $user_ranks = generate_ranks($userinfo, $ranks_sql);
 

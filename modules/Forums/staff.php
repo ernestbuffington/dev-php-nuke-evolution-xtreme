@@ -82,26 +82,27 @@ while($staff = $db->sql_fetchrow($results))
         {
                 switch( $staff['user_avatar_type'] )
                 {
-                        case USER_AVATAR_UPLOAD:
-                     $avatar = ( $board_config['allow_avatar_upload'] ) ? '<img src="' . $board_config['avatar_path'] . '/' . $staff['user_avatar'] . '" border="0" />' : '';
-            break;
-/*****[BEGIN]******************************************
- [ Mod:     Remote Avatar Resize               v2.0.0 ]
- ******************************************************/
-                        case USER_AVATAR_REMOTE:
-            $avatar = resize_avatar($staff['user_avatar']);
-            break;
-/*****[END]********************************************
- [ Mod:     Remote Avatar Resize               v2.0.0 ]
- ******************************************************/
-                        case USER_AVATAR_GALLERY:
-            $avatar = ( $board_config['allow_avatar_local'] ) ? '<img src="' . $board_config['avatar_gallery_path'] . '/' . $staff['user_avatar'] . '" alt="" border="0" />' : '';
-            break;
+                     case USER_AVATAR_UPLOAD:
+                     $avatar = ( $board_config['allow_avatar_upload'] ) ? '<img class="rounded-corners-forum" width="200" src="' . $board_config['avatar_path'] . '/' . $staff['user_avatar'] . '" border="0" />' : '';
+                     break;
+                    /*****[BEGIN]******************************************
+                     [ Mod:     Remote Avatar Resize               v2.0.0 ]
+                     ******************************************************/
+                     case USER_AVATAR_REMOTE:
+                     $avatar = resize_avatar($staff['user_avatar']);
+                     break;
+                    /*****[END]********************************************
+                     [ Mod:     Remote Avatar Resize               v2.0.0 ]
+                     ******************************************************/
+                     case USER_AVATAR_GALLERY:
+                     $avatar = ( $board_config['allow_avatar_local'] ) 
+					 ? '<img class="rounded-corners-forum" width="200" src="' . $board_config['avatar_gallery_path'] . '/' . $staff['user_avatar'] . '" alt="" border="0" />' : '';
+                     break;
                 }
         }
         else
         {
-                $avatar = '';
+           $avatar = '';
         }
 
         $lvl = $staff['user_level']-1;

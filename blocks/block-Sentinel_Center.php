@@ -36,7 +36,8 @@ if( empty($blocksession[1]['count']) ):
 	$total_ips = 0;
 endif;
 
-$content .= '<center><img src="modules/NukeSentinel/images/nukesentinel_large.png" height="60" width="468" alt="'._AB_WARNED.'" title="'._AB_WARNED.'" /><br />'._AB_HAVECAUGHT.' '.intval($total_ips).' '._AB_SHAMEFULHACKERS.'</center>'."\n";
-$content .= '<hr /><center><a href="http://nukescripts.86it.us" target="_blank">Copyright © 2000-2021 by NukeScripts&trade;</a></center>'."\n";
+$content .= '<div align="center">'._AB_HAVECAUGHT.'<strong> '.intval($total_ips).'</strong> '._AB_SHAMEFULHACKERS.'<br /><img src="modules/NukeSentinel/images/nukesentinel_large.png" height="60" width="468" alt="'._AB_WARNED.'" 
+title="'._AB_WARNED.'" /></div>'."\n";
+$content .= '<div align="center"><a href="http://nukescripts.86it.us" target="_blank">Copyright © 2000-2021 by NukeScripts&trade;</a></div>'."\n";
 
 ?>
