@@ -17,4 +17,4 @@ Goto https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Proj
 Select the General drop down and submit your findings.
 
 Thank You,
-Errnst Allen Buffington
+The 86it Developers Network
