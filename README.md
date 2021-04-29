@@ -1,5 +1,9 @@
 <h1>PHP-Nuke Evolution Xtreme</h1>
 <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme.svg?type=shield"/></a>
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme?ref=badge_large)
+
 <h2>Major Changes in the US Version of Nuke Evolution Xtreme</h2>
 
 <ul>
@@ -65,15 +69,7 @@ If you need help with an install do not hesitate to submit a request by clicking
 <a href="https://dev-php-nuke-evolution-xtreme.86it.us/index.php" rel="nofollow">http://dev-php-nuke-evolution-xtreme.86it.us/index.php</a></p>
 
 # Note : This repo does not carry the same code used in other countries. This is strictly the US version of Nuke-Evolution Xtreme!
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme?ref=badge_shield)
-
 
 <h2>Warranty</h2>
 
 <p>Because PHP-Nuke Evolution Xtreme is licensed free of charge, there is no warranty for the package, to the extent permitted by applicable law. Except when otherwise stated in writing, the PHP-Nuke Evolution Xtreme Team provides PHP-Nuke Evolution Xtreme &quot;as is&quot; without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose. The entire risk as to the quality and performance of the package is with you. Should the package prove defective, you assume the cost of all necessary servicing, repair, or correction.</p>
-
-
-
-
-## License
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme?ref=badge_large)
