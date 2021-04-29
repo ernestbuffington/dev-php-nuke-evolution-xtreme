@@ -72,13 +72,13 @@ $do_gzip_compress,
 	return; 
 
 global $powered_by;
-$powered_by = '<font size="3">PHP-Nuke Evolution Xtreme Copyright &copy; 2010 2021<br /> by Ernest Buffington and The 86it Developers Network.<br /> 
+$powered_by = '<font size="3">PHP-Nuke Evolution Xtreme (US Version) Copyright &copy; 2010 2021<br /> by Ernest Allen Buffington and The 86it Developers Network.<br /> 
  All logos, trademarks and posts in this site are property of their respective owners, all the rest <br />&copy; '.date('l jS \of F Y h:i:s A').' by Brandon Maintenance Management, LLC.<br />
- Powered by PHP-Nuke Evolution Xtreme v3.0.1b<br /><br />
+ Powered by PHP-Nuke Evolution Xtreme v3.0.1b (US Version)<br /><br />
  <strong>CREDITS</strong><br />
  PHP-Nuke Copyright &copy; 2006 by Francisco Burzi.<br /> 
  Bob Marion of NukeScripts.Net<br />  
- Ernest Buffington of 86it.us<br>
+ Ernest Allen Buffington of 86it.us<br>
  PHP-Nuke Evolution Basic<br /> 
  PHP-Nuke Evolution Xtreme UK Version<br />
  PHP-Nuke Evolution Xtreme US Version<br />
@@ -93,8 +93,8 @@ $powered_by = '<font size="3">PHP-Nuke Evolution Xtreme Copyright &copy; 2010 20
 	 $footmsg .= '<br />';
      $footmsg .= 'Forums Powered by <a href="http://dev-phpbb2.86it.us/" target="_tab">phpBB Titanium v2.0.23n</a> | Core &copy; 2001, 2019 phpBB Group<br />';
      endif;
-$footmsg .= '<a class="tooltip-html copyright" href="'.$theme_download_link.'" data-toggle="modal" data-target="'.$theme_download_link.'" title="'.$theme_title.''; 
-$footmsg .= '<br/>Designed By: '.$theme_author.'<br />Created '.$theme_date.'<br />&copy; '.$theme_author.'<br/>All Rights Reserved">&copy; Copyright Information</a><br/>';
+$footmsg .= '<a class="tooltip-html copyright" href="'.$theme_download_link.'" data-toggle="modal" data-target="'.$theme_download_link.'" title="'.$theme_title.' Theme'; 
+$footmsg .= '<br/>Designed By '.$theme_author.'<br />Created '.$theme_date.'<br />&copy; '.$theme_author.'<br/>All Rights Reserved">'.$theme_title.' Theme &copy; Copyright Information</a><br/>';
 
 	 
 	    
