@@ -214,8 +214,8 @@ function evouserinfo_get_guests_online ($start)
         $url = str_replace("&", "&amp;", $url);
            //$where = '<a data-user-country="'.$session['host_addr'].'" href="'.$url.'" alt="'.$module.'" title="'.$module.'">'.$num.'</a>.&nbsp;';
            //$where = (is_admin()) ? $where : $num.'.&nbsp;';
-        $where 			= '<a href="'.$url.'" alt="'.$module.'" title="'.$module.'">'.$num.'</a>.&nbsp;';
-        $where 			= (is_admin()) ? $where : $num.'.&nbsp;';
+        $where 			= '<a href="'.$url.'" alt="'.$module.'" title="'.$module.'">&nbsp;&nbsp;'.$num.'</a>.&nbsp;';
+        $where 			= (is_admin()) ? $where : '&nbsp;&nbsp;'.$num.'.&nbsp;';
         
 		if(!is_admin()):
             $out['text'] .= $where.$lang_evo_userblock['BLOCK']['ONLINE']['GUEST']."<br />\n";
@@ -290,7 +290,7 @@ function evouserinfo_online_display ($members, $guests)
 
         if ($guests['total'] > 0):
 
-            $out .= '<div style="font-weight: bold">&nbsp;&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['GUESTS'].'</div>';
+            $out .= '<br/><div style="font-weight: bold">&nbsp;&nbsp;'.$lang_evo_userblock['BLOCK']['ONLINE']['GUESTS'].'</div>';
             $out .= '<div>'.$guests['text'].'</div>';
 
         endif;

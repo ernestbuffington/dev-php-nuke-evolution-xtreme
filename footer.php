@@ -333,7 +333,7 @@ if (!defined('HOME_FILE') AND defined('MODULE_FILE') AND (file_exists(NUKE_MODUL
     include_once(NUKE_MODULES_DIR . $name . '/admin/panel.php');
     CloseTable();
 }
-# This loads the admin panel when you got the admin area END
+# This loads the admin panel when you goto the admin area END
 themefooter();
 
 # needed for the forum admin area START

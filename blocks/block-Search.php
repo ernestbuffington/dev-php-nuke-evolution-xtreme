@@ -23,8 +23,8 @@
 
 if(!defined('NUKE_EVO')) exit;
 
-$content = "<form onsubmit=\"this.submit.disabled='true'\" action=\"modules.php?name=Search\" method=\"post\">";
-$content .= "<center><input type=\"text\" name=\"query\" size=\"15\">";
-$content .= "<br /><input type=\"submit\" value=\""._SEARCH."\"></center></form>";
+$content = "<br/><form onsubmit=\"this.submit.disabled='true'\" action=\"modules.php?name=Search\" method=\"post\">";
+$content .= "<div align=\"center\"><input type=\"text\" name=\"query\" size=\"15\"><br/>";
+$content .= "<br /><input type=\"submit\" value=\""._SEARCH."\"></div></form><br/>";
 
 ?>

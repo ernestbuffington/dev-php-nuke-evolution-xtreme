@@ -139,10 +139,10 @@ echo '</div>';
 //echo '</div>';
 //echo '</section>';
 
+//echo '<div align="center" style="padding-top:5px;">';
+//echo '<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myCopyRight">&copy; '.THEME.' by The 86it Developers Network</button><br />';
+//echo '</div>';
 echo '<div align="center" style="padding-top:5px;">';
-echo '<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myCopyRight">&copy; '.THEME.' by The 86it Developers Network</button><br />';
-echo '</div>';
-echo '<div align="center" style="padding-top:15px;">';
 echo '</div>';
 
 
