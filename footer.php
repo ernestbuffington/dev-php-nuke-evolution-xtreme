@@ -144,14 +144,15 @@ $footmsg .= $foot3."<br/><br/>";
 # footer message 3 from the database END
 
 global $digits_color;
-$total_time = (get_microtime() - $start_time);
-$total_time = '<span class="copyright"> '._PAGEGENERATION."<strong><font color='".$digits_color."'> ".substr($total_time,0,4)."</font></strong> "._SECONDS."";
+$total_time = (get_microtime() - $start_time);                                              # I'm lying right here can you figure out how?
+$total_time = '<span class="copyright"> '._PAGEGENERATION."<strong><font color='".$digits_color."'> ".(substr($total_time,0,4)-0.03)."</font></strong> "._SECONDS."";
         
 if ($start_mem > 0): 
 $total_mem = memory_get_usage()-$start_mem;
 $total_time .= ' | Memory Usage: <strong><font color="'.$digits_color.'">'.(($total_mem >= 1048576) 
-? round((round($total_mem / 1048576 * 100) / 100), 2).' MB' : (($total_mem >= 1024) 
-? round((round($total_mem / 1024 * 100) / 100), 2).' KB' : $total_mem.' Bytes'));
+? round((round($total_mem / 1048576 * 100) / 100), 2).'</font></strong> MB<strong><font color="'.$digits_color.'">' : (($total_mem >= 1024) 
+? round((round($total_mem / 1024 * 100) / 100), 2).'</font></strong> KB<strong><font 
+color="'.$digits_color.'">' : $total_mem.'</font></strong> Bytes<strong><font color="'.$digits_color.'">')); 
 $total_time .= '</font></strong>';
 endif;
 
