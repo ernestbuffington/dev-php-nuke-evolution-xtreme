@@ -4,15 +4,48 @@
 ## License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme?ref=badge_large)
 
-<h2>Associated Developers</h2>
+<h2>Developer Team</h2>
 
 <ul><ul>
-	<li>Lonestar</li>
+	<li>Ernest Allen Buffington</li>
+	<li>Francisco Burzi</li> 
+	<li>Bob Marion</li> 
+	<li>SeaBeast08</li> 
+	<li>Terrance Wolfe</li>
+	<li>Richard van Oosterhout</li> 
+	<li>Peter Lindgren</li> 
+	<li>André V Escudero</li>
+        <li>Lonestar</li>
 	<li>CoRpSE</li>
-	<li>Bob Marion</li>
-	<li>TheGhost</li>
-	<li>SeaBeast08</li>
-	<li>TheWolf</li>
+</ul><ul>
+
+<h2>Contributor Team</h2>
+
+<ul><ul>
+
+<li>Cerealkiller (http://www.portalvol.com)</li> 
+<li>Cobalt74 (http://onyxbgd.verygames.net)</li> 
+<li>curt UniKCode (www.vecino398.com)</li> 
+<li>Jamilig (http://www.portalvol.com) 
+
+</ul><ul>
+
+<h2>Test and Translation Team</h2>
+
+<ul><ul>
+<li>Aleagi (http://www.phpnuke.org.br)</li>
+<li>Curtis Hancock (http://curtishancock.net)</li>
+<li>Emre YILDIRIM (http://www.emreyildirim.com)</li>
+<li>Fábio M.G. (http://www.hardwarebr.net)</li>
+<li>Kevin Hurley (http://www.armadafleetcommand.com)</li>
+<li>Marcelo Daibert (http://daibert.net)</li>
+<li>Mathijs Lubbertsen</li>
+<li>MaxAN</li>
+<li>RR69</li>
+<li>Vitor Martins Santos</li>
+<li>WaLLoU</li>
+<li>which (http://www.which.idv.tw)</li>
+<li>ylhor (www.netcolony.org)</li>
 </ul><ul>
 
 <h2>Major Changes in the US Version of Nuke Evolution Xtreme</h2>
