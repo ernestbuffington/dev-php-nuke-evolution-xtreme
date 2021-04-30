@@ -32,14 +32,12 @@ class sql_db
 {
 	/*!
 	 * @public var $mysql_version
-	 *
 	 * The current MySQL server version
 	 */
 	var $mysql_version;
 
 	/*!
 	 * @public var $db_connect_id
-	 *
 	 * The unique indentifier for the current database connection
 	 */
 	var $db_connect_id;
@@ -50,7 +48,6 @@ class sql_db
 
 	/*!
 	 * @public var $num_queries
-	 *
 	 * Total number of queries that were processed by this instance of the
 	 * database connection
 	 */
@@ -58,7 +55,6 @@ class sql_db
 
 	/*!
 	 * @public var $time
-	 *
 	 * Total time in miliseconds it took to run all the queries by this instance
 	 * of the database connection
 	 */
@@ -66,14 +62,12 @@ class sql_db
 
     /*!
 	 * @public var $debug
-	 *
 	 * Can be used to check for invalid MySQL queries once they have been run
 	 */
-    var $debug = 0;
+    var $debug = 1;
 
     /*!
 	 * @public var $saved
-	 *
 	 * Storage for MySQL query debugging
 	 */
     var $saved = '';
@@ -125,6 +119,7 @@ class sql_db
 			}
 		}
 	}
+	
 	function _backtrace()
 	{
 		$this->file = 'unknown';
