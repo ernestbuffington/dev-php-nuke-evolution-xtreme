@@ -762,7 +762,7 @@ function ShoutBox($ShoutSubmit, $ShoutComment, $shoutuid)
 			if ($SBpos == 'center') 
 			{
 				$bottom_content .= "<td align=\"left\" nowrap=\"nowrap\" valign=\"top\">";
-				$bottom_content .= "    <input type=\"text\" name=\"ShoutComment\" id=\"ShoutComment\" size=\"$ShoutTextWidth\" onKeyPress=\"return OnEnter(event)\" value=\"$boxtext\" maxlength=\"2500\" onfocus=\"if ( this.value == '"._SB_MESSAGE."' ) { this.value=''; }\" onblur=\"if (this.value == '') { this.value='"._SB_MESSAGE."' }\" style=\"width: 100%;\" />";
+				$bottom_content .= "<input type=\"text\" name=\"ShoutComment\" id=\"ShoutComment\" size=\"$ShoutTextWidth\" onKeyPress=\"return OnEnter(event)\" value=\"$boxtext\" maxlength=\"2500\" onfocus=\"if ( this.value == '"._SB_MESSAGE."' ) { this.value=''; }\" onblur=\"if (this.value == '') { this.value='"._SB_MESSAGE."' }\" style=\"width: 100%;\" />";
 				$bottom_content .= "</td>";
 				
 				$bottom_content .= "<td align=\"right\" width=\"140\">";
@@ -770,7 +770,7 @@ function ShoutBox($ShoutSubmit, $ShoutComment, $shoutuid)
 				$bottom_content .= "<input type=\"hidden\" name=\"ShoutSubmit\" id=\"ShoutSubmit\" value=\"ShoutPost\" />";
 				$bottom_content .= "<div id=\"smilies_hide\" style=\"display: block;\">";
 				
-				$bottom_content .= "<div class=\"content\"><br/>";
+				$bottom_content .= "<div class=\"content\">";
 				$bottom_content .= "<input type=\"button\" name=\"button\" onclick=\"AjaxShout();\" value=\""._SHOUT."\" />&nbsp;"; # added a space between buttons
 				$bottom_content .= "<span onclick=\"changeBoxSize('show'); return false;\"><input type=\"button\" value=\""._SMILIES."\" /></span>";
 				$bottom_content .= "</div>";
@@ -780,6 +780,9 @@ function ShoutBox($ShoutSubmit, $ShoutComment, $shoutuid)
 				$bottom_content .= "<input type=\"button\" name=\"button\" onclick=\"AjaxShout();\" value=\""._SHOUT."\" />&nbsp;"; # added a space between buttons
 				$bottom_content .= "<span onclick=\"changeBoxSize ('hide'); return false;\"><input type=\"button\" value=\""._SMILIES."\" /></span>";
 				$bottom_content .= "<br /><br />";
+				$bottom_content .= "<tr>";
+				$bottom_content .= "<td align=\"center\" nowrap=\"nowrap\">";
+
 			} 
 			else 
 			{
@@ -790,10 +793,10 @@ function ShoutBox($ShoutSubmit, $ShoutComment, $shoutuid)
 				$bottom_content .= "</td>";
 				$bottom_content .= "</tr>";
 				$bottom_content .= "<tr>";
-				$bottom_content .= "<td align=\"center\">";
+				$bottom_content .= "<td align=\"center\"><br/>";
 				$bottom_content .= "<input type=\"hidden\" name=\"ShoutSubmit\" id=\"ShoutSubmit\" value=\"ShoutPost\" />";
 				$bottom_content .= "<div id=\"smilies_hide\" style=\"display: block;\">";
-				$bottom_content .= "<div class=\"content\"><br/>";
+				$bottom_content .= "<div class=\"content\"><br/>"; # added
 				$bottom_content .= "<input type=\"button\" name=\"button\" onclick=\"AjaxShout();\" value=\""._SHOUT."\" />&nbsp;"; # added a space between buttons
 				$bottom_content .= "<span onclick=\"changeBoxSize('show'); return false;\"><input type=\"button\" value=\""._SMILIES."\" /></span>";
 				$bottom_content .= "</div>";
@@ -809,14 +812,18 @@ function ShoutBox($ShoutSubmit, $ShoutComment, $shoutuid)
             $nameresult1 = $db->sql_query($sql);
             $flag = 1;
             
-			while ($return = $db->sql_fetchrow($nameresult1)) {
+			while ($return = $db->sql_fetchrow($nameresult1)) 
+			{
                 $sql = "SELECT * FROM `".$prefix."_shoutbox_emoticons` WHERE `image`='$return[0]' LIMIT 1";
                 $nameresult = $db->sql_query($sql);
-                while ($emoticons = $db->sql_fetchrow($nameresult)) {
+            
+			    while ($emoticons = $db->sql_fetchrow($nameresult)) 
+				{
                     $emoticons[3] = str_replace('>', '', $emoticons['image']);
                     $emoticons[3] = str_replace('src=', 'src="', $emoticons[3]);
                     $bottom_content .= "<span style=\"cursor: pointer;\" onclick=\"DoSmilie(' $emoticons[text] ','$messageDefinition');\">$emoticons[3]\" border=\"0\" alt=\"\" /></span>&nbsp;";
-                    if ($flag == $conf['smiliesPerRow']) {
+                    if ($flag == $conf['smiliesPerRow']) 
+					{
                         $bottom_content .="<br /><br />\n";
                         $flag = 1;
                         continue;
@@ -828,7 +835,7 @@ function ShoutBox($ShoutSubmit, $ShoutComment, $shoutuid)
             $db->sql_freeresult($nameresult1);
             $bottom_content .= "</div></div></td></tr>\n";
 
-            $bottom_content .= "</table></form>\n";
+            $bottom_content .= "</table><br/></form>\n";
         }
 
     } else {
@@ -872,5 +879,4 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
 		exit;
 	}
 }
-
 ?>
