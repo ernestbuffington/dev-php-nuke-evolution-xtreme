@@ -1089,7 +1089,6 @@ function check_html($str, $strip='') {
  ******************************************************/
     if(defined('INPUT_FILTER')) 
 	{
-		
 		if ($strip == 'nohtml') {
             global $AllowableHTML;
         }
