@@ -23,7 +23,7 @@
 <li>Cerealkiller</li> 
 <li>Cobalt74</li> 
 <li>UniKCode</li> 
-<li>Jamilig) 
+<li>Jamilig</li> 
 
 </ul>
 
