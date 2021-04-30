@@ -4,17 +4,18 @@
 <h2>Developer Team</h2>
 
 <ul>
-	<li>Ernest Allen Buffington</li>
-	<li>killagan</li>
 	<li>Francisco Burzi</li> 
-	<li>Bob Marion</li> 
+        <li>Bob Marion</li> 
+        <li>Technocrat</li>
+	<li>killagan</li>
+	<li>TheGhost</li>
+        <li>Lonestar</li>
+	<li>CoRpSE</li>
 	<li>SeaBeast08</li> 
 	<li>Terrance Wolfe</li>
 	<li>Richard van Oosterhout</li> 
 	<li>Peter Lindgren</li> 
 	<li>André V Escudero</li>
-        <li>Lonestar</li>
-	<li>CoRpSE</li>
 </ul>
 
 <h2>Contributor Team</h2>
