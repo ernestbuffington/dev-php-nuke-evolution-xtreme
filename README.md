@@ -1,8 +1,51 @@
 <h1>PHP-Nuke Evolution Xtreme (The US Version)</h1>
 <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme.svg?type=shield"/></a>
 
-## License
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme?ref=badge_large)
+<h2>Developer Team</h2>
+
+<ul>
+	<li>Francisco Burzi</li> 
+        <li>Bob Marion</li> 
+        <li>Technocrat</li>
+	<li>killagan</li>
+	<li>TheGhost</li>
+        <li>Lonestar</li>
+	<li>CoRpSE</li>
+	<li>SeaBeast08</li> 
+	<li>Terrance Wolfe</li>
+	<li>Richard van Oosterhout</li> 
+	<li>Peter Lindgren</li> 
+	<li>André V Escudero</li>
+</ul>
+
+<h2>Contributor Team</h2>
+
+<ul>
+
+<li>Cerealkiller</li> 
+<li>Cobalt74</li> 
+<li>UniKCode</li> 
+<li>Jamilig</li> 
+
+</ul>
+
+<h2>Test and Translation Team</h2>
+
+<ul>
+<li>Aleagi</li>
+<li>Curtis Hancock</li>
+<li>Emre YILDIRIM</li>
+<li>Fábio M.G.</li>
+<li>Kevin Hurley</li>
+<li>Marcelo Daibert</li>
+<li>Mathijs Lubbertsen</li>
+<li>MaxAN</li>
+<li>RR69</li>
+<li>Vitor Martins Santos</li>
+<li>WaLLoU</li>
+<li>which</li>
+<li>ylhor</li>
+</ul>
 
 <h2>Major Changes in the US Version of Nuke Evolution Xtreme</h2>
 
