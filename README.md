@@ -4,7 +4,7 @@
 ## License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme?ref=badge_large)
 
-<h2Associated Developers</h2>
+<h2>Associated Developers</h2>
 
 <ul>
 	<li>Lonestar</li>
