@@ -573,7 +573,8 @@ function ShoutBox($ShoutSubmit, $ShoutComment, $shoutuid) {
             }
         }
         // You may not remove or edit this copyright!!! Doing so violates the GPL license.
-        $mid_content .= "<tr><td align=\"right\"><a title=\"Free scripts!\" target=\"_blank\" href=\"https://ourscripts.86it.us\"><span style=\"font-size: 9;\">Shout Box &copy;</span></a></td></tr></table>";
+        $mid_content .= "<tr><td align=\"right\"><a title=\"Free scripts!\" target=\"_blank\" 
+		href=\"https://ourscripts.86it.us\"><span style=\"font-size: 9;\">Shout Box &copy;</span></a></td></tr></table>";
         // end copyright.
         // end mid content
         // start bottom content $bottom_content
@@ -583,30 +584,54 @@ function ShoutBox($ShoutSubmit, $ShoutComment, $shoutuid) {
         // bottom half
 		$bottom_content .= "<form name=\"shoutform1\" method=\"post\" action=\"modules.php?name=Your_Account\" style=\"margin-bottom: 0px; margin-top: 0px\" id=\"shoutform1\">";
 		
-        if ($conf['anonymouspost'] == 'no' && $username == 'Anonymous') {
+        if ($conf['anonymouspost'] == 'no' && $username == 'Anonymous') 
+		{
             $bottom_content .= "<div style=\"padding: 1px;\" align=\"center\" class=\"content\"><a href=\"modules.php?name=Shout_Box\">"._SHOUTHISTORY."</a>";
-            $bottom_content .= "&nbsp;<span style=\"cursor: pointer;\" onmouseover=\"SBspeed=4\" onmouseout=\"SBspeed=1\"><img src=\"$up_img\" border=\"0\" alt=\"\" width=\"9\" height=\"5\" /></span>";
-            $bottom_content .= "&nbsp;<span style=\"cursor: pointer;\" onmouseover=\"SBspeed=1-5\" onmouseout=\"SBspeed=1\"><img src=\"$down_img\" border=\"0\" alt=\"\" width=\"9\" height=\"5\" /></span>";
-            $bottom_content .= "&nbsp;<span style=\"cursor: wait;\" onmouseover=\"SBspeed=0\" onmouseout=\"SBspeed=1\"><img src=\"$pause_img\" border=\"0\" alt=\"\" width=\"9\" height=\"5\" /></span>";
-            $bottom_content .= "</div><div style=\"padding: 1px; text-align: center;\" class=\"content\"><br />"._ONLYREGISTERED." <a href=\"modules.php?name=Your_Account\">"._SHOUTLOGIN."</a> "._OR." <a href=\"modules.php?name=Your_Account&amp;op=new_user\">"._CREATEANACCT."</a>.</div>";
-        } else {
+            $bottom_content .= "&nbsp;<span style=\"cursor: pointer;\" onmouseover=\"SBspeed=4\" onmouseout=\"SBspeed=1\"><img src=\"$up_img\" 
+			border=\"0\" alt=\"\" width=\"9\" height=\"5\" /></span>";
+            
+			$bottom_content .= "&nbsp;<span style=\"cursor: pointer;\" onmouseover=\"SBspeed=1-5\" onmouseout=\"SBspeed=1\"><img 
+			src=\"$down_img\" border=\"0\" alt=\"\" width=\"9\" height=\"5\" /></span>";
+            
+			$bottom_content .= "&nbsp;<span style=\"cursor: wait;\" onmouseover=\"SBspeed=0\" onmouseout=\"SBspeed=1\"><img 
+			src=\"$pause_img\" border=\"0\" alt=\"\" width=\"9\" height=\"5\" /></span>";
+            
+			$bottom_content .= "</div><div style=\"padding: 1px; text-align: center;\" class=\"content\"><br />"._ONLYREGISTERED." <a 
+			href=\"modules.php?name=Your_Account\">"._SHOUTLOGIN."</a> "._OR." <a href=\"modules.php?name=Your_Account&amp;op=new_user\">"._CREATEANACCT."</a>.</div>";
+        } 
+		else 
+		{
             $bottom_content .= "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
-            $bottom_content .= "    <tr>";
-            $bottom_content .= "        <td align=\"center\"" . (($SBpos == 'center') ? " colspan=\"" . (($conf['anonymouspost']== 'yes' && $username == 'Anonymous') ? '3' : '2') . "\" style=\"padding: 5px 0;\"" : '') . ">";
-            $bottom_content .= "            <a href=\"modules.php?name=Shout_Box\">"._SHOUTHISTORY."</a>";
-            $bottom_content .= "            <span style=\"cursor: pointer;\" onmouseover=\"SBspeed=4\" onmouseout=\"SBspeed=1\"><img src=\"$up_img\" border=\"0\" alt=\"\" width=\"9\" height=\"5\" /></span>";
-            $bottom_content .= "            <span style=\"cursor: pointer;\" onmouseover=\"SBspeed=1-5\" onmouseout=\"SBspeed=1\"><img src=\"$down_img\" border=\"0\" alt=\"\" width=\"9\" height=\"5\" /></span>";
-            $bottom_content .= "            <span style=\"cursor: wait;\" onmouseover=\"SBspeed=0\" onmouseout=\"SBspeed=1\"><img src=\"$pause_img\" border=\"0\" alt=\"\" width=\"9\" height=\"5\" /></span>";
-            $bottom_content .= "        </td>";
-            $bottom_content .= "    </tr>\n";
+            $bottom_content .= "<tr>";
+        
+		    $bottom_content .= "<td align=\"center\"".(($SBpos == 'center') ? " colspan=\"".(($conf['anonymouspost']== 'yes' 
+			&& $username == 'Anonymous') ? '3' : '2')."\" style=\"padding: 5px 0;\"" : '') . ">";
+            
+			$bottom_content .= "<div align=\"center\"><a href=\"modules.php?name=Shout_Box\">"._SHOUTHISTORY."</a></div>";
+            $bottom_content .= "<span style=\"cursor: pointer;\" onmouseover=\"SBspeed=4\" onmouseout=\"SBspeed=1\"><img 
+			src=\"$up_img\" border=\"0\" alt=\"\" width=\"9\" height=\"5\" /></span>";
+            
+			$bottom_content .= "<span style=\"cursor: pointer;\" onmouseover=\"SBspeed=1-5\" onmouseout=\"SBspeed=1\"><img 
+			src=\"$down_img\" border=\"0\" alt=\"\" width=\"9\" height=\"5\" /></span>";
+            
+			$bottom_content .= "<span style=\"cursor: wait;\" onmouseover=\"SBspeed=0\" onmouseout=\"SBspeed=1\"><img 
+			src=\"$pause_img\" border=\"0\" alt=\"\" width=\"9\" height=\"5\" /></span>";
+            
+			$bottom_content .= "</td>";
+            $bottom_content .= "</tr>\n";
 			
             // Start smilie Drop-Down Code
             $messageDefinition = _SB_MESSAGE;
 
-            if (preg_match("/MSIE(.*)/i", $_SERVER['HTTP_USER_AGENT']) || preg_match("/Konqueror\/3(.*)/i", $_SERVER['HTTP_USER_AGENT']) || (preg_match("/Opera(.*)/i", $_SERVER['HTTP_USER_AGENT']))) {
+            if (preg_match("/MSIE(.*)/i", $_SERVER['HTTP_USER_AGENT']) 
+			|| preg_match("/Konqueror\/3(.*)/i", $_SERVER['HTTP_USER_AGENT']) 
+			|| (preg_match("/Opera(.*)/i", $_SERVER['HTTP_USER_AGENT']))) 
+			{
                 $ShoutNameWidth = $conf['textWidth'];
                 $ShoutTextWidth = $conf['textWidth'];
-            } else {
+            } 
+			else 
+			{
                 // Firefox, Mozilla, NS, && any others.
                 $ShoutNameWidth = $conf['textWidth'] - 4;
                 $ShoutTextWidth = $conf['textWidth'] - 4;
