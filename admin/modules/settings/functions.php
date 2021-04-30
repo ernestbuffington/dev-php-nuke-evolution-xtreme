@@ -397,7 +397,7 @@ function save_settings($sub)
 	# Anytime you modify the settings for the website it updates the proper fields.
 	# This information is used to tell the crawlers/bots when the website was last updated on the index page.
 	# Reference : https://stackoverflow.com/questions/267658/having-both-a-created-and-last-updated-timestamp-columns-in-mysql-4-0												  
-    $db->sql_query("INSERT INTO ".$prefix."_config(datePublished, dateModified) values(null, null)");
+    //$db->sql_query("UPDATE ".$prefix."_config(datePublished, dateModified) values(null, null)");
 	
 	$cache->delete('nukeconfig', 'config');
     $cache->delete('evoconfig', 'config');
