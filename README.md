@@ -21,14 +21,14 @@
 
 <h2>Contributor Team</h2>
 
-<ul><ul>
+<ul>
 
 <li>Cerealkiller (http://www.portalvol.com)</li> 
 <li>Cobalt74 (http://onyxbgd.verygames.net)</li> 
 <li>curt UniKCode (www.vecino398.com)</li> 
 <li>Jamilig (http://www.portalvol.com) 
 
-</ul><ul>
+</ul>
 
 <h2>Test and Translation Team</h2>
 
