@@ -86,96 +86,106 @@ $powered_by = '<font size="3">PHP-Nuke Evolution Xtreme (US Version) Copyright &
  </font>
  ';
 
-        $footmsg = "<span class=\"footmsg\">\n";
-     
-	 global $theme_title, $theme_author, $theme_date, $theme_name, $theme_download_link, $name; 
-	 if(($name) && $name === 'Forums'):
-	 $footmsg .= '<br />';
-     $footmsg .= 'Forums Powered by <a href="http://dev-phpbb2.86it.us/" target="_tab">phpBB Titanium v2.0.23n</a> | Core &copy; 2001, 2019 phpBB Group<br />';
-     endif;
-$footmsg .= '<a class="tooltip-html copyright" href="'.$theme_download_link.'" data-toggle="modal" data-target="'.$theme_download_link.'" title="'.$theme_title.' Theme'; 
-$footmsg .= '<br/>Designed By '.$theme_author.'<br />Created '.$theme_date.'<br />&copy; '.$theme_author.'<br/>All Rights Reserved">'.$theme_title.' Theme &copy; Copyright Information</a><br/>';
+$footmsg = "<span class=\"footmsg\">\n";
 
-	 
-	    
+# Google Site Map v1.0 START	    
 $footmsg .= '<font size="5"><strong><a class="greatminds" href="modules.php?name=Google-Site-Map" target="_self"><font color="#4285f4">G</font><font color="#ea4335">o</font><font color="#fbbc05">o</font><font color="#4285f4">g</font><font color="#34a853">l</font><font color="#ea4335">e</font> <font color="#4285f4">S</font><font color="#ea4335">i</font><font color="#fbbc05">t</font><font color="#4285f4">e</font><font color="#ea4335">m</font><font color="#34a853">a</font><font color="#ea4335">p</font></a></strong></font><br />';
+# Google Site Map v1.0 END
+
+# footer messages from databae START
+if (!empty($foot1)) 
+$footmsg .= $foot1."<br/>";
+if (!empty($foot2)) 
+$footmsg .= $foot2."<br/>";
+# footer messages from databae END
+
+# START user clear cache updated 09/12/2019 Ernest Allen Buffington
+if($use_cache && $usrclearcache): 
+$footmsg .= "<form method='post' name='clear_cache' action='".$_SERVER['REQUEST_URI']."'>";
+$footmsg .= "<input type='hidden' name='clear_cache' value='1'>";
+$footmsg .= ""._SITECACHED . "</span> <a href=\"javascript:clear_cache.submit()\">" . _UPDATECACHE . "</a>";
+$footmsg .= "</form>";
+endif;
+# END user clear cache updated 09/12/2019 Ernest Allen Buffington
+
+# Copyright Information START
+# DO NOT REMOVE THE FOLLOWING COPYRIGHT LINES. YOU'RE NOT ALLOWED TO REMOVE NOR EDIT THIS.
+# IF YOU NEED TO REMOVE IT AND HAVE MY WRITTEN AUTHORIZATION YOU CAN:
+# PLAY FAIR AND SUPPORT THE DEVELOPERS, PLEASE!
+global $theme_title, $theme_author, $theme_date, $theme_name, $theme_download_link, $name; 
+if(($name) && $name === 'Forums'):
+$footmsg .= '<br />';
+$footmsg .= 'Forums Powered by <a href="http://dev-phpbb2.86it.us/" target="_tab">phpBB Titanium v2.0.23n</a> | Core &copy; 2001, 2019 phpBB Group<br />';
+endif;
+$footmsg .= '<a class="tooltip-html copyright" href="'.$theme_download_link.'" data-toggle="modal" data-target="'.$theme_download_link.'" title="'.$theme_title.' Theme'; 
+$footmsg .= '<br/>Designed By '.$theme_author.'<br />Created '.$theme_date.'<br />&copy; '.$theme_author.'<br/>All Rights Reserved">'.$theme_title.' theme &copy; copyright</a><br/><br/>';
+# Copyright Information END
 		
-		if (!empty($foot1)) {
-            $footmsg .= $foot1."\n";
-        }
-        if (!empty($foot2)) {
-            $footmsg .= $foot2."\n";
-        }
-        if (!empty($foot3)) {
-            $footmsg .= $foot3."\n";
-        }
+# Network About us START
+$footmsg .= "<font size=\"+1\">";
+$footmsg .= "[ "
+         . "<a href=\"".HTTPS."modules.php?name=Network&file=about\">"
+         . "About Us</a> ] - [ "
+         . "<a href=\"".HTTPS."modules.php?name=Network&file=disclaimer\">"
+         . "Disclaimer Statement</a> ] - [ "
+         . "<a href=\"".HTTPS."modules.php?name=Network&file=privacy\">"
+         . "Privacy Statement</a> ] - [ "
+         . "<a href=\"".HTTPS."modules.php?name=Network&file=terms\">"
+         . "Terms of Use</a> ]\n";
+$footmsg .= "</font><br><br>";
+# Network About us END
 
-        // DO NOT REMOVE THE FOLLOWING COPYRIGHT LINE. YOU'RE NOT ALLOWED TO REMOVE NOR EDIT THIS.
-        // IF YOU REALLY NEED TO REMOVE IT AND HAVE MY WRITTEN AUTHORIZATION CHECK:
-        // http://phpnuke.org/modules.php?name=Commercial_License
-        // PLAY FAIR AND SUPPORT THE DEVELOPMENT, PLEASE!
-        //$footmsg .= '<br />'.$copyright.'<br />';
-        //$footmsg = (preg_match(HEX_PREG,$footmsg)) ? $footmsg : $footmsg."<br />".ord_crypt_decode(HEX_CACHED)."<br />";
-        global $digits_color;
+# footer message 3 from the database START
+if (!empty($foot3)) 
+$footmsg .= $foot3."<br/><br/>";
+# footer message 3 from the database END
 
-        		$footmsg .= "[ "
-                  . "<a href=\"".HTTPS."modules.php?name=Network&file=about\">"
-                  . "About Us</a> ] - [ "
-                  . "<a href=\"".HTTPS."modules.php?name=Network&file=disclaimer\">"
-                  . "Disclaimer Statement</a> ] - [ "
-                  . "<a href=\"".HTTPS."modules.php?name=Network&file=privacy\">"
-                  . "Privacy Statement</a> ] - [ "
-                  . "<a href=\"".HTTPS."modules.php?name=Network&file=terms\">"
-                  . "Terms of Use</a> ]<br>\n";
-				  
-		$total_time = (get_microtime() - $start_time);
-        $total_time = '<span class="copyright">[ '._PAGEGENERATION."<strong><font color='".$digits_color."'> ".substr($total_time,0,4)."</font></strong> "._SECONDS."";
+global $digits_color;
+$total_time = (get_microtime() - $start_time);
+$total_time = '<span class="copyright"> '._PAGEGENERATION."<strong><font color='".$digits_color."'> ".substr($total_time,0,4)."</font></strong> "._SECONDS."";
         
-		if ($start_mem > 0) 
-		{
-            $total_mem = memory_get_usage()-$start_mem;
-            $total_time .= ' | Memory Usage: <strong><font color="'.$digits_color.'">'.(($total_mem >= 1048576) 
-			? round((round($total_mem / 1048576 * 100) / 100), 2).' MB' : (($total_mem >= 1024) 
-			? round((round($total_mem / 1024 * 100) / 100), 2).' KB' : $total_mem.' Bytes'));
-			$total_time .= '</font></strong>';
-        }
+if ($start_mem > 0): 
+$total_mem = memory_get_usage()-$start_mem;
+$total_time .= ' | Memory Usage: <strong><font color="'.$digits_color.'">'.(($total_mem >= 1048576) 
+? round((round($total_mem / 1048576 * 100) / 100), 2).' MB' : (($total_mem >= 1024) 
+? round((round($total_mem / 1024 * 100) / 100), 2).' KB' : $total_mem.' Bytes'));
+$total_time .= '</font></strong>';
+endif;
 
-        # START Queries Count v2.0.1
-        if($queries_count) {
-            $total_time .= ' | DB Queries: <strong><font color="'.$digits_color.'">' . $db->num_queries;
-			$total_time .= '</font></strong>';
-        }
-        # END Queries Count v2.0.1
+# START Queries Count v2.0.1
+if($queries_count):
+$total_time .= ' | DB Queries: <strong><font color="'.$digits_color.'">' . $db->num_queries;
+$total_time .= '</font></strong>';
+endif;
+# END Queries Count v2.0.1
 
-        $total_time .= ' ]';
-        $total_time .= '</span>';
+$total_time .= ' ';
+$total_time .= '</span>';
 
-        # START Auto Optimize v1.0.0
-        if(is_admin()) {
-            $first_time = false;
-            if (($last_optimize = $cache->load('last_optimize', 'config')) === false) {
-                $last_optimize = time();
-                $first_time = true;
-            }
-			
-            //For information on how to change the auto-optimize intervals
-            //Please see www.php.net/strtotime
-            //Default: -1 day
-            $interval = strtotime('-1 day');
-            if (($last_optimize <= $interval) || ($first_time && $cache->valid && $use_cache))
-            {
-                if ($db->sql_optimize()) {
-                    $cache->save('last_optimize', 'config', time());
-                    $total_time .= "<br />Database Optimized";
-                }
-            }
+# Auto Optimize v1.0.0 START
+if(is_admin()): 
+ $first_time = false;
+  if (($last_optimize = $cache->load('last_optimize', 'config')) === false): 
+   $last_optimize = time();
+    $first_time = true;
+  endif;			
+     //For information on how to change the auto-optimize intervals
+     //Please see www.php.net/strtotime
+     //Default: -1 day
+     $interval = strtotime('-1 day');
+       if (($last_optimize <= $interval) || ($first_time && $cache->valid && $use_cache)):
+         if ($db->sql_optimize()):
+           $cache->save('last_optimize', 'config', time());
+             $total_time .= "<br />Database Optimized";
+         endif;
+       endif;
            
-		    # START Module Simplifications v1.0.0
-			update_modules();
-		    # END Module Simplifications v1.0.0
+# Module Simplifications v1.0.0 START 
+update_modules();
+# Module Simplifications v1.0.0 END 
 
-        }
-        # END Auto Optimize v1.0.0
+endif;
+# Auto Optimize v1.0.0 END
 	
     $footmsg .= $total_time."<br />\n</span>\n";
 
@@ -190,7 +200,7 @@ $footmsg .= '<font size="5"><strong><a class="greatminds" href="modules.php?name
     
 	if (is_admin()) 
 	{
-            echo $db->print_debug();
+      echo $db->print_debug();
     }
     # END Debugger v1.0.0
 	
@@ -198,7 +208,7 @@ $footmsg .= '<font size="5"><strong><a class="greatminds" href="modules.php?name
 	
 	if (is_admin() && !is_bool($debug) && $debug == 'full') 
 	{
-		$strstart = strlen(NUKE_BASE_DIR);
+		    $strstart = strlen(NUKE_BASE_DIR);
 			$debug_sql = '<span class="genmed" style="font-weight: bold;">SQL Debug:</span><br /><br />';
 			
 			foreach ($db->querylist as $file => $queries) 
@@ -223,16 +233,6 @@ $footmsg .= '<font size="5"><strong><a class="greatminds" href="modules.php?name
     }
 	# with this span tag it is invisble to the main website
 	
-        # START updated 09/12/2019 Ernest Allen Buffington
-        if($use_cache && $usrclearcache) 
-		{
-          $footmsg .= "<form method='post' name='clear_cache' action='".$_SERVER['REQUEST_URI']."'>";
-          $footmsg .= "<input type='hidden' name='clear_cache' value='1'>";
-          $footmsg .= ""._SITECACHED . "</span> <a href=\"javascript:clear_cache.submit()\">" . _UPDATECACHE . "</a>";
-          $footmsg .= "</form>";
-        }
-		# END updated 09/12/2019 Ernest Allen Buffington
-		
 	echo $footmsg;
     $has_echoed = 1;
 
