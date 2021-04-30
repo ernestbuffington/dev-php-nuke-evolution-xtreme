@@ -64,7 +64,7 @@ class sql_db
 	 * @public var $debug
 	 * Can be used to check for invalid MySQL queries once they have been run
 	 */
-    var $debug = 1;
+    var $debug = 0;
 
     /*!
 	 * @public var $saved

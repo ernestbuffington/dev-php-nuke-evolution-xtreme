@@ -14,9 +14,7 @@
 if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) 
 exit('Access Denied');
 
-# un-comment this to enable facebook
-//define('facebook', 'enabled');
-
+define('facebook', 'enabled');
 if ( defined('facebook') ):
 global $fb, $appID, $api_version, $appSecret, $my_url;
 require_once __DIR__ . '/includes/Facebook/autoload.php';
