@@ -6,7 +6,7 @@
 
 <h2>Developer Team</h2>
 
-<ul><ul>
+<ul>
 	<li>Ernest Allen Buffington</li>
 	<li>Francisco Burzi</li> 
 	<li>Bob Marion</li> 
@@ -17,7 +17,7 @@
 	<li>André V Escudero</li>
         <li>Lonestar</li>
 	<li>CoRpSE</li>
-</ul><ul>
+</ul>
 
 <h2>Contributor Team</h2>
 
@@ -32,7 +32,7 @@
 
 <h2>Test and Translation Team</h2>
 
-<ul><ul>
+<ul>
 <li>Aleagi (http://www.phpnuke.org.br)</li>
 <li>Curtis Hancock (http://curtishancock.net)</li>
 <li>Emre YILDIRIM (http://www.emreyildirim.com)</li>
@@ -46,7 +46,7 @@
 <li>WaLLoU</li>
 <li>which (http://www.which.idv.tw)</li>
 <li>ylhor (www.netcolony.org)</li>
-</ul><ul>
+</ul>
 
 <h2>Major Changes in the US Version of Nuke Evolution Xtreme</h2>
 
