@@ -2,6 +2,7 @@
 /*======================================================================= 
   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
+
 /************************************************************************/
 /* PHP-NUKE: Advanced Content Management System                         */
 /* ============================================                         */
@@ -13,6 +14,7 @@
 /* it under the terms of the GNU General Public License as published by */
 /* the Free Software Foundation; either version 2 of the License.       */
 /************************************************************************/
+
 /*****[CHANGES]**********************************************************
 -=[Base]=-
       Nuke Patched                             v3.1.0       06/26/2005
@@ -26,11 +28,10 @@
       Admin Icon/Link Pos                      v1.0.0       06/07/2005
 	  NSN Center Blocks                        v2.2.1       05/26/2009
  ************************************************************************/
-if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME']))
-exit('Access Denied');
 
-if(!defined('HEADER')) 
-return;
+if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) exit('Access Denied');
+
+if(!defined('HEADER')) return;
 
 define('NUKE_FOOTER', true);
 
@@ -66,11 +67,11 @@ function footmsg()
 $do_gzip_compress, 
 	   $start_mem;
 
-    static $has_echoed;
+static $has_echoed;
 
-    if(isset($has_echoed) && $has_echoed == 1) 
-	return; 
+if(isset($has_echoed) && $has_echoed == 1) return; 
 
+# powered by information and credits START
 global $powered_by;
 $powered_by = '<font size="3">PHP-Nuke Evolution Xtreme (US Version) Copyright &copy; 2010 2021<br /> by Ernest Allen Buffington and The 86it Developers Network.<br /> 
  All logos, trademarks and posts in this site are property of their respective owners, all the rest <br />&copy; '.date('l jS \of F Y h:i:s A').' by Brandon Maintenance Management, LLC.<br />
@@ -85,7 +86,9 @@ $powered_by = '<font size="3">PHP-Nuke Evolution Xtreme (US Version) Copyright &
  PHP-Nuke Titanium US Version<br />
  </font>
  ';
+# powered by information and credits END
 
+# footer messages span class START
 $footmsg = "<span class=\"footmsg\">\n";
 
 # Google Site Map v1.0 START	    
