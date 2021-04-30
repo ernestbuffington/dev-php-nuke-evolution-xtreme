@@ -633,33 +633,41 @@ function ShoutBox($ShoutSubmit, $ShoutComment, $shoutuid)
                 $nameresultN = $db->sql_query($sqlN);
                 $rowN = $db->sql_fetchrow($nameresultN);
                 $db->sql_freeresult($nameresultN);
-                if ($rowN && ($row['name'] != "Anonymous")) {
+                
+				if ($rowN && ($row['name'] != "Anonymous")) 
+				{
     /*****[BEGIN]******************************************
      [ Mod:    Advanced Username Color             v1.0.5 ]
      ******************************************************/
-                    $tempContent[$i] .= "<strong><a href=\"modules.php?name=Your_Account&amp;op=userinfo&amp;username=$row[name]\">" . UsernameColor($row['name']) . "</a>:</strong> $ShoutComment";
+                    $tempContent[$i] .= "<strong><a href=\"modules.php?name=Your_Account&amp;op=userinfo&amp;username=$row[name]\">".UsernameColor($row['name'])."</a>&nbsp;&nbsp;<i class=\"bi bi-megaphone\"></i>&nbsp;</strong> $ShoutComment";
     /*****[END]********************************************
      [ Mod:    Advanced Username Color             v1.0.5 ]
      ******************************************************/
                 } 
 				else 
 				{
-                    $tempContent[$i] .= "<strong>".$row['name'].":</strong> $ShoutComment";
+                    $tempContent[$i] .= "<strong>".$row['name']."&nbsp;&nbsp;<i class=\"bi bi-megaphone\"></i>&nbsp;</strong> $ShoutComment";
                 }
             }
             if ($conf['date']== 'yes') 
 			{
-                if (!empty($row['timestamp'])) {
+                if (!empty($row['timestamp'])) 
+				{
                     // reads unix timestamp && formats it to the viewer's timezone
-                    if ($is_user) {
+                    if ($is_user) 
+					{
                         $unixTime = EvoDate($userinfo['user_dateformat'], $row['timestamp'], $userinfo['user_timezone']);
-                        $tempContent[$i] .= "<br />$unixTime";
-                    } else {
+                        $tempContent[$i] .= "<br />$unixTime<br /><br />"; # added a space between shouts
+                    } 
+					else 
+					{
                         $unixTime = EvoDate($board_config['default_dateformat'], $row['timestamp'], $board_config['board_timezone']);
-                        $tempContent[$i] .= "<br />$unixTime";
+                        $tempContent[$i] .= "<br />$unixTime<br /><br />"; # added a space between shouts
                     }
-                } else {
-                    $tempContent[$i] .= "<br />".$row['date']."&nbsp;".$row['time'];
+                } 
+				else 
+				{
+                    $tempContent[$i] .= "<br />".$row['date']."&nbsp;".$row['time']."<br /><br />"; # added a space between shouts
                 }
             }
             $tempContent[$i] .= "</td></tr>";
