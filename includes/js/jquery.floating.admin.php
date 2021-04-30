@@ -130,10 +130,10 @@ if ( is_admin() && !defined('_disable_floating_admin') )
 			'divider'		=> false
 		),
 		array(
-			'title' 		=> $customlang['floating_admin']['news'],
+			'title' 		=> $customlang['floating_admin']['blog'],
 			'url' 			=> $admin_file.'.php?op=adminStory',
 			'fa_icon' 		=> 'fa-rss',
-			'access_level' 	=> is_mod_admin('News'),
+			'access_level' 	=> is_mod_admin('Blog'),
 			'file_exists' 	=> true,
 			'divider'		=> false
 		),
