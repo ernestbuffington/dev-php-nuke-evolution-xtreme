@@ -7,12 +7,12 @@
 <h2>Associated Developers</h2>
 
 <ul>
-	<li>Lonestar</li>
-	<li>CoRpSE</li>
-	<li>Bob Marion</li>
-	<li>TheGhost</li>
-	<li>SeaBeast08</li>
-	<li>TheWolf</li>
+	<li>Lonestar</li><li>1</li>
+	<li>CoRpSE</li><li>2</li>
+	<li>Bob Marion</li><li>3</li>
+	<li>TheGhost</li><li>4</li>
+	<li>SeaBeast08</li><li>5</li>
+	<li>TheWolf</li><li>6</li>
 
 </ul>
 
