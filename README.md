@@ -1,9 +1,6 @@
 <h1>PHP-Nuke Evolution Xtreme (The US Version)</h1>
 <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme.svg?type=shield"/></a>
 
-## License
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme?ref=badge_large)
-
 <h2>Developer Team</h2>
 
 <ul>
@@ -23,29 +20,29 @@
 
 <ul>
 
-<li>Cerealkiller (https://portalvol.86it.us)</li> 
-<li>Cobalt74 (https://onyxbgd.verygames.86it.us)</li> 
-<li>curt UniKCode (https://vecino398.86it.us)</li> 
-<li>Jamilig (https://portalvol.86it.us) 
+<li>Cerealkiller</li> 
+<li>Cobalt74</li> 
+<li>UniKCode</li> 
+<li>Jamilig) 
 
 </ul>
 
 <h2>Test and Translation Team</h2>
 
 <ul>
-<li>Aleagi (http://www.phpnuke.org.br)</li>
-<li>Curtis Hancock (http://curtishancock.net)</li>
-<li>Emre YILDIRIM (http://www.emreyildirim.com)</li>
-<li>Fábio M.G. (http://www.hardwarebr.net)</li>
-<li>Kevin Hurley (http://www.armadafleetcommand.com)</li>
-<li>Marcelo Daibert (http://daibert.net)</li>
+<li>Aleagi</li>
+<li>Curtis Hancock</li>
+<li>Emre YILDIRIM</li>
+<li>Fábio M.G.</li>
+<li>Kevin Hurley</li>
+<li>Marcelo Daibert</li>
 <li>Mathijs Lubbertsen</li>
 <li>MaxAN</li>
 <li>RR69</li>
 <li>Vitor Martins Santos</li>
 <li>WaLLoU</li>
-<li>which (http://www.which.idv.tw)</li>
-<li>ylhor (www.netcolony.org)</li>
+<li>which</li>
+<li>ylhor</li>
 </ul>
 
 <h2>Major Changes in the US Version of Nuke Evolution Xtreme</h2>
