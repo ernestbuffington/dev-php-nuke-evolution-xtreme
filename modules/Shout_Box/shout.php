@@ -239,7 +239,9 @@ function ShoutBox($ShoutSubmit, $ShoutComment, $shoutuid) {
 					$i++;
 				}
 			}
-			if (empty($ShoutError)) { $ShoutComment = implode(" ",$ShoutNew); }
+			
+			# was told to comment this out on Lonestars website
+			//if (empty($ShoutError)) { $ShoutComment = implode(" ",$ShoutNew); }
 
 			//Smilies from database
 			$ShoutArrayReplace = explode(" ",$ShoutComment);
