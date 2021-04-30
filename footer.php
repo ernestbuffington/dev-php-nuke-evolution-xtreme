@@ -145,7 +145,7 @@ $footmsg .= $foot3."<br/><br/>";
 
 global $digits_color;
 $total_time = (get_microtime() - $start_time);                                              # I'm lying right here can you figure out how?
-$total_time = '<span class="copyright"> '._PAGEGENERATION."<strong><font color='".$digits_color."'> ".(substr($total_time,0,4)-0.03)."</font></strong> "._SECONDS."";
+$total_time = '<span class="copyright"> '._PAGEGENERATION."<strong><font color='".$digits_color."'> ".(substr($total_time,0,4)-0.00)."</font></strong> "._SECONDS."";
         
 if ($start_mem > 0): 
 $total_mem = memory_get_usage()-$start_mem;
@@ -155,6 +155,8 @@ $total_time .= ' | Memory Usage: <strong><font color="'.$digits_color.'">'.(($to
 color="'.$digits_color.'">' : $total_mem.'</font></strong> Bytes<strong><font color="'.$digits_color.'">')); 
 $total_time .= '</font></strong>';
 endif;
+
+$footmsg .= $db->mariadb_version().'<br/>';
 
 # START Queries Count v2.0.1
 if($queries_count):

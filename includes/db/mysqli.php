@@ -655,6 +655,19 @@ class sql_db
         }
         return '';
     }
+    
+	# added by Ernest Allen Buffington 4/29/2021 Thursday 9:05pm
+    function mariadb_version()
+	{
+		if($this->db_connect_id):
+			$result  = 'Why are we lightning fast?<br>';
+			$result .= 'MySQL Server Version: ';
+			$result .= @mysqli_get_server_info($this->db_connect_id);
+			return $result;
+		else:
+			return false;
+		endif;
+	}
 
 } // class sql_db
 
