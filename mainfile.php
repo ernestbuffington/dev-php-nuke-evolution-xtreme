@@ -1393,9 +1393,7 @@ function network_ads($position)
     echo "\n\n<!-- function network_ads EXECUTE -->\n";
 	
 	if(!$banners) 
-	{ 
-	  return ''; 
-	}
+    return ''; 
     
 	$position = intval($position);
     $result = $db2->sql_query("SELECT * FROM `".$network_prefix."_banner` WHERE `position`='$position' AND `active`='1' ORDER BY RAND() LIMIT 0,1");
@@ -1407,23 +1405,22 @@ function network_ads($position)
 	$row = $db2->sql_fetchrow($result, SQL_ASSOC);
     $db2->sql_freeresult($result);
     
-	foreach($row as $var => $value) 
-	{
+	foreach($row as $var => $value): 
         if (isset($$var)) 
 		unset($$var);
-        
 		$$var = $value;
-    }
+    endforeach;
     
 	$bid = intval($bid);
     
 	if(!is_admin()) 
-	{
-        $db2->sql_query("UPDATE `".$network_prefix."_banner` SET `impmade`=" . $impmade . "+1 WHERE `bid`='$bid'");
-    }
+    $db2->sql_query("UPDATE `".$network_prefix."_banner` SET `impmade`=" . $impmade . "+1 WHERE `bid`='$bid'");
+
     $sql2 = "SELECT `cid`, `imptotal`, `impmade`, `clicks`, `date`, `ad_class`, `ad_code`, `ad_width`, `ad_height` FROM `".$network_prefix."_banner` WHERE `bid`='$bid'";
     $result2 = $db2->sql_query($sql2);
+
     list($cid, $imptotal, $impmade, $clicks, $date, $ad_class, $ad_code, $ad_width, $ad_height) = $db2->sql_fetchrow($result2, SQL_NUM);
+
     $db2->sql_freeresult($result2);
     $cid = intval($cid);
     $imptotal = intval($imptotal);
@@ -1431,16 +1428,17 @@ function network_ads($position)
     $clicks = intval($clicks);
     
 	/* Check if this impression is the last one and print the banner */
-    if (($imptotal <= $impmade) && ($imptotal != 0)) 
-	{
+    if (($imptotal <= $impmade) && ($imptotal != 0)): 
+	
         $db2->sql_query("UPDATE `".$network_prefix."_banner` SET `active`='0' WHERE `bid`='$bid'");
         $sql3 = "SELECT `name`, `contact`, `email` FROM `".$network_prefix."_banner_clients` WHERE `cid`='$cid'";
         $result3 = $db->sql_query($sql3);
-        list($c_name, $c_contact, $c_email) = $db->sql_fetchrow($result3, SQL_NUM);
-        $db2->sql_freeresult($result3);
+    
+	    list($c_name, $c_contact, $c_email) = $db->sql_fetchrow($result3, SQL_NUM);
+    
+	    $db2->sql_freeresult($result3);
         
-		if (!empty($c_email)) 
-		{
+		if (!empty($c_email)): 
             $from = $sitename.' <'.$adminmail.'>';
             $to = $c_contact.' <'.$c_email.'>';
             $message = _HELLO." $c_contact:\n\n";
@@ -1458,32 +1456,24 @@ function network_ads($position)
             $subject = $sitename.': '._BANNERSFINNISHED;
             $mailcommand = evo_mail($to, $subject, $message, "From: $from\nX-Mailer: PHP/" . PHPVERS);
             $mailcommand = removecrlf($mailcommand);
-        }
-    }
-    
-	if ($ad_class == "code") 
-	{
+        endif;
+    endif;
+	if ($ad_class == "code"): 
         $ad_code = stripslashes($ad_code);
         $ads = '<div align="center">'.$ad_code.'</div>';
-    } 
-	else
-	if ($ad_class == "flash") 
-	{
+	elseif ($ad_class == "flash"): 
         $ads = "<div align=\"center\">"
               ."<object classid=\"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000\" codebase=\"https://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0\" width=\"".$ad_width."\" height=\"".$ad_height."\" id=\"$bid\">"
               ."<param name=\"movie\" value=\"".$imageurl."\" />"
               ."<param name=\"quality\" value=\"high\" />"
               ."<embed src=\"".$imageurl."\" quality=\"high\" width=\"".$ad_width."\" height=\"".$ad_height."\" name=\"".$bid."\" align=\"\" type=\"application/x-shockwave-flash\" pluginspage=\"https://www.macromedia.com/go/getflashplayer\"></embed></object>"
               ."</div>";
-    } 
-	else 
-	{
+	else: 
 		# this opens the ad from the main hub - https://hub.86it.us
         $ads = "<div class=\"banner_box\" align=\"center\"><a href=\"https://hub.86it.us/index.php?op=ad_network_click&amp;bid=$bid\" target=\"_blank\"><img class=\"banner_box\" src=\"$imageurl\" border=\"0\" alt=\"$alttext\" title=\"$alttext\"></a></div>";
-    }
-    
-    echo "<!-- Networks Ads DONE -->\n\n\n";
-	return $ads;
+	endif;
+    echo "<!-- Networks Ads END EXECUTE -->\n\n\n";
+  return $ads;
 }
 
 /*
