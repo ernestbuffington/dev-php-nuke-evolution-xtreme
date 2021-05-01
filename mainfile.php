@@ -1495,8 +1495,13 @@ function network_ads($position)
 function addPHPCSSToHead($content, $type='file')
 {
     global $headPHPCSS;
-    if (($type == 'file') && (is_array($headPHPCSS) && count($headPHPCSS) > 0) && (in_array(array($type, $content), $headPHPCSS))) return;
-    $headPHPCSS[] = array($type, $content);
+    if (($type == 'file') 
+	&& (is_array($headPHPCSS) 
+	&& count($headPHPCSS) > 0) 
+	&& (in_array(array($type, $content), $headPHPCSS))) 
+	return;
+    
+	$headPHPCSS[] = array($type, $content);
     return;
 }
 # END for Theme Fly Kit by Ernest Buffington - 09/02/2019
