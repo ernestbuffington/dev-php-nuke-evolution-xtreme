@@ -8,7 +8,7 @@
 <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme.svg?type=shield"/></a>
 
 
-<h2>Developer Team</h2>
+<h2>Developers</h2>
 
 <ul>
 	<li>Francisco Burzi</li> 
