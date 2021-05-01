@@ -1521,8 +1521,14 @@ function addJSToHead($content, $type='file')
 function addJSToBody($content, $type='file') 
 {
     global $bodyJS;
-    if (($type == 'file') && (is_array($bodyJS) && count($bodyJS) > 0) && (in_array(array($type, $content), $bodyJS))) return;
-    $bodyJS[] = array($type, $content);
+    
+	if (($type == 'file') 
+	&& (is_array($bodyJS) 
+	&& count($bodyJS) > 0) 
+	&& (in_array(array($type, $content), $bodyJS))) 
+	return;
+    
+	$bodyJS[] = array($type, $content);
     return;
 }
 
