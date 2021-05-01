@@ -325,7 +325,8 @@ function online()
 		$guest = 3;
 
 	}
-	# Bing Bot - The MSN Bot retired in 2010
+	# Bing Bot - The MSN Bot retired in 2010 
+	# Perhaps Facebook bought Bing Bot or ended up with the IP some how?
 	if(($ip == '13.66.139.157') 
 	|| ('13.66.139.19')
 	|| ('157.55.39.150')
@@ -334,7 +335,19 @@ function online()
         $uname = 'Bing Bot';
 		$guest = 3;
 
-	}	
+	}
+	
+    # This is Amazon
+	if(($ip == '100.25.148.103') 
+	|| ($ip == '100.25.148.103')
+	)
+	{
+
+        $uname = 'Amazon Bot';
+		$guest = 3;
+
+	}
+		
     # This is AWS
 	if(($ip == '34.233.208.215') 
 	|| ($ip == '34.233.58.209')
