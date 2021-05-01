@@ -1059,61 +1059,54 @@ function Remove_Slashes($str) {
 }
 
 // check_words function by ReOrGaNiSaTiOn
-function check_words($message) {
+function check_words($message) 
+{
     global $censor_words;
-    if(empty($message)) {
-        return '';
-    }
-    if(empty($censor_words)) {
-        return $message;
-    }
-    $orig_word = array();
+
+    if(empty($message)) 
+    return '';
+    
+	if(empty($censor_words)) 
+    return $message;
+    
+	$orig_word = array();
     $replacement_word = array();
-    foreach( $censor_words as $word => $replacement ) {
+    
+	foreach( $censor_words as $word => $replacement ): 
         $orig_word[] = '#\b(' . str_replace('\*', '\w*?', preg_quote($word, '#')) . ')\b#i';
         $replacement_word[] = $replacement;
-    }
-    $return_message = @preg_replace($orig_word, $replacement_word, $message);
+    endforeach;
+    
+	$return_message = @preg_replace($orig_word, $replacement_word, $message);
+
     return $return_message;
 }
 
-function check_html($str, $strip='') {
+function check_html($str, $strip='') 
+{
         # do not filter strings for the admins! (Test This Later)        
-		if (is_mod_admin('super'))
-		{
+		if (is_mod_admin('super')):
           $str = Fix_Quotes($str, !empty($strip));
           return $str;
-		}
+		endif;
 /*****[BEGIN]******************************************
  [ Base:    PHP Input Filter                   v1.2.2 ]
  ******************************************************/
-    if(defined('INPUT_FILTER')) 
-	{
-		if ($strip == 'nohtml') {
-            global $AllowableHTML;
-        }
-    
-	    if (!is_array($AllowableHTML)) 
-		{
+    if(defined('INPUT_FILTER')): 
+		if ($strip == 'nohtml')
+        global $AllowableHTML;
+	    if (!is_array($AllowableHTML)): 
             $html = '';
-        } 
-		else 
-		{
+		else: 
             $html = '';
-            foreach($AllowableHTML as $type => $key) 
-			{
+            foreach($AllowableHTML as $type => $key):
                  if($key == 1) 
-				 {
                    $html[] = $type;
-                 }
-            }
-        }
-		
+            endforeach;
+        endif;
         $html_filter = new InputFilter($html, "", 0, 0, 1);
         $str = $html_filter->process($str);
-    } 
-	else 
-	{
+	else: 
 /*****[END]********************************************
  [ Base:    PHP Input Filter                   v1.2.2 ]
  ******************************************************/
@@ -1121,11 +1114,10 @@ function check_html($str, $strip='') {
 /*****[BEGIN]******************************************
  [ Base:    PHP Input Filter                   v1.2.2 ]
  ******************************************************/
-    }
+    endif;
 /*****[END]********************************************
  [ Base:    PHP Input Filter                   v1.2.2 ]
  ******************************************************/
-
     return $str;
 }
 
@@ -1147,55 +1139,42 @@ function formatTimestamp($time, $format='', $dateonly='')
 {
     global $datetime, $locale, $userinfo, $board_config;
 
-    if (empty($format)) 
-	{
+    if (empty($format)): 
         if (isset($userinfo['user_dateformat']) && !empty($userinfo['user_dateformat'])) 
-		{
             $format = $userinfo['user_dateformat'];
-        } 
 		else 
 		if (isset($board_config['default_dateformat']) && !empty($board_config['default_dateformat'])) 
-		{
             $format = $board_config['default_dateformat'];
-        } 
 		else 
-		{
             $format = 'D M d, Y g:i a';
-        }
-    }
+    endif;
     
-	if (!empty($dateonly)) 
-	{
+	if (!empty($dateonly)): 
+	
         $replaces = array('a', 'A', 'B', 'c', 'D', 'g', 'G', 'h', 'H', 'i', 'I', 'O', 'r', 's', 'U', 'Z', ':');
         $format = str_replace($replaces, '', $format);
-    }
+    endif;
     
 	if ((isset($userinfo['user_timezone']) && !empty($userinfo['user_timezone'])) && $userinfo['user_id'] != 1) 
-	{
         $tz = $userinfo['user_timezone'];
-    } 
-	else 
-	if (isset($board_config['board_timezone']) && !empty($board_config['board_timezone'])) 
-	{
+	elseif (isset($board_config['board_timezone']) && !empty($board_config['board_timezone'])) 
         $tz = $board_config['board_timezone'];
-    } 
 	else 
-	{
         $tz = '10';
-    }
+
     setlocale(LC_TIME, $locale);
     
-	if (!is_numeric($time)) 
-	{
+	if (!is_numeric($time)): 
         preg_match('/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}) ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})/', $time, $datetime);
         $time = gmmktime($datetime[4],$datetime[5],$datetime[6],$datetime[2],$datetime[3],$datetime[1]);
-    }
+    endif;
     
 	$datetime = EvoDate($format, $time, $tz);
     return $datetime;
 }
 
-function get_microtime() {
+function get_microtime() 
+{
     list($usec, $sec) = explode(' ', microtime());
     return ($usec + $sec);
 }
@@ -1208,12 +1187,12 @@ function blog_signature($aid)
     global $user_prefix, $db;
     static $users;
 
-    if (is_array($users[$aid])) {
+    if (is_array($users[$aid])):
         $row = $users[$aid];
-    } else {
+    else:
         $row = get_admin_field('*', $aid);
         $users[$aid] = $row;
-    }
+    endif;
 
 	  # webmaster
        list($username, 
@@ -1254,39 +1233,48 @@ function blog_signature($aid)
  ******************************************************/
 
 
-function get_author($aid) {
+function get_author($aid) 
+{
     global $user_prefix, $db;
     static $users;
-    if (is_array($users[$aid])) {
+
+    if (is_array($users[$aid])): 
         $row = $users[$aid];
-    } else {
+	else: 
         $row = get_admin_field('*', $aid);
         $users[$aid] = $row;
-    }
+    endif;
+	
     $result = $db->sql_query('SELECT `user_id` from `'.$user_prefix.'_users` WHERE `username`="'.$aid.'"');
     $userid = $db->sql_fetchrow($result);
     $db->sql_freeresult($result);
 /*****[BEGIN]******************************************
  [ Mod:    Advanced Username Color             v1.0.5 ]
  ******************************************************/
-    if (isset($userid[0])) {
-        $aid = "<a href=\"modules.php?name=Profile&amp;mode=viewprofile&amp;u=".$userid[0]."\">".UsernameColor($aid)."</a>";
-    } else if (isset($row['url']) && $row['url'] != 'http://') {
-        $aid = "<a href=\"".$row['url']."\">".UsernameColor($aid)."</a>";
-    } else {
-        $aid = UsernameColor($aid);
+    if (isset($userid[0])) 
+     $aid = "<a href=\"modules.php?name=Profile&amp;mode=viewprofile&amp;u=".$userid[0]."\">".UsernameColor($aid)."</a>";
+	elseif (isset($row['url']) && $row['url'] != 'http://') 
+     $aid = "<a href=\"".$row['url']."\">".UsernameColor($aid)."</a>";
+	else 
+     $aid = UsernameColor($aid);
 /*****[END]********************************************
  [ Mod:    Advanced Username Color             v1.0.5 ]
  ******************************************************/
-    }
     return $aid;
 }
 
-function getTopics($s_sid) {
+function getTopics($s_sid) 
+{
     global $topicname, $topicimage, $topictext, $db;
     $sid = intval($s_sid);
-    $sql = 'SELECT t.`topicname`, t.`topicimage`, t.`topictext` FROM (`'._STORIES_TABLE.'` s LEFT JOIN `'._TOPICS_TABLE.'` t ON t.`topicid` = s.`topic`) WHERE s.`sid` = "'.$sid.'"';
-    $result = $db->sql_query($sql);
+    
+	$sql = 'SELECT t.`topicname`, t.`topicimage`, t.`topictext` 
+	FROM (`'._STORIES_TABLE.'` s 
+	LEFT JOIN `'._TOPICS_TABLE.'` t 
+	ON t.`topicid` = s.`topic`) 
+	WHERE s.`sid` = "'.$sid.'"';
+    
+	$result = $db->sql_query($sql);
     $row = $db->sql_fetchrow($result);
     $db->sql_freeresult($result);
     $topicname = $row['topicname'];
