@@ -1633,15 +1633,16 @@ function get_theme()
     ChangeTheme($_REQUEST['theme'], $cookie[0]);
 
     #Theme Preview Mod - Theme Management (JeFFb68CAM)
-    if(isset($_REQUEST['tpreview']) && ThemeAllowed($_REQUEST['tpreview'])) 
-	{
+    if(isset($_REQUEST['tpreview']) && ThemeAllowed($_REQUEST['tpreview'])): 
+	
         $ThemeSel = $_REQUEST['tpreview'];
     
 	    if(!is_user()) 
         setcookie('guest_theme', $ThemeSel, time()+84600);
 
         return $ThemeSel;
-    }
+
+    endif;
 
     #Theme Preview for guests Mod - Theme Management (JeFFb68CAM)
     if (isset($_COOKIE['guest_theme']) && !is_user()) 
@@ -1658,35 +1659,44 @@ function get_theme()
  ******************************************************/
 
 // Function to translate Datestrings
-function translate($phrase) {
-    switch($phrase) {
+function translate($phrase) 
+{
+	switch($phrase) :
         case'xdatestring': $tmp='%A, %B %d @ %T %Z'; break;
         case'linksdatestring': $tmp='%d-%b-%Y'; break;
         case'xdatestring2': $tmp='%A, %B %d'; break;
         default: $tmp=$phrase; break;
-    }
+    endswitch;
+	
     return $tmp;
 }
 
-function removecrlf($str) {
+function removecrlf($str) 
+{
     return strtr($str, '\015\012', ' ');
 }
 
-function validate_mail($email) {
-    if(strlen($email) < 7 || !preg_match('/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/', $email)) {
+function validate_mail($email) 
+{
+    if(strlen($email) < 7 || !preg_match('/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/', $email)): 
+	
         DisplayError(_ERRORINVEMAIL);
         return false;
-    } else {
+     
+	else: 
         return $email;
-    }
+	endif;
 }
 
-function encode_mail($email) {
+function encode_mail($email) 
+{
     $finished = '';
-    for($i=0, $j = strlen($email); $i<$j; ++$i) {
+
+    for($i=0, $j = strlen($email); $i<$j; ++$i):
         $n = mt_rand(0, 1);
         $finished .= ($n) ? '&#x'.sprintf('%X',ord($email[$i])).';' : '&#'.ord($email[$i]).';';
-    }
+    endfor;
+
     return $finished;
 }
 
@@ -1786,20 +1796,25 @@ include_once(NUKE_INCLUDE_DIR.'nbbcode.php');
 /*****[BEGIN]******************************************
  [ Base:    Switch Content Script              v2.0.0 ]
  ******************************************************/
-function get_plus_minus_image () {
+function get_plus_minus_image () 
+{
     static $theme;
     static $image;
-    if(isset($image) && is_array($image)) return $image;
-    if(empty($theme)) {
-        if(function_exists('get_theme')) {
+
+    if(isset($image) && is_array($image)) 
+	return $image;
+
+    if(empty($theme)) 
+        if(function_exists('get_theme')) 
             $theme = get_theme();
-        }
-    }
+
     $theme_folder = (!empty($theme)) ? ((defined(NUKE_THEMES_DIR)) ? NUKE_THEMES_DIR.$theme.'/images/' : dirname(__FILE__) . '/themes/'.$theme.'/images/') : '';
     $image['plus'] = (file_exists($theme_folder.'plus.gif')) ? 'themes/'.$theme.'/images/plus.gif' : 'images/plus.gif';
     $image['minus'] = (file_exists($theme_folder.'minus.gif')) ? 'themes/'.$theme.'/images/minus.gif' : 'images/minus.gif';
+
     return $image;
 }
+
 $plus_minus_images = get_plus_minus_image();
 /*****[END]********************************************
  [ Base:    Switch Content Script              v2.0.0 ]
