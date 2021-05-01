@@ -93,9 +93,6 @@ print '<tr>'."\n";
 print '<td width="23" height="3" background="'.HTTPS.'themes/'.$theme_name.'/tables/OpenTable/leftside.png">'."\n";
 print '<img src="'.HTTPS.'themes/'.$theme_name.'/tables/OpenTable/leftside.png" border="0" width="23" height="3"></td>'."\n";
 print '<td width="100%">'."\n";
-print '<table cellSpacing="0" cellPadding="8" width="100%" border="0" style="border-collapse: collapse" bordercolor="#111111">'."\n";
-print '<tr>'."\n";
-print '<td width="100%" bgcolor="#0b151f">'."\n";
 # Top of center table END  (this is where you edit for each theme design)
 #################################################################################################################################################################
 #################################################################################################################################################################
@@ -107,6 +104,10 @@ print '<td width="100%" bgcolor="#0b151f">'."\n";
 #
 # This stays no matter what START ---------------------------------------------------------------------------------------------------------------------------------
 echo "<!-- CONTENT START -->\n\n\n\n\n";
+print '<table cellSpacing="0" cellPadding="8" width="100%" border="0" style="border-collapse: collapse" bordercolor="#111111">'."\n";
+print '<tr>'."\n";
+print '<td width="100%" bgcolor="#0b151f">'."\n";
+
 print '<div align="center">';
 print '<table style="background-color: none; height:100%; width:99%;" class="googlesitemap" align="center" border="5" cellpadding="15" cellspacing="20" dir="ltr" id="googlesitemap">';
 print '<tbody>';
@@ -123,11 +124,7 @@ print '</tr>';
 print '</tbody>';
 print '</table>';
 print '</div>';
-
 echo "\n\n\n\n\n<!-- CONTENT END -->\n";
-print '</td>';
-print '</tr>';
-print '</table>';
 # This stays no matter what END	---------------------------------------------------------------------------------------------------------------------------------
 #
 #
@@ -138,6 +135,10 @@ print '</table>';
 #################################################################################################################################################################
 #################################################################################################################################################################
 # bottome of center table START (this is where you edit for each theme design)
+print '</td>';
+print '</tr>';
+print '</table>';
+
 print '</td>';
 print '<td width="23" height="3" background="'.HTTPS.'themes/'.$theme_name.'/tables/CloseTable/rightside.png">'."\n";
 print '<img src="'.HTTPS.'themes/'.$theme_name.'/tables/CloseTable/rightside.png" border="0" width="23" height="3"></td>'."\n";
