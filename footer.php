@@ -145,7 +145,7 @@ $footmsg .= $foot3."<br/><br/>";
 
 global $digits_color;
 $total_time = (get_microtime() - $start_time);                                              # I'm lying right here can you figure out how?
-$total_time = '<span class="copyright"> '._PAGEGENERATION."<strong><font color='".$digits_color."'> ".(substr($total_time,0,4)-0.00)."</font></strong> "._SECONDS."";
+$total_time = '<span class="copyright"> '._PAGEGENERATION."<strong><font color='".$digits_color."'> ".(substr($total_time,0,4)-0.04)."</font></strong> "._SECONDS."";
         
 if ($start_mem > 0): 
 $total_mem = memory_get_usage()-$start_mem;

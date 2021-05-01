@@ -1237,8 +1237,7 @@ function blog_signature($aid)
      $aid .= '<br />';				   
      $aid .= '<table border="0" cellpadding="0" cellspacing="0" width="100%" height="0">';
      $aid .= '<tr>';
-     $aid .= '<td valign="top" height="80" width="80" height="200"><img width="90" 
-                       class="rounded-corners" style="max-height: 150px; max-width: 150px;" src="modules/Forums/images/avatars/'.$avatar.'" alt="avatar" border="0"></td>';
+     $aid .= '<td valign="top" height="80" width="80" height="200"><img width="90" class="rounded-corners" style="max-height: 150px; max-width: 150px;" src="modules/Forums/images/avatars/'.$avatar.'" alt="avatar" border="0"></td>';
      $aid .= '<td align="top">';
      $aid .= '&nbsp;&nbsp;<strong>'.$user_occ.'</strong><br />';
      $aid .= '&nbsp;&nbsp;name: '.$name.'<br />';
@@ -1713,40 +1712,55 @@ function UsernameColor($username, $old_name=false) {
     return $cached_names[$plain_username];
 }
 
-function GroupColor($group_name, $short=0) {
+# get group color
+function GroupColor($group_name, $short=0) 
+{
     global $db, $use_colors, $cache;
+
     static $cached_groups;
-    if(!$use_colors) return $group_name;
-    $plaingroupname = ( $short !=0 ) ? $group_name.'_short' : $group_name;
-    if (!empty($cached_groups[$plaingroupname])) {
-        return $cached_groups[$plaingroupname];
-    }
-    if ((($cached_groups = $cache->load('GroupColors', 'config')) === false) || empty($cached_groups)) {
-        $cached_groups = array();
-        $sql = 'SELECT `auc`.`group_color` as `group_color`, `gr`.`group_name` as`group_name` FROM ( `'.GROUPS_TABLE.'` `gr` LEFT JOIN  `' . AUC_TABLE . '` `auc` ON `gr`.`group_color` =  `auc`.`group_id`) WHERE `gr`.`group_description` <> "Personal User" ORDER BY `gr`.`group_name` ASC';
-        $result = $db->sql_query($sql);
-        while (list($group_color, $groupcolor_name) = $db->sql_fetchrow($result)) {
+
+    if(!$use_colors) 
+	return $group_name;
+    
+	$plaingroupname = ( $short !=0 ) ? $group_name.'_short' : $group_name;
+    
+	if (!empty($cached_groups[$plaingroupname])) 
+    return $cached_groups[$plaingroupname];
+    
+    if ((($cached_groups = $cache->load('GroupColors', 'config')) === false) || empty($cached_groups)) :
+        
+		$cached_groups = array();
+        
+		$sql = 'SELECT `auc`.`group_color` as `group_color`, `gr`.`group_name` as`group_name` FROM ( `'.GROUPS_TABLE.'` `gr` LEFT JOIN  `' . AUC_TABLE . '` `auc` ON `gr`.`group_color` =  `auc`.`group_id`) WHERE `gr`.`group_description` <> "Personal User" ORDER BY `gr`.`group_name` ASC';
+        
+		$result = $db->sql_query($sql);
+    
+	     while (list($group_color, $groupcolor_name) = $db->sql_fetchrow($result)): 
             $colorgroup_short = (strlen($groupcolor_name) > 13) ? substr($groupcolor_name,0,10).'...' : $groupcolor_name;
             $colorgroup_name  = $groupcolor_name;
             $cached_groups[$groupcolor_name.'_short'] = (strlen($group_color) == 6) ? '<span style="color: #'. $group_color .'"><strong>'. $colorgroup_short .'</strong></span>' : $colorgroup_short;
             $cached_groups[$groupcolor_name] = (strlen($group_color) == 6) ? '<span style="color: #'. $group_color .'"><strong>'. $colorgroup_name .'</strong></span>' : $colorgroup_name;
-        }
-        $db->sql_freeresult($result);
+         endwhile;
+    
+	    $db->sql_freeresult($result);
         $cache->save('GroupColors', 'config', $cached_groups);
-    }
-    if (!empty($cached_groups[$plaingroupname])) {
-        return $cached_groups[$plaingroupname];
-    } else {
-        return $plaingroupname;
-    }
+    
+	endif;
+    
+	if (!empty($cached_groups[$plaingroupname])) 
+    return $cached_groups[$plaingroupname];
+    else 
+    return $plaingroupname;
 }
 
-function check_priv_mess($user_id) {
+function check_priv_mess($user_id) 
+{
     global $db;
-    if (empty($user_id) || !is_numeric($user_id)) {
-        return FALSE;
-    }
- 		$pms = $db->sql_ufetchrow("SELECT COUNT(privmsgs_id) as no FROM ".PRIVMSGS_TABLE." WHERE privmsgs_to_userid='".$user_id."' AND (privmsgs_type='5' OR privmsgs_type='1')");
+
+    if (empty($user_id) || !is_numeric($user_id)) 
+    return false;
+    
+ 	$pms = $db->sql_ufetchrow("SELECT COUNT(privmsgs_id) as no FROM ".PRIVMSGS_TABLE." WHERE privmsgs_to_userid='".$user_id."' AND (privmsgs_type='5' OR privmsgs_type='1')");
     return $pms['no'];
 }
 
