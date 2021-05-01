@@ -1,7 +1,8 @@
 <h1>PHP-Nuke Evolution Xtreme (The US Version)</h1>
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0cfc2ea1fcf74154919aa46befadec31)](https://app.codacy.com/gh/ernestbuffington/dev-php-nuke-evolution-xtreme?utm_source=github.com&utm_medium=referral&utm_content=ernestbuffington/dev-php-nuke-evolution-xtreme&utm_campaign=Badge_Grade_Settings)
+
 <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme.svg?type=shield"/></a>
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0cfc2ea1fcf74154919aa46befadec31)](https://app.codacy.com/gh/ernestbuffington/dev-php-nuke-evolution-xtreme?utm_source=github.com&utm_medium=referral&utm_content=ernestbuffington/dev-php-nuke-evolution-xtreme&utm_campaign=Badge_Grade_Settings)
 
 <h2>Developer Team</h2>
 
