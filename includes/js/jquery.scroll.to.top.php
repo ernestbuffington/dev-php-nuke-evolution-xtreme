@@ -7,6 +7,7 @@
  * @since 2.0.9e 
  *
  * @author Lonestar <https://lonestar-modules.com>
+ * @filename jquery.scroll.to.top.php
  * @version 1.0.0
  * @license GPL-3.0
  */
