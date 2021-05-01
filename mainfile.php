@@ -1591,7 +1591,7 @@ function writeBODYJS()
                 echo $js[1];
         endforeach;
     endif;
-    return;
+  return;
 }
 
 function makePass() 
