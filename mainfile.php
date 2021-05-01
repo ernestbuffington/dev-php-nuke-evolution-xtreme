@@ -1487,7 +1487,7 @@ function network_ads($position)
 }
 
 /*
- * functions added to support dynamic and ordered loading of CSS and JS in <HEAD> and before </BODY>
+ * functions added to support dynamic and ordered loading of CSS, PHPCSS, and JS in <HEAD> and before </BODY>
  * Code origin Raven Nuke CMS (http://www.ravenphpscripts.com)
  */
 
