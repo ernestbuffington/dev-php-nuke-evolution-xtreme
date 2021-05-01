@@ -1690,25 +1690,36 @@ function encode_mail($email) {
     return $finished;
 }
 
-function UsernameColor($username, $old_name=false) {
+# get username color
+function UsernameColor($username, $old_name=false) 
+{
     global $db, $user_prefix, $use_colors, $cache;
+
     static $cached_names;
-    if($old_name) { $username = $old_name; }
-    if(!$use_colors) return $username;
+
+    if($old_name) 
+	$username = $old_name; 
+
+    if(!$use_colors) 
+	return $username;
+
     $plain_username = strtolower($username);
-    if(isset($cached_names[$plain_username])) {
-        return $cached_names[$plain_username];
-    }
-    if(!is_array($cached_names)) {
-        $cached_names = $cache->load('UserColors', 'config');
-    }
-    if (!isset($cached_names[$plain_username])) {
-            list($user_color, $uname) = $db->sql_ufetchrow("SELECT `user_color_gc`, `username` FROM `" . $user_prefix . "_users` WHERE `username` = '" . str_replace("'", "\'", $username) . "'", SQL_NUM);
+
+    if(isset($cached_names[$plain_username])) 
+    return $cached_names[$plain_username];
+    
+    if(!is_array($cached_names)) 
+    $cached_names = $cache->load('UserColors', 'config');
+    
+    if (!isset($cached_names[$plain_username])):
+          
+		    list($user_color, $uname) = $db->sql_ufetchrow("SELECT `user_color_gc`, `username` FROM `" . $user_prefix . "_users` WHERE `username` = '" . str_replace("'", "\'", $username) . "'", SQL_NUM);
             $uname = (!empty($uname)) ? $uname : $username;
             $username = (strlen($user_color) == 6) ? '<span style="color: #'. $user_color .'">'. $uname .'</span>' : $uname;
             $cached_names[$plain_username] = $username;
             $cache->save('UserColors', 'config', $cached_names);
-    }
+	endif;
+
     return $cached_names[$plain_username];
 }
 
