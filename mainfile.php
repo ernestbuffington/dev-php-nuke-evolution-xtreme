@@ -1531,38 +1531,29 @@ function writeHEAD()
     global $headPHPCSS, $headCSS, $headJS;
     
     # START for Theme Fly Kit by Ernest Buffington - 09/02/2019
-	if (is_array($headPHPCSS) && count($headPHPCSS) > 0) 
-    {
-        foreach($headPHPCSS AS $php) 
-        {
-            if ($php[0]=='file') 
-            {
+	if (is_array($headPHPCSS) && count($headPHPCSS) > 0):
+        foreach($headPHPCSS AS $php):
+            if ($php[0]=='file'):
 				echo "<style type=\"text/css\">\n";
                 include($php[1]);
 				echo "</style>\n";
-            } 
-			else 
-			{
+			else: 
 				echo "<style type=\"text/css\">\n";
                 include($php[1]);
 				echo "</style>\n"; 
-            }
-        }
-    }
+            endif;
+        endforeach;
+    endif;
     # END for Theme Fly Kit by Ernest Buffington - 09/02/2019
 	
-	if (is_array($headCSS) && count($headCSS) > 0) 
-    {
-        foreach($headCSS AS $css) 
-        {
+	if (is_array($headCSS) && count($headCSS) > 0):
+        foreach($headCSS AS $css):
             if ($css[0]=='file') 
-            {
                 echo '<link rel="stylesheet" href="' . $css[1] . '" type="text/css" />' . "\n";
-            } else {
+            else
                 echo $css[1];
-            }
-        }
-    }
+        endforeach;
+    endif;
 
     if (is_array($headJS) && count($headJS) > 0):
         foreach($headJS AS $js):
