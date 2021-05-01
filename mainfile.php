@@ -1513,8 +1513,13 @@ function addCSSToHead($content, $type='file')
 function addJSToHead($content, $type='file') 
 {
     global $headJS;
-    if (($type == 'file') && (is_array($headJS) && count($headJS) > 0) && (in_array(array($type, $content), $headJS))) return;
-    $headJS[] = array($type, $content);
+    if (($type == 'file') 
+	&& (is_array($headJS) 
+	&& count($headJS) > 0) 
+	&& (in_array(array($type, $content), $headJS))) 
+	return;
+    
+	$headJS[] = array($type, $content);
     return;
 }
 
