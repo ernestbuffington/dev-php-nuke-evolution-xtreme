@@ -156,7 +156,9 @@ color="'.$digits_color.'">' : $total_mem.'</font></strong> Bytes<strong><font co
 $total_time .= '</font></strong>';
 endif;
 
+# MariaDB version at bottom of footer START
 $footmsg .= $db->mariadb_version().'<br/>';
+# MariaDB version at bottom of footer END
 
 # START Queries Count v2.0.1
 if($queries_count):
