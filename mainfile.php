@@ -1564,19 +1564,15 @@ function writeHEAD()
         }
     }
 
-    if (is_array($headJS) && count($headJS) > 0) 
-    {
-        foreach($headJS AS $js) 
-        {
+    if (is_array($headJS) && count($headJS) > 0):
+        foreach($headJS AS $js):
             if ($js[0] == 'file') 
-            {
                 echo '<script type="text/javascript" src="' . $js[1] . '"></script>' . "\n";
-            } else {
+            else
                 echo $js[1];
-            }
-        }
-    }
-    return;
+        endforeach;
+    endif;
+  return;
 }
 
 function writeBODYJS() 
