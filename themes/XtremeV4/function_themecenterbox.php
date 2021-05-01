@@ -127,6 +127,7 @@ print '</div>';
 echo "\n\n\n\n\n<!-- CONTENT END -->\n";
 print '</td>';
 print '</tr>';
+print '</table>';
 # This stays no matter what END	---------------------------------------------------------------------------------------------------------------------------------
 #
 #
@@ -137,7 +138,6 @@ print '</tr>';
 #################################################################################################################################################################
 #################################################################################################################################################################
 # bottome of center table START (this is where you edit for each theme design)
-print '</table>';
 print '</td>';
 print '<td width="23" height="3" background="'.HTTPS.'themes/'.$theme_name.'/tables/CloseTable/rightside.png">'."\n";
 print '<img src="'.HTTPS.'themes/'.$theme_name.'/tables/CloseTable/rightside.png" border="0" width="23" height="3"></td>'."\n";
