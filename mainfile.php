@@ -946,29 +946,36 @@ function rss_content($url) {
     return false;
 }
 
-function headlines($bid, $side=0, $row='') {
+function headlines($bid, $side=0, $row='') 
+{
     global $prefix, $db, $my_headlines, $cache;
-    if(!$my_headlines) return;
-    $bid = intval($bid);
-    if (!is_array($row)) {
-        $row = $db->sql_ufetchrow('SELECT `title`, `content`, `url`, `refresh`, `time` FROM `'.$prefix.'_blocks` WHERE `bid`='.$bid, SQL_ASSOC);
-    }
-    $content =& trim($row['content']);
-    if ($row['time'] < (time()-$row['refresh']) || empty($content)) {
+
+    if(!$my_headlines) 
+	return;
+    
+	$bid = intval($bid);
+    
+	if (!is_array($row)) 
+    $row = $db->sql_ufetchrow('SELECT `title`, `content`, `url`, `refresh`, `time` FROM `'.$prefix.'_blocks` WHERE `bid`='.$bid, SQL_ASSOC);
+    
+	$content =& trim($row['content']);
+
+    if ($row['time'] < (time()-$row['refresh']) || empty($content)):
         $content = rss_content($row['url']);
         $btime = time();
         $db->sql_query("UPDATE `".$prefix."_blocks` SET `content`='".Fix_Quotes($content)."', `time`='$btime' WHERE `bid`='$bid'");
         $cache->delete('blocks', 'config');
-    }
-    if (empty($content)) {
-        $content = _RSSPROBLEM.' ('.$row['title'].')';
-    }
+    endif;
+
+    if (empty($content)) 
+    $content = _RSSPROBLEM.' ('.$row['title'].')';
+    
     $content = '<span class="content">'.$content.'</span>';
-    if ($side == 'c' || $side == 'd') {
+    
+	if ($side == 'c' || $side == 'd') 
         themecenterbox($row['title'], $content);
-    } else {
+     else 
         themesidebox($row['title'], $content, $bid);
-    }
 }
 
 function blog_ultramode() 
