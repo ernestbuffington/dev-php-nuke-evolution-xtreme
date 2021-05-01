@@ -1,5 +1,6 @@
 <h1>PHP-Nuke Evolution Xtreme (The US Version)</h1>
 <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme.svg?type=shield"/></a>
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0cfc2ea1fcf74154919aa46befadec31)](https://app.codacy.com/gh/ernestbuffington/dev-php-nuke-evolution-xtreme?utm_source=github.com&utm_medium=referral&utm_content=ernestbuffington/dev-php-nuke-evolution-xtreme&utm_campaign=Badge_Grade_Settings)
 
 <h2>Developer Team</h2>
 
@@ -112,8 +113,6 @@ If you need help with an install do not hesitate to submit a request by clicking
 <a href="https://dev-php-nuke-evolution-xtreme.86it.us/index.php" rel="nofollow">http://dev-php-nuke-evolution-xtreme.86it.us/index.php</a></p>
 
 # Note : This repo does not carry the same code used in other countries. This is strictly the US version of Nuke-Evolution Xtreme!
-
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0cfc2ea1fcf74154919aa46befadec31)](https://app.codacy.com/gh/ernestbuffington/dev-php-nuke-evolution-xtreme?utm_source=github.com&utm_medium=referral&utm_content=ernestbuffington/dev-php-nuke-evolution-xtreme&utm_campaign=Badge_Grade_Settings)
 
 <h2>Warranty</h2>
 
