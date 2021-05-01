@@ -9,7 +9,7 @@
 
 
 <h2>Developer Team</h2>
-
+```markdown
 <ul>
 	<li>Francisco Burzi</li> 
         <li>Bob Marion</li> 
@@ -25,7 +25,7 @@
 	<li>Peter Lindgren</li> 
 	<li>André V Escudero</li>
 </ul>
-
+```
 <h2>Contributor Team</h2>
 
 <ul>
