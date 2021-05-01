@@ -61,6 +61,14 @@ if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
 /*--------------------------*/
 function themesidebox($title, $content, $bid = 0) 
 {
+# check for invisible facebook blocks START
+global $invisble_facebook_block;
+if ($invisble_facebook_block == true):
+echo $content;
+$invisble_facebook_block =  false;
+else:
+# check for invisible facebook blocks END
+  	
 global $theme_name;
 
 echo "\n\n<!-- function themesidebox START -->\n";
@@ -116,7 +124,12 @@ print '</table>'."\n";
 print '<div align="center" style="padding-top:6px;">';
 print '</div>';
 
+# check for invisible facebook blocks START
+endif;
+# check for invisible facebook blocks END
+
 echo "\n<!-- function themesidebox END -->\n\n\n";
+
 }
 ?>
 

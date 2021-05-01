@@ -27,6 +27,11 @@
 
 if(!defined('NUKE_EVO')) exit;
 
+# we tell the block loader that we do not want tables
+# drawn arounf out block by setting this to TRUE
+global $invisble_facebook_block;
+$invisble_facebook_block = true;
+
 // Now show it
 $content  = '<div class="fb-customerchat"';
 $content .= 'attribution="page_inbox"';

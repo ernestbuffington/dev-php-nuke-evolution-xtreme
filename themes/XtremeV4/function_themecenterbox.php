@@ -1,6 +1,6 @@
 <?php
 # THEME INFO                                                                            #
-# Universal Theme v1.0 (Fixed & Full Width)                                             #
+# Template Theme v1.0 (Fixed & Full Width)                                              #
 #                                                                                       #
 # Final Build Date 03/16/2021 Tuesday 12:54am                                           #
 #                                                                                       #
@@ -52,15 +52,31 @@
 # -[04/17/2010] Updated Nuke Evolution to XHTML 1.0 Transitional                        #
 #---------------------------------------------------------------------------------------#
 
-if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
-    exit('Access Denied');
-}
+if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) exit('Access Denied');
 
 /*--------------------------*/
 /* Theme CenterBox 
 /*--------------------------*/
 function themecenterbox($title, $content) 
 {
+ # This stays no matter what START
+# check for invisible facebook blocks START
+# we do not draw tables fo invisible facebook blocks!
+global $invisble_facebook_block;
+if ($invisble_facebook_block == true):
+echo $content;
+$invisble_facebook_block =  false;
+else:
+# check for invisible facebook blocks END
+ # This stays no matter what END
+#
+#
+#
+#################################################################################################################################################################
+#################################################################################################################################################################
+#################################################################################################################################################################
+#################################################################################################################################################################
+# Top of center table START (this is where you edit for each theme design)
 global $theme_name;	
 print '<table class=blockz cellSpacing="0" cellPadding="0" border="0" width="100%">'."\n";
 print '<tr><td width="39" style="background: repeat-x; background-image: url('.HTTPS.'themes/'.$theme_name.'/tables/OpenTable/invisible_pixel.gif);">'."\n";
@@ -80,8 +96,16 @@ print '<td width="100%">'."\n";
 print '<table cellSpacing="0" cellPadding="8" width="100%" border="0" style="border-collapse: collapse" bordercolor="#111111">'."\n";
 print '<tr>'."\n";
 print '<td width="100%" bgcolor="#0b151f">'."\n";
-
-# This stays no matter what START
+# Top of center table END  (this is where you edit for each theme design)
+#################################################################################################################################################################
+#################################################################################################################################################################
+#################################################################################################################################################################
+#################################################################################################################################################################
+#
+#
+#
+#
+# This stays no matter what START ---------------------------------------------------------------------------------------------------------------------------------
 echo "<!-- CONTENT START -->\n\n\n\n\n";
 print '<div align="center">';
 print '<table style="background-color: none; height:100%; width:99%;" class="googlesitemap" align="center" border="5" cellpadding="15" cellspacing="20" dir="ltr" id="googlesitemap">';
@@ -101,10 +125,18 @@ print '</table>';
 print '</div>';
 
 echo "\n\n\n\n\n<!-- CONTENT END -->\n";
-# This stays no matter what END	
-
 print '</td>';
 print '</tr>';
+# This stays no matter what END	---------------------------------------------------------------------------------------------------------------------------------
+#
+#
+#
+#
+#################################################################################################################################################################
+#################################################################################################################################################################
+#################################################################################################################################################################
+#################################################################################################################################################################
+# bottome of center table START (this is where you edit for each theme design)
 print '</table>';
 print '</td>';
 print '<td width="23" height="3" background="'.HTTPS.'themes/'.$theme_name.'/tables/CloseTable/rightside.png">'."\n";
@@ -125,10 +157,26 @@ print '<img src="'.HTTPS.'themes/'.$theme_name.'/tables/CloseTable/brc.png" bord
 
 print '</tr>'."\n";
 print '</table>'."\n";
+# bottome of center table END (this is where you edit for each theme design)
+#################################################################################################################################################################
+#################################################################################################################################################################
+#################################################################################################################################################################
+#################################################################################################################################################################
+#
+#
+#
+#
+#
+#
+ # This stays no matter what START ---------------------------------------------------------------------------------------------------------------------------------	
+# check for invisible facebook blocks START
+endif;
+# check for invisible facebook blocks END
 
-# This sets the space between blogs listed START
+# This sets the space between center tables listed START
 print '<div align="center" style="padding-top:6px;">';
 print '</div>';
-# This sets the space between blogs listed END
+# This sets the space between center tables listed END -------------------------------------------------------------------------------------------------------------
+ # This stays no matter what END	
 }
 ?>

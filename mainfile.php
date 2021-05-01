@@ -899,51 +899,70 @@ function blocks($side, $count=false) {
     return;
 } 
 
-function blockfileinc($blockfiletitle, $blockfile, $side=1, $bid) {
-    global $collapse;
+function blockfileinc($blockfiletitle, $blockfile, $side=1, $bid) 
+{
+    global $debug, $collapse;
 
-    if (!file_exists(NUKE_BLOCKS_DIR.$blockfile)) {
+    if ($debug == 0)
+	echo '<div align="center">'.$blockfile.'</div>';
+
+    if (!file_exists(NUKE_BLOCKS_DIR.$blockfile)) 
+	{
         $content = _BLOCKPROBLEM;
-    } else {
+    } 
+	else 
+	{
         include(NUKE_BLOCKS_DIR.$blockfile);
     }
-    if (empty($content)) {
+    
+	if (empty($content)) 
+	{
         $content = _BLOCKPROBLEM2;
     }
 /*****[BEGIN]******************************************
  [ Mod:     Switch Content Script              v2.0.0 ]
  ******************************************************/
-    if($collapse) {
+    if($collapse) 
+	{
         $content = "&nbsp;<div id=\"block".$bid."\" class=\"switchcontent\">".$content."</div>";
     }
 /*****[END]********************************************
  [ Mod:     Switch Content Script              v2.0.0 ]
  ******************************************************/
-    if ($side == 'r' || $side == 'l') {
-        themesidebox($blockfiletitle, $content, $bid);
-    } else {
+    if ($side == 'r' || $side == 'l') 
+	{
+		themesidebox($blockfiletitle, $content, $bid);
+    } 
+	else 
+	{
         themecenterbox($blockfiletitle, $content);
     }
 }
 
-function rss_content($url) {
-    if (!evo_site_up($url)) return false;
-    require_once(NUKE_CLASSES_DIR.'class.rss.php');
-    if ($rss = RSS::read($url)) {
+function rss_content($url) 
+{
+    if (!evo_site_up($url)) 
+	return false;
+    
+	require_once(NUKE_CLASSES_DIR.'class.rss.php');
+    
+	if ($rss = RSS::read($url)):
         $items =& $rss['items'];
         $site_link =& $rss['link'];
         $content = '';
-        for ($i=0,$j = count($items);$i  <$j;$i++) {
+    
+	    for ($i=0,$j = count($items);$i  <$j;$i++):
             $link = $items[$i]['link'];
             $title2 = $items[$i]['title'];
             $content .= "<strong><big>&middot;</big></strong> <a href=\"$link\" target=\"new\">$title2</a><br />\n";
-        }
-        if (!empty($site_link)) {
-            $content .= "<br /><a href=\"$site_link\" target=\"_blank\"><strong>"._HREADMORE.'</strong></a>';
-        }
+        endfor;
+    
+	    if (!empty($site_link)) 
+        $content .= "<br /><a href=\"$site_link\" target=\"_blank\"><strong>"._HREADMORE.'</strong></a>';
+        
         return $content;
-    }
-    return false;
+    endif;
+  return false;
 }
 
 function headlines($bid, $side=0, $row='') 
