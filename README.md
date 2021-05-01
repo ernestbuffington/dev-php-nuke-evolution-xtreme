@@ -14,9 +14,12 @@
 	<li>Francisco Burzi</li> 
         <li>Bob Marion</li> 
         <li>Technocrat</li>
-	<li>killagan</li>
+	<li>killigan</li>
 	<li>JeFFb68CAM</li>
 	<li>TheGhost</li>
+	<li>SgtLegend</li>
+	<li>Eyecu</li>
+	<li>Wolfstar</li>
         <li>Lonestar</li>
 	<li>CoRpSE</li>
 	<li>SeaBeast08</li> 
