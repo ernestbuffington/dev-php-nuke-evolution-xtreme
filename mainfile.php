@@ -1582,33 +1582,34 @@ function writeHEAD()
 function writeBODYJS() 
 {
     global $bodyJS;
-    if (is_array($bodyJS) && count($bodyJS) > 0) 
-    {
-        foreach($bodyJS AS $js) 
-        {
+    
+	if (is_array($bodyJS) && count($bodyJS) > 0): 
+        foreach($bodyJS AS $js):
             if ($js[0] == 'file') 
-            {
                 echo '<script type="text/javascript" language="JavaScript" src="' . $js[1] . '"></script>' . "\n";
-            } else {
+            else
                 echo $js[1];
-            }
-        }
-    }
+        endforeach;
+    endif;
     return;
 }
 
-function makePass() {
+function makePass() 
+{
     $cons = 'bcdfghjklmnpqrstvwxyz';
     $vocs = 'aeiou';
-    for ($x=0; $x < 6; $x++) {
+
+    for ($x=0; $x < 6; $x++):
         mt_srand ((double) microtime() * 1000000);
         $con[$x] = substr($cons, mt_rand(0, strlen($cons)-1), 1);
         $voc[$x] = substr($vocs, mt_rand(0, strlen($vocs)-1), 1);
-    }
+    endfor;
+
     mt_srand((double)microtime()*1000000);
     $num1 = mt_rand(0, 9);
     $num2 = mt_rand(0, 9);
     $makepass = $con[0] . $voc[0] .$con[2] . $num1 . $num2 . $con[3] . $voc[3] . $con[4];
+
     return $makepass;
 }
 /*****[END]********************************************
