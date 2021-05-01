@@ -29,7 +29,7 @@
 	<li>André V Escudero</li>
 </ul>
 
-<h2>Contributor Team</h2>
+<h2>Contributors</h2>
 
 <ul>
 
@@ -40,7 +40,7 @@
 
 </ul>
 
-<h2>Test and Translation Team</h2>
+<h2>Test and Translation</h2>
 
 <ul>
 <li>Aleagi</li>
