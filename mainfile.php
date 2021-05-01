@@ -978,8 +978,7 @@ function blog_ultramode()
     $sql = "SELECT s.sid, s.catid, s.aid, s.title, s.datePublished, s.dateModified, s.hometext, s.comments, s.topic, s.ticon, t.topictext, t.topicimage FROM `".$prefix."_stories` s LEFT JOIN `".$prefix."_topics` t ON t.topicid = s.topic WHERE s.ihome = '0' ".$querylang." ORDER BY s.datePublished DESC LIMIT 0,10";
     $result = $db->sql_query($sql);
     
-	while ($row = $db->sql_fetchrow($result, SQL_ASSOC)) 
-	{
+	while ($row = $db->sql_fetchrow($result, SQL_ASSOC)): 
         $rsid = $row['sid'];
         $raid = $row['aid'];
         $rtitle = htmlspecialchars(stripslashes($row['title']));
@@ -992,20 +991,18 @@ function blog_ultramode()
         $topicimage = ($row['ticon']) ? stripslashes($row['topicimage']) : '';
         $rtime = formatTimestamp($rtime, 'l, F d');
         $content .= "%%\n".$rtitle."\n/modules.php?name=Blog&file=article&sid=".$rsid."\n".$rtime."\n".$raid."\n".$topictext."\n".$rcomments."\n".$topicimage."\n";
-    }
+    endwhile;
+	
     $db->sql_freeresult($result);
     
-	if (file_exists(NUKE_BASE_DIR."ultramode.txt") && is_writable(NUKE_BASE_DIR."ultramode.txt")) 
-	{
+	if (file_exists(NUKE_BASE_DIR."ultramode.txt") && is_writable(NUKE_BASE_DIR."ultramode.txt")): 
         $file = fopen(NUKE_BASE_DIR."ultramode.txt", "w");
         fwrite($file, "General purpose self-explanatory file with news headlines\n".$content);
         fclose($file);
-    } 
-	else 
-	{
+	else: 
         global $debugger;
         $debugger->handle_error('Unable to write ultramode content to file', 'Error');
-    }
+    endif;
 }
 
 function ultramode() 
