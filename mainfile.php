@@ -1505,8 +1505,13 @@ function addPHPCSSToHead($content, $type='file')
 function addCSSToHead($content, $type='file') 
 {
     global $headCSS;
-    if (($type == 'file') && (is_array($headCSS) && count($headCSS) > 0) && (in_array(array($type, $content), $headCSS))) return;
-    $headCSS[] = array($type, $content);
+    if (($type == 'file') 
+	&& (is_array($headCSS) 
+	&& count($headCSS) > 0) 
+	&& (in_array(array($type, $content), $headCSS))) 
+	return;
+    
+	$headCSS[] = array($type, $content);
     return;
 }
 
