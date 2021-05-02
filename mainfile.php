@@ -1240,7 +1240,7 @@ function blog_signature($aid)
 											        `user_occ` 
 											
 											FROM `'.$user_prefix.'_users` WHERE `username`="'.$aid.'"', SQL_NUM);
-     $aid  = '<br />';				   
+     $aid  = '';				   
      $aid .= 'Sincerely,<br />';
      $aid .= $name.'<br />';				   				   
      $aid .= '<br />';				   
@@ -1251,7 +1251,7 @@ function blog_signature($aid)
      $aid .= '&nbsp;&nbsp;<strong>'.$user_occ.'</strong><br />';
      $aid .= '&nbsp;&nbsp;name: '.$name.'<br />';
      $aid .= '&nbsp;&nbsp;email: '.str_replace("@", "[at]", $email).'<br />';
-     $aid .= $bio.'<br />';
+     $aid .= $bio.'';
      $aid .= '</td>';
      $aid .= '</tr>';
      $aid .= '</table>';

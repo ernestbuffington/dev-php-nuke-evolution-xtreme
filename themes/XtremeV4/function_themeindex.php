@@ -94,7 +94,7 @@ function themeindex($aid, $informant, $time, $modified, $title, $counter, $topic
 
     endif;
 
-$posted = sprintf($customlang['global']['posted_by'], '<strong>'.get_author($aid).'</strong>', $time);
+$posted = '<strong>Posted by '.get_author($aid).' '.$time.'</strong>';
 $datetime = substr($morelink, 0, strpos($morelink, '|')-strlen($morelink));
 $morelink = substr($morelink, strlen($datetime)+2);
 $reads = '( <span style="color: '.$digits_txt_color.';">'.$customlang['global']['reads'].'</span>: <span style="color: '.$digits_color.';"><strong>'.$counter.'</strong></span> )';
@@ -128,15 +128,27 @@ print '<tbody>';
 print '<tr>';
 print '<td>';
 
-echo '<div align="center" id="text"><br/><h1><font size="6"><strong>'.$title.'</strong></font></h1><br/>';
+print '<div align="center" style="padding-top:10px;">';
 print '</div>';
+
+echo '<div align="center" id="text"><h1><font size="6"><strong>'.$title.'</strong></font></h1>';
+print '</div>';
+
+print '<div align="center" style="padding-top:6px;">';
+print '</div>';
+
+print ''.$posted.'';
+
+print '<div align="center" style="padding-top:6px;">';
+print '</div>';
+
 //content
 echo '<div align="left" id="text">';
 echo ''.$content.'</div>';	
 
 print blog_signature($aid);
 
-echo '<div align="right">'.$posted.'<img src="themes/'.$theme_name.'/images/invisible_pixel.gif" alt="" width="4" height="1" border="0" /><br />'.$datetime.' '.$topictext.' | '.$morelink.' '.$reads.'<img src="themes/'.$theme_name.'/images/invisible_pixel.gif" alt="" width="4" height="1" border="0" /></div>';
+echo '<div align="center"><br />'.$datetime.' '.$topictext.' | '.$morelink.' '.$reads.'<img src="themes/'.$theme_name.'/images/invisible_pixel.gif" alt="" width="4" height="1" border="0" /></div>';
 
 print '</td>';
 print '</tr>';

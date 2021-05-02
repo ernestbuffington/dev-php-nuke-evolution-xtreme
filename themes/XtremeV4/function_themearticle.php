@@ -96,8 +96,7 @@ if (!empty($topicimage))
 			$content .= $thetext.$notes;
 	}
 
-$posted = _POSTEDON.' '.$datetime.' '._BY.'<strong> ';
-$posted .= get_author($aid).'</strong>';
+$posted .= '<strong>Posted by '.get_author($aid).' '.$datetime.'</strong>';
 $reads = '(<span style="color: '.$digits_txt_color.';"> Reads :</span> <span style="color: '.$digits_color.';"><strong>'.$counter.'</strong></span> )';
 
 print '<table class=blockz cellSpacing="0" cellPadding="0" border="0" width="100%">'."\n";
@@ -120,19 +119,34 @@ print '<tr>'."\n";
 print '<td width="100%" bgcolor="#0b151f">'."\n";
 
 # This stays no matter what START
-echo "<!-- CONTENT START -->\n\n\n\n\n";
 print '<div align="center">';
-print '<table style="background-color: none; height:100%; width:99%;" class="googlesitemap" align="center" border="5" cellpadding="15" cellspacing="20" dir="ltr" id="googlesitemap">';
+print '<table style="background-color: none; height:100%; width:99%;" class="theme_article" align="center" border="5" cellpadding="15" cellspacing="20" dir="ltr" id="theme_article">';
 print '<tbody>';
 print '<tr>';
 print '<td>';
 
-echo '<div align="center" id="text"><br/><h1><font size="6"><strong>'.$topictext.'</strong></font><br/><br/><font size="4"><strong>'.$title.'</strong></font></h1><br />';
+print '<div align="center" style="padding-top:13px;">';
 print '</div>';
+
+echo '<div align="center" id="text"><h1><font size="6"><strong>'.$topictext.'</strong></font><br/></h1>';
+print '</div>';
+
+print '<div align="center" style="padding-top:1px;"><h2><font size="4"><strong>'.$title.'</strong></font></h2>';
+print '</div>';
+
+print ''.$posted.'';
+
+print '<div align="center" style="padding-top:6px;">';
+print '</div>';
+
+echo "<!-- CONTENT THEME ARTICLE START -->\n\n";
+
 //content START
 echo '<div align="left" id="text">';
 echo ''.$content.'</div>';
 //content END
+
+echo "\n\n<!-- CONTENT THEME ARTICLE END -->\n\n";
 
 print blog_signature($aid);
 
@@ -141,7 +155,7 @@ facebook_likes();
 facebook_comments();
 echo "<!-- facebook functions END -->\n\n\n";
 
-echo '<div align="left">'.$posted.'<img src="themes/'.$theme_name.'/images/invisible_pixel.gif" alt="" width="4" height="1" border="0" /><div valign="bottom" align="right">'.$reads.'</div><img src="themes/'.$theme_name.'/images/invisible_pixel.gif" alt="" width="4" height="1" border="0" /></div>';
+echo '<div valign="bottom" align="right">'.$reads.'</div>';
 
 print '</td>';
 print '</tr>';
@@ -149,7 +163,6 @@ print '</tbody>';
 print '</table>';
 print '</div>';
 
-echo "\n\n\n\n\n<!-- CONTENT END -->\n";
 # This stays no matter what END	
 
 print '</td>';
