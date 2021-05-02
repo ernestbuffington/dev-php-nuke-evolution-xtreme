@@ -540,9 +540,9 @@ echo "\n\n<!--
    :      :   : :  : :: ::    :: :: :    :   : :   : :  :   :: : :       :     
                                                                                 -->\n";
 # Easter Egg Hunt added by who I'm not sure but it's cute
-#addJSToBody(NUKE_JQUERY_SCRIPTS_DIR.'Evo.EE.js','file');
-#addJSToBody(NUKE_JQUERY_SCRIPTS_DIR.'Evo.EE.CMD.js','file');
-echo "\n<!-- Validate DeeZ Nuts -->\n\n\n";
+# addJSToBody(NUKE_JQUERY_SCRIPTS_DIR.'Evo.EE.js','file');
+# addJSToBody(NUKE_JQUERY_SCRIPTS_DIR.'Evo.EE.CMD.js','file');
+echo "\n<!-- Ernest Allen Buffington aka TheGhost -->\n\n\n";
 
 global $analytics;
 
