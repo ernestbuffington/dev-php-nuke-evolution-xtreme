@@ -429,5 +429,4 @@ function lazy_tap_check($set)
         DisplayError($admLang['MISCELLANEOUS']['LAZY_TAP_ERROR']);
     }
 }
-
 ?>
