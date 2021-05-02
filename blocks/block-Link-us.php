@@ -1,16 +1,7 @@
 <?php
-
 /*=======================================================================
  Nuke-Evolution		: 	Enhanced Web Portal System
  ========================================================================
- 
- Nuke-Evo Base          :		#$#BASE
- Nuke-Evo Version       :		#$#VER
- Nuke-Evo Build         :		#$#BUILD
- Nuke-Evo Patch         :		#$#PATCH
- Nuke-Evo Filename      :		#$#FILENAME
- Nuke-Evo Date          :		#$#DATE
-
  (c) 2007 - 2008 by DarkForgeGFX - http://www.darkforgegfx.com
  ========================================================================
 
@@ -28,7 +19,6 @@
 -=[Base]=-
 -=[Mod]=-
  ************************************************************************/
-
 if(!defined('NUKE_EVO')) exit;
 
 global $prefix, $db, $sitename, $nukeurl;
@@ -38,7 +28,9 @@ $config = dburow("SELECT * FROM ".$prefix."_link_us_config LIMIT 1");
 function block_Link_Us_cache($block_cachetime) 
 {
 	global $prefix;
-	if ((($blockcache = cache_load('link_us', 'blocks')) === false) || empty($blockcache) || intval($blockcache[0]['stat_created']) < (time() - intval($block_cachetime))) 
+	if ((($blockcache = cache_load('link_us', 'blocks')) === false) 
+	|| empty($blockcache) 
+	|| intval($blockcache[0]['stat_created']) < (time() - intval($block_cachetime))) 
 	{
 		$sql = "SELECT `id`, 
 		        `site_name`, 
@@ -63,8 +55,8 @@ elseif($config['marquee_direction'] == 2){ $direction = "down"; }
 elseif($config['marquee_direction'] == 3){ $direction = "left"; }
 elseif($config['marquee_direction'] == 4){ $direction = "right"; }
 
-	if ($config['button_seperate'] == 1){ $seperation ="<span style='width=100px; size=5;'><hr /></span>"; }
-elseif ($config['button_seperate'] == 2){ $seperation ="<center>-------------------</center>"; }
+	if ($config['button_seperate'] == 1){ $seperation ="<span style='width=100px; size=5;'><br /></span>"; }
+elseif ($config['button_seperate'] == 2){ $seperation ="<div align=\"center\">-------------------</div>"; }
 elseif ($config['button_seperate'] == 0){ $seperation =""; }
 
 	if($config['show_clicks'] == 1){ $clicks = "<br />(Visits ".$site_hits." )"; }
@@ -80,7 +72,7 @@ elseif($config['block_height'] == 5){ $height = "300"; }
 elseif($config['marquee_scroll'] == 2){ $amount = 2; }
 
 
-$my_image = '<img src="'.$config['my_image'].'" alt="'.$sitename.'" title="'.$sitename.'" width="88" height="31">';
+$my_image = '<br /><img src="'.$config['my_image'].'" alt="'.$sitename.'" title="'.$sitename.'" width="88" height="31">';
 $linkus_settings = '<a href="'.$nukeurl.'" target="_blank"><img src="'.$config['my_image'].'" alt="'.$sitename.'" title="'.$sitename.'" width="88" height="31"></a><br>';
 
 
@@ -90,14 +82,13 @@ $content .= '<span class="content"><textarea style="resize: none; font-size: 13p
 $content .= '<br /><br />';
 $content .= '<a href="modules.php?name=Link_Us">View All Buttons</a><br />';
 
-if($config['user_submit'] == 1){ $content .= '<a href="modules.php?name=Link_Us&op=submitbutton">Submit Button</a><br />'; }
+if($config['user_submit'] == 1)
+$content .= '<a href="modules.php?name=Link_Us&op=submitbutton">Submit Button</a><br /><br />'; 
 
-$content .= '<hr>';
+$content .= '';
 
 if($config['marquee'] == 1)
-{
-	$content .= "<marquee direction='".$direction."' scrollamount='".$amount."' height='".$height."' onMouseover='this.stop()' onMouseout='this.start()'>";
-}
+$content .= "<marquee direction='".$direction."' scrollamount='".$amount."' height='".$height."' onMouseover='this.stop()' onMouseout='this.start()'>";
 
 foreach( $blocksession as $friends ):
 
@@ -111,11 +102,7 @@ foreach( $blocksession as $friends ):
 
 endforeach;
 
-if($config['marquee'] == 1){
-	$content .= "</marquee>";
-}
-
+if($config['marquee'] == 1)
+$content .= "</marquee>";
 $content .= '</div>';
-
-
 ?>
