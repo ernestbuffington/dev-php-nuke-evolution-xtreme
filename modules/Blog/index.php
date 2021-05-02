@@ -389,7 +389,7 @@ switch ($op)
 				$counter++;
             }
 
-            echo "</select><strong> "._NE_OF." $articlepages "._NE_PAGES.".</strong></td>\n</tr>\n";
+            echo "</select> "._NE_OF." $articlepages "._NE_PAGES."</td>\n</tr>\n";
             echo "</table>\n";
             echo "</form></div>\n";
 

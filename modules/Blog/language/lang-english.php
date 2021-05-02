@@ -137,9 +137,9 @@ define("_READWITHCOMMENTS", "You can read the complete story with its comments f
 /*****[BEGIN]******************************************
  [ Mod:     NSN Blog                           v1.1.0 ]
  ******************************************************/
-define("_NE_SELECT","Select Page");
-define("_NE_OF","of");
-define("_NE_PAGES","pages");
+define("_NE_SELECT","Select Blog Page");
+define("_NE_OF","( There are ");
+define("_NE_PAGES"," Blog Pages )");
 define("_NE_NEWSCONFIG","Blog Configuration");
 define("_NE_DISPLAYTYPE","Display Column");
 define("_NE_SINGLE","Single Column");
