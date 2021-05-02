@@ -368,5 +368,4 @@ function LoadThemeInfo($theme)
     }
     return $theme_info;
 }
-
 ?>
