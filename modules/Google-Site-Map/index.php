@@ -76,7 +76,7 @@ print '<font color="#FF0000"><i style="vertical-align: middle;" class="fa fa-loc
 print '</div><br/>';
 
 print '<div align="center">';
-print '<table style="background-color:#70163C; height:100%;" class="googlesitemap" align="center" border="5" cellpadding="15" cellspacing="20" dir="ltr" id="googlesitemap">';
+print '<table style="background-color:#70163C;" class="googlesitemap" align="center" border="5" cellpadding="15" cellspacing="20" dir="ltr" id="googlesitemap">';
 print '<tbody>';
 print '<tr>';
 print '<td align="center">';
