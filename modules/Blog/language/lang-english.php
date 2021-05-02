@@ -52,7 +52,9 @@ define("_NEWSBY","Blog by");
 define("_MOSTREAD","Most read Blog");
 define("_READMORE","Read More...");
 define("_BYTESMORE","bytes more");
-define("_COMMENTSQ","comments?");
+
+define("_COMMENTSQ","Likes & comments?");
+
 define("_COMMENT","comment");
 define("_CONFIGURE","Configure");
 define("_LOGINCREATE","Login/Create an Account");

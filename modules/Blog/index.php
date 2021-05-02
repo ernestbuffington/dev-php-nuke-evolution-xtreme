@@ -199,12 +199,14 @@ switch ($op)
             
 			$the_icons = "";
 
-            if (is_user()) 
+            # show the user buttons
+			if (is_user()) 
             {
                 $the_icons .= ' | <a href="modules.php?name='.$module_name.'&amp;file=print&amp;sid='.$artinfo["sid"].'"><i class="fa fa-print"></i></a>'.PHP_EOL;
                 $the_icons .= '&nbsp;<a href="modules.php?name='.$module_name.'&amp;file=friend&amp;op=FriendSend&amp;sid='.$artinfo["sid"].'"><i class="fa fa-envelope"></i></a>';
             }
-            
+			
+            # show thw admin buttons
 			if (is_mod_admin($module_name)) 
             {
                 $the_icons .= ' | <a href="'.$admin_file.'.php?op=EditStory&amp;sid='.$artinfo["sid"].'"><i class="fa fa-pen"></i></a>'.PHP_EOL;
@@ -213,9 +215,14 @@ switch ($op)
 
             $read_link = "<a href='modules.php?name=$module_name&amp;file=read_article&amp;sid=".$artinfo["sid"]."$r_options' onclick=\"NewsReadWindow(this.href,'ReadArticle','600','400','yes');return false;\">";
             $story_link = "<a href='modules.php?name=$module_name&amp;file=article&amp;sid=".$artinfo["sid"]."$r_options'>";
-            $morelink = "( "; // added a space here as that is how it belongs!  Ernest Buffington 08/09/2019
+            
+			
+            $seperator = " )&nbsp;( ";
+			$morelink = "( "; // added a space here as that is how it belongs!  Ernest Buffington 08/09/2019
 
-            if($neconfig["texttype"] == 0) 
+            
+			
+			if($neconfig["texttype"] == 0) 
 			{
                 if ($fullcount > 0 OR $artinfo["comments"] > 0 OR $articlecomm == 0 OR $artinfo["acomm"] == 1) 
 				{
@@ -252,12 +259,13 @@ switch ($op)
 			if ($articlecomm == 1 AND $artinfo["acomm"] == 0) 
 			{
 				
-                if ($artinfo["comments"] == 0) 
-                    $morelink .= "$story_link"._COMMENTSQ."</a>";
-				elseif ($artinfo["comments"] == 1) 
+                if ($artinfo["comments"] == 0): 
+				    $morelink .= "$story_link"._COMMENTSQ."</a>$seperator";
+				elseif ($artinfo["comments"] == 1): 
                     $morelink .= "$story_link".$artinfo["comments"]." "._COMMENT."</a>";
-				elseif ($artinfo["comments"] > 1) 
+				elseif ($artinfo["comments"] > 1): 
                     $morelink .= "$story_link".$artinfo["comments"]." "._COMMENTS."</a>";
+			    endif;
             }
             
 			$morelink .= "$the_icons";
