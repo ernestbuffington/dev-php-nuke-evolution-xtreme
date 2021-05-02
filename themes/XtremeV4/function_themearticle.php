@@ -104,7 +104,7 @@ print '<table class=blockz cellSpacing="0" cellPadding="0" border="0" width="100
 print '<tr><td width="39" style="background: repeat-x; background-image: url('.HTTPS.'themes/'.$theme_name.'/tables/OpenTable/invisible_pixel.gif);">'."\n";
 print '<img src="'.HTTPS.'themes/'.$theme_name.'/tables/OpenTable/tlc.png" border="0" width="39" height="50"></td>'."\n";
 
-print '<td valign="top" align="center" style="background: repeat-x; background-image: url('.HTTPS.'themes/'.$theme_name.'/tables/OpenTable/topmiddle.png);"><br><strong>Blog <i class="fas fa-arrow-right" style="font-size: 10px; color: #ccc;"></i> '.$title.'</strong></td>'."\n";
+print '<td valign="top" align="center" style="background: repeat-x; background-image: url('.HTTPS.'themes/'.$theme_name.'/tables/OpenTable/topmiddle.png);"><br />PHP-Nuke Evolution Xtreme (US Version)</td>'."\n";
 
 print '<td align="right" width="39">'."\n";
 print '<img src="'.HTTPS.'themes/'.$theme_name.'/tables/OpenTable/trc.png" border="0" width="39" height="50"></td>'."\n";
@@ -127,6 +127,8 @@ print '<tbody>';
 print '<tr>';
 print '<td>';
 
+echo '<div align="center" id="text"><br/><h1><font size="6"><strong>'.$topictext.'</strong></font><br/><br/><font size="4"><strong>'.$title.'</strong></font></h1><br />';
+print '</div>';
 //content START
 echo '<div align="left" id="text">';
 echo ''.$content.'</div>';
