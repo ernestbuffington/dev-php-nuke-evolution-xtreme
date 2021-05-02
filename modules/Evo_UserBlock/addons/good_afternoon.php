@@ -175,5 +175,5 @@ if ($evouserinfo_time >= 18 && $evouserinfo_time <= 23) {
 }
 //Username
 $evouserinfo_good_afternoon .= "<br /><strong>".$uname."</strong></div>";
-$evouserinfo_good_afternoon .= "<br />\n";
+//$evouserinfo_good_afternoon .= "<br />\n";
 ?>
