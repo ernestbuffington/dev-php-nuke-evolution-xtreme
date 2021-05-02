@@ -38,9 +38,14 @@ $config = dburow("SELECT * FROM ".$prefix."_link_us_config LIMIT 1");
 function block_Link_Us_cache($block_cachetime) 
 {
 	global $prefix;
-	if ((($blockcache = cache_load('link_us', 'blocks')) === false) || empty($blockcache) || intval($blockcache[0]['stat_created']) < (time() - intval($block_cachetime))) {
-		// $sql = "SELECT `id`, `site_name`, `site_url`, `site_image`, `site_hits` FROM `".$prefix."_link_us` WHERE `site_status`='1' AND `button_type`='1' OR `button_type`='3' ORDER BY `id` DESC";
-		$sql = "SELECT `id`, `site_name`, `site_url`, `site_image`, `site_hits` FROM `".$prefix."_link_us` WHERE `site_status` = 1 ORDER BY `id` DESC";
+	if ((($blockcache = cache_load('link_us', 'blocks')) === false) || empty($blockcache) || intval($blockcache[0]['stat_created']) < (time() - intval($block_cachetime))) 
+	{
+		$sql = "SELECT `id`, 
+		        `site_name`, 
+				 `site_url`, 
+			   `site_image`, 
+			    `site_hits` FROM `".$prefix."_link_us` WHERE `site_status` = 1 ORDER BY `id` DESC";
+		
 		$result = dbquery($sql);
 		$blockcache = dbrowset($result);
 		dbfree($result);
