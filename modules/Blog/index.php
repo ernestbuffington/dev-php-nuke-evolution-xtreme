@@ -67,7 +67,7 @@ redirect("modules.php?name=$module_name&file=topics&topic=$new_topic");
 $main_module = main_module();
 
 $op = (isset($op)) ? $op : '';
-$neconfig["homenumber"] = 50;
+$neconfig["homenumber"] = 0;
 switch ($op) 
 {
     default:
@@ -360,14 +360,14 @@ switch ($op)
 
         if ($articlepages!=1 && $articlepages!=0) 
 		{
-            echo "<br />\n";
+            //echo "<br />\n";
         
 		    OpenTable();
         
 		    $counter = 1;
             $currentpage = ($max / $storynum);
         
-		    echo "<form action='modules.php?name=$module_name' method='post'>\n";
+		    echo "<div align=\"center\"><form action='modules.php?name=$module_name' method='post'>\n";
             echo "<table align='center' border='0' cellpadding='2' cellspacing='2'>\n";
             echo "<tr>\n<td><strong>"._NE_SELECT." </strong><select name='min' onChange='top.location.href=this.options[this.selectedIndex].value'>\n";
         
@@ -391,7 +391,7 @@ switch ($op)
 
             echo "</select><strong> "._NE_OF." $articlepages "._NE_PAGES.".</strong></td>\n</tr>\n";
             echo "</table>\n";
-            echo "</form>\n";
+            echo "</form></div>\n";
 
             CloseTable();
         }
