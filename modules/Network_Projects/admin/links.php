@@ -19,6 +19,6 @@ if (!defined('ADMIN_FILE')) {
 
 global $admin_file;
 
-adminmenu($admin_file.".php?op=Main", 'Titanium Network Projects', "nukeproject.png");
+adminmenu($admin_file.".php?op=Main", 'Network Projects', "nukeproject.png");
 
 ?>
