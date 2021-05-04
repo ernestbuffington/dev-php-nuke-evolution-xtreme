@@ -20,7 +20,7 @@
 defined('NUKE_EVO') or die('Just go away, Shit Head!');
 
 global $db, $prefix, $userinfo;
-global $evouserinfo_avatar, $board_config, $userinfo; 
+global $evouserinfo_avatar, $board_config, $userinfo, $bgcolor4; 
 
 $max_height = '59';
 $max_width = '59';
@@ -28,11 +28,11 @@ $max_width = '59';
 $row1_result = $db->sql_query("SELECT * FROM `".$prefix."_users_who_been` as whb, `".USERS_TABLE."` as u WHERE whb.username = u.username AND whb.username != '".$userinfo['username']."' ORDER BY `last_visit` DESC LIMIT 3");
 
 $row1   = '<div align="center">';
-$row1  .= '<table border="0" width="200">';
+$row1  .= '<table bgcolor="'.$bgcolor4.'" border="0" width="200">';
 $row1  .= '<tr>';
 $row1  .= '<td align="center">';
 
-$row1  .= '<table border="1" cellpadding="0" cellspacing="1" class="visitorlog">';
+$row1  .= '<table bgcolor="'.$bgcolor4.'" border="1" cellpadding="0" cellspacing="1" class="visitorlog">';
 
 while($whosbeen = $db->sql_fetchrow($row1_result)):
 
@@ -100,7 +100,7 @@ $row1 .= '</div>';
 $row2_result = $db->sql_query("SELECT * FROM `".$prefix."_users_who_been` as whb, `".USERS_TABLE."` as u WHERE whb.username = u.username AND whb.username != '".$userinfo['username']."' ORDER BY `last_visit` DESC LIMIT 3, 3");
 
 $row2   = '<div align="center">';
-$row2  .= '<table border="0" width="200">';
+$row2  .= '<table bgcolor="'.$bgcolor4.'" border="0" width="200">';
 $row2  .= '<tr>';
 $row2  .= '<td align="center">';
 
@@ -172,7 +172,7 @@ $row2 .= '</div>';
 $row3_result = $db->sql_query("SELECT * FROM `".$prefix."_users_who_been` as whb, `".USERS_TABLE."` as u WHERE whb.username = u.username AND whb.username != '".$userinfo['username']."' ORDER BY `last_visit` DESC LIMIT 6, 3");
 
 $row3   = '<div align="center">';
-$row3  .= '<table border="0" width="200">';
+$row3  .= '<table bgcolor="'.$bgcolor4.'" border="0" width="200">';
 $row3  .= '<tr>';
 $row3  .= '<td align="center">';
 
@@ -244,11 +244,11 @@ $row3 .= '</div>';
 $row4_result = $db->sql_query("SELECT * FROM `".$prefix."_users_who_been` as whb, `".USERS_TABLE."` as u WHERE whb.username = u.username AND whb.username != '".$userinfo['username']."' ORDER BY `last_visit` DESC LIMIT 9, 3");
 
 $row4   = '<div align="center">';
-$row4  .= '<table border="0" width="200">';
+$row4  .= '<table bgcolor="'.$bgcolor4.'" border="0" width="200">';
 $row4  .= '<tr>';
 $row4  .= '<td align="center">';
 
-$row4  .= '<table border="1" cellpadding="0" cellspacing="1" class="visitorlog">';
+$row4  .= '<table bgcolor="'.$bgcolor4.'" border="1" cellpadding="0" cellspacing="1" class="visitorlog">';
 
 while($whosbeen = $db->sql_fetchrow($row4_result)):
 
@@ -318,7 +318,7 @@ global $screen_width;
 $content = '<div align="center">';
 
 if($screen_width < 1920):
-$content .= '<table border="1" width="100%">';
+$content .= '<table bgcolor="'.$bgcolor4.'" border="1" width="100%">';
 $content .= '	<tr>';
 $content .= '		<td width="251" valign="top">'.$row1.'</td>';
 $content .= '		<td width="251" valign="top">'.$row2.'</td>';
@@ -334,7 +334,7 @@ $content .= '</table>';
 endif;
 
 if($screen_width >= 1920):
-$content .= '<table border="1" width="100%">';
+$content .= '<table bgcolor="'.$bgcolor4.'" border="1" width="100%">';
 $content .= '	<tr>';
 $content .= '		<td width="251" valign="top">'.$row1.'</td>';
 $content .= '		<td width="251" valign="top">'.$row2.'</td>';

@@ -45,9 +45,7 @@ function Show_CNBYA_menu(){
     } else {
         echo "<center><span class=\"title\"><strong>"._USERREGLOGIN."</strong></span></center>\n";
     }
-    CloseTable();
-    echo "<br />";
-    OpenTable();
+
     echo "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tr><td align=\"left\"><span class=\"content\">\n";
     echo "[ <a href=\"modules.php?name=$module_name\">"._LOGIN."</a> \n";
     echo "| <a href=\"modules.php?name=$module_name&amp;op=new_user\">"._REGNEWUSER."</a> ]\n";
@@ -56,7 +54,6 @@ function Show_CNBYA_menu(){
     echo "| <a href=\"modules.php?name=$module_name&amp;op=ShowCookiesRedirect\">"._YA_COOKIEDELALL."</a> ]</span>\n";
     echo "</td></tr></table>\n";
     CloseTable();
-    echo "<br />";
 }
 
 function ya_userCheck($username){
@@ -360,20 +357,36 @@ function mmain($user) {
         $random_num = mt_rand(0, $maxran);
         Show_CNBYA_menu();
         OpenTable();
-        echo "<table width=\"100%\" cellpadding=\"4\" cellspacing=\"1\" class=\"forumline\" border=\"0\">";
-        echo "    <tr>";
+        echo "<br /><table width=\"100%\" cellpadding=\"4\" cellspacing=\"1\" class=\"forumline\" border=\"0\">";
+        
+		echo "    <tr>";
         echo "        <th class=\"thHead\">" . _EUCOOKIETITLE . "</th>";
         echo "    </tr>";
-        echo "    <tr>";
+        
+		echo "    <tr>";
         echo "        <td align=\"left\" class=\"row1\">" . _EUCOOKIEAUTH . "</td>";
         echo "    </tr>";
-        echo "</table>";
-        CloseTable();
-        OpenTable();
-       echo "<form action=\"modules.php?name=".$module_name."\" method=\"post\">\n";
+
+		echo "    <tr>";
+        echo "        <th class=\"thHead\">&nbsp;</th>";
+        echo "    </tr>";
+        
+		echo "</table><br />";
+        
+		# align this motherfucker
+		echo '<div align="center">';
+		
+		echo "<form action=\"modules.php?name=".$module_name."\" method=\"post\">\n";
         echo "<table border=\"0\">\n";
-        echo "<tr><td>"._NICKNAME.":</td><td><input type=\"text\" name=\"username\" size=\"15\" maxlength=\"25\"></td></tr>\n";
-        echo "<tr><td>"._PASSWORD.":</td><td><input type=\"password\" name=\"user_password\" size=\"15\" maxlength=\"20\" AutoComplete=\"off\"></td></tr>\n";
+        
+		echo "<tr><td>"._NICKNAME.":</td><td><input type=\"text\" name=\"username\" size=\"25\" maxlength=\"25\"></td></tr>\n";
+
+		echo "<tr><td>&nbsp;</td><td>&nbsp;</td></tr>\n";
+        
+		echo "<tr><td>"._PASSWORD.":</td><td><input type=\"password\" name=\"user_password\" size=\"25\" maxlength=\"25\" AutoComplete=\"off\"></td></tr>\n";
+
+		echo "<tr><td>&nbsp;</td><td>&nbsp;</td></tr>\n";
+		
         echo "<input type=\"hidden\" name=\"redirect\" value=\"". $redirect ."\">\n"; 
         echo "<input type=\"hidden\" name=\"mode\" value=\"".$mode."\">\n";
         echo "<input type=\"hidden\" name=\"f\" value=\"".$f."\">\n";
@@ -381,13 +394,26 @@ function mmain($user) {
         echo "<input type=\"hidden\" name=\"p\" value=\"".$p."\">\n";
         echo "<input type=\"hidden\" name=\"op\" value=\"login\">\n";
 		echo "<tr><td colspan='2'>";
- 		$cnbchk = array(2,4,5,7);
+ 		
+		$cnbchk = array(2,4,5,7);
    		echo security_code($cnbchk, 'normal', '1'); //Size - compact || normal
+
+		echo "<tr><td>&nbsp;</td><td>&nbsp;</td></tr>\n";
+		
 		echo "</td></tr>";
-        echo "<tr><td colspan=\"2\"><input type=\"submit\" value=\""._LOGIN."\">";
-        if ($ya_config['useactivate'] == 0) { echo "<br />("._BESUREACT.")\n"; }
-        echo "</td></tr></table>\n";
-		echo "</form>\n";
+        
+		echo "<tr><td colspan=\"2\"><div align=\"center\"><input type=\"submit\" value=\""._LOGIN."\">";
+        
+
+		echo "<tr><td>&nbsp;</td><td>&nbsp;</td></tr>\n";
+
+		if ($ya_config['useactivate'] == 0) { echo "<br />("._BESUREACT.")\n"; }
+        
+		echo "</div></td></tr>\n";
+		echo "</table></form>\n";
+		
+		echo '</div>';
+		
         CloseTable();
         include_once(NUKE_BASE_DIR.'footer.php');
     } elseif (is_user()) {

@@ -12,7 +12,7 @@ $last_new_topics     = 10;
 $show_started_by	 = true;
 $alternate_row_class = true;
 
-$table  = '<table border="0" cellpadding="4" cellspacing="1" class="forumline" style="width:100%">'.PHP_EOL;
+$table  = '<br /><table border="0" cellpadding="4" cellspacing="1" class="forumline" style="width:100%">'.PHP_EOL;
 $table .= '  <tr>'.PHP_EOL;
 $table .= '    <td class="catHead" style="width: 4%"></td>'.PHP_EOL;
 $table .= '    <td class="catHead" style="width: 46%">'.$blockslang['forums']['topic'].'</td>'.PHP_EOL;
@@ -101,6 +101,6 @@ else:
 
 endif;
 
-$table .= '</table>'.PHP_EOL;
+$table .= '</table><br />'.PHP_EOL;
 $content = $table;
 ?>
