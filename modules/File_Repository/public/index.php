@@ -16,6 +16,7 @@ function _file_repository_index()
 {
 	global $db, $admin_file, $lang_new, $module_name, $settings, $themes, $admin, $user;
 	OpenTable();
+	echo '<br />';
 	_index_navigation_header();
 	$cid 			 = (isset($_GET['cid'])) ? $_GET['cid'] : 0;
 	$count_downloads = $db->sql_numrows($db->sql_query("SELECT * FROM `"._FILE_REPOSITORY_ITEMS."` WHERE `cid` = '".$cid."' && `isbroken` = 0 && `isactive` = 1 && `isapproved` = 1 && `isbroken` = 0"));
@@ -238,6 +239,7 @@ function _file_repository_index()
 		echo '  </tr>'."\n";
 		echo '</table>'."\n";
 	}
+	echo '<br />';
 	CloseTable();
 }
 

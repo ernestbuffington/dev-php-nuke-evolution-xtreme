@@ -17,6 +17,7 @@ function main()
 {
 	global $db, $lang_new, $module_name, $userinfo, $nukeurl, $settings, $mysettings, $myimages;
 	OpenTable();
+	echo '<br />';
 	index_navigation_header();
 //-------------------------------------------------------------------------
 //	UPDATE THE JQUERY IMAGE COUNT VALUE.
@@ -216,6 +217,7 @@ function main()
 //	EXCEED THE NUMBER OF IMAGES SPECFIED PER PAGE, SHOW NOTHING.
 //-------------------------------------------------------------------------	
 	echo '</table>'."\n";
+	echo '<br />';
 	CloseTable();
 }
 
