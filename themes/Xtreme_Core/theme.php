@@ -67,13 +67,13 @@ exit('Access Denied');
 #-----------------------------#
 global $theme_title, $theme_author, $theme_date, $theme_name, $theme_download_link;
 # Theme Name
-$theme_title = 'Xtreme v4.0';
+$theme_title = 'Xtreme Core v1.0';
 define('THEME', $theme_title);
 # Theme Author
 $theme_author = 'Ernest Allen Buffington';
 define('THEME_AUTHOR', $theme_author);
 # Theme creation date
-$theme_date = '4/28/2021';
+$theme_date = '05/04/2021';
 define('THEME_DATE', $theme_date);
 $theme_download_link = '#myCopyRight';
 define('THEME_DOWNLOAD_LINK', $theme_download_link);
