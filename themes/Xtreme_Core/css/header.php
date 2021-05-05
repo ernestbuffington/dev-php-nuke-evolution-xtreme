@@ -60,8 +60,9 @@ global $theme_name;
 echo "\n\n/* Universal/css/header.php Fly Kit for PHP-Nuke Titanium - Design Themes On The Fly */\n"; 
 echo "/* When we are done we will move this code to style.css */\n\n"; 
 
-global $screen_width, $screen_height, $bgcolor1, $bgcolor2, $bgcolor3, $bgcolor4;
+global $screen_width, $screen_height, $bgcolor1, $bgcolor2, $bgcolor3, $bgcolor4, $bgcolor5;
 
+$bgcolor5 ='#3c3523';
 ?>
 /*---------------------------------------------------------------*/
 /* Main Theme Body                                               */
@@ -351,7 +352,7 @@ a.bbcode-href {
  *--------------------------------------------------
 */
 textarea, select, input {
-	background-color: #333;
+	background-color: <?=$bgcolor5?>;
 	color: #fff;
 	font-family: "Open Sans", sans-serif;
 	letter-spacing: 0px;
@@ -685,7 +686,7 @@ td.extra {
 
 /* The Outline Round the Main Forum Tables */
 .forumline {
-	background: #333;
+	background: <?=$bgcolor5?>;
 	border: #222 0px solid;
 }
 
@@ -730,7 +731,7 @@ th {
 }
 
 th.bar {
-	background: #333;
+	background: <?=$bgcolor5?>;
 	border: #222 1px solid;
 	color: #ddd;
 	font-size: 11px;
@@ -971,8 +972,8 @@ progress{background-color:#f3f3f3;border:0;height:18px;}
 .codebox p{display:block;font-weight:600;border-bottom:1px solid #ccc;text-transform:uppercase;}
 
 .phpcodebox {background-color:#fdf6e3;}
-.phpcodebox p{color:#333 ;}
-.code_select {color:#676767;}
+.phpcodebox p{color:<?=$bgcolor5?> ;}
+.code_select {color:<?=$bgcolor2?>;}
 .code_select:hover {color: <?=$bgcolor1?>;}
 
 .notepaper{position:relative;margin:auto;padding:29px 20px 20px 45px;width:90%;line-height:32px;color:#6a5f49;text-shadow:0 1px 1px #fff;background-color:#f2f6c1;background-image:-webkit-radial-gradient(center,cover,rgba(255,255,255,0.7) 0%,rgba(255,255,255,0.1) 90%),-webkit-repeating-linear-gradient(top,transparent 0%,transparent 29px,rgba(239,207,173,0.7) 29px,rgba(239,207,173,0.7) 30px); background-image:-moz-radial-gradient(center,cover,rgba(255,255,255,0.7) 0%,rgba(255,255,255,0.1) 90%),-moz-repeating-linear-gradient(top,transparent 0%,transparent 29px,rgba(239,207,173,0.7) 29px,rgba(239,207,173,0.7) 30px); background-image:-o-radial-gradient(center,cover,rgba(255,255,255,0.7) 0%,rgba(255,255,255,0.1) 90%),-o-repeating-linear-gradient(top,transparent 0%,transparent 29px,rgba(239,207,173,0.7) 29px,rgba(239,207,173,0.7) 30px);border:1px solid #c3baaa;border-color:rgba(195,186,170,0.9);-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-box-shadow:inset 0 1px rgba(255,255,255,0.5),inset 0 0 5px #d8e071,0 0 1px rgba(0,0,0,0.1),0 2px rgba(0,0,0,0.02);box-shadow:inset 0 1px rgba(255,255,255,0.5),inset 0 0 5px #d8e071,0 0 1px rgba(0,0,0,0.1),0 2px rgba(0,0,0,0.02)}

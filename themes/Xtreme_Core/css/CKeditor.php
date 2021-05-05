@@ -29,7 +29,28 @@
 #---------------------------------------------------------------------------------------#
 global $theme_name;
 echo "/* Fly Kit CKeditor Style Sheet */\n"; 
+
+global $screen_width, $screen_height, $bgcolor1, $bgcolor2, $bgcolor3, $bgcolor4, $bgcolor5;
 ?>
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #151515; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #333333; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #8d7b4d; 
+}
+
 /* PRESETS
 Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
@@ -59,7 +80,7 @@ textarea.cke_source
 {
 	font-family: 'Courier New', Monospace;
 	font-size: small;
-	background-color: #000000; 
+	background-color: <?=$bgcolor5?>; 
 	white-space: pre-wrap;
 	border: none;
 	padding: 0;
@@ -69,7 +90,7 @@ textarea.cke_source
 
 .cke_wysiwyg_frame, .cke_wysiwyg_div
 {
-	background-color: #fff;
+	background-color: <?=$bgcolor5?>;
 }
 <?
 

@@ -59,10 +59,9 @@ function head()
 	//$eighty_six_it = '<a class = "small" href="https://www.86it.us/" target="_tab" >Proud Member Of The 86it Developers Network</a>';
     
 	# Auto MimeType v1.0.0 START
-	if (@file_exists(NUKE_THEMES_DIR.$ThemeSel.'/includes/mimetype.php'))  
+	if (@file_exists(NUKE_THEMES_DIR.$ThemeSel.'/includes/mimetype.php')):  
     include(NUKE_THEMES_DIR.$ThemeSel.'/includes/mimetype.php');
-	else 
-	{
+	else: 
       echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd" />'."\n";
       echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="'._LANGCODE.'" />'."\n";
       echo '<html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="https://www.facebook.com/2008/fbml" />'."\n"; 
@@ -75,7 +74,7 @@ function head()
       echo '<meta http-equiv="Content-Language" content="'._LANGCODE.'" />'."\n";
       echo '<meta http-equiv="Content-Style-Type" content="text/css" />'."\n";
       echo '<meta http-equiv="Content-Script-Type" content="text/javascript" />'."\n";
-    }	
+    endif;	
 	# Auto MimeType v1.0.0 END
 
     include_once(NUKE_INCLUDE_DIR.'meta.php');
