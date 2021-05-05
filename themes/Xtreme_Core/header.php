@@ -207,24 +207,32 @@ global $eighty_six_it, $my_welcome_message;
 echo '<div align="center"><strong><font color="#e48e00"></font>'.$my_welcome_message.'</strong></div>';
 echo '<div align="center"><strong><font color="#1572b6">'.$eighty_six_it.'</font></strong></div>';
 
+
+if (!is_user()):
+echo '<div align="center">';
+echo '<div class="alert alert-danger fade in alert-dismissible role="alert">';
+echo '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>';
+echo '  <strong>Alert!</strong> You are not logged in, please <a style="cursor:help" class="redalert" href="modules.php?name=Your_Account&op=new_user">create an account</a> or <a style="cursor:help" class="redalert" href="modules.php?name=Your_Account">login!</a>';
+echo '</div>';
+
+echo '</div>';
+endif;
+
 echo '<div align="center" style="padding-top:19px;">';
 echo '</div>';
 
 # MENU SYSTEM
 #######################################################################################################################################################
-//echo '<div class="box_bottom" style="width: 100%; height: 29px; background-image: url('.theme_dir.'images/MENU/menu_stretch_bar_black.png)">';        #
+echo '<div class="box_bottom" style="width: 100%; height: 45px;>';                                                                                    #
 include(theme_dir.'menu.php');                                                                                                                        #
-//echo '</div>';                                                                                                                                        #
-#######################################################################################################################################################
-
+echo '</div>';                                                                                                                                        #
+######################################################################################################################################################
 global $titanium_browser;
 
 echo "\n\n\n\n\n<!-- function_CloseTable top START -->\n";
 print '</td>';
 print '</tr>';
 print '</table>';
-
-
 
 /////////////////////////////
 print '</td>';

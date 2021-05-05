@@ -161,6 +161,7 @@ addCSSToHead(theme_style_dir.'menu.css','file');
 #-------------------#
 addPHPCSSToHead(theme_phpstyle_dir.'menu.php','file');     
 addPHPCSSToHead(theme_phpstyle_dir.'header.php','file');     
+addPHPCSSToHead(theme_phpstyle_dir.'scrollbars.php','file'); 
 addPHPCSSToHead(theme_phpstyle_dir.'sideblocks.php','file'); 
 addPHPCSSToHead(theme_phpstyle_dir.'body.php','file');       
 addPHPCSSToHead(theme_phpstyle_dir.'footer.php','file');     

@@ -67,6 +67,16 @@ $bgcolor5 ='#3c3523';
 /*---------------------------------------------------------------*/
 /* Main Theme Body                                               */
 /*---------------------------------------------------------------*/
+a.redalert:link {text-decoration: underline; color: crimson;}
+a.redalert:visited {text-decoration: underline; color: crimson;}
+a.redalert:hover {text-decoration: underline; color: green;}
+
+.alert {
+  position: absolute;
+  top: 217px; // Should be same as the height of the header
+  width: 100%;
+}
+
 img.rounded-corners-last-post { 
   border-radius: 9px; 
 }

@@ -3,7 +3,7 @@
 # themes/Universal/css/body.php                                                         #
 #---------------------------------------------------------------------------------------#
 # THEME INFO                                                                            #
-# Universal Theme v1.0 (Fixed & Full Width)                                           #
+# Universal Theme v1.0 (Fixed & Full Width)                                             #
 #                                                                                       #
 # Final Build Date 08/17/2019 Saturday 7:40pm                                           #
 #                                                                                       #
@@ -29,48 +29,25 @@
 #---------------------------------------------------------------------------------------#
 global $theme_name;
 echo "/* Fly Kit CKeditor Style Sheet */\n"; 
-echo "/* Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved. */\n"; 
-echo "/* For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license */\n"; 
-
+echo "/* css/scrollbars.php (scroll bar colors) */\n"; 
 global $screen_width, $screen_height, $bgcolor1, $bgcolor2, $bgcolor3, $bgcolor4, $bgcolor5;
 ?>
-/* PRESETS */
-
-/* "Source" button label */
-.cke_button__source_label,
-.cke_button__sourcedialog_label
-{
-	display: inline;
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-/* "Font Size" combo width */
-.cke_combo__fontsize .cke_combo_text
-{
-	width: 30px;
+/* Track */
+::-webkit-scrollbar-track {
+  background: <?=$bgcolor2?>; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: <?=$bgcolor5?>; 
 }
 
-/* "Font Size" panel size */
-.cke_combopanel__fontsize
-{
-	width: 120px;
-}
-
-/* Editable regions */
-textarea.cke_source
-{
-	font-family: 'Courier New', Monospace;
-	font-size: small;
-	background-color: <?=$bgcolor5?>; 
-	white-space: pre-wrap;
-	border: none;
-	padding: 0;
-	margin: 0;
-	display: block;
-}
-
-.cke_wysiwyg_frame, .cke_wysiwyg_div
-{
-	background-color: <?=$bgcolor5?>;
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: <?=$bgcolor1?>; 
 }
 <?
-
