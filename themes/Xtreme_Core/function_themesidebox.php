@@ -98,7 +98,7 @@ print '<table cellSpacing="0" cellPadding="0" width="100%" border="0">'."\n";
 print '<tr>'."\n";
 # table left middle side
 print '<td width="23" height="3" background="'.HTTPS.'themes/'.$theme_name.'/images/SIDEBLOCKS/left_side_middle_151515.png">'."\n";
-print '<img src="'.HTTPS.'themes/'.$theme_name.'/images/CENTERBOCKS/left_side_middle_151515.png" border="0" width="39" height="3"></td>'."\n";
+print '<img src="'.HTTPS.'themes/'.$theme_name.'/images/CENTERBLOCKS/left_side_middle_151515.png" border="0" width="39" height="3"></td>'."\n";
 print '<td width="100%">'."\n";
 # Top of center table END  (this is where you edit for each theme design)
 #################################################################################################################################################################
