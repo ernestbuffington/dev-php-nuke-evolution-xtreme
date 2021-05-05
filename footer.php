@@ -180,7 +180,8 @@ if(is_admin()):
      //For information on how to change the auto-optimize intervals
      //Please see www.php.net/strtotime
      //Default: -1 day
-     $interval = strtotime('-1 day');
+     //$interval = strtotime('-1 day');
+	 $interval = strtotime('-1 week');
        if (($last_optimize <= $interval) || ($first_time && $cache->valid && $use_cache)):
          if ($db->sql_optimize()):
            $cache->save('last_optimize', 'config', time());

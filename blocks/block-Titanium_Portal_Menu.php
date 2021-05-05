@@ -135,17 +135,17 @@ if (is_array($tempoA))
 }
 
 # What the fuck does this do and why ? This file will never be found because it will never exist!
-//if (file_exists("themes/$ThemeSel/module.php")) 
-//{
-//    include("themes/$ThemeSel/module.php");
-//
-//    $is_active = ($active[$default_module]!=0) ? 1 : 0 ; 
-//    
-//	if ($is_active==1 AND file_exists("modules/$default_module/index.php")) 
-//	{
-//        $main_module = $default_module;
-//    }
-//}
+if (file_exists("themes/$ThemeSel/module.php")) 
+{
+    include("themes/$ThemeSel/module.php");
+
+    $is_active = ($active[$default_module]!=0) ? 1 : 0 ; 
+    
+	if ($is_active==1 AND file_exists("modules/$default_module/index.php")) 
+	{
+        $main_module = $default_module;
+    }
+}
 
 $total_actions = "";
 

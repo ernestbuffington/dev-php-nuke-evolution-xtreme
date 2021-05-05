@@ -360,7 +360,17 @@ function update_modules() {
         $module = $modlist[$i];
         if (!in_array($module, $modules))
         {
-            $db->sql_uquery("INSERT INTO `"._MODULES_TABLE."` (`mid`, `title`, `custom_title`, `active`, `view`, `inmenu`, `pos`, `cat_id`, `blocks`, `admins`, `groups`) VALUES (NULL, '$module', '".str_replace("_", " ", $module)."', 0, 0, 1, 0, 7, 1, '', '')");
+            $db->sql_uquery("INSERT INTO `"._MODULES_TABLE."` (`mid`, 
+			                                                 `title`, 
+													  `custom_title`, 
+													        `active`, 
+															  `view`, 
+															`inmenu`, 
+															   `pos`, 
+															`cat_id`, 
+															`blocks`, 
+															`admins`, 
+															`groups`) VALUES (NULL, '$module', '".str_replace("_", " ", $module)."', 0, 0, 1, 0, 7, 1, '', '')");
         }
     }
 
