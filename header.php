@@ -132,8 +132,7 @@ function head()
 	# START Load current theme. - 09/07/2019
 
     echo "\n\n<!-- START Load favicon. -->\n\n";
-    if ((($favicon = $cache->load('favicon', 'config')) === false) || empty($favicon)) 
-	{
+    if ((($favicon = $cache->load('favicon', 'config')) === false) || empty($favicon)): 
         if (file_exists(NUKE_BASE_DIR.'favicon.ico')) 
 		$favicon = "favicon.ico";
 		else 
@@ -144,17 +143,13 @@ function head()
 		$favicon = "themes/$ThemeSel/images/favicon.ico";
 		else 
         $favicon = 'none';
-        
 		if ($favicon != 'none') 
         echo "<link rel=\"shortcut icon\" href=\"$favicon\" type=\"image/x-icon\" />\n";
-
         $cache->save('favicon', 'config', $favicon);
-    } 
-	else 
-	{
+	else: 
         if ($favicon != 'none') 
         echo "<link rel=\"shortcut icon\" href=\"$favicon\" type=\"image/x-icon\" />\n";
-    }
+    endif;
     echo "\n<!-- END Load favicon. -->\n\n";
 
     global $browser;
