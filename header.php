@@ -365,7 +365,7 @@ function online()
      *
      * @since 2.0.9E
      */
-    $db->sql_query("replace into `".$prefix."_session` (uname, 
+    $db->sql_query("REPLACE INTO `".$prefix."_session` (uname, 
 	                                                     time, 
 													starttime, 
 													host_addr, 
@@ -386,7 +386,7 @@ function online()
      * @since 2.0.9E
      */
     if ( $guest == 0 )
-        $db->sql_query("replace into `".$prefix."_users_who_been` (`user_ID`, 
+        $db->sql_query("REPLACE INTO `".$prefix."_users_who_been` (`user_ID`, 
 		                                                           `username`, 
 																   `last_visit`) 
    values ('".$userinfo['user_id']."', 
