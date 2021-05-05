@@ -134,11 +134,14 @@ function head()
     echo "\n\n<!-- START Load favicon. -->\n\n";
     if ((($favicon = $cache->load('favicon', 'config')) === false) || empty($favicon)) 
 	{
-        if (file_exists(NUKE_BASE_DIR.'favicon.ico')) $favicon = "favicon.ico";
+        if (file_exists(NUKE_BASE_DIR.'favicon.ico')) 
+		$favicon = "favicon.ico";
 		else 
-		if (file_exists(NUKE_IMAGES_DIR.'favicon.ico')) $favicon = "images/favicon.ico";
+		if (file_exists(NUKE_IMAGES_DIR.'favicon.ico')) 
+		$favicon = "images/favicon.ico";
 		else 
-		if (file_exists(NUKE_THEMES_DIR.$ThemeSel.'/images/favicon.ico')) $favicon = "themes/$ThemeSel/images/favicon.ico";
+		if (file_exists(NUKE_THEMES_DIR.$ThemeSel.'/images/favicon.ico')) 
+		$favicon = "themes/$ThemeSel/images/favicon.ico";
 		else 
         $favicon = 'none';
         
@@ -162,36 +165,25 @@ function head()
     echo "\n<!-- END writeHEAD() -->\n\n";
 
     echo "\n\n<!-- START custom_head -->\n\n";
-    
-	if ((($custom_head = $cache->load('custom_head', 'config')) === false) || empty($custom_head)) 
-	{
+	if ((($custom_head = $cache->load('custom_head', 'config')) === false) || empty($custom_head)): 
         $custom_head = array();
-    
 	    if (file_exists(NUKE_INCLUDE_DIR.'custom_files/custom_head.php')) 
         $custom_head[] = 'custom_head';
-        
-		if (file_exists(NUKE_INCLUDE_DIR.'custom_files/custom_header.php')) 
+ 		if (file_exists(NUKE_INCLUDE_DIR.'custom_files/custom_header.php')) 
         $custom_head[] = 'custom_header';
-        
-        if (!empty($custom_head)) 
-		{
-            foreach ($custom_head as $file) {
+        if (!empty($custom_head)): 
+            foreach ($custom_head as $file):
                 include_once(NUKE_INCLUDE_DIR.'custom_files/'.$file.'.php');
-            }
-        }
-        
+            endforeach;
+        endif;
 		$cache->save('custom_head', 'config', $custom_head);
-    } 
-	else 
-	{
-        if (!empty($custom_head)) 
-		{
-            foreach ($custom_head as $file) 
-			{
+	else: 
+        if (!empty($custom_head)): 
+            foreach ($custom_head as $file): 
                 include_once(NUKE_INCLUDE_DIR.'custom_files/'.$file.'.php');
-            }
-        }
-    }
+            endforeach;
+        endif;
+    endif;
     echo "\n<!-- END custom_head -->\n\n";
 
     /* ----- as you can probably tell this is used for IE compatibility ----- */
