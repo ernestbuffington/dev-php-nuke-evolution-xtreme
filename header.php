@@ -158,7 +158,9 @@ function head()
     echo "\n<!-- END Load favicon. -->\n\n";
 
     global $browser;
-    if(isset($modheader)) { echo $modheader; }
+    
+	if(isset($modheader)) 
+	echo $modheader; 
 
     echo "\n\n<!-- START writeHEAD() -->\n\n";
     writeHEAD();
@@ -223,10 +225,8 @@ function online()
  [ Base:    Advanced Security Extension        v1.0.0 ]
  ******************************************************/
     elseif($user_agent['engine'] == 'bot'):
-
         $uname = $user_agent['bot'];
 		$guest = 3;
-
 /*****[END]********************************************
  [ Base:    Advanced Security Extension        v1.0.0 ]
  ******************************************************/
@@ -407,7 +407,6 @@ head();
  ******************************************************/
 if (!defined('ADMIN_FILE')):
 	include_once(NUKE_INCLUDE_DIR.'counter.php');
-
 	if (defined('HOME_FILE')):
 		include_once(NUKE_INCLUDE_DIR.'messagebox.php');
 		blocks('Center');
@@ -415,9 +414,7 @@ if (!defined('ADMIN_FILE')):
 		include(NUKE_INCLUDE_DIR.'cblocks1.php');
 		include(NUKE_INCLUDE_DIR.'cblocks2.php');
     endif;
-
 endif;
 /*****[END]********************************************
  [ Mod:    NSN Center Blocks                   v2.2.1 ]
  ******************************************************/
-
