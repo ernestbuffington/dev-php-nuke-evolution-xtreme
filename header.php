@@ -87,15 +87,13 @@ function head()
 
 	################################################################
 	if (@file_exists(TITANIUM_CLASSES_DIR . 'class.browsers.php')) #      Added by Ernest Buffington
-	    include(TITANIUM_CLASSES_DIR . 'class.browsers.php');      ###### Load Browser class - used for checking your browser types
-                                                                   #      Start date Jan 1st 2012 till Present - It is a work in progress!
+	include(TITANIUM_CLASSES_DIR . 'class.browsers.php');          ###### Load Browser class - used for checking your browser types
+    #                                                              #      Start date Jan 1st 2012 till Present - It is a work in progress!
     ################################################################
 	if (@file_exists(TITANIUM_INCLUDE_DIR . 'cookies.php')) #            Added by Ernest Buffington
 	include(TITANIUM_INCLUDE_DIR . 'cookies.php');          ############ Load the custom cookies file if it exist COOKIE CONTROL
     #########################################################            Jan 1st 2012 
-    # START Javascript functions. - 09/03/2019              #
 	include_once(NUKE_INCLUDE_DIR.'javascript.php');        ####### Javascript Loader 09/21/2019
-    # END Javascript functions. - 09/03/2019                #
     ######################################################### 
 
     echo "\n\n<!-- CHECKING FOR pre 2019 themes -> javascript.php in Theme Dir START -->\n";   # Used for PHP-Nuke Titanium pre 2019 themes.
