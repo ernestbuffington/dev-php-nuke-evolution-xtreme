@@ -318,7 +318,7 @@ function AddLink()
         echo "</form>";
     
 	else: 
-	{
+	
         echo "<div align=\"center\">"._LINKSNOTUSER1."<br />"
         .""._LINKSNOTUSER2."<br /><br />"
             .""._LINKSNOTUSER3."<br />"
@@ -327,7 +327,7 @@ function AddLink()
             .""._LINKSNOTUSER6."<br />"
             .""._LINKSNOTUSER7."<br /><br />"
             .""._LINKSNOTUSER8."</div>";
-    }
+    endif;
 
     # stop using <br /> use a div tage with padding!
 	print '<div align="center" style="padding-top:6px;">'."\n";
@@ -342,7 +342,7 @@ function Add($title, $url, $auth_name, $cat, $description, $email) {
     $result = $db->sql_query("SELECT url from ".$prefix."_links_links where url='$url'");
     $numrows = $db->sql_numrows($result);
 /*****[BEGIN]******************************************
- [ Mod:    Advanced Security Code Control      v1.0.0 ] added 5/6/2021 (Someone fucked this up so I fixed it)
+ [ Mod:    Advanced Security Code Control      v2.0.0 ] added 5/6/2021 (Someone fucked this up so I fixed it)
  ******************************************************/
 	# Throw an error, If the user fails the reCaptcha.
 	if (!security_code_check($_POST['g-recaptcha-response'], array(0,1,2,3,4,5,6,7))):
@@ -353,92 +353,95 @@ function Add($title, $url, $auth_name, $cat, $description, $email) {
     include_once(NUKE_BASE_DIR.'footer.php');
 	endif;
 /*****[END]********************************************
- [ Mod:    Advanced Security Code Control      v1.0.0 ] added 5/6/2021 (Someone fucked this up so I fixed it)
+ [ Mod:    Advanced Security Code Control      v2.0.0 ] added 5/6/2021 (Someone fucked this up so I fixed it)
  ******************************************************/
-    if ($numrows>0) {
+    if ($numrows>0): 
         include_once(NUKE_BASE_DIR.'header.php');
         menu(1);
-        //echo "<br />";
         OpenTable();
-        echo "<center><strong>"._LINKALREADYEXT."</strong><br /><br />"
+        echo "<div align=\"center\"><strong>"._LINKALREADYEXT."</strong></div><br /><br />"
             .""._GOBACK."";
         CloseTable();
         include_once(NUKE_BASE_DIR.'footer.php');
-    } else {
-        if(is_user()) {
-            $submitter = $userinfo['username'];
-        }
-    // Check if Title exist
-        if (empty($title)) {
+	else: 
+        if(is_user()) 
+        $submitter = $userinfo['username'];
+		// Check if Title exist
+        if (empty($title)):
             include_once(NUKE_BASE_DIR.'header.php');
             menu(1);
-            //echo "<br />";
             OpenTable();
-            echo "<center><strong>"._LINKNOTITLE."</strong><br /><br />"
+            echo "<div align=\"center\"><strong>"._LINKNOTITLE."</strong></div><br /><br />"
                 .""._GOBACK."";
             CloseTable();
             include_once(NUKE_BASE_DIR.'footer.php');
-        }
-    // Check if URL exist
-        if (empty($url)) {
+        endif;
+		// Check if URL exist
+        if (empty($url)):
             include_once(NUKE_BASE_DIR.'header.php');
             menu(1);
-            //echo "<br />";
             OpenTable();
-            echo "<center><strong>"._LINKNOURL."</strong><br /><br />"
+            echo "<div align=\"center\"><strong>"._LINKNOURL."</strong></div><br /><br />"
                 .""._GOBACK."";
             CloseTable();
             include_once(NUKE_BASE_DIR.'footer.php');
-        }
-    // Check if Description exist
-        if (empty($description)) {
+        endif;
+        // Check if Description exist
+        if (empty($description)):
             include_once(NUKE_BASE_DIR.'header.php');
             menu(1);
-            //echo "<br />";
             OpenTable();
-            echo "<center><strong>"._LINKNODESC."</strong><br /><br />"
+            echo "<div align=\"center\"><strong>"._LINKNODESC."</strong></div><br /><br />"
                 .""._GOBACK."";
             CloseTable();
             include_once(NUKE_BASE_DIR.'footer.php');
-        }
-        $cat = explode("-", $cat);
-        if (empty($cat[1])) {
-            $cat[1] = 0;
-        }
+        endif;
+		$cat = explode("-", $cat);
+        if (empty($cat[1])) 
+        $cat[1] = 0;
         $title = check_html(Fix_Quotes($title, "nohtml"));
         $url = stripslashes(check_html($url, "nohtml"));
         $description = check_html(Fix_Quotes($description), "html");
         $auth_name = stripslashes(check_html($auth_name, "nohtml"));
-        if (!empty($email)) {
-            Validate($email,'email',_WEBLINKS);
-        }
+        if (!empty($email)) 
+        Validate($email,'email',_WEBLINKS);
         Validate($url,'url',_WEBLINKS);
         $cat[0] = intval($cat[0]);
         $cat[1] = intval($cat[1]);
-        $num_new = $db->sql_numrows($db->sql_query("SELECT * FROM ".$prefix."_links_newlink WHERE title='$title' OR url='$url' OR description='$description'"));
-        if ($num_new == 0) {
-            $db->sql_query("insert into ".$prefix."_links_newlink values (NULL, '$cat[0]', '$cat[1]', '".addslashes($title)."', '".addslashes($url)."', '".addslashes($description)."', '".addslashes($auth_name)."', '".addslashes($email)."', '".addslashes($submitter)."')");
+        $num_new = $db->sql_numrows($db->sql_query("SELECT * FROM ".$prefix."_links_newlink 
+		                                             WHERE title='$title' 
+													    OR url='$url' OR description='$description'"));
+        if ($num_new == 0):
+        $db->sql_query("insert into ".$prefix."_links_newlink values (NULL, 
+		                                                         '$cat[0]', 
+																 '$cat[1]', 
+												  '".addslashes($title)."', 
+												    '".addslashes($url)."', 
+											'".addslashes($description)."', 
+											  '".addslashes($auth_name)."', 
+											      '".addslashes($email)."', 
+											  '".addslashes($submitter)."')");
+											  
 /*****[BEGIN]******************************************
  [ Base:    Caching System                     v3.0.0 ]
  ******************************************************/
-            $cache->delete('numwaitl', 'submissions');
+        $cache->delete('numwaitl', 'submissions');
 /*****[END]********************************************
  [ Base:    Caching System                     v3.0.0 ]
  ******************************************************/
-        }
+        endif;
         include_once(NUKE_BASE_DIR.'header.php');
         menu(1);
-        //echo "<br />";
         OpenTable();
-        echo "<center><strong>"._LINKRECEIVED."</strong><br />";
-        if (!empty($email)) {
-            echo _EMAILWHENADD;
-        } else {
-            echo _CHECKFORIT;
-        }
+        echo "<div align=\"center\"><strong>"._LINKRECEIVED."</strong></div><br />";
+        if (!empty($email)) 
+        echo _EMAILWHENADD;
+        else 
+        echo _CHECKFORIT;
         CloseTable();
         include_once(NUKE_BASE_DIR.'footer.php');
-    }
+    
+	endif;
 }
 
 function NewLinks($newlinkshowdays) {
