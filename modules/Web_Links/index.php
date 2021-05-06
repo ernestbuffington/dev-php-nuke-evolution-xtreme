@@ -444,17 +444,23 @@ function Add($title, $url, $auth_name, $cat, $description, $email) {
 	endif;
 }
 
-function NewLinks($newlinkshowdays) {
+function NewLinks($newlinkshowdays) 
+{
     global $prefix, $db, $module_name;
     include_once(NUKE_BASE_DIR.'header.php');
     $newlinkshowdays = intval(trim($newlinkshowdays));
     menu(1);
-    //echo "<br />";
     OpenTable();
-    echo "<center><span class=\"option\"><strong>"._NEWLINKS."</strong></span></center><br />";
+
+    # stop using <br /> use a div tags with padding whenever it's poosible!
+	print '<div align="center" style="padding-top:6px;">'."\n";
+    print '</div>'."\n";
+
+    echo "<div align=\"center\"><span class=\"option\"><strong><h1>"._NEWLINKS."</h1></strong></span></div><br />";
     $counter = 0;
     $allweeklinks = 0;
-    while ($counter <= 7-1){
+    
+	while ($counter <= 7-1):
     $newlinkdayRaw = (time()-(86400 * $counter));
     $newlinkday = date("d-M-Y", $newlinkdayRaw);
     $newlinkView = date("F d, Y", $newlinkdayRaw);
@@ -462,108 +468,136 @@ function NewLinks($newlinkshowdays) {
     $totallinks = $db->sql_numrows($db->sql_query("SELECT * FROM ".$prefix."_links_links WHERE date LIKE '%$newlinkDB%'"));
     $counter++;
     $allweeklinks = $allweeklinks + $totallinks;
-    }
+    endwhile;
+	
     $counter = 0;
     $allmonthlinks = 0;
-    while ($counter <=30-1){
+    
+	while ($counter <=30-1):
         $newlinkdayRaw = (time()-(86400 * $counter));
         $newlinkDB = Date("Y-m-d", $newlinkdayRaw);
         $totallinks = $db->sql_numrows($db->sql_query("SELECT * FROM ".$prefix."_links_links WHERE date LIKE '%$newlinkDB%'"));
         $allmonthlinks = $allmonthlinks + $totallinks;
         $counter++;
-    }
-    echo "<center><strong>"._TOTALNEWLINKS.":</strong> "._LASTWEEK." - $allweeklinks \ "._LAST30DAYS." - $allmonthlinks<br />"
+    endwhile;
+	
+    echo "<div align=\"center\"><strong>"._TOTALNEWLINKS.":</strong> "._LASTWEEK." - $allweeklinks \ "._LAST30DAYS." - $allmonthlinks<br />"
     .""._SHOW.": <a href=\"modules.php?name=$module_name&amp;l_op=NewLinks&amp;newlinkshowdays=7\">"._1WEEK."</a> - <a href=\"modules.php?name=$module_name&amp;l_op=NewLinks&amp;newlinkshowdays=14\">"._2WEEKS."</a> - <a href=\"modules.php?name=$module_name&amp;l_op=NewLinks&amp;newlinkshowdays=30\">"._30DAYS."</a>"
-    ."</center><br />";
-    /* List Last VARIABLE Days of Links */
+    ."</div><br />";
+    
+	/* List Last VARIABLE Days of Links */
     if ($newlinkshowdays <= 0) $newlinkshowdays = 7;
-    echo "<br /><center><strong>"._TOTALFORLAST." $newlinkshowdays "._DAYS.":</strong><br /><br />";
+    echo "<br /><div align=\"center\"><strong>"._TOTALFORLAST." $newlinkshowdays "._DAYS.":</strong><br /><br />";
     $counter = 0;
     $allweeklinks = 0;
-    while ($counter <= $newlinkshowdays-1) {
-    $newlinkdayRaw = (time()-(86400 * $counter));
-    $newlinkday = date("d-M-Y", $newlinkdayRaw);
-    $newlinkView = date("F d, Y", $newlinkdayRaw);
-    $newlinkDB = Date("Y-m-d", $newlinkdayRaw);
-        $totallinks = $db->sql_numrows($db->sql_query("SELECT * FROM ".$prefix."_links_links WHERE date LIKE '%$newlinkDB%'"));
-    $counter++;
-    $allweeklinks = $allweeklinks + $totallinks;
-    echo "<strong><big><i class=\"bi bi-calendar3\"></i></big></strong> <a href=\"modules.php?name=Web_Links&amp;l_op=NewLinksDate&amp;selectdate=$newlinkdayRaw\">$newlinkView</a>&nbsp;($totallinks)<br />";
-    }
+    
+	while ($counter <= $newlinkshowdays-1): 
+    
+	$newlinkdayRaw = (time()-(86400 * $counter));
+       $newlinkday = date("d-M-Y", $newlinkdayRaw);
+      $newlinkView = date("F d, Y", $newlinkdayRaw);
+        $newlinkDB = Date("Y-m-d", $newlinkdayRaw);
+       $totallinks = $db->sql_numrows($db->sql_query("SELECT * FROM ".$prefix."_links_links WHERE date LIKE '%$newlinkDB%'"));
+    
+	$counter++;
+     
+	 $allweeklinks = $allweeklinks + $totallinks;
+    
+	echo "<strong><big><i class=\"bi bi-calendar3\"></i></big></strong> <a href=\"modules.php?name=Web_Links&amp;l_op=NewLinksDate&amp;selectdate=$newlinkdayRaw\">$newlinkView</a>&nbsp;($totallinks)<br />";
+    
+	endwhile;
+	
     $counter = 0;
     $allmonthlinks = 0;
-    echo "</center>";
+    echo "</div>";
+
+    # stop using <br /> use a div tags with padding whenever it's poosible!
+	print '<div align="center" style="padding-top:6px;">'."\n";
+    print '</div>'."\n";
+
     CloseTable();
     include_once(NUKE_BASE_DIR.'footer.php');
 }
 
-function NewLinksDate($selectdate) {
+function NewLinksDate($selectdate) 
+{
     global $prefix, $db, $module_name, $admin, $user, $admin_file, $locale, $mainvotedecimal, $datetime;
     $dateDB = (date("d-M-Y", $selectdate));
     $dateView = (date("F d, Y", $selectdate));
     include_once(NUKE_BASE_DIR.'header.php');
     menu(1);
-    //echo "<br />";
+
     OpenTable();
+
     $newlinkDB = Date("Y-m-d", $selectdate);
     $totallinks = $db->sql_numrows($db->sql_query("SELECT * FROM ".$prefix."_links_links WHERE date LIKE '%$newlinkDB%'"));
+
     echo "<span class=\"option\"><strong>$dateView - $totallinks "._NEWLINKS."</strong></span>"
     ."<table width=\"100%\" cellspacing=\"0\" cellpadding=\"10\" border=\"0\"><tr><td><span class=\"content\">";
-    $result2 = $db->sql_query("SELECT lid, cid, sid, title, description, date, hits, linkratingsummary, totalvotes, totalcomments from ".$prefix."_links_links where date LIKE '%$newlinkDB%' order by title ASC");
-    while ($row2 = $db->sql_fetchrow($result2)) {
-    $lid = intval($row2['lid']);
-    $cid = intval($row2['cid']);
-    $sid = intval($row2['sid']);
-    $title = stripslashes(check_html($row2['title'], "nohtml"));
-    $description = stripslashes($row2['description']);
-    $time = $row2['date'];
-    $hits = intval($row2['hits']);
-    $linkratingsummary = $row2['linkratingsummary'];
-    $totalvotes = intval($row2['totalvotes']);
-    $totalcomments = $row2['totalcomments'];
-    $linkratingsummary = number_format($linkratingsummary, $mainvotedecimal);
-        echo "<font size=\"4\"><i class=\"bi bi-link\"></i></font> <a href=\"modules.php?name=$module_name&amp;l_op=visit&amp;lid=$lid\" target=\"new\">$title</a>";
-    newlinkgraphic($datetime, $time);
-    popgraphic($hits);
-    echo "<br /><i class=\"bi bi-info-square\"></i> $description<br />";
-    setlocale (LC_TIME, $locale);
-    /* INSERT code for *editor review* here */
-    preg_match ("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2}) ([0-9]{1,2})\:([0-9]{1,2})\:([0-9]{1,2})/", $time, $datetime);
-    $datetime = strftime(""._LINKSDATESTRING."", mktime($datetime[4],$datetime[5],$datetime[6],$datetime[2],$datetime[3],$datetime[1]));
-    $datetime = ucfirst($datetime);
-    echo "<i class=\"bi bi-calendar4\"></i> Added <strong>$datetime</strong> "._HITS.": $hits";
-        $transfertitle = str_replace (" ", "_", $title);
+
+    $result2 = $db->sql_query("SELECT lid, 
+	                                  cid, 
+									  sid, 
+									title, 
+							  description, 
+							         date, 
+									 hits, 
+						linkratingsummary, 
+						       totalvotes, 
+							totalcomments FROM ".$prefix."_links_links 
+							             WHERE date 
+										  LIKE '%$newlinkDB%' 
+										 ORDER by title ASC");
+
+    while ($row2 = $db->sql_fetchrow($result2)):
+      $lid = intval($row2['lid']);
+      $cid = intval($row2['cid']);
+      $sid = intval($row2['sid']);
+      $title = stripslashes(check_html($row2['title'], "nohtml"));
+      $description = stripslashes($row2['description']);
+      $time = $row2['date'];
+      $hits = intval($row2['hits']);
+      $linkratingsummary = $row2['linkratingsummary'];
+      $totalvotes = intval($row2['totalvotes']);
+      $totalcomments = $row2['totalcomments'];
+      $linkratingsummary = number_format($linkratingsummary, $mainvotedecimal);
+      echo "<font size=\"4\"><i class=\"bi bi-link\"></i></font> <a href=\"modules.php?name=$module_name&amp;l_op=visit&amp;lid=$lid\" target=\"new\">$title</a>";
+      newlinkgraphic($datetime, $time);
+      popgraphic($hits);
+      echo "<br /><i class=\"bi bi-info-square\"></i> $description<br />";
+      setlocale (LC_TIME, $locale);
+      /* INSERT code for *editor review* here */
+      preg_match ("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2}) ([0-9]{1,2})\:([0-9]{1,2})\:([0-9]{1,2})/", $time, $datetime);
+      $datetime = strftime(""._LINKSDATESTRING."", mktime($datetime[4],$datetime[5],$datetime[6],$datetime[2],$datetime[3],$datetime[1]));
+      $datetime = ucfirst($datetime);
+      echo "<i class=\"bi bi-calendar4\"></i> Added <strong>$datetime</strong> "._HITS.": $hits";
+       $transfertitle = str_replace (" ", "_", $title);
         /* voting & comments stats */
-        if ($totalvotes == 1) {
+        if ($totalvotes == 1) 
         $votestring = _VOTE;
-        } else {
+	    else 
         $votestring = _VOTES;
-    }
-        if ($linkratingsummary!="0" || $linkratingsummary!="0.0") {
+        if ($linkratingsummary!="0" || $linkratingsummary!="0.0") 
         echo " "._RATING.": $linkratingsummary ($totalvotes $votestring)";
-    }
-    echo "<br />";
-    if (is_mod_admin($module_name)) {
+        echo "<br />";
+        if (is_mod_admin($module_name)) 
         echo "<a href=\"".$admin_file.".php?op=LinksModLink&amp;lid=$lid\">"._EDIT."</a> | ";
-    }
-    echo "<a href=\"modules.php?name=$module_name&amp;l_op=ratelink&amp;lid=$lid&amp;ttitle=$transfertitle\">"._RATESITE."</a>";
-        if (is_user()) {
+        echo "<a href=\"modules.php?name=$module_name&amp;l_op=ratelink&amp;lid=$lid&amp;ttitle=$transfertitle\">"._RATESITE."</a>";
+        if (is_user()) 
         echo " | <a href=\"modules.php?name=$module_name&amp;l_op=brokenlink&amp;lid=$lid\">"._REPORTBROKEN."</a>";
-    }
-    if ($totalvotes != 0) {
+        if ($totalvotes != 0) 
         echo " | <a href=\"modules.php?name=$module_name&amp;l_op=viewlinkdetails&amp;lid=$lid&amp;ttitle=$transfertitle\">"._DETAILS."</a>";
-    }
-        if ($totalcomments != 0) {
+        if ($totalcomments != 0) 
         echo " | <a href=\"modules.php?name=$module_name&amp;l_op=viewlinkcomments&amp;lid=$lid&amp;ttitle=$transfertitle\">"._SCOMMENTS." ($totalcomments)</a>";
-    }
-    detecteditorial($lid, $transfertitle);
-    echo "<br />";
-    $row3 = $db->sql_fetchrow($db->sql_query("SELECT title from ".$prefix."_links_categories where cid='$cid'"));
-    $ctitle = stripslashes(check_html($row3['title'], "nohtml"));
-    $ctitle=weblinks_parent($cid,$ctitle);
-    echo ""._CATEGORY.": $ctitle";
-    echo "<br /><br />";
-    }
+	  detecteditorial($lid, $transfertitle);
+      echo "<br />";
+      $row3 = $db->sql_fetchrow($db->sql_query("SELECT title from ".$prefix."_links_categories where cid='$cid'"));
+      $ctitle = stripslashes(check_html($row3['title'], "nohtml"));
+      $ctitle=weblinks_parent($cid,$ctitle);
+      echo ""._CATEGORY.": $ctitle";
+      echo "<br /><br />";
+    endwhile;
+	
     echo "</span></td></tr></table>";
     CloseTable();
     include_once(NUKE_BASE_DIR.'footer.php');
