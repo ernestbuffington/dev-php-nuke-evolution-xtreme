@@ -33,6 +33,7 @@
 -=[Base]=-
       Nuke Patched                             v3.1.0       06/26/2005
       Caching System                           v1.0.0       10/31/2005
+	  Bootsrrap Mod                            v1.0.0       05/06/2021
  ************************************************************************/
 if (!defined('MODULE_FILE')) 
 die('You can\'t access this file directly...');
