@@ -56,12 +56,12 @@ function weblinks_parent($parentid,$title)
     $cid = intval($row['cid']);
     $ptitle = stripslashes(check_html($row['title'], "nohtml"));
     $pparentid = intval($row['parentid']);
-    if ($ptitle=="$title") $title=$title;
-    elseif (!empty($ptitle)) $title=$ptitle."/".$title;
-    if ($pparentid!=0) {
-        $title=weblinks_parent($pparentid,$title);
-    }
-    
+    if ($ptitle=="$title") 
+	$title=$title;
+    elseif (!empty($ptitle)) 
+	$title=$ptitle."/".$title;
+    if ($pparentid!=0) 
+    $title=weblinks_parent($pparentid,$title);
 	return $title;
 }
 
@@ -74,13 +74,10 @@ function weblinks_parentlink($parentid,$title)
     $cid = intval($row['cid']);
     $ptitle = stripslashes(check_html($row['title'], "nohtml"));
     $pparentid = intval($row['parentid']);
-    
-	if (!empty($ptitle)) $title="<a href=modules.php?name=$module_name&amp;l_op=viewlink&amp;cid=$cid>$ptitle</a>/".$title;
-    
+	if (!empty($ptitle)) 
+	$title="<a href=modules.php?name=$module_name&amp;l_op=viewlink&amp;cid=$cid>$ptitle</a>/".$title;
 	if ($pparentid!=0) 
-	{
-        $title=weblinks_parentlink($pparentid,$ptitle);
-    }
+    $title=weblinks_parentlink($pparentid,$ptitle);
     return $title;
 }
 
@@ -90,7 +87,7 @@ function menu($mainlink)
     
 	OpenTable();
     
-    # stop using <br /> use a div tage with padding!
+    # stop using <br /> use a div tags with padding whenever it's poosible!
 	print '<div align="center" style="padding-top:13px;">'."\n";
     print '</div>'."\n";
 
@@ -122,7 +119,7 @@ function menu($mainlink)
         ."</strong>"
 	    ."</span></div>";
 
-    # stop using <br /> use a div tage with padding!
+    # stop using <br /> use a div tags with padding whenever it's poosible!
     print '<div align="center" style="padding-top:6px;">'."\n";
     print '</div>'."\n";
 	CloseTable();
@@ -166,7 +163,7 @@ function index()
     
 	OpenTable();
    
-    # stop using <br /> use a div tage with padding!
+    # stop using <br /> use a div tags with padding whenever it's poosible!
 	print '<div align="center" style="padding-top:6px;">'."\n";
     print '</div>'."\n";
    
@@ -249,7 +246,7 @@ function index()
     
 	echo "<center><span class=\"content\">"._THEREARE." <strong>$numrows</strong> "._LINKS." "._AND." <strong>$catnum</strong> "._CATEGORIES." "._INDB."</span></center>";
 
-    # stop using <br /> use a div tage with padding!
+    # stop using <br /> use a div tags with padding whenever it's poosible!
 	print '<div align="center" style="padding-top:6px;">'."\n";
     print '</div>'."\n";
 
@@ -266,14 +263,13 @@ function AddLink()
 
     OpenTable();
 
-    # stop using <br /> use a div tage with padding!
+    # stop using <br /> use a div tags with padding whenever it's poosible!
 	print '<div align="center" style="padding-top:6px;">'."\n";
     print '</div>'."\n";
 
     echo "<div align=\"center\"><span class=\"title\"><strong><h1>"._ADDALINK."</h1></strong></span></div><br />";
 	
-    if (is_user() || $links_anonaddlinklock == 1) 
-	{  /* 06-24-01 Bug fix : changed $links_anonaddlinklock != 1 to $links_anonaddlinklock == 1 */
+    if (is_user() || $links_anonaddlinklock == 1):
         echo "<strong><h2>"._INSTRUCTIONS.":</h2></strong>"
         ."<strong><big><i class=\"bi bi-link\"></i></big></strong> "._SUBMITONCE."<br />"
         ."<strong><big><i class=\"bi bi-check2-square\"></i></big></strong> "._POSTPENDING."<br />"
@@ -288,8 +284,7 @@ function AddLink()
 			."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;<i class=\"bi bi-hand-index\"></i> The website or portal link goes here.<br /><br />";
-    
-	# stop using <br /> use a div tage with padding!
+	# stop using <br /> use a div tags with padding whenever it's poosible!
 	print '<div align="center" style="padding-top:6px;">'."\n";
     print '</div>'."\n";
 			
@@ -321,8 +316,8 @@ function AddLink()
         echo "<input type=\"hidden\" name=\"l_op\" value=\"Add\">";
 		echo "<input type=\"submit\" value=\""._ADDURL."\"> "._GOBACK."<br /><br />";
         echo "</form>";
-    }
-	else 
+    
+	else: 
 	{
         echo "<div align=\"center\">"._LINKSNOTUSER1."<br />"
         .""._LINKSNOTUSER2."<br /><br />"
