@@ -131,7 +131,7 @@ print '<tbody>';
 print '<tr>';
 print '<td>';
 
-print '<div align="center" style="padding-top:13px;">';
+print '<div align="center" style="padding-top:14px;">';
 print '</div>';
 
 echo '<div align="center" id="text"><h1><font size="6"><strong>'.$topictext.'</strong></font><br/></h1>';
@@ -162,6 +162,9 @@ facebook_comments();
 echo "<!-- facebook functions END -->\n\n\n";
 
 echo '<div valign="bottom" align="right">'.$reads.'</div>';
+
+print '<div align="center" style="padding-top:14px;">';
+print '</div>';
 
 print '</td>';
 print '</tr>';

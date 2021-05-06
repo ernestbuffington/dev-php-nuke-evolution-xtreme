@@ -10,13 +10,18 @@
 /* Copyright (c) 2002 by Francisco Burzi                                */
 /* http://phpnuke.org                                                   */
 /*                                                                      */
-/* Based on Journey Links Hack                                          */
 /* Copyright (c) 2000 by James Knickelbein                              */
 /* Journey Milwaukee (http://www.journeymilwaukee.com)                  */
 /*                                                                      */
 /* This program is free software. You can redistribute it and/or modify */
 /* it under the terms of the GNU General Public License as published by */
 /* the Free Software Foundation; either version 2 of the License.       */
+/*                                                                      */
+/* Module Name: Web Links                                               */
+/* Contributor: Ernest Allen Buffington                                 */
+/* Version: v1.0.2                                                      */
+/* Core: PHP-Nuke Evolution Xtreme v2.0.9d <> 3.0.1b                    */
+/* Description: Web Links/Resources based on Journey Links Hack         */
 /*                                                                      */
 /************************************************************************/
 /*         Additional security & Abstraction layer conversion           */

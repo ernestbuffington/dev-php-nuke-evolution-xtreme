@@ -133,7 +133,7 @@ print '<tbody>';
 print '<tr>';
 print '<td>';
 
-print '<div align="center" style="padding-top:10px;">';
+print '<div align="center" style="padding-top:14px;">';
 print '</div>';
 
 echo '<div align="center" id="text"><h1><font size="6"><strong>'.$title.'</strong></font></h1>';
@@ -154,6 +154,9 @@ echo ''.$content.'</div>';
 print blog_signature($aid);
 
 echo '<div align="center"><br />'.$datetime.' '.$topictext.' | '.$morelink.' '.$reads.'<img src="themes/'.$theme_name.'/images/BLOG/invisible_pixel.gif" alt="" width="4" height="1" border="0" /></div>';
+
+print '<div align="center" style="padding-top:14px;">';
+print '</div>';
 
 print '</td>';
 print '</tr>';
