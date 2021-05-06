@@ -5,7 +5,7 @@
 
 /***************************************************************************
  *   copyright            : (C) ESO Software Inc.
- *   email                : scottybcoder#gmail.com
+ *   email                : scottybcoder@gmail.com
  ***************************************************************************/
 
 if (!defined('MODULE_FILE')) { die('You can\'t access this file directly...'); }
@@ -45,6 +45,11 @@ switch($ins['step'])
    $textcolor2 = $ThemeInfo['textcolor2'];
    title($sitename.' '.$title);
    OpenTable();
+
+   # stop using <br /> use a div tag with padding whenever it's possible!
+   print '<div align="center" style="padding-top:13px;">'."\n";
+   print '</div>'."\n";
+   
    global $fieldset_color, $fieldset_border_width; 
    echo '<fieldset style="border-color: '.$textcolor2.'; border-width: '.$fieldset_border_width.'; border-style: solid;">';
    echo '<legend align="center" id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px; font-weight: bold;"><font color="white">'.$pagetitle.' :: '.$title.'</font></strong></legend>';
@@ -117,12 +122,17 @@ background-color:#DDDDDD;
    echo "</table></div>";
    // CLOSE TABLE FOR USER INPUT
 
-   echo "</td></tr></table></div>";
+   echo "</td></tr></table></fieldset></div>";
    // CLOSE OPEN TABLE CASE 1
 
    global $domain, $name, $facebook_plugin_width;
    echo '<br />';
    echo '<div align="center">Written by: Truman "ScottyBcoder" Buffington</div>';
+
+   # stop using <br /> use a div tag with padding whenever it's possible!
+   print '<div align="center" style="padding-top:13px;">'."\n";
+   print '</div>'."\n";
+   
    CloseTable();                                                                                                                    #
    include("footer.php");
 
@@ -158,6 +168,10 @@ background-color:#DDDDDD;
 <?
    title($sitename.' '.$title);
    OpenTable();	
+
+   # stop using <br /> use a div tag with padding whenever it's possible!
+   print '<div align="center" style="padding-top:13px;">'."\n";
+   print '</div>'."\n";
 
    echo '<fieldset style="border-color: '.$textcolor2.'; border-width: '.$fieldset_border_width.'; border-style: solid;">';
    echo '<legend align="center" id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px; font-weight: bold;"><font color="white">'.$pagetitle.' :: '.$title.'</font></strong></legend>';
@@ -312,10 +326,15 @@ background-color:#DDDDDD;
 
    echo "</table></div></span>";
    // CLOSE TABLE LOAN PROGRAM
-   echo "</td></tr></table></div>";
+   echo "</td></tr></table></fieldset></div>";
    // CLOSE TABLE CASE 2
    echo '<br />';
    echo '<div align="center">Written by: Truman "ScottyBcoder" Buffington</div>';
+
+   # stop using <br /> use a div tag with padding whenever it's possible!
+   print '<div align="center" style="padding-top:13px;">'."\n";
+   print '</div>'."\n";
+   
    CloseTable();                                                                                                                    #
    include("footer.php");
 
@@ -347,7 +366,12 @@ background-color:#DDDDDD;
 </style>
 <?
    title($sitename.' '.$title);
-   OpenTable();	
+   OpenTable();
+   
+   # stop using <br /> use a div tag with padding whenever it's possible!
+   print '<div align="center" style="padding-top:13px;">'."\n";
+   print '</div>'."\n";
+   	
 
    echo '<fieldset style="border-color: '.$textcolor2.'; border-width: '.$fieldset_border_width.'; border-style: solid;">';
    echo '<legend align="center" id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px; font-weight: bold;"><font color="white">'.$pagetitle.' :: '.$title.'</font></strong></legend>';
@@ -400,10 +424,15 @@ background-color:#DDDDDD;
 
    echo "</table></div>";
    // CLOSE TABLE MESSAGE AND BACK BUTTON 
-   echo "</td></tr></table></div>";
+   echo "</td></tr></table></fieldset></div>";
    // CLOSE TABLE THANK YOU MESSAGE PAGE
    echo '<br />';
    echo '<div align="center">Written by: Truman "ScottyBcoder" Buffington</div>';
+
+   # stop using <br /> use a div tag with padding whenever it's possible!
+   print '<div align="center" style="padding-top:13px;">'."\n";
+   print '</div>'."\n";
+
    CloseTable();                                                                                                                    #
    include("footer.php");
 
@@ -433,7 +462,11 @@ background-color:#DDDDDD;
 </style>
 <?
    title($sitename.' '.$title);
-   OpenTable();	
+   OpenTable();
+
+   # stop using <br /> use a div tag with padding whenever it's possible!
+   print '<div align="center" style="padding-top:13px;">'."\n";
+   print '</div>'."\n";
 
    echo '<fieldset style="border-color: '.$textcolor2.'; border-width: '.$fieldset_border_width.'; border-style: solid;">';
    echo '<legend align="center" id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px; font-weight: bold;"><font color="white">'.$pagetitle.' :: '.$title.'</font></strong></legend>';
@@ -578,9 +611,14 @@ background-color:#DDDDDD;
    // CLOSE FORM 
    
    // CLOSE TABLE
-   echo "</td></tr></table></div></div>";
+   echo "</td></tr></table></fieldset></div></div>";
    echo '<br />';
    echo '<div align="center">Written by: Truman "ScottyBcoder" Buffington</div>';
+   
+   # stop using <br /> use a div tag with padding whenever it's possible!
+   print '<div align="center" style="padding-top:13px;">'."\n";
+   print '</div>'."\n";
+   
    CloseTable();                                                                                                                    #
    include("footer.php");
    break;
