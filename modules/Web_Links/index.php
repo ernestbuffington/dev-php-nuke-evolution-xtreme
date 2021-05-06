@@ -883,100 +883,143 @@ function RandomLink()
 */
 }
 
-function viewlink($cid, $min, $orderby, $show) {
+function viewlink($cid, $min, $orderby, $show) 
+{
     global $prefix, $db, $admin, $perpage, $module_name, $user, $admin_file, $locale, $mainvotedecimal, $datetime;
     $show = intval($show);
+
     if (empty($show))
-    {
-        $show = '';
-    }
-    if (!empty($orderby)) {
-        $orderby = htmlspecialchars($orderby);
-    }
+    $show = '';
+    if (!empty($orderby)) 
+    $orderby = htmlspecialchars($orderby);
+    
     include_once(NUKE_BASE_DIR.'header.php');
-    if (!isset($min)) $min=0;
-    if (!isset($max)) $max=$min+$perpage;
-    if(!empty($orderby)) {
-        $orderby = convertorderbyin($orderby);
-    } else {
-        $orderby = "title ASC";
-    }
-    if (!empty($show)) {
-        $perpage = $show;
-    } else {
-        $show=$perpage;
-    }
+
+    if (!isset($min)) 
+	$min=0;
+    
+	if (!isset($max)) 
+	$max=$min+$perpage;
+    
+	if(!empty($orderby)) 
+    $orderby = convertorderbyin($orderby);
+	else 
+    $orderby = "title ASC";
+    
+	if (!empty($show)) 
+    $perpage = $show;
+	else 
+    $show=$perpage;
+
     menu(1);
-    //echo "<br />";
+
     OpenTable();
+
+    # stop using <br /> use a div tags with padding whenever it's poosible!
+    print '<div align="center" style="padding-top:11px;">'."\n";
+    print '</div>'."\n";
+
     $cid = intval($cid);
     $row_two = $db->sql_fetchrow($db->sql_query("SELECT title,parentid FROM ".$prefix."_links_categories WHERE cid='$cid'"));
     $title = stripslashes(check_html($row_two['title'], "nohtml"));
     $parentid = intval($row_two['parentid']);
-    $title=weblinks_parentlink($parentid,$title);
-    $title="<a href=modules.php?name=$module_name>"._MAIN."</a>/$title";
-    echo "<center><span class=\"option\"><strong>"._CATEGORY.": $title</strong></span></center><br />";
-    echo "<table border=\"0\" cellspacing=\"10\" cellpadding=\"0\" align=\"center\"><tr>";
+    
+	$title=weblinks_parentlink($parentid,$title);
+    
+	$title="<a href=modules.php?name=$module_name>"._MAIN."</a>/$title";
+    echo "<center><span class=\"option\"><strong><h1>$title</h1></strong></span></center><br />";
+    
+	echo "<table border=\"0\" cellspacing=\"10\" cellpadding=\"0\" align=\"center\"><tr>";
     $cid = intval($cid);
     $result2 = $db->sql_query("SELECT cid, title, cdescription from ".$prefix."_links_categories where parentid='$cid' order by title");
     $dum = 0;
     $count = 0;
-    while($row2 = $db->sql_fetchrow($result2)) {
+    
+	while($row2 = $db->sql_fetchrow($result2)):
         $cid2 = intval($row2['cid']);
         $title2 = stripslashes(check_html($row2['title'], "nohtml"));
         $cdescription2 = stripslashes($row2['cdescription']);
     echo "<td><span class=\"option\"><strong><big><i class=\"bi bi-arrow-return-right\"></i></big></strong> <a href=\"modules.php?name=Web_Links&amp;l_op=viewlink&amp;cid=$cid2\"><strong>$title2</strong></a></span>";
     categorynewlinkgraphic($cid2);
-    if ($description2) {
-        echo "<span class=\"content\">$cdescription2</span><br />";
-    } else {
-        echo "<br />";
-    }
+    
+	if ($description2) 
+    echo "<span class=\"content\">$cdescription2</span><br />";
+    else 
+    echo "<br />";
+    
     $result3 = $db->sql_query("SELECT cid, title from ".$prefix."_links_categories where parentid='$cid2' order by title limit 0,3");
     $space = 0;
-    while($row3 = $db->sql_fetchrow($result3)) {
+    
+	while($row3 = $db->sql_fetchrow($result3)):
         $cid3 = intval($row3['cid']);
         $title3 = stripslashes(check_html($row3['title'], "nohtml"));
-            if ($space>0) {
+        if ($space>0) 
         echo ",&nbsp;";
-        }
         echo "<span class=\"content\"><a href=\"modules.php?name=$module_name&amp;l_op=viewlink&amp;cid=$cid3\">$title3</a></span>";
         $space++;
-    }
-    if ($count<1) {
+    endwhile;
+    
+	if ($count<1):
         echo "</td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td>";
         $dum = 1;
-    }
-    $count++;
-    if ($count==2) {
+    endif;
+    
+	$count++;
+    
+	if ($count==2):
         echo "</td></tr><tr>";
         $count = 0;
         $dum = 0;
-    }
-    }
-    if ($dum == 1) {
+    endif;
+    
+	endwhile;
+	
+    if ($dum == 1) 
     echo "</tr></table>";
-    } elseif ($dum == 0) {
+    elseif ($dum == 0) 
     echo "<td></td></tr></table>";
-    }
-
+    
     echo "<hr noshade size=\"1\">";
-    $orderbyTrans = convertorderbytrans($orderby);
-    echo "<center><span class=\"content\">"._SORTLINKSBY.": "
+    
+	$orderbyTrans = convertorderbytrans($orderby);
+    
+	echo "<center><span class=\"content\">"._SORTLINKSBY.": "
         .""._TITLE." (<a href=\"modules.php?name=$module_name&amp;l_op=viewlink&amp;cid=$cid&amp;orderby=titleA\">A</a>\<a href=\"modules.php?name=$module_name&amp;l_op=viewlink&amp;cid=$cid&amp;orderby=titleD\">D</a>) "
         .""._DATE." (<a href=\"modules.php?name=$module_name&amp;l_op=viewlink&amp;cid=$cid&amp;orderby=dateA\">A</a>\<a href=\"modules.php?name=$module_name&amp;l_op=viewlink&amp;cid=$cid&amp;orderby=dateD\">D</a>) "
         .""._RATING." (<a href=\"modules.php?name=$module_name&amp;l_op=viewlink&amp;cid=$cid&amp;orderby=ratingA\">A</a>\<a href=\"modules.php?name=$module_name&amp;l_op=viewlink&amp;cid=$cid&amp;orderby=ratingD\">D</a>) "
         .""._POPULARITY." (<a href=\"modules.php?name=$module_name&amp;l_op=viewlink&amp;cid=$cid&amp;orderby=hitsA\">A</a>\<a href=\"modules.php?name=$module_name&amp;l_op=viewlink&amp;cid=$cid&amp;orderby=hitsD\">D</a>)"
     ."<br /><strong>"._SITESSORTED.": $orderbyTrans</strong></span></center><br /><br />";
-    if(!is_numeric($min)){
+    
+	if(!is_numeric($min))
     $min=0;
-    }
-    $result4 = $db->sql_query("SELECT lid, title, description, date, hits, linkratingsummary, totalvotes, totalcomments from ".$prefix."_links_links where cid='$cid' order by $orderby limit $min,$perpage");
-    $fullcountresult = $db->sql_query("SELECT lid, title, description, date, hits, linkratingsummary, totalvotes, totalcomments from ".$prefix."_links_links where cid='$cid'");
-    $totalselectedlinks = $db->sql_numrows($fullcountresult);
-    echo "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"10\" border=\"0\"><tr><td><span class=\"content\">";
+    
+    $result4 = $db->sql_query("SELECT lid, 
+	                                title, 
+							  description, 
+							         date, 
+									 hits, 
+						linkratingsummary, 
+						       totalvotes, 
+							totalcomments FROM ".$prefix."_links_links 
+							             WHERE cid='$cid' 
+										 ORDER by $orderby limit $min,$perpage");
+    
+	$fullcountresult = $db->sql_query("SELECT lid, 
+	                                        title, 
+									  description, 
+									         date, 
+											 hits, 
+								linkratingsummary, 
+								       totalvotes, 
+									totalcomments FROM ".$prefix."_links_links 
+									             WHERE cid='$cid'");
+    
+	$totalselectedlinks = $db->sql_numrows($fullcountresult);
+    
+	echo "<table width=\"100%\" cellspacing=\"0\" cellpadding=\"10\" border=\"0\"><tr><td><span class=\"content\">";
     $x=0;
-    while($row4 = $db->sql_fetchrow($result4)) {
+    
+	while($row4 = $db->sql_fetchrow($result4)):
         $lid = intval($row4['lid']);
         $title = stripslashes(check_html($row4['title'], "nohtml"));
         $description = stripslashes($row4['description']);
@@ -989,112 +1032,136 @@ function viewlink($cid, $min, $orderby, $show) {
         echo "<font size=\"4\"><i class=\"bi bi-link\"></i></font> <a href=\"modules.php?name=$module_name&amp;l_op=visit&amp;lid=$lid\" target=\"new\"><strong>$title</strong></a>";
     newlinkgraphic($datetime, $time);
     popgraphic($hits);
-    /* INSERT code for *editor review* here */
+    
+	/* INSERT code for *editor review* here */
     echo "<br />";
     echo "<i class=\"bi bi-info-square\"></i>  $description<br />";
-    setlocale (LC_TIME, $locale);
+    
+	setlocale (LC_TIME, $locale);
     preg_match ("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2}) ([0-9]{1,2})\:([0-9]{1,2})\:([0-9]{1,2})/", $time, $datetime);
     $datetime = strftime(""._LINKSDATESTRING."", mktime($datetime[4],$datetime[5],$datetime[6],$datetime[2],$datetime[3],$datetime[1]));
     $datetime = ucfirst($datetime);
-    echo "<i class=\"bi bi-calendar2-plus\"></i> "._ADDEDON.": $datetime "._HITS.": $hits";
+    
+	echo "<i class=\"bi bi-calendar2-plus\"></i> "._ADDEDON.": $datetime "._HITS.": $hits";
         $transfertitle = str_replace (" ", "_", $title);
         /* voting & comments stats */
-        if ($totalvotes == 1) {
+        if ($totalvotes == 1) 
         $votestring = _VOTE;
-        } else {
+        else 
         $votestring = _VOTES;
-    }
-        if ($linkratingsummary!="0" || $linkratingsummary!="0.0") {
+    
+        if ($linkratingsummary!="0" || $linkratingsummary!="0.0") 
         echo " "._RATING.": $linkratingsummary ($totalvotes $votestring)";
-    }
+    
     echo "<br />";
-    if (is_mod_admin($module_name)) {
-        echo "<a href=\"".$admin_file.".php?op=LinksModLink&amp;lid=$lid\">"._EDIT."</a> | ";
-    }
+    
+	if (is_mod_admin($module_name)) 
+    echo "<a href=\"".$admin_file.".php?op=LinksModLink&amp;lid=$lid\">"._EDIT."</a> | ";
+    
     echo "<a href=\"modules.php?name=$module_name&amp;l_op=ratelink&amp;lid=$lid&amp;ttitle=$transfertitle\">"._RATESITE."</a>";
-        if (is_user()) {
-        echo " | <a href=\"modules.php?name=$module_name&amp;l_op=brokenlink&amp;lid=$lid\">"._REPORTBROKEN."</a>";
-    }
-    if ($totalvotes != 0) {
-        echo " | <a href=\"modules.php?name=$module_name&amp;l_op=viewlinkdetails&amp;lid=$lid&amp;ttitle=$transfertitle\">"._DETAILS."</a>";
-    }
-        if ($totalcomments != 0) {
-        echo " | <a href=\"modules.php?name=$module_name&amp;l_op=viewlinkcomments&amp;lid=$lid&amp;ttitle=$transfertitle\">"._SCOMMENTS." ($totalcomments)</a>";
-    }
-        detecteditorial($lid, $transfertitle);
-    echo "<br /><br />";
+    
+	if (is_user()) 
+    echo " | <a href=\"modules.php?name=$module_name&amp;l_op=brokenlink&amp;lid=$lid\">"._REPORTBROKEN."</a>";
+    
+    if ($totalvotes != 0) 
+    echo " | <a href=\"modules.php?name=$module_name&amp;l_op=viewlinkdetails&amp;lid=$lid&amp;ttitle=$transfertitle\">"._DETAILS."</a>";
+    
+    if ($totalcomments != 0) 
+    echo " | <a href=\"modules.php?name=$module_name&amp;l_op=viewlinkcomments&amp;lid=$lid&amp;ttitle=$transfertitle\">"._SCOMMENTS." ($totalcomments)</a>";
+    
+    detecteditorial($lid, $transfertitle);
+    
+	echo "<br /><br />";
     $x++;
-    }
+    endwhile;
+	
     echo "</span>";
-    $orderby = convertorderbyout($orderby);
-    /* Calculates how many pages exist. Which page one should be on, etc... */
+    
+	$orderby = convertorderbyout($orderby);
+    
+	/* Calculates how many pages exist. Which page one should be on, etc... */
     $linkpagesint = ($totalselectedlinks / $perpage);
     $linkpageremainder = ($totalselectedlinks % $perpage);
-    if ($linkpageremainder != 0) {
+    
+	if ($linkpageremainder != 0):
         $linkpages = ceil($linkpagesint);
-        if ($totalselectedlinks < $perpage) {
+ 	    if ($totalselectedlinks < $perpage):
             $linkpageremainder = 0;
-        }
-    } else {
-        $linkpages = $linkpagesint;
-    }
-    /* Page Numbering */
-    if ($linkpages!=1 && $linkpages!=0) {
+        endif;
+ 	else: 
+       $linkpages = $linkpagesint;
+    endif;
+    
+	/* Page Numbering */
+    if ($linkpages!=1 && $linkpages!=0):
         echo "<br /><br />";
-          echo ""._SELECTPAGE.": ";
-         $prev=$min-$perpage;
-         if ($prev>=0) {
+        echo ""._SELECTPAGE.": ";
+        $prev=$min-$perpage;
+      
+	     if ($prev>=0): 
             echo "&nbsp;&nbsp;<strong>[ <a href=\"modules.php?name=$module_name&amp;l_op=viewlink&amp;cid=$cid&amp;min=$prev&amp;orderby=$orderby&amp;show=$show\">";
             echo " &lt;&lt; "._PREVIOUS."</a> ]</strong> ";
-      }
+         endif;
+		 
         $counter = 1;
      $currentpage = ($max / $perpage);
-           while ($counter<=$linkpages ) {
+
+           while ($counter<=$linkpages ):
               $cpage = $counter;
               $mintemp = ($perpage * $counter) - $perpage;
-              if ($counter == $currentpage) {
-        echo "<strong>$counter</strong>&nbsp;";
-        } else {
-        echo "<a href=\"modules.php?name=$module_name&amp;l_op=viewlink&amp;cid=$cid&amp;min=$mintemp&amp;orderby=$orderby&amp;show=$show\">$counter</a> ";
-        }
-               $counter++;
-           }
-         $next=$min+$perpage;
-         if ($x>=$perpage) {
+ 		      if ($counter == $currentpage) 
+              echo "<strong>$counter</strong>&nbsp;";
+		      else 
+              echo "<a href=\"modules.php?name=$module_name&amp;l_op=viewlink&amp;cid=$cid&amp;min=$mintemp&amp;orderby=$orderby&amp;show=$show\">$counter</a> ";
+              $counter++;
+           endwhile;
+         
+		 $next=$min+$perpage;
+         
+		 if ($x>=$perpage):
             echo "&nbsp;&nbsp;<strong>[ <a href=\"modules.php?name=$module_name&amp;l_op=viewlink&amp;cid=$cid&amp;min=$max&amp;orderby=$orderby&amp;show=$show\">";
             echo " "._NEXT." &gt;&gt;</a> ]</strong> ";
-         }
-    }
+         endif;
+		 
+    endif;
+	
     echo "</td></tr></table>";
-    CloseTable();
+    echo '<hr>';
+
+    # stop using <br /> use a div tags with padding whenever it's poosible!
+    print '<div align="center" style="padding-top:11px;">'."\n";
+    print '</div>'."\n";
+
+	CloseTable();
     include_once(NUKE_BASE_DIR.'footer.php');
 }
 
-function newlinkgraphic($datetime, $time) {
+function newlinkgraphic($datetime, $time) 
+{
     global $module_name, $locale;
+
     echo "&nbsp;";
+
     setlocale (LC_TIME, $locale);
     preg_match ("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2}) ([0-9]{1,2})\:([0-9]{1,2})\:([0-9]{1,2})/", $time, $datetime);
     $datetime = strftime(""._LINKSDATESTRING."", mktime($datetime[4],$datetime[5],$datetime[6],$datetime[2],$datetime[3],$datetime[1]));
     $datetime = ucfirst($datetime);
     $startdate = time();
     $count = 0;
-    while ($count <= 7) {
+
+    while ($count <= 7):
     $daysold = date("d-M-Y", $startdate);
-        if ("$daysold" == "$datetime") {
-            if ($count<=1) {
-        echo "<img src=\"modules/$module_name/images/new_01.png\" alt=\""._NEWTODAY."\">";
-        }
-            if ($count<=3 && $count>1) {
-        echo "<img src=\"modules/$module_name/images/new_03.png\" alt=\""._NEWLAST3DAYS."\">";
-        }
-            if ($count<=7 && $count>3) {
-        echo "<img src=\"modules/$module_name/images/new_07.png\" alt=\""._NEWTHISWEEK."\">";
-        }
-    }
+        if ("$daysold" == "$datetime"): 
+            if ($count<=1) 
+              echo "<img src=\"modules/$module_name/images/new_01.png\" alt=\""._NEWTODAY."\">";
+            if ($count<=3 && $count>1) 
+               echo "<img src=\"modules/$module_name/images/new_03.png\" alt=\""._NEWLAST3DAYS."\">";
+            if ($count<=7 && $count>3) 
+              echo "<img src=\"modules/$module_name/images/new_07.png\" alt=\""._NEWTHISWEEK."\">";
+       endif;
         $count++;
         $startdate = (time()-(86400 * $count));
-    }
+    endwhile;
 }
 
 function categorynewlinkgraphic($cat) {
