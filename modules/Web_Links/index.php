@@ -1164,93 +1164,146 @@ function newlinkgraphic($datetime, $time)
     endwhile;
 }
 
-function categorynewlinkgraphic($cat) {
+function categorynewlinkgraphic($cat) 
+{
     global $prefix, $db, $module_name, $locale;
     $cat = intval(trim($cat));
     $row = $db->sql_fetchrow($db->sql_query("SELECT date from ".$prefix."_links_links where cid='$cat' order by date desc limit 1"));
     $time = $row['date'];
+
     echo "&nbsp;";
+
     setlocale (LC_TIME, $locale);
     preg_match ("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2}) ([0-9]{1,2})\:([0-9]{1,2})\:([0-9]{1,2})/", $time, $datetime);
     $datetime = strftime(""._LINKSDATESTRING."", mktime($datetime[4],$datetime[5],$datetime[6],$datetime[2],$datetime[3],$datetime[1]));
     $datetime = ucfirst($datetime);
     $startdate = time();
     $count = 0;
-    while ($count <= 7) {
+
+    while ($count <= 7):
     $daysold = date("d-M-Y", $startdate);
-        if ("$daysold" == "$datetime") {
-            if ($count<=1) {
+        if ("$daysold" == "$datetime"):
+        if ($count<=1) 
         echo "<img src=\"modules/$module_name/images/new_01.png\" alt=\""._CATNEWTODAY."\">";
-        }
-            if ($count<=3 && $count>1) {
+        if ($count<=3 && $count>1) 
         echo "<img src=\"modules/$module_name/images/new_03.png\" alt=\""._CATLAST3DAYS."\">";
-        }
-            if ($count<=7 && $count>3) {
+        if ($count<=7 && $count>3) 
         echo "<img src=\"modules/$module_name/images/new_07.png\" alt=\""._CATTHISWEEK."\">";
-        }
-    }
+    endif;
         $count++;
         $startdate = (time()-(86400 * $count));
-    }
+    endwhile;
 }
 
-function popgraphic($hits) {
+function popgraphic($hits) 
+{
     global $module_name;
     include(NUKE_MODULES_DIR.$module_name.'/l_config.php');
-    if ($hits>=$popular) {
+    if ($hits>=$popular) 
     echo "&nbsp;<img src=\"modules/$module_name/images/pop.gif\" alt=\""._POPULAR."\">";
-    }
 }
 
-function convertorderbyin($orderby) {
-    if ($orderby != "titleA" AND $orderby != "dateA" AND $orderby != "hitsA" AND $orderby != "ratingA" AND $orderby != "titleD" AND $orderby != "dateD" AND $orderby != "hitsD" AND $orderby != "ratingD") {
+function convertorderbyin($orderby) 
+{
+    if ($orderby != "titleA" AND $orderby 
+	             != "dateA" AND $orderby 
+				 != "hitsA" AND $orderby 
+				 != "ratingA" AND $orderby 
+				 != "titleD" AND $orderby 
+				 != "dateD" AND $orderby 
+				 != "hitsD" AND $orderby 
+				 != "ratingD") 
+	{
         redirect("index.php");
         exit;
     }
-    if ($orderby == "titleA")    $orderby = "title ASC";
-    if ($orderby == "dateA")    $orderby = "date ASC";
-    if ($orderby == "hitsA")    $orderby = "hits ASC";
-    if ($orderby == "ratingA")    $orderby = "linkratingsummary ASC";
-    if ($orderby == "titleD")    $orderby = "title DESC";
-    if ($orderby == "dateD")    $orderby = "date DESC";
-    if ($orderby == "hitsD")    $orderby = "hits DESC";
-    if ($orderby == "ratingD")    $orderby = "linkratingsummary DESC";
+    if ($orderby == "titleA")    
+	$orderby = "title ASC";
+    if ($orderby == "dateA")    
+	$orderby = "date ASC";
+    if ($orderby == "hitsA")    
+	$orderby = "hits ASC";
+    if ($orderby == "ratingA")    
+	$orderby = "linkratingsummary ASC";
+    if ($orderby == "titleD")    
+	$orderby = "title DESC";
+    if ($orderby == "dateD")    
+	$orderby = "date DESC";
+    if ($orderby == "hitsD")    
+	$orderby = "hits DESC";
+    if ($orderby == "ratingD")    
+	$orderby = "linkratingsummary DESC";
     return $orderby;
 }
 
-function convertorderbytrans($orderby) {
-    if ($orderby != "hits ASC" AND $orderby != "hits DESC" AND $orderby != "title ASC" AND $orderby != "title DESC" AND $orderby != "date ASC" AND $orderby != "date DESC" AND $orderby != "linkratingsummary ASC" AND $orderby != "linkratingsummary DESC") {
+function convertorderbytrans($orderby) 
+{
+    if ($orderby != "hits ASC" AND $orderby 
+	             != "hits DESC" AND $orderby 
+				 != "title ASC" AND $orderby 
+				 != "title DESC" AND $orderby 
+				 != "date ASC" AND $orderby 
+				 != "date DESC" AND $orderby 
+				 != "linkratingsummary ASC" AND $orderby 
+				 != "linkratingsummary DESC") 
+	{
         redirect("index.php");
         exit;
     }
-    if ($orderby == "hits ASC")            $orderbyTrans = ""._POPULARITY1."";
-    if ($orderby == "hits DESC")        $orderbyTrans = ""._POPULARITY2."";
-    if ($orderby == "title ASC")        $orderbyTrans = ""._TITLEAZ."";
-    if ($orderby == "title DESC")        $orderbyTrans = ""._TITLEZA."";
-    if ($orderby == "date ASC")            $orderbyTrans = ""._DATE1."";
-    if ($orderby == "date DESC")        $orderbyTrans = ""._DATE2."";
-    if ($orderby == "linkratingsummary ASC")    $orderbyTrans = ""._RATING1."";
-    if ($orderby == "linkratingsummary DESC")    $orderbyTrans = ""._RATING2."";
+    if ($orderby == "hits ASC")            
+	$orderbyTrans = ""._POPULARITY1."";
+    if ($orderby == "hits DESC")        
+	$orderbyTrans = ""._POPULARITY2."";
+    if ($orderby == "title ASC")        
+	$orderbyTrans = ""._TITLEAZ."";
+    if ($orderby == "title DESC")        
+	$orderbyTrans = ""._TITLEZA."";
+    if ($orderby == "date ASC")            
+	$orderbyTrans = ""._DATE1."";
+    if ($orderby == "date DESC")        
+	$orderbyTrans = ""._DATE2."";
+    if ($orderby == "linkratingsummary ASC")    
+	$orderbyTrans = ""._RATING1."";
+    if ($orderby == "linkratingsummary DESC")    
+	$orderbyTrans = ""._RATING2."";
     return $orderbyTrans;
 }
 
-function convertorderbyout($orderby) {
-    if ($orderby != "title ASC" AND $orderby != "date ASC" AND $orderby != "hits ASC" AND $orderby != "linkratingsummary ASC" AND $orderby != "title DESC" AND $orderby != "date DESC" AND $orderby != "hits DESC" AND $orderby != "linkratingsummary DESC") {
+function convertorderbyout($orderby) 
+{
+    if ($orderby != "title ASC" AND $orderby 
+	             != "date ASC" AND $orderby 
+				 != "hits ASC" AND $orderby 
+				 != "linkratingsummary ASC" AND $orderby 
+				 != "title DESC" AND $orderby 
+				 != "date DESC" AND $orderby 
+				 != "hits DESC" AND $orderby 
+				 != "linkratingsummary DESC") 
+	{
         redirect("index.php");
         exit;
     }
-    if ($orderby == "title ASC")        $orderby = "titleA";
-    if ($orderby == "date ASC")            $orderby = "dateA";
-    if ($orderby == "hits ASC")            $orderby = "hitsA";
-    if ($orderby == "linkratingsummary ASC")    $orderby = "ratingA";
-    if ($orderby == "title DESC")        $orderby = "titleD";
-    if ($orderby == "date DESC")        $orderby = "dateD";
-    if ($orderby == "hits DESC")        $orderby = "hitsD";
-    if ($orderby == "linkratingsummary DESC")    $orderby = "ratingD";
+    if ($orderby == "title ASC")        
+	$orderby = "titleA";
+    if ($orderby == "date ASC")            
+	$orderby = "dateA";
+    if ($orderby == "hits ASC")            
+	$orderby = "hitsA";
+    if ($orderby == "linkratingsummary ASC")    
+	$orderby = "ratingA";
+    if ($orderby == "title DESC")        
+	$orderby = "titleD";
+    if ($orderby == "date DESC")        
+	$orderby = "dateD";
+    if ($orderby == "hits DESC")        
+	$orderby = "hitsD";
+    if ($orderby == "linkratingsummary DESC")    
+	$orderby = "ratingD";
     return $orderby;
 }
 
-function visit($lid) {
+function visit($lid) 
+{
     global $prefix, $db;
     $lid = intval($lid);
     $db->sql_query("update ".$prefix."_links_links set hits=hits+1 where lid='$lid'");
@@ -1259,43 +1312,80 @@ function visit($lid) {
     redirect("$url");
 }
 
-function search($query, $min, $orderby, $show) {
+function search($query, $min, $orderby, $show) 
+{
     global $prefix, $db, $admin, $bgcolor2, $module_name, $locale, $mainvotedecimal, $datetime;
     include(NUKE_MODULES_DIR.$module_name.'/l_config.php');
     include_once(NUKE_BASE_DIR.'header.php');
-    if (!isset($min)) $min=0;
-    if (!isset($max)) $max=$min+$linksresults;
-    if(!empty($orderby)) {
+
+    if (!isset($min)) 
+	$min=0;
+    if (!isset($max)) 
+	$max=$min+$linksresults;
+    if(!empty($orderby)) 
     $orderby = convertorderbyin($orderby);
-    } else {
+	else 
     $orderby = "title ASC";
-    }
-    if ($show!="") {
+    
+	if($show != "") 
     $linksresults = $show;
-    } else {
+	else 
     $show=$linksresults;
-    }
-    $query = htmlentities($query, ENT_QUOTES);
+    
+	$query = htmlentities($query, ENT_QUOTES);
     $query = addslashes($query);
+
     if(!is_numeric($linksresults) AND $linksresults==0)
-    {
     $linksresults=10;
-    }
-    $result = $db->sql_query("SELECT lid, cid, sid, title, url, description, date, hits, linkratingsummary, totalvotes, totalcomments from ".$prefix."_links_links where title LIKE '%$query%' OR description LIKE '%$query%' ORDER BY $orderby LIMIT ".intval($min).",$linksresults");
-    $fullcountresult = $db->sql_query("SELECT lid, title, description, date, hits, linkratingsummary, totalvotes, totalcomments from ".$prefix."_links_links where title LIKE '%$query%' OR description LIKE '%$query%'");
-    $totalselectedlinks = $db->sql_numrows($fullcountresult);
+
+    $result = $db->sql_query("SELECT lid, 
+	                                 cid, 
+									 sid, 
+								   title, 
+								     url, 
+						     description, 
+							        date, 
+									hits, 
+					   linkratingsummary, 
+					          totalvotes, 
+						   totalcomments FROM ".$prefix."_links_links 
+						                WHERE title 
+										 LIKE '%$query%' 
+										   OR description 
+										 LIKE '%$query%' 
+										ORDER BY $orderby 
+										LIMIT ".intval($min).",$linksresults");
+    
+	$fullcountresult = $db->sql_query("SELECT lid, 
+	                                        title, 
+									  description, 
+									         date, 
+											 hits, 
+							    linkratingsummary, 
+								       totalvotes, 
+									totalcomments FROM ".$prefix."_links_links 
+									             WHERE title 
+												  LIKE '%$query%' 
+												    OR description 
+												  LIKE '%$query%'");
+    
+	$totalselectedlinks = $db->sql_numrows($fullcountresult);
     $nrows = $db->sql_numrows($result);
     $x=0;
     $the_query = stripslashes($query);
     $the_query = str_replace("\'", "'", $the_query);
     menu(1);
-    OpenTable();
-    if ($query != "") {
-        if ($nrows>0) {
-        echo "<span class=\"option\">"._SEARCHRESULTS4.": <strong>$the_query</strong></span><br /><br />"
+    
+	OpenTable();
+    
+	if ($query != "") :
+        if ($nrows>0):
+		echo "<span class=\"option\">"._SEARCHRESULTS4.": <strong>$the_query</strong></span><br /><br />"
             ."<table width=\"100%\" bgcolor=\"$bgcolor2\"><tr><td><span class=\"option\"><strong>"._USUBCATEGORIES."</strong></span></td></tr></table>";
-            $result2 = $db->sql_query("SELECT cid, title from ".$prefix."_links_categories where title LIKE '%$query%' ORDER BY title DESC");
-            while ($row2 = $db->sql_fetchrow($result2)) {
+            
+			$result2 = $db->sql_query("SELECT cid, title from ".$prefix."_links_categories where title LIKE '%$query%' ORDER BY title DESC");
+            
+			while ($row2 = $db->sql_fetchrow($result2)):
             $cid = intval($row2['cid']);
             $stitle = stripslashes(check_html($row2['title'], "nohtml"));
             $res = $db->sql_query("SELECT * from ".$prefix."_links_links where cid='$cid'");
@@ -1307,8 +1397,9 @@ function search($query, $min, $orderby, $show) {
             if ($parentid3>0) $title3 = weblinks_parent($parentid3,$title3);
             $title3 = str_replace($query, "<strong>$query</strong>", $title3);
             echo "<strong><big>&middot;</big></strong>&nbsp;<a href=\"modules.php?name=$module_name&amp;l_op=viewlink&amp;cid=$cid\">$title3</a> ($numrows)<br />";
-        }
-    echo "<br /><table width=\"100%\" bgcolor=\"$bgcolor2\"><tr><td><span class=\"option\"><strong>"._LINKS."</strong></span></td></tr></table>";
+        endwhile;
+    
+	    echo "<br /><table width=\"100%\" bgcolor=\"$bgcolor2\"><tr><td><span class=\"option\"><strong>"._LINKS."</strong></span></td></tr></table>";
         $orderbyTrans = convertorderbytrans($orderby);
         echo "<br /><span class=\"content\">"._SORTLINKSBY.": "
             .""._TITLE." (<a href=\"modules.php?name=$module_name&amp;l_op=search&amp;query=$the_query&amp;orderby=titleA\">A</a>\<a href=\"modules.php?name=$module_name&amp;l_op=search&amp;query=$the_query&amp;orderby=titleD\">D</a>)"
@@ -1316,7 +1407,8 @@ function search($query, $min, $orderby, $show) {
             .""._RATING." (<a href=\"modules.php?name=$module_name&amp;l_op=search&amp;query=$the_query&amp;orderby=ratingA\">A</a>\<a href=\"modules.php?name=$module_name&amp;l_op=search&amp;query=$the_query&amp;orderby=ratingD\">D</a>)"
             .""._POPULARITY." (<a href=\"modules.php?name=$module_name&amp;l_op=search&amp;query=$the_query&amp;orderby=hitsA\">A</a>\<a href=\"modules.php?name=$module_name&amp;l_op=search&amp;query=$the_query&amp;orderby=hitsD\">D</a>)"
             ."<br />"._SITESSORTED.": $orderbyTrans<br /><br />";
-        while($row = $db->sql_fetchrow($result)) {
+        
+		while($row = $db->sql_fetchrow($result)):
                 $lid = intval($row['lid']);
                 $cid = intval($row['cid']);
                 $sid = intval($row['sid']);
@@ -1328,89 +1420,110 @@ function search($query, $min, $orderby, $show) {
                 $linkratingsummary = $row['linkratingsummary'];
                 $totalvotes = intval($row['totalvotes']);
                 $totalcomments = $row['totalcomments'];
-        $linkratingsummary = number_format($linkratingsummary, $mainvotedecimal);
+        
+		$linkratingsummary = number_format($linkratingsummary, $mainvotedecimal);
         $transfertitle = str_replace (" ", "_", $title);
         $title = str_replace($query, "<strong>$query</strong>", $title);
-        echo "<a href=\"modules.php?name=$module_name&amp;l_op=visit&amp;lid=$lid\" target=\"new\">$title</a>";
-        newlinkgraphic($datetime, $time);
+        
+		echo "<a href=\"modules.php?name=$module_name&amp;l_op=visit&amp;lid=$lid\" target=\"new\">$title</a>";
+        
+		newlinkgraphic($datetime, $time);
             popgraphic($hits);
-        echo "<br />";
-        $description = str_replace($query, "<strong>$query</strong>", $description);
-        echo ""._DESCRIPTION.": $description<br />";
-        setlocale (LC_TIME, $locale);
+        
+		echo "<br />";
+        
+		$description = str_replace($query, "<strong>$query</strong>", $description);
+        
+		echo ""._DESCRIPTION.": $description<br />";
+        
+		setlocale (LC_TIME, $locale);
         preg_match ("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2}) ([0-9]{1,2})\:([0-9]{1,2})\:([0-9]{1,2})/", $time, $datetime);
         $datetime = strftime(""._LINKSDATESTRING."", mktime($datetime[4],$datetime[5],$datetime[6],$datetime[2],$datetime[3],$datetime[1]));
         $datetime = ucfirst($datetime);
-        echo ""._ADDEDON.": $datetime "._HITS.": $hits";
-            /* voting & comments stats */
-            if ($totalvotes == 1) {
+        
+		echo ""._ADDEDON.": $datetime "._HITS.": $hits";
+        /* voting & comments stats */
+        if ($totalvotes == 1) 
         $votestring = _VOTE;
-        } else {
+        else 
         $votestring = _VOTES;
-        }
-            if ($linkratingsummary!="0" || $linkratingsummary!="0.0") {
+        
+        if ($linkratingsummary!="0" || $linkratingsummary!="0.0") 
         echo " "._RATING.": $linkratingsummary ($totalvotes $votestring)";
-        }
-            echo "<br /><a href=\"modules.php?name=$module_name&amp;l_op=ratelink&amp;lid=$lid&amp;ttitle=$transfertitle\">"._RATESITE."</a>";
-            if ($totalvotes != 0) {
+        
+        echo "<br /><a href=\"modules.php?name=$module_name&amp;l_op=ratelink&amp;lid=$lid&amp;ttitle=$transfertitle\">"._RATESITE."</a>";
+        
+		if ($totalvotes != 0) 
         echo " | <a href=\"modules.php?name=$module_name&amp;l_op=viewlinkdetails&amp;lid=$lid&amp;ttitle=$transfertitle\">"._DETAILS."</a>";
-        }
-            if ($totalcomments != 0) {
+        
+        if ($totalcomments != 0) 
         echo " | <a href=\"modules.php?name=$module_name&amp;l_op=viewlinkcomments&amp;lid=$lid&amp;ttitle=$transfertitle>"._SCOMMENTS." ($totalcomments)</a>";
-        }
+        
         detecteditorial($lid, $transfertitle);
-        echo "<br />";
-        $row4 = $db->sql_fetchrow($db->sql_query("SELECT cid,title,parentid from ".$prefix."_links_categories where cid='$cid'"));
+        
+		echo "<br />";
+        
+		$row4 = $db->sql_fetchrow($db->sql_query("SELECT cid,title,parentid from ".$prefix."_links_categories where cid='$cid'"));
         $cid3 = intval($row4['cid']);
         $title3 = stripslashes(check_html($row4['title'], "nohtml"));
         $parentid3 = intval($row4['parentid']);
-        if ($parentid3>0) $title3 = weblinks_parent($parentid3,$title3);
-        echo ""._CATEGORY.": $title3<br /><br />";
+        
+		if ($parentid3>0) 
+		$title3 = weblinks_parent($parentid3,$title3);
+        
+		echo ""._CATEGORY.": $title3<br /><br />";
         $x++;
-    }
-    echo "</span>";
-        $orderby = convertorderbyout($orderby);
-    } else {
+    
+	endwhile;
+    
+	echo "</span>";
+    $orderby = convertorderbyout($orderby);
+    else:
     echo "<br /><center><span class=\"option\"><strong>"._NOMATCHES."</strong></span><br /><br />"._GOBACK."<br /></center>";
-    }
+    endif;
+	
     /* Calculates how many pages exist.  Which page one should be on, etc... */
     $linkpagesint = ($totalselectedlinks / $linksresults);
     $linkpageremainder = ($totalselectedlinks % $linksresults);
-    if ($linkpageremainder != 0) {
+    if ($linkpageremainder != 0):
         $linkpages = ceil($linkpagesint);
-        if ($totalselectedlinks < $linksresults) {
+        if ($totalselectedlinks < $linksresults): 
             $linkpageremainder = 0;
-    }
-    } else {
+		endif;
+ 	else: 
         $linkpages = $linkpagesint;
-    }
-    /* Page Numbering */
-    if ($linkpages!=1 && $linkpages!=0) {
+    endif;
+	
+	/* Page Numbering */
+    if ($linkpages!=1 && $linkpages!=0):
+ 
     echo "<br /><br />"
         .""._SELECTPAGE.": ";
     $prev=$min-$linksresults;
-    if ($prev>=0) {
+    if ($prev>=0)
             echo "&nbsp;&nbsp;<strong>[ <a href=\"modules.php?name=$module_name&amp;l_op=search&amp;query=$the_query&amp;min=$prev&amp;orderby=$orderby&amp;show=$show\">"
             ." &lt;&lt; "._PREVIOUS."</a> ]</strong> ";
-          }
+          
     $counter = 1;
         $currentpage = ($max / $linksresults);
-        while ($counter<=$linkpages ) {
+        
+		while ($counter<=$linkpages ):
             $cpage = $counter;
             $mintemp = ($perpage * $counter) - $linksresults;
-            if ($counter == $currentpage) {
-        echo "<strong>$counter</strong>&nbsp;";
-        } else {
-        echo "<a href=\"modules.php?name=$module_name&amp;l_op=search&amp;query=$the_query&amp;min=$mintemp&amp;orderby=$orderby&amp;show=$show\">$counter</a> ";
-        }
-            $counter++;
-        }
+         if ($counter == $currentpage) 
+         echo "<strong>$counter</strong>&nbsp;";
+         else 
+         echo "<a href=\"modules.php?name=$module_name&amp;l_op=search&amp;query=$the_query&amp;min=$mintemp&amp;orderby=$orderby&amp;show=$show\">$counter</a> ";
+         $counter++;
+        endwhile;
+
         $next=$min+$linksresults;
-        if ($x>=$perpage) {
+
+        if ($x>=$perpage) 
             echo "&nbsp;&nbsp;<strong>[ <a href=\"modules.php?name=$module_name&amp;l_op=search&amp;query=$the_query&amp;min=$max&amp;orderby=$orderby&amp;show=$show\">"
             ." "._NEXT." &gt;&gt;</a> ]</strong>";
-        }
-    }
+    endif;
+
     echo "<center><span class=\"content\">"
     ."<br />"._TRY2SEARCH." \"$the_query\" "._INOTHERSENGINES."<br />"
     ."<br /><a target=\"_blank\" href=\"http://search.disney.com/search?o=home&q=$the_query\">Disney</a> - "
@@ -1420,12 +1533,13 @@ function search($query, $min, $orderby, $show) {
     ."<a target=\"_blank\" href=\"https://groups.google.com/search?q=$the_query\">Google Groups</a> - "
     ."<a target=\"_blank\" href=\"https://forums.justlinux.com/tags.php?tag=$the_query\">JustLinux Forums</a><br />"
     ."</span>";
-    } else {
-    echo "<center><span class=\"option\"><strong>"._NOMATCHES."</strong></span></center><br />";
-    }
-    echo '<br />';
-	CloseTable();
-    include_once(NUKE_BASE_DIR.'footer.php');
+  else:
+  echo "<center><span class=\"option\"><strong>"._NOMATCHES."</strong></span></center><br />";
+  endif;
+    
+  echo '<br />';
+  CloseTable();
+  include_once(NUKE_BASE_DIR.'footer.php');
 }
 
 function viewlinkeditorial($lid, $ttitle) {
