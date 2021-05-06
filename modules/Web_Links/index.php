@@ -178,8 +178,8 @@ function index()
     $dum = 0;
     $count = 0;
     
-	while($row = $db->sql_fetchrow($result)) 
-	{
+	while($row = $db->sql_fetchrow($result)): 
+	
       $cid = intval($row['cid']);
       $title = stripslashes(check_html($row['title'], "nohtml"));
       $cdescription = stripslashes($row['cdescription']);
@@ -199,8 +199,7 @@ function index()
 	  $result2 = $db->sql_query("SELECT cid, title from ".$prefix."_links_categories where parentid='$cid' order by title limit 0,3");
       $space = 0;
     
-	  while($row2 = $db->sql_fetchrow($result2)) 
-	  {
+	  while($row2 = $db->sql_fetchrow($result2)):
           $cid = intval($row2['cid']);
           $stitle = stripslashes(check_html($row2['title'], "nohtml"));
         
@@ -213,7 +212,8 @@ function index()
           echo "<span class=\"content\"><a href=\"modules.php?name=Web_Links&amp;l_op=viewlink&amp;cid=$cid\">$stitle</a></span>";
         
 		  $space++;
-      }
+      
+	  endwhile;
     
 	      if ($count<1): 
           echo '<br /><br />';
@@ -231,8 +231,7 @@ function index()
           $dum = 0;
           endif;
 
-    }
-    #end of while
+    endwhile;
 	
 	if ($dum == 1): 
     echo "</tr></table>";
@@ -258,49 +257,87 @@ function index()
     include_once(NUKE_BASE_DIR.'footer.php');
 }
 
-function AddLink() {
+function AddLink() 
+{
     global $prefix, $db, $user, $links_anonaddlinklock, $module_name;
     include_once(NUKE_BASE_DIR.'header.php');
     $mainlink = 1;
     menu(1);
-    //echo "<br />";
+
     OpenTable();
-    echo "<center><span class=\"title\"><strong>"._ADDALINK."</strong></span></center><br /><br />";
-    if (is_user() || $links_anonaddlinklock == 1) {  /* 06-24-01 Bug fix : changed $links_anonaddlinklock != 1 to $links_anonaddlinklock == 1 */
-        echo "<strong>"._INSTRUCTIONS.":</strong><br />"
-        ."<strong><big>&middot;</big></strong> "._SUBMITONCE."<br />"
-        ."<strong><big>&middot;</big></strong> "._POSTPENDING."<br />"
-        ."<strong><big>&middot;</big></strong> "._USERANDIP."<br />"
+
+    # stop using <br /> use a div tage with padding!
+	print '<div align="center" style="padding-top:6px;">'."\n";
+    print '</div>'."\n";
+
+    echo "<div align=\"center\"><span class=\"title\"><strong><h1>"._ADDALINK."</h1></strong></span></div><br />";
+	
+    if (is_user() || $links_anonaddlinklock == 1) 
+	{  /* 06-24-01 Bug fix : changed $links_anonaddlinklock != 1 to $links_anonaddlinklock == 1 */
+        echo "<strong><h2>"._INSTRUCTIONS.":</h2></strong>"
+        ."<strong><big><i class=\"bi bi-link\"></i></big></strong> "._SUBMITONCE."<br />"
+        ."<strong><big><i class=\"bi bi-check2-square\"></i></big></strong> "._POSTPENDING."<br />"
+        ."<strong><big><i class=\"bi bi-person-bounding-box\"></i></big></strong> "._USERANDIP."<br /><br />"
+		
             ."<form method=\"post\" action=\"modules.php?name=$module_name&amp;l_op=Add\">"
-            .""._PAGETITLE.": <input type=\"text\" name=\"title\" size=\"50\" maxlength=\"100\"><br />"
-            .""._PAGEURL.": <input type=\"text\" name=\"url\" size=\"50\" maxlength=\"100\" value=\"http://\"><br />";
-        echo ""._CATEGORY.": <select name=\"cat\">";
-        $result = $db->sql_query("SELECT cid, title, parentid from ".$prefix."_links_categories order by parentid,title");
-        while ($row = $db->sql_fetchrow($result)) {
+            ."<i class=\"bi bi-info-square\"></i> "._PAGETITLE.": <input type=\"text\" name=\"title\" size=\"50\" maxlength=\"100\"><br />"
+			."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class=\"bi bi-hand-index\"></i> The link title goes here.<br /><br />"
+            ."<i class=\"bi bi-info-square\"></i> "._PAGEURL.": <input type=\"text\" name=\"url\" size=\"50\" maxlength=\"100\" value=\"https://\"><br />"
+			."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;<i class=\"bi bi-hand-index\"></i> The website or portal link goes here.<br /><br />";
+    
+	# stop using <br /> use a div tage with padding!
+	print '<div align="center" style="padding-top:6px;">'."\n";
+    print '</div>'."\n";
+			
+        echo "<i class=\"bi bi-info-square\"></i> "._CATEGORY.": <select name=\"cat\">";
+        
+		$result = $db->sql_query("SELECT cid, 
+		                               title, 
+									parentid FROM ".$prefix."_links_categories order by parentid,title");
+									
+        while ($row = $db->sql_fetchrow($result)): 
+		
         $cid2 = intval($row['cid']);
         $ctitle2 = stripslashes(check_html($row['title'], "nohtml"));
         $parentid2 = intval($row['parentid']);
-            if ($parentid2!=0) $ctitle2=weblinks_parent($parentid2,$ctitle2);
+        
+		    if ($parentid2!=0) $ctitle2=weblinks_parent($parentid2,$ctitle2);
             echo "<option value=\"$cid2\">$ctitle2</option>";
-        }
-        echo "</select><br /><br />"
-            .""._LDESCRIPTION."<br /><textarea name=\"description\" cols=\"60\" rows=\"5\"></textarea><br /><br /><br />"
-            .""._YOURNAME.": <input type=\"text\" name=\"auth_name\" size=\"30\" maxlength=\"60\"><br />"
-            .""._YOUREMAIL.": <input type=\"text\" name=\"email\" size=\"30\" maxlength=\"60\"><br /><br />"
-            ."<table>".security_code(array(7), true, 1)."</table>"
-            ."<input type=\"hidden\" name=\"l_op\" value=\"Add\">"
-            ."<input type=\"submit\" value=\""._ADDURL."\"> "._GOBACK."<br /><br />"
-            ."</form>";
-    }else {
-        echo "<center>"._LINKSNOTUSER1."<br />"
+        endwhile;
+        
+		echo "</select><br /><br />";
+        echo ""._LDESCRIPTION."<br /><textarea name=\"description\" cols=\"60\" rows=\"5\"></textarea><br /><br />";
+        
+		global $userinfo;
+        echo '<div class="textbold" style="margin-left:1px;">'._YOURNAME.':</div><input type="text" name="auth_name" value="'.$userinfo['username'].'" size="30" required><br /><br />';
+        echo '<div class="textbold" style="margin-left:1px;">'._YOUREMAIL.':</div><input type="email" name="email" value="'.$userinfo['user_email'].'" size="30" required><br /><br />';
+            
+		echo security_code(array(0,1,2,3,4,5,6,7), 'normal').'<br />'; # added 5/6/2021 (Someone fucked this up so I fixed it)
+		
+        echo "<input type=\"hidden\" name=\"l_op\" value=\"Add\">";
+		echo "<input type=\"submit\" value=\""._ADDURL."\"> "._GOBACK."<br /><br />";
+        echo "</form>";
+    }
+	else 
+	{
+        echo "<div align=\"center\">"._LINKSNOTUSER1."<br />"
         .""._LINKSNOTUSER2."<br /><br />"
             .""._LINKSNOTUSER3."<br />"
             .""._LINKSNOTUSER4."<br />"
             .""._LINKSNOTUSER5."<br />"
             .""._LINKSNOTUSER6."<br />"
             .""._LINKSNOTUSER7."<br /><br />"
-            .""._LINKSNOTUSER8."";
+            .""._LINKSNOTUSER8."</div>";
     }
+
+    # stop using <br /> use a div tage with padding!
+	print '<div align="center" style="padding-top:6px;">'."\n";
+    print '</div>'."\n";
+
     CloseTable();
     include_once(NUKE_BASE_DIR.'footer.php');
 }
@@ -310,17 +347,18 @@ function Add($title, $url, $auth_name, $cat, $description, $email) {
     $result = $db->sql_query("SELECT url from ".$prefix."_links_links where url='$url'");
     $numrows = $db->sql_numrows($result);
 /*****[BEGIN]******************************************
- [ Mod:    Advanced Security Code Control      v1.0.0 ]
+ [ Mod:    Advanced Security Code Control      v1.0.0 ] added 5/6/2021 (Someone fucked this up so I fixed it)
  ******************************************************/
-    if (!security_code_check($_POST['gfx_check'], 'force')) {
-        OpenTable();
-        echo '<center>'._GFX_FAILURE.'</center>';
-        CloseTable();
-        include_once(NUKE_BASE_DIR.'footer.php');
-        exit;
-    }
+	# Throw an error, If the user fails the reCaptcha.
+	if (!security_code_check($_POST['g-recaptcha-response'], array(0,1,2,3,4,5,6,7))):
+    include_once(NUKE_BASE_DIR.'header.php');
+	OpenTable();
+	$error_message[] = $lang_new[$module_name]['reCaptcha'];
+	CloseTable();
+    include_once(NUKE_BASE_DIR.'footer.php');
+	endif;
 /*****[END]********************************************
- [ Mod:    Advanced Security Code Control      v1.0.0 ]
+ [ Mod:    Advanced Security Code Control      v1.0.0 ] added 5/6/2021 (Someone fucked this up so I fixed it)
  ******************************************************/
     if ($numrows>0) {
         include_once(NUKE_BASE_DIR.'header.php');

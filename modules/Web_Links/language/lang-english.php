@@ -28,7 +28,7 @@ define("_URL","URL");
 define("_PREVIOUS","Previous Page");
 define("_NEXT","Next Page");
 define("_YOURNAME","Your Name");
-define("_CATEGORY","Category");
+define("_CATEGORY","Link Category");
 define("_CATEGORIES","Categories");
 define("_LVOTES","votes");
 define("_TOTALVOTES","Total Votes:");
