@@ -165,11 +165,16 @@ function index()
 	menu($mainlink);
     
 	OpenTable();
+   
+    # stop using <br /> use a div tage with padding!
+	print '<div align="center" style="padding-top:6px;">'."\n";
+    print '</div>'."\n";
+   
     echo '<div align="center">';
-	echo "<center><span class=\"title\"><strong>"._LINKSMAINCAT."</strong></span></center><br />";
+	echo "<div align=\"center\"><span class=\"title\"><strong><h1>"._LINKSMAINCAT."</h1></strong></span></div><br />";
     echo "<table border=\"0\" cellspacing=\"10\" cellpadding=\"0\" align=\"center\"><tr>";
     
-	$result = $db->sql_query("select cid, title, cdescription from ".$prefix."_links_categories where parentid=0 order by title");
+	$result = $db->sql_query("SELECT cid, title, cdescription from ".$prefix."_links_categories where parentid=0 order by title"); 
     $dum = 0;
     $count = 0;
     
@@ -181,12 +186,12 @@ function index()
       
 	  echo "<td><span class=\"option\"><strong>
 	  <big><i class=\"bi bi-link\"></i></big></strong> 
-	  <a href=\"modules.php?name=Web_Links&amp;l_op=viewlink&amp;cid=$cid\"><strong>$title</strong></a></span>";
+	  <a href=\"modules.php?name=Web_Links&amp;l_op=viewlink&amp;cid=".$cid."\"><strong>".$title."</strong></a></span>";
     
 	  categorynewlinkgraphic($cid);
     
 	  if($cdescription):
-      echo "<br /><span class=\"content\"><i class=\"bi bi-info-circle\"></i> $cdescription</span><br />";
+      echo "<br /><span class=\"content\"><i class=\"bi bi-info-circle\"></i> ".$cdescription."</span><br />";
       else:
       echo "<br />"; 
       endif;
@@ -244,6 +249,11 @@ function index()
     $catnum = intval($catnum);
     
 	echo "<center><span class=\"content\">"._THEREARE." <strong>$numrows</strong> "._LINKS." "._AND." <strong>$catnum</strong> "._CATEGORIES." "._INDB."</span></center>";
+
+    # stop using <br /> use a div tage with padding!
+	print '<div align="center" style="padding-top:6px;">'."\n";
+    print '</div>'."\n";
+
 	CloseTable();
     include_once(NUKE_BASE_DIR.'footer.php');
 }
