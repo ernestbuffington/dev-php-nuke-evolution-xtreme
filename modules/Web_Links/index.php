@@ -863,7 +863,9 @@ function MostPopular($ratenum, $ratetype)
     include_once(NUKE_BASE_DIR.'footer.php');
 }
 
-function RandomLink() {
+function RandomLink() 
+{
+/*  This is pure garabage!
     global $prefix, $db;
     $result = $db->sql_query("SELECT * from ".$prefix."_links_links");
     $numrows = $db->sql_numrows($result);
@@ -878,6 +880,7 @@ function RandomLink() {
     $url = stripslashes($row2['url']);
     $db->sql_query("update ".$prefix."_links_links set hits=hits+1 where lid='$random'");
     redirect("$url");
+*/
 }
 
 function viewlink($cid, $min, $orderby, $show) {
