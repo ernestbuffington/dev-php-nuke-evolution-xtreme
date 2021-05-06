@@ -60,7 +60,7 @@ global $theme_name;
 echo "\n\n/* Universal/css/header.php Fly Kit for PHP-Nuke Titanium - Design Themes On The Fly */\n"; 
 echo "/* When we are done we will move this code to style.css */\n\n"; 
 
-global $screen_width, $screen_height, $bgcolor1, $bgcolor2, $bgcolor3, $bgcolor4, $bgcolor5;
+global $screen_width, $screen_height, $textcolor1, $textcolor2, $bgcolor1, $bgcolor2, $bgcolor3, $bgcolor4, $bgcolor5;
 
 $bgcolor5 ='#3c3523';
 ?>
@@ -344,17 +344,17 @@ body {
 }
 
 a { 
-	color: #ccc;
+	color: <?=$textcolor1?>;
 	text-decoration: none;
 }
 
 a:hover,
 a.bbcode-href:hover { 
-	color: #f5a405;
+	color: <?=$textcolor2?>;
 }
 
 a.bbcode-href {
-	color: #ce982d;
+	color: <?=$textcolor1?>;
 }
 
 /*
@@ -430,12 +430,12 @@ a.copyright:link,
 a.copyright:active,
 a.copyright:visited {
 	font-size: 14px;
-	color: #ccc;
+	color: <?=$textcolor1?>;
 	text-decoration: none;
 }
 a.copyright:hover {
 	font-size: 14px;
-	color: #f5a405;
+	color: <?=$textcolor2?>;
 	text-decoration: none;
 }
 
@@ -474,11 +474,11 @@ a.copyright:hover {
  *--------------------------------------------------
 */
 .body-background {
-	background-color: #000000;
+	background-color: <?=$bgcolor4?>;
 }
 
 .body-background2 {
-	background-color: #000000;
+	background-color: <?=$bgcolor4?>;
 }
 
 /*

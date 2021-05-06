@@ -1139,7 +1139,7 @@ function search($query, $min, $orderby, $show) {
     echo "</span>";
         $orderby = convertorderbyout($orderby);
     } else {
-    echo "<br /><br /><center><span class=\"option\"><strong>"._NOMATCHES."</strong></span><br /><br />"._GOBACK."<br /></center>";
+    echo "<br /><center><span class=\"option\"><strong>"._NOMATCHES."</strong></span><br /><br />"._GOBACK."<br /></center>";
     }
     /* Calculates how many pages exist.  Which page one should be on, etc... */
     $linkpagesint = ($totalselectedlinks / $linksresults);
@@ -1179,26 +1179,20 @@ function search($query, $min, $orderby, $show) {
             ." "._NEXT." &gt;&gt;</a> ]</strong>";
         }
     }
-    echo "<br /><br /><center><span class=\"content\">"
-    .""._TRY2SEARCH." \"$the_query\" "._INOTHERSENGINES."<br />"
-    ."<a target=\"_blank\" href=\"http://www.altavista.com/cgi-bin/query?pg=q&amp;sc=on&amp;hl=on&amp;act=2006&amp;par=0&amp;q=$the_query&amp;kl=XX&amp;stype=stext\">Alta Vista</a> - "
-    ."<a target=\"_blank\" href=\"http://www.hotbot.com/?MT=$the_query&amp;DU=days&amp;SW=web\">HotBot</a> - "
-    ."<a target=\"_blank\" href=\"http://www.infoseek.com/Titles?qt=$the_query\">Infoseek</a> - "
-    ."<a target=\"_blank\" href=\"http://www.dejanews.com/dnquery.xp?QRY=$the_query\">Deja News</a> - "
-    ."<a target=\"_blank\" href=\"http://www.lycos.com/cgi-bin/pursuit?query=$the_query&amp;maxhits=20\">Lycos</a> - "
-    ."<a target=\"_blank\" href=\"http://search.yahoo.com/bin/search?p=$the_query\">Yahoo</a>"
-    ."<br />"
-    ."<a target=\"_blank\" href=\"http://es.linuxstart.com/cgi-bin/sqlsearch.cgi?pos=1&amp;query=$the_query&amp;language=&amp;advanced=&amp;urlonly=&amp;withid=\">LinuxStart</a> - "
-    ."<a target=\"_blank\" href=\"http://search.1stlinuxsearch.com/compass?scope=$the_query&amp;ui=sr\">1stLinuxSearch</a> - "
+    echo "<center><span class=\"content\">"
+    ."<br />"._TRY2SEARCH." \"$the_query\" "._INOTHERSENGINES."<br />"
+    ."<br /><a target=\"_blank\" href=\"http://search.disney.com/search?o=home&q=$the_query\">Disney</a> - "
+    ."<a target=\"_blank\" href=\"https://search.lycos.com/web/?q=$the_query&amp;maxhits=20\">Lycos</a> - "
+    ."<a target=\"_blank\" href=\"https://search.yahoo.com/search?p=$the_query\">Yahoo</a> - "
     ."<a target=\"_blank\" href=\"http://www.google.com/search?q=$the_query\">Google</a> - "
-    ."<a target=\"_blank\" href=\"http://www.linuxlinks.com/cgi-bin/search.cgi?query=$the_query&amp;engine=Links\">LinuxLinks</a> - "
-    ."<a target=\"_blank\" href=\"http://www.freshmeat.net/search/?q=$the_query&amp;section=projects\">Freshmeat</a> - "
-    ."<a target=\"_blank\" href=\"http://www.justlinux.com/bin/search.pl?key=$the_query\">JustLinux</a>"
+    ."<a target=\"_blank\" href=\"https://groups.google.com/search?q=$the_query\">Google Groups</a> - "
+    ."<a target=\"_blank\" href=\"https://forums.justlinux.com/tags.php?tag=$the_query\">JustLinux Forums</a><br />"
     ."</span>";
     } else {
-    echo "<center><span class=\"option\"><strong>"._NOMATCHES."</strong></span></center><br /><br />";
+    echo "<center><span class=\"option\"><strong>"._NOMATCHES."</strong></span></center><br />";
     }
-    CloseTable();
+    echo '<br />';
+	CloseTable();
     include_once(NUKE_BASE_DIR.'footer.php');
 }
 
