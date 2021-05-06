@@ -1542,136 +1542,199 @@ function search($query, $min, $orderby, $show)
   include_once(NUKE_BASE_DIR.'footer.php');
 }
 
-function viewlinkeditorial($lid, $ttitle) {
+function viewlinkeditorial($lid, $ttitle) 
+{
     global $prefix, $db, $admin, $module_name;
+
     include_once(NUKE_BASE_DIR.'header.php');
     include(NUKE_MODULES_DIR.$module_name.'/l_config.php');
     menu(1);
     $lid = intval(trim($lid));
-    $result = $db->sql_query("SELECT adminid, editorialtimestamp, editorialtext, editorialtitle FROM ".$prefix."_links_editorials WHERE linkid = '$lid'");
-    $recordexist = $db->sql_numrows($result);
+    
+	$result = $db->sql_query("SELECT `adminid`, 
+	                      `editorialtimestamp`, 
+						       `editorialtext`, 
+							  `editorialtitle` FROM ".$prefix."_links_editorials 
+							                WHERE linkid = '".$lid."'");
+    
+	$recordexist = $db->sql_numrows($result);
     $ttitle = htmlentities($ttitle);
     $transfertitle = str_replace ("_", " ", $ttitle);
     $displaytitle = $transfertitle;
-    //echo "<br />";
+
     OpenTable();
-    echo "<center><span class=\"option\"><strong>"._LINKPROFILE.": ".htmlentities($displaytitle)."</strong></span><br />";
+	
+    # stop using <br /> use a div tags with padding whenever it's poosible!
+    print '<div align="center" style="padding-top:11px;">'."\n";
+    print '</div>'."\n";
+
+    echo "<div align=\"center\"><span class=\"option\"><strong><h1>"._LINKPROFILE.": ".htmlentities($displaytitle)."</h1></strong></span><br />";
     linkinfomenu($lid, $ttitle);
-    if ($recordexist != 0) {
-    while($row = $db->sql_fetchrow($result)) {
-        $adminid = intval($row['adminid']);
+    
+	if ($recordexist != 0):
+    
+	while($row = $db->sql_fetchrow($result)):
+        $adminid = $row['adminid']; // Fixed 5/6/2021 (Someone fucked this up setting as intval!)
         $editorialtimestamp = $row['editorialtimestamp'];
         $editorialtext = stripslashes($row['editorialtext']);
         $editorialtitle = stripslashes(check_html($row['editorialtitle'], "nohtml"));
-            preg_match ("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2}) ([0-9]{1,2})\:([0-9]{1,2})\:([0-9]{1,2})/", $editorialtimestamp, $editorialtime);
+        preg_match ("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2}) ([0-9]{1,2})\:([0-9]{1,2})\:([0-9]{1,2})/", $editorialtimestamp, $editorialtime);
         $editorialtime = strftime("%F",mktime($editorialtime[4],$editorialtime[5],$editorialtime[6],$editorialtime[2],$editorialtime[3],$editorialtime[1]));
         $date_array = explode("-", $editorialtime);
         $timestamp = mktime(0, 0, 0, $date_array['1'], $date_array['2'], $date_array['0']);
-               $formatted_date = date("F j, Y", $timestamp);
+        $formatted_date = date("F j, Y", $timestamp);
         echo "<br /><br />";
-           OpenTable2();
+        
+		OpenTable2();
         echo "<center><span class=\"option\"><strong>'$editorialtitle'</strong></span></center>"
-        ."<center><span class=\"tiny\">"._EDITORIALBY." $adminid - $formatted_date</span></center><br /><br />"
+        ."<center><span class=\"tiny\">"._EDITORIALBY." ".$adminid." - ".$formatted_date."</span></center><br /><br />"
         ."$editorialtext";
         CloseTable2();
-        }
-    } else {
-        echo "<br /><br /><center><span class=\"option\"><strong>"._NOEDITORIAL."</strong></span></center>";
-    }
+        endwhile;
+    
+	else:
+    echo "<br /><br /><center><span class=\"option\"><strong>"._NOEDITORIAL."</strong></span></center>";
+	endif;
+    
     echo "<br /><br /><center>";
     linkfooter($lid,$ttitle);
-    echo "</center>";
-    CloseTable();
+    echo "</div>";
+    
+    # stop using <br /> use a div tags with padding whenever it's poosible!
+    print '<div align="center" style="padding-top:11px;">'."\n";
+    print '</div>'."\n";
+
+	CloseTable();
     include_once(NUKE_BASE_DIR.'footer.php');
 }
 
-function detecteditorial($lid, $ttitle) {
+function detecteditorial($lid, $ttitle) 
+{
     global $prefix, $db, $module_name;
     $lid = intval($lid);
-    $resulted2 = $db->sql_query("SELECT adminid from ".$prefix."_links_editorials where linkid='$lid'");
+    $resulted2 = $db->sql_query("SELECT adminid FROM ".$prefix."_links_editorials WHERE linkid='$lid'");
     $recordexist = $db->sql_numrows($resulted2);
-    if ($recordexist != 0) {
+    
+	if ($recordexist != 0) 
     echo " | <a href=\"modules.php?name=$module_name&amp;l_op=viewlinkeditorial&amp;lid=$lid&amp;ttitle=$ttitle\">"._EDITORIAL."</a>";
-    }
+    
 }
 
-function viewlinkcomments($lid, $ttitle) {
+function viewlinkcomments($lid, $ttitle) 
+{
     global $prefix, $db, $admin, $bgcolor2, $module_name, $admin_file;
     include_once(NUKE_BASE_DIR.'header.php');
     include(NUKE_MODULES_DIR.$module_name.'/l_config.php');
     menu(1);
     $lid = intval(trim($lid));
-    //echo "<br />";
-    $result = $db->sql_query("SELECT ratinguser, rating, ratingcomments, ratingtimestamp FROM ".$prefix."_links_votedata WHERE ratinglid = '$lid' AND ratingcomments != '' ORDER BY ratingtimestamp DESC");
+
+    $result = $db->sql_query("SELECT ratinguser, 
+	                                     rating, 
+							     ratingcomments, 
+								ratingtimestamp FROM ".$prefix."_links_votedata 
+								               WHERE ratinglid = '$lid' 
+											     AND ratingcomments != '' 
+											   ORDER by ratingtimestamp 
+											    DESC");
+												
     $totalcomments = $db->sql_numrows($result);
     $ttitle = htmlentities($ttitle);
     $transfertitle = str_replace ("_", " ", $ttitle);
     $displaytitle = $transfertitle;
+	
     OpenTable();
-    echo "<center><span class=\"option\"><strong>"._LINKPROFILE.": ".htmlentities($displaytitle)."</strong></span><br /><br />";
-    linkinfomenu($lid, $ttitle);
-    echo "<br /><br /><br />"._TOTALOF." $totalcomments "._COMMENTS."</span></center><br />"
+    
+    # stop using <br /> use a div tags with padding whenever it's poosible!
+    print '<div align="center" style="padding-top:11px;">'."\n";
+    print '</div>'."\n";
+	
+	echo "<div align=\"center\"><span class=\"option\"><strong><h1>"._LINKPROFILE.": ".htmlentities($displaytitle)."</h1></strong></span><br /><br />";
+    
+	linkinfomenu($lid, $ttitle);
+    
+	echo "<br /><br /><br />"._TOTALOF." $totalcomments "._COMMENTS."</span><br />"
     ."<table align=\"center\" border=\"0\" cellspacing=\"0\" cellpadding=\"2\" width=\"450\">";
     $x=0;
-    while($row = $db->sql_fetchrow($result)) {
+    
+	while($row = $db->sql_fetchrow($result)):
+	 	
         $ratinguser = $row['ratinguser'];
         $rating = intval($row['rating']);
         $ratingcomments = $row['ratingcomments'];
         $ratingtimestamp = $row['ratingtimestamp'];
         preg_match ("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2}) ([0-9]{1,2})\:([0-9]{1,2})\:([0-9]{1,2})/", $ratingtimestamp, $ratingtime);
-    $ratingtime = strftime("%F",mktime($ratingtime[4],$ratingtime[5],$ratingtime[6],$ratingtime[2],$ratingtime[3],$ratingtime[1]));
-    $date_array = explode("-", $ratingtime);
-    $timestamp = mktime(0, 0, 0, $date_array['1'], $date_array['2'], $date_array['0']);
+        $ratingtime = strftime("%F",mktime($ratingtime[4],$ratingtime[5],$ratingtime[6],$ratingtime[2],$ratingtime[3],$ratingtime[1]));
+        $date_array = explode("-", $ratingtime);
+        $timestamp = mktime(0, 0, 0, $date_array['1'], $date_array['2'], $date_array['0']);
         $formatted_date = date("F j, Y", $timestamp);
-    /* Individual user information */
-    $result2 = $db->sql_query("SELECT rating FROM ".$prefix."_links_votedata WHERE ratinguser = '$ratinguser'");
+        
+		/* Individual user information */
+        $result2 = $db->sql_query("SELECT rating FROM ".$prefix."_links_votedata WHERE ratinguser = '$ratinguser'");
         $usertotalcomments = $db->sql_numrows($result2);
         $useravgrating = 0;
-    while($row2 = $db->sql_fetchrow($result2))
-        $rating2 = intval($row2['rating']);
-    $useravgrating = $useravgrating + $rating2;
+    
+	while($row2 = $db->sql_fetchrow($result2))
+        
+		$rating2 = intval($row2['rating']);
+        $useravgrating = $useravgrating + $rating2;
         $useravgrating = $useravgrating / $usertotalcomments;
         $useravgrating = number_format($useravgrating, 1);
-        echo "<tr><td bgcolor=\"$bgcolor2\">"
+        
+		echo "<tr><td bgcolor=\"$bgcolor2\">"
             ."<span class=\"content\"><strong> "._USER.": </strong><a href=\"$nukeurl/modules.php?name=Your_Account&amp;op=userinfo&amp;username=$ratinguser\">$ratinguser</a></span>"
-        ."</td>"
-        ."<td bgcolor=\"$bgcolor2\">"
-        ."<span class=\"content\"><strong>"._RATING.": </strong>$rating</span>"
-        ."</td>"
-        ."<td bgcolor=\"$bgcolor2\" align=\"right\">"
+            ."</td>"
+            ."<td bgcolor=\"$bgcolor2\">"
+            ."<span class=\"content\"><strong>"._RATING.": </strong>$rating</span>"
+            ."</td>"
+            ."<td bgcolor=\"$bgcolor2\" align=\"right\">"
             ."<span class=\"content\">$formatted_date</span>"
-        ."</td>"
-        ."</tr>"
-        ."<tr>"
-        ."<td valign=\"top\">"
-        ."<span class=\"tiny\">"._USERAVGRATING.": $useravgrating</span>"
-        ."</td>"
-        ."<td valign=\"top\" colspan=\"2\">"
-        ."<span class=\"tiny\">"._NUMRATINGS.": $usertotalcomments</span>"
-        ."</td>"
-        ."</tr>"
+            ."</td>"
+            ."</tr>"
             ."<tr>"
-        ."<td colspan=\"3\">"
-        ."<span class=\"content\">";
-        if (is_mod_admin($module_name)) {
+            ."<td valign=\"top\">"
+            ."<span class=\"tiny\">"._USERAVGRATING.": $useravgrating</span>"
+            ."</td>"
+            ."<td valign=\"top\" colspan=\"2\">"
+            ."<span class=\"tiny\">"._NUMRATINGS.": $usertotalcomments</span>"
+            ."</td>"
+            ."</tr>"
+            ."<tr>"
+            ."<td colspan=\"3\">"
+            ."<span class=\"content\">";
+    
+	    if (is_mod_admin($module_name)) 
         echo "<a href=\"".$admin_file.".php?op=LinksModLink&amp;lid=$lid\"><img src=\"modules/$module_name/images/editicon.gif\" border=\"0\" alt=\""._EDITTHISLINK."\"></a>";
-        }
+        
     echo " $ratingcomments</span>"
         ."<br /><br /><br /></td></tr>";
-    $x++;
-    }
-    echo "</table><br /><br /><center>";
-    linkfooter($lid,$ttitle);
-    echo "</center>";
+    
+	$x++;
+    
+	endwhile;
+	
+    echo "</table><br /><br /><div align=\"center\">";
+    
+	linkfooter($lid,$ttitle);
+    
+	echo "</div></div>";
+
+    # stop using <br /> use a div tags with padding whenever it's poosible!
+    print '<div align="center" style="padding-top:11px;">'."\n";
+    print '</div>'."\n";
+
     CloseTable();
     include_once(NUKE_BASE_DIR.'footer.php');
 }
 
-function viewlinkdetails($lid, $ttitle) {
+function viewlinkdetails($lid, $ttitle) 
+{
     global $prefix, $db, $admin, $bgcolor1, $bgcolor2, $bgcolor3, $bgcolor4, $module_name, $anonymous;
+
     include_once(NUKE_BASE_DIR.'header.php');
     include(NUKE_MODULES_DIR.$module_name.'/l_config.php');
+
     menu(1);
+
     $lid = intval($lid);
     $voteresult = $db->sql_query("SELECT rating, ratinguser, ratingcomments FROM ".$prefix."_links_votedata WHERE ratinglid = '$lid'");
     $totalvotesDB = $db->sql_numrows($voteresult);
@@ -1690,128 +1753,164 @@ function viewlinkdetails($lid, $ttitle) {
     $rvv = array(0,0,0,0,0,0,0,0,0,0,0);
     $ovv = array(0,0,0,0,0,0,0,0,0,0,0);
     $truecomments = $totalvotesDB;
-    while($row = $db->sql_fetchrow($voteresult)) {
+
+    while($row = $db->sql_fetchrow($voteresult)): 
+	
      $ratingDB = intval($row['rating']);
      $ratinguserDB = $row['ratinguser'];
      $ratingcommentsDB = $row['ratingcomments'];
-     if ($ratingcommentsDB=="") $truecomments--;
-        if ($ratinguserDB==$anonymous) {
-        $anonvotes++;
-        $anonvoteval += $ratingDB;
-    }
-    if ($useoutsidevoting == 1) {
-        if ($ratinguserDB=='outside') {
+     
+	 if ($ratingcommentsDB=="") 
+	 $truecomments--;
+     
+	 if ($ratinguserDB==$anonymous): 
+     $anonvotes++;
+     $anonvoteval += $ratingDB;
+     endif;
+    
+	 if ($useoutsidevoting == 1): 
+        if ($ratinguserDB=='outside'): 
         $outsidevotes++;
-            $outsidevoteval += $ratingDB;
-        }
-    } else {
+        $outsidevoteval += $ratingDB;
+        endif;
+	else: 
         $outsidevotes = 0;
-    }
-    if ($ratinguserDB!=$anonymous && $ratinguserDB!="outside") {
-        $regvoteval += $ratingDB;
-    }
-    if ($ratinguserDB!=$anonymous && $ratinguserDB!="outside") {
-        if ($ratingDB > $topreg) $topreg = $ratingDB;
-        if ($ratingDB < $bottomreg) $bottomreg = $ratingDB;
-        for ($rcounter=1; $rcounter<11; $rcounter++) if ($ratingDB==$rcounter) $rvv[$rcounter]++;
-    }
-    if ($ratinguserDB==$anonymous) {
-        if ($ratingDB > $topanon) $topanon = $ratingDB;
-        if ($ratingDB < $bottomanon) $bottomanon = $ratingDB;
-        for ($rcounter=1; $rcounter<11; $rcounter++) if ($ratingDB==$rcounter) $avv[$rcounter]++;
-    }
-    if ($ratinguserDB=="outside") {
-        if ($ratingDB > $topoutside) $topoutside = $ratingDB;
-        if ($ratingDB < $bottomoutside) $bottomoutside = $ratingDB;
-        for ($rcounter=1; $rcounter<11; $rcounter++) if ($ratingDB==$rcounter) $ovv[$rcounter]++;
-    }
-    }
-    $regvotes = $totalvotesDB - $anonvotes - $outsidevotes;
-    if ($totalvotesDB == 0) {
+    endif;    
+    
+	if($ratinguserDB!=$anonymous && $ratinguserDB!="outside") 
+    $regvoteval += $ratingDB;
+    
+	if($ratinguserDB!=$anonymous && $ratinguserDB!="outside"): 
+        if ($ratingDB > $topreg) 
+		$topreg = $ratingDB;
+        if ($ratingDB < $bottomreg) 
+		$bottomreg = $ratingDB;
+        for ($rcounter=1; $rcounter<11; $rcounter++): 
+		if ($ratingDB==$rcounter) 
+		$rvv[$rcounter]++;
+		endfor;
+    endif;
+    
+	if($ratinguserDB==$anonymous): 
+        if ($ratingDB > $topanon) 
+		$topanon = $ratingDB;
+        if ($ratingDB < $bottomanon) 
+		$bottomanon = $ratingDB;
+        for ($rcounter=1; $rcounter<11; $rcounter++): 
+		if ($ratingDB==$rcounter) 
+		$avv[$rcounter]++;
+		endfor;
+    endif;
+    
+	if ($ratinguserDB=="outside"): 
+        if ($ratingDB > $topoutside) 
+		$topoutside = $ratingDB;
+        if ($ratingDB < $bottomoutside) 
+		$bottomoutside = $ratingDB;
+        for ($rcounter=1; $rcounter<11; $rcounter++): 
+		if ($ratingDB==$rcounter) 
+		$ovv[$rcounter]++;
+		endfor;
+    endif;
+	
+    endwhile;
+    
+	$regvotes = $totalvotesDB - $anonvotes - $outsidevotes;
+    
+    if($totalvotesDB == 0): 
     $finalrating = 0;
-    } else if ($anonvotes == 0 && $regvotes == 0) {
+	elseif($anonvotes == 0 && $regvotes == 0): 
     /* Figure Outside Only Vote */
     $finalrating = $outsidevoteval / $outsidevotes;
     $finalrating = number_format($finalrating, $detailvotedecimal);
     $avgOU = $outsidevoteval / $totalvotesDB;
     $avgOU = number_format($avgOU, $detailvotedecimal);
-    } else if ($outsidevotes == 0 && $regvotes == 0) {
+	elseif($outsidevotes == 0 && $regvotes == 0): 
      /* Figure Anon Only Vote */
     $finalrating = $anonvoteval / $anonvotes;
     $finalrating = number_format($finalrating, $detailvotedecimal);
     $avgAU = $anonvoteval / $totalvotesDB;
     $avgAU = number_format($avgAU, $detailvotedecimal);
-    } else if ($outsidevotes == 0 && $anonvotes == 0) {
+	elseif($outsidevotes == 0 && $anonvotes == 0): 
     /* Figure Reg Only Vote */
     $finalrating = $regvoteval / $regvotes;
     $finalrating = number_format($finalrating, $detailvotedecimal);
     $avgRU = $regvoteval / $totalvotesDB;
     $avgRU = number_format($avgRU, $detailvotedecimal);
-    } else if ($regvotes == 0 && $useoutsidevoting == 1 && $outsidevotes != 0 && $anonvotes != 0 ) {
+	elseif ($regvotes == 0 && $useoutsidevoting == 1 && $outsidevotes != 0 && $anonvotes != 0 ): 
      /* Figure Reg and Anon Mix */
-     $avgAU = $anonvoteval / $anonvotes;
+    $avgAU = $anonvoteval / $anonvotes;
     $avgOU = $outsidevoteval / $outsidevotes;
-    if ($anonweight > $outsideweight ) {
-        /* Anon is 'standard weight' */
-        $newimpact = $anonweight / $outsideweight;
-        $impactAU = $anonvotes;
-        $impactOU = $outsidevotes / $newimpact;
-        $finalrating = ((($avgOU * $impactOU) + ($avgAU * $impactAU)) / ($impactAU + $impactOU));
-        $finalrating = number_format($finalrating, $detailvotedecimal);
-    } else {
-        /* Outside is 'standard weight' */
-        $newimpact = $outsideweight / $anonweight;
-        $impactOU = $outsidevotes;
-        $impactAU = $anonvotes / $newimpact;
-        $finalrating = ((($avgOU * $impactOU) + ($avgAU * $impactAU)) / ($impactAU + $impactOU));
-        $finalrating = number_format($finalrating, $detailvotedecimal);
-    }
-    } else {
+	   if ($anonweight > $outsideweight ): 
+           /* Anon is 'standard weight' */
+           $newimpact = $anonweight / $outsideweight;
+           $impactAU = $anonvotes;
+           $impactOU = $outsidevotes / $newimpact;
+           $finalrating = ((($avgOU * $impactOU) + ($avgAU * $impactAU)) / ($impactAU + $impactOU));
+           $finalrating = number_format($finalrating, $detailvotedecimal);
+	   else: 
+           /* Outside is 'standard weight' */
+           $newimpact = $outsideweight / $anonweight;
+           $impactOU = $outsidevotes;
+           $impactAU = $anonvotes / $newimpact;
+           $finalrating = ((($avgOU * $impactOU) + ($avgAU * $impactAU)) / ($impactAU + $impactOU));
+           $finalrating = number_format($finalrating, $detailvotedecimal);
+       endif;
+    else: 
          /* REG User vs. Anonymous vs. Outside User Weight Calutions */
          $impact = $anonweight;
          $outsideimpact = $outsideweight;
-         if ($regvotes == 0) {
-        $avgRU = 0;
-    } else {
-        $avgRU = $regvoteval / $regvotes;
-    }
-    if ($anonvotes == 0) {
-        $avgAU = 0;
-    } else {
-        $avgAU = $anonvoteval / $anonvotes;
-    }
-    if ($outsidevotes == 0 ) {
-        $avgOU = 0;
-    } else {
-        $avgOU = $outsidevoteval / $outsidevotes;
-    }
-    $impactRU = $regvotes;
-    $impactAU = $anonvotes / $impact;
-    $impactOU = $outsidevotes / $outsideimpact;
-    $finalrating = (($avgRU * $impactRU) + ($avgAU * $impactAU) + ($avgOU * $impactOU)) / ($impactRU + $impactAU + $impactOU);
-    $finalrating = number_format($finalrating, $detailvotedecimal);
-    }
-    if (!isset($avgOU) || $avgOU == 0 || empty($avgOU)) {
+
+         if ($regvotes == 0) 
+         $avgRU = 0;
+         else 
+         $avgRU = $regvoteval / $regvotes;
+         
+         if ($anonvotes == 0) 
+         $avgAU = 0;
+		 else 
+         $avgAU = $anonvoteval / $anonvotes;
+         
+         if ($outsidevotes == 0 ) 
+         $avgOU = 0;
+		 else 
+         $avgOU = $outsidevoteval / $outsidevotes;
+         
+         $impactRU = $regvotes;
+         $impactAU = $anonvotes / $impact;
+         $impactOU = $outsidevotes / $outsideimpact;
+         $finalrating = (($avgRU * $impactRU) + ($avgAU * $impactAU) + ($avgOU * $impactOU)) / ($impactRU + $impactAU + $impactOU);
+         $finalrating = number_format($finalrating, $detailvotedecimal);
+endif;
+
+    if (!isset($avgOU) || $avgOU == 0 || empty($avgOU)) 
     $avgOU = "";
-    } else {
+	else 
     $avgOU = number_format($avgOU, $detailvotedecimal);
-    }
-    if (!isset($avgRU) || $avgRU == 0 || empty($avgRU)) {
+
+    if (!isset($avgRU) || $avgRU == 0 || empty($avgRU)) 
     $avgRU = "";
-    } else {
+	else 
     $avgRU = number_format($avgRU, $detailvotedecimal);
-    }
-    if (!isset($avgAU) || $avgAU == 0 || empty($avgAU)) {
+
+    if (!isset($avgAU) || $avgAU == 0 || empty($avgAU)) 
     $avgAU = "";
-    } else {
+	else 
     $avgAU = number_format($avgAU, $detailvotedecimal);
-    }
-    if ($topanon == 0) $topanon = "";
-    if ($bottomanon == 11) $bottomanon = "";
-    if ($topreg == 0) $topreg = "";
-    if ($bottomreg == 11) $bottomreg = "";
-    if ($topoutside == 0) $topoutside = "";
-    if ($bottomoutside == 11) $bottomoutside = "";
+
+    if ($topanon == 0) 
+	$topanon = "";
+    if ($bottomanon == 11) 
+	$bottomanon = "";
+    if ($topreg == 0) 
+	$topreg = "";
+    if ($bottomreg == 11) 
+	$bottomreg = "";
+    if ($topoutside == 0) 
+	$topoutside = "";
+    if ($bottomoutside == 11) 
+	$bottomoutside = "";
+
     $totalchartheight = 70;
     $chartunits = $totalchartheight / 10;
     $avvper        = array(0,0,0,0,0,0,0,0,0,0,0);
@@ -1826,97 +1925,123 @@ function viewlinkdetails($lid, $ttitle) {
     $avvmultiplier = 0;
     $rvvmultiplier = 0;
     $ovvmultiplier = 0;
-    for ($rcounter=1; $rcounter<11; $rcounter++) {
-        if ($anonvotes != 0) $avvper[$rcounter] = $avv[$rcounter] / $anonvotes;
-        if ($regvotes != 0) $rvvper[$rcounter] = $rvv[$rcounter] / $regvotes;
-        if ($outsidevotes != 0) $ovvper[$rcounter] = $ovv[$rcounter] / $outsidevotes;
-        $avvpercent[$rcounter] = number_format($avvper[$rcounter] * 100, 1);
+    
+	for ($rcounter=1; $rcounter<11; $rcounter++): 
+        if ($anonvotes != 0) 
+		$avvper[$rcounter] = $avv[$rcounter] / $anonvotes;
+		if ($regvotes != 0) 
+		$rvvper[$rcounter] = $rvv[$rcounter] / $regvotes;
+		if ($outsidevotes != 0) 
+		$ovvper[$rcounter] = $ovv[$rcounter] / $outsidevotes;
+		$avvpercent[$rcounter] = number_format($avvper[$rcounter] * 100, 1);
         $rvvpercent[$rcounter] = number_format($rvvper[$rcounter] * 100, 1);
         $ovvpercent[$rcounter] = number_format($ovvper[$rcounter] * 100, 1);
-        if ($avv[$rcounter] > $avvmultiplier) $avvmultiplier = $avv[$rcounter];
-        if ($rvv[$rcounter] > $rvvmultiplier) $rvvmultiplier = $rvv[$rcounter];
-        if ($ovv[$rcounter] > $ovvmultiplier) $ovvmultiplier = $ovv[$rcounter];
-    }
-    if ($avvmultiplier != 0) $avvmultiplier = 10 / $avvmultiplier;
-    if ($rvvmultiplier != 0) $rvvmultiplier = 10 / $rvvmultiplier;
-    if ($ovvmultiplier != 0) $ovvmultiplier = 10 / $ovvmultiplier;
-    for ($rcounter=1; $rcounter<11; $rcounter++) {
+		if ($avv[$rcounter] > $avvmultiplier) 
+		$avvmultiplier = $avv[$rcounter];
+		if ($rvv[$rcounter] > $rvvmultiplier) 
+		$rvvmultiplier = $rvv[$rcounter];
+		if ($ovv[$rcounter] > $ovvmultiplier) 
+		$ovvmultiplier = $ovv[$rcounter];
+    endfor;
+    
+	if ($avvmultiplier != 0) 
+	$avvmultiplier = 10 / $avvmultiplier;
+	if ($rvvmultiplier != 0) 
+	$rvvmultiplier = 10 / $rvvmultiplier;
+	if ($ovvmultiplier != 0) 
+	$ovvmultiplier = 10 / $ovvmultiplier;
+    
+	for ($rcounter=1; $rcounter<11; $rcounter++): 
         $avvchartheight[$rcounter] = ($avv[$rcounter] * $avvmultiplier) * $chartunits;
         $rvvchartheight[$rcounter] = ($rvv[$rcounter] * $rvvmultiplier) * $chartunits;
         $ovvchartheight[$rcounter] = ($ovv[$rcounter] * $ovvmultiplier) * $chartunits;
-        if ($avvchartheight[$rcounter]==0) $avvchartheight[$rcounter]=1;
-        if ($rvvchartheight[$rcounter]==0) $rvvchartheight[$rcounter]=1;
-        if ($ovvchartheight[$rcounter]==0) $ovvchartheight[$rcounter]=1;
-    }
+        if ($avvchartheight[$rcounter]==0) 
+		$avvchartheight[$rcounter]=1;
+        if ($rvvchartheight[$rcounter]==0) 
+		$rvvchartheight[$rcounter]=1;
+        if ($ovvchartheight[$rcounter]==0) 
+		$ovvchartheight[$rcounter]=1;
+    endfor;
+
     $ttitle = htmlentities($ttitle);
     $transfertitle = str_replace ("_", " ", $ttitle);
     $displaytitle = $transfertitle;
-    //echo "<br />";
+
     OpenTable();
-    echo "<center><span class=\"option\"><strong>"._LINKPROFILE.": ".htmlentities($displaytitle)."</strong></span><br /><br />";
+
+    # stop using <br /> use a div tags with padding whenever it's poosible!
+    print '<div align="center" style="padding-top:11px;">'."\n";
+    print '</div>'."\n";
+
+    echo "<div align=\"center\"><span class=\"option\"><strong><h1>"._LINKPROFILE.": ".htmlentities($displaytitle)."</h1></strong></span><br /><br />";
+
     linkinfomenu($lid, $ttitle);
+
     echo "<br /><br />"._LINKRATINGDET."<br />"
         .""._TOTALVOTES." $totalvotesDB<br />"
         .""._OVERALLRATING.": $finalrating</center><br /><br />"
-    ."<table align=\"center\" border=\"0\" cellspacing=\"0\" cellpadding=\"2\" width=\"455\">"
-    ."<tr><td colspan=\"2\" bgcolor=\"$bgcolor2\">"
-    ."<span class=\"content\"><strong>"._REGISTEREDUSERS."</strong></span>"
-    ."</td></tr>"
-    ."<tr>"
-    ."<td bgcolor=\"$bgcolor1\">"
-        ."<span class=\"content\">"._NUMBEROFRATINGS.": $regvotes</span>"
-    ."</td>"
-    ."<td rowspan=\"5\" width=\"200\">";
-    if ($regvotes==0) {
-    echo "<center><span class=\"content\">"._NOREGUSERSVOTES."</span></center>";
-    } else {
-           echo "<table border=\"1\" width=\"200\">"
-            ."<tr>"
-        ."<td valign=\"top\" align=\"center\" colspan=\"10\" bgcolor=\"$bgcolor2\"><span class=\"content\">"._BREAKDOWNBYVAL."</span></td>"
-        ."</tr>"
+        ."<table align=\"center\" border=\"0\" cellspacing=\"0\" cellpadding=\"2\" width=\"455\">"
+        ."<tr><td colspan=\"2\" bgcolor=\"$bgcolor2\">"
+        ."<span class=\"content\"><strong>"._REGISTEREDUSERS."</strong></span>"
+        ."</td></tr>"
         ."<tr>"
-        ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[1] "._LVOTES." ($rvvpercent[1]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[1]\"></td>"
-        ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[2] "._LVOTES." ($rvvpercent[2]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[2]\"></td>"
-        ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[3] "._LVOTES." ($rvvpercent[3]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[3]\"></td>"
-        ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[4] "._LVOTES." ($rvvpercent[4]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[4]\"></td>"
-        ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[5] "._LVOTES." ($rvvpercent[5]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[5]\"></td>"
-        ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[6] "._LVOTES." ($rvvpercent[6]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[6]\"></td>"
-        ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[7] "._LVOTES." ($rvvpercent[7]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[7]\"></td>"
-        ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[8] "._LVOTES." ($rvvpercent[8]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[8]\"></td>"
-        ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[9] "._LVOTES." ($rvvpercent[9]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[9]\"></td>"
-        ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[10] "._LVOTES." ($rvvpercent[10]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[10]\"></td>"
-        ."</tr>"
-        ."<tr><td colspan=\"10\" bgcolor=\"$bgcolor2\">"
-        ."<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"200\"><tr>"
-        ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">1</span></td>"
-        ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">2</span></td>"
-        ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">3</span></td>"
-        ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">4</span></td>"
-        ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">5</span></td>"
-        ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">6</span></td>"
-        ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">7</span></td>"
-        ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">8</span></td>"
-        ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">9</span></td>"
-        ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">10</span></td>"
-        ."</tr></table>"
-        ."</td></tr></table>";
-    }
-    echo "</td>"
-    ."</tr>"
-    ."<tr><td bgcolor=\"$bgcolor2\"><span class=\"content\">"._LINKRATING.": $avgRU</span></td></tr>"
-    ."<tr><td bgcolor=\"$bgcolor1\"><span class=\"content\">"._HIGHRATING.": $topreg</span></td></tr>"
-    ."<tr><td bgcolor=\"$bgcolor2\"><span class=\"content\">"._LOWRATING.": $bottomreg</span></td></tr>"
-    ."<tr><td bgcolor=\"$bgcolor1\"><span class=\"content\">"._NUMOFCOMMENTS.": $truecomments</span></td></tr>"
-    ."<tr><td></td></tr>"
-    ."<tr><td valign=\"top\" colspan=\"2\"><span class=\"tiny\"><br /><br />"._WEIGHNOTE." $anonweight "._TO." 1.</span></td></tr>"
-        ."<tr><td colspan=\"2\" bgcolor=\"$bgcolor2\"><span class=\"content\"><strong>"._UNREGISTEREDUSERS."</strong></span></td></tr>"
-    ."<tr><td bgcolor=\"$bgcolor1\"><span class=\"content\">"._NUMBEROFRATINGS.": $anonvotes</span></td>"
-    ."<td rowspan=\"5\" width=\"200\">";
-    if ($anonvotes==0) {
+        ."<td bgcolor=\"$bgcolor1\">"
+        ."<span class=\"content\">"._NUMBEROFRATINGS.": $regvotes</span>"
+        ."</td>"
+        ."<td rowspan=\"5\" width=\"200\">";
+    
+	if ($regvotes==0): 
+    echo "<div align=\"center\"><span class=\"content\">"._NOREGUSERSVOTES."</span></div>";
+	else: 
+      echo "<table border=\"1\" width=\"200\">"
+      ."<tr>"
+      ."<td valign=\"top\" align=\"center\" colspan=\"10\" bgcolor=\"$bgcolor2\"><span class=\"content\">"._BREAKDOWNBYVAL."</span></td>"
+      ."</tr>"
+      ."<tr>"
+      ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[1] "._LVOTES." ($rvvpercent[1]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[1]\"></td>"
+      ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[2] "._LVOTES." ($rvvpercent[2]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[2]\"></td>"
+      ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[3] "._LVOTES." ($rvvpercent[3]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[3]\"></td>"
+      ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[4] "._LVOTES." ($rvvpercent[4]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[4]\"></td>"
+      ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[5] "._LVOTES." ($rvvpercent[5]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[5]\"></td>"
+      ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[6] "._LVOTES." ($rvvpercent[6]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[6]\"></td>"
+      ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[7] "._LVOTES." ($rvvpercent[7]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[7]\"></td>"
+      ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[8] "._LVOTES." ($rvvpercent[8]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[8]\"></td>"
+      ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[9] "._LVOTES." ($rvvpercent[9]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[9]\"></td>"
+      ."<td bgcolor=\"$bgcolor1\" valign=\"bottom\"><img border=\"0\" alt=\"$rvv[10] "._LVOTES." ($rvvpercent[10]% "._LTOTALVOTES.")\" src=\"images/blackpixel.gif\" width=\"15\" height=\"$rvvchartheight[10]\"></td>"
+      ."</tr>"
+      ."<tr><td colspan=\"10\" bgcolor=\"$bgcolor2\">"
+      ."<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"200\"><tr>"
+      ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">1</span></td>"
+      ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">2</span></td>"
+      ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">3</span></td>"
+      ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">4</span></td>"
+      ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">5</span></td>"
+      ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">6</span></td>"
+      ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">7</span></td>"
+      ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">8</span></td>"
+      ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">9</span></td>"
+      ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">10</span></td>"
+      ."</tr></table>"
+      ."</td></tr></table>";
+    endif;
+    
+	echo "</td>"
+      ."</tr>"
+      ."<tr><td bgcolor=\"$bgcolor2\"><span class=\"content\">"._LINKRATING.": $avgRU</span></td></tr>"
+      ."<tr><td bgcolor=\"$bgcolor1\"><span class=\"content\">"._HIGHRATING.": $topreg</span></td></tr>"
+      ."<tr><td bgcolor=\"$bgcolor2\"><span class=\"content\">"._LOWRATING.": $bottomreg</span></td></tr>"
+      ."<tr><td bgcolor=\"$bgcolor1\"><span class=\"content\">"._NUMOFCOMMENTS.": $truecomments</span></td></tr>"
+      ."<tr><td></td></tr>"
+      ."<tr><td valign=\"top\" colspan=\"2\"><span class=\"tiny\"><br /><br />"._WEIGHNOTE." $anonweight "._TO." 1.</span></td></tr>"
+      ."<tr><td colspan=\"2\" bgcolor=\"$bgcolor2\"><span class=\"content\"><strong>"._UNREGISTEREDUSERS."</strong></span></td></tr>"
+      ."<tr><td bgcolor=\"$bgcolor1\"><span class=\"content\">"._NUMBEROFRATINGS.": $anonvotes</span></td>"
+      ."<td rowspan=\"5\" width=\"200\">";
+    
+	if ($anonvotes==0): 
     echo "<center><span class=\"content\">"._NOUNREGUSERSVOTES."</span></center>";
-    } else {
+	else: 
         echo "<table border=\"1\" width=\"200\">"
-            ."<tr>"
+        ."<tr>"
         ."<td valign=\"top\" align=\"center\" colspan=\"10\" bgcolor=\"$bgcolor2\"><span class=\"content\">"._BREAKDOWNBYVAL."</span></td>"
         ."</tr>"
         ."<tr>"
@@ -1945,23 +2070,27 @@ function viewlinkdetails($lid, $ttitle) {
         ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">10</span></td>"
         ."</tr></table>"
         ."</td></tr></table>";
-    }
-    echo "</td>"
-    ."</tr>"
-    ."<tr><td bgcolor=\"$bgcolor2\"><span class=\"content\">"._LINKRATING.": $avgAU</span></td></tr>"
-    ."<tr><td bgcolor=\"$bgcolor1\"><span class=\"content\">"._HIGHRATING.": $topanon</span></td></tr>"
-    ."<tr><td bgcolor=\"$bgcolor2\"><span class=\"content\">"._LOWRATING.": $bottomanon</span></td></tr>"
-    ."<tr><td bgcolor=\"$bgcolor1\"><span class=\"content\">&nbsp;</span></td></tr>";
-    if ($useoutsidevoting == 1) {
+    endif;
+    
+	echo "</td>"
+        ."</tr>"
+        ."<tr><td bgcolor=\"$bgcolor2\"><span class=\"content\">"._LINKRATING.": $avgAU</span></td></tr>"
+        ."<tr><td bgcolor=\"$bgcolor1\"><span class=\"content\">"._HIGHRATING.": $topanon</span></td></tr>"
+        ."<tr><td bgcolor=\"$bgcolor2\"><span class=\"content\">"._LOWRATING.": $bottomanon</span></td></tr>"
+        ."<tr><td bgcolor=\"$bgcolor1\"><span class=\"content\">&nbsp;</span></td></tr>";
+    
+	if ($useoutsidevoting == 1): 
+	
     echo "<tr><td valign=top colspan=\"2\"><span class=\"tiny\"><br /><br />"._WEIGHOUTNOTE." $outsideweight "._TO." 1.</span></td></tr>"
         ."<tr><td colspan=\"2\" bgcolor=\"$bgcolor2\"><span class=\"content\"><strong>"._OUTSIDEVOTERS."</strong></span></td></tr>"
         ."<tr><td bgcolor=\"$bgcolor1\"><span class=\"content\">"._NUMBEROFRATINGS.": $outsidevotes</span></td>"
         ."<td rowspan=\"5\" width=\"200\">";
-        if ($outsidevotes==0) {
+    
+	    if ($outsidevotes==0): 
         echo "<center><span class=\"content\">"._NOOUTSIDEVOTES."</span></center>";
-    } else {
+	   else: 
         echo "<table border=\"1\" width=\"200\">"
-            ."<tr>"
+          ."<tr>"
           ."<td valign=\"top\" align=\"center\" colspan=\"10\" bgcolor=\"$bgcolor2\"><span class=\"content\">"._BREAKDOWNBYVAL."</span></td>"
           ."</tr>"
           ."<tr>"
@@ -1990,18 +2119,27 @@ function viewlinkdetails($lid, $ttitle) {
           ."<td width=\"10%\" valign=\"bottom\" align=\"center\"><span class=\"content\">10</span></td>"
           ."</tr></table>"
           ."</td></tr></table>";
-      }
-    echo "</td>"
+      endif;
+    
+	echo "</td>"
         ."</tr>"
         ."<tr><td bgcolor=\"$bgcolor2\"><span class=\"content\">"._LINKRATING.": $avgOU</span></td></tr>"
         ."<tr><td bgcolor=\"$bgcolor1\"><span class=\"content\">"._HIGHRATING.": $topoutside</span></td></tr>"
         ."<tr><td bgcolor=\"$bgcolor2\"><span class=\"content\">"._LOWRATING.": $bottomoutside</span></td></tr>"
         ."<tr><td bgcolor=\"$bgcolor1\"><span class=\"content\">&nbsp;</span></td></tr>";
-    }
-    echo "</table><br /><br /><center>";
-    linkfooter($lid,$ttitle);
-    echo "</center>";
-    CloseTable();
+    endif;
+    
+	echo "</table><br /><br /><div align=\"center\">";
+    
+	linkfooter($lid,$ttitle);
+    
+	echo "</div>";
+    
+    # stop using <br /> use a div tags with padding whenever it's poosible!
+    print '<div align="center" style="padding-top:11px;">'."\n";
+    print '</div>'."\n";
+	
+	CloseTable();
     include_once(NUKE_BASE_DIR.'footer.php');
 }
 
@@ -2014,59 +2152,66 @@ function linkfooter($lid,$ttitle)
     linkfooterchild($lid);
 }
 
-function linkfooterchild($lid) {
+function linkfooterchild($lid) 
+{
     global $module_name;
     include(NUKE_MODULES_DIR.$module_name.'/l_config.php');
-    if ($useoutsidevoting = 1) {
+    if ($useoutsidevoting = 1) 
     echo "<br /><span class=\"content\">"._ISTHISYOURSITE." <a href=\"modules.php?name=$module_name&amp;l_op=outsidelinksetup&amp;lid=$lid\">"._ALLOWTORATE."</a></span>";
-    }
 }
 
-function outsidelinksetup($lid) {
+function outsidelinksetup($lid) 
+{
     global $module_name, $sitename, $nukeurl;
     include_once(NUKE_BASE_DIR.'header.php');
     include(NUKE_MODULES_DIR.$module_name.'/l_config.php');
     menu(1);
-    //echo "<br />";
+
     OpenTable();
-    echo "<center><span class=\"option\"><strong>"._PROMOTEYOURSITE."</strong></span></center><br /><br />
 
-    "._PROMOTE01."<br /><br />
+    # stop using <br /> use a div tags with padding whenever it's poosible!
+    print '<div align="center" style="padding-top:11px;">'."\n";
+    print '</div>'."\n";
+    
+    echo '<div align="left"><span class="option"><strong><h1>'._PROMOTEYOURSITE.'</h1></strong></span></center><br />';
 
-    <strong>1) "._TEXTLINK."</strong><br /><br />
+    echo ''._PROMOTE01.'<br /><br />';
+	
+	echo '<hr><strong>1) '._TEXTLINK.'</strong><br /><br />';
 
-    "._PROMOTE02."<br /><br />
-    <center><a href=\"$nukeurl/modules.php?name=$module_name&amp;l_op=ratelink&amp;lid=$lid\">"._RATETHISSITE." @ $sitename</a></center><br /><br />
-    <center>"._HTMLCODE1."</center><br />
-    <center><i>&lt;a href=\"$nukeurl/modules.php?name=$module_name&amp;l_op=ratelink&amp;lid=$lid\"&gt;"._RATETHISSITE."&lt;/a&gt;</i></center>
-    <br /><br />
-    "._THENUMBER." \"$lid\" "._IDREFER."<br /><br />
+    echo ''._PROMOTE02.'<br /><br />';
+	
+	echo '<div align="center"><a href="'.$nukeurl.'/modules.php?name='.$module_name.'&amp;l_op=ratelink&amp;lid='.$lid.'">'._RATETHISSITE.' @ '.$sitename.'</a></div><br />';
 
-    <strong>2) "._BUTTONLINK."</strong><br /><br />
 
-    "._PROMOTE03."<br /><br />
+    echo '<div align="center">'._HTMLCODE1.'</div><br />';
 
-    <center>
-    <form action=\"modules.php?name=$module_name\" method=\"post\">\n
-    <input type=\"hidden\" name=\"lid\" value=\"$lid\">\n
-    <input type=\"hidden\" name=\"l_op\" value=\"ratelink\">\n
-    <input type=\"submit\" value=\""._RATEIT."\">\n
-    </form>\n
-    </center>
+    echo '<div align="center"><textarea rows="4" cols="50"><a href="'.$nukeurl.'/modules.php?name='.$module_name.'&amp;l_op=ratelink&amp;lid='.$lid.'">'._RATETHISSITE.' @ '.$sitename.'</a></textarea></div><br /><hr>';
 
-    <center>"._HTMLCODE2."</center><br /><br />
+    echo '<div align="center">
+    <form action="modules.php?name='.$module_name.'" method="post">
+    <input type="hidden" name="lid" value="'.$lid.'">
+    <input type="hidden" name="l_op" value="ratelink">
+    <input type="submit" value="'._RATEIT.'">
+    </form>
+    </div>';
+	
+	echo '<center>'._HTMLCODE2.'</center><br /><br />';
 
-    <table border=\"0\" align=\"center\"><tr><td align=\"left\"><i>
-    &lt;form action=\"$nukeurl/modules.php?name=$module_name\" method=\"post\"&gt;<br />\n
-    &nbsp;&nbsp;&lt;input type=\"hidden\" name=\"lid\" value=\"$lid\"&gt;<br />\n
-    &nbsp;&nbsp;&lt;input type=\"hidden\" name=\"l_op\" value=\"ratelink\"&gt;<br />\n
-    &nbsp;&nbsp;&lt;input type=\"submit\" value=\""._RATEIT."\"&gt;<br />\n
-    &lt;/form&gt;\n
-    </i></td></tr></table>
 
-    <br /><br />
+    echo '<div align="center"><textarea rows="6" cols="56">
+    <form action="modules.php?name='.$module_name.'" method="post">
+    <input type="hidden" name="lid" value="'.$lid.'">
+    <input type="hidden" name="l_op" value="ratelink">
+    <input type="submit" value="'._RATEIT.'">
+    </form>
+    </div>';
+	echo '</textarea></div>';
 
-    <strong>3) "._REMOTEFORM."</strong><br /><br />
+	
+	echo '<hr>';
+
+    echo "<strong>3) "._REMOTEFORM."</strong><br /><br /> 
 
     "._PROMOTE04."
 
@@ -2132,8 +2277,13 @@ function outsidelinksetup($lid) {
     <br /><br /><center>
     "._PROMOTE05."<br /><br />
     - $sitename "._STAFF."
-    <br /><br /></center>";
-    CloseTable();
+    </center>";
+
+    # stop using <br /> use a div tags with padding whenever it's poosible!
+    print '<div align="center" style="padding-top:11px;">'."\n";
+    print '</div>'."\n";
+	
+	CloseTable();
     include_once(NUKE_BASE_DIR.'footer.php');
 }
 
