@@ -529,10 +529,14 @@ function NewLinksDate($selectdate)
 
     OpenTable();
 
+    # stop using <br /> use a div tags with padding whenever it's poosible!
+	print '<div align="center" style="padding-top:6px;">'."\n";
+    print '</div>'."\n";
+
     $newlinkDB = Date("Y-m-d", $selectdate);
     $totallinks = $db->sql_numrows($db->sql_query("SELECT * FROM ".$prefix."_links_links WHERE date LIKE '%$newlinkDB%'"));
 
-    echo "<span class=\"option\"><strong>$dateView - $totallinks "._NEWLINKS."</strong></span>"
+    echo "<div align=\"center\"><span class=\"option\"><strong><h1>$dateView - $totallinks "._NEWLINKS."</h1></strong></span></div>"
     ."<table width=\"100%\" cellspacing=\"0\" cellpadding=\"10\" border=\"0\"><tr><td><span class=\"content\">";
 
     $result2 = $db->sql_query("SELECT lid, 
@@ -595,147 +599,201 @@ function NewLinksDate($selectdate)
       $ctitle = stripslashes(check_html($row3['title'], "nohtml"));
       $ctitle=weblinks_parent($cid,$ctitle);
       echo ""._CATEGORY.": $ctitle";
-      echo "<br /><br />";
+      # stop using <br /> use a div tags with padding whenever it's poosible!
+	  print '<div align="center" style="padding-top:6px;">'."\n";
+      print '</div>'."\n";
     endwhile;
 	
     echo "</span></td></tr></table>";
+
     CloseTable();
     include_once(NUKE_BASE_DIR.'footer.php');
 }
 
-function TopRated($ratenum, $ratetype) {
+function TopRated($ratenum, $ratetype) 
+{
     global $prefix, $db, $admin, $module_name, $user, $locale, $mainvotedecimal, $datetime;
-    include_once(NUKE_BASE_DIR.'header.php');
+    
+	include_once(NUKE_BASE_DIR.'header.php');
     include(NUKE_MODULES_DIR.$module_name.'/l_config.php');
-    menu(1);
-    //echo "<br />";
+	menu(1);
     OpenTable();
+	
+    # stop using <br /> use a div tags with padding whenever it's poosible!
+    print '<div align="center" style="padding-top:6px;">'."\n";
+    print '</div>'."\n";
+	
     echo "<table border=\"0\" width=\"100%\"><tr><td align=\"center\">";
-    if (!empty($ratenum) && !empty($ratetype)) {
+    if(!empty($ratenum) && !empty($ratetype)): 
     $ratenum = intval($ratenum);
     $ratetype = htmlentities($ratetype);
-        $toplinks = $ratenum;
-        if ($ratetype == "percent") {
-        $toplinkspercentrigger = 1;
-    }
-    }
-    if ($toplinkspercentrigger == 1) {
+    $toplinks = $ratenum;
+    if($ratetype == "percent") 
+    $toplinkspercentrigger = 1;
+    endif;
+    if($toplinkspercentrigger == 1):
         $toplinkspercent = $toplinks;
         $totalratedlinks = $db->sql_numrows($db->sql_query("SELECT * from ".$prefix."_links_links where linkratingsummary != '0'"));
         $toplinks = $toplinks / 100;
         $toplinks = $totalratedlinks * $toplinks;
         $toplinks = round($toplinks);
-    }
-    if ($toplinkspercentrigger == 1) {
-    echo "<center><span class=\"option\"><strong>"._BESTRATED." $toplinkspercent% ("._OF." $totalratedlinks "._TRATEDLINKS.")</strong></span></center><br />";
-    } else {
-    echo "<center><span class=\"option\"><strong>"._BESTRATED." ".htmlentities($toplinks)." </strong></span></center><br />";
-    }
+    endif;
+    
+	if($toplinkspercentrigger == 1) 
+    echo "<div align=\"center\"><span class=\"option\"><strong><h1>"._BESTRATED." $toplinkspercent% ("._OF." $totalratedlinks "._TRATEDLINKS.")</h1></strong></span></div><br />";
+    else 
+    echo "<div align=\"center\"><span class=\"option\"><strong><h1>"._BESTRATED." ".htmlentities($toplinks)." </h1></strong></span></div><br />";
+    
     echo "</td></tr>"
-    ."<tr><td><center>"._NOTE." $linkvotemin "._TVOTESREQ."<br />"
+    ."<tr><td><div align=\"center\">"._NOTE." $linkvotemin "._TVOTESREQ."<br />"
     .""._SHOWTOP.":  [ <a href=\"modules.php?name=$module_name&amp;l_op=TopRated&amp;ratenum=10&amp;ratetype=num\">10</a> - "
     ."<a href=\"modules.php?name=$module_name&amp;l_op=TopRated&amp;ratenum=25&amp;ratetype=num\">25</a> - "
         ."<a href=\"modules.php?name=$module_name&amp;l_op=TopRated&amp;ratenum=50&amp;ratetype=num\">50</a> | "
         ."<a href=\"modules.php?name=$module_name&amp;l_op=TopRated&amp;ratenum=1&amp;ratetype=percent\">1%</a> - "
         ."<a href=\"modules.php?name=$module_name&amp;l_op=TopRated&amp;ratenum=5&amp;ratetype=percent\">5%</a> - "
-        ."<a href=\"modules.php?name=$module_name&amp;l_op=TopRated&amp;ratenum=10&amp;ratetype=percent\">10%</a> ]</center><br /><br /></td></tr>";
-    $result = $db->sql_query("SELECT lid, cid, sid, title, description, date, hits, linkratingsummary, totalvotes, totalcomments from ".$prefix."_links_links where linkratingsummary != 0 and totalvotes >= $linkvotemin order by linkratingsummary DESC limit 0,$toplinks");
+        ."<a href=\"modules.php?name=$module_name&amp;l_op=TopRated&amp;ratenum=10&amp;ratetype=percent\">10%</a> ]</div><br /><br /></td></tr>";
+    
+	$result = $db->sql_query("SELECT lid, 
+	                                 cid, 
+									 sid, 
+								   title, 
+							 description, 
+							        date, 
+									hits, 
+					   linkratingsummary, 
+					          totalvotes, 
+						   totalcomments FROM ".$prefix."_links_links WHRE linkratingsummary != 0 AND totalvotes >= $linkvotemin ORDER by linkratingsummary DESC limit 0,$toplinks");
     echo "<tr><td>";
-    while ($row = $db->sql_fetchrow($result)) {
-    $lid = intval($row['lid']);
-    $cid = intval($row['cid']);
-    $sid = intval($row['sid']);
-    $title = stripslashes(check_html($row['title'], "nohtml"));
-    $description = stripslashes($row['description']);
-    $time = $row['date'];
-    $hits = intval($row['hits']);
-    $linkratingsummary = $row['linkratingsummary'];
-    $totalvotes = intval($row['totalvotes']);
-    $totalcomments = $row['totalcomments'];
-    $linkratingsummary = number_format($linkratingsummary, $mainvotedecimal);
-        echo "<a href=\"modules.php?name=$module_name&amp;l_op=visit&amp;lid=$lid\" target=\"new\">$title</a>";
-    newlinkgraphic($datetime, $time);
-    popgraphic($hits);
-    echo "<br />";
-    echo ""._DESCRIPTION.": $description<br />";
-    setlocale (LC_TIME, $locale);
-    preg_match ("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2}) ([0-9]{1,2})\:([0-9]{1,2})\:([0-9]{1,2})/", $time, $datetime);
-    $datetime = strftime(""._LINKSDATESTRING."", mktime($datetime[4],$datetime[5],$datetime[6],$datetime[2],$datetime[3],$datetime[1]));
-    $datetime = ucfirst($datetime);
-    echo ""._ADDEDON.": $datetime "._HITS.": $hits";
-    $transfertitle = str_replace (" ", "_", $title);
-    /* voting & comments stats */
-        if ($totalvotes == 1) {
-        $votestring = _VOTE;
-        } else {
-        $votestring = _VOTES;
-    }
-    if ($linkratingsummary!="0" || $linkratingsummary!="0.0") {
-        echo " "._RATING.": <strong> $linkratingsummary </strong> ($totalvotes $votestring)";
-    }
-    echo "<br /><a href=\"modules.php?name=$module_name&amp;l_op=ratelink&amp;lid=$lid&amp;ttitle=$transfertitle\">"._RATESITE."</a>";
-    if (is_user()) {
-        echo " | <a href=\"modules.php?name=$module_name&amp;l_op=brokenlink&amp;lid=$lid\">"._REPORTBROKEN."</a>";
-    }
-    if ($totalvotes != 0) {
-        echo " | <a href=\"modules.php?name=$module_name&amp;l_op=viewlinkdetails&amp;lid=$lid&amp;ttitle=$transfertitle\">"._DETAILS."</a>";
-    }
-    if ($totalcomments != 0) {
-        echo " | <a href=\"modules.php?name=$module_name&amp;l_op=viewlinkcomments&amp;lid=$lid&amp;ttitle=$transfertitle\">"._SCOMMENTS." ($totalcomments)</a>";
-    }
-    detecteditorial($lid, $transfertitle);
-    echo "<br />";
-    $row2 = $db->sql_fetchrow($db->sql_query("SELECT title from ".$prefix."_links_categories where cid='$cid'"));
-    $ctitle = $row2['title'];
-    $ctitle = weblinks_parent($cid,$ctitle);
-    echo ""._CATEGORY.": $ctitle";
-    echo "<br /><br />";
-    echo "<br /><br />";
-    }
+    
+	while($row = $db->sql_fetchrow($result)): 
+	
+      $lid = intval($row['lid']);
+      $cid = intval($row['cid']);
+      $sid = intval($row['sid']);
+      $title = stripslashes(check_html($row['title'], "nohtml"));
+      $description = stripslashes($row['description']);
+      $time = $row['date'];
+      $hits = intval($row['hits']);
+      $linkratingsummary = $row['linkratingsummary'];
+      $totalvotes = intval($row['totalvotes']);
+      $totalcomments = $row['totalcomments'];
+      $linkratingsummary = number_format($linkratingsummary, $mainvotedecimal);
+      echo "<a href=\"modules.php?name=$module_name&amp;l_op=visit&amp;lid=$lid\" target=\"new\">$title</a>";
+      newlinkgraphic($datetime, $time);
+      popgraphic($hits);
+      echo "<br />";
+      echo ""._DESCRIPTION.": $description<br />";
+      setlocale (LC_TIME, $locale);
+      preg_match ("/([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2}) ([0-9]{1,2})\:([0-9]{1,2})\:([0-9]{1,2})/", $time, $datetime);
+      $datetime = strftime(""._LINKSDATESTRING."", mktime($datetime[4],$datetime[5],$datetime[6],$datetime[2],$datetime[3],$datetime[1]));
+      $datetime = ucfirst($datetime);
+      echo ""._ADDEDON.": $datetime "._HITS.": $hits";
+      $transfertitle = str_replace (" ", "_", $title); 
+    
+	  /* voting & comments stats */
+      if($totalvotes == 1) 
+      $votestring = _VOTE;
+      else 
+      $votestring = _VOTES;
+    
+      if($linkratingsummary != "0" || $linkratingsummary != "0.0") 
+      echo " "._RATING.": <strong> $linkratingsummary </strong> ($totalvotes $votestring)";
+    
+      echo "<br /><a href=\"modules.php?name=$module_name&amp;l_op=ratelink&amp;lid=$lid&amp;ttitle=$transfertitle\">"._RATESITE."</a>";
+    
+	  if(is_user()) 
+      echo " | <a href=\"modules.php?name=$module_name&amp;l_op=brokenlink&amp;lid=$lid\">"._REPORTBROKEN."</a>";
+    
+      if($totalvotes != 0) 
+      echo " | <a href=\"modules.php?name=$module_name&amp;l_op=viewlinkdetails&amp;lid=$lid&amp;ttitle=$transfertitle\">"._DETAILS."</a>";
+    
+      if($totalcomments != 0) 
+      echo " | <a href=\"modules.php?name=$module_name&amp;l_op=viewlinkcomments&amp;lid=$lid&amp;ttitle=$transfertitle\">"._SCOMMENTS." ($totalcomments)</a>";
+    
+      detecteditorial($lid, $transfertitle);
+    
+	  echo "<br />";
+    
+	  $row2 = $db->sql_fetchrow($db->sql_query("SELECT title from ".$prefix."_links_categories where cid='$cid'"));
+      $ctitle = $row2['title'];
+      $ctitle = weblinks_parent($cid,$ctitle);
+    
+	echo ""._CATEGORY.": $ctitle";
+    # stop using <br /> use a div tags with padding whenever it's poosible!
+    print '<div align="center" style="padding-top:6px;">'."\n";
+    print '</div>'."\n";
+    
+	endwhile;
+
     echo "</span></td></tr></table>";
-    CloseTable();
+    
+	CloseTable();
     include_once(NUKE_BASE_DIR.'footer.php');
 }
 
-function MostPopular($ratenum, $ratetype) {
+function MostPopular($ratenum, $ratetype) 
+{
     global $prefix, $db, $admin, $module_name, $user, $admin_file, $locale, $mainvotedecimal, $datetime;
     include_once(NUKE_BASE_DIR.'header.php');
     include(NUKE_MODULES_DIR.$module_name.'/l_config.php');
     menu(1);
-    //echo "<br />";
+
     OpenTable();
+
+    # stop using <br /> use a div tags with padding whenever it's poosible!
+    print '<div align="center" style="padding-top:11px;">'."\n";
+    print '</div>'."\n";
+
     echo "<table border=\"0\" width=\"100%\"><tr><td align=\"center\">";
-    if (!empty($ratenum) && !empty($ratetype)) {
+    if (!empty($ratenum) && !empty($ratetype)):
     $ratenum = intval($ratenum);
     $ratetype = htmlentities($ratetype);
         $mostpoplinks = $ratenum;
         if ($ratetype == "percent") $mostpoplinkspercentrigger = 1;
-    }
-    if ($mostpoplinkspercentrigger == 1) {
+    endif;
+	
+    if ($mostpoplinkspercentrigger == 1):
         $toplinkspercent = $mostpoplinks;
         $result2 = $db->sql_query("SELECT * from ".$prefix."_links_links");
         $totalmostpoplinks = $db->sql_numrows($result2);
         $mostpoplinks = $mostpoplinks / 100;
         $mostpoplinks = $totalmostpoplinks * $mostpoplinks;
         $mostpoplinks = round($mostpoplinks);
-    }
-    if ($mostpoplinkspercentrigger == 1) {
-    echo "<center><span class=\"option\"><strong>"._MOSTPOPULAR." $toplinkspercent% ("._OFALL." $totalmostpoplinks "._LINKS.")</strong></span></center>";
-    } else {
-    echo "<center><span class=\"option\"><strong>"._MOSTPOPULAR." ".htmlentities($mostpoplinks)."</strong></span></center>";
-    }
-    echo "<tr><td><center>"._SHOWTOP.": [ <a href=\"modules.php?name=$module_name&amp;l_op=MostPopular&amp;ratenum=10&amp;ratetype=num\">10</a> - "
+    endif;
+    
+	if ($mostpoplinkspercentrigger == 1) 
+    echo "<center><span class=\"option\"><strong><h1>"._MOSTPOPULAR." $toplinkspercent% ("._OFALL." $totalmostpoplinks "._LINKS.")</h1></strong></span></center>";
+	else 
+    echo "<center><span class=\"option\"><strong><h1>"._MOSTPOPULAR." ".htmlentities($mostpoplinks)."</h1></strong></span></center>";
+    
+	echo "<tr><td><center>"._SHOWTOP.": [ <a href=\"modules.php?name=$module_name&amp;l_op=MostPopular&amp;ratenum=10&amp;ratetype=num\">10</a> - "
     ."<a href=\"modules.php?name=$module_name&amp;l_op=MostPopular&amp;ratenum=25&amp;ratetype=num\">25</a> - "
         ."<a href=\"modules.php?name=$module_name&amp;l_op=MostPopular&amp;ratenum=50&amp;ratetype=num\">50</a> | "
         ."<a href=\"modules.php?name=$module_name&amp;l_op=MostPopular&amp;ratenum=1&amp;ratetype=percent\">1%</a> - "
         ."<a href=\"modules.php?name=$module_name&amp;l_op=MostPopular&amp;ratenum=5&amp;ratetype=percent\">5%</a> - "
         ."<a href=\"modules.php?name=$module_name&amp;l_op=MostPopular&amp;ratenum=10&amp;ratetype=percent\">10%</a> ]</center><br /><br /></td></tr>";
-    if(!is_numeric($mostpoplinks)) {
+    
+	if(!is_numeric($mostpoplinks)) 
     $mostpoplinks=10;
-    }
-    $result3 = $db->sql_query("SELECT lid, cid, sid, title, description, date, hits, linkratingsummary, totalvotes, totalcomments from ".$prefix."_links_links order by hits DESC limit 0,$mostpoplinks");
+    
+	$result3 = $db->sql_query("SELECT lid, 
+	                                  cid, 
+									  sid, 
+									title, 
+							  description, 
+							         date, 
+									 hits, 
+						linkratingsummary, 
+						       totalvotes, 
+							totalcomments FROM ".$prefix."_links_links 
+							             ORDER by hits 
+										  DESC limit 0,$mostpoplinks");
     echo "<tr><td>";
-    while($row3 = $db->sql_fetchrow($result3)) {
+	
+    //print '<hr>'."\n";
+
+    while($row3 = $db->sql_fetchrow($result3)): 
+	
     $lid = intval($row3['lid']);
     $cid = intval($row3['cid']);
     $sid = intval($row3['sid']);
@@ -747,7 +805,7 @@ function MostPopular($ratenum, $ratetype) {
     $totalvotes = intval($row3['totalvotes']);
     $totalcomments = $row3['totalcomments'];
     $linkratingsummary = number_format($linkratingsummary, $mainvotedecimal);
-        echo "<span class=\"content\"><font size=\"4\"><i class=\"bi bi-link-45deg\"></i></font> <a href=\"modules.php?name=$module_name&amp;l_op=visit&amp;lid=$lid\" target=\"new\">$title</a>";
+    echo "<span class=\"content\"><font size=\"4\"><i class=\"bi bi-link-45deg\"></i></font> <a href=\"modules.php?name=$module_name&amp;l_op=visit&amp;lid=$lid\" target=\"new\">$title</a>";
     newlinkgraphic($datetime, $time);
     popgraphic($hits);
     echo "<br />";
@@ -758,38 +816,48 @@ function MostPopular($ratenum, $ratetype) {
     $datetime = ucfirst($datetime);
     echo "<i class=\"bi bi-calendar4\"></i> "._ADDEDON.": $datetime "._HITS.": <strong>$hits</strong>";
     $transfertitle = str_replace (" ", "_", $title);
-    /* voting & comments stats */
-        if ($totalvotes == 1) {
-        $votestring = _VOTE;
-        } else {
-        $votestring = _VOTES;
-    }
-    if ($linkratingsummary!="0" || $linkratingsummary!="0.0") {
-        echo " "._RATING.": $linkratingsummary ($totalvotes $votestring)";
-    }
+    
+	/* voting & comments stats */
+    if ($totalvotes == 1) 
+    $votestring = _VOTE;
+    else 
+    $votestring = _VOTES;
+    
+    if ($linkratingsummary!="0" || $linkratingsummary!="0.0") 
+    echo " "._RATING.": $linkratingsummary ($totalvotes $votestring)";
+    
     echo "<br />";
-    if (is_mod_admin($module_name)) {
-        echo "<a href=\"".$admin_file.".php?op=LinksModLink&amp;lid=$lid\">"._EDIT."</a> | ";
-    }
+    
+	if (is_mod_admin($module_name)) 
+    echo "<a href=\"".$admin_file.".php?op=LinksModLink&amp;lid=$lid\">"._EDIT."</a> | ";
+    
     echo "<a href=\"modules.php?name=$module_name&amp;l_op=ratelink&amp;lid=$lid&amp;ttitle=$transfertitle\">"._RATESITE."</a>";
-    if (is_user()) {
-        echo " | <a href=\"modules.php?name=$module_name&amp;l_op=brokenlink&amp;lid=$lid\">"._REPORTBROKEN."</a>";
-    }
-    if ($totalvotes != 0) {
-        echo " | <a href=\"modules.php?name=$module_name&amp;l_op=viewlinkdetails&amp;lid=$lid&amp;ttitle=$transfertitle\">"._DETAILS."</a>";
-    }
-    if ($totalcomments != 0) {
-        echo " | <a href=\"modules.php?name=$module_name&amp;l_op=viewlinkcomments&amp;lid=$lid&amp;ttitle=$transfertitle\">"._SCOMMENTS." ($totalcomments)</a>";
-    }
+    
+	if (is_user()) 
+    echo " | <a href=\"modules.php?name=$module_name&amp;l_op=brokenlink&amp;lid=$lid\">"._REPORTBROKEN."</a>";
+    
+    if ($totalvotes != 0) 
+    echo " | <a href=\"modules.php?name=$module_name&amp;l_op=viewlinkdetails&amp;lid=$lid&amp;ttitle=$transfertitle\">"._DETAILS."</a>";
+    
+    if ($totalcomments != 0) 
+    echo " | <a href=\"modules.php?name=$module_name&amp;l_op=viewlinkcomments&amp;lid=$lid&amp;ttitle=$transfertitle\">"._SCOMMENTS." ($totalcomments)</a>";
+    
     detecteditorial($lid, $transfertitle);
-    echo "<br />";
-    $row4 = $db->sql_fetchrow($db->sql_query("SELECT title from ".$prefix."_links_categories where cid='$cid'"));
+    
+	echo "<br />";
+    
+	$row4 = $db->sql_fetchrow($db->sql_query("SELECT title from ".$prefix."_links_categories where cid='$cid'"));
     $ctitle = stripslashes(check_html($row4['title'], "nohtml"));
     $ctitle=weblinks_parent($cid,$ctitle);
-    echo ""._CATEGORY.": $ctitle";
-    echo "<br /><br />";
-    echo "<br /><br /></span>";
-    }
+    
+	echo ""._CATEGORY.": $ctitle";
+
+    # stop using <br /> use a div tags with padding whenever it's poosible!
+    print '<div align="center" style="padding-top:13px;">'."\n";
+    print '</div>'."\n";
+
+    echo "</span>";
+    endwhile;
     echo "</span></td></tr></table>";
     CloseTable();
     include_once(NUKE_BASE_DIR.'footer.php');
