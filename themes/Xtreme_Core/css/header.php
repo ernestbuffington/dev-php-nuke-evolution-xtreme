@@ -348,6 +348,11 @@ a {
 	text-decoration: none;
 }
 
+a:active,
+a.bbcode-href:active { 
+	color: <?=$textcolor2?>;
+}
+
 a:hover,
 a.bbcode-href:hover { 
 	color: <?=$textcolor2?>;
