@@ -143,16 +143,16 @@ function linkinfomenu($lid, $ttitle)
 {
     global $module_name, $user;
     
-	echo "<span class=\"content\"><strong>[ "
-    ."<a href=\"modules.php?name=".$module_name."&amp;l_op=viewlinkcomments&amp;lid=".$lid."&amp;ttitle=".$ttitle."\">"._LINKCOMMENTS."</a>"
-    ." | <a href=\"modules.php?name=".$module_name."&amp;l_op=viewlinkdetails&amp;lid=".$lid."&amp;ttitle=".$ttitle."\">"._ADDITIONALDET."</a>"
-    ." | <a href=\"modules.php?name=".$module_name."&amp;l_op=viewlinkeditorial&amp;lid=".$lid."&amp;ttitle=".$ttitle."\">"._EDITORREVIEW."</a>"
-    ." | <a href=\"modules.php?name=".$module_name."&amp;l_op=modifylinkrequest&amp;lid=".$lid."\">"._MODIFY."</a>";
+	echo "<span class=\"content\"><strong>"
+    ."<i class=\"bi bi-person-square\"></i>&nbsp;<a href=\"modules.php?name=".$module_name."&amp;l_op=viewlinkcomments&amp;lid=".$lid."&amp;ttitle=".$ttitle."\">"._LINKCOMMENTS."</a>&nbsp;&nbsp;"
+    ."<i class=\"bi bi-info-square\"></i>&nbsp;<a href=\"modules.php?name=".$module_name."&amp;l_op=viewlinkdetails&amp;lid=".$lid."&amp;ttitle=".$ttitle."\">"._ADDITIONALDET."</a>&nbsp;&nbsp;"
+    ."<i class=\"bi bi-clipboard-data\"></i>&nbsp;<a href=\"modules.php?name=".$module_name."&amp;l_op=viewlinkeditorial&amp;lid=".$lid."&amp;ttitle=".$ttitle."\">"._EDITORREVIEW."</a>&nbsp;&nbsp;"
+    ."<i class=\"bi bi-pencil-square\"></i>&nbsp;<a href=\"modules.php?name=".$module_name."&amp;l_op=modifylinkrequest&amp;lid=".$lid."\">"._MODIFY."</a>&nbsp;&nbsp;";
     
 	if (is_user()):
-    echo " | <a href=\"modules.php?name=".$module_name."&amp;l_op=brokenlink&amp;lid=".$lid."\">"._REPORTBROKEN."</a>";
+    echo "<i class=\"bi bi-backspace-reverse\"></i>&nbsp;<a href=\"modules.php?name=".$module_name."&amp;l_op=brokenlink&amp;lid=".$lid."\">"._REPORTBROKEN."</a>&nbsp;&nbsp;";
     endif;
-    echo " ]</span></strong>";
+    echo " </span></strong>";
 }
 
 function index() 
@@ -1673,9 +1673,12 @@ function viewlinkdetails($lid, $ttitle) {
     include_once(NUKE_BASE_DIR.'footer.php');
 }
 
-function linkfooter($lid,$ttitle) {
+function linkfooter($lid,$ttitle) 
+{
     global $module_name;
+
     echo "<span class=\"content\"> <i class=\"bi bi-globe2\"></i> <a href=\"modules.php?name=$module_name&amp;l_op=visit&amp;lid=$lid\" target=\"_blank\">"._VISITTHISSITE."</a>&nbsp;&nbsp;<i class=\"bi bi-check-square\"></i> <a href=\"modules.php?name=$module_name&amp;l_op=ratelink&amp;lid=$lid&amp;ttitle=$ttitle\">"._RATETHISSITE."</a> </span><br /><br />";
+
     linkfooterchild($lid);
 }
 
