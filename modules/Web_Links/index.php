@@ -87,7 +87,7 @@ function menu($mainlink)
     
 	OpenTable();
     
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
 	print '<div align="center" style="padding-top:13px;">'."\n";
     print '</div>'."\n";
 
@@ -119,7 +119,7 @@ function menu($mainlink)
         ."</strong>"
 	    ."</span></div>";
 
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:6px;">'."\n";
     print '</div>'."\n";
 	CloseTable();
@@ -163,7 +163,7 @@ function index()
     
 	OpenTable();
    
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
 	print '<div align="center" style="padding-top:6px;">'."\n";
     print '</div>'."\n";
    
@@ -246,7 +246,7 @@ function index()
     
 	echo "<center><span class=\"content\">"._THEREARE." <strong>$numrows</strong> "._LINKS." "._AND." <strong>$catnum</strong> "._CATEGORIES." "._INDB."</span></center>";
 
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
 	print '<div align="center" style="padding-top:6px;">'."\n";
     print '</div>'."\n";
 
@@ -263,7 +263,7 @@ function AddLink()
 
     OpenTable();
 
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
 	print '<div align="center" style="padding-top:6px;">'."\n";
     print '</div>'."\n";
 
@@ -284,7 +284,7 @@ function AddLink()
 			."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;<i class=\"bi bi-hand-index\"></i> The website or portal link goes here.<br /><br />";
-	# stop using <br /> use a div tags with padding whenever it's poosible!
+	# stop using <br /> use a div tag with padding whenever it's possible!
 	print '<div align="center" style="padding-top:6px;">'."\n";
     print '</div>'."\n";
 			
@@ -452,7 +452,7 @@ function NewLinks($newlinkshowdays)
     menu(1);
     OpenTable();
 
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
 	print '<div align="center" style="padding-top:6px;">'."\n";
     print '</div>'."\n";
 
@@ -511,7 +511,7 @@ function NewLinks($newlinkshowdays)
     $allmonthlinks = 0;
     echo "</div>";
 
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
 	print '<div align="center" style="padding-top:6px;">'."\n";
     print '</div>'."\n";
 
@@ -529,7 +529,7 @@ function NewLinksDate($selectdate)
 
     OpenTable();
 
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
 	print '<div align="center" style="padding-top:6px;">'."\n";
     print '</div>'."\n";
 
@@ -599,7 +599,7 @@ function NewLinksDate($selectdate)
       $ctitle = stripslashes(check_html($row3['title'], "nohtml"));
       $ctitle=weblinks_parent($cid,$ctitle);
       echo ""._CATEGORY.": $ctitle";
-      # stop using <br /> use a div tags with padding whenever it's poosible!
+      # stop using <br /> use a div tag with padding whenever it's possible!
 	  print '<div align="center" style="padding-top:6px;">'."\n";
       print '</div>'."\n";
     endwhile;
@@ -619,7 +619,7 @@ function TopRated($ratenum, $ratetype)
 	menu(1);
     OpenTable();
 	
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:6px;">'."\n";
     print '</div>'."\n";
 	
@@ -719,7 +719,7 @@ function TopRated($ratenum, $ratetype)
       $ctitle = weblinks_parent($cid,$ctitle);
     
 	echo ""._CATEGORY.": $ctitle";
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:6px;">'."\n";
     print '</div>'."\n";
     
@@ -740,7 +740,7 @@ function MostPopular($ratenum, $ratetype)
 
     OpenTable();
 
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 
@@ -852,7 +852,7 @@ function MostPopular($ratenum, $ratetype)
     
 	echo ""._CATEGORY.": $ctitle";
 
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:13px;">'."\n";
     print '</div>'."\n";
 
@@ -915,7 +915,7 @@ function viewlink($cid, $min, $orderby, $show)
 
     OpenTable();
 
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 
@@ -1128,7 +1128,7 @@ function viewlink($cid, $min, $orderby, $show)
     echo "</td></tr></table>";
     echo '<hr>';
 
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 
@@ -1564,7 +1564,7 @@ function viewlinkeditorial($lid, $ttitle)
 
     OpenTable();
 	
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 
@@ -1600,7 +1600,7 @@ function viewlinkeditorial($lid, $ttitle)
     linkfooter($lid,$ttitle);
     echo "</div>";
     
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 
@@ -1644,7 +1644,7 @@ function viewlinkcomments($lid, $ttitle)
 	
     OpenTable();
     
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 	
@@ -1718,7 +1718,7 @@ function viewlinkcomments($lid, $ttitle)
     
 	echo "</div></div>";
 
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 
@@ -1969,7 +1969,7 @@ endif;
 
     OpenTable();
 
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 
@@ -2135,7 +2135,7 @@ endif;
     
 	echo "</div>";
     
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 	
@@ -2169,7 +2169,7 @@ function outsidelinksetup($lid)
 
     OpenTable();
 
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
     
@@ -2276,7 +2276,7 @@ function outsidelinksetup($lid)
     
 	echo '<hr>';
    
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 	
@@ -2302,7 +2302,7 @@ function brokenlink($lid)
 
     OpenTable();
 
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 
@@ -2317,7 +2317,7 @@ function brokenlink($lid)
     echo ""._THANKSBROKEN."<br /><br />";
     echo "<input type=\"hidden\" name=\"l_op\" value=\"brokenlinkS\"><input type=\"submit\" value=\""._REPORTBROKEN."\"></div></form>";
 
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 
@@ -2362,13 +2362,13 @@ function brokenlinkS($lid,$cid, $title, $url, $description, $modifysubmitter)
         menu(1);
         OpenTable();
         
-		# stop using <br /> use a div tags with padding whenever it's poosible!
+		# stop using <br /> use a div tag with padding whenever it's possible!
         print '<div align="center" style="padding-top:11px;">'."\n";
         print '</div>'."\n";
         
 		echo "<br /><div align=\"center\">"._THANKSFORINFO."<br /><br />"._LOOKTOREQUEST."</div><br />";
 
-		# stop using <br /> use a div tags with padding whenever it's poosible!
+		# stop using <br /> use a div tag with padding whenever it's possible!
         print '<div align="center" style="padding-top:11px;">'."\n";
         print '</div>'."\n";
         
@@ -2393,7 +2393,7 @@ function modifylinkrequest($lid)
     menu(1);
     OpenTable();
 
-	# stop using <br /> use a div tags with padding whenever it's poosible!
+	# stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 
@@ -2453,7 +2453,7 @@ function modifylinkrequest($lid)
 		
     endif;
 
-	# stop using <br /> use a div tags with padding whenever it's poosible!
+	# stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:14px;">'."\n";
     print '</div>'."\n";
 
@@ -2480,14 +2480,14 @@ function modifylinkrequestS($lid, $cat, $title, $url, $description, $modifysubmi
 
     OpenTable();
 
-	# stop using <br /> use a div tags with padding whenever it's poosible!
+	# stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 
     echo "<div align=\"center\"><span class=\"content\"><h1>"._ONLYREGUSERSMODIFY."</h1></span></div>";
     $blocknow = 1;
 
-	# stop using <br /> use a div tags with padding whenever it's poosible!
+	# stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 
@@ -2533,13 +2533,13 @@ function modifylinkrequestS($lid, $cat, $title, $url, $description, $modifysubmi
 
     OpenTable();
 
-	# stop using <br /> use a div tags with padding whenever it's poosible!
+	# stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 
     echo "<div align=\"center\"><span class=\"content\"><h1>"._THANKSFORINFO." "._LOOKTOREQUEST."</h1></span></div>";
 
-	# stop using <br /> use a div tags with padding whenever it's poosible!
+	# stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 
@@ -2698,7 +2698,7 @@ function completevoteheader(){
     menu(1);
     OpenTable();
 
-	# stop using <br /> use a div tags with padding whenever it's poosible!
+	# stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 
@@ -2727,7 +2727,7 @@ function completevotefooter($lid, $ttitle, $ratinguser)
     linkinfomenu($lid,$ttitle);
     echo "</div>";
     
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 
@@ -2760,7 +2760,7 @@ function ratelink($lid, $user, $ttitle)
 
     OpenTable();
 
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 
@@ -2826,7 +2826,7 @@ function ratelink($lid, $user, $ttitle)
     linkfooterchild($lid);
     echo "</div>";
 
-    # stop using <br /> use a div tags with padding whenever it's poosible!
+    # stop using <br /> use a div tag with padding whenever it's possible!
     print '<div align="center" style="padding-top:11px;">'."\n";
     print '</div>'."\n";
 
