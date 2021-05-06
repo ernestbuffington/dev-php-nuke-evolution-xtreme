@@ -89,55 +89,69 @@ function menu($mainlink)
     global $module_name, $query;
     
 	OpenTable();
-    $ThemeSel = get_theme();
-    if (file_exists("themes/$ThemeSel/images/Web_links/Web_Links.png")) {
-    echo "<br /><center><a href=\"modules.php?name=$module_name\"><img style=\"max-height: 50px;\" src=\"themes/$ThemeSel/images/Web_links/Web_Links.png\" border=\"0\" alt=\"\"></a><br /><br />";
-    } 
-	else 
-	{
-    echo "<br /><center><a href=\"modules.php?name=$module_name\"><img style=\"max-height: 50px;\" src=\"modules/$module_name/images/Web_Links.png\" border=\"0\" alt=\"\"></a><br /><br />";
-    }
     
-	echo "<form action=\"modules.php?name=$module_name&amp;l_op=search&amp;query=$query\" method=\"post\">"
+    # stop using <br /> use a div tage with padding!
+	print '<div align="center" style="padding-top:13px;">'."\n";
+    print '</div>'."\n";
+
+	$ThemeSel = get_theme();
+    
+	if (file_exists("themes/".$ThemeSel."/images/Web_links/Web_Links.png")):
+    echo "<div align=\"center\"><a href=\"modules.php?name=".$module_name."\"><img style=\"max-height: 50px;\" src=\"themes/".$ThemeSel."/images/Web_links/Web_Links.png\" border=\"0\" alt=\"\"></a><br /><br />";
+     
+	else: 
+	
+    echo "<div align=\"center\"><a href=\"modules.php?name=".$module_name."\"><img style=\"max-height: 50px;\" src=\"modules/".$module_name."/images/Web_Links.png\" border=\"0\" alt=\"\"></a><br /><br />";
+    endif;
+    
+	echo "<form action=\"modules.php?name=".$module_name."&amp;l_op=search&amp;query=".$query."\" method=\"post\">"
     ."<span class=\"content\"><input type=\"text\" size=\"25\" name=\"query\"> <input type=\"submit\" value=\""._SEARCH."\"></span>"
     ."</form>";
-    echo "<br /><strong><span class=\"content\"> ";
     
-	if ($mainlink>0) 
-	{
-    echo "<a href=\"modules.php?name=$module_name\"><i class=\"bi bi-link\"></i> "._LINKSMAIN."</a>  ";
-    }
+	echo "<br /><strong><span class=\"content\"> ";
     
-	echo "<a href=\"modules.php?name=$module_name&amp;l_op=AddLink\"><i class=\"bi bi-link\"></i> "._ADDLINK."</a>"
-    ."  <a href=\"modules.php?name=$module_name&amp;l_op=NewLinks\"><i class=\"bi bi-link\"></i> "._NEW."</a>"
-    ."  <a href=\"modules.php?name=$module_name&amp;l_op=MostPopular\"><i class=\"bi bi-link\"></i> "._POPULAR."</a>"
-    ."  <a href=\"modules.php?name=$module_name&amp;l_op=TopRated\"><i class=\"bi bi-link\"></i> "._TOPRATED."</a>"
-    #."  <a href=\"modules.php?name=$module_name&amp;l_op=RandomLink\"><i class=\"bi bi-link\"></i> "._RANDOM."</a> "
-    ."<br /><br /></strong>"
-	."</span></center>";
-    CloseTable();
+	if ($mainlink>0): 
+    echo "<a href=\"modules.php?name=".$module_name."\"><i class=\"bi bi-link\"></i> "._LINKSMAIN."</a>  ";
+    endif;
+    
+	echo " <a href=\"modules.php?name=".$module_name."&amp;l_op=AddLink\"><i class=\"bi bi-link\"></i> "._ADDLINK."</a>"
+        ." <a href=\"modules.php?name=".$module_name."&amp;l_op=NewLinks\"><i class=\"bi bi-link\"></i> "._NEW."</a>"
+        ." <a href=\"modules.php?name=".$module_name."&amp;l_op=MostPopular\"><i class=\"bi bi-link\"></i> "._POPULAR."</a>"
+        ." <a href=\"modules.php?name=".$module_name,"&amp;l_op=TopRated\"><i class=\"bi bi-link\"></i> "._TOPRATED."</a>"
+       #."<a href=\"modules.php?name=$module_name&amp;l_op=RandomLink\"><i class=\"bi bi-link\"></i> "._RANDOM."</a> " <- This is garbage
+        ."</strong>"
+	    ."</span></div>";
+
+    # stop using <br /> use a div tage with padding!
+    print '<div align="center" style="padding-top:6px;">'."\n";
+    print '</div>'."\n";
+	CloseTable();
 }
 
-function SearchForm() {
+function SearchForm() 
+{
 	global $module_name, $query;
 	
-    echo "<form action=\"modules.php?name=$module_name&amp;l_op=search&amp;query=$query\" method=\"post\">"
+    echo "<form action=\"modules.php?name=".$module_name,"&amp;l_op=search&amp;query=".$query."\" method=\"post\">"
     ."<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" align=\"center\">"
     ."<tr><td><span class=\"content\"><input type=\"text\" size=\"25\" name=\"query\"> <input type=\"submit\" value=\""._SEARCH."\"></td></tr>"
     ."</table>"
     ."</form>";
 }
 
-function linkinfomenu($lid, $ttitle) {
+function linkinfomenu($lid, $ttitle) 
+{
     global $module_name, $user;
-    echo "<br /><span class=\"content\">[ "
-    ."<a href=\"modules.php?name=$module_name&amp;l_op=viewlinkcomments&amp;lid=$lid&amp;ttitle=$ttitle\">"._LINKCOMMENTS."</a>"
-    ." | <a href=\"modules.php?name=$module_name&amp;l_op=viewlinkdetails&amp;lid=$lid&amp;ttitle=$ttitle\">"._ADDITIONALDET."</a>"
-    ." | <a href=\"modules.php?name=$module_name&amp;l_op=viewlinkeditorial&amp;lid=$lid&amp;ttitle=$ttitle\">"._EDITORREVIEW."</a>"
-    ." | <a href=\"modules.php?name=$module_name&amp;l_op=modifylinkrequest&amp;lid=$lid\">"._MODIFY."</a>";
-    if (is_user()) {
-    echo " | <a href=\"modules.php?name=$module_name&amp;l_op=brokenlink&amp;lid=$lid\">"._REPORTBROKEN."</a>";
-    }
+    
+	echo "<span class=\"content\">[ "
+    ."<a href=\"modules.php?name=".$module_name."&amp;l_op=viewlinkcomments&amp;lid=".$lid."&amp;ttitle=".$ttitle."\">"._LINKCOMMENTS."</a>"
+    ." | <a href=\"modules.php?name=".$module_name."&amp;l_op=viewlinkdetails&amp;lid=".$lid."&amp;ttitle=".$ttitle."\">"._ADDITIONALDET."</a>"
+    ." | <a href=\"modules.php?name=".$module_name."&amp;l_op=viewlinkeditorial&amp;lid=".$lid."&amp;ttitle=".$ttitle."\">"._EDITORREVIEW."</a>"
+    ." | <a href=\"modules.php?name=".$module_name."&amp;l_op=modifylinkrequest&amp;lid=".$lid."\">"._MODIFY."</a>";
+    
+	if (is_user()):
+    echo " | <a href=\"modules.php?name=".$module_name."&amp;l_op=brokenlink&amp;lid=".$lid."\">"._REPORTBROKEN."</a>";
+    endif;
     echo " ]</span>";
 }
 
