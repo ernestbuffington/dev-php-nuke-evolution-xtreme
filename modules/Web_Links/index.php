@@ -143,7 +143,7 @@ function linkinfomenu($lid, $ttitle)
 {
     global $module_name, $user;
     
-	echo "<span class=\"content\">[ "
+	echo "<span class=\"content\"><strong>[ "
     ."<a href=\"modules.php?name=".$module_name."&amp;l_op=viewlinkcomments&amp;lid=".$lid."&amp;ttitle=".$ttitle."\">"._LINKCOMMENTS."</a>"
     ." | <a href=\"modules.php?name=".$module_name."&amp;l_op=viewlinkdetails&amp;lid=".$lid."&amp;ttitle=".$ttitle."\">"._ADDITIONALDET."</a>"
     ." | <a href=\"modules.php?name=".$module_name."&amp;l_op=viewlinkeditorial&amp;lid=".$lid."&amp;ttitle=".$ttitle."\">"._EDITORREVIEW."</a>"
@@ -152,7 +152,7 @@ function linkinfomenu($lid, $ttitle)
 	if (is_user()):
     echo " | <a href=\"modules.php?name=".$module_name."&amp;l_op=brokenlink&amp;lid=".$lid."\">"._REPORTBROKEN."</a>";
     endif;
-    echo " ]</span>";
+    echo " ]</span></strong>";
 }
 
 function index() 
@@ -1675,7 +1675,7 @@ function viewlinkdetails($lid, $ttitle) {
 
 function linkfooter($lid,$ttitle) {
     global $module_name;
-    echo "<span class=\"content\">[ <a href=\"modules.php?name=$module_name&amp;l_op=visit&amp;lid=$lid\" target=\"_blank\">"._VISITTHISSITE."</a> | <a href=\"modules.php?name=$module_name&amp;l_op=ratelink&amp;lid=$lid&amp;ttitle=$ttitle\">"._RATETHISSITE."</a> ]</span><br /><br />";
+    echo "<span class=\"content\"> <i class=\"bi bi-globe2\"></i> <a href=\"modules.php?name=$module_name&amp;l_op=visit&amp;lid=$lid\" target=\"_blank\">"._VISITTHISSITE."</a>&nbsp;&nbsp;<i class=\"bi bi-check-square\"></i> <a href=\"modules.php?name=$module_name&amp;l_op=ratelink&amp;lid=$lid&amp;ttitle=$ttitle\">"._RATETHISSITE."</a> </span><br /><br />";
     linkfooterchild($lid);
 }
 
