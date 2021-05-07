@@ -97,13 +97,6 @@ img.rounded-corners-user-info {
   border-radius: 20px; 
 }
 
-.banner_box
-{
-z-index: 780;
-color: rgb(104, 182, 4);
-opacity: 9.0;
-}
-
 fieldset 
 {
 	display: block; 

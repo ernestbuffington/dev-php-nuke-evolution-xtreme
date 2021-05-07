@@ -1,6 +1,6 @@
 <?php
 #---------------------------------------------------------------------------------------#
-# HEADER                                                                                #
+# HEADER                                                                                # 
 #---------------------------------------------------------------------------------------#
 # THEME INFO                                                                            #
 # Inferno Theme v1.0 (Fixed & Full Width)                                               #
@@ -57,134 +57,35 @@
 
 global $theme_name;
 
-echo "\n\n/* Universal/css/body.php Fly Kit for PHP-Nuke Titanium - Design Themes On The Fly */\n"; 
+echo "\n\n/* themename/css/banner_ads.php Fly Kit for PHP-Nuke Titanium - Design Themes On The Fly */\n"; 
 echo "/* When we are done we will move this code to style.css */\n\n"; 
 
 global $screen_width, $screen_height, $bgcolor1, $bgcolor2, $bgcolor3, $bgcolor4;
-
+/* <?=$bgcolor1?> */
 ?>
-/*---------------------------------------------------------------*/
-/* Full Screen Video Background v1.0                             */
-/*                                                               */
-/* Designed and Coded By: TheGhost                               */
-/* Coded On: 22nd January, 2007                                  */
-/* Copyright © 2007 TheGhost All Rights Reserved                 */
-/*                                                               */
-/* This uses Advanced Resolution Checking v1.0                   */
-/*---------------------------------------------------------------*/
-.fullscreen-bg {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
-  z-index: -100;
+.banner_box
+{
+z-index: 780;
+color: rgb(104, 182, 4);
+opacity: 9.0;
 }
 
-.fullscreen-bg__video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: <?=$screen_height?>;
-}
-
-@media (max-width: <?=$screen_width?>) {
-  .fullscreen-bg {
-  }
-
-  .fullscreen-bg__video {
-    display: none;
-  }
-}
-
-body{
-background-color: black;	
-}
-
-.top_and_bottom{
-background-color: black;	
-background-image: 
-url(../../../themes/<?=$theme_name?>/backgrounds/glasstop.png),
-url(../../../themes/<?=$theme_name?>/backgrounds/sidebox_bottom.png);
-background-position:
-top right,                   /* this positions the first image - TheGhost add 8/2/2019 */
-bottom left;                 /* this positions the second image - TheGhost add 8/2/2019 */
-background-repeat:
-no-repeat;                   /* this applies to both images - TheGhost add 8/2/2019 */ 
-}
-
-body7 {
-background: url(<?php echo BODY_BACKGROUND; ?>);
-<?php echo BODY_CONTAIN; ?>
-}
-
-blink{
-animation: blinker 0.6s linear infinite;
-color: #1c87c9;
-}
-
-@keyframes blinker {  
-50% { opacity: 0; }
-}
-
-.blink-one {
-animation: blinker-one 1s linear infinite;
-}
-
-@keyframes blinker-one {  
-0% { opacity: 0; }
-}
-
-.blink-two {
-animation: blinker-two 1.4s linear infinite;
-}
-
-@keyframes blinker-two {  
-100% { opacity: 0; }
-}
-
-.logo {
-float: center;
-position: relative;
-margin: 0px 0px 0px 0px;
-z-index: 777;
-}
-
-@import url(//db.onlinewebfonts.com/c/783dd6c2d08bdc67012a0eec73fc1702?family=80sPXLW00-Thin);
-
-@font-face {font-family: "80sPXLW00-Thin"; src: url("//db.onlinewebfonts.com/t/783dd6c2d08bdc67012a0eec73fc1702.eot"); src: url("//db.onlinewebfonts.com/t/783dd6c2d08bdc67012a0eec73fc1702.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/783dd6c2d08bdc67012a0eec73fc1702.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/783dd6c2d08bdc67012a0eec73fc1702.woff") format("woff"), url("//db.onlinewebfonts.com/t/783dd6c2d08bdc67012a0eec73fc1702.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/783dd6c2d08bdc67012a0eec73fc1702.svg#80sPXLW00-Thin") format("svg"); }
-
-.marquee_one {
-overflow: hidden;
-margin: 10px;
-font-family: "80sPXLW00-Thin";
-width: 481px;
-height: 20px;
-border: 1px solid #404040;
+.banner_left {
 position: absolute;
-margin: -120px 115px 15px 115px;
+margin: 13px 115px 15px 115px;
 left: 0;
 display:inline;
-z-index: 780;
-background: black;
-color: rgb(104, 182, 4);
+z-index: 9999;
 }
 
-.marquee_two {
-overflow: hidden;
-margin: 10px;
-font-family: "80sPXLW00-Thin";
-width: 481px;
-height: 20px;
-border: 1px solid #404040;
+.banner_right {
 position: absolute;
-margin: -120px 115px 15px 115px;
+margin: -61px 115px 15px 10px;
 right: 0;
 display:inline;
-z-index: 779;
-background: black;
-color: rgb(104, 182, 4);
+z-index: 9999;
 }
 <?
+
+
+

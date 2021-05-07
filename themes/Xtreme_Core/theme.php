@@ -159,6 +159,7 @@ addCSSToHead(theme_style_dir.'menu.css','file');
 #-------------------#
 # FlyKit Mod v1.0   #
 #-------------------#
+addPHPCSSToHead(theme_phpstyle_dir.'banner_ads.php','file');     
 addPHPCSSToHead(theme_phpstyle_dir.'menu.php','file');     
 addPHPCSSToHead(theme_phpstyle_dir.'header.php','file');     
 addPHPCSSToHead(theme_phpstyle_dir.'scrollbars.php','file'); 

@@ -181,7 +181,7 @@ if(is_admin()):
      //Please see www.php.net/strtotime
      //Default: -1 day
      //$interval = strtotime('-1 day');
-	 $interval = strtotime('-1');
+	 $interval = strtotime('-1 day');
        if (($last_optimize <= $interval) || ($first_time && $cache->valid && $use_cache)):
          if ($db->sql_optimize()):
            $cache->save('last_optimize', 'config', time());
@@ -201,7 +201,7 @@ endif;
     # START Debugger v1.0.0
     if(is_admin() && $debugger->debug && count($debugger->errors) > 0) 
 	{
-       $footmsg .= "<br /><center><strong>Debugging:</strong></center>";
+       $footmsg .= "<br /><div align=\"center\"><strong>Debugging:</strong></div>";
        $footmsg .= "<table border='0' width='80%' align='center'><tr><td>";
        $footmsg .= $debugger->return_errors();
        $footmsg .= "</td></tr></table>";

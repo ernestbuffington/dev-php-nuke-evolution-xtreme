@@ -57,134 +57,75 @@
 
 global $theme_name;
 
-echo "\n\n/* Universal/css/body.php Fly Kit for PHP-Nuke Titanium - Design Themes On The Fly */\n"; 
+echo "\n\n/* themename/css/menu.php Fly Kit for PHP-Nuke Titanium - Design Themes On The Fly */\n"; 
 echo "/* When we are done we will move this code to style.css */\n\n"; 
 
 global $screen_width, $screen_height, $bgcolor1, $bgcolor2, $bgcolor3, $bgcolor4;
-
+/* <?=$bgcolor1?> */
 ?>
-/*---------------------------------------------------------------*/
-/* Full Screen Video Background v1.0                             */
-/*                                                               */
-/* Designed and Coded By: TheGhost                               */
-/* Coded On: 22nd January, 2007                                  */
-/* Copyright © 2007 TheGhost All Rights Reserved                 */
-/*                                                               */
-/* This uses Advanced Resolution Checking v1.0                   */
-/*---------------------------------------------------------------*/
-.fullscreen-bg {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
-  z-index: -100;
+/* Dropdown Button */
+.dropbtn {
+  background-color: <?=$bgcolor1?>;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
 }
 
-.fullscreen-bg__video {
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: <?=$screen_height?>;
+  background-color: <?=$bgcolor1?>;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
 }
 
-@media (max-width: <?=$screen_width?>) {
-  .fullscreen-bg {
-  }
-
-  .fullscreen-bg__video {
-    display: none;
-  }
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
 }
 
-body{
-background-color: black;	
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: <?=$bgcolor2?>;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: <?=$bgcolor1?>;}
+
+/* Dropdown Button */
+.adropbtn {
+  background-color: <?=$bgcolor2?>;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
 }
 
-.top_and_bottom{
-background-color: black;	
-background-image: 
-url(../../../themes/<?=$theme_name?>/backgrounds/glasstop.png),
-url(../../../themes/<?=$theme_name?>/backgrounds/sidebox_bottom.png);
-background-position:
-top right,                   /* this positions the first image - TheGhost add 8/2/2019 */
-bottom left;                 /* this positions the second image - TheGhost add 8/2/2019 */
-background-repeat:
-no-repeat;                   /* this applies to both images - TheGhost add 8/2/2019 */ 
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.adropdown:hover .adropbtn 
+{
+  color: white !important;
+  background-color: <?=$bgcolor4?>;
 }
 
-body7 {
-background: url(<?php echo BODY_BACKGROUND; ?>);
-<?php echo BODY_CONTAIN; ?>
-}
-
-blink{
-animation: blinker 0.6s linear infinite;
-color: #1c87c9;
-}
-
-@keyframes blinker {  
-50% { opacity: 0; }
-}
-
-.blink-one {
-animation: blinker-one 1s linear infinite;
-}
-
-@keyframes blinker-one {  
-0% { opacity: 0; }
-}
-
-.blink-two {
-animation: blinker-two 1.4s linear infinite;
-}
-
-@keyframes blinker-two {  
-100% { opacity: 0; }
-}
-
-.logo {
-float: center;
-position: relative;
-margin: 0px 0px 0px 0px;
-z-index: 777;
-}
-
-@import url(//db.onlinewebfonts.com/c/783dd6c2d08bdc67012a0eec73fc1702?family=80sPXLW00-Thin);
-
-@font-face {font-family: "80sPXLW00-Thin"; src: url("//db.onlinewebfonts.com/t/783dd6c2d08bdc67012a0eec73fc1702.eot"); src: url("//db.onlinewebfonts.com/t/783dd6c2d08bdc67012a0eec73fc1702.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/783dd6c2d08bdc67012a0eec73fc1702.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/783dd6c2d08bdc67012a0eec73fc1702.woff") format("woff"), url("//db.onlinewebfonts.com/t/783dd6c2d08bdc67012a0eec73fc1702.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/783dd6c2d08bdc67012a0eec73fc1702.svg#80sPXLW00-Thin") format("svg"); }
-
-.marquee_one {
-overflow: hidden;
-margin: 10px;
-font-family: "80sPXLW00-Thin";
-width: 481px;
-height: 20px;
-border: 1px solid #404040;
-position: absolute;
-margin: -120px 115px 15px 115px;
-left: 0;
-display:inline;
-z-index: 780;
-background: black;
-color: rgb(104, 182, 4);
-}
-
-.marquee_two {
-overflow: hidden;
-margin: 10px;
-font-family: "80sPXLW00-Thin";
-width: 481px;
-height: 20px;
-border: 1px solid #404040;
-position: absolute;
-margin: -120px 115px 15px 115px;
-right: 0;
-display:inline;
-z-index: 779;
-background: black;
-color: rgb(104, 182, 4);
+ul.dropdown-content a:hover 
+{ 
+  color: <?=$bgcolor1?> !important;
+  background-color: <?=$bgcolor4?>; 
 }
 <?
+
+
