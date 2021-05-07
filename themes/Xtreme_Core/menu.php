@@ -63,137 +63,371 @@ echo '<div id="cssmenu" class="align-center">';
 #####################################################################################################################
 if (!is_user()) 
 {
-if ($name == 'Forums'):
-?>
-<div align="center">
- <div class="btn-group">
-    <a href="index.php" class="btn btn-primary dropbtn" role="button">Home</a>
-    <a href="modules.php?name=Forums" class="btn btn-primary adropbtn" role="button">Forum Index</a>
-    <a href="modules.php?name=Forums&file=search&search_id=newposts" class="btn btn-primary dropbtn" role="button">New Posts</a>
-    <a href="modules.php?name=Forums&file=search&search_id=unanswered" class="btn btn-primary dropbtn" role="button">Unanswered Topics</a>
-    <a href="modules.php?name=Forums&file=search" class="btn btn-primary dropbtn" role="button">Search</a>
-  </div>
+   # not logged in FORUMS menu START	
+   if ($name == 'Forums'):
+
+   echo '<div align="center">';
+   
+       echo ' <div class="btn-group">';
+       echo '    <a href="index.php" class="btn btn-primary dropbtn" role="button">Home</a>';
+       echo '    <a href="modules.php?name=Forums" class="btn btn-primary adropbtn" role="button">Forum Index</a>';
+       echo '    <a href="modules.php?name=Forums&file=search&search_id=newposts" class="btn btn-primary dropbtn" role="button">New Posts</a>';
+       echo '    <a href="modules.php?name=Forums&file=search&search_id=unanswered" class="btn btn-primary dropbtn" role="button">Unanswered Topics</a>';
+       echo '    <a href="modules.php?name=Forums&file=search" class="btn btn-primary dropbtn" role="button">Search</a>';
+       echo '  </div>';
 
 
-</div>
-<?
+    echo '</div>';
+	# not logged in FORUMS menu END
+
+    # not logged in Links START	
+    elseif ($name == 'Web_Links'):
+
+
+
+    # not logged in Links END	
 else:
-?>
-<div align="center">
+
+   echo '<div align="center">';
+
+   echo '<div class="btn-group">';
+   echo '     <a href="index.php" class="btn btn-primary adropbtn" role="button">Home</a>';
+   echo '      <a href="modules.php?name=Forums" class="btn btn-primary dropbtn" role="button">Forums</a>';
+   echo '      <a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">Links</a>';
 
 
+   echo '       <div class="btn-group">';
+   echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Downloads</a>';
+   echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
+   echo '         <li><strong><a href="modules.php?name=File_Repository" class="btn btn-primary dropbtn" role="button">Main Downloads</a></strong></li>';
+   echo '         <li><strong><a href="modules.php?name=File_Repository&action=newdownloads" class="btn btn-primary dropbtn" role="button">New Downloads</a></strong></li>';
+   echo '         <li><strong><a href="modules.php?name=File_Repository&action=mostpopular" class="btn btn-primary dropbtn" role="button">Popular Downloads</a></strong></li>';
+   echo '         <li><strong><a href="modules.php?name=File_Repository&action=statistics" class="btn btn-primary dropbtn" role="button">Download Statistics</a></strong></li>';
+   echo '         <li><strong><a href="modules.php?name=File_Repository&action=search" class="btn btn-primary dropbtn" role="button">Search Downloads</a></strong></li>';
+   echo '         <li><strong><a href="modules.php?name=File_Repository&action=submitdownload" class="btn btn-primary dropbtn" role="button">Upload A File</a></strong></li>';
+   echo '       </ul>';
+   echo '       </div>';
 
+   echo '       <div class="btn-group">';
+   echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blogs</a>';
+   echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
+   echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">Blogs</a></strong></li>';
+   echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">Blog Topics</a></strong></li>';
+   echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">Blog Archives</a></strong></li>';
+   echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">Blog Top 10</a></strong></li>';
+   echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog</a></strong></li>';
+   echo '       </ul>';
+   echo '       </div>';
 
+   echo '       <div class="btn-group">';
+   echo '       <a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">FAQ</a>';
+   echo '       </div>';
 
-<div class="btn-group">
-     <a href="index.php" class="btn btn-primary adropbtn" role="button">Home</a>
-      <a href="modules.php?name=Forums" class="btn btn-primary dropbtn" role="button">Forums</a>
-      <a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">Links</a>
+   echo '       <div class="btn-group">';
+   echo '       <a href="modules.php?name=Your_Account" class="btn btn-primary dropbtn" role="button">My Account</a>';
+   echo '       </div>';
+   echo '</div></div>';
 
-
-       <div class="btn-group">
-       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Downloads</a>
-       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">
-         <li><strong><a href="modules.php?name=File_Repository" class="btn btn-primary dropbtn" role="button">Main Downloads</a></strong></li>
-         <li><strong><a href="modules.php?name=File_Repository&action=newdownloads" class="btn btn-primary dropbtn" role="button">New Downloads</a></strong></li>
-         <li><strong><a href="modules.php?name=File_Repository&action=mostpopular" class="btn btn-primary dropbtn" role="button">Popular Downloads</a></strong></li>
-         <li><strong><a href="modules.php?name=File_Repository&action=statistics" class="btn btn-primary dropbtn" role="button">Download Statistics</a></strong></li>
-         <li><strong><a href="modules.php?name=File_Repository&action=search" class="btn btn-primary dropbtn" role="button">Search Downloads</a></strong></li>
-         <li><strong><a href="modules.php?name=File_Repository&action=submitdownload" class="btn btn-primary dropbtn" role="button">Upload A File</a></strong></li>
-       </ul>
-       </div>
-
-       <div class="btn-group">
-       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blogs</a>
-       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">
-         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">Blogs</a></strong></li>
-         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">Blog Topics</a></strong></li>
-         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">Blog Archives</a></strong></li>
-         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">Blog Top 10</a></strong></li>
-         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog</a></strong></li>
-       </ul>
-       </div>
-
-       <div class="btn-group">
-       <a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">FAQ</a>
-       </div>
-
-       <div class="btn-group">
-       <a href="modules.php?name=Your_Account" class="btn btn-primary dropbtn" role="button">My Account</a>
-       </div>
-</div></div>
-<?
 endif;
 } 
 
 
-
-
-
 if (is_user()) 
 {
-if ($name == 'Forums'):
-?>
-<div align="center">
- <div class="btn-group">
-    <a href="index.php" class="btn btn-primary dropbtn" role="button">Home</a>
-    <a href="modules.php?name=Forums" class="btn btn-primary adropbtn" role="button">Forum Index</a>
-    <a href="modules.php?name=Forums&file=search&search_id=newposts" class="btn btn-primary dropbtn" role="button">New Posts</a>
-    <a href="modules.php?name=Forums&file=search&search_id=unanswered" class="btn btn-primary dropbtn" role="button">Unanswered Topics</a>
-    <a href="modules.php?name=Forums&file=search" class="btn btn-primary dropbtn" role="button">Search</a>
-  </div>
-</div>
-<?
-else:
-?>
-<div align="center">
-    <div class="btn-group">
+    if ($name == 'Forums'):
+    
+	echo '<div align="center">';
+    echo '<div class="btn-group">';
+
+    echo ' <div class="btn-group">';
+    echo '    <a href="index.php" class="btn btn-primary dropbtn" role="button">Home</a>';
+    echo '    <a href="modules.php?name=Forums" class="btn btn-primary adropbtn" role="button">Forum Index</a>';
+    echo '    <a href="modules.php?name=Forums&file=search&search_id=newposts" class="btn btn-primary dropbtn" role="button">New Posts</a>';
+    echo '    <a href="modules.php?name=Forums&file=search&search_id=unanswered" class="btn btn-primary dropbtn" role="button">Unanswered Topics</a>';
+    echo '    <a href="modules.php?name=Forums&file=search" class="btn btn-primary dropbtn" role="button">Search</a>';
+    echo '  </div>';
+
+    echo '<div class="btn-group">';
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">My Account</a>';
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
+    echo '         <li><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">My InBox</a></li>';
+    echo '         <li><a href="modules.php?name=Image_Repository" class="btn btn-primary dropbtn" role="button">My Image Vault</a></li>';
+    echo '         <li><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmark Vault</a></li>';
+    echo '         <li><a href="modules.php?name=Profile&mode=editprofile" class="btn btn-primary dropbtn" role="button">Change My Info</a></li>';
+    echo '         <li><a href="modules.php?name=Your_Account&op=chgtheme" class="btn btn-primary dropbtn" role="button">Change My Theme</a></li>';
+    echo '         <li><a href="modules.php?name=Your_Account&op=logout" class="btn btn-primary dropbtn" role="button">Logout</a></li>';
+    echo '       </ul>';
+    echo '</div>';
+
+    echo '</div></div>';
+
+    # logged in Private Messages START	
+    elseif ($name == 'Private_Messages'):
+
+    if( isset($_POST['folder']) || isset($_GET['folder'])):
+        $folder = (isset($_POST['folder']) ) ? $_POST['folder'] : $_GET['folder'];
+        
+		if (is_string($folder)): 
+        $folder = htmlspecialchars($folder);
+        else: 
+        $folder = '';
+        endif;
+
+        if($folder != 'inbox' && $folder != 'outbox' && $folder != 'sentbox' && $folder != 'savebox'):
+        $folder = 'inbox';
+		endif;
+    
+    else:
+        $folder = 'inbox';
+    endif;
+	
+    echo '<div align="center">';
+    echo '    <div class="btn-group">';
      
-     <a href="index.php" class="btn btn-primary adropbtn" role="button">Home</a>
-      <a href="modules.php?name=Forums" class="btn btn-primary dropbtn" role="button">Forums</a>
-      <a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">Links</a>
+    echo '     <a href="index.php" class="btn btn-primary dropbtn" role="button">Home</a>';
+	
+	if($folder != 'outbox' && $folder != 'sentbox' && $folder != 'savebox')
+    echo '      <a href="modules.php?name=Private_Messages&folder=inbox" class="btn btn-primary adropbtn" role="button">In Box</a>';
+    else
+	echo '      <a href="modules.php?name=Private_Messages&folder=inbox" class="btn btn-primary dropbtn" role="button">In Box</a>';
+	
+	if($folder == 'sentbox')
+	echo '      <a href="modules.php?name=Private_Messages&folder=sentbox" class="btn btn-primary adropbtn" role="button">Sent Box</a>';
+    else
+	echo '      <a href="modules.php?name=Private_Messages&folder=sentbox" class="btn btn-primary dropbtn" role="button">Sent Box</a>';
+	
+	if($folder == 'outbox')
+	echo '      <a href="modules.php?name=Private_Messages&folder=outbox" class="btn btn-primary adropbtn" role="button">Out Box</a>';
+	else
+	echo '      <a href="modules.php?name=Private_Messages&folder=outbox" class="btn btn-primary dropbtn" role="button">Out Box</a>';
+	
+	if($folder == 'savebox')
+    echo '      <a href="modules.php?name=Private_Messages&folder=savebox" class="btn btn-primary adropbtn" role="button">Saved Box</a>';
+    else
+	echo '      <a href="modules.php?name=Private_Messages&folder=savebox" class="btn btn-primary dropbtn" role="button">Saved Box</a>';
 
-<div class="btn-group">
-       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Downloads</a>
-       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">
-         <li><strong><a href="modules.php?name=File_Repository" class="btn btn-primary dropbtn" role="button">Main Downloads</a></strong></li>
-         <li><strong><a href="modules.php?name=File_Repository&action=newdownloads" class="btn btn-primary dropbtn" role="button">New Downloads</a></strong></li>
-         <li><strong><a href="modules.php?name=File_Repository&action=mostpopular" class="btn btn-primary dropbtn" role="button">Popular Downloads</a></strong></li>
-         <li><strong><a href="modules.php?name=File_Repository&action=statistics" class="btn btn-primary dropbtn" role="button">Download Statistics</a></strong></li>
-         <li><strong><a href="modules.php?name=File_Repository&action=search" class="btn btn-primary dropbtn" role="button">Search Downloads</a></strong></li>
-         <li><strong><a href="modules.php?name=File_Repository&action=submitdownload" class="btn btn-primary dropbtn" role="button">Upload A File</a></strong></li>
-       </ul>
-</div>
+    echo '<div class="btn-group">';
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">My Account</a>';
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
+    echo '         <li><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">My InBox</a></li>';
+    echo '         <li><a href="modules.php?name=Image_Repository" class="btn btn-primary dropbtn" role="button">My Image Vault</a></li>';
+    echo '         <li><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmark Vault</a></li>';
+    echo '         <li><a href="modules.php?name=Profile&mode=editprofile" class="btn btn-primary dropbtn" role="button">Change My Info</a></li>';
+    echo '         <li><a href="modules.php?name=Your_Account&op=chgtheme" class="btn btn-primary dropbtn" role="button">Change My Theme</a></li>';
+    echo '         <li><a href="modules.php?name=Your_Account&op=logout" class="btn btn-primary dropbtn" role="button">Logout</a></li>';
+    echo '       </ul>';
+    echo '</div>';
+    
+    echo '    </div>';
+    echo '</div>';
+    # logged in Private Messages END	
 
-<div class="btn-group">
-       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blogs</a>
-       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">
-         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">Blogs</a></strong></li>
-         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">Blog Topics</a></strong></li>
-         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">Blog Archives</a></strong></li>
-         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">Blog Top 10</a></strong></li>
-         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog</a></strong></li>
-       </ul>
-</div>
+    # logged in Links START	
+    elseif ($name == 'FAQ'):
 
-       <a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">FAQ</a>
+    echo '<div align="center">';
+    echo '    <div class="btn-group">';
+     
+    echo '     <a href="index.php" class="btn btn-primary dropbtn" role="button">Home</a>';
+    echo '      <a href="modules.php?name=Forums" class="btn btn-primary dropbtn" role="button">Forums</a>';
+    echo '      <a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">Links</a>';
 
-<div class="btn-group">
-       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">My Account</a>
-       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">
-         <li><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">My InBox</a></li>
-         <li><a href="modules.php?name=Image_Repository" class="btn btn-primary dropbtn" role="button">My Image Vault</a></li>
-         <li><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmark Vault</a></li>
-         <li><a href="modules.php?name=Profile&mode=editprofile" class="btn btn-primary dropbtn" role="button">Change My Info</a></li>
-         <li><a href="modules.php?name=Your_Account&op=chgtheme" class="btn btn-primary dropbtn" role="button">Change My Theme</a></li>
-         <li><a href="modules.php?name=Your_Account&op=logout" class="btn btn-primary dropbtn" role="button">Logout</a></li>
-       </ul>
-</div>
+    echo '<div class="btn-group">';
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Downloads</a>';
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
+    echo '         <li><strong><a href="modules.php?name=File_Repository" class="btn btn-primary dropbtn" role="button">Main Downloads</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=newdownloads" class="btn btn-primary dropbtn" role="button">New Downloads</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=mostpopular" class="btn btn-primary dropbtn" role="button">Popular Downloads</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=statistics" class="btn btn-primary dropbtn" role="button">Download Statistics</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=search" class="btn btn-primary dropbtn" role="button">Search Downloads</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=submitdownload" class="btn btn-primary dropbtn" role="button">Upload A File</a></strong></li>';
+    echo '       </ul>';
+    echo '</div>';
+
+    echo '<div class="btn-group">';
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
+    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">Blog Posts</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">Blog Topics</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">Blog Archives</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">Blog Top 10</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
+    echo '       </ul>';
+    echo '</div>';
+
+    echo '       <a href="modules.php?name=FAQ" class="btn btn-primary adropbtn" role="button">FAQ</a>';
+
+    echo '<div class="btn-group">';
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">My Account</a>';
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
+    echo '         <li><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">My InBox</a></li>';
+    echo '         <li><a href="modules.php?name=Image_Repository" class="btn btn-primary dropbtn" role="button">My Image Vault</a></li>';
+    echo '         <li><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmark Vault</a></li>';
+    echo '         <li><a href="modules.php?name=Profile&mode=editprofile" class="btn btn-primary dropbtn" role="button">Change My Info</a></li>';
+    echo '         <li><a href="modules.php?name=Your_Account&op=chgtheme" class="btn btn-primary dropbtn" role="button">Change My Theme</a></li>';
+    echo '         <li><a href="modules.php?name=Your_Account&op=logout" class="btn btn-primary dropbtn" role="button">Logout</a></li>';
+    echo '       </ul>';
+    echo '</div>';
     
     
-    </div>
-</div>
-<?
+    echo '    </div>';
+    echo '</div>';
+    # logged in FAQ END	
+
+    # logged in Links START	
+    elseif ($name == 'Web_Links'):
+
+    echo '<div align="center">';
+    echo '    <div class="btn-group">';
+     
+    echo '     <a href="index.php" class="btn btn-primary dropbtn" role="button">Home</a>';
+    echo '      <a href="modules.php?name=Forums" class="btn btn-primary dropbtn" role="button">Forums</a>';
+    echo '      <a href="modules.php?name=Web_Links" class="btn btn-primary adropbtn" role="button">Links</a>';
+
+    echo '<div class="btn-group">';
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Downloads</a>';
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
+    echo '         <li><strong><a href="modules.php?name=File_Repository" class="btn btn-primary dropbtn" role="button">Main Downloads</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=newdownloads" class="btn btn-primary dropbtn" role="button">New Downloads</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=mostpopular" class="btn btn-primary dropbtn" role="button">Popular Downloads</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=statistics" class="btn btn-primary dropbtn" role="button">Download Statistics</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=search" class="btn btn-primary dropbtn" role="button">Search Downloads</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=submitdownload" class="btn btn-primary dropbtn" role="button">Upload A File</a></strong></li>';
+    echo '       </ul>';
+    echo '</div>';
+
+    echo '<div class="btn-group">';
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
+    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">Blog Posts</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">Blog Topics</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">Blog Archives</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">Blog Top 10</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
+    echo '       </ul>';
+    echo '</div>';
+
+    echo '       <a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">FAQ</a>';
+
+    echo '<div class="btn-group">';
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">My Account</a>';
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
+    echo '         <li><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">My InBox</a></li>';
+    echo '         <li><a href="modules.php?name=Image_Repository" class="btn btn-primary dropbtn" role="button">My Image Vault</a></li>';
+    echo '         <li><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmark Vault</a></li>';
+    echo '         <li><a href="modules.php?name=Profile&mode=editprofile" class="btn btn-primary dropbtn" role="button">Change My Info</a></li>';
+    echo '         <li><a href="modules.php?name=Your_Account&op=chgtheme" class="btn btn-primary dropbtn" role="button">Change My Theme</a></li>';
+    echo '         <li><a href="modules.php?name=Your_Account&op=logout" class="btn btn-primary dropbtn" role="button">Logout</a></li>';
+    echo '       </ul>';
+    echo '</div>';
+    
+    
+    echo '    </div>';
+    echo '</div>';
+    # logged in Links END	
+
+    # logged in Blog START	
+    elseif (($name == 'Blog') OR ($name == 'Blog_Topics') OR ($name == 'Blog_Archive') OR ($name == 'Blog_Top') OR ($name == 'Blog_Submit')):
+
+    echo '<div align="center">';
+    echo '    <div class="btn-group">';
+     
+    echo '     <a href="index.php" class="btn btn-primary dropbtn" role="button">Home</a>';
+    echo '      <a href="modules.php?name=Forums" class="btn btn-primary dropbtn" role="button">Forums</a>';
+    echo '      <a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">Links</a>';
+
+    echo '<div class="btn-group">';
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Downloads</a>';
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
+    echo '         <li><strong><a href="modules.php?name=File_Repository" class="btn btn-primary dropbtn" role="button">Main Downloads</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=newdownloads" class="btn btn-primary dropbtn" role="button">New Downloads</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=mostpopular" class="btn btn-primary dropbtn" role="button">Popular Downloads</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=statistics" class="btn btn-primary dropbtn" role="button">Download Statistics</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=search" class="btn btn-primary dropbtn" role="button">Search Downloads</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=submitdownload" class="btn btn-primary dropbtn" role="button">Upload A File</a></strong></li>';
+    echo '       </ul>';
+    echo '</div>';
+
+    echo '<div class="btn-group">';
+    echo '       <a class="btn adropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
+    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">Blog Posts</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">Blog Topics</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">Blog Archives</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">Blog Top 10</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
+    echo '       </ul>';
+    echo '</div>';
+
+    echo '       <a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">FAQ</a>';
+
+    echo '<div class="btn-group">';
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">My Account</a>';
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
+    echo '         <li><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">My InBox</a></li>';
+    echo '         <li><a href="modules.php?name=Image_Repository" class="btn btn-primary dropbtn" role="button">My Image Vault</a></li>';
+    echo '         <li><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmark Vault</a></li>';
+    echo '         <li><a href="modules.php?name=Profile&mode=editprofile" class="btn btn-primary dropbtn" role="button">Change My Info</a></li>';
+    echo '         <li><a href="modules.php?name=Your_Account&op=chgtheme" class="btn btn-primary dropbtn" role="button">Change My Theme</a></li>';
+    echo '         <li><a href="modules.php?name=Your_Account&op=logout" class="btn btn-primary dropbtn" role="button">Logout</a></li>';
+    echo '       </ul>';
+    echo '</div>';
+    
+    
+    echo '    </div>';
+    echo '</div>';
+    # logged in Blog END	
+
+else:
+
+    echo '<div align="center">';
+    echo '    <div class="btn-group">';
+     
+    echo '     <a href="index.php" class="btn btn-primary adropbtn" role="button">Home</a>';
+    echo '      <a href="modules.php?name=Forums" class="btn btn-primary dropbtn" role="button">Forums</a>';
+    echo '      <a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">Links</a>';
+
+    echo '<div class="btn-group">';
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Downloads</a>';
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
+    echo '         <li><strong><a href="modules.php?name=File_Repository" class="btn btn-primary dropbtn" role="button">Main Downloads</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=newdownloads" class="btn btn-primary dropbtn" role="button">New Downloads</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=mostpopular" class="btn btn-primary dropbtn" role="button">Popular Downloads</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=statistics" class="btn btn-primary dropbtn" role="button">Download Statistics</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=search" class="btn btn-primary dropbtn" role="button">Search Downloads</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=File_Repository&action=submitdownload" class="btn btn-primary dropbtn" role="button">Upload A File</a></strong></li>';
+    echo '       </ul>';
+    echo '</div>';
+
+    echo '<div class="btn-group">';
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
+    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">Blog Posts</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">Blog Topics</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">Blog Archives</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">Blog Top 10</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
+    echo '       </ul>';
+    echo '</div>';
+
+    echo '       <a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">FAQ</a>';
+
+    echo '<div class="btn-group">';
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">My Account</a>';
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
+    echo '         <li><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">My InBox</a></li>';
+    echo '         <li><a href="modules.php?name=Image_Repository" class="btn btn-primary dropbtn" role="button">My Image Vault</a></li>';
+    echo '         <li><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmark Vault</a></li>';
+    echo '         <li><a href="modules.php?name=Profile&mode=editprofile" class="btn btn-primary dropbtn" role="button">Change My Info</a></li>';
+    echo '         <li><a href="modules.php?name=Your_Account&op=chgtheme" class="btn btn-primary dropbtn" role="button">Change My Theme</a></li>';
+    echo '         <li><a href="modules.php?name=Your_Account&op=logout" class="btn btn-primary dropbtn" role="button">Logout</a></li>';
+    echo '       </ul>';
+    echo '</div>';
+    
+    
+   echo '    </div>';
+   echo '</div>';
+
 endif;
 }
 

@@ -181,7 +181,7 @@ if(is_admin()):
      //Please see www.php.net/strtotime
      //Default: -1 day
      //$interval = strtotime('-1 day');
-	 $interval = strtotime('-1 week');
+	 $interval = strtotime('-1');
        if (($last_optimize <= $interval) || ($first_time && $cache->valid && $use_cache)):
          if ($db->sql_optimize()):
            $cache->save('last_optimize', 'config', time());
@@ -377,8 +377,8 @@ if(is_object($db))
 $db->sql_close(); //close local database
 if(is_object($db2))
 $db2->sql_close(); //close network user database
-if(is_object($db3))
-$db3->sql_close(); //close music database
+//if(is_object($db3))
+//$db3->sql_close(); //close music database
 /*****[END]********************************************
  [ Other:   DB Connectors                      v2.0.0 ]
  [ Other:   Persistent DB Connection           v2.0.0 ]

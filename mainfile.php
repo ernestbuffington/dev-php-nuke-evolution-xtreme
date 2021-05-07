@@ -708,6 +708,7 @@ function cookiedecode($trash=0)
 
 function title($text) 
 {
+  return;	
   global $name;
 
     # Opera Hack as images were not showing up
