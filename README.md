@@ -16,7 +16,8 @@
         <li>Technocrat</li>
 	<li>killigan</li>
 	<li>JeFFb68CAM</li>
-	<li>AlphaClient</li> 
+	<li>AlphaClient</li>
+	<li>Shakey</li>
 	<li>TheGhost</li>
 	<li>ScottyBcoder</li>
 	<li>SgtLegend</li>
