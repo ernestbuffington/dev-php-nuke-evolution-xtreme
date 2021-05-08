@@ -193,10 +193,12 @@ print '</table>'."\n";
 echo '</td>';
 echo '</tr>';
 echo '</table><br /><br />';
-
+echo '<div align="center" style="padding-top:3956px;">';
+echo '</div>';
 global $powered_by;
-echo '<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><div align="center">'.$powered_by.'</div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />';
-
+echo '<div align="center">'.$powered_by.'</div>';
+echo '<div align="center" style="padding-top:256px;">';
+echo '</div>';
 echo '</td>';
 echo '</tr>';
 echo '</table>';

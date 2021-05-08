@@ -904,8 +904,8 @@ function blockfileinc($blockfiletitle, $blockfile, $side=1, $bid)
 {
     global $debug, $collapse;
 
-    if ($debug == 0)
-	echo '<div align="center">'.$blockfile.'</div>';
+    //if ($debug == 0)
+	//echo '<div align="center">'.$blockfile.'</div>';
 
     if (!file_exists(NUKE_BLOCKS_DIR.$blockfile)) 
 	{

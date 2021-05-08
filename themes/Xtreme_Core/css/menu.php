@@ -66,9 +66,6 @@ global $screen_width, $screen_height, $bgcolor1, $bgcolor2, $bgcolor3, $bgcolor4
 /* Dropdown Button */
 .dropbtn {
   background-color: <?=$bgcolor1?>;
-  color: white;
-  padding: 10px;
-  font-size: 16px;
   border: none;
 }
 
@@ -91,41 +88,47 @@ global $screen_width, $screen_height, $bgcolor1, $bgcolor2, $bgcolor3, $bgcolor4
 /* Links inside the dropdown */
 .dropdown-content a {
   color: black;
-  padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: <?=$bgcolor2?>;}
+.dropdown-content a:hover 
+{
+  background-color: <?=$bgcolor2?>;
+}
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content 
+{
+  display: block;
+}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: <?=$bgcolor1?>;}
+.dropdown:hover .dropbtn 
+{
+  background-color: <?=$bgcolor1?>;
+}
 
 /* Dropdown Button */
 .adropbtn {
   background-color: <?=$bgcolor2?>;
-  color: white;
-  padding: 10px;
-  font-size: 16px;
   border: none;
 }
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .adropdown:hover .adropbtn 
 {
-  color: white !important;
+  color: <?=$bgcolor1?> !important;
   background-color: <?=$bgcolor4?>;
 }
 
-ul.dropdown-content a:hover 
-{ 
-  color: <?=$bgcolor1?> !important;
-  background-color: <?=$bgcolor4?>; 
-}
+
+#ul.dropdown-content a:hover 
+#{ 
+#  color: <?=$bgcolor1?> !important;
+#  background-color: <?=$bgcolor4?>; 
+#}
 <?
 
 

@@ -291,8 +291,14 @@ echo ''.network_ads(0).'';
 echo '</td>';
 # ad banner for left side of header - 86it ads only! CELL ONE @ 33.3% END
 
+//echo '<table border="0" width="100%" height="165">';
+//echo '<tr>';
+//echo '<td align="left" width="25%" valign="top">';
+//echo '</div>';
 //echo '<div class="banner_left"><img src="'.HTTPS.'themes/'.$theme_name.'/images/HEADER/future_02.png" width="350" alt="Xtreme" longdesc="PHP-Nuke Evolution Xtreme" />';
 //echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="'.HTTPS.'themes/'.$theme_name.'/header/buzzard2.png" width="92" alt="Buzzard" longdesc="Buzzard (Patients My Ass)" /></div>';
+//echo '</td>';
+
 # programming logos start
 
 # center CELL TWO @ 33.3% START

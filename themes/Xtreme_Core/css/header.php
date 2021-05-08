@@ -712,7 +712,7 @@ td.row2 {
 }
 
 td.row3 {
-	background-color: #4c4c4c;
+	background-color: #7f6f49;
 	border: 1px solid #222;
 	border: 1px solid <?=$bgcolor3?>;
 	padding: 4px;
