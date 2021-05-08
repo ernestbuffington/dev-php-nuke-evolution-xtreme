@@ -1400,7 +1400,7 @@ function ads($position)
     } 
 	else 
 	{
-        $ads = "<div class=\"banner_box\" align=\"center\"><a href=\"index.php?op=ad_click&amp;bid=$bid\" target=\"_blank\"><img src=\"$imageurl\" border=\"0\" alt=\"$alttext\" title=\"$alttext\"></a></div>";
+       $ads = '<a href="index.php?op=ad_click&amp;bid='.$bid.'" target="_blank"><img src="'.$imageurl.'" width="'.$ad_width.'" height="'.$ad_height.'" border="0" alt="'.$alttext.'" title="'.$alttext.'"></a>';
     }
     return $ads;
 }
@@ -1489,7 +1489,7 @@ function network_ads($position)
               ."</div>";
 	else: 
 		# this opens the ad from the main hub - https://hub.86it.us
-        $ads = "<div class=\"banner_box\" align=\"center\"><a href=\"https://hub.86it.us/index.php?op=ad_network_click&amp;bid=$bid\" target=\"_blank\"><img class=\"banner_box\" src=\"$imageurl\" border=\"0\" alt=\"$alttext\" title=\"$alttext\"></a></div>";
+        $ads = '<a href="https://hub.86it.us/index.php?op=ad_network_click&amp;bid='.$bid.'" target="_blank"><img src="'.$imageurl.'" width="'.$ad_width.'" height="'.$ad_height.'" border="0" alt="'.$alttext.'" title="'.$alttext.'"></a>';
 	endif;
     echo "<!-- Networks Ads END EXECUTE -->\n\n\n";
   return $ads;

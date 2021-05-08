@@ -59,7 +59,7 @@ global $bgcolor1, $bgcolor2, $bgcolor3, $bgcolor4, $user, $cookie, $prefix, $sit
 ########################
 # DO NOT EDIT THIS LINE
 #####################################################################################################################
-echo '<div id="cssmenu" class="align-center">';
+//echo '<div id="cssmenu" class="align-center">';
 #####################################################################################################################
 if (!is_user()) 
 {
@@ -435,5 +435,7 @@ if (is_mod_admin('super'))
 {
 
 }
+echo '<div align="center" style="padding-top:8px;">';
 echo '</div>';
+//echo '</div>';
 ?>
