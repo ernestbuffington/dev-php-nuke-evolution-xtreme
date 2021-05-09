@@ -713,15 +713,15 @@ td.row2 {
 
 td.row3 {
 	background-color: #7f6f49;
-	border: 1px solid #222;
+	border: 1px solid border: 1px solid <?=$bgcolor3?>;
 	border: 1px solid <?=$bgcolor3?>;
 	padding: 4px;
 }
 
 /* Category Row Right */
 td.rowpic {
-	background: #292929;
-	border: #cccccc 1px solid;
+	background: <?=$bgcolor2?>;
+	border: <?=$bgcolor3?> 1px solid;
 	padding-left: 2px;
 	padding-right: 2px;
 	padding-bottom: 2px;

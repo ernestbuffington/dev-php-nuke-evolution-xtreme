@@ -103,16 +103,22 @@ else:
    echo '       </ul>';
    echo '</div>';
 
-   echo '<div class="btn-group">';
-   echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blogs</a>';
-   echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
-   echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">Blogs</a></strong></li>';
-   echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">Blog Topics</a></strong></li>';
-   echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">Blog Archives</a></strong></li>';
-   echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">Blog Top 10</a></strong></li>';
-   echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog</a></strong></li>';
-   echo '       </ul>';
-   echo '</div>';
+    echo '<div class="btn-group">';
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
+    if (is_mod_admin('super')):
+    echo '         <li><strong><a href="admin.php?op=adminStory" class="btn btn-primary dropbtn" role="button">Post New Blog</a></strong></li>';
+    echo '         <li><strong><a href="admin.php?op=topicsmanager" class="btn btn-primary dropbtn" role="button">Create New Blog Topic</a></strong></li>';
+    echo '         <li><strong><a href="admin.php?op=AddCategory" class="btn btn-primary dropbtn" role="button">Create New Blog Category</a></strong></li>';
+    endif;
+    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">View Blog Posts</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">View Blog Topics</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">View Blog Archives</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">View Top 10 Blog Posts</a></strong></li>';
+    if (!is_mod_admin('super'))
+	echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
+    echo '       </ul>';
+    echo '</div>';
 
    echo '<div class="btn-group">';
    echo '       <a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">FAQ</a>';
@@ -228,11 +234,17 @@ if (is_user())
     echo '<div class="btn-group">';
     echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';
     echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
-    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">Blog Posts</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">Blog Topics</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">Blog Archives</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">Blog Top 10</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
+    if (is_mod_admin('super')):
+    echo '         <li><strong><a href="admin.php?op=adminStory" class="btn btn-primary dropbtn" role="button">Post New Blog</a></strong></li>';
+    echo '         <li><strong><a href="admin.php?op=topicsmanager" class="btn btn-primary dropbtn" role="button">Create New Blog Topic</a></strong></li>';
+    echo '         <li><strong><a href="admin.php?op=AddCategory" class="btn btn-primary dropbtn" role="button">Create New Blog Category</a></strong></li>';
+    endif;
+    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">View Blog Posts</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">View Blog Topics</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">View Blog Archives</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">View Top 10 Blog Posts</a></strong></li>';
+    if (!is_mod_admin('super'))
+	echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
     echo '       </ul>';
     echo '</div>';
 
@@ -294,16 +306,22 @@ if (is_user())
     echo '<div class="btn-group">';
     echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';
     echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
-    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">Blog Posts</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">Blog Topics</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">Blog Archives</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">Blog Top 10</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
+    if (is_mod_admin('super')):
+    echo '         <li><strong><a href="admin.php?op=adminStory" class="btn btn-primary dropbtn" role="button">Post New Blog</a></strong></li>';
+    echo '         <li><strong><a href="admin.php?op=topicsmanager" class="btn btn-primary dropbtn" role="button">Create New Blog Topic</a></strong></li>';
+    echo '         <li><strong><a href="admin.php?op=AddCategory" class="btn btn-primary dropbtn" role="button">Create New Blog Category</a></strong></li>';
+    endif;
+    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">View Blog Posts</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">View Blog Topics</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">View Blog Archives</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">View Top 10 Blog Posts</a></strong></li>';
+    if (!is_mod_admin('super'))
+	echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
     echo '       </ul>';
     echo '</div>';
 
    echo '<div class="btn-group">';
-   echo '       <a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">FAQ</a>';
+   echo '       <a href="modules.php?name=FAQ" class="btn btn-primary adropbtn" role="button">FAQ</a>';
    echo '</div>';
 
    echo '<div class="btn-group">';
@@ -348,11 +366,17 @@ if (is_user())
     echo '<div class="btn-group">';
     echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';
     echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
-    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">Blog Posts</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">Blog Topics</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">Blog Archives</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">Blog Top 10</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
+    if (is_mod_admin('super')):
+    echo '         <li><strong><a href="admin.php?op=adminStory" class="btn btn-primary dropbtn" role="button">Post New Blog</a></strong></li>';
+    echo '         <li><strong><a href="admin.php?op=topicsmanager" class="btn btn-primary dropbtn" role="button">Create New Blog Topic</a></strong></li>';
+    echo '         <li><strong><a href="admin.php?op=AddCategory" class="btn btn-primary dropbtn" role="button">Create New Blog Category</a></strong></li>';
+    endif;
+    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">View Blog Posts</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">View Blog Topics</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">View Blog Archives</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">View Top 10 Blog Posts</a></strong></li>';
+    if (!is_mod_admin('super'))
+	echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
     echo '       </ul>';
     echo '</div>';
 
@@ -404,11 +428,17 @@ if (is_user())
     echo '<div class="btn-group">';
     echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';
     echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
-    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">Blog Posts</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">Blog Topics</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">Blog Archives</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">Blog Top 10</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
+    if (is_mod_admin('super')):
+    echo '         <li><strong><a href="admin.php?op=adminStory" class="btn btn-primary dropbtn" role="button">Post New Blog</a></strong></li>';
+    echo '         <li><strong><a href="admin.php?op=topicsmanager" class="btn btn-primary dropbtn" role="button">Create New Blog Topic</a></strong></li>';
+    echo '         <li><strong><a href="admin.php?op=AddCategory" class="btn btn-primary dropbtn" role="button">Create New Blog Category</a></strong></li>';
+    endif;
+    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">View Blog Posts</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">View Blog Topics</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">View Blog Archives</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">View Top 10 Blog Posts</a></strong></li>';
+    if (!is_mod_admin('super'))
+	echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
     echo '       </ul>';
     echo '</div>';
 
@@ -470,12 +500,18 @@ if (is_user())
 
     echo '<div class="btn-group">';
     echo '       <a class="btn adropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';
-    echo '       <ul class="dropdown-menu adropbtn dropdown-content" role="menu">';
-    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">Blog Posts</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">Blog Topics</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">Blog Archives</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">Blog Top 10</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
+    if (is_mod_admin('super')):
+    echo '         <li><strong><a href="admin.php?op=adminStory" class="btn btn-primary dropbtn" role="button">Post New Blog</a></strong></li>';
+    echo '         <li><strong><a href="admin.php?op=topicsmanager" class="btn btn-primary dropbtn" role="button">Create New Blog Topic</a></strong></li>';
+    echo '         <li><strong><a href="admin.php?op=AddCategory" class="btn btn-primary dropbtn" role="button">Create New Blog Category</a></strong></li>';
+    endif;
+    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">View Blog Posts</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">View Blog Topics</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">View Blog Archives</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">View Top 10 Blog Posts</a></strong></li>';
+    if (!is_mod_admin('super'))
+	echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
     echo '       </ul>';
     echo '</div>';
 
@@ -560,11 +596,17 @@ echo '<div class="btn-group">';
     echo '<div class="btn-group">';
     echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';
     echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
-    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">Blog Posts</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">Blog Topics</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">Blog Archives</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">Blog Top 10</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
+    if (is_mod_admin('super')):
+    echo '         <li><strong><a href="admin.php?op=adminStory" class="btn btn-primary dropbtn" role="button">Post New Blog</a></strong></li>';
+    echo '         <li><strong><a href="admin.php?op=topicsmanager" class="btn btn-primary dropbtn" role="button">Create New Blog Topic</a></strong></li>';
+    echo '         <li><strong><a href="admin.php?op=AddCategory" class="btn btn-primary dropbtn" role="button">Create New Blog Category</a></strong></li>';
+    endif;
+    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">View Blog Posts</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">View Blog Topics</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">View Blog Archives</a></strong></li>';
+    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">View Top 10 Blog Posts</a></strong></li>';
+    if (!is_mod_admin('super'))
+	echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
     echo '       </ul>';
     echo '</div>';
 
