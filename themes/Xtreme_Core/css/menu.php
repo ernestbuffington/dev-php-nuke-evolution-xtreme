@@ -116,6 +116,13 @@ global $screen_width, $screen_height, $bgcolor1, $bgcolor2, $bgcolor3, $bgcolor4
   border: none;
 }
 
+/* Dropdown Button */
+.adropbtn-admin {
+  background-color: none;
+  border: none;
+}
+
+
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .adropdown:hover .adropbtn 
 {
