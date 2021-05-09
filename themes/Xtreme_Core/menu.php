@@ -248,9 +248,19 @@ if (is_user())
     echo '       </ul>';
     echo '</div>';
 
-   echo '<div class="btn-group">';
-   echo '       <a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">FAQ</a>';
-   echo '</div>';
+   # This is the button set for the FAQ module #################################################################################################################
+   echo '<div class="btn-group">';                                                                                                                             #
+    if (is_mod_admin('super')):                                                                                                                                #
+     echo '<a href="modules.php?name=FAQ" class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">FAQ</a>';                       #
+     echo '<ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                   #
+     echo '  <li><strong><a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">View Frequently Asked Questions</a></strong></li>';      #
+     echo '  <li><strong><a href="admin.php?op=FaqAdmin" class="btn btn-primary dropbtn" role="button">Edit Frequently Asked Questions</a></strong></li>';     #
+     echo '</ul>';                                                                                                                                             #
+   else:                                                                                                                                                       #
+     echo '<a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">FAQ</a>';                                                              #
+   endif;                                                                                                                                                      #
+   echo '</div>';                                                                                                                                              #
+   #############################################################################################################################################################
 
    echo '<div class="btn-group">';
     echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">My Account</a>';
@@ -320,9 +330,19 @@ if (is_user())
     echo '       </ul>';
     echo '</div>';
 
-   echo '<div class="btn-group">';
-   echo '       <a href="modules.php?name=FAQ" class="btn btn-primary adropbtn" role="button">FAQ</a>';
-   echo '</div>';
+   # This is the button set for the FAQ module #################################################################################################################
+   echo '<div class="btn-group">';                                                                                                                             #
+    if (is_mod_admin('super')):                                                                                                                                #
+     echo '<a href="modules.php?name=FAQ" class="btn adropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">FAQ</a>';                      #
+     echo '<ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                   #
+     echo '  <li><strong><a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">View Frequently Asked Questions</a></strong></li>';      #
+     echo '  <li><strong><a href="admin.php?op=FaqAdmin" class="btn btn-primary dropbtn" role="button">Edit Frequently Asked Questions</a></strong></li>';     #
+     echo '</ul>';                                                                                                                                             #
+   else:                                                                                                                                                       #
+     echo '<a href="modules.php?name=FAQ" class="btn btn-primary adropbtn" role="button">FAQ</a>';                                                             #
+   endif;                                                                                                                                                      #
+   echo '</div>';                                                                                                                                              #
+   #############################################################################################################################################################
 
    echo '<div class="btn-group">';
     echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">My Account</a>';
@@ -380,9 +400,19 @@ if (is_user())
     echo '       </ul>';
     echo '</div>';
 
-   echo '<div class="btn-group">';
-   echo '       <a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">FAQ</a>';
-   echo '</div>';
+   # This is the button set for the FAQ module #################################################################################################################
+   echo '<div class="btn-group">';                                                                                                                             #
+    if (is_mod_admin('super')):                                                                                                                                #
+     echo '<a href="modules.php?name=FAQ" class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">FAQ</a>';                       #
+     echo '<ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                   #
+     echo '  <li><strong><a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">View Frequently Asked Questions</a></strong></li>';      #
+     echo '  <li><strong><a href="admin.php?op=FaqAdmin" class="btn btn-primary dropbtn" role="button">Edit Frequently Asked Questions</a></strong></li>';     #
+     echo '</ul>';                                                                                                                                             #
+   else:                                                                                                                                                       #
+     echo '<a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">FAQ</a>';                                                              #
+   endif;                                                                                                                                                      #
+   echo '</div>';                                                                                                                                              #
+   #############################################################################################################################################################
 
    echo '<div class="btn-group">';
     echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">My Account</a>';
@@ -442,9 +472,19 @@ if (is_user())
     echo '       </ul>';
     echo '</div>';
 
-   echo '<div class="btn-group">';
-   echo '       <a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">FAQ</a>';
-   echo '</div>';
+   # This is the button set for the FAQ module #################################################################################################################
+   echo '<div class="btn-group">';                                                                                                                             #
+    if (is_mod_admin('super')):                                                                                                                                #
+     echo '<a href="modules.php?name=FAQ" class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">FAQ</a>';                       #
+     echo '<ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                   #
+     echo '  <li><strong><a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">View Frequently Asked Questions</a></strong></li>';      #
+     echo '  <li><strong><a href="admin.php?op=FaqAdmin" class="btn btn-primary dropbtn" role="button">Edit Frequently Asked Questions</a></strong></li>';     #
+     echo '</ul>';                                                                                                                                             #
+   else:                                                                                                                                                       #
+     echo '<a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">FAQ</a>';                                                              #
+   endif;                                                                                                                                                      #
+   echo '</div>';                                                                                                                                              #
+   #############################################################################################################################################################
 
    echo '<div class="btn-group">';
     echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">My Account</a>';
@@ -515,9 +555,19 @@ if (is_user())
     echo '       </ul>';
     echo '</div>';
 
-   echo '<div class="btn-group">';
-   echo '       <a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">FAQ</a>';
-   echo '</div>';
+   # This is the button set for the FAQ module #################################################################################################################
+   echo '<div class="btn-group">';                                                                                                                             #
+    if (is_mod_admin('super')):                                                                                                                                #
+     echo '<a href="modules.php?name=FAQ" class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">FAQ</a>';                       #
+     echo '<ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                   #
+     echo '  <li><strong><a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">View Frequently Asked Questions</a></strong></li>';      #
+     echo '  <li><strong><a href="admin.php?op=FaqAdmin" class="btn btn-primary dropbtn" role="button">Edit Frequently Asked Questions</a></strong></li>';     #
+     echo '</ul>';                                                                                                                                             #
+   else:                                                                                                                                                       #
+     echo '<a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">FAQ</a>';                                                              #
+   endif;                                                                                                                                                      #
+   echo '</div>';                                                                                                                                              #
+   #############################################################################################################################################################
 
    echo '<div class="btn-group">';
     echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">My Account</a>';
@@ -610,10 +660,20 @@ echo '<div class="btn-group">';
     echo '       </ul>';
     echo '</div>';
 
-   echo '<div class="btn-group">';
-   echo '       <a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">FAQ</a>';
-   echo '</div>';
-
+   # This is the button set for the FAQ module #################################################################################################################
+   echo '<div class="btn-group">';                                                                                                                             #
+    if (is_mod_admin('super')):                                                                                                                                #
+     echo '<a href="modules.php?name=FAQ" class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">FAQ</a>';                       #
+     echo '<ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                   #
+     echo '  <li><strong><a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">View Frequently Asked Questions</a></strong></li>';      #
+     echo '  <li><strong><a href="admin.php?op=FaqAdmin" class="btn btn-primary dropbtn" role="button">Edit Frequently Asked Questions</a></strong></li>';     #
+     echo '</ul>';                                                                                                                                             #
+   else:                                                                                                                                                       #
+     echo '<a href="modules.php?name=FAQ" class="btn btn-primary dropbtn" role="button">FAQ</a>';                                                              #
+   endif;                                                                                                                                                      #
+   echo '</div>';                                                                                                                                              #
+   #############################################################################################################################################################
+   
    echo '<div class="btn-group">';
     echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">My Account</a>';
     echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
