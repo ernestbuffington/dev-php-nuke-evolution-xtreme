@@ -287,7 +287,7 @@ echo '<tr>';
 echo '<td align="left" width="25%" valign="top">';
 echo '<div align="center" style="padding-top:17px;">';
 echo '</div>';
-echo ''.network_ads(0).'';
+echo ''.ads(0).'';
 echo '</td>';
 # ad banner for left side of header - 86it ads only! CELL ONE @ 33.3% END
 

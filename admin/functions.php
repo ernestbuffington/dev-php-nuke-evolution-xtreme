@@ -281,14 +281,6 @@ function adminmenu($url, $title, $image)
 	}
 	else
 	{
-		if ( defined('BOOTSTRAP') ):
-		?>
-			<a href="<?php echo $url ?>">
-				<h3 style="font-size: 17px; margin: 0;"><?php echo $title ?></h3>
-			</a>
-		<?php
-		else:
-
 			echo '    <td style="width: 16.6%;">';
 			echo '      <a href="'.$url.'">';
 			echo '      <table style="height: 75px; text-align: center; width: 100%;" border="0" cellpadding="4" cellspacing="1" class="forumline">';           
@@ -298,8 +290,6 @@ function adminmenu($url, $title, $image)
 			echo '      </table>';
 			echo '      </a>';
 			echo '    </td>';
-
-		endif;
 	}
 
 	if ($counter == 5) 

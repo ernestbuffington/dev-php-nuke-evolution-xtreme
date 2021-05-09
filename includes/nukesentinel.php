@@ -8,7 +8,7 @@
 /* NukeSentinel(tm)                                     */
 /* By: NukeScripts Network (webmaster@nukescripts.net)  */
 /* http://nukescripts.86it.us                           */
-/* Copyright (c) 2000-2006 by NukeScripts Network         */
+/* Copyright (c) 2000-2006 by NukeScripts Network       */
 /* See CREDITS.txt for ALL contributors                 */
 /********************************************************/
 
@@ -476,26 +476,37 @@ if($ab_config['force_nukeurl'] == 1 AND !defined('RSS_FEED')) {
 
 // IP Tracking
 // CAUTION: This function can slow your sites load time
-if($ab_config['track_active'] == 1 AND !is_excluded($nsnst_const['remote_ip'])) {
-  if(!empty($nsnst_const['post_string'])) {
+if($ab_config['track_active'] == 1 AND !is_excluded($nsnst_const['remote_ip'])) 
+{
+  if(!empty($nsnst_const['post_string'])) 
+  {
 	$pg = $nsnst_const['script_name']."?".$nsnst_const['post_string'];
-  } elseif(!empty($nsnst_const['get_string'])) {
+  } 
+  elseif(!empty($nsnst_const['get_string'])) 
+  {
 	$pg = $nsnst_const['script_name']."?".$nsnst_const['get_string'];
-  } elseif(!empty($nsnst_const['query_string'])) {
+  } 
+  elseif(!empty($nsnst_const['query_string'])) 
+  {
 	$pg = $nsnst_const['script_name']."?".$nsnst_const['query_string'];
-  } else {
+  } 
+  else 
+  {
 	$pg = $nsnst_const['script_name'];
   }
   $pg = preg_replace('/&(password|user_password|upassword|pass|upass|user_pass|vpass|pwd|new_pass|name)2?(confirm)?(_confirm)?=\w*/i','',$pg);
 
-  if($pg != "/rss.php" AND $pg != '/modules.php' AND !stristr($pg, "op=gfx")) {
+  if($pg != "/rss.php" AND $pg != '/modules.php' AND !stristr($pg, "op=gfx")) 
+  {
 	$result = $db->sql_query("SELECT ip_lo FROM `".$prefix."_nsnst_ip2country` LIMIT 0,1");
 	$checkrow = $db->sql_numrows($result);
 	$db->sql_freeresult($result);
-	if($checkrow > 0) {
-	   $tresult = $db->sql_query("SELECT `c2c` FROM `".$prefix."_nsnst_ip2country` WHERE `ip_lo`<='".$nsnst_const['remote_long']."' AND `ip_hi`>='".$nsnst_const['remote_long']."'");
-	   $checkrow = $db->sql_numrows($tresult);
-	   if($checkrow > 0) {
+	
+	if($checkrow > 0) 
+	{
+	  $tresult = $db->sql_query("SELECT `c2c` FROM `".$prefix."_nsnst_ip2country` WHERE `ip_lo`<='".$nsnst_const['remote_long']."' AND `ip_hi`>='".$nsnst_const['remote_long']."'");
+	  $checkrow = $db->sql_numrows($tresult);
+	  if($checkrow > 0) {
 		  list($c2c) = $db->sql_fetchrow($tresult);
 	   }
 	   $db->sql_freeresult($tresult);
@@ -521,16 +532,46 @@ if($ab_config['track_active'] == 1 AND !is_excluded($nsnst_const['remote_ip'])) 
 	// 	$nsnst_const['ban_username2'] = $nsnst_const['ban_username']; 
 	//   }
 	$refered_from = htmlentities ($nsnst_const['referer'], ENT_QUOTES);
-	$db->sql_query("INSERT INTO `".$prefix."_nsnst_tracked_ips` (`user_id`, `username`, `date`, `ip_addr`, `ip_long`, `page`, `user_agent`, `refered_from`, `x_forward_for`, `client_ip`, `remote_addr`, `remote_port`, `request_method`, `c2c`) VALUES ('".addslashes($nsnst_const['ban_user_id'])."', '$ban_username2', '".addslashes($nsnst_const['ban_time'])."', '".addslashes($nsnst_const['remote_ip'])."', '".addslashes($nsnst_const['remote_long'])."', '".addslashes($pg)."', '".addslashes($user_agent)."', '$refered_from', '".addslashes($nsnst_const['forward_ip'])."', '".addslashes($nsnst_const['client_ip'])."', '".addslashes($nsnst_const['remote_addr'])."', '".addslashes($nsnst_const['remote_port'])."', '".addslashes($nsnst_const['request_method'])."', '$c2c')");
+	$db->sql_query("INSERT INTO `".$prefix."_nsnst_tracked_ips` (`user_id`, 
+	                                                            `username`, 
+																    `date`, 
+																 `ip_addr`, 
+																 `ip_long`, 
+																    `page`, 
+															  `user_agent`, 
+															`refered_from`, 
+														   `x_forward_for`, 
+														       `client_ip`, 
+															 `remote_addr`, 
+															 `remote_port`, 
+														  `request_method`, 
+														             `c2c`) 
+								VALUES ('".addslashes($nsnst_const['ban_user_id'])."', 
+								                                     '$ban_username2', 
+										   '".addslashes($nsnst_const['ban_time'])."', 
+										  '".addslashes($nsnst_const['remote_ip'])."', 
+										'".addslashes($nsnst_const['remote_long'])."', 
+								 '".addslashes($pg)."', '".addslashes($user_agent)."', 
+								                                      '$refered_from', 
+										 '".addslashes($nsnst_const['forward_ip'])."', 
+										  '".addslashes($nsnst_const['client_ip'])."', 
+										'".addslashes($nsnst_const['remote_addr'])."', 
+										'".addslashes($nsnst_const['remote_port'])."', 
+									 '".addslashes($nsnst_const['request_method'])."', 
+									                                        '$c2c')");
 	$db->sql_freeresult($result);
 	$clearedtime = strtotime(date("Y-m-d", $nsnst_const['ban_time']));
 	$cleartime = strtotime(date("Y-m-d", $nsnst_const['ban_time']));
-	if($ab_config['track_max'] > 0 AND $ab_config['track_clear'] < $cleartime) {
+	
+	if($ab_config['track_max'] > 0 AND $ab_config['track_clear'] < $cleartime) 
+	{
 	  $ab_config['track_del'] = $cleartime - $ab_config['track_max'];
+	  
 	  $db->sql_query("DELETE FROM `".$prefix."_nsnst_tracked_ips` WHERE `date` < ".$ab_config['track_del']);
-	  $result = $db->sql_query("UPDATE `".$prefix."_nsnst_config` SET `config_value`='$clearedtime' WHERE `config_name`='track_clear'");
+	  $result = $db->sql_query("UPDATE `".$prefix."_nsnst_config` SET `config_value`='".$clearedtime."' WHERE `config_name`='track_clear'");
 	  $db->sql_freeresult($result);
-	  //$db->sql_query("OPTIMIZE TABLE `".$prefix."_nsnst_tracked_ips`");
+	  
+	  $db->sql_query("OPTIMIZE TABLE `".$prefix."_nsnst_tracked_ips`");
 	}
   }
 }
@@ -591,9 +632,170 @@ function get_query_string() {
   return "none";
 }
 
-function st_clean_string($cleanstring) {
-  $st_fr1 = array("%00", "%01", "%02", "%03", "%04", "%05", "%06", "%07", "%08", "%09", "%10", "%11", "%12", "%13", "%14", "%15", "%16", "%17", "%18", "%19", "%20", "%21", "%22", "%23", "%24", "%25", "%26", "%27", "%28", "%29", "%30", "%31", "%32", "%33", "%34", "%35", "%36", "%37", "%38", "%39", "%40", "%41", "%42", "%43", "%44", "%45", "%46", "%47", "%48", "%49", "%50", "%51", "%52", "%53", "%54", "%55", "%56", "%57", "%58", "%59", "%60", "%61", "%62", "%63", "%64", "%65", "%66", "%67", "%68", "%69", "%70", "%71", "%72", "%73", "%74", "%75", "%76", "%77", "%78", "%79");
-  $st_to1 = array("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", " ", "!", "\"", "#", "$", "%", "&", "'", "(", ")", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "@", "A", "B", "C", "D", "E", "F", "G", "H", "I", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "`", "a", "b", "c", "d", "e", "f", "g", "h", "i", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y");
+function st_clean_string($cleanstring) 
+{
+  $st_fr1 = array("%00", 
+                  "%01", 
+				  "%02", 
+				  "%03", 
+				  "%04", 
+				  "%05", 
+				  "%06", 
+				  "%07", 
+				  "%08", 
+				  "%09", 
+				  "%10", 
+				  "%11", 
+				  "%12", 
+				  "%13", 
+				  "%14", 
+				  "%15", 
+				  "%16", 
+				  "%17", 
+				  "%18", 
+				  "%19", 
+				  "%20", 
+				  "%21", 
+				  "%22", 
+				  "%23", 
+				  "%24", 
+				  "%25", 
+				  "%26", 
+				  "%27", 
+				  "%28", 
+				  "%29", 
+				  "%30", 
+				  "%31", 
+				  "%32", 
+				  "%33", 
+				  "%34", 
+				  "%35", 
+				  "%36", 
+				  "%37", 
+				  "%38", 
+				  "%39", 
+				  "%40", 
+				  "%41", 
+				  "%42", 
+				  "%43", 
+				  "%44", 
+				  "%45", 
+				  "%46", 
+				  "%47", 
+				  "%48", 
+				  "%49", 
+				  "%50", 
+				  "%51", 
+				  "%52", 
+				  "%53", 
+				  "%54", 
+				  "%55", 
+				  "%56", 
+				  "%57", 
+				  "%58", 
+				  "%59", 
+				  "%60", 
+				  "%61", 
+				  "%62", 
+				  "%63", 
+				  "%64", 
+				  "%65", 
+				  "%66", 
+				  "%67", 
+				  "%68", 
+				  "%69", 
+				  "%70", 
+				  "%71", 
+				  "%72", 
+				  "%73", 
+				  "%74", 
+				  "%75", 
+				  "%76", 
+				  "%77", 
+				  "%78", 
+				  "%79");
+  
+  $st_to1 = array("", 
+                  "", 
+				  "", 
+				  "", 
+				  "", 
+				  "", 
+				  "", 
+				  "", 
+				  "", 
+				  "", 
+				  "", 
+				  "", 
+				  "", 
+				  "", 
+				  "", 
+				  "", 
+				  "", 
+				  "", 
+				  "", 
+				  "", 
+				 " ", 
+				 "!", 
+				"\"", 
+				 "#", 
+				 "$", 
+				 "%", 
+				 "&", 
+				 "'", 
+				 "(", 
+				 ")", 
+				 "0", 
+				 "1", 
+				 "2", 
+				 "3", 
+				 "4", 
+				 "5", 
+				 "6", 
+				 "7", 
+				 "8", 
+				 "9", 
+				 "@", 
+				 "A", 
+				 "B", 
+				 "C", 
+				 "D", 
+				 "E", 
+				 "F", 
+				 "G", 
+				 "H", 
+				 "I", 
+				 "P", 
+				 "Q", 
+				 "R", 
+				 "S", 
+				 "T", 
+				 "U", 
+				 "V", 
+				 "W", 
+				 "X", 
+				 "Y", 
+				 "`", 
+				 "a", 
+				 "b", 
+				 "c", 
+				 "d", 
+				 "e", 
+				 "f", 
+				 "g", 
+				 "h", 
+				 "i", 
+				 "p", 
+				 "q", 
+				 "r", 
+				 "s", 
+				 "t", 
+				 "u", 
+				 "v", 
+				 "w", 
+				 "x", 
+				 "y");
+				 
   $st_fr2 = array("%0A", "%0B", "%0C", "%0D", "%0E", "%0F", "%1A", "%1B", "%1C", "%1D", "%1E", "%1F", "%2A", "%2B", "%2C", "%2D", "%2E", "%2F", "%3A", "%3B", "%3C", "%3D", "%3E", "%3F", "%4A", "%4B", "%4C", "%4D", "%4E", "%4F", "%5A", "%5B", "%5C", "%5D", "%5E", "%5F", "%6A", "%6B", "%6C", "%6D", "%6E", "%6F", "%7A", "%7B", "%7C", "%7D", "%7E", "%7F", "%0a", "%0b", "%0c", "%0d", "%0e", "%0f", "%1a", "%1b", "%1c", "%1d", "%1e", "%1f", "%2a", "%2b", "%2c", "%2d", "%2e", "%2f", "%3a", "%3b", "%3c", "%3d", "%3e", "%3f", "%4a", "%4b", "%4c", "%4d", "%4e", "%4f", "%5a", "%5b", "%5c", "%5d", "%5e", "%5f", "%6a", "%6b", "%6c", "%6d", "%6e", "%6f", "%7a", "%7b", "%7c", "%7d", "%7e", "%7f");
   $st_to2 = array("", "", "", "", "", "", "", "", "", "", "", "", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "J", "K", "L", "M", "N", "O", "Z", "[", "\\", "]", "^", "_", "j", "k", "l", "m", "n", "o", "z", "{", "|", "}", "~", "", "", "", "", "", "", "", "", "", "", "", "", "", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "J", "K", "L", "M", "N", "O", "Z", "[", "\\", "]", "^", "_", "j", "k", "l", "m", "n", "o", "z", "{", "|", "}", "~", "");
   $cleanstring = str_replace($st_fr1, $st_to1, $cleanstring);

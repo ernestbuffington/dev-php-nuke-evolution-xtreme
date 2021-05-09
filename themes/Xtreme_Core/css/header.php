@@ -973,7 +973,7 @@ input[type='radio']{background-color:transparent!important;width:18px;height:18p
 input[type='checkbox']{width:18px;height:18px;}
 input[type='image']{border:none;padding:0;}
 
-progress{background-color:#f3f3f3;border:0;height:18px;}
+progress{background-color:<?=$bgcolor2?>;border:0;height:18px;}
 
 .codebox{border-style:solid;display:block;padding: 10px;;border:1px solid #b5b7b9;background-color:<?=$bgcolor2?>;}
 .codebox code{display:block;font:1em Monaco,"Open Sans",sans-serif;max-height:500px;max-width:100%;overflow:auto;margin:0;padding: 5px 3px;}

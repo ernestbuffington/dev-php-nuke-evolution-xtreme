@@ -225,13 +225,13 @@ if (is_user())
     if (is_mod_admin('super')):                                                                                                                                   #
      echo '<a href="modules.php?name=Web_Links" class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Links</a>';                  #
      echo '<ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                      #
-     echo '  <li><strong><a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">View Web Links</a></strong></li>';                    #
-     echo '  <li><strong><a href="admin.php?op=Links" class="btn btn-primary dropbtn" role="button">Add Web Link</a></strong></li>';                              # 
-     echo '  <li><strong><a href="admin.php?op=LinksCleanVotes" class="btn btn-primary dropbtn" role="button">Clean Link Votes</a></strong></li>';                # 
-     echo '  <li><strong><a href="admin.php?op=LinksListBrokenLinks" class="btn btn-primary dropbtn" role="button">Broken Link Reports</a></strong></li>';        # 
-     echo '  <li><strong><a href="admin.php?op=LinksListModRequests" class="btn btn-primary dropbtn" role="button">Link Modification Requests</a></strong></li>'; # 
-     echo '  <li><strong><a href="admin.php?op=LinksLinkCheck" class="btn btn-primary dropbtn" role="button">Validate Web Links</a></strong></li>';               # 
-	 echo '</ul>';                                                                                                                                                #
+     echo '  <li><strong><a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">View Web Links</a></strong></li>';                    #######
+     echo '  <li><strong><a href="admin.php?op=Links" class="btn btn-danger adropbtn-admin" role="button">Add Web Link</a></strong></li>';                              # 
+     echo '  <li><strong><a href="admin.php?op=LinksCleanVotes" class="btn btn-danger adropbtn-admin" role="button">Clean Link Votes</a></strong></li>';                # 
+     echo '  <li><strong><a href="admin.php?op=LinksListBrokenLinks" class="btn btn-danger adropbtn-admin" role="button">Broken Link Reports</a></strong></li>';        #  
+     echo '  <li><strong><a href="admin.php?op=LinksListModRequests" class="btn btn-danger adropbtn-admin" role="button">Link Modification Requests</a></strong></li>'; # 
+     echo '  <li><strong><a href="admin.php?op=LinksLinkCheck" class="btn btn-danger adropbtn-admin" role="button">Validate Web Links</a></strong></li>';               # 
+	 echo '</ul>';                                                                                                                                                #######
    else:                                                                                                                                                          #
      echo '<a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">Links</a>';                                                         #
    endif;                                                                                                                                                         #
@@ -240,7 +240,7 @@ if (is_user())
 
     # File_Repository ######################################################################################################################################################################## 
     echo '<div class="btn-group">';                                                                                                                                                          #
-    echo ' <a class="btn adropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Downloads</a>';                                                                           #
+    echo ' <a class="btn adropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Downloads</a>';                                                                          #
     echo '   <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                                               #
                                                                                                                                                                                              #
     if (is_mod_admin('super')):                                                                                                                                                              #
@@ -265,22 +265,24 @@ if (is_user())
     echo '</div>';                                                                                                                                                                           #
 	##########################################################################################################################################################################################
 
-    echo '<div class="btn-group">';
-    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';
-    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
-    if (is_mod_admin('super')):
-    echo '         <li><strong><a href="admin.php?op=adminStory" class="btn btn-primary dropbtn" role="button">Post New Blog</a></strong></li>';
-    echo '         <li><strong><a href="admin.php?op=topicsmanager" class="btn btn-primary dropbtn" role="button">Create New Blog Topic</a></strong></li>';
-    echo '         <li><strong><a href="admin.php?op=AddCategory" class="btn btn-primary dropbtn" role="button">Create New Blog Category</a></strong></li>';
-    endif;
-    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">View Blog Posts</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">View Blog Topics</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">View Blog Archives</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">View Top 10 Blog Posts</a></strong></li>';
-    if (!is_mod_admin('super'))
-	echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
-    echo '       </ul>';
-    echo '</div>';
+    # Blog module buttin set ###########################################################################################################################################
+    echo '<div class="btn-group">';                                                                                                                                    #
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';                                                    #
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                     #
+    if (is_mod_admin('super')):                                                                                                                                        #
+    echo '         <li><strong><a href="admin.php?op=adminStory" class="btn btn-danger adropbtn-admin" role="button">Post New Blog</a></strong></li>';                 #
+    echo '         <li><strong><a href="admin.php?op=topicsmanager" class="btn btn-danger adropbtn-admin" role="button">Create New Blog Topic</a></strong></li>';      #
+    echo '         <li><strong><a href="admin.php?op=AddCategory" class="btn btn-danger adropbtn-admin" role="button">Create New Blog Category</a></strong></li>';     #
+    endif;                                                                                                                                                             #
+    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">View Blog Posts</a></strong></li>';                       #
+    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">View Blog Topics</a></strong></li>';               #
+    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">View Blog Archives</a></strong></li>';            #
+    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">View Top 10 Blog Posts</a></strong></li>';            #
+    if (!is_mod_admin('super'))                                                                                                                                        #
+	echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';               #
+    echo '       </ul>';                                                                                                                                               #
+    echo '</div>';                                                                                                                                                     #
+	####################################################################################################################################################################
 
    # This is the button set for the FAQ module #################################################################################################################
    echo '<div class="btn-group">';                                                                                                                             #
@@ -332,13 +334,13 @@ if (is_user())
     if (is_mod_admin('super')):                                                                                                                                   #
      echo '<a href="modules.php?name=Web_Links" class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Links</a>';                  #
      echo '<ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                      #
-     echo '  <li><strong><a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">View Web Links</a></strong></li>';                    #
-     echo '  <li><strong><a href="admin.php?op=Links" class="btn btn-primary dropbtn" role="button">Add Web Link</a></strong></li>';                              # 
-     echo '  <li><strong><a href="admin.php?op=LinksCleanVotes" class="btn btn-primary dropbtn" role="button">Clean Link Votes</a></strong></li>';                # 
-     echo '  <li><strong><a href="admin.php?op=LinksListBrokenLinks" class="btn btn-primary dropbtn" role="button">Broken Link Reports</a></strong></li>';        # 
-     echo '  <li><strong><a href="admin.php?op=LinksListModRequests" class="btn btn-primary dropbtn" role="button">Link Modification Requests</a></strong></li>'; # 
-     echo '  <li><strong><a href="admin.php?op=LinksLinkCheck" class="btn btn-primary dropbtn" role="button">Validate Web Links</a></strong></li>';               # 
-	 echo '</ul>';                                                                                                                                                #
+     echo '  <li><strong><a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">View Web Links</a></strong></li>';                    #######
+     echo '  <li><strong><a href="admin.php?op=Links" class="btn btn-danger adropbtn-admin" role="button">Add Web Link</a></strong></li>';                              # 
+     echo '  <li><strong><a href="admin.php?op=LinksCleanVotes" class="btn btn-danger adropbtn-admin" role="button">Clean Link Votes</a></strong></li>';                # 
+     echo '  <li><strong><a href="admin.php?op=LinksListBrokenLinks" class="btn btn-danger adropbtn-admin" role="button">Broken Link Reports</a></strong></li>';        #  
+     echo '  <li><strong><a href="admin.php?op=LinksListModRequests" class="btn btn-danger adropbtn-admin" role="button">Link Modification Requests</a></strong></li>'; # 
+     echo '  <li><strong><a href="admin.php?op=LinksLinkCheck" class="btn btn-danger adropbtn-admin" role="button">Validate Web Links</a></strong></li>';               # 
+	 echo '</ul>';                                                                                                                                                #######
    else:                                                                                                                                                          #
      echo '<a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">Links</a>';                                                         #
    endif;                                                                                                                                                         #
@@ -372,22 +374,24 @@ if (is_user())
     echo '</div>';                                                                                                                                                                           #
 	##########################################################################################################################################################################################
 
-    echo '<div class="btn-group">';
-    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';
-    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
-    if (is_mod_admin('super')):
-    echo '         <li><strong><a href="admin.php?op=adminStory" class="btn btn-primary dropbtn" role="button">Post New Blog</a></strong></li>';
-    echo '         <li><strong><a href="admin.php?op=topicsmanager" class="btn btn-primary dropbtn" role="button">Create New Blog Topic</a></strong></li>';
-    echo '         <li><strong><a href="admin.php?op=AddCategory" class="btn btn-primary dropbtn" role="button">Create New Blog Category</a></strong></li>';
-    endif;
-    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">View Blog Posts</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">View Blog Topics</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">View Blog Archives</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">View Top 10 Blog Posts</a></strong></li>';
-    if (!is_mod_admin('super'))
-	echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
-    echo '       </ul>';
-    echo '</div>';
+    # Blog module buttin set ###########################################################################################################################################
+    echo '<div class="btn-group">';                                                                                                                                    #
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';                                                    #
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                     #
+    if (is_mod_admin('super')):                                                                                                                                        #
+    echo '         <li><strong><a href="admin.php?op=adminStory" class="btn btn-danger adropbtn-admin" role="button">Post New Blog</a></strong></li>';                 #
+    echo '         <li><strong><a href="admin.php?op=topicsmanager" class="btn btn-danger adropbtn-admin" role="button">Create New Blog Topic</a></strong></li>';      #
+    echo '         <li><strong><a href="admin.php?op=AddCategory" class="btn btn-danger adropbtn-admin" role="button">Create New Blog Category</a></strong></li>';     #
+    endif;                                                                                                                                                             #
+    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">View Blog Posts</a></strong></li>';                       #
+    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">View Blog Topics</a></strong></li>';               #
+    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">View Blog Archives</a></strong></li>';            #
+    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">View Top 10 Blog Posts</a></strong></li>';            #
+    if (!is_mod_admin('super'))                                                                                                                                        #
+	echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';               #
+    echo '       </ul>';                                                                                                                                               #
+    echo '</div>';                                                                                                                                                     #
+	####################################################################################################################################################################
 
    # This is the button set for the FAQ module #################################################################################################################
    echo '<div class="btn-group">';                                                                                                                             #
@@ -439,13 +443,13 @@ if (is_user())
     if (is_mod_admin('super')):                                                                                                                                   #
      echo '<a href="modules.php?name=Web_Links" class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Links</a>';                  #
      echo '<ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                      #
-     echo '  <li><strong><a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">View Web Links</a></strong></li>';                    #
-     echo '  <li><strong><a href="admin.php?op=Links" class="btn btn-primary dropbtn" role="button">Add Web Link</a></strong></li>';                              # 
-     echo '  <li><strong><a href="admin.php?op=LinksCleanVotes" class="btn btn-primary dropbtn" role="button">Clean Link Votes</a></strong></li>';                # 
-     echo '  <li><strong><a href="admin.php?op=LinksListBrokenLinks" class="btn btn-primary dropbtn" role="button">Broken Link Reports</a></strong></li>';        # 
-     echo '  <li><strong><a href="admin.php?op=LinksListModRequests" class="btn btn-primary dropbtn" role="button">Link Modification Requests</a></strong></li>'; # 
-     echo '  <li><strong><a href="admin.php?op=LinksLinkCheck" class="btn btn-primary dropbtn" role="button">Validate Web Links</a></strong></li>';               # 
-	 echo '</ul>';                                                                                                                                                #
+     echo '  <li><strong><a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">View Web Links</a></strong></li>';                    #######
+     echo '  <li><strong><a href="admin.php?op=Links" class="btn btn-danger adropbtn-admin" role="button">Add Web Link</a></strong></li>';                              # 
+     echo '  <li><strong><a href="admin.php?op=LinksCleanVotes" class="btn btn-danger adropbtn-admin" role="button">Clean Link Votes</a></strong></li>';                # 
+     echo '  <li><strong><a href="admin.php?op=LinksListBrokenLinks" class="btn btn-danger adropbtn-admin" role="button">Broken Link Reports</a></strong></li>';        #  
+     echo '  <li><strong><a href="admin.php?op=LinksListModRequests" class="btn btn-danger adropbtn-admin" role="button">Link Modification Requests</a></strong></li>'; # 
+     echo '  <li><strong><a href="admin.php?op=LinksLinkCheck" class="btn btn-danger adropbtn-admin" role="button">Validate Web Links</a></strong></li>';               # 
+	 echo '</ul>';                                                                                                                                                #######
    else:                                                                                                                                                          #
      echo '<a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">Links</a>';                                                         #
    endif;                                                                                                                                                         #
@@ -479,22 +483,24 @@ if (is_user())
     echo '</div>';                                                                                                                                                                           #
 	##########################################################################################################################################################################################
 
-    echo '<div class="btn-group">';
-    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';
-    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
-    if (is_mod_admin('super')):
-    echo '         <li><strong><a href="admin.php?op=adminStory" class="btn btn-primary dropbtn" role="button">Post New Blog</a></strong></li>';
-    echo '         <li><strong><a href="admin.php?op=topicsmanager" class="btn btn-primary dropbtn" role="button">Create New Blog Topic</a></strong></li>';
-    echo '         <li><strong><a href="admin.php?op=AddCategory" class="btn btn-primary dropbtn" role="button">Create New Blog Category</a></strong></li>';
-    endif;
-    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">View Blog Posts</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">View Blog Topics</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">View Blog Archives</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">View Top 10 Blog Posts</a></strong></li>';
-    if (!is_mod_admin('super'))
-	echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
-    echo '       </ul>';
-    echo '</div>';
+    # Blog module buttin set ###########################################################################################################################################
+    echo '<div class="btn-group">';                                                                                                                                    #
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';                                                    #
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                     #
+    if (is_mod_admin('super')):                                                                                                                                        #
+    echo '         <li><strong><a href="admin.php?op=adminStory" class="btn btn-danger adropbtn-admin" role="button">Post New Blog</a></strong></li>';                 #
+    echo '         <li><strong><a href="admin.php?op=topicsmanager" class="btn btn-danger adropbtn-admin" role="button">Create New Blog Topic</a></strong></li>';      #
+    echo '         <li><strong><a href="admin.php?op=AddCategory" class="btn btn-danger adropbtn-admin" role="button">Create New Blog Category</a></strong></li>';     #
+    endif;                                                                                                                                                             #
+    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">View Blog Posts</a></strong></li>';                       #
+    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">View Blog Topics</a></strong></li>';               #
+    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">View Blog Archives</a></strong></li>';            #
+    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">View Top 10 Blog Posts</a></strong></li>';            #
+    if (!is_mod_admin('super'))                                                                                                                                        #
+	echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';               #
+    echo '       </ul>';                                                                                                                                               #
+    echo '</div>';                                                                                                                                                     #
+	####################################################################################################################################################################
 
    # This is the button set for the FAQ module #################################################################################################################
    echo '<div class="btn-group">';                                                                                                                             #
@@ -544,15 +550,15 @@ if (is_user())
    # This is the button set for the Web Links #####################################################################################################################
    echo '<div class="btn-group">';                                                                                                                                #
     if (is_mod_admin('super')):                                                                                                                                   #
-     echo '<a href="modules.php?name=Web_Links" class="btn adropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Links</a>';                  #
-     echo '<ul class="dropdown-menu adropbtn dropdown-content" role="menu">';                                                                                      #
-     echo '  <li><strong><a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">View Web Links</a></strong></li>';                    #
-     echo '  <li><strong><a href="admin.php?op=Links" class="btn btn-primary dropbtn" role="button">Add Web Link</a></strong></li>';                              # 
-     echo '  <li><strong><a href="admin.php?op=LinksCleanVotes" class="btn btn-primary dropbtn" role="button">Clean Link Votes</a></strong></li>';                # 
-     echo '  <li><strong><a href="admin.php?op=LinksListBrokenLinks" class="btn btn-primary dropbtn" role="button">Broken Link Reports</a></strong></li>';        # 
-     echo '  <li><strong><a href="admin.php?op=LinksListModRequests" class="btn btn-primary dropbtn" role="button">Link Modification Requests</a></strong></li>'; # 
-     echo '  <li><strong><a href="admin.php?op=LinksLinkCheck" class="btn btn-primary dropbtn" role="button">Validate Web Links</a></strong></li>';               # 
-	 echo '</ul>';                                                                                                                                                #
+     echo '<a href="modules.php?name=Web_Links" class="btn adropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Links</a>';                 #
+     echo '<ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                      #
+     echo '  <li><strong><a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">View Web Links</a></strong></li>';                    #######
+     echo '  <li><strong><a href="admin.php?op=Links" class="btn btn-danger adropbtn-admin" role="button">Add Web Link</a></strong></li>';                              # 
+     echo '  <li><strong><a href="admin.php?op=LinksCleanVotes" class="btn btn-danger adropbtn-admin" role="button">Clean Link Votes</a></strong></li>';                # 
+     echo '  <li><strong><a href="admin.php?op=LinksListBrokenLinks" class="btn btn-danger adropbtn-admin" role="button">Broken Link Reports</a></strong></li>';        #  
+     echo '  <li><strong><a href="admin.php?op=LinksListModRequests" class="btn btn-danger adropbtn-admin" role="button">Link Modification Requests</a></strong></li>'; # 
+     echo '  <li><strong><a href="admin.php?op=LinksLinkCheck" class="btn btn-danger adropbtn-admin" role="button">Validate Web Links</a></strong></li>';               # 
+	 echo '</ul>';                                                                                                                                                #######
    else:                                                                                                                                                          #
      echo '<a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">Links</a>';                                                         #
    endif;                                                                                                                                                         #
@@ -586,22 +592,24 @@ if (is_user())
     echo '</div>';                                                                                                                                                                           #
 	##########################################################################################################################################################################################
 
-    echo '<div class="btn-group">';
-    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';
-    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
-    if (is_mod_admin('super')):
-    echo '         <li><strong><a href="admin.php?op=adminStory" class="btn btn-primary dropbtn" role="button">Post New Blog</a></strong></li>';
-    echo '         <li><strong><a href="admin.php?op=topicsmanager" class="btn btn-primary dropbtn" role="button">Create New Blog Topic</a></strong></li>';
-    echo '         <li><strong><a href="admin.php?op=AddCategory" class="btn btn-primary dropbtn" role="button">Create New Blog Category</a></strong></li>';
-    endif;
-    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">View Blog Posts</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">View Blog Topics</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">View Blog Archives</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">View Top 10 Blog Posts</a></strong></li>';
-    if (!is_mod_admin('super'))
-	echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
-    echo '       </ul>';
-    echo '</div>';
+    # Blog module buttin set ###########################################################################################################################################
+    echo '<div class="btn-group">';                                                                                                                                    #
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';                                                    #
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                     #
+    if (is_mod_admin('super')):                                                                                                                                        #
+    echo '         <li><strong><a href="admin.php?op=adminStory" class="btn btn-danger adropbtn-admin" role="button">Post New Blog</a></strong></li>';                 #
+    echo '         <li><strong><a href="admin.php?op=topicsmanager" class="btn btn-danger adropbtn-admin" role="button">Create New Blog Topic</a></strong></li>';      #
+    echo '         <li><strong><a href="admin.php?op=AddCategory" class="btn btn-danger adropbtn-admin" role="button">Create New Blog Category</a></strong></li>';     #
+    endif;                                                                                                                                                             #
+    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">View Blog Posts</a></strong></li>';                       #
+    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">View Blog Topics</a></strong></li>';               #
+    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">View Blog Archives</a></strong></li>';            #
+    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">View Top 10 Blog Posts</a></strong></li>';            #
+    if (!is_mod_admin('super'))                                                                                                                                        #
+	echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';               #
+    echo '       </ul>';                                                                                                                                               #
+    echo '</div>';                                                                                                                                                     #
+	####################################################################################################################################################################
 
    # This is the button set for the FAQ module #################################################################################################################
    echo '<div class="btn-group">';                                                                                                                             #
@@ -693,22 +701,24 @@ if (is_user())
     echo '</div>';                                                                                                                                                                           #
 	##########################################################################################################################################################################################
 
-    echo '<div class="btn-group">';
-    echo '       <a class="btn adropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';
-    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';
-    if (is_mod_admin('super')):
-    echo '         <li><strong><a href="admin.php?op=adminStory" class="btn btn-primary dropbtn" role="button">Post New Blog</a></strong></li>';
-    echo '         <li><strong><a href="admin.php?op=topicsmanager" class="btn btn-primary dropbtn" role="button">Create New Blog Topic</a></strong></li>';
-    echo '         <li><strong><a href="admin.php?op=AddCategory" class="btn btn-primary dropbtn" role="button">Create New Blog Category</a></strong></li>';
-    endif;
-    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">View Blog Posts</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">View Blog Topics</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">View Blog Archives</a></strong></li>';
-    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">View Top 10 Blog Posts</a></strong></li>';
-    if (!is_mod_admin('super'))
-	echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';
-    echo '       </ul>';
-    echo '</div>';
+    # Blog module buttin set ###########################################################################################################################################
+    echo '<div class="btn-group">';                                                                                                                                    #
+    echo '       <a class="btn adropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';                                                   #
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                     #
+    if (is_mod_admin('super')):                                                                                                                                        #
+    echo '         <li><strong><a href="admin.php?op=adminStory" class="btn btn-danger adropbtn-admin" role="button">Post New Blog</a></strong></li>';                 #
+    echo '         <li><strong><a href="admin.php?op=topicsmanager" class="btn btn-danger adropbtn-admin" role="button">Create New Blog Topic</a></strong></li>';      #
+    echo '         <li><strong><a href="admin.php?op=AddCategory" class="btn btn-danger adropbtn-admin" role="button">Create New Blog Category</a></strong></li>';     #
+    endif;                                                                                                                                                             #
+    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">View Blog Posts</a></strong></li>';                       #
+    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">View Blog Topics</a></strong></li>';               #
+    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">View Blog Archives</a></strong></li>';            #
+    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">View Top 10 Blog Posts</a></strong></li>';            #
+    if (!is_mod_admin('super'))                                                                                                                                        #
+	echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';               #
+    echo '       </ul>';                                                                                                                                               #
+    echo '</div>';                                                                                                                                                     #
+	####################################################################################################################################################################
 
    # This is the button set for the FAQ module #################################################################################################################
    echo '<div class="btn-group">';                                                                                                                             #
@@ -760,13 +770,13 @@ echo '<div class="btn-group">';
     if (is_mod_admin('super')):                                                                                                                                   #
      echo '<a href="modules.php?name=Web_Links" class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Links</a>';                  #
      echo '<ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                      #
-     echo '  <li><strong><a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">View Web Links</a></strong></li>';                    #
-     echo '  <li><strong><a href="admin.php?op=Links" class="btn btn-primary dropbtn" role="button">Add Web Link</a></strong></li>';                              # 
-     echo '  <li><strong><a href="admin.php?op=LinksCleanVotes" class="btn btn-primary dropbtn" role="button">Clean Link Votes</a></strong></li>';                # 
-     echo '  <li><strong><a href="admin.php?op=LinksListBrokenLinks" class="btn btn-primary dropbtn" role="button">Broken Link Reports</a></strong></li>';        # 
-     echo '  <li><strong><a href="admin.php?op=LinksListModRequests" class="btn btn-primary dropbtn" role="button">Link Modification Requests</a></strong></li>'; # 
-     echo '  <li><strong><a href="admin.php?op=LinksLinkCheck" class="btn btn-primary dropbtn" role="button">Validate Web Links</a></strong></li>';               # 
-	 echo '</ul>';                                                                                                                                                #
+     echo '  <li><strong><a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">View Web Links</a></strong></li>';                    #######
+     echo '  <li><strong><a href="admin.php?op=Links" class="btn btn-danger admin-adropbtn" role="button">Add Web Link</a></strong></li>';                              # 
+     echo '  <li><strong><a href="admin.php?op=LinksCleanVotes" class="btn btn-danger admin-adropbtn" role="button">Clean Link Votes</a></strong></li>';                # 
+     echo '  <li><strong><a href="admin.php?op=LinksListBrokenLinks" class="btn btn-danger admin-adropbtn" role="button">Broken Link Reports</a></strong></li>';        # 
+     echo '  <li><strong><a href="admin.php?op=LinksListModRequests" class="btn btn-danger admin-adropbtn" role="button">Link Modification Requests</a></strong></li>'; # 
+     echo '  <li><strong><a href="admin.php?op=LinksLinkCheck" class="btn btn-danger admin-adropbtn" role="button">Validate Web Links</a></strong></li>';               # 
+	 echo '</ul>';                                                                                                                                                #######
    else:                                                                                                                                                          #
      echo '<a href="modules.php?name=Web_Links" class="btn btn-primary dropbtn" role="button">Links</a>';                                                         #
    endif;                                                                                                                                                         #
@@ -800,24 +810,24 @@ echo '<div class="btn-group">';
     echo '</div>';                                                                                                                                                                           #
 	##########################################################################################################################################################################################
 
-   # This is the button set for the BLOG module ##############################################################################################################
-    echo '<div class="btn-group">';                                                                                                                          #
-    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';                                          #
-    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                           #
-    if (is_mod_admin('super')):                                                                                                                              #
-    echo '         <li><strong><a href="admin.php?op=adminStory" class="btn btn-primary dropbtn" role="button">Post New Blog</a></strong></li>';             #
-    echo '         <li><strong><a href="admin.php?op=topicsmanager" class="btn btn-primary dropbtn" role="button">Create New Blog Topic</a></strong></li>';  #
-    echo '         <li><strong><a href="admin.php?op=AddCategory" class="btn btn-primary dropbtn" role="button">Create New Blog Category</a></strong></li>'; #
-    endif;                                                                                                                                                   #
-    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">View Blog Posts</a></strong></li>';             #
-    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">View Blog Topics</a></strong></li>';     #
-    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">View Blog Archives</a></strong></li>';  #
-    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">View Top 10 Blog Posts</a></strong></li>';  #
-    if (!is_mod_admin('super'))                                                                                                                              #
-	echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';     #
-    echo '       </ul>';                                                                                                                                     #
-    echo '</div>';                                                                                                                                           #
-	##########################################################################################################################################################
+    # Blog module buttin set ###########################################################################################################################################
+    echo '<div class="btn-group">';                                                                                                                                    #
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Blog</a>';                                                    #
+    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                     #
+    if (is_mod_admin('super')):                                                                                                                                        #
+    echo '         <li><strong><a href="admin.php?op=adminStory" class="btn btn-danger adropbtn-admin" role="button">Post New Blog</a></strong></li>';                 #
+    echo '         <li><strong><a href="admin.php?op=topicsmanager" class="btn btn-danger adropbtn-admin" role="button">Create New Blog Topic</a></strong></li>';      #
+    echo '         <li><strong><a href="admin.php?op=AddCategory" class="btn btn-danger adropbtn-admin" role="button">Create New Blog Category</a></strong></li>';     #
+    endif;                                                                                                                                                             #
+    echo '         <li><strong><a href="modules.php?name=Blog" class="btn btn-primary dropbtn" role="button">View Blog Posts</a></strong></li>';                       #
+    echo '         <li><strong><a href="modules.php?name=Blog_Topics" class="btn btn-primary dropbtn" role="button">View Blog Topics</a></strong></li>';               #
+    echo '         <li><strong><a href="modules.php?name=Blog_Archive" class="btn btn-primary dropbtn" role="button">View Blog Archives</a></strong></li>';            #
+    echo '         <li><strong><a href="modules.php?name=Blog_Top" class="btn btn-primary dropbtn" role="button">View Top 10 Blog Posts</a></strong></li>';            #
+    if (!is_mod_admin('super'))                                                                                                                                        #
+	echo '         <li><strong><a href="modules.php?name=Blog_Submit" class="btn btn-primary dropbtn" role="button">Submit Blog Post</a></strong></li>';               #
+    echo '       </ul>';                                                                                                                                               #
+    echo '</div>';                                                                                                                                                     #
+	####################################################################################################################################################################
 
    # This is the button set for the FAQ module #################################################################################################################
    echo '<div class="btn-group">';                                                                                                                             #
