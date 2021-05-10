@@ -42,12 +42,21 @@ include(NUKE_MODULES_DIR.$module_name.'/doc_config.php');
 
 define('INDEX_FILE', true);
 
-function about() {
+function about() 
+{
     global $sitename, $adminmail, $aboutus, $questions, $module_name, $currentlang;
+
     include_once(NUKE_BASE_DIR.'header.php');
+
     title($sitename.': '._NSABOUTUS);
-    if (file_exists(NUKE_MODULES_DIR.$module_name.'/copyright.php')) {
+    
+	if (file_exists(NUKE_MODULES_DIR.$module_name.'/copyright.php')) {
         OpenTable();
+	    # space at the top of header inside graphics area!
+        echo '<div align="center" style="padding-top:10px;">';
+        echo '</div>';
+
+		echo '<div align="center"><h1>About The 86it Developers Network</h1></div>';
         echo "<table width=\"95%\" border=\"0\" cellspacing=\"0\" cellpadding=\"2\" align=\"center\">";
         echo "<tr><td valign=\"top\"><br />";
         echo "<div align=\"justify\"><span class=\"content\">";

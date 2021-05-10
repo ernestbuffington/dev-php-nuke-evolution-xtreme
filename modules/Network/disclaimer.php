@@ -42,13 +42,24 @@ include(NUKE_MODULES_DIR.$module_name.'/doc_config.php');
 
 define('INDEX_FILE', true);
 
-function disclaimer() {
+function disclaimer() 
+{
     global $sitename, $adminmail, $module_name;
+
     include_once(NUKE_BASE_DIR.'header.php');
+
     title($sitename.': '._NSDISCLAIMER);
-    if (file_exists(NUKE_MODULES_DIR.$module_name.'/copyright.php')) {
+
+    if (file_exists(NUKE_MODULES_DIR.$module_name.'/copyright.php')) 
+	{
         OpenTable();
-        echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"10\" align=\"center\">";
+ 	    # space at the top of header inside graphics area!
+        echo '<div align="center" style="padding-top:10px;">';
+        echo '</div>';
+
+		echo '<div align="center"><h1>The 86it Developers Network Disclaimer</h1></div>';
+   
+	    echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"10\" align=\"center\">";
         echo "<tr><td valign=\"top\"><br />";
         echo "<div align=\"justify\"><span class=\"content\">";
         echo "<strong>$sitename</strong> "._NSDISCLAIM1." <strong>$sitename</strong> "._NSDISCLAIM2."";

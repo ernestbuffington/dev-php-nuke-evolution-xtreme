@@ -5,10 +5,10 @@
 
 /********************************************************/
 /* NukeSentinel™                                        */
-/* By: NukeScripts(tm) (http://nukescripts.86it.us)     */
-/* Copyright (c) 2000-2008 by NukeScripts(tm)           */
+/* By: NukeScripts™ (http://nukescripts.86it.us)        */
+/* Copyright (c) 2000-2008 by NukeScripts™              */
 /* See CREDITS.txt for ALL contributors                 */
-/********************************************************/
+/********************************************************/ 
 if(!defined('MODULE_FILE')) die ('You can\'t access this file directly...');
 define('NUKESENTINEL_PUBLIC',true);
 $module_name = basename(dirname(__FILE__));

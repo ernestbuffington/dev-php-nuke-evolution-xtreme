@@ -32,10 +32,10 @@
 ##################################################
 
 define("_NSINDEXLEGAL","Docs");
-define("_NSABOUTUS","About Us");
-define("_NSDISCLAIMER","Disclaimer Statement");
-define("_NSPRIVACY","Privacy Statement");
-define("_NSTERMS","Terms of Use");
+define("_NSABOUTUS","About Our Network");
+define("_NSDISCLAIMER","Network Disclaimer Statement");
+define("_NSPRIVACY","Network Privacy Statement");
+define("_NSTERMS","Network Terms of Use");
 define("_NSFEEDBACK","If you have any questions, comments, or suggestions about these Docs, please use our <a href=\"modules.php?name=Feedback\">Feedback Form</a>.<br /><br />");
 define("_NSCONTACT","If you have any questions, comments, or suggestions about these Docs, please use our <a href=\"contact.html\"><strong><u>Contact Form</u></strong></a>.<br /><br />");
 

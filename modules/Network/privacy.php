@@ -42,13 +42,25 @@ include(NUKE_MODULES_DIR.$module_name.'/doc_config.php');
 
 define('INDEX_FILE', true);
 
-function privacy() {
+function privacy() 
+{
     global $sitename, $adminmail, $module_name;
+
     include_once(NUKE_BASE_DIR.'header.php');
+
     title("$sitename: "._NSPRIVACY."");
-    if (file_exists(NUKE_MODULES_DIR.$module_name.'/copyright.php')) {
+
+    if (file_exists(NUKE_MODULES_DIR.$module_name.'/copyright.php')) 
+	{
         OpenTable();
-        echo "<br /><table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"4\" align=\"center\">";
+    
+ 	    # space at the top of header inside graphics area!
+        echo '<div align="center" style="padding-top:10px;">';
+        echo '</div>';
+
+		echo '<div align="center"><h1>The 86it Developers Network Privacy Statement</h1></div>';
+	
+	    echo "<br /><table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"4\" align=\"center\">";
         echo "<tr><td valign=\"top\">";
         echo "<div align=\"justify\">"._NSPRIVACY1." <strong>$sitename</strong>. "._NSPRIVACY2."</div>";
         echo "<br /><br /><div align=\"justify\"><span class=\"content\">";
