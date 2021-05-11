@@ -1347,9 +1347,9 @@ function ads($position)
         $db->sql_query("UPDATE `".$prefix."_banner` SET `impmade`=" . $impmade . "+1 WHERE `bid`='$bid'");
     }
     
-	$sql2 = "SELECT `cid`, `imptotal`, `impmade`, `clicks`, `date`, `ad_class`, `ad_code`, `ad_width`, `ad_height` FROM `".$prefix."_banner` WHERE `bid`='$bid'";
+	$sql2 = "SELECT `cid`, `imptotal`, `impmade`, `clicks`, `date`, `ad_class`, `ad_code`, `ad_width`, `ad_height`, `clickurl` FROM `".$prefix."_banner` WHERE `bid`='$bid'";
     $result2 = $db->sql_query($sql2);
-    list($cid, $imptotal, $impmade, $clicks, $date, $ad_class, $ad_code, $ad_width, $ad_height) = $db->sql_fetchrow($result2, SQL_NUM);
+    list($cid, $imptotal, $impmade, $clicks, $date, $ad_class, $ad_code, $ad_width, $ad_height, $clickurl) = $db->sql_fetchrow($result2, SQL_NUM);
     $db->sql_freeresult($result2);
     $cid = intval($cid);
     $imptotal = intval($imptotal);
@@ -1389,18 +1389,13 @@ function ads($position)
         $ad_code = stripslashes($ad_code);
         $ads = "<div align=\"center\">$ad_code</div>";
     } 
-	elseif ($ad_class == "flash") 
-	{
-        $ads = "<div align=\"center\">"
-              ."<object classid=\"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000\" codebase=\"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0\" width=\"".$ad_width."\" height=\"".$ad_height."\" id=\"$bid\">"
-              ."<param name=\"movie\" value=\"".$imageurl."\" />"
-              ."<param name=\"quality\" value=\"high\" />"
-              ."<embed src=\"".$imageurl."\" quality=\"high\" width=\"".$ad_width."\" height=\"".$ad_height."\" name=\"".$bid."\" align=\"\" type=\"application/x-shockwave-flash\" pluginspage=\"http://www.macromedia.com/go/getflashplayer\"></embed></object>"
-              ."</div>";
-    } 
 	else 
 	{
+	   if ($clickurl == 'index.php'):
+       $ads = '<a href="index.php?op=ad_click&amp;bid='.$bid.'" target="_self"><img src="'.$imageurl.'" width="'.$ad_width.'" height="'.$ad_height.'" border="0" alt="'.$alttext.'" title="'.$alttext.'"></a>';
+	   else:
        $ads = '<a href="index.php?op=ad_click&amp;bid='.$bid.'" target="_blank"><img src="'.$imageurl.'" width="'.$ad_width.'" height="'.$ad_height.'" border="0" alt="'.$alttext.'" title="'.$alttext.'"></a>';
+	   endif;
     }
     return $ads;
 }
@@ -1409,7 +1404,8 @@ function network_ads($position)
 {
     global $network_prefix, $db2, $sitename, $adminmail, $nukeurl, $banners;
 
-    echo "\n\n<!-- function network_ads EXECUTE -->\n";
+    echo "\n\n\n<!-- function network_ads START -->\n";
+    echo "<!-- function network_ads LOADING -->\n";
 	
 	if(!$banners) 
     return ''; 
@@ -1435,8 +1431,19 @@ function network_ads($position)
 	if(!is_admin()) 
     $db2->sql_query("UPDATE `".$network_prefix."_banner` SET `impmade`=" . $impmade . "+1 WHERE `bid`='$bid'");
 
-    $sql2 = "SELECT `cid`, `imptotal`, `impmade`, `clicks`, `date`, `ad_class`, `ad_code`, `ad_width`, `ad_height` FROM `".$network_prefix."_banner` WHERE `bid`='$bid'";
-    $result2 = $db2->sql_query($sql2);
+    $sql2 = "SELECT `cid`, 
+	           `imptotal`, 
+			    `impmade`, 
+				 `clicks`, 
+				   `date`, 
+			   `ad_class`, 
+			    `ad_code`, 
+			   `ad_width`, 
+			  `ad_height` 
+			  
+			  FROM `".$network_prefix."_banner` WHERE `bid`='$bid'";
+    
+	$result2 = $db2->sql_query($sql2);
 
     list($cid, $imptotal, $impmade, $clicks, $date, $ad_class, $ad_code, $ad_width, $ad_height) = $db2->sql_fetchrow($result2, SQL_NUM);
 
@@ -1477,21 +1484,15 @@ function network_ads($position)
             $mailcommand = removecrlf($mailcommand);
         endif;
     endif;
+	
 	if ($ad_class == "code"): 
         $ad_code = stripslashes($ad_code);
         $ads = '<div align="center">'.$ad_code.'</div>';
-	elseif ($ad_class == "flash"): 
-        $ads = "<div align=\"center\">"
-              ."<object classid=\"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000\" codebase=\"https://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0\" width=\"".$ad_width."\" height=\"".$ad_height."\" id=\"$bid\">"
-              ."<param name=\"movie\" value=\"".$imageurl."\" />"
-              ."<param name=\"quality\" value=\"high\" />"
-              ."<embed src=\"".$imageurl."\" quality=\"high\" width=\"".$ad_width."\" height=\"".$ad_height."\" name=\"".$bid."\" align=\"\" type=\"application/x-shockwave-flash\" pluginspage=\"https://www.macromedia.com/go/getflashplayer\"></embed></object>"
-              ."</div>";
-	else: 
+    else:
 		# this opens the ad from the main hub - https://hub.86it.us
         $ads = '<a href="https://hub.86it.us/index.php?op=ad_network_click&amp;bid='.$bid.'" target="_blank"><img src="'.$imageurl.'" width="'.$ad_width.'" height="'.$ad_height.'" border="0" alt="'.$alttext.'" title="'.$alttext.'"></a>';
 	endif;
-    echo "<!-- Networks Ads END EXECUTE -->\n\n\n";
+    echo "<!-- function network_ads DONE -->\n\n\n";
   return $ads;
 }
 
