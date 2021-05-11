@@ -1384,19 +1384,16 @@ function ads($position)
         }
     }
     
-	if ($ad_class == "code") 
-	{
+	if ($ad_class == "code"): 
         $ad_code = stripslashes($ad_code);
         $ads = "<div align=\"center\">$ad_code</div>";
-    } 
-	else 
-	{
+	else: 
 	   if ($clickurl == 'index.php'):
        $ads = '<a href="index.php?op=ad_click&amp;bid='.$bid.'" target="_self"><img src="'.$imageurl.'" width="'.$ad_width.'" height="'.$ad_height.'" border="0" alt="'.$alttext.'" title="'.$alttext.'"></a>';
 	   else:
        $ads = '<a href="index.php?op=ad_click&amp;bid='.$bid.'" target="_blank"><img src="'.$imageurl.'" width="'.$ad_width.'" height="'.$ad_height.'" border="0" alt="'.$alttext.'" title="'.$alttext.'"></a>';
 	   endif;
-    }
+    endif;
     return $ads;
 }
 
