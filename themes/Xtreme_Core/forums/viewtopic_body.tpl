@@ -245,11 +245,14 @@
       <span class="nav">
         <a href="{U_POST_NEW_TOPIC}"><img src="{POST_IMG}" border="0" alt="{L_POST_NEW_TOPIC}" align="middle" /></a>
         <a href="{U_POST_REPLY_TOPIC}"><img src="{REPLY_IMG}" border="0" alt="{L_POST_REPLY_TOPIC}" align="middle" /></a>
+        
         <!-- BEGIN switch_quick_reply -->
         <a href="{U_POST_SQR_TOPIC}"><img src="{SQR_IMG}" border="0" alt="{L_POST_SQR_TOPIC}" align="middle" /></a>
         <!-- END switch_quick_reply -->
         <a target="_blank" href="{U_PRINTER_TOPIC}"><img src="{PRINTER_IMG}" border="0" alt="{L_PRINTER_TOPIC}" align="middle" /></a>
-        <!-- TOPIC BUTTON (WHO HAS VIEWED THE POST) --><a href="{U_WHOVIEW_TOPIC}"><img src="{WHOVIEW_IMG}" border="0" alt="{L_WHOVIEW_ALT}" align="middle" /></a><!-- TOPIC BUTTON (WHO HAS VIEWED THE POST) -->
+        <!-- TOPIC BUTTON (WHO HAS VIEWED THE POST) -->
+        <a href="{U_WHOVIEW_TOPIC}"><img src="{WHOVIEW_IMG}" border="0" alt="{L_WHOVIEW_ALT}" align="middle" /></a>
+        <!-- TOPIC BUTTON (WHO HAS VIEWED THE POST) -->
         <!-- BEGIN thanks_button -->
         <a href="{thanks_button.U_THANK_TOPIC}"><img src="{thanks_button.THANK_IMG}" border="0" alt="{thanks_button.L_THANK_TOPIC}" align="middle" /></a>
         <!-- END thanks_button -->

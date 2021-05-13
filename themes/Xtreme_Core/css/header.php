@@ -1026,16 +1026,83 @@ progress{background-color:<?=$bgcolor2?>;border:0;height:18px;}
 .code_select {color:<?=$bgcolor2?>;}
 .code_select:hover {color: <?=$bgcolor1?>;}
 
-.notepaper{position:relative;margin:auto;padding:29px 20px 20px 45px;width:90%;line-height:32px;color:#6a5f49;text-shadow:0 1px 1px #fff;background-color:#f2f6c1;background-image:-webkit-radial-gradient(center,cover,rgba(255,255,255,0.7) 0%,rgba(255,255,255,0.1) 90%),-webkit-repeating-linear-gradient(top,transparent 0%,transparent 29px,rgba(239,207,173,0.7) 29px,rgba(239,207,173,0.7) 30px); background-image:-moz-radial-gradient(center,cover,rgba(255,255,255,0.7) 0%,rgba(255,255,255,0.1) 90%),-moz-repeating-linear-gradient(top,transparent 0%,transparent 29px,rgba(239,207,173,0.7) 29px,rgba(239,207,173,0.7) 30px); background-image:-o-radial-gradient(center,cover,rgba(255,255,255,0.7) 0%,rgba(255,255,255,0.1) 90%),-o-repeating-linear-gradient(top,transparent 0%,transparent 29px,rgba(239,207,173,0.7) 29px,rgba(239,207,173,0.7) 30px);border:1px solid #c3baaa;border-color:rgba(195,186,170,0.9);-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;-webkit-box-shadow:inset 0 1px rgba(255,255,255,0.5),inset 0 0 5px #d8e071,0 0 1px rgba(0,0,0,0.1),0 2px rgba(0,0,0,0.02);box-shadow:inset 0 1px rgba(255,255,255,0.5),inset 0 0 5px #d8e071,0 0 1px rgba(0,0,0,0.1),0 2px rgba(0,0,0,0.02)}
-.notepaper:before,.notepaper:after{content:'';position:absolute;top:0;bottom:0;}
-.notepaper:before{left:28px;width:2px;border:solid #efcfad;border-color:rgba(239,207,173,0.9);border-width:0 1px;}
-.notepaper:after{z-index:-1;left:0;right:0;background:rgba(242,246,193,0.9);border:1px solid rgba(170,157,134,0.7);-webkit-transform:rotate(2deg);-moz-transform:rotate(2deg);-ms-transform:rotate(2deg);-o-transform:rotate(2deg);transform:rotate(2deg)}
+.notepaper
+{
+position:relative;
+margin:auto;
+padding:10px 15px 7px 40px;
+width:90%;
+line-height:15px;
+color:<?=$textcolor1?>;text-shadow:0 1px 1px <?=$bgcolor4?>; 
+background-color:none;
 
-.curly-quotes:before,.curly-quotes:after{display:inline-block;vertical-align:top;height:30px;line-height:48px;font-size:50px;opacity:.2;}
-.curly-quotes:before{content:'\201C';margin-right:4px;margin-left:-8px;}
-.curly-quotes:after{content:'\201D';margin-left:4px;margin-right:-8px;}
+background-image:-webkit-radial-gradient(center,cover,rgba(166,139,67,0.7) 0%,rgba(166,139,67,0.1) 90%),-webkit-repeating-linear-gradient(top,transparent 0%,transparent 29px,rgba(239,207,173,0.7) 29px,rgba(239,207,173,0.7) 0px); 
 
-.quote-by{display:block;padding-right:10px;font-size:13px;font-style:italic;color:#84775c;}
+background-image:-moz-radial-gradient(center,cover,rgba(166,139,67,0.7) 0%,rgba(166,139,67,0.1) 90%),-moz-repeating-linear-gradient(top,transparent 0%,transparent 29px,rgba(239,207,173,0.7) 29px,rgba(239,207,173,0.7) 30px); background-image:-o-radial-gradient(center,cover,rgba(205,179,109,0.1) 0%,rgba(255,255,255,0.1) 90%),-o-repeating-linear-gradient(top,transparent 0%,transparent 29px,rgba(239,207,173,0.7) 29px,rgba(239,207,173,0.7) 30px);border:1px solid #c3baaa;border-color:rgba(195,186,170,0.9);
+
+-webkit-box-sizing:border-box;
+-moz-box-sizing:border-box;
+box-sizing:border-box;
+-webkit-box-shadow:inset 0 1px rgba(166,139,67,0.5),inset 0 0 5px #d8e071,0 0 1px rgba(0,0,0,0.1),0 2px rgba(0,0,0,0.02);box-shadow:inset 0 1px rgba(166,139,67,0.5),inset 0 0 0px  #d8e071,0 0 1px rgba(0,0,0,0.1),0 0px rgba(0,0,0,0.02)
+}
+
+.notepaper:before,.notepaper:after
+{
+  content:'';position:absolute;top:0;bottom:0;
+}
+
+.notepaper:before
+{
+left:28px;width:2px;border:solid #8c7433;
+border-color:rgba(239,207,173,0.9);
+border-width:0 0px;
+}
+
+.notepaper:after
+{
+z-index:-1;
+left:0;right:0;
+background:rgba(242,246,193,0.9);
+border:1px solid rgba(170,157,134,0.7);
+-webkit-transform:rotate(2deg);
+-moz-transform:rotate(2deg);
+-ms-transform:rotate(2deg);
+-o-transform:rotate(2deg);
+transform:rotate(2deg)
+}
+
+.curly-quotes:before,.curly-quotes:after
+{
+display:inline-block;
+vertical-align:top;
+height:30px;line-height:48px;
+font-size:50px;opacity:.2;
+}
+
+.curly-quotes:before
+{
+content:'\201C';
+margin-right:4px;
+margin-left:-8px;
+}
+
+.curly-quotes:after
+{
+content:'\201D';
+margin-left:4px;
+padding-top:14px;
+margin-right:-8px;
+}
+
+.quote-by
+{
+display:block;
+padding-bottom:10px;
+padding-right:10px;
+font-size:13px;
+font-style:italic;color:<?=$textcolor1?>;
+}
+
 .lt-ie8 .notepaper{padding:15px 25px;}
 
 .lastpost .fa{float:right;padding:10px;transition:all .2s ease-in-out;}
