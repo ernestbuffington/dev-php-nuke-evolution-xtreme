@@ -3,7 +3,6 @@
   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
 
-
 /*********************************************************************************/
 /* CNB Your Account: An Advanced User Management System for phpnuke             */
 /* ============================================                                 */
@@ -62,72 +61,65 @@ $p = $_REQUEST['p'];
 include(NUKE_MODULES_DIR.$module_name.'/navbar.php');
 include(NUKE_MODULES_DIR.$module_name.'/includes/cookiecheck.php');
 
-function ya_expire() {
+function ya_expire() 
+{
     global $ya_config, $db, $user_prefix;
-    if ($ya_config['expiring']!=0) {
-        $past = time()-$ya_config['expiring'];
+    
+	if ($ya_config['expiring']!=0):
+        
+		$past = time()-$ya_config['expiring'];
         $res = $db->sql_query("SELECT user_id FROM ".$user_prefix."_users_temp WHERE time < '$past'");
-        while (list($uid) = $db->sql_fetchrow($res)) {
+        
+		while (list($uid) = $db->sql_fetchrow($res)):
           $uid = intval($uid);
           $db->sql_query("DELETE FROM ".$user_prefix."_users_temp WHERE user_id = $uid");
           $db->sql_query("DELETE FROM ".$user_prefix."_cnbya_value_temp WHERE uid = '$uid'");
-        }
+        endwhile;
         
         $db->sql_query("OPTIMIZE TABLE ".$user_prefix."_cnbya_value_temp");
         $db->sql_query("OPTIMIZE TABLE ".$user_prefix."_users_temp");
-    }
+    
+	endif;
 }
 
-switch($op) 
-{
+switch($op): 
+
     case "username_check":
         include(NUKE_MODULES_DIR.$module_name.'/public/check.php');
         break;
-
     case "activate":
         include(NUKE_MODULES_DIR.$module_name.'/public/activate.php');
     break;
-
     case "avatarlist":
-        if (is_user()) {
-            include(NUKE_MODULES_DIR.$module_name.'/public/avatarlist.php');
-        } else {
-            notuser();
-        }
+        if (is_user())
+        include(NUKE_MODULES_DIR.$module_name.'/public/avatarlist.php');
+        else 
+        notuser();
     break;
-
     case "avatarsave":
-        if (is_user()) {
-            include(NUKE_MODULES_DIR.$module_name.'/public/avatarsave.php');
-        } else {
-            notuser();
-        }
+        if (is_user())
+        include(NUKE_MODULES_DIR.$module_name.'/public/avatarsave.php');
+        else 
+        notuser();
     break;
-
     case "avatarlinksave":
-        if (is_user()) {
-            include(NUKE_MODULES_DIR.$module_name.'/public/avatarlinksave.php');
-        } else {
-            notuser();
-        }
+        if (is_user())
+        include(NUKE_MODULES_DIR.$module_name.'/public/avatarlinksave.php');
+        else
+        notuser();
     break;
-    
     case "delete":
-        if ($ya_config['allowuserdelete'] == 1) {
-            include(NUKE_MODULES_DIR.$module_name.'/public/delete.php');
-        } else {
-            disabled();
-        }
+        if ($ya_config['allowuserdelete'] == 1) 
+        include(NUKE_MODULES_DIR.$module_name.'/public/delete.php');
+        else 
+        disabled();
     break;
-
     case "deleteconfirm":
-        if ($ya_config['allowuserdelete'] == 1) {
-            include(NUKE_MODULES_DIR.$module_name.'/public/deleteconfirm.php');
-        } else {
-            disabled();
-        }
+        if ($ya_config['allowuserdelete'] == 1) 
+        include(NUKE_MODULES_DIR.$module_name.'/public/deleteconfirm.php');
+        else 
+        disabled();
     break;
-
     case "editcomm":
         include(NUKE_MODULES_DIR.$module_name.'/public/editcomm.php');
     break;
@@ -144,23 +136,17 @@ switch($op)
         changemail();
     break;
     case "chgtheme":
-        if ($ya_config['allowusertheme']==0) {
-            include(NUKE_MODULES_DIR.$module_name.'/public/chngtheme.php');
-        } else {
-            disabled();
-        }
+        if ($ya_config['allowusertheme']==0) 
+        include(NUKE_MODULES_DIR.$module_name.'/public/chngtheme.php');
+        else 
+        disabled();
     break;
-
     case "edituser":
         //include(NUKE_MODULES_DIR.$module_name.'/public/edituser.php');
-/*****[BEGIN]******************************************
- [ Mod:    YA Merge                            v1.0.0 ]
- ******************************************************/
+        # Mod: YA Merge v1.0.0 START
         redirect("modules.php?name=Profile&mode=editprofile");
         exit;
-/*****[END]********************************************
- [ Mod:    YA Merge                            v1.0.0 ]
- ******************************************************/
+        # Mod: YA Merge v1.0.0 END
     break;
 
     case "login":
@@ -511,6 +497,6 @@ if ($ya_config['allowuserreg']==0) {
         mmain($user);
     break;
 
-}
+endswitch;
 
 ?>
