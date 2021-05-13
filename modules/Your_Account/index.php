@@ -1,27 +1,27 @@
 <?php
-/*======================================================================= 
-  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
- =======================================================================*/
+/*=============================================================================== 
+   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
+ ================================================================================*/
 
 /*********************************************************************************/
-/* CNB Your Account: An Advanced User Management System for phpnuke             */
-/* ============================================                                 */
-/*                                                                              */
-/* Copyright (c) 2004 by Comunidade PHP Nuke Brasil                             */
-/* http://dev.phpnuke.org.br & http://www.phpnuke.org.br                        */
-/*                                                                              */
-/* Contact author: escudero@phpnuke.org.br                                      */
-/* International Support Forum: http://ravenphpscripts.com/forum76.html         */
-/*                                                                              */
-/* This program is free software. You can redistribute it and/or modify         */
-/* it under the terms of the GNU General Public License as published by         */
-/* the Free Software Foundation; either version 2 of the License.               */
-/*                                                                              */
+/* CNB Your Account: An Advanced User Management System for phpnuke              */
+/* ============================================                                  */
+/*                                                                               */
+/* Copyright (c) 2004 by Comunidade PHP Nuke Brasil                              */
+/* http://dev.phpnuke.org.br & http://www.phpnuke.org.br                         */
+/*                                                                               */
+/* Contact author: escudero@phpnuke.org.br                                       */
+/* International Support Forum: http://ravenphpscripts.com/forum76.html          */
+/*                                                                               */
+/* This program is free software. You can redistribute it and/or modify          */
+/* it under the terms of the GNU General Public License as published by          */
+/* the Free Software Foundation; either version 2 of the License.                */
+/*                                                                               */
 /*********************************************************************************/
-/* CNB Your Account it the official successor of NSN Your Account by Bob Marion    */
+/* CNB Your Account it the official successor of NSN Your Account by Bob Marion  */
 /*********************************************************************************/
 
-/*****[CHANGES]**********************************************************
+/*****[CHANGES]*******************************************************************
 -=[Base]=-
       Nuke Patched                             v3.1.0       06/26/2005
       NukeSentinel                             v2.5.00      07/11/2006
@@ -30,7 +30,7 @@
       Forum Logout                             v1.0.0       07/27/2005
       YA Merge                                 v1.0.0       07/28/2005
       User IP Lock                             v1.0.0       11/30/2005
- ************************************************************************/
+ *********************************************************************************/
 
 if (!defined('MODULE_FILE')) die('You can\'t access this file directly...');
 
@@ -189,7 +189,7 @@ switch($op):
 		  Show_CNBYA_menu();
           
 		  OpenTable();
-          echo "<center><span class='title'>"._SORRYNOUSERINFO."</span></center>\n";
+          echo "<div align=\"center\"><span class='title'>"._SORRYNOUSERINFO."</span></div>\n";
           CloseTable();
           
 		  include_once(NUKE_BASE_DIR.'footer.php');
@@ -319,11 +319,11 @@ switch($op):
             OpenTable();
             
 			if ($setinfo['user_level'] == 0): 
-            echo "<br /><center><span class=\"title\"><strong>"._ACCSUSPENDED."</strong></span></center><br />\n";
+            echo "<br /><div align=\"center\"><span class=\"title\"><strong>"._ACCSUSPENDED."</strong></span></div><br />\n";
             elseif ($setinfo['user_level'] == -1): 
-            echo "<br /><center><span class=\"title\"><strong>"._ACCDELETED."</strong></span></center><br />\n";
+            echo "<br /><div align=\"center\"><span class=\"title\"><strong>"._ACCDELETED."</strong></span></div><br />\n";
             else:
-            echo "<br /><center><span class=\"title\"><strong>"._SORRYNOUSERINFO."</strong></span></center><br />\n";
+            echo "<br /><div align=\"center\"><span class=\"title\"><strong>"._SORRYNOUSERINFO."</strong></span></div><br />\n";
             endif;
 			
         CloseTable();
@@ -427,114 +427,93 @@ switch($op):
     endif;
     break;
     case "new_confirm":
-        if (is_user()) {
+        if (is_user()): 
             mmain($user);
-        } else {
-            if ($ya_config['allowuserreg']==0) {
-                if ($ya_config['requireadmin'] == 1) {
+        else:
+            if ($ya_config['allowuserreg']==0):
+                if ($ya_config['requireadmin'] == 1):
                     include(NUKE_MODULES_DIR.$module_name.'/public/new_confirm1.php');
-                } elseif ($ya_config['requireadmin'] == 0 AND $ya_config['useactivate'] == 0) {
+                elseif ($ya_config['requireadmin'] == 0 AND $ya_config['useactivate'] == 0):
                     include(NUKE_MODULES_DIR.$module_name.'/public/new_confirm2.php');
-                } elseif ($ya_config['requireadmin'] == 0 AND $ya_config['useactivate'] == 1) {
+                elseif ($ya_config['requireadmin'] == 0 AND $ya_config['useactivate'] == 1):
                     include(NUKE_MODULES_DIR.$module_name.'/public/new_confirm3.php');
-                }
-            } else {
+                endif;
+            else:
                 disabled();
-            }
-        }
+            endif;
+        endif;
     break;
-
     case "new_finish":
         ya_expire();
-        if (is_user()) {
-            mmain($user);
-        } else {
-            if ($ya_config['allowuserreg']==0) {
-                if ($ya_config['requireadmin'] == 1) {
+		if (is_user()): 
+        mmain($user);
+		else: 
+		    if ($ya_config['allowuserreg']==0): 
+                
+				if($ya_config['requireadmin'] == 1): 
                     include(NUKE_MODULES_DIR.$module_name.'/public/new_finish1.php');
-                } elseif ($ya_config['requireadmin'] == 0 AND $ya_config['useactivate'] == 0) {
+				elseif ($ya_config['requireadmin'] == 0 AND $ya_config['useactivate'] == 0): 
                     include(NUKE_MODULES_DIR.$module_name.'/public/new_finish2.php');
-                } elseif ($ya_config['requireadmin'] == 0 AND $ya_config['useactivate'] == 1) {
+				elseif ($ya_config['requireadmin'] == 0 AND $ya_config['useactivate'] == 1): 
                     include(NUKE_MODULES_DIR.$module_name.'/public/new_finish3.php');
-                }
-            } else {
+                endif;
+			else: 
                 disabled();
-            }
-        }
+            endif;
+		endif;
     break;
-
     case "pass_lost":
         include(NUKE_MODULES_DIR.$module_name.'/public/passlost.php');
     break;
-
    case "saveactivate":
         include(NUKE_MODULES_DIR.$module_name.'/public/saveactivate.php');
     break;
-
     case "savecomm":
-        if (is_user()) {
-            include(NUKE_MODULES_DIR.$module_name.'/public/savecomm.php');
-        } else {
-            notuser();
-        }
+        if (is_user()) 
+        include(NUKE_MODULES_DIR.$module_name.'/public/savecomm.php');
+        else 
+        notuser();
     break;
-
     case "savehome":
-        if (is_user()) {
-            include(NUKE_MODULES_DIR.$module_name.'/public/savehome.php');
-        } else {
-            notuser();
-        }
+        if (is_user())
+        include(NUKE_MODULES_DIR.$module_name.'/public/savehome.php');
+        else 
+        notuser();
     break;
-
     case "savetheme":
-        if (is_user()) {
-            if ($ya_config['allowusertheme']==0) {
-                include(NUKE_MODULES_DIR.$module_name.'/public/savetheme.php');
-            } else {
-                disabled();
-            }
-        } else {
+        if (is_user()):
+            if ($ya_config['allowusertheme']==0) 
+            include(NUKE_MODULES_DIR.$module_name.'/public/savetheme.php');
+            else 
+            disabled();
+        else:
             notuser();
-        }
+        endif;
     break;
-
     case "saveuser":
-        if (is_user()) {
-            include(NUKE_MODULES_DIR.$module_name.'/public/saveuser.php');
-        } else {
-            notuser();
-        }
+        if (is_user()) 
+        include(NUKE_MODULES_DIR.$module_name.'/public/saveuser.php');
+        else 
+        notuser();
     break;
-
     case "userinfo":
-/*****[BEGIN]******************************************
- [ Mod:    YA Merge                            v1.0.0 ]
- ******************************************************/
+        # Mod: YA Merge v1.0.0 START
         list($uid) = $db->sql_ufetchrow('SELECT user_id FROM '.$user_prefix.'_users WHERE username="'.$username.'"', SQL_NUM);
         redirect("modules.php?name=Profile&mode=viewprofile&u=".$uid);
         exit;
-/*****[END]********************************************
- [ Mod:    YA Merge                            v1.0.0 ]
- ******************************************************/
+        # Mod: YA Merge v1.0.0 END
     break;
-
     case "ShowCookiesRedirect":
         ShowCookiesRedirect();
     break;
-
     case "ShowCookies":
         ShowCookies();
     break;
-
     case "DeleteCookies":
         DeleteCookies();
     break;
-
     default:
         mmain($user);
     break;
-
 endswitch;
-
 ?>
