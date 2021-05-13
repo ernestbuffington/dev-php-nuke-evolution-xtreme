@@ -32,25 +32,24 @@
       User IP Lock                             v1.0.0       11/30/2005
  ************************************************************************/
 
-if (!defined('MODULE_FILE')) {
-   die('You can\'t access this file directly...');
-}
+if (!defined('MODULE_FILE')) die('You can\'t access this file directly...');
 
 $module_name = basename(dirname(__FILE__));
+
 require_once("modules/Your_Account/includes/constants.php");
 
-if (!defined('CNBYA')) {
-    die('CNBYA protection');
-}
+if (!defined('CNBYA')) die('CNBYA protection');
 
 include_once(NUKE_MODULES_DIR.$module_name.'/includes/functions.php');
 
-// menelaos: removed because it is already called in /modules/Your_Account/includes/mainfileend.php
+# menelaos: removed because it is already called in /modules/Your_Account/includes/mainfileend.php
 $ya_config = ya_get_configs();
 
 get_lang($module_name);
 $userpage = 1;
+
 global $cookie;
+
 $username = Fix_Quotes($_REQUEST['username']);
 $redirect = $_REQUEST['redirect'];
 $module = $_REQUEST['module'];
@@ -58,6 +57,7 @@ $user_password = $_REQUEST['user_password'];
 $mode = $_REQUEST['mode'];
 $t = $_REQUEST['t'];
 $p = $_REQUEST['p'];
+
 include(NUKE_MODULES_DIR.$module_name.'/navbar.php');
 include(NUKE_MODULES_DIR.$module_name.'/includes/cookiecheck.php');
 
@@ -138,8 +138,9 @@ switch($op):
         disabled();
     break;
     case "edituser":
-        //include(NUKE_MODULES_DIR.$module_name.'/public/edituser.php');
-        # Mod: YA Merge v1.0.0 START
+        //include(NUKE_MODULES_DIR.$module_name.'/public/edituser.php'); (WHY WAS THIS TAKEN OUT?????) Assholes not commenting their changes!
+        
+		# Mod: YA Merge v1.0.0 START
         redirect("modules.php?name=Profile&mode=editprofile");
         exit;
         # Mod: YA Merge v1.0.0 END
@@ -170,7 +171,7 @@ switch($op):
         $result  = $db->sql_query("SELECT * FROM ".$user_prefix."_users WHERE username='$username'");
         $setinfo = $db->sql_fetchrow($result);
         
-		// menelaos: check of the member agreed with the TOS and update the database field
+		# menelaos: check of the member agreed with the TOS and update the database field
         if (($ya_config['tos'] == intval(1)) AND ($_POST['tos_yes'] == intval(1))): 
         $db->sql_query("UPDATE ".$user_prefix."_users SET agreedtos='1' WHERE username='$username'");
         endif;
@@ -335,84 +336,96 @@ switch($op):
    break;
    case "logout":
         global $cookie, $db, $prefix;
-        $r_uid = $cookie[0];
+        
+		$r_uid = $cookie[0];
         $r_username = $cookie[1];
-        setcookie("user");
-        if (trim($ya_config['cookiepath']) != '') setcookie("user","expired",time()-604800,"$ya_config[cookiepath]"); //correct the problem of path change
-        $db->sql_query("DELETE FROM ".$prefix."_session WHERE uname='$r_username'");
+        
+		setcookie("user");
+        
+		if (trim($ya_config['cookiepath']) != ''): 
+		# correct the problem of path change
+		setcookie("user","expired",time()-604800,"$ya_config[cookiepath]"); 
+        endif;
+		
+		$db->sql_query("DELETE FROM ".$prefix."_session WHERE uname='$r_username'");
         $db->sql_query("OPTIMIZE TABLE ".$prefix."_session");
         $sql = "SELECT session_id FROM ".$prefix."_bbsessions WHERE session_user_id='$r_uid'";
         $row = $db->sql_fetchrow($db->sql_query($sql));
         $db->sql_query("DELETE FROM ".$prefix."_bbsessions WHERE session_user_id='$r_uid'");
         $db->sql_query("OPTIMIZE TABLE ".$prefix."_bbsessions");
-/*****[BEGIN]******************************************
- [ Mod:     Forum Logout                       v1.0.0 ]
- ******************************************************/
+
+        # Mod: Forum Logout v1.0.0 START
         global $board_config;
-        $cookiename = $board_config['cookie_name'];
+        
+		$cookiename = $board_config['cookie_name'];
         $cookiepath = $board_config['cookie_path'];
         $cookiedomain = $board_config['cookie_domain'];
         $cookiesecure = $board_config['cookie_secure'];
         $current_time = time();
-        setcookie($cookiename . '_data', '', $current_time - 31536000, $cookiepath, $cookiedomain, $cookiesecure);
-        setcookie($cookiename . '_sid', '', $current_time - 31536000, $cookiepath, $cookiedomain, $cookiesecure);
-/*****[END]********************************************
- [ Mod:     Forum Logout                       v1.0.0 ]
- ******************************************************/
+        
+		setcookie($cookiename.'_data','', $current_time - 31536000, $cookiepath, $cookiedomain, $cookiesecure);
+        setcookie($cookiename.'_sid','', $current_time - 31536000, $cookiepath, $cookiedomain, $cookiesecure);
+        # Mod: Forum Logout v1.0.0 END
+
         $user = "";
-        //include_once(NUKE_BASE_DIR.'header.php');
-        if (!empty($redirect)) {
-            //echo "<META HTTP-EQUIV=\"refresh\" content=\"2;URL=modules.php?name=$redirect\">";
+
+        if (!empty($redirect)): 
             redirect("modules.php?name=$redirect");
             exit;
-        } else {
-            //echo "<META HTTP-EQUIV=\"refresh\" content=\"2;URL=index.php\">";
-            redirect("index.php");
+		else: 
+            redirect("modules.php?name=Your_Account");
             exit;
-        }
-        //title(_YOUARELOGGEDOUT);
-        //include_once(NUKE_BASE_DIR.'footer.php');
-    break;
+        endif;
 
+    break;
     case "mailpasswd":
         include(NUKE_MODULES_DIR.$module_name.'/public/mailpass.php');
     break;
-
     case "new_user":
-     if (is_user()) {
-            mmain($user);
-        } else {
-if ($ya_config['allowuserreg']==0) {
-     if ($ya_config['coppa'] == intval(1)) {
-       if($_POST['coppa_yes']!= intval(1)) {
-         include(NUKE_MODULES_DIR.$module_name.'/public/ya_coppa.php');
-         exit;
-     }
-          }
-     if ($ya_config['tos'] == intval(1)) {
-       if($_POST['tos_yes'] != intval(1)) {
-         include(NUKE_MODULES_DIR.$module_name.'/public/ya_tos.php');
-         exit;
-     }
-          }
-        if ($ya_config['coppa'] !== intval(1) OR $ya_config['coppa'] == intval(1) AND $_POST['coppa_yes'] = intval(1)){
-        if ($ya_config['tos'] !== intval(1) OR $ya_config['tos'] == intval(1) AND $_POST['tos_yes']=intval(1)){
-           if ($ya_config['requireadmin'] == 1) {
-                    include(NUKE_MODULES_DIR.$module_name.'/public/new_user1.php');
-                } elseif ($ya_config['requireadmin'] == 0 AND $ya_config['useactivate'] == 0) {
-                    include(NUKE_MODULES_DIR.$module_name.'/public/new_user2.php');
-                } elseif ($ya_config['requireadmin'] == 0 AND $ya_config['useactivate'] == 1) {
-                    include(NUKE_MODULES_DIR.$module_name.'/public/new_user3.php');
-                }
-             }
-         }
-       // redirect("modules.php?name=Profile");
-           }else {
-    disabled();
-  }
-}
+    if (is_user()): 
+    mmain($user);
+    else:
+	  # if new user registration is allowed 
+      if ($ya_config['allowuserreg']==0):
+	    # if coppa is required 
+        if ($ya_config['coppa'] == intval(1)): 
+           if($_POST['coppa_yes']!= intval(1)): 
+              include(NUKE_MODULES_DIR.$module_name.'/public/ya_coppa.php');
+                exit;
+           endif;
+        endif;
+		# if terms of service is required 
+		if ($ya_config['tos'] == intval(1)): 
+          if($_POST['tos_yes'] != intval(1)): 
+            include(NUKE_MODULES_DIR.$module_name.'/public/ya_tos.php');
+            exit;
+          endif;
+        endif;
+		# if coppa is not required
+        if ($ya_config['coppa'] !== intval(1)
+		# or if coppa is required 
+		OR $ya_config['coppa'] == intval(1) 
+		# if coppa post variable is set to yes 
+		AND $_POST['coppa_yes'] = intval(1)):
+		  if ($ya_config['tos'] !== intval(1) 
+		  OR $ya_config['tos'] == intval(1) 
+		  AND $_POST['tos_yes'] = intval(1)):
+		     # if admin approval is required 
+             if ($ya_config['requireadmin'] == 1) 
+             include(NUKE_MODULES_DIR.$module_name.'/public/new_user1.php');
+			 # if admin approval is not required and user activate not enabled 
+			 elseif ($ya_config['requireadmin'] == 0 AND $ya_config['useactivate'] == 0) 
+             include(NUKE_MODULES_DIR.$module_name.'/public/new_user2.php');
+			 # if admin approval is not required and user activate is required 
+			 elseif ($ya_config['requireadmin'] == 0 AND $ya_config['useactivate'] == 1) 
+             include(NUKE_MODULES_DIR.$module_name.'/public/new_user3.php');
+          endif;
+        endif;
+      else: 
+        disabled();
+      endif;
+    endif;
     break;
-
     case "new_confirm":
         if (is_user()) {
             mmain($user);

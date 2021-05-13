@@ -64,6 +64,10 @@ global $screen_width, $screen_height, $textcolor1, $textcolor2, $bgcolor1, $bgco
 
 $bgcolor5 ='#3c3523';
 ?>
+input[type="radio"]{
+    vertical-align: bottom;
+}
+
 /*---------------------------------------------------------------*/
 /* Forum Attachements                                            */
 /*---------------------------------------------------------------*/
