@@ -3,7 +3,6 @@
   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
 
-
 /***************************************************************************
  *                           page_header_admin.php
  *                            -------------------
@@ -28,20 +27,15 @@
 -=[Mod]=-
       Forum Admin Style Selection              v1.0.0       10/01/2005
  ************************************************************************/
-
-if (!defined('IN_PHPBB'))
-{
-    die('Hacking attempt');
-}
+if (!defined('IN_PHPBB')) die('Hacking attempt');
 
 define('HEADER_INC', true);
 
 /*****[BEGIN]******************************************
  [ Mod:     Forum Admin Style Selection        v1.0.0 ]
  ******************************************************/
-$Theme = get_theme();
-$style = ($board_config['use_theme_style']) ? "./../../../themes/$Theme/style/style.css" : "./../templates/subSilver/subSilver.css";
-
+$ThemeSel = get_theme();
+$style = ($board_config['use_theme_style']) ? "./../../../themes/$ThemeSel/style/admin.css" : "./../templates/subSilver/subSilver.css";
 /*****[END]********************************************
  [ Mod:     Forum Admin Style Selection        v1.0.0 ]
  ******************************************************/
@@ -135,5 +129,4 @@ else
 header ('Expires: 0');
 header ('Pragma: no-cache');
 $template->pparse('header');
-
 ?>

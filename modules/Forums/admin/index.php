@@ -55,7 +55,9 @@ include(NUKE_BASE_DIR.'includes/functions_log.php');
 /*****[END]********************************************
  [ Mod:     Log Moderator Actions              v1.1.6 ]
  ******************************************************/
-
+//echo "<style type=\"text/css\">\n";
+//include(NUKE_BASE_DIR.'themes/Xtreme_Core/css/header.php'); 
+//echo "</style>\n";  
 // ---------------
 // Begin functions
 //

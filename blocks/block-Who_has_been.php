@@ -68,7 +68,7 @@ while($whosbeen = $db->sql_fetchrow($result)):
 
 	   }
 	}
-
+	
     # testing database lookup <span class="countries '.$whosbeen['user_from_flag'].'"></span>
 	//list($shit) = $db->sql_ufetchrow("SELECT `user_id` FROM `".$prefix."_users` WHERE `username`='".$whosbeen['username']."'", SQL_NUM);
 	//list($notes) = $db->sql_ufetchrow("SELECT `user_admin_notes` FROM `".$prefix."_users` WHERE `user_id`='".$shit."'", SQL_NUM);

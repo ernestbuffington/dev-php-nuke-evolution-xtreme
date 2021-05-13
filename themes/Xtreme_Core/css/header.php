@@ -65,8 +65,46 @@ global $screen_width, $screen_height, $textcolor1, $textcolor2, $bgcolor1, $bgco
 $bgcolor5 ='#3c3523';
 ?>
 /*---------------------------------------------------------------*/
+/* Forum Attachements                                            */
+/*---------------------------------------------------------------*/
+td.attachrowZ        
+{ 
+#font: normal 11px Verdana, Arial, Helvetica, sans-serif; color : <?=$textcolor1?>; 
+border-color : <?=$bgcolor4?>; 
+}
+td.attachheaderZ     
+{ 
+#font: normal 11px Verdana, Arial, Helvetica, sans-serif; color : <?=$textcolor1?>; 
+border-color : <?=$bgcolor4?>; 
+background-color: <?=$bgcolor1?>; 
+}
+table.attachtableZ    
+{ 
+#font: normal 12px Verdana, Arial, Helvetica, sans-serif; color : <?=$textcolor1?>; 
+border-color : <?=$bgcolor4?>;    
+border-collapse : collapse; 
+}
+/*---------------------------------------------------------------*/
 /* Main Theme Body                                               */
 /*---------------------------------------------------------------*/
+.button {
+  background-color: <?=$bgcolor1?>;
+  border: none;
+  color: white;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+}
+
+.button1 {border-radius: 2px;}
+.button2 {border-radius: 4px;}
+.button3 {border-radius: 8px;}
+.button4 {border-radius: 12px;}
+.button5 {border-radius: 50%;}
+
 a.redalert:link {text-decoration: underline; color: crimson;}
 a.redalert:visited {text-decoration: underline; color: crimson;}
 a.redalert:hover {text-decoration: underline; color: green;}
@@ -75,6 +113,10 @@ a.redalert:hover {text-decoration: underline; color: green;}
   position: absolute;
   top: 217px; // Should be same as the height of the header
   width: 100%;
+}
+
+img.rounded-corners-header { 
+  border-radius: 3px; 
 }
 
 img.rounded-corners-last-post { 

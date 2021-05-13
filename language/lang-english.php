@@ -22,15 +22,15 @@
 /**************************************************************************/
 
 define('_EMPTY_MESSAGE','You must enter a message first');
-define('_YOUHAVE_1_MSGS','You Have %s New Private Message');
-define('_YOUHAVE_X_MSGS','You Have %s New Private Messages');
-define('_YOUHAVE_NO_MSGS','You Have <strong><span class="blink-one"><font color="yellow">0</font></span></strong> NEW Messages, Nobody Likes You!');
+define('_YOUHAVE_1_MSGS','You Have <strong><span class="blink-one">%s</span></strong> New Private Message');
+define('_YOUHAVE_X_MSGS','You Have <strong><span class="blink-one">%s</span></strong> New Private Messages');
+define('_YOUHAVE_NO_MSGS','You Have <strong><span class="blink-one">0</span></strong> NEW Messages, Nobody Likes You!');
 
 // new common language defines.
 define('_S_ADMIN_PANEL','Admin Panel');
 define('_L_ADMIN_PANEL','Administration');
 define('_EDIT_PROFILE','Edit Profile');
-define('_YOUHAVE_X_MSGS','You Have %s New Private Messages');
+define('_YOUHAVE_X_MSGS','You Have <strong><span class="blink-one">%s</span></strong> New Private Messages');
 define('_WATCH_YOUTUBE','Watch this video on YouTube');
 define("_POSTEDBY","Posted by");
 define("_ON","on");

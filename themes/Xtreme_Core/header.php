@@ -63,8 +63,26 @@
 if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) 
 exit('Access Denied');
 
-global $screen_res, $sitename, $slogan, $name, $banners, $db, $user_prefix, $prefix, $admin_file, $userinfo, $ThemeInfo, $theme_name;
-global $titanium_browser;
+global $screen_res, 
+       $textcolor1, 
+	   $textcolor2, 
+	     $bgcolor1,
+		 $bgcolor2,
+		 $bgcolor3,
+		 $bgcolor4,
+		 $bgcolor5,  
+		 $sitename, 
+		   $slogan, 
+		     $name, 
+		  $banners, 
+		       $db, 
+	  $user_prefix, 
+	       $prefix, 
+	   $admin_file, 
+	     $userinfo, 
+		$ThemeInfo,
+ $titanium_browser, 
+	   $theme_name;
 
 echo "\n\n<!-- THEME HEADER START -->\n"; # set background here in themes/Inferno/css/maintable.php
 
@@ -166,20 +184,10 @@ $scrollmsg .= "<img style=\"vertical-align:absmiddle\" border=\"0\" height=\"10\
 $scrollmsg .= '<span class="blink-one">This version of <strong>Maxthon</strong> does break websites so please use at your own RISK!</span>'; // 0%
 }
 
-if ($username === 'TheWolf')
-$moreuser_info .= '::: Don\'t be such a Stranger! Thanks for killing Nicholas Oneil Ryder, that guy was truly a piece of shit!';
-
-if ($username === 'EOL') 
-$moreuser_info .= '::: Don\'t be such a Stranger!';
-
-if ($username === 'AlphaClient')
-$moreuser_info .= '::: We have detected that you are using a cell phone, one moment please while I verify your identity!                                                                                   looking up your phone number now................................................................................Brandon, Florida 813-244-9921                                                                                                                                                                                                                                 We are sorry but this phone number does not appear to be registered to you DISCONNECTING NOW!                                                                                                                                                                                                                                 Just Kidding ROFLMAO!';
-
 global $connected;
 
-$moreuser_info .= '::: Software developers like to solve problems. This online community is the perfect place for us to help each other ';
-$moreuser_info .= '::: We really appreciate it when you take the time to login and look around. We spent a lot of time building this network and nothing makes us more happy than when our 
-visitors truly enjoy their visit! ';
+$moreuser_info .= '';
+$moreuser_info .= '';
 
 # check to see if user is logged into facebook
 if(isset($_COOKIE['fbsr_' . $appID])):
@@ -188,15 +196,15 @@ else:
 $marquee_one .= ' login to our facebook app and you will be able to use the like and comments sections of this web portal...';
 endif;
 
-$date .= '::: Todays date <font color="green">'.date('m-d-Y').'</font>';
+$date .= '::: Todays date <font color="'.$textcolor2.'">'.date('m-d-Y').'</font>';
 
 if ($username === _ANONYMOUS)
 $moreuser_info .= '::: There is so much more here to see, it takes 30 seconds to register an account and we don\'t even verify with e-mail! Just register we promise you won\'t be sorry...';
 
 if ($username === _ANONYMOUS)
-$marquee_one = $moreuser_info.' ::: Your Monitor Resolution is <font color="#f48024">'.$screen_res.'</font> ::: '.$newmessages.'';
+$marquee_one = $moreuser_info.' ::: Your Monitor Resolution is <font color="'.$textcolor2.'">'.$screen_res.'</font> ::: '.$newmessages.'';
 else
-$marquee_one = $date.' '.$connected.' Welcome back <strong><font color="yellow"><span class="blink-one">'.$username.'</span></font></strong> It\'s quite awesome to see you my friend! We are so glad you could make it back over to visit... We know with your super tight busy schedule and all, it most certainly must have been quite a task! ::: '.$newmessages.' ::: Your current Monitor Resolution is <font color="#f48024">'.$screen_res.'</font> '.$moreuser_info.' ::: Your current browser version is <font color="#f48024">'.$titanium_browser->getVersion().'</font> ::: '.$scrollmsg.'</div>';
+$marquee_one = $date.' '.$connected.' Welcome back <strong><font color='.$textcolor2.'><span class="blink-one">'.$username.'</span></font></strong> It\'s quite awesome to see you my friend! We are so glad you could make it back over to visit... We know with your super tight busy schedule and all, it most certainly must have been quite a task! ::: '.$newmessages.' ::: Your current Monitor Resolution is <font color='.$textcolor2.'>'.$screen_res.'</font> '.$moreuser_info.' ::: Your current browser version is <font color="'.$textcolor2.'">'.$titanium_browser->getVersion().'</font> ::: '.$scrollmsg.'</div>';
 
 //$bullshit2 = 'Sept 28th 2019, Oct 4th 2019, Oct 5th 2019, Oct 11th 2019, Oct 13th 2019, Oct 14th 2019 Oct 20th 2019, Oct 22nd 2019, Oct 24th 2019';
 # right finger
@@ -206,10 +214,10 @@ $rfinger = '<img border="0" align="absmiddle" height="16" src="themes/'.$theme_n
 $marquee_two = '
                <strong>IPHub is an IP lookup website featuring Proxy/VPN detection. 
 			   A free API is available, so you can perform fraud checks on online stores, 
-			   detect malicious players on online games and much more! <a href="https://iphub.info" target="new">Click here to sign up for FREE today at ipHub</a></strong>
-              <strong>::: <font color="#e48e00"><a href="https://soulcircuscowboys.com" target="_blank">Country Music: The Soul Circus Cowboys</a></font></strong>
-              <strong>::: <font color="#e48e00"><a href="https://facebook.com/brandon.maintenance" target="_blank">Sponsor: Brandon Maintenance Management, LLC Phone: 813-846-2865</a></font></strong>
-              <strong>::: <font color="#e48e00"><a href="https://bigcountryradio.net" target="_blank">Sponsor: Big Country Radio - The EJ Morning Show</a></font> :::</strong>';
+			   detect malicious players on online games and much more! <a href="https://iphub.info" target="new">'.$rfinger.' Click here '.$lfinger.' to sign up for FREE today at ipHub</a></strong>
+              <strong>::: <font color='.$textcolor2.'><a href="https://soulcircuscowboys.com" target="_blank">Country Music: The Soul Circus Cowboys</a></font></strong>
+              <strong>::: <font color='.$textcolor2.'><a href="https://facebook.com/brandon.maintenance" target="_blank">Sponsor: Brandon Maintenance Management, LLC Phone: 813-846-2865</a></font></strong>
+              <strong>::: <font color='.$textcolor2.'><a href="https://bigcountryradio.net" target="_blank">Sponsor: Big Country Radio - The EJ Morning Show</a></font> :::</strong>';
 
 
 #-----------------#
@@ -351,18 +359,57 @@ echo '</td>';
 echo '</tr>';
 
 echo '<tr>';
-echo '<td align="left" height="30" width="25%" valign="middle">
+echo '<td align="left" height="30" width="25%" valign="middle">   </td>';
 
+global $avatar_overide_size, $make_xtreme_avatar_small, $board_config, $userinfo;
+// START - this was added for the very whimpy small themes that have no block width! by Ernest Buffington 08/06/2019
+if ($make_xtreme_avatar_small == true)
+{
+  $board_config['avatar_max_height'] = 20;
+  $board_config['avatar_max_width'] = 20;
+}
+// END - this was added for the very whimpy small themes that have no block width! by Ernest Buffington 08/06/2019
+if(is_user() && $userinfo['user_avatar']):
 
-</td>';
-echo '<td align="right" width="25%" valign="middle">report bug etc</td>';
+  switch( $userinfo['user_avatar_type']):
+		# user_allowavatar = 1
+		case USER_AVATAR_UPLOAD:
+			$headeruserinfo_avatar .= ( $board_config['allow_avatar_upload'] ) 
+			? '<img class="rounded-corners-header" style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '.$board_config['avatar_max_width'].'px;" src="' 
+			. $board_config['avatar_path'] . '/' . $userinfo['user_avatar'] . '" alt="" border="0" />' : '';
+			break;
+		# user_allowavatar = 2
+		case USER_AVATAR_REMOTE:
+			$headeruserinfo_avatar .= '<img class="rounded-corners-header" style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '.$board_config['avatar_max_width'].'px;" src="
+			'.avatar_resize($userinfo['user_avatar']).'" alt="" border="0" />';
+			break;
+		# user_allowavatar = 3
+		case USER_AVATAR_GALLERY:
+			$headeruserinfo_avatar .= ( $board_config['allow_avatar_local'] ) ? '<img class="rounded-corners-header" style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '
+			.$board_config['avatar_max_width'].'px;" src="' . $board_config['avatar_gallery_path'] . '/' . (($userinfo['user_avatar'] == 'blank.gif' || $userinfo['user_avatar'] 
+			== 'gallery/blank.gif') ? 'blank.png' : $userinfo['user_avatar']) . '" alt="" border="0" />' : '';
+			break;
+
+  endswitch;
+else:
+$headeruserinfo_avatar .= '<img class="rounded-corners-header" style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '
+.$board_config['avatar_max_width'].'px;" src="'.$board_config['default_avatar_users_url'].'" alt="" border="0" />';
+endif;
+
+if(is_user()):
+echo '<td align="left" width="25%" valign="middle">'.$headeruserinfo_avatar.' '.$userinfo['username'].'</td>';
+else:
+echo '<td align="left" width="25%" valign="middle"></td>';
+endif;
+
 echo '</tr>';
 
-
+# left and right marquee START
 echo '<tr>';
-echo '<td align="left" width="25%" valign="bottom" height="20"><div class="marquee_one"><font color="#ffc62a" size="2"><strong>'.$marquee_one.'</strong></font></div></td>';
-echo '<td align="right" width="25%" valign="bottom" height="20"><div class="marquee_two"><font color="#ffc62a" size="2"><strong>'.$marquee_two.'</strong></font></div></td>';
+echo '<td align="left" width="25%" valign="bottom" height="20"><div class="marquee_one"><font color="#008000" size="2"><strong>'.$marquee_one.'</strong></font></div></td>';
+echo '<td align="right" width="25%" valign="bottom" height="20"><div class="marquee_two"><font color="#008000" size="2"><strong>'.$marquee_two.'</strong></font></div></td>';
 echo '</tr>';
+# left and right marquee END
 
 echo '<tr>';
 echo '<td align="left" height="13" width="25%" valign="middle"></td>';

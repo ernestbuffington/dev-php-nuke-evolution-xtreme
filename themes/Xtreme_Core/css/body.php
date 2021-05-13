@@ -63,6 +63,8 @@ echo "/* When we are done we will move this code to style.css */\n\n";
 global $screen_width, $screen_height, $bgcolor1, $bgcolor2, $bgcolor3, $bgcolor4;
 
 ?>
+
+
 /*---------------------------------------------------------------*/
 /* Full Screen Video Background v1.0                             */
 /*                                                               */
