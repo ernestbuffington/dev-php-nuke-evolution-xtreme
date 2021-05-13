@@ -83,7 +83,6 @@ function ya_expire()
 }
 
 switch($op): 
-
     case "username_check":
         include(NUKE_MODULES_DIR.$module_name.'/public/check.php');
         break;
@@ -123,14 +122,11 @@ switch($op):
     case "editcomm":
         include(NUKE_MODULES_DIR.$module_name.'/public/editcomm.php');
     break;
-
     case "edithome":
         include(NUKE_MODULES_DIR.$module_name.'/public/edithome.php');
     break;
-
     case "edittheme":
     break;
-
     case "changemail":
         include(NUKE_MODULES_DIR.$module_name.'/public/changemail.php');
         changemail();
@@ -148,163 +144,196 @@ switch($op):
         exit;
         # Mod: YA Merge v1.0.0 END
     break;
-
     case "login":
         # Base: NukeSentinel v2.5.00 START
         global $nsnst_const, $user_prefix;
         # Base: NukeSentinel v2.5.00 END
 
-    /**
-     * Security Mod: IPHUB VPN & Proxy blocker
-     * @since 2.0.9e
-     */
-    # if (get_evo_option('iphub_status', 'int') == 1):  
-    #     // include_once(NUKE_BASE_DIR.'header.php');  
-    #     block_vpn_proxy_user();
-    #     // include_once(NUKE_BASE_DIR.'footer.php');
-    # endif;
+       /**
+        * Security Mod: IPHUB VPN & Proxy blocker
+        * @since 2.0.9e
+        */
+        
+		# if (get_evo_option('iphub_status', 'int') == 1):  
+        #     // include_once(NUKE_BASE_DIR.'header.php');  
+        #     block_vpn_proxy_user();
+        #     // include_once(NUKE_BASE_DIR.'footer.php');
+        # endif;
 
-/*****[BEGIN]******************************************
- [ Mod:     User IP Lock                       v1.0.0 ]
- ******************************************************/
-        if(!compare_ips($username)) {
+        # Mod: User IP Lock v1.0.0 START
+        if(!compare_ips($username)):
             DisplayError('Your IP is not valid for this user');
             exit;
-        }
-/*****[END]********************************************
- [ Mod:     User IP Lock                       v1.0.0 ]
- ******************************************************/
+        endif;
+        # Mod: User IP Lock v1.0.0 END
+
         $result  = $db->sql_query("SELECT * FROM ".$user_prefix."_users WHERE username='$username'");
         $setinfo = $db->sql_fetchrow($result);
-        // menelaos: check of the member agreed with the TOS and update the database field
-        if (($ya_config['tos'] == intval(1)) AND ($_POST['tos_yes'] == intval(1))) {
+        
+		// menelaos: check of the member agreed with the TOS and update the database field
+        if (($ya_config['tos'] == intval(1)) AND ($_POST['tos_yes'] == intval(1))): 
         $db->sql_query("UPDATE ".$user_prefix."_users SET agreedtos='1' WHERE username='$username'");
-        }
-        $forward = str_replace("redirect=", "", "$redirect");
-        if (preg_match("#privmsg#", $forward)) { $pm_login = "active"; }
-    if ($db->sql_numrows($result) == 0) {
-        include_once(NUKE_BASE_DIR.'header.php');
-        Show_CNBYA_menu();
-        OpenTable();
-        echo "<center><span class='title'>"._SORRYNOUSERINFO."</span></center>\n";
-        CloseTable();
-        include_once(NUKE_BASE_DIR.'footer.php');
-    } 
-    elseif ($db->sql_numrows($result) == 1 AND $setinfo['user_id'] != 1 AND !empty($setinfo['user_password']) AND $setinfo['user_active'] >0 AND $setinfo['user_level'] >0) 
-    {
-        $dbpass     = $setinfo['user_password'];
-        $non_crypt_pass = $user_password;
-        $old_crypt_pass = crypt($user_password,substr($dbpass,0,2));
-/*****[BEGIN]******************************************
- [ Base:     Evolution Functions               v1.5.0 ]
- ******************************************************/
-            $new_pass = EvoCrypt($user_password);
-/*****[END]********************************************
- [ Base:     Evolution Functions               v1.5.0 ]
- ******************************************************/
-        $new_pass = md5($user_password);
-        $evo_crypt = EvoCrypt($user_password);
-        //Reset to md5x1
-        if (($dbpass == $evo_crypt) || (($dbpass == $non_crypt_pass) || ($dbpass == $old_crypt_pass))) {
+        endif;
+		
+		$forward = str_replace("redirect=", "", "$redirect");
+        
+		if (preg_match("#privmsg#", $forward)): 
+		$pm_login = "active";
+		endif; 
+        
+   if ($db->sql_numrows($result) == 0): 
+          
+		  include_once(NUKE_BASE_DIR.'header.php');
+          
+		  Show_CNBYA_menu();
+          
+		  OpenTable();
+          echo "<center><span class='title'>"._SORRYNOUSERINFO."</span></center>\n";
+          CloseTable();
+          
+		  include_once(NUKE_BASE_DIR.'footer.php');
+         
+          elseif($db->sql_numrows($result) == 1 
+		  AND $setinfo['user_id'] != 1 
+		  AND !empty($setinfo['user_password']) 
+		  AND $setinfo['user_active'] >0 AND $setinfo['user_level'] >0): 
+        
+          $dbpass     = $setinfo['user_password'];
+          $non_crypt_pass = $user_password;
+          $old_crypt_pass = crypt($user_password,substr($dbpass,0,2));
+          
+		  # Base: Evolution Functions v1.5.0 START
+          $new_pass = EvoCrypt($user_password);
+          # Base: Evolution Functions v1.5.0 START
+
+          $new_pass = md5($user_password);
+          $evo_crypt = EvoCrypt($user_password);
+          
+		  //Reset to md5x1
+          if (($dbpass == $evo_crypt) 
+		  || (($dbpass == $non_crypt_pass) 
+		  || ($dbpass == $old_crypt_pass))): 
+		  
             $db->sql_query("UPDATE ".$user_prefix."_users SET user_password='$new_pass' WHERE username='$username'");
             $result = $db->sql_query("SELECT user_password FROM ".$user_prefix."_users WHERE username='$username'");
             list($dbpass) = $db->sql_fetchrow($result);
-        }
-        if ($dbpass != $new_pass) {
-            //Does it need another md5?
-        	if (md5($dbpass) == $new_pass) {
+          
+		  endif;
+          
+		  if ($dbpass != $new_pass): 
+            
+			# Does it need another md5?
+        	if (md5($dbpass) == $new_pass): 
+			
                 $db->sql_query("UPDATE ".$user_prefix."_users SET user_password='$new_pass' WHERE username='$username'");
                 $result = $db->sql_query("SELECT user_password FROM ".$user_prefix."_users WHERE username='$username'");
-                list($dbpass) = $db->sql_fetchrow($result);
-                if ($dbpass != $new_pass) {
+                
+				list($dbpass) = $db->sql_fetchrow($result);
+                
+				if ($dbpass != $new_pass): 
                     redirect("modules.php?name=$module_name&stop=1");
                     return;
-                }
-        	} else {
+                endif;
+			
+			else: 
         	    redirect("modules.php?name=$module_name&stop=1");
                 return;
-        	}
-        }
-/*****[BEGIN]******************************************
- [ Mod:    Advanced Security Code Control      v1.0.0 ]
- ******************************************************/
-        $gfxchk = array(2,4,5,7);
-        if (!security_code_check($_POST['g-recaptcha-response'], $gfxchk)) {
-/*****[END]********************************************
- [ Mod:    Advanced Security Code Control      v1.0.0 ]
- ******************************************************/
+        	endif;
+         
+		 endif;
+         
+		 # Mod: Advanced Security Code Control v1.0.0 START
+         $gfxchk = array(2,4,5,7);
+
+         if (!security_code_check($_POST['g-recaptcha-response'], $gfxchk)):
             redirect("modules.php?name=$module_name&stop=1");
             exit;
-        } else {
-            // menelaos: show a member the current TOS if he has not agreed yet
-            if (($ya_config['tos'] == intval(1)) AND ($ya_config['tosall'] == intval(1)) AND ($setinfo['agreedtos'] != intval(1))) {
-                if($_POST['tos_yes'] != intval(1)) {
+         # Mod: Advanced Security Code Control v1.0.0 END
+
+		 else: 
+            # menelaos: show a member the current TOS if he has not agreed yet
+            if (($ya_config['tos'] == intval(1)) AND ($ya_config['tosall'] == intval(1)) AND ($setinfo['agreedtos'] != intval(1))): 
+                if($_POST['tos_yes'] != intval(1)): 
                 include(NUKE_MODULES_DIR.$module_name.'/public/ya_tos.php');
                 exit;
-                }
-            }
+                endif;
+            endif;
             // menelaos: show a member the current TOS if he has not agreed yet
 
-            yacookie($setinfo['user_id'], $setinfo['username'], $new_pass, $setinfo['storynum'], $setinfo['umode'], $setinfo['uorder'], $setinfo['thold'], $setinfo['noscore'], $setinfo['ublockon'], $setinfo['theme'], $setinfo['commentmax']);
-/*****[BEGIN]******************************************
- [ Base:    NukeSentinel                      v2.5.00 ]
- ******************************************************/
-            $uname = $nsnst_const['remote_ip'];
-/*****[END]********************************************
- [ Base:    NukeSentinel                      v2.5.00 ]
- ******************************************************/
-            $db->sql_query("DELETE FROM ".$prefix."_session WHERE uname='$uname' AND guest='1'");
-            $db->sql_query("UPDATE ".$user_prefix."_users SET last_ip='$uname' WHERE username='$username'");
-        }
+            yacookie($setinfo['user_id'], 
+			        $setinfo['username'], 
+		 $new_pass, $setinfo['storynum'], 
+		               $setinfo['umode'], 
+					  $setinfo['uorder'], 
+					   $setinfo['thold'], 
+					 $setinfo['noscore'], 
+					$setinfo['ublockon'], 
+					   $setinfo['theme'], 
+				  $setinfo['commentmax']);
+      
+	   # Base: NukeSentinel v2.5.00 START
+       $uname = $nsnst_const['remote_ip'];
+       # Base: NukeSentinel v2.5.00 START
+      
+	   $db->sql_query("DELETE FROM ".$prefix."_session WHERE uname='$uname' AND guest='1'");
+       $db->sql_query("UPDATE ".$user_prefix."_users SET last_ip='$uname' WHERE username='$username'");
+        
+	   endif;
 
-        // menelaos: the cookiecheck is run here
-        if ($ya_config['cookiecheck']==1) {
-        $cookiecheck    = yacookiecheckresults();
-        }
-        if (!empty($pm_login)) {
-            redirect("modules.php?name=Private_Messages&file=index&folder=inbox");
-        } else if (!empty($t))  {
-            redirect("modules.php?name=Forums&file=$forward&mode=$mode&t=$t");
-        } else if (!empty($p))  {
-            redirect("modules.php?name=Forums&file=$forward&mode=$mode&p=$p");
-        } else if (empty($redirect)) {
-        	if ($board_config['loginpage'] == 1) {
-        		redirect("modules.php?name=Your_Account&op=userinfo&bypass=1&username=$username");
-        	}
-        	else
-        	{
-        		redirect("modules.php?name=Forums");
-        	}
-        } else if (!empty($module)) {
+      // menelaos: the cookiecheck is run here
+      if ($ya_config['cookiecheck']==1): 
+      $cookiecheck    = yacookiecheckresults();
+      endif;
+	  
+	  if (!empty($pm_login)): 
+      redirect("modules.php?name=Private_Messages&file=index&folder=inbox");
+	  elseif(!empty($t)):  
+      redirect("modules.php?name=Forums&file=$forward&mode=$mode&t=$t");
+	  elseif (!empty($p)):  
+      redirect("modules.php?name=Forums&file=$forward&mode=$mode&p=$p");
+	  elseif(empty($redirect)): 
+	      if ($board_config['loginpage'] == 1): 
+          redirect("modules.php?name=Your_Account&op=userinfo&bypass=1&username=$username");
+          else:
+          redirect("modules.php?name=Forums");
+          endif;
+ 	  elseif(!empty($module)): 
             redirect("modules.php?name=$module");
-        } else if (empty($mode)) {
-            if(!empty($f)) {
-                redirect("modules.php?name=Forums&file=$forward&f=$f");
-            } else {
-                redirect("modules.php?name=Forums&file=$forward");
-            }
-        } else {
-                redirect("modules.php?name=Forums&file=$forward&mode=$mode&f=$f");
-        }
-        } elseif ($db->sql_numrows($result) == 1 AND ($setinfo['user_level'] < 1 OR $setinfo['user_active'] < 1)) {
-            include_once(NUKE_BASE_DIR.'header.php');
+	  elseif(empty($mode)): 
+
+          if(!empty($f)) 
+          redirect("modules.php?name=Forums&file=$forward&f=$f");
+		  else 
+          redirect("modules.php?name=Forums&file=$forward");
+            
+         
+	  else: 
+      redirect("modules.php?name=Forums&file=$forward&mode=$mode&f=$f");
+      endif;
+		
+   elseif($db->sql_numrows($result) == 1 AND ($setinfo['user_level'] < 1 OR $setinfo['user_active'] < 1)):
+            
+			include_once(NUKE_BASE_DIR.'header.php');
             Show_CNBYA_menu();
             OpenTable();
-            if ($setinfo['user_level'] == 0) {
-                echo "<br /><center><span class=\"title\"><strong>"._ACCSUSPENDED."</strong></span></center><br />\n";
-            } elseif ($setinfo['user_level'] == -1) {
-                echo "<br /><center><span class=\"title\"><strong>"._ACCDELETED."</strong></span></center><br />\n";
-            } else {
-                echo "<br /><center><span class=\"title\"><strong>"._SORRYNOUSERINFO."</strong></span></center><br />\n";
-            }
+            
+			if ($setinfo['user_level'] == 0): 
+            echo "<br /><center><span class=\"title\"><strong>"._ACCSUSPENDED."</strong></span></center><br />\n";
+            elseif ($setinfo['user_level'] == -1): 
+            echo "<br /><center><span class=\"title\"><strong>"._ACCDELETED."</strong></span></center><br />\n";
+            else:
+            echo "<br /><center><span class=\"title\"><strong>"._SORRYNOUSERINFO."</strong></span></center><br />\n";
+            endif;
+			
         CloseTable();
+		
         include_once(NUKE_BASE_DIR.'footer.php');
-        } else {
-        redirect("modules.php?name=$module_name&stop=1");
-        }
-        break;
-
-    case "logout":
+   else:
+   redirect("modules.php?name=$module_name&stop=1");
+   endif;
+		
+   break;
+   case "logout":
         global $cookie, $db, $prefix;
         $r_uid = $cookie[0];
         $r_username = $cookie[1];
