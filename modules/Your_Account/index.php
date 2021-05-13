@@ -150,23 +150,19 @@ switch($op):
     break;
 
     case "login":
-/*****[BEGIN]******************************************
- [ Base:    NukeSentinel                      v2.5.00 ]
- ******************************************************/
+        # Base: NukeSentinel v2.5.00 START
         global $nsnst_const, $user_prefix;
-/*****[END]********************************************
- [ Base:    NukeSentinel                      v2.5.00 ]
- ******************************************************/
+        # Base: NukeSentinel v2.5.00 END
 
     /**
      * Security Mod: IPHUB VPN & Proxy blocker
      * @since 2.0.9e
      */
-    // if (get_evo_option('iphub_status', 'int') == 1):  
-    //     // include_once(NUKE_BASE_DIR.'header.php');  
-    //     block_vpn_proxy_user();
-    //     // include_once(NUKE_BASE_DIR.'footer.php');
-    // endif;
+    # if (get_evo_option('iphub_status', 'int') == 1):  
+    #     // include_once(NUKE_BASE_DIR.'header.php');  
+    #     block_vpn_proxy_user();
+    #     // include_once(NUKE_BASE_DIR.'footer.php');
+    # endif;
 
 /*****[BEGIN]******************************************
  [ Mod:     User IP Lock                       v1.0.0 ]
