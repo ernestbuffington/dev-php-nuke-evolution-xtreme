@@ -40,10 +40,10 @@ if (!defined('CNBYA')) {
     if ((is_user()) AND (strtolower($userinfo['username']) == strtolower($cookie[1])) AND ($userinfo['user_password'] == $cookie[2])) {
         include_once(NUKE_BASE_DIR.'header.php');
         title(_COMMENTSCONFIG);
-        OpenTable();
-        nav();
-        CloseTable();
-        echo "<br />";
+        //OpenTable();
+        //nav();
+        //CloseTable();
+        //echo "<br />";
         OpenTable();
         echo "<div align=\"center\">"._YA_DISABLED."</div>";
         CloseTable();

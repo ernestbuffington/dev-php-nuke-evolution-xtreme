@@ -63,7 +63,7 @@
 	  Inline Banner Ad                         v1.2.3       05/26/2009
 	  Email topic to friend                    v1.0.0       05/26/2009
 	  Related Topics                           v0.1.2       05/28/2009
-    Who viewed a topic                       v1.0.3
+      Who viewed a topic                       v1.0.3
  ************************************************************************/
 
 if (!defined('MODULE_FILE')) {
