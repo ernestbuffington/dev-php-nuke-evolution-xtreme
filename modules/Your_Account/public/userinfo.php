@@ -1,33 +1,33 @@
 <?php
-/*======================================================================= 
-  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
- =======================================================================*/
+/*=============================================================================== 
+   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
+ ================================================================================*/
 
 /*********************************************************************************/
-/* CNB Your Account: An Advanced User Management System for phpnuke             */
-/* ============================================                                 */
-/*                                                                              */
-/* Copyright (c) 2004 by Comunidade PHP Nuke Brasil                             */
-/* http://dev.phpnuke.org.br & http://www.phpnuke.org.br                        */
-/*                                                                              */
-/* Contact author: escudero@phpnuke.org.br                                      */
-/* International Support Forum: http://ravenphpscripts.com/forum76.html         */
-/*                                                                              */
-/* This program is free software. You can redistribute it and/or modify         */
-/* it under the terms of the GNU General Public License as published by         */
-/* the Free Software Foundation; either version 2 of the License.               */
-/*                                                                              */
+/* CNB Your Account: An Advanced User Management System for phpnuke              */
+/* ============================================                                  */
+/*                                                                               */
+/* Copyright (c) 2004 by Comunidade PHP Nuke Brasil                              */
+/* http://dev.phpnuke.org.br & http://www.phpnuke.org.br                         */
+/*                                                                               */
+/* Contact author: escudero@phpnuke.org.br                                       */
+/* International Support Forum: http://ravenphpscripts.com/forum76.html          */
+/*                                                                               */
+/* This program is free software. You can redistribute it and/or modify          */
+/* it under the terms of the GNU General Public License as published by          */
+/* the Free Software Foundation; either version 2 of the License.                */
+/*                                                                               */
 /*********************************************************************************/
-/* CNB Your Account it the official successor of NSN Your Account by Bob Marion    */
+/* CNB Your Account it the official successor of NSN Your Account by Bob Marion  */
 /*********************************************************************************/
 
-/*****[CHANGES]**********************************************************
+/*****[CHANGES]*******************************************************************
 -=[Base]=-
       Nuke Patched                             v3.1.0       06/26/2005
       NukeSentinel                             v2.5.00      07/11/2006
 -=Mod=-
       CNBYA Modifications                      v1.0.0       08/11/2005
- ************************************************************************/
+ *********************************************************************************/
 
 if (!defined('MODULE_FILE')) die ("You can't access this file directly...");
 
@@ -62,13 +62,13 @@ if ($num > 0):
             echo "<br />";
         else:
             # Mod: Advanced Username Color v1.0.5 START 
-            echo "<span class=\"title\">"._PERSONALINFO.": ".UsernameColor($usrinfo['username'])."</span></center><br />";
+            echo "<span class=\"title\">"._PERSONALINFO.": ".UsernameColor($usrinfo['username'])."</span></div><br />";
             # Mod: Advanced Username Color v1.0.5 END
         endif;
 		
         if($num == 1): 
 		
-            echo "<center>\n";
+            echo "<div align=\"center\">\n";
             echo "<table bgcolor='$bgcolor4' border='0' cellpadding='2' cellspacing='1' class='content' width='60%'>\n";
             echo "<tr>\n<td align='center' bgcolor='$bgcolor2' class='title' colspan='2' width='100%'>";
         
@@ -174,9 +174,9 @@ if ($num > 0):
 	        endif;
             
 			echo "</table>\n";
-            echo "</center><br />\n<center>\n";
+            echo "</div><br />\n<div align=\"center\">\n";
             
-			if (is_active("Journal") AND $cookie[1] != $username): 
+			if (is_active("Journal") AND $cookie[1] != $username):  
 			
                 $sql3 = "SELECT jid FROM ".$prefix."_journal WHERE aid='$username' AND status='yes' ORDER BY pdate,jid DESC LIMIT 0,1";
                 $result3 = $db->sql_query($sq3);
@@ -192,12 +192,12 @@ if ($num > 0):
             
                 if ($usrinfo['last_ip'] != 0): 
 				
-                echo "<center>"._LASTIP." <strong>$usrinfo[last_ip]</strong><br />";
+                echo "<div align=\"center\">"._LASTIP." <strong>$usrinfo[last_ip]</strong><br />";
                 # Base: NukeSentinel v2.5.00      START
                 # Mod: CNBYA Modifications v1.0.0 START
                 echo "[ <a href='".$admin_file.".php?
 				op=ABBlockedIPAdd&amp;tip=".$usrinfo['last_ip']."'>"._BANTHIS."</a> | <a 
-				href=\"modules.php?name=$module_name&amp;file=admin&amp;op=modifyUser&amp;chng_uid=".$usrinfo['username']."\">"._EDITUSER."</a> ]</center>";
+				href=\"modules.php?name=$module_name&amp;file=admin&amp;op=modifyUser&amp;chng_uid=".$usrinfo['username']."\">"._EDITUSER."</a> ]</div>";
                 # Base: NukeSentinel v2.5.00      END
                 # Mod: CNBYA Modifications v1.0.0 END
                 endif;
@@ -213,10 +213,10 @@ if ($num > 0):
 			AND is_active("Private_Messages")): 
 			  echo "<br />[ <a href=\"modules.php?name=Private_Messages&amp;mode=post&amp;u=$usrinfo[user_id]\">"._USENDPRIVATEMSG." $usrinfo[username]</a> ]<br />\n"; 
 			endif;
-			echo "</center></span>";
+			echo "</div></span>";
          
 		else: 
-            echo "<center>"._NOINFOFOR." $username</center>";
+            echo "<div align=\"center\">"._NOINFOFOR." $username</div>";
         endif; # end if num = 1
         
 		CloseTable();
@@ -244,13 +244,13 @@ if ($num > 0):
 	else: 
 	
         OpenTable();
-        echo "<center><strong>"._NOINFOFOR." <i>".$usrinfo['username']."</i></strong></center>";
+        echo "<div align=\"center\"><strong>"._NOINFOFOR." <i>".$usrinfo['username']."</i></strong></div>";
         
 		if($usrinfo[user_level] == 0) 
-	    echo "<br /><center><strong>"._ACCSUSPENDED."</strong></center>"; 
+	    echo "<br /><div align=\"center\"><strong>"._ACCSUSPENDED."</strong></div>"; 
         
 		if($usrinfo[user_level] == -1) 
-		echo "<br /><center><strong>"._ACCDELETED."</strong></center>"; 
+		echo "<br /><div align=\"center\"><strong>"._ACCDELETED."</strong></div>"; 
 		CloseTable();
     
 	endif;
@@ -258,8 +258,8 @@ if ($num > 0):
 else: 
 
     OpenTable();
-    echo "<center><strong>"._NOINFOFOR." <i>".$usrinfo['username']."</i></strong></center>";
-    echo "<br /><center><strong>"._YA_ACCNOFIND."</strong></center>";
+    echo "<div align=\"center\"><strong>"._NOINFOFOR." <i>".$usrinfo['username']."</i></strong></div>";
+    echo "<br /><div align=\"center\"><strong>"._YA_ACCNOFIND."</strong></div>";
     CloseTable();
 
 endif;
