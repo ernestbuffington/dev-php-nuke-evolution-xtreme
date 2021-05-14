@@ -1805,218 +1805,175 @@ for($i = 0; $i < $total_posts; $i++)
           # Mod: Bottom aligned signature v1.2.0 END
         endif;
 
-/*****[BEGIN]******************************************
- [ Mod:     Force Word Wrapping               v1.0.16 ]
- ******************************************************/
+        # Mod: Force Word Wrapping v1.0.16 START
         $message = word_wrap_pass($message);
-/*****[END]********************************************
- [ Mod:     Force Word Wrapping               v1.0.16 ]
- ******************************************************/
+        # Mod: Force Word Wrapping v1.0.16 END
 
         // $message = str_replace("\n", "\n<br />\n", $message);
         $message = str_replace("\n", "<br />", $message);
 
-        //
-        // Editing information
-        //
-        if ( $postrow[$i]['post_edit_count'] )
-        {
-                $l_edit_time_total = ( $postrow[$i]['post_edit_count'] == 1 ) ? $lang['Edited_time_total'] : $lang['Edited_times_total'];
-                $l_edited_by = sprintf($l_edit_time_total, $poster, create_date($board_config['default_dateformat'], $postrow[$i]['post_edit_time'], $board_config['board_timezone']), $postrow[$i]['post_edit_count']);
-        } else {
-                $l_edited_by = '';
-        }
-/*****[BEGIN]******************************************
- [ Mod:     Users Reputations Systems          v1.0.0 ]
- ******************************************************/
+        # Editing information
+        if($postrow[$i]['post_edit_count']):
+          $l_edit_time_total = ( $postrow[$i]['post_edit_count'] == 1 ) ? $lang['Edited_time_total'] : $lang['Edited_times_total'];
+          $l_edited_by = sprintf($l_edit_time_total, $poster, create_date($board_config['default_dateformat'], 
+		  $postrow[$i]['post_edit_time'], $board_config['board_timezone']), $postrow[$i]['post_edit_count']);
+		else: 
+          $l_edited_by = '';
+        endif;
+        
+		# Mod: Users Reputations Systems v1.0.0 START
         $reputation = '';
-        if ($postrow[$i]['user_id'] != ANONYMOUS)
-        {
-          if ($rep_config['rep_disable'] == 0)
-          {
-            if ($postrow[$i]['user_reputation'] == 0)
-            {
+        
+		if($postrow[$i]['user_id'] != ANONYMOUS):
+        
+          if($rep_config['rep_disable'] == 0):
+          
+            if($postrow[$i]['user_reputation'] == 0):
               $reputation = $lang['Zero_reputation'];
-            } else
-            {
-              if ($rep_config['graphic_version'] == 0)
-              {
-                // Text version
-                $reputation =  $lang['Reputation'] . ": ";
-                if ($postrow[$i]['user_reputation'] > 0)
-                {
+			else:
+              if($rep_config['graphic_version'] == 0):
+                # Text version
+                $reputation = $lang['Reputation'].": ";
+                
+				if($postrow[$i]['user_reputation'] > 0)
                   $reputation .= "<strong><font color=\"green\">" . round($postrow[$i]['user_reputation'],1) . "</font></strong>";
-                } else {
+				else 
                   $reputation .= "<strong><font color=\"red\">" . round($postrow[$i]['user_reputation'],1) . "</font></strong>";
-                }
-                $reputation_add = '';
-              } else {
-                // Graphic version
+                
+				$reputation_add = '';
+              else:
+                # Graphic version
                 get_reputation_medals($postrow[$i]['user_reputation']);
-              }
-            }
-            $reputation .=  " <a href=\""  . append_sid("reputation.$phpEx?a=add&amp;" . POST_USERS_URL . "=" . $postrow[$i]['user_id']) . "&" . POST_POST_URL . "=" . $postrow[$i]['post_id'] . "&c=" . substr(md5($bbcode_uid),0,8) . "\" target=\"_blank\" onClick=\"popupWin = window.open(this.href, '" . $lang['Reputation'] . "', 'location,width=700,height=400,top=0,scrollbars=yes'); popupWin.focus(); return false;\"><img src=\"modules/Forums/images/reputation_add_plus.gif\" alt=\"\" border=\"0\"><img src=\"modules/Forums/images/reputation_add_minus.gif\" alt=\"\" border=\"0\"></a>";
-            $sql = "SELECT COUNT(user_id) AS count_reps
+              endif;
+            endif;
+            
+			$reputation .=  " <a href=\"".append_sid("reputation.$phpEx?a=add&amp;".POST_USERS_URL."=".$postrow[$i]['user_id'])."&"
+			.POST_POST_URL."=".$postrow[$i]['post_id']."&c=".substr(md5($bbcode_uid),0,8)."\" target=\"_blank\" onClick=\"popupWin = 
+			window.open(this.href, '".$lang['Reputation']."', 'location,width=700,height=400,top=0,scrollbars=yes'); popupWin.focus(); 
+			return false;\"><img src=\"modules/Forums/images/reputation_add_plus.gif\" alt=\"\" border=\"0\"><img src=\"modules/Forums/images/reputation_add_minus.gif\" alt=\"\" border=\"0\"></a>";
+            
+			$sql = "SELECT COUNT(user_id) AS count_reps
                 FROM " . REPUTATION_TABLE . " AS r
                 WHERE r.user_id = " . $postrow[$i]['user_id'] . "
                 GROUP BY user_id";
-            if ( !($result = $db->sql_query($sql)) )
-            {
-              message_die(GENERAL_ERROR, "Could not obtain reputation stats for this user", '', __LINE__, __FILE__, $sql);
-            }
-            $row_rep = $db->sql_fetchrow($result);
-            if ($row_rep)
-            {
-              $reputation .= "<br /><a href=\""  . append_sid("reputation.$phpEx?a=stats&amp;" . POST_USERS_URL . "=" . $postrow[$i]['user_id']) . "\" target=\"_blank\" onClick=\"popupWin = window.open(this.href, '" . $lang['Reputation'] . "', 'location,width=700,height=400,top=0,scrollbars=yes'); popupWin.focus(); return false;\">" . $lang['Votes'] . "</a>: " . $row_rep['count_reps'];
-            }
-          }
-        }
-/*****[END]********************************************
- [ Mod:     Users Reputations System           v1.0.0 ]
- ******************************************************/		
-/*****[BEGIN]******************************************
- [ Mod:     Post Icons                         v1.0.1 ]
- ******************************************************/
-		$post_subject = get_icon_title($postrow[$i]['post_icon']) . '&nbsp;' . $post_subject;
-/*****[END]********************************************
- [ Mod:     Post Icons                         v1.0.1 ]
- ******************************************************/
+            
+			if(!($result = $db->sql_query($sql)))
+            message_die(GENERAL_ERROR, "Could not obtain reputation stats for this user", '', __LINE__, __FILE__, $sql);
+            
+            
+			$row_rep = $db->sql_fetchrow($result);
+            
+			if($row_rep):
+              $reputation .= "<br /><a href=\"".append_sid("reputation.$phpEx?a=stats&amp;".POST_USERS_URL."=" 
+			  .$postrow[$i]['user_id'])."\" target=\"_blank\" onClick=\"popupWin = window.open(this.href, '".$lang['Reputation']."', 'location,width=700,
+			  height=400,top=0,scrollbars=yes'); popupWin.focus(); return false;\">" . $lang['Votes'] . "</a>: " . $row_rep['count_reps'];
+			endif;
+          endif;
+        endif; 
+		# Mod: Users Reputations System v1.0.0 END
 
-        //
-        // Again this will be handled by the templating
-        // code at some point
-        //
+        # Mod: Post Icons v1.0.1 START
+		$post_subject = get_icon_title($postrow[$i]['post_icon']) . '&nbsp;' . $post_subject;
+        # Mod: Post Icons v1.0.1 END
+
+        
+        # Again this will be handled by the templating
+        # code at some point
         $row_color = ( !($i % 2) ) ? $theme['td_color1'] : $theme['td_color2'];
         $row_class = ( !($i % 2) ) ? $theme['td_class1'] : $theme['td_class2'];
 
-/*****[BEGIN]*****************************************
-[ Mod: Inline Banner Ad                       v1.2.3 ]
-******************************************************/
+        # Mod: Inline Banner Ad v1.2.3 START
         $inline_ad_code = '';
         $display_ad = ($i == (int) $board_config['ad_after_post'] - 1) || (((int) $board_config['ad_every_post'] != 0) && ($i + 1) % (int) $board_config['ad_every_post'] == 0);
 
-        //This if statement should keep server processing down a bit
-        if ($display_ad)
-        {
-          $display_ad = ($board_config['ad_who'] == ALL) || ($board_config['ad_who'] == ANONYMOUS && $userdata['user_id'] == ANONYMOUS) || ($board_config['ad_who'] == USER && $userdata['user_id'] != ANONYMOUS);
-          $ad_no_forums = explode(",", $board_config['ad_no_forums']);
-        for ($a=0; $a < count($ad_no_forums); $a++)
-        {
-          if ($forum_id == $ad_no_forums[$a])
-          {
-            $display_ad = false;
-            break;
-          }
-        }
-        if ($board_config['ad_no_groups'] != '')
-        {
-          $ad_no_groups = explode(",", $board_config['ad_no_groups']);
-            $sql = "SELECT 1
-                FROM " . USER_GROUP_TABLE . "
-                WHERE user_id=" . $userdata['user_id'] . " AND (group_id=0";
-            for ($a=0; $a < count($ad_no_groups); $a++)
-            {
-            $sql .= " OR group_id=" . $ad_no_groups[$a];
-            }
-            $sql .= ")";
-            if ( !($result = $db->sql_query($sql)) )
-            {
-            message_die(GENERAL_ERROR, 'Could not query ad information', '', __LINE__, __FILE__, $sql);
-            }
-            if ($row = $db->sql_fetchrow($result))
-            {
+        # This if statement should keep server processing down a bit
+        if ($display_ad):
+          $display_ad = ($board_config['ad_who'] == ALL) 
+		  || ($board_config['ad_who'] == ANONYMOUS 
+		  && $userdata['user_id'] == ANONYMOUS) 
+		  || ($board_config['ad_who'] == USER && $userdata['user_id'] != ANONYMOUS);
+          
+		  $ad_no_forums = explode(",", $board_config['ad_no_forums']);
+        
+		  for ($a=0; $a < count($ad_no_forums); $a++):
+            if ($forum_id == $ad_no_forums[$a]):
               $display_ad = false;
-            }
-        }
-        if ($userdata['user_id'] != ANONYMOUS && ($board_config['ad_post_threshold'] != '') && ($userdata['user_posts'] >= $board_config['ad_post_threshold']))
-        {
-          $display_ad = false;
-        }
-        }
-        //check once more, for server performance
-
-        if ($display_ad)
-        {
+              break;
+            endif;
+          endfor;
+        
+	      if ($board_config['ad_no_groups'] != ''):
+              $ad_no_groups = explode(",", $board_config['ad_no_groups']);
+              $sql = "SELECT 1
+                  FROM " . USER_GROUP_TABLE . "
+                  WHERE user_id=" . $userdata['user_id'] . " AND (group_id=0";
+		      for ($a=0; $a < count($ad_no_groups); $a++):
+              $sql .= " OR group_id=" . $ad_no_groups[$a];
+              endfor;
+              $sql .= ")";
+		      if(!($result = $db->sql_query($sql)))
+              message_die(GENERAL_ERROR, 'Could not query ad information', '', __LINE__, __FILE__, $sql);
+		      if ($row = $db->sql_fetchrow($result))
+              $display_ad = false;
+          endif;
+		  
+		  if ($userdata['user_id'] != ANONYMOUS && ($board_config['ad_post_threshold'] != '') && ($userdata['user_posts'] >= $board_config['ad_post_threshold']))
+             $display_ad = false;
+       endif;
+	  
+        # check once more, for server performance
+        if ($display_ad):
           $sql = "SELECT a.ad_code
             FROM " . ADS_TABLE . " a";
-          if ( !($result = $db->sql_query($sql)) )
-        {
+		  if(!($result = $db->sql_query($sql)))
           message_die(GENERAL_ERROR, 'Could not query ad information', '', __LINE__, __FILE__, $sql);
-        }
-        $adRow = array();
-        $adRow = $db->sql_fetchrowset($result);
-        srand((double)microtime()*1000000);
-        $adindex = rand(1, $db->sql_numrows($result)) - 1;
-        $db->sql_freeresult($result);
+          $adRow = array();
+          $adRow = $db->sql_fetchrowset($result);
+          srand((double)microtime()*1000000);
+          $adindex = rand(1, $db->sql_numrows($result)) - 1;
+          $db->sql_freeresult($result);
           $inline_ad_code = $adRow[$adindex]['ad_code'];
-        }
-/*****[END]*******************************************
-[ Mod: Inline Banner Ad                       v1.2.3 ]
-******************************************************/
+        endif;
+        # Mod: Inline Banner Ad v1.2.3 START
 
-/*****[BEGIN]******************************************
- [ Mod:     XData                              v1.0.3 ]
- ******************************************************/
-$xd_root = array();
-$xd_block = array();
-$xd_meta = get_xd_metadata();
-while ( list($code_name, $meta) = each($xd_meta) )
-{
-    if ( isset($poster_xd[$code_name]) )
-    {
-        $value = $poster_xd[$code_name];
 
-        if ( !$meta['allow_html'] )
-        {
-            $value = preg_replace('#(<)([\/]?.*?)(>)#is', "&lt;\\2&gt;", $value);
-        }
+       # Mod: XData v1.0.3 START
+       $xd_root = array();
+       $xd_block = array();
+       $xd_meta = get_xd_metadata();
+	   while(list($code_name, $meta) = each($xd_meta)):
+         if(isset($poster_xd[$code_name])):
+		   $value = $poster_xd[$code_name];
+           if(!$meta['allow_html'])
+           $value = preg_replace('#(<)([\/]?.*?)(>)#is', "&lt;\\2&gt;", $value);
 
-        if ( $meta['allow_bbcode'] && $user_sig_bbcode_uid != '')
-        {
-            $value = bbencode_second_pass($value, $profiledata['xdata_bbcode']);
-        }
+           if($meta['allow_bbcode'] && $user_sig_bbcode_uid != '')
+           $value = bbencode_second_pass($value, $profiledata['xdata_bbcode']);
+           if($meta['allow_bbcode'])
+           $value = make_clickable($value);
+           if($meta['allow_smilies'])
+           $value = smilies_pass($value);
 
-        if ($meta['allow_bbcode'])
-        {
-            $value = make_clickable($value);
-        }
+           # Mod: XData Date Conversion v0.1.1 START
+           if($meta['field_type'] == 'date')
+      	   $value = create_date($userdata['user_dateformat'], $value, $userdata['user_timezone']);
+           # Mod: XData Date Conversion v0.1.1 END
 
-        if ( $meta['allow_smilies'] )
-        {
-            $value = smilies_pass($value);
-        }
-/*****[ANFANG]*****************************************
- [ Mod:    XData Date Conversion               v0.1.1 ]
- ******************************************************/
-        if ($meta['field_type'] == 'date')
-        {
-        		$value = create_date($userdata['user_dateformat'], $value, $userdata['user_timezone']);
-        }
-/*****[ENDE]*******************************************
- [ Mod:    XData Date Conversion               v0.1.1 ]
- ******************************************************/
-        $value = str_replace("\n", "\n<br />\n", $value);
-
-        if ( $meta['display_posting'] == XD_DISPLAY_ROOT && $meta['viewtopic'])
-        {
+           $value = str_replace("\n", "\n<br />\n", $value);
+           if($meta['display_posting'] == XD_DISPLAY_ROOT && $meta['viewtopic'])
              $xd_root[$code_name] = $value;
-        }
-        elseif ( $meta['display_posting'] == XD_DISPLAY_NORMAL && $meta['viewtopic'])
-        {
-            $xd_block[$code_name] = $value;
-        }
-    }
-}
-/*****[END]********************************************
- [ Mod:     XData                              v1.0.3 ]
- ******************************************************/
+           elseif($meta['display_posting'] == XD_DISPLAY_NORMAL && $meta['viewtopic'])
+             $xd_block[$code_name] = $value;
+         endif;
+       endwhile;
+       # Mod: XData v1.0.3 START
 
 /*****[BEGIN]******************************************
  [ Mod:     Super Quick Reply                  v1.3.2 ]
  ******************************************************/
        /* if ( $show_qr_form )
         {
-             $poster = '<a href="javascript:pn(\''.$poster.'\');">'.$poster.'</a>';
+             $poster = '<a href="javascript:pn(\''.$poster.'\');">'.$poster.'</a>'; 
         }*/
 /*****[END]********************************************
  [ Mod:     Super Quick Reply                  v1.3.2 ]
