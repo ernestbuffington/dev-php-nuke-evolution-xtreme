@@ -1107,8 +1107,8 @@ $template->assign_vars(array(
 
 
 # Does this topic contain a poll?
-if(!empty($forum_topic_data['topic_vote']))
-{
+if(!empty($forum_topic_data['topic_vote'])):
+
         /*--FNA #1--*/
 
         $s_hidden_fields = '';
@@ -1119,11 +1119,11 @@ if(!empty($forum_topic_data['topic_vote']))
                         AND vr.vote_id = vd.vote_id
                 ORDER BY vr.vote_option_id ASC";
         
-		if ( !($result = $db->sql_query($sql)) )
+		if(!($result = $db->sql_query($sql)))
         message_die(GENERAL_ERROR, "Could not obtain vote data for this topic", '', __LINE__, __FILE__, $sql);
 
-        if ( $vote_info = $db->sql_fetchrowset($result) )
-        {
+        if($vote_info = $db->sql_fetchrowset($result)):
+        
                 $db->sql_freeresult($result);
                 $vote_options = count($vote_info);
 
@@ -1155,8 +1155,8 @@ if(!empty($forum_topic_data['topic_vote']))
 
                 $poll_expired = ($vote_info[0]['vote_length']) ? (($vote_info[0]['vote_start'] + $vote_info[0]['vote_length'] < time()) ? TRUE : 0) : 0;
 
-                if ($user_voted || $view_result || $poll_expired || !$is_auth['auth_vote'] || $forum_topic_data['topic_status'] == TOPIC_LOCKED)
-                {
+                if ($user_voted || $view_result || $poll_expired || !$is_auth['auth_vote'] || $forum_topic_data['topic_status'] == TOPIC_LOCKED):
+                
                      # Mod: Must first vote to see Results v1.0.0 START
                      # If poll is over, allow results to be viewed by all.
                      if (!$user_voted && !$poll_view_toggle && $view_result && !$poll_expired) 
@@ -1213,25 +1213,22 @@ if(!empty($forum_topic_data['topic_vote']))
                                 'TOTAL_VOTES' => $vote_results_sum)
                         );
 
-                }
-                else
-                {
+                
+                else:
+                
                         $template->set_filenames(array(
                                 'pollbox' => 'viewtopic_poll_ballot.tpl')
                         );
 
-                        for($i = 0; $i < $vote_options; $i++)
-                        {
-                                if ( count($orig_word) )
-                                {
-                                        $vote_info[$i]['vote_option_text'] = preg_replace($orig_word, $replacement_word, $vote_info[$i]['vote_option_text']);
-                                }
+                        for($i = 0; $i < $vote_options; $i++):
+                          if ( count($orig_word) )
+                          $vote_info[$i]['vote_option_text'] = preg_replace($orig_word, $replacement_word, $vote_info[$i]['vote_option_text']);
 
-                                $template->assign_block_vars("poll_option", array(
-                                        'POLL_OPTION_ID' => $vote_info[$i]['vote_option_id'],
-                                        'POLL_OPTION_CAPTION' => $vote_info[$i]['vote_option_text'])
-                                );
-                        }
+                          $template->assign_block_vars("poll_option", array(
+                                 'POLL_OPTION_ID' => $vote_info[$i]['vote_option_id'],
+                                 'POLL_OPTION_CAPTION' => $vote_info[$i]['vote_option_text'])
+                          );
+                        endfor;
 
                         $template->assign_vars(array(
                                 'L_SUBMIT_VOTE' => $lang['Submit_vote'],
@@ -1244,12 +1241,10 @@ if(!empty($forum_topic_data['topic_vote']))
                         );
 
                         $s_hidden_fields = '<input type="hidden" name="topic_id" value="' . $topic_id . '" /><input type="hidden" name="mode" value="vote" />';
-                }
+                endif;
 
-                if ( count($orig_word) )
-                {
-                        $vote_title = preg_replace($orig_word, $replacement_word, $vote_title);
-                }
+                if(count($orig_word))
+                $vote_title = preg_replace($orig_word, $replacement_word, $vote_title);
 
                 $s_hidden_fields .= '<input type="hidden" name="sid" value="' . $userdata['session_id'] . '" />';
 
@@ -1261,8 +1256,8 @@ if(!empty($forum_topic_data['topic_vote']))
                 );
 
                 $template->assign_var_from_handle('POLL_DISPLAY', 'pollbox');
-        }
-}
+        endif;
+endif;
 
 /*****[BEGIN]******************************************
  [ Mod:    Attachment Mod                      v2.4.1 ]
