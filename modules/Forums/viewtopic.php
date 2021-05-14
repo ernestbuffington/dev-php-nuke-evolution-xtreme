@@ -870,8 +870,8 @@ $lock_topic_url = $lock_topic_btn = $lock_topic_status = '';
 $split_topic_url = $split_topic_btn = '';
 $merge_topic_url = $merge_topic_btn = '';
 
-if ( $is_auth['auth_mod'] )
-{
+if($is_auth['auth_mod']):
+
         $s_auth_can .= sprintf($lang['Rules_moderate'], '<a href="'.append_sid("modcp.$phpEx?".POST_FORUM_URL."=$forum_id").'">', '</a>');
 
         $topic_mod .= '<a href="'.append_sid("modcp.$phpEx?".POST_TOPIC_URL."=$topic_id&amp;mode=delete").'"><img 
@@ -914,69 +914,57 @@ if ( $is_auth['auth_mod'] )
 		$merge_topic_url = append_sid("merge.$phpEx?" . POST_TOPIC_URL . '=' . $topic_id);
         $merge_topic_btn = $lang['Merge_topics'];
         # Mod: Simply Merge Threads v1.0.1 END 
-}
+endif;
 
-//
-// Topic watch information
-//
+
+# Topic watch information
 $s_watching_topic = $s_watching_topic_url = $s_watching_topic_text = $s_watching_topic_state = '';
-if ( $can_watch_topic )
-{
-        if ( $is_watching_topic )
-        {
-                $s_watching_topic = '<a href="' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;unwatch=topic&amp;start=$start") . '">' . $lang['Stop_watching_topic'] . '</a>';
-                $s_watching_topic_img = ( isset($images['Topic_un_watch']) ) ? '<a href="' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;unwatch=topic&amp;start=$start") . '"><img src="' . $images['Topic_un_watch'] . '" alt="' . $lang['Stop_watching_topic'] . '" title="' . $lang['Stop_watching_topic'] . '" border="0"></a>' : '';
+if($can_watch_topic):
+  if($is_watching_topic):
+     $s_watching_topic = '<a href="' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;unwatch=topic&amp;start=$start") . '">' . $lang['Stop_watching_topic'] . '</a>';
+     
+	 $s_watching_topic_img = ( isset($images['Topic_un_watch']) ) ? '<a href="' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;unwatch=topic&amp;start=$start") . '"><img 
+	 src="' . $images['Topic_un_watch'] . '" alt="' . $lang['Stop_watching_topic'] . '" title="' . $lang['Stop_watching_topic'] . '" border="0"></a>' : '';
 
-                $s_watching_topic_url = append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;unwatch=topic&amp;page=$start");
-                $s_watching_topic_text = $lang['Stop_watching_topic'];
-                $s_watching_topic_state = 1;
-        }
-        else
-        {
-                $s_watching_topic = '<a href="' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;watch=topic&amp;start=$start") . '">' . $lang['Start_watching_topic'] . '</a>';
-                $s_watching_topic_img = ( isset($images['Topic_watch']) ) ? '<a href="' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;watch=topic&amp;start=$start") . '"><img src="' . $images['Topic_watch'] . '" alt="' . $lang['Stop_watching_topic'] . '" title="' . $lang['Start_watching_topic'] . '" border="0"></a>' : '';
+     $s_watching_topic_url = append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;unwatch=topic&amp;page=$start");
+     $s_watching_topic_text = $lang['Stop_watching_topic'];
+     $s_watching_topic_state = 1;
+        
+  else:
+        
+  $s_watching_topic = '<a href="' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;watch=topic&amp;start=$start") . '">' . $lang['Start_watching_topic'] . '</a>';
+  $s_watching_topic_img = ( isset($images['Topic_watch']) ) ? '<a href="' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;watch=topic&amp;start=$start") . '"><img src="' . $images['Topic_watch'] . '" alt="' . $lang['Stop_watching_topic'] . '" title="' . $lang['Start_watching_topic'] . '" border="0"></a>' : '';
 
-                $s_watching_topic_url = append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;watch=topic&amp;page=$start");
-                $s_watching_topic_text = $lang['Start_watching_topic'];
-                $s_watching_topic_state = 0;
-        }
-}
-/*****[BEGIN]******************************************
- [ Mod:     Email topic to friend              v1.0.0 ]
- ******************************************************/
+  $s_watching_topic_url = append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;watch=topic&amp;page=$start");
+  $s_watching_topic_text = $lang['Start_watching_topic'];
+  $s_watching_topic_state = 0;
+  endif;
+endif;
+
+# Mod: Email topic to friend v1.0.0 START
 $s_email_topic = $s_email_url = $s_email_text = '';
-if($userdata['session_logged_in'])
-{
+if($userdata['session_logged_in']):
   $action = ($post_id) ? POST_POST_URL . "=$post_id" : POST_TOPIC_URL . "=$topic_id&amp;start=$start";
   $s_email_topic = '<a href="' . append_sid("emailtopic.$phpEx?$action") . '">' . $lang['Email_topic'] . '</a>';
   $s_email_url = append_sid("emailtopic.$phpEx?$action");
   $s_email_text = $lang['Email_topic'];
-}
-/*****[END]********************************************
- [ Mod:     Email topic to friend              v1.0.0 ]
- ******************************************************/
-//
-// If we've got a hightlight set pass it on to pagination,
-// I get annoyed when I lose my highlight after the first page.
-//
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+endif;
+# Mod: Email topic to friend v1.0.0 END
+
+
+# If we've got a hightlight set pass it on to pagination,
+# I get annoyed when I lose my highlight after the first page.
+# Mod: Printer Topic v1.0.8 START
 if(isset($HTTP_GET_VARS['printertopic']))
-{
 $pagination_printertopic = "printertopic=1&amp;";
-}
 if(!empty($highlight))
-{
 $pagination_highlight = "highlight=$highlight&amp;";
-}
 $pagination_ppp = $board_config['posts_per_page'];
-if(isset($finish))
-{
+if(isset($finish)):
     $pagination_ppp = ($finish < 0)? -$finish: ($finish - $start);
     $pagination_finish_rel = "finish_rel=". -$pagination_ppp. "&amp";
     $pagination_finish_rel_clean = "finish_rel=". -$pagination_ppp. "&amp";
-}
+endif;
 
 $pagination_printertopic = (isset($pagination_printertopic)) ? $pagination_printertopic : '';
 $pagination_highlight = (isset($pagination_highlight)) ? $pagination_highlight : '';
@@ -984,23 +972,16 @@ $pagination_finish_rel = (isset($pagination_finish_rel)) ? $pagination_finish_re
 
 $pagination = generate_pagination("viewtopic&amp;". $pagination_printertopic . POST_TOPIC_URL . "=$topic_id&amp;postdays=$post_days&amp;postorder=$post_order&amp;". $pagination_highlight . $pagination_finish_rel, $total_replies, $pagination_ppp, $start);
 
-/*****[BEGIN]******************************************
- [ Mod:    Thank You Mod                       v1.1.8 ]
- ******************************************************/
+# Mod: Thank You Mod v1.1.8 START
 $current_page = get_page($total_replies, $board_config['posts_per_page'], $start);
-/*****[END]********************************************
- [ Mod:    Thank You Mod                       v1.1.8 ]
- ******************************************************/
-if($pagination != '' && !empty($pagination_printertopic))
-{
-    $pagination .= " &nbsp;<a href=\"modules.php?name=Forums&amp;file=viewtopic&amp;". $pagination_printertopic. POST_TOPIC_URL . "=$topic_id&amp;postdays=$post_days&amp;postorder=$post_order&amp;". $pagination_highlight. "start=0&amp;finish_rel=-10000\" title=\"" . $lang['printertopic_cancel_pagination_desc'] . "\">:|&nbsp;|:</a>";
-}
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+# Mod: Thank You Mod v1.1.8 END
 
+if($pagination != '' && !empty($pagination_printertopic)):
+$pagination .= " &nbsp;<a href=\"modules.php?name=Forums&amp;file=viewtopic&amp;". $pagination_printertopic. POST_TOPIC_URL . "=$topic_id&amp;postdays=$post_days&amp;postorder=$post_order&amp;". $pagination_highlight. "start=0&amp;finish_rel=-10000\" title=\"" . $lang['printertopic_cancel_pagination_desc'] . "\">:|&nbsp;|:</a>";
+endif;
+
+# Mod: Printer Topic v1.0.8 START
 $pagination_variables = array(
-	// 'url' => append_sid("viewtopic&amp;". $pagination_printertopic . POST_TOPIC_URL . "=$topic_id&amp;postdays=$post_days&amp;postorder=$post_order&amp;". $pagination_highlight . $pagination_finish_rel), 
 	'url' => append_sid("viewtopic&amp;". $pagination_printertopic . POST_TOPIC_URL . "=$topic_id&amp;postdays=$post_days&amp;postorder=$post_order"), 
 	'total' => $total_replies,
 	'per-page' => $pagination_ppp,
@@ -1009,18 +990,13 @@ $pagination_variables = array(
 	'adjacents' => 2
 );
 
-//
-// Send vars to template
-//
+
+# Send vars to template
 $template->assign_vars(array(
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+        # Mod: Printer Topic v1.0.8 START
         'START_REL' => ($start + 1),
         'FINISH_REL' => (isset($HTTP_GET_VARS['finish_rel'])? intval($HTTP_GET_VARS['finish_rel']) : ($board_config['posts_per_page'] - $start)),
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+        # Mod: Printer Topic v1.0.8 END
  		/**
  		 *	@since 2.0.9e001
  		 */
@@ -1034,36 +1010,26 @@ $template->assign_vars(array(
         'TOPIC_TIME' => create_date($board_config['default_dateformat'], $topic_time, $board_config['board_timezone']),
         'PAGINATION' => str_replace('&amp;&amp;', '&amp;', $pagination),
         'PAGINATION_BOOTSTRAP' => get_bootstrap_pagination($pagination_variables),
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+        
+		# Mod: Printer Topic v1.0.8 START
         'PAGE_NUMBER' => sprintf($lang['Page_of'], ( floor( $start / $pagination_ppp ) + 1 ), ceil( $total_replies / $pagination_ppp )),
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+		# Mod: Printer Topic v1.0.8 END
 
         'POST_IMG' => $post_img,
         'REPLY_IMG' => $reply_img,
 
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+         # Mod: Printer Topic v1.0.8 START
         'PRINTER_IMG' => $printer_img,
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
-/*****[START]******************************************
- [ Base:    Who viewed a topic                 v1.0.3 ]
- ******************************************************/
+         # Mod: Printer Topic v1.0.8 END
+
+         # Base: Who viewed a topic v1.0.3 START
         'WHOVIEW_IMG' => $whoview_img,
         'L_WHOVIEW_ALT' => $whoview_alt,
-/*****[END]********************************************
- [ Base:    Who viewed a topic                 v1.0.3 ]
- ******************************************************/
+         # Base: Who viewed a topic v1.0.3 START
+
         'L_RANK_TITLE'    => $lang['rank_title'],
 
         'L_POST_COUNT' => $lang['Posts'],
-
 
         'L_BY' => $lang['By'],
         'L_IN' => $lang['In'],
@@ -1077,13 +1043,11 @@ $template->assign_vars(array(
         'L_VIEW_PREVIOUS_TOPIC' => $lang['View_previous_topic'],
         'L_POST_NEW_TOPIC' => $post_alt,
         'L_POST_REPLY_TOPIC' => $reply_alt,
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+         
+		 # Mod: Printer Topic v1.0.8 START
         'L_PRINTER_TOPIC' => $printer_alt,
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+		 # Mod: Printer Topic v1.0.8 END
+
         'L_BACK_TO_TOP' => $lang['Back_to_top'],
         'L_DISPLAY_POSTS' => $lang['Display_posts'],
         'L_LOCK_TOPIC' => $lang['Lock_topic'],
@@ -1111,15 +1075,13 @@ $template->assign_vars(array(
         'S_TOPIC_SPLIT_BTN' => $split_topic_btn,
         'S_TOPIC_MERGE_URL' => $merge_topic_url,
         'S_TOPIC_MERGE_BTN' => $merge_topic_btn,
-/*****[BEGIN]******************************************
- [ Mod:     Email topic to friend              v1.0.0 ]
- ******************************************************/
+         
+		 # Mod: Email topic to friend v1.0.0 START
         'S_EMAIL_TOPIC' => $s_email_topic,
         'S_EMAIL_URL' => $s_email_url,
         'S_EMAIL_TEXT' => $s_email_text,
-/*****[END]********************************************
- [ Mod:     Email topic to friend              v1.0.0 ]
- ******************************************************/		
+		 # Mod: Email topic to friend v1.0.0 END
+
         'S_WATCH_TOPIC' => $s_watching_topic,
         'S_WATCH_TOPIC_IMG' => $s_watching_topic_img,
 
