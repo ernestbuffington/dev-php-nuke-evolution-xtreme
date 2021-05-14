@@ -28,13 +28,13 @@
       YA Forum Sig                             v1.0.0       06/15/2005
  *********************************************************************************/
 
-if (!defined('MODULE_FILE')) die ("You can't access this file directly...");
+if(!defined('MODULE_FILE')) die ("You can't access this file directly...");
 
-if (!defined('CNBYA'))die('CNBYA protection');
+if(!defined('CNBYA'))die('CNBYA protection');
 
     global $cookie, $userinfo;
 	
-    if ((is_user()) 
+    if((is_user()) 
 	AND (strtolower($userinfo['username']) == strtolower($cookie[1])) 
 	AND ($userinfo['user_password'] == $cookie[2])): 
 	
@@ -49,14 +49,14 @@ if (!defined('CNBYA'))die('CNBYA protection');
 
       $result = $db->sql_query("SELECT * FROM ".$user_prefix."_cnbya_field");
     
-	  while ($sqlvalue = $db->sql_fetchrow($result)):
+	  while($sqlvalue = $db->sql_fetchrow($result)):
       
 	  list($value) = $db->sql_fetchrow( $db->sql_query("SELECT value FROM ".$user_prefix."_cnbya_value WHERE fid ='$sqlvalue[fid]' AND uid = '$userinfo[user_id]'"));
     
       $userinfo[$sqlvalue['name']] = $value;
       endwhile;
 
-		if (!preg_match("#https://#i", $userinfo['user_website']) && $userinfo['user_website'] != "https://"): 
+		if(!preg_match("#https://#i", $userinfo['user_website']) && $userinfo['user_website'] != "https://"): 
             $userinfo['user_website'] = "http://".$userinfo['user_website'];
         endif;
         
@@ -68,7 +68,7 @@ if (!defined('CNBYA'))die('CNBYA protection');
         echo "<tr><td bgcolor='$bgcolor2'><strong>"._UREALNAME."</strong>:<br />"._REQUIRED."</td><td bgcolor='$bgcolor3'>";
         echo "<input type='text' name='realname' value=\"$userinfo[name]\" size='50' maxlength='60'></td></tr>";
         
-		if ($ya_config['allowmailchange'] < 1): 
+		if($ya_config['allowmailchange'] < 1): 
           echo "<tr><td bgcolor='$bgcolor2'><strong>"._UREALEMAIL.":</strong><br />"._REQUIRED."</td>";
           echo "<td bgcolor='$bgcolor3'><input type='text' name='user_email' value=\"$userinfo[user_email]\" size='50' maxlength='255'><br />"._EMAILNOTPUBLIC."</td></tr>";
 		else: 
@@ -82,20 +82,20 @@ if (!defined('CNBYA'))die('CNBYA protection');
         
         $result = $db->sql_query("SELECT * FROM ".$user_prefix."_cnbya_field WHERE need <> '0' ORDER BY pos");
         
-		while ($sqlvalue = $db->sql_fetchrow($result)): 
+		while($sqlvalue = $db->sql_fetchrow($result)): 
           $t = $sqlvalue[fid];
           $value2 = explode("::", $sqlvalue[value]);
-		  if (substr($sqlvalue[name],0,1)=='_') 
+		  if(substr($sqlvalue[name],0,1)=='_') 
 		  eval( "\$name_exit = $sqlvalue[name];"); 
 		  else $name_exit = $sqlvalue[name];
-		  if (count($value2) == 1): 
+		  if(count($value2) == 1): 
             echo "<tr><td bgcolor='$bgcolor2'><strong>$name_exit</strong></td><td bgcolor='$bgcolor3'><input type='text' name='nfield[$t]' value='".$userinfo[$sqlvalue[name]]."' size='20' maxlength='$sqlvalue[size]'></td></tr>\n";            
             $sqlvalueMax = $sqlvalueMax - 1;  
 		  else: 
             echo "<tr><td bgcolor='$bgcolor2'><strong>$name_exit</strong></td><td bgcolor='$bgcolor3'>";
             echo "<select name='nfield[$t]'>\n";
 		    for ($i = 0; $i<count($value2); $i++): 
-			   if (trim($userinfo[$sqlvalue[name]]) == trim($value2[$i])) 
+			   if(trim($userinfo[$sqlvalue[name]]) == trim($value2[$i])) 
 			   $sel = "selected"; 
 			   else 
 			   $sel = "";
@@ -122,7 +122,7 @@ if (!defined('CNBYA'))die('CNBYA protection');
         echo "<td bgcolor='$bgcolor3'><input type='text' name='user_interests' value=\"$userinfo[user_interests]\" size='30' maxlength='100'></td></tr>";
         echo "<tr><td bgcolor='$bgcolor2'><strong>"._RECEIVENEWSLETTER."</strong></td><td bgcolor='$bgcolor3'>";
         
-		if ($userinfo[newsletter] == 1): 
+		if($userinfo[newsletter] == 1): 
 		  $ck1 = " selected"; 
 		  $ck2 = ""; 
 		else: 
@@ -134,7 +134,7 @@ if (!defined('CNBYA'))die('CNBYA protection');
         echo "<option value='0'$ck2>"._NO."</option></select></td></tr>";
         echo "<tr><td bgcolor='$bgcolor2'><strong>"._ALWAYSSHOWEMAIL.":</strong></td><td bgcolor='$bgcolor3'>";
         
-		if ($userinfo[user_viewemail] == 1): 
+		if($userinfo[user_viewemail] == 1): 
 		  $ck1 = " selected"; 
 		  $ck2 = ""; 
 		else: 
@@ -146,7 +146,7 @@ if (!defined('CNBYA'))die('CNBYA protection');
         echo "<option value='0'$ck2>"._NO."</option></select></td></tr>";
         echo "<tr><td bgcolor='$bgcolor2'><strong>"._HIDEONLINE.":</strong></td><td bgcolor='$bgcolor3'>";
         
-		if ($userinfo[user_allow_viewonline] == 0): 
+		if($userinfo[user_allow_viewonline] == 0): 
 		  $ck1 = " selected"; 
 		  $ck2 = ""; 
 		else: 
@@ -158,7 +158,7 @@ if (!defined('CNBYA'))die('CNBYA protection');
         echo "<option value='1'$ck2>"._NO."</option></select></td></tr>";
         echo "<tr><td bgcolor='$bgcolor2'><strong>"._REPLYNOTIFY.":</strong><br />"._REPLYNOTIFYMSG."</td><td bgcolor='$bgcolor3'>";
         
-		if ($userinfo[user_notify] == 1): 
+		if($userinfo[user_notify] == 1): 
 		  $ck1 = " selected"; 
 		  $ck2 = ""; 
 		else: 
@@ -170,7 +170,7 @@ if (!defined('CNBYA'))die('CNBYA protection');
         echo "<option value='0'$ck2>"._NO."</option></select></td></tr>";
         echo "<tr><td bgcolor='$bgcolor2'><strong>"._PMNOTIFY.":</strong></td><td bgcolor='$bgcolor3'>";
         
-		if ($userinfo[user_notify_pm] == 1): 
+		if($userinfo[user_notify_pm] == 1): 
 		  $ck1 = " selected"; 
 		  $ck2 = ""; 
 		else: 
@@ -182,7 +182,7 @@ if (!defined('CNBYA'))die('CNBYA protection');
         echo "<option value='0'$ck2>"._NO."</option></select></td></tr>";
         echo "<tr><td bgcolor='$bgcolor2'><strong>"._POPPM.":</strong><br />"._POPPMMSG."</td><td bgcolor='$bgcolor3'>";
         
-		if ($userinfo[user_popup_pm] == 1): 
+		if($userinfo[user_popup_pm] == 1): 
 		  $ck1 = " selected"; 
 		  $ck2 = ""; 
 		else: 
@@ -194,7 +194,7 @@ if (!defined('CNBYA'))die('CNBYA protection');
         echo "<option value='0'$ck2>"._NO."</option></select></td></tr>";
         echo "<tr><td bgcolor='$bgcolor2'><strong>"._ATTACHSIG.":</strong></td><td bgcolor='$bgcolor3'>";
         
-		if ($userinfo[user_attachsig] == 1): 
+		if($userinfo[user_attachsig] == 1): 
 		  $ck1 = " selected"; 
 		  $ck2 = ""; 
 		else: 
@@ -206,7 +206,7 @@ if (!defined('CNBYA'))die('CNBYA protection');
         echo "<option value='0'$ck2>"._NO."</option></select></td></tr>";
         echo "<tr><td bgcolor='$bgcolor2'><strong>"._ALLOWBBCODE."</strong></td><td bgcolor='$bgcolor3'>";
         
-		if ($userinfo[user_allowbbcode] == 1): 
+		if($userinfo[user_allowbbcode] == 1): 
 		  $ck1 = " selected"; 
 		  $ck2 = ""; 
 		else: 
@@ -218,7 +218,7 @@ if (!defined('CNBYA'))die('CNBYA protection');
         echo "<option value='0'$ck2>"._NO."</option></select></td></tr>";
         echo "<tr><td bgcolor='$bgcolor2'><strong>"._ALLOWHTMLCODE."</strong></td><td bgcolor='$bgcolor3'>";
         
-		if ($userinfo[user_allowhtml] == 1): 
+		if($userinfo[user_allowhtml] == 1): 
 		  $ck1 = " selected"; 
 		  $ck2 = ""; 
 		else: 
@@ -230,7 +230,7 @@ if (!defined('CNBYA'))die('CNBYA protection');
         echo "<option value='0'$ck2>"._NO."</option></select></td></tr>";
         echo "<tr><td bgcolor='$bgcolor2'><strong>"._ALLOWSMILIES."</strong></td><td bgcolor='$bgcolor3'>";
         
-		if ($userinfo[user_allowsmile] == 1): 
+		if($userinfo[user_allowsmile] == 1): 
 		   $ck1 = " selected"; 
 		   $ck2 = ""; 
 		else: 
@@ -243,9 +243,9 @@ if (!defined('CNBYA'))die('CNBYA protection');
         echo "<tr><td bgcolor='$bgcolor2'><strong>"._FORUMSTIME."</strong></td><td bgcolor='$bgcolor3'>";
         echo "<select name='user_timezone'>";
         
-		for ($i=-12; $i<13; $i++): 
+		for($i=-12; $i<13; $i++): 
 		
-            if ($i == 0): 
+            if($i == 0): 
                 $dummy = "GMT";
 			else: 
                 if (!preg_match("/[\-]/", $i)) 
@@ -253,10 +253,10 @@ if (!defined('CNBYA'))die('CNBYA protection');
 				$dummy = "GMT $i "._HOURS."";
             endif;
             
-			if ($userinfo[user_timezone] == $i) 
-                echo "<option name='user_timezone' value=\"$i\" selected>$dummy</option>";
+			if($userinfo[user_timezone] == $i) 
+              echo "<option name='user_timezone' value=\"$i\" selected>$dummy</option>";
 			else 
-                echo "<option name='user_timezone' value=\"$i\">$dummy</option>";
+              echo "<option name='user_timezone' value=\"$i\">$dummy</option>";
         endfor;
         
 		echo "</select>";
@@ -314,8 +314,8 @@ if (!defined('CNBYA'))die('CNBYA protection');
         @ksort($avatar_images);
         @reset($avatar_images);
         
-		if( empty($category) ) 
-        list($category, ) = each($avatar_images);
+		if(empty($category)) 
+        list($category,) = each($avatar_images);
         
 		@reset($avatar_images);
         $s_categories = '<select name="avatarcategory">';
@@ -339,15 +339,15 @@ if (!defined('CNBYA'))die('CNBYA protection');
         echo "<span class='title'>"._YA_AVCP."</span></strong><br />";
         echo "<tr><td bgcolor='$bgcolor2'>"._YA_AVINF1." ".$board_config['avatar_max_width']." "._YA_AVINF2." ".$board_config['avatar_max_height']." "._YA_AVINF3." ".YA_CoolSize($board_config['avatar_filesize']).".</td>";
         
-		if (preg_match("#http#", $userinfo['user_avatar'])) 
+		if(preg_match("#http#", $userinfo['user_avatar'])) 
             # avatarfix by menelaos dot hetnet dot nl 
             echo "<td bgcolor='$bgcolor3' align=center>"._YA_CURRAV."<br /><IMG alt=\"\" src=\"$direktori/$userinfo[user_avatar]\" width=\"40\" height=\"50\"></td></tr>";
-		elseif ($userinfo[user_avatar]) 
+		elseif($userinfo[user_avatar]) 
             echo "<td bgcolor='$bgcolor3' align=center>"._YA_CURRAV."<br /><IMG alt=\"\" src=\"$direktori/$userinfo[user_avatar]\" width=\"40\" height=\"50\"></td></tr>";
         
 		echo "<br />";
         
-		if ($board_config['allow_avatar_local']): 
+		if($board_config['allow_avatar_local']): 
             echo "<form action=\"modules.php?name=Your_Account&amp;op=avatarlist\" method=\"post\">";
             echo "<tr><td bgcolor='$bgcolor2'><strong>"._YA_SELAVGALL.":</strong></td>";
             echo "<td bgcolor='$bgcolor3'>".$s_categories."&nbsp;<img src=\"images/right.gif\" align=middle>&nbsp;<input class=button type=submit value=\""._YA_SHOWGALL."\"></td></tr>";
@@ -369,7 +369,7 @@ if (!defined('CNBYA'))die('CNBYA protection');
             echo "<td bgcolor='$bgcolor3'><strong>"._YA_DISABLED."</strong></td></tr>";
         endif;
         
-        if ($board_config['allow_avatar_remote']): 
+        if($board_config['allow_avatar_remote']): 
             echo "<form action=\"modules.php?name=Your_Account&amp;op=avatarlinksave\" method=\"post\">";
             echo "<tr><td bgcolor='$bgcolor2'><strong>"._YA_OFFSITE.":</strong><br /><SPAN class=gensmall>"._YA_SUBMITBUTTON."</SPAN></td>";
 			if ($userinfo[user_avatar_type] == 2) 
