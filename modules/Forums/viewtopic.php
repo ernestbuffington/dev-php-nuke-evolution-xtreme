@@ -1259,24 +1259,19 @@ if(!empty($forum_topic_data['topic_vote'])):
         endif;
 endif;
 
-/*****[BEGIN]******************************************
- [ Mod:    Attachment Mod                      v2.4.1 ]
- ******************************************************/
+# Mod: Attachment Mod v2.4.1 START
 init_display_post_attachments($forum_topic_data['topic_attachment']);
-/*****[END]********************************************
- [ Mod:    Attachment Mod                      v2.4.1 ]
- ******************************************************/
+# Mod: Attachment Mod v2.4.1 END
 
-//
-// Update the topic view counter
-//
+
+# Update the topic view counter
 $sql = "UPDATE " . TOPICS_TABLE . "
         SET topic_views = topic_views + 1
         WHERE topic_id = '$topic_id'";
-if ( !$db->sql_query($sql) )
-{
-        message_die(GENERAL_ERROR, "Could not update topic views.", '', __LINE__, __FILE__, $sql);
-}
+
+if(!$db->sql_query($sql))
+message_die(GENERAL_ERROR, "Could not update topic views.", '', __LINE__, __FILE__, $sql);
+
 
 /*****[BEGIN]******************************************
  [ Mod:    Thank You Mod                       v1.1.8 ]
