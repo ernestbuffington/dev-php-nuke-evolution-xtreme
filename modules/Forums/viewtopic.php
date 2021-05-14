@@ -1655,196 +1655,142 @@ for($i = 0; $i < $total_posts; $i++)
           $edit_alt = '';
         endif;
 
-        if($is_auth['auth_mod'])
-        {
-                $temp_url = append_sid("modcp.$phpEx?mode=ip&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id'] . "&amp;" . POST_TOPIC_URL . "=" . $topic_id);
-                $ip_url = $temp_url;
-                $ip_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_ip'] . '" alt="' . $lang['View_IP'] . '" title="' . $lang['View_IP'] . '" border="0" /></a>';
-                $ip = '<a href="' . $temp_url . '">' . $lang['View_IP'] . '</a>';
-                $ip_alt = $lang['View_IP'];
+        if($is_auth['auth_mod']):
+          $temp_url = append_sid("modcp.$phpEx?mode=ip&amp;".POST_POST_URL."=".$postrow[$i]['post_id']."&amp;".POST_TOPIC_URL."=".$topic_id);
+          $ip_url = $temp_url;
+          $ip_img = '<a href="'.$temp_url.'"><img src="'.$images['icon_ip'].'" alt="'.$lang['View_IP'].'" title="'.$lang['View_IP'].'" border="0" /></a>';
+          $ip = '<a href="'.$temp_url.'">'.$lang['View_IP'].'</a>';
+          $ip_alt = $lang['View_IP'];
+          $temp_url = append_sid("posting.$phpEx?mode=delete&amp;".POST_POST_URL."=".$postrow[$i]['post_id']);
+          $delpost_url = $temp_url;
+          $delpost_img = '<a href="'.$temp_url.'"><img src="'.$images['icon_delpost'].'" alt="'.$lang['Delete_post'].'" title="'.$lang['Delete_post'].'" border="0" /></a>';
+          $delpost = '<a href="'.$temp_url.'">'.$lang['Delete_post'].'</a>';
+          $delpost_alt = $lang['Delete_post'];
+        else:
+          $ip_url = '';
+          $ip_img = '';
+          $ip = '';
+          $ip_alt = '';
 
-                $temp_url = append_sid("posting.$phpEx?mode=delete&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id']);
-                $delpost_url = $temp_url;
-                $delpost_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_delpost'] . '" alt="' . $lang['Delete_post'] . '" title="' . $lang['Delete_post'] . '" border="0" /></a>';
-                $delpost = '<a href="' . $temp_url . '">' . $lang['Delete_post'] . '</a>';
-                $delpost_alt = $lang['Delete_post'];
-        }
-        else
-        {
-                $ip_url = '';
-                $ip_img = '';
-                $ip = '';
-                $ip_alt = '';
+           if($userdata['user_id'] == $poster_id && $is_auth['auth_delete'] && $forum_topic_data['topic_last_post_id'] == $postrow[$i]['post_id']):
+             $temp_url = append_sid("posting.$phpEx?mode=delete&amp;".POST_POST_URL."=".$postrow[$i]['post_id']);
+             $delpost_url = $temp_url;
+             $delpost_img = '<a href="'.$temp_url.'"><img src="'.$images['icon_delpost'].'" alt="'.$lang['Delete_post'].'" title="'.$lang['Delete_post'].'" border="0" /></a>';
+             $delpost = '<a href="' . $temp_url . '">' . $lang['Delete_post'] . '</a>';
+             $delpost_alt = $lang['Delete_post'];
+           else:
+             $delpost_url = '';
+             $delpost_img = '';
+             $delpost = '';
+             $delpost_alt = '';
+           endif;
+        endif;
 
-                if ( $userdata['user_id'] == $poster_id && $is_auth['auth_delete'] && $forum_topic_data['topic_last_post_id'] == $postrow[$i]['post_id'] )
-                {
-                        $temp_url = append_sid("posting.$phpEx?mode=delete&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id']);
-                        $delpost_url = $temp_url;
-                        $delpost_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_delpost'] . '" alt="' . $lang['Delete_post'] . '" title="' . $lang['Delete_post'] . '" border="0" /></a>';
-                        $delpost = '<a href="' . $temp_url . '">' . $lang['Delete_post'] . '</a>';
-                        $delpost_alt = $lang['Delete_post'];
-                }
-                else
-                {
-                    $delpost_url = '';
-                        $delpost_img = '';
-                        $delpost = '';
-                        $delpost_alt = '';
-                }
-        }
-
-/*****[BEGIN]******************************************
- [ Mod:     Smilies in Topic Titles            v1.0.0 ]
- [ Mod:     Smilies in Topic Titles Toggle     v1.0.0 ]
- ******************************************************/
- if ($board_config['smilies_in_titles'])
-            {
+        # Mod: Smilies in Topic Titles v1.0.0 START
+        # Mod: Smilies in Topic Titles Toggle v1.0.0 START
+        if ($board_config['smilies_in_titles'])
         $post_subject = smilies_pass(( !empty($postrow[$i]['post_subject']) ) ? $postrow[$i]['post_subject'] : '');
-            } else {
+		else 
         $post_subject = ( !empty($postrow[$i]['post_subject']) ) ? $postrow[$i]['post_subject'] : '';
-            }
-/*****[END]********************************************
- [ Mod:     Smilies in Topic Titles Toggle     v1.0.0 ]
- [ Mod:     Smilies in Topic Titles            v1.0.0 ]
- ******************************************************/
+        # Mod: Smilies in Topic Titles v1.0.0 END
+        # Mod: Smilies in Topic Titles Toggle v1.0.0 END
 
         $message = $postrow[$i]['post_text'];
         $bbcode_uid = $postrow[$i]['bbcode_uid'];
-/*****[BEGIN]******************************************
- [ Mod:     View/Disable Avatars/Signatures    v1.1.2 ]
- ******************************************************/
-        if($userdata['user_showsignatures']){
-             $user_sig = ( $postrow[$i]['enable_sig'] && !empty($postrow[$i]['user_sig']) && $board_config['allow_sig'] ) ? $postrow[$i]['user_sig'] : '';
-        }
-/*****[END]********************************************
- [ Mod:     View/Disable Avatars/Signatures    v1.1.2 ]
- ******************************************************/
+
+        # Mod: View/Disable Avatars/Signatures v1.1.2 START
+        if($userdata['user_showsignatures'])
+        $user_sig = ($postrow[$i]['enable_sig'] && !empty($postrow[$i]['user_sig']) && $board_config['allow_sig'] ) ? $postrow[$i]['user_sig'] : '';
+        # Mod: View/Disable Avatars/Signatures v1.1.2 END
+
         $user_sig_bbcode_uid = $postrow[$i]['user_sig_bbcode_uid'];
 
-        //
-        // Note! The order used for parsing the message _is_ important, moving things around could break any
-        // output
-        //
-/*****[BEGIN]******************************************
- [ Mod:     Display Poster Information Once    v2.0.0 ]
- ******************************************************/
-	if( $leave_out['show_sig_once'] )
-	{
-		$user_sig = "&nbsp;";		// Leaves out signature
-		$user_sig_image = "&nbsp;";	// Leaves out sig image (for Signature panel)
-	}
-	if( $leave_out['show_rank_once'] ) {
-	    $poster_rank = "&nbsp;";		// Leaves out rank title
-		$rank_image = "&nbsp;";		// Leaves out rank images
-	}
-	if( $leave_out['show_avatar_once'] ) {
-	     $poster_avatar = "&nbsp;";
-	}
-/*****[END]********************************************
- [ Mod:     Display Poster Information Once    v2.0.0 ]
- ******************************************************/
-        //
-        // If the board has HTML off but the post has HTML
-        // on then we process it, else leave it alone
-        //
-    if ( !$board_config['allow_html'] || !$userdata['user_allowhtml'])
-        {
-                if ( !empty($user_sig) )
-                {
-                        $user_sig = preg_replace('#(<)([\/]?.*?)(>)#is', "&lt;\\2&gt;", $user_sig);
-                }
+        # Note! The order used for parsing the message _is_ important, moving things around could break any
+        # output
 
-                if ( $postrow[$i]['enable_html'] )
-                {
-                        $message = preg_replace('#(<)([\/]?.*?)(>)#is', "&lt;\\2&gt;", $message);
-                }
-        }
-
-/*****[BEGIN]******************************************
- [ Mod:    Hide Mod                            v1.2.0 ]
- ******************************************************/
-        //
-        // Parse message and/or sig for BBCode if reqd
-        //
-        if ($user_sig != '' && $user_sig_bbcode_uid != '')
-		{
-			$user_sig = ($board_config['allow_bbcode']) ? bbencode_second_pass($user_sig, $user_sig_bbcode_uid) : preg_replace("/\:$user_sig_bbcode_uid/si", '', $user_sig);
-		  $user_sig = bbencode_third_pass($user_sig, $user_sig_bbcode_uid, $valid);
-		}
+        # Mod: Display Poster Information Once v2.0.0 START
+	    if($leave_out['show_sig_once']):
+		  $user_sig = "&nbsp;";		    # Leaves out signature
+		  $user_sig_image = "&nbsp;";	# Leaves out sig image (for Signature panel)
+	    endif;
+	 
+	    if($leave_out['show_rank_once']): 
+	      $poster_rank = "&nbsp;";		# Leaves out rank title
+		  $rank_image = "&nbsp;";		# Leaves out rank images
+	    endif;
 	
-		if ($bbcode_uid != '')
-		{
+	    if( $leave_out['show_avatar_once']) 
+	    $poster_avatar = "&nbsp;";
+        # Mod: Display Poster Information Once v2.0.0 END
+        
+        # If the board has HTML off but the post has HTML
+        # on then we process it, else leave it alone
+        if(!$board_config['allow_html'] || !$userdata['user_allowhtml']):
+           if ( !empty($user_sig) )
+             $user_sig = preg_replace('#(<)([\/]?.*?)(>)#is', "&lt;\\2&gt;", $user_sig);
+           if ( $postrow[$i]['enable_html'] )
+              $message = preg_replace('#(<)([\/]?.*?)(>)#is', "&lt;\\2&gt;", $message);
+        endif;
+
+        # Mod: Hide Mod v1.2.0 START
+        # Parse message and/or sig for BBCode if reqd
+        if($user_sig != '' && $user_sig_bbcode_uid != ''):
+		  $user_sig = ($board_config['allow_bbcode']) ? bbencode_second_pass($user_sig, $user_sig_bbcode_uid) : preg_replace("/\:$user_sig_bbcode_uid/si", '', $user_sig);
+		  $user_sig = bbencode_third_pass($user_sig, $user_sig_bbcode_uid, $valid);
+		endif;
+	
+		if($bbcode_uid != ''):
 			$message = ($board_config['allow_bbcode']) ? bbencode_second_pass($message, $bbcode_uid) : preg_replace("/\:$bbcode_uid/si", '', $message);
 		  	$message = bbencode_third_pass($message, $bbcode_uid, $valid);
-		}
-/*****[END]********************************************
- [ Mod:    Hide Mod                            v1.2.0 ]
- ******************************************************/
+		endif;
+        # Mod: Hide Mod v1.2.0 END
 
-        if ( !empty($user_sig) )
-        {
-                $user_sig = make_clickable($user_sig);
-        }
+        if(!empty($user_sig))
+        $user_sig = make_clickable($user_sig);
+        
         $message = make_clickable($message);
 
-        /*--FNA #2--*/
+        # Parse smilies
+        if($board_config['allow_smilies']):
+          if($postrow[$i]['user_allowsmile'] && !empty($user_sig))
+            $user_sig = smilies_pass($user_sig);
+          if ( $postrow[$i]['enable_smilies'] )
+            $message = smilies_pass($message);
+        endif;
+        
+        # Highlight active words (primarily for search)
+        if($highlight_match)
+        # This has been back-ported from 3.0 CVS
+        $message = preg_replace('#(?!<.*)(?<!\w)(' . $highlight_match . ')(?!\w|[^<>]*>)#i', '<span style="color:#'.$theme['fontcolor3'].'">\1</span>', $message);
+        
 
-        //
-        // Parse smilies
-        //
-        if ( $board_config['allow_smilies'] )
-        {
-                if ( $postrow[$i]['user_allowsmile'] && !empty($user_sig) )
-                {
-                        $user_sig = smilies_pass($user_sig);
-                }
+        # Replace naughty words for fuckfaces that abuse free speech
+        if(count($orig_word)):
+        
+          $post_subject = preg_replace($orig_word, $replacement_word, $post_subject);
 
-                if ( $postrow[$i]['enable_smilies'] )
-                {
-                        $message = smilies_pass($message);
-                }
-        }
+          if(!empty($user_sig)):
+             /*$user_sig = str_replace('\"', '"', substr(@preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' 
+			 . $user_sig . '<'), 1, -1));*/
+          endif;
+          
+		  $message = preg_replace($orig_word, $replacement_word, $message);
+            /* $message = str_replace('\"', '"', substr(@preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' 
+			. $message . '<'), 1, -1)); */
 
-        //
-        // Highlight active words (primarily for search)
-        //
-        if ($highlight_match)
-        {
-                // This has been back-ported from 3.0 CVS
-		      $message = preg_replace('#(?!<.*)(?<!\w)(' . $highlight_match . ')(?!\w|[^<>]*>)#i', '<span style="color:#'.$theme['fontcolor3'].'">\1</span>', $message);
-        }
+          # Mod: XData v1.0.3 START
+          @reset($poster_xd);
+          while(list($code_name,) = each($poster_xd)):
+             /*$poster_xd[$code_name] = str_replace('\"', '"', substr(preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', 
+		     "preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $poster_xd[$code_name] . '<'), 1, -1));*/
+		    $poster_xd[$code_name] = preg_replace($orig_word, $replacement_word, $poster_xd[$code_name]);
+          endwhile;
+          # Mod: XData v1.0.3 END
+        endif;
 
-        //
-        // Replace naughty words
-        //
-        if (count($orig_word))
-        {
-                $post_subject = preg_replace($orig_word, $replacement_word, $post_subject);
-
-                if (!empty($user_sig))
-                {
-                    /*$user_sig = str_replace('\"', '"', substr(@preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $user_sig . '<'), 1, -1));*/
-                }
-                $message = preg_replace($orig_word, $replacement_word, $message);
-                /* $message = str_replace('\"', '"', substr(@preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $message . '<'), 1, -1)); */
-/*****[BEGIN]******************************************
- [ Mod:     XData                              v1.0.3 ]
- ******************************************************/
-                @reset($poster_xd);
-                while ( list($code_name, ) = each($poster_xd) )
-                {
-                    /*$poster_xd[$code_name] = str_replace('\"', '"', substr(preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $poster_xd[$code_name] . '<'), 1, -1));*/
-                    $poster_xd[$code_name] = preg_replace($orig_word, $replacement_word, $poster_xd[$code_name]);
-                }
-/*****[END]********************************************
- [ Mod:     XData                              v1.0.3 ]
- ******************************************************/
-        }
-
-        //
-        // Replace newlines (we use this rather than nl2br because
-        // till recently it wasn't XHTML compliant)
-        //
+        
+        # Replace newlines (we use this rather than nl2br because
+        # till recently it wasn't XHTML compliant)
         if ( !empty($user_sig) )
         {
 /*****[BEGIN]******************************************
