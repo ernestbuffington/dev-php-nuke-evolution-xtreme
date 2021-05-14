@@ -990,7 +990,6 @@ $pagination_variables = array(
 	'adjacents' => 2
 );
 
-
 # Send vars to template
 $template->assign_vars(array(
         # Mod: Printer Topic v1.0.8 START
@@ -1094,27 +1093,21 @@ $template->assign_vars(array(
         'U_VIEW_OLDER_TOPIC' => $view_prev_topic_url,
         'U_VIEW_NEWER_TOPIC' => $view_next_topic_url,
         'U_POST_NEW_TOPIC' => $new_topic_url,
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+        
+		 # Mod: Printer Topic v1.0.8 START
         'U_PRINTER_TOPIC' => $printer_topic_url,
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
-/*****[START]******************************************
- [ Base:    Who viewed a topic                 v1.0.3 ]
- ******************************************************/
+		 # Mod: Printer Topic v1.0.8 END
+
+         # Base: Who viewed a topic v1.0.3 START
         'U_WHOVIEW_TOPIC' => $who_has_viewed_topic,       
-/*****[END]********************************************
- [ Base:    Who viewed a topic                 v1.0.3 ]
- ******************************************************/
+         # Base: Who viewed a topic v1.0.3 END
+
         'U_POST_REPLY_TOPIC' => $reply_topic_url)
 );
 
-//
-// Does this topic contain a poll?
-//
-if ( !empty($forum_topic_data['topic_vote']) )
+
+# Does this topic contain a poll?
+if(!empty($forum_topic_data['topic_vote']))
 {
         /*--FNA #1--*/
 
@@ -1125,10 +1118,9 @@ if ( !empty($forum_topic_data['topic_vote']) )
                 WHERE vd.topic_id = '$topic_id'
                         AND vr.vote_id = vd.vote_id
                 ORDER BY vr.vote_option_id ASC";
-        if ( !($result = $db->sql_query($sql)) )
-        {
-                message_die(GENERAL_ERROR, "Could not obtain vote data for this topic", '', __LINE__, __FILE__, $sql);
-        }
+        
+		if ( !($result = $db->sql_query($sql)) )
+        message_die(GENERAL_ERROR, "Could not obtain vote data for this topic", '', __LINE__, __FILE__, $sql);
 
         if ( $vote_info = $db->sql_fetchrowset($result) )
         {
@@ -1136,109 +1128,85 @@ if ( !empty($forum_topic_data['topic_vote']) )
                 $vote_options = count($vote_info);
 
                 $vote_id = $vote_info[0]['vote_id'];
-/*****[BEGIN]******************************************
- [ Mod:     Smilies in Topic Titles            v1.0.0 ]
- ******************************************************/
+                
+				# Mod: Smilies in Topic Titles v1.0.0 START
                 $vote_title = smilies_pass($vote_info[0]['vote_text']);
-/*****[END]********************************************
- [ Mod:     Smilies in Topic Titles            v1.0.0 ]
- ******************************************************/
+				# Mod: Smilies in Topic Titles v1.0.0 END
 
-/*****[BEGIN]******************************************
- [ Mod:     Must first vote to see Results     v1.0.0 ]
- ******************************************************/
-                  $poll_view_toggle = $vote_info[0]['poll_view_toggle'];
-/*****[END]********************************************
- [ Mod:     Must first vote to see Results     v1.0.0 ]
- ******************************************************/
+                # Mod: Must first vote to see Results v1.0.0 START
+                $poll_view_toggle = $vote_info[0]['poll_view_toggle'];
+                # Mod: Must first vote to see Results v1.0.0 END
 
                 $sql = "SELECT vote_id
                         FROM " . VOTE_USERS_TABLE . "
                         WHERE vote_id = '$vote_id'
-                                AND vote_user_id = " . intval($userdata['user_id']);
-                if ( !($result = $db->sql_query($sql)) )
-                {
-                        message_die(GENERAL_ERROR, "Could not obtain user vote data for this topic", '', __LINE__, __FILE__, $sql);
-                }
+                        AND vote_user_id = " . intval($userdata['user_id']);
+                
+				if(!($result = $db->sql_query($sql)))
+                message_die(GENERAL_ERROR, "Could not obtain user vote data for this topic", '', __LINE__, __FILE__, $sql);
 
-                $user_voted = ( $row = $db->sql_fetchrow($result) ) ? TRUE : 0;
+                $user_voted = ($row = $db->sql_fetchrow($result)) ? TRUE : 0;
                 $db->sql_freeresult($result);
 
-                if ( isset($HTTP_GET_VARS['vote']) || isset($HTTP_POST_VARS['vote']) )
-                {
-                        $view_result = ( ( ( isset($HTTP_GET_VARS['vote']) ) ? $HTTP_GET_VARS['vote'] : $HTTP_POST_VARS['vote'] ) == 'viewresult' ) ? TRUE : 0;
-                }
+                if( isset($HTTP_GET_VARS['vote']) || isset($HTTP_POST_VARS['vote']))
+                $view_result = (((isset($HTTP_GET_VARS['vote'])) ? $HTTP_GET_VARS['vote'] : $HTTP_POST_VARS['vote']) == 'viewresult') ? TRUE : 0;
                 else
+                $view_result = 0;
+
+                $poll_expired = ($vote_info[0]['vote_length']) ? (($vote_info[0]['vote_start'] + $vote_info[0]['vote_length'] < time()) ? TRUE : 0) : 0;
+
+                if ($user_voted || $view_result || $poll_expired || !$is_auth['auth_vote'] || $forum_topic_data['topic_status'] == TOPIC_LOCKED)
                 {
-                        $view_result = 0;
-                }
+                     # Mod: Must first vote to see Results v1.0.0 START
+                     # If poll is over, allow results to be viewed by all.
+                     if (!$user_voted && !$poll_view_toggle && $view_result && !$poll_expired) 
+                     message_die(GENERAL_ERROR, $lang['must_first_vote']);
+                     # Mod: Must first vote to see Results v1.0.0 START
 
-                $poll_expired = ( $vote_info[0]['vote_length'] ) ? ( ( $vote_info[0]['vote_start'] + $vote_info[0]['vote_length'] < time() ) ? TRUE : 0 ) : 0;
-
-                if ( $user_voted || $view_result || $poll_expired || !$is_auth['auth_vote'] || $forum_topic_data['topic_status'] == TOPIC_LOCKED )
-                {
-/*****[BEGIN]******************************************
- [ Mod:     Must first vote to see Results     v1.0.0 ]
- ******************************************************/
- //If poll is over, allow results to be viewed by all.
-                     if (!$user_voted && !$poll_view_toggle && $view_result && !$poll_expired) {
-                                message_die(GENERAL_ERROR, $lang['must_first_vote']);
-                        }
-/*****[END]********************************************
- [ Mod:     Must first vote to see Results     v1.0.0 ]
- ******************************************************/
-
-                        $template->set_filenames(array(
+                     $template->set_filenames(array(
                                 'pollbox' => 'viewtopic_poll_result.tpl')
-                        );
+                     );
 
-                        $vote_results_sum = 0;
+                     $vote_results_sum = 0;
 
-                        for($i = 0; $i < $vote_options; $i++)
-                        {
-                                $vote_results_sum += $vote_info[$i]['vote_result'];
-                        }
+                     for($i = 0; $i < $vote_options; $i++):
+                     $vote_results_sum += $vote_info[$i]['vote_result'];
+                     endfor;
 
-                        // $vote_graphic = 0;
-                        // $vote_graphic_max = count($images['voting_graphic']);
+                    // $vote_graphic = 0;
+                    // $vote_graphic_max = count($images['voting_graphic']);
 
-                        for($i = 0; $i < $vote_options; $i++)
-                        {
-                                $vote_percent = ( $vote_results_sum > 0 ) ? $vote_info[$i]['vote_result'] / $vote_results_sum : 0;
-                                // $vote_graphic_length = round($vote_percent * $board_config['vote_graphic_length']);
+                    for($i = 0; $i < $vote_options; $i++):
+                    
+                       $vote_percent = ($vote_results_sum > 0) ? $vote_info[$i]['vote_result'] / $vote_results_sum : 0;
 
-                                // $vote_graphic_img = $images['voting_graphic'][$vote_graphic];
-                                // $vote_graphic = ($vote_graphic < $vote_graphic_max - 1) ? $vote_graphic + 1 : 0;
+                       // $vote_graphic_length = round($vote_percent * $board_config['vote_graphic_length']);
+                       // $vote_graphic_img = $images['voting_graphic'][$vote_graphic];
+                       // $vote_graphic = ($vote_graphic < $vote_graphic_max - 1) ? $vote_graphic + 1 : 0;
 
-                                if ( count($orig_word) )
-                                {
-                                        $vote_info[$i]['vote_option_text'] = preg_replace($orig_word, $replacement_word, $vote_info[$i]['vote_option_text']);
-                                }
+                       if(count($orig_word))
+                       $vote_info[$i]['vote_option_text'] = preg_replace($orig_word, $replacement_word, $vote_info[$i]['vote_option_text']);
 
-                                $template->assign_block_vars("poll_option", array(
-/*****[BEGIN]******************************************
- [ Mod:     Smilies in Topic Titles            v1.0.0 ]
- ******************************************************/
-                                        'POLL_OPTION_CAPTION' => smilies_pass($vote_info[$i]['vote_option_text']),
-/*****[END]********************************************
- [ Mod:     Smilies in Topic Titles            v1.0.0 ]
- ******************************************************/
-                                        'POLL_PROGRESS_BAR' => display_progress_bar(false,'evo-progress-bar orange shine', ($vote_percent * 100)),
-                                        'POLL_OPTION_RESULT' => $vote_info[$i]['vote_result'],
-                                        // 'POLL_OPTION_PERCENT_VALUE' => sprintf("%.1d%%", ($vote_percent * 100)),
+                      $template->assign_block_vars("poll_option", array(
+                       
+					   # Mod: Smilies in Topic Titles v1.0.0 START
+                      'POLL_OPTION_CAPTION' => smilies_pass($vote_info[$i]['vote_option_text']),
+					   # Mod: Smilies in Topic Titles v1.0.0 END
 
-                                        'POLL_OPTION_PERCENT_VALUE' => sprintf("%.1d%%", round(($vote_percent * 100),0,PHP_ROUND_HALF_UP)),
+                      'POLL_PROGRESS_BAR' => display_progress_bar(false,'evo-progress-bar orange shine', ($vote_percent * 100)),
+                      'POLL_OPTION_RESULT' => $vote_info[$i]['vote_result'],
+                      // 'POLL_OPTION_PERCENT_VALUE' => sprintf("%.1d%%", ($vote_percent * 100)),
+
+                      'POLL_OPTION_PERCENT_VALUE' => sprintf("%.1d%%", round(($vote_percent * 100),0,PHP_ROUND_HALF_UP)),
                                         
-                                        // 'POLL_OPTION_RESULT' => $vote_info[$i]['vote_result'],
-                                        // 'POLL_OPTION_PERCENT' => sprintf("%.1d%%", ($vote_percent * 100)),
-                                        // 'POLL_OPTION_PERCENT_VALUE' => ($vote_percent * 100),
-                                        // 'POLL_OPTION_PERCENT' => sprintf("%.1d%%", ($vote_percent * 100)),
-
-                                        // 'POLL_OPTION_IMG' => $vote_graphic_img,
-                                        // 'POLL_OPTION_IMG_WIDTH' => $vote_graphic_length
-                                      )
-                                );
-                        }
+                      // 'POLL_OPTION_RESULT' => $vote_info[$i]['vote_result'],
+                      // 'POLL_OPTION_PERCENT' => sprintf("%.1d%%", ($vote_percent * 100)),
+                      // 'POLL_OPTION_PERCENT_VALUE' => ($vote_percent * 100),
+                      // 'POLL_OPTION_PERCENT' => sprintf("%.1d%%", ($vote_percent * 100)),
+                      // 'POLL_OPTION_IMG' => $vote_graphic_img,
+                      // 'POLL_OPTION_IMG_WIDTH' => $vote_graphic_length
+                      ));
+                    endfor;
 
                         $template->assign_vars(array(
                                 'L_TOTAL_VOTES' => $lang['Total_votes'],
@@ -1268,13 +1236,9 @@ if ( !empty($forum_topic_data['topic_vote']) )
                         $template->assign_vars(array(
                                 'L_SUBMIT_VOTE' => $lang['Submit_vote'],
 
-/*****[BEGIN]******************************************
- [ Mod:     Must first vote to see Results     v1.0.0 ]
- ******************************************************/
+                                 # Mod: Must first vote to see Results v1.0.0 START
                                 'L_VIEW_RESULTS' => (!$user_voted && $poll_view_toggle) ? $lang['View_results'] : '',
-/*****[END]********************************************
- [ Mod:     Must first vote to see Results     v1.0.0 ]
- ******************************************************/
+                                 # Mod: Must first vote to see Results v1.0.0 END
 
                                 'U_VIEW_RESULTS' => append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;postdays=$post_days&amp;postorder=$post_order&amp;vote=viewresult"))
                         );
