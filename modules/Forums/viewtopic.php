@@ -1788,33 +1788,22 @@ for($i = 0; $i < $total_posts; $i++)
           # Mod: XData v1.0.3 END
         endif;
 
-        
         # Replace newlines (we use this rather than nl2br because
         # till recently it wasn't XHTML compliant)
-        if ( !empty($user_sig) )
-        {
-/*****[BEGIN]******************************************
- [ Mod:     Force Word Wrapping               v1.0.16 ]
- ******************************************************/
-                $user_sig = word_wrap_pass($user_sig);
-/*****[END]********************************************
- [ Mod:     Force Word Wrapping               v1.0.16 ]
- ******************************************************/
+        if(!empty($user_sig)):
+          # Mod: Force Word Wrapping v1.0.16 START
+          $user_sig = word_wrap_pass($user_sig);
+          # Mod: Force Word Wrapping v1.0.16 END
 
-/*****[BEGIN]******************************************
- [ Mod:     Advance Signature Divider Control  v1.0.0 ]
- [ Mod:     Bottom aligned signature           v1.2.0 ]
- ******************************************************/
-                if ($board_config['sig_line'] == "<hr />" || $board_config['sig_line'] == "<hr />") {
-                    $user_sig = '<br />' . $board_config['sig_line']. str_replace("\n", "\n<br />\n", $user_sig);
-                } else {
-                    $user_sig = $board_config['sig_line'].'<br />' . str_replace("\n", "\n<br />\n", $user_sig);
-                }
-/*****[END]********************************************
- [ Mod:     Bottom aligned signature           v1.2.0 ]
- [ Mod:     Advance Signature Divider Control  v1.0.0 ]
- ******************************************************/
-        }
+          # Mod: Advance Signature Divider Control v1.0.0 START
+          # Mod: Bottom aligned signature v1.2.0 START
+          if ($board_config['sig_line'] == "<hr />" || $board_config['sig_line'] == "<hr />") 
+          $user_sig = '<br />' . $board_config['sig_line']. str_replace("\n", "\n<br />\n", $user_sig);
+		  else 
+          $user_sig = $board_config['sig_line'].'<br />' . str_replace("\n", "\n<br />\n", $user_sig);
+          # Mod: Advance Signature Divider Control v1.0.0 END
+          # Mod: Bottom aligned signature v1.2.0 END
+        endif;
 
 /*****[BEGIN]******************************************
  [ Mod:     Force Word Wrapping               v1.0.16 ]
