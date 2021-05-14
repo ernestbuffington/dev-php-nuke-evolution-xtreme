@@ -1,7 +1,7 @@
 <?php
-/*======================================================================= 
+/*========================================================================== 
   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
- =======================================================================*/
+ ===========================================================================*/
 
 /***************************************************************************
  *                               viewtopic.php
@@ -23,7 +23,7 @@
  *
  ***************************************************************************/
 
-/*****[CHANGES]**********************************************************
+/*****[CHANGES]*************************************************************
 -=[Base]=-
       Nuke Patched                             v3.1.0       06/26/2005
 -=[Mod]=-
@@ -65,7 +65,6 @@
 	  Related Topics                           v0.1.2       05/28/2009
       Who viewed a topic                       v1.0.3
  ************************************************************************/
-
 if (!defined('MODULE_FILE')) die ("You can't access this file directly...");
 
 if((!(isset($popup)) OR ($popup != "1")) && !isset($HTTP_GET_VARS['printertopic'])):
@@ -340,12 +339,11 @@ endif;
 # Base: Who viewed a topic v1.0.3 START
 $user_id=$userdata['user_id'];
 $sql='UPDATE '.TOPIC_VIEW_TABLE.' SET topic_id="'.$topic_id.'", view_time="'.time().'", view_count=view_count+1 WHERE topic_id='.$topic_id.' AND user_id='.$user_id;
-if ( !$db->sql_query($sql) || !$db->sql_affectedrows() )
-{
+if ( !$db->sql_query($sql) || !$db->sql_affectedrows()):
     $sql = 'INSERT IGNORE INTO '.TOPIC_VIEW_TABLE.' (topic_id, user_id, view_time,view_count) VALUES ('.$topic_id.', "'.$user_id.'", "'.time().'","1")';
     if ( !($db->sql_query($sql)) )
     message_die(CRITICAL_ERROR, 'Error create user view topic information ', '', __LINE__, __FILE__, $sql);
-}
+endif;
 # Base: Who viewed a topic v1.0.3 END
 
 /**
@@ -518,98 +516,82 @@ endif;
 # Generate a 'Show posts in previous x days' select box. If the postdays var is POSTed
 # then get it's value, find the number of topics with dates newer than it (to properly
 # handle pagination) and alter the main query
-
-/*****[BEGIN]******************************************
- [ Mod:    Hide Mod                            v1.2.0 ]
- ******************************************************/
+# Mod: Hide Mod v1.2.0 START
 $valid = FALSE;
-if( $userdata['session_logged_in'] ) 
-{
+if($userdata['session_logged_in']): 
 	$sql = "SELECT p.poster_id, p.topic_id
 		FROM " . POSTS_TABLE . " p
 		WHERE p.topic_id = $topic_id
 		AND p.poster_id = " . $userdata['user_id'];
 	$resultat = $db->sql_query($sql);
 	$valid = $db->sql_numrows($resultat) ? TRUE : FALSE;
-}
-/*****[END]********************************************
- [ Mod:    Hide Mod                            v1.2.0 ]
- ******************************************************/
+endif;
+# Mod: Hide Mod v1.2.0 END
+
 $previous_days = array(0, 1, 7, 14, 30, 90, 180, 364);
 $previous_days_text = array($lang['All_Posts'], $lang['1_Day'], $lang['7_Days'], $lang['2_Weeks'], $lang['1_Month'], $lang['3_Months'], $lang['6_Months'], $lang['1_Year']);
 
-if( !empty($HTTP_POST_VARS['postdays']) || !empty($HTTP_GET_VARS['postdays']) )
-{
+if(!empty($HTTP_POST_VARS['postdays']) || !empty($HTTP_GET_VARS['postdays'])):
         $post_days = ( !empty($HTTP_POST_VARS['postdays']) ) ? intval($HTTP_POST_VARS['postdays']) : intval($HTTP_GET_VARS['postdays']);
         $min_post_time = time() - (intval($post_days) * 86400);
 
         $sql = "SELECT COUNT(p.post_id) AS num_posts
                 FROM (" . TOPICS_TABLE . " t, " . POSTS_TABLE . " p)
                 WHERE t.topic_id = '$topic_id'
-                        AND p.topic_id = t.topic_id
-                        AND p.post_time >= '$min_post_time'";
-        if ( !($result = $db->sql_query($sql)) )
-        {
-                message_die(GENERAL_ERROR, "Could not obtain limited topics count information", '', __LINE__, __FILE__, $sql);
-        }
-
-        $total_replies = ( $row = $db->sql_fetchrow($result) ) ? intval($row['num_posts']) : 0;
+                AND p.topic_id = t.topic_id
+                AND p.post_time >= '$min_post_time'";
+ 
+        if(!($result = $db->sql_query($sql))):
+        message_die(GENERAL_ERROR, "Could not obtain limited topics count information", '', __LINE__, __FILE__, $sql);
+        endif;
+       
+	    $total_replies = ($row = $db->sql_fetchrow($result)) ? intval($row['num_posts']) : 0;
 
         $limit_posts_time = "AND p.post_time >= $min_post_time ";
 
-        if ( !empty($HTTP_POST_VARS['postdays']))
-        {
-                $start = 0;
-        }
-}
-else
-{
-        $total_replies = intval($forum_topic_data['topic_replies']) + 1;
+        if(!empty($HTTP_POST_VARS['postdays'])):
+        $start = 0;
+		endif;
 
+else:
+        $total_replies = intval($forum_topic_data['topic_replies']) + 1;
         $limit_posts_time = '';
         $post_days = 0;
-}
+endif;
 
 $select_post_days = '<select name="postdays">';
-for($i = 0; $i < count($previous_days); $i++)
-{
-        $selected = ($post_days == $previous_days[$i]) ? ' selected="selected"' : '';
-        $select_post_days .= '<option value="' . $previous_days[$i] . '"' . $selected . '>' . $previous_days_text[$i] . '</option>';
-}
+
+for($i = 0; $i < count($previous_days); $i++):
+  $selected = ($post_days == $previous_days[$i]) ? ' selected="selected"' : '';
+  $select_post_days .= '<option value="' . $previous_days[$i] . '"' . $selected . '>' . $previous_days_text[$i] . '</option>';
+endfor;
+
 $select_post_days .= '</select>';
 
-//
-// Decide how to order the post display
-//
-if ( !empty($HTTP_POST_VARS['postorder']) || !empty($HTTP_GET_VARS['postorder']) )
-{
+# Decide how to order the post display
+if(!empty($HTTP_POST_VARS['postorder']) || !empty($HTTP_GET_VARS['postorder'])):
     $post_order = (!empty($HTTP_POST_VARS['postorder'])) ? htmlspecialchars($HTTP_POST_VARS['postorder']) : htmlspecialchars($HTTP_GET_VARS['postorder']);
-if (!preg_match("/^((asc)|(desc))$/i",$post_order) )
-{
-        message_die(GENERAL_ERROR, 'Selected post order is not valid');
-}
-        $post_time_order = ($post_order == "asc") ? "ASC" : "DESC";
-}
-else
-{
-        $post_order = 'asc';
-        $post_time_order = 'ASC';
-}
+
+    if (!preg_match("/^((asc)|(desc))$/i",$post_order) )
+    message_die(GENERAL_ERROR, 'Selected post order is not valid');
+
+    $post_time_order = ($post_order == "asc") ? "ASC" : "DESC";
+else:
+    $post_order = 'asc';
+    $post_time_order = 'ASC';
+endif;
 
 $select_post_order = '<select name="postorder">';
-if ( $post_time_order == 'ASC' )
-{
-        $select_post_order .= '<option value="asc" selected="selected">' . $lang['Oldest_First'] . '</option><option value="desc">' . $lang['Newest_First'] . '</option>';
-}
+
+if($post_time_order == 'ASC')
+$select_post_order .= '<option value="asc" selected="selected">' . $lang['Oldest_First'] . '</option><option value="desc">' . $lang['Newest_First'] . '</option>';
 else
-{
-        $select_post_order .= '<option value="asc">' . $lang['Oldest_First'] . '</option><option value="desc" selected="selected">' . $lang['Newest_First'] . '</option>';
-}
+$select_post_order .= '<option value="asc">' . $lang['Oldest_First'] . '</option><option value="desc" selected="selected">' . $lang['Newest_First'] . '</option>';
+
 $select_post_order .= '</select>';
 
-//
-// Go ahead and pull all data for this topic
-//
+
+# Go ahead and pull all data for this topic
 /*****[BEGIN]******************************************
  [ Mod:    Printer Topic                       v1.0.8 ]
  [ Mod:    Online/Offline/Hidden               v2.2.7 ]
@@ -619,8 +601,39 @@ $select_post_order .= '</select>';
  [ Mod:    Birthdays                           v3.0.0 ]
  [ Mod:    Users Reputations System            v1.0.0 ]
  ******************************************************/
-$sql = "SELECT u.username, u.user_id, u.user_posts, u.user_from, u.user_from_flag, u.user_website, u.user_birthday, u.birthday_display, u.user_email, u.user_facebook, u.user_regdate, u.user_viewemail, u.user_rank, u.user_rank2, u.user_rank3, u.user_rank4, u.user_rank5, u.user_sig, u.user_sig_bbcode_uid, u.user_avatar, u.user_avatar_type, u.user_allowavatar, u.user_allowsmile, u.user_allow_viewonline, u.user_session_time, u.user_gender, p.*,  pt.post_text, pt.post_subject, pt.bbcode_uid, u.user_reputation
-        FROM (" . POSTS_TABLE . " p, " . USERS_TABLE . " u, " . POSTS_TEXT_TABLE . " pt)
+$sql = "SELECT u.username, 
+                u.user_id, 
+		     u.user_posts, 
+			  u.user_from, 
+		 u.user_from_flag, 
+		   u.user_website, 
+		  u.user_birthday, 
+	   u.birthday_display, 
+	         u.user_email, 
+		  u.user_facebook, 
+		   u.user_regdate, 
+		 u.user_viewemail, 
+		      u.user_rank, 
+			 u.user_rank2, 
+			 u.user_rank3, 
+			 u.user_rank4, 
+			 u.user_rank5, 
+			   u.user_sig, 
+	u.user_sig_bbcode_uid, 
+	        u.user_avatar, 
+	   u.user_avatar_type, 
+	   u.user_allowavatar, 
+	    u.user_allowsmile, 
+  u.user_allow_viewonline, 
+      u.user_session_time, 
+	        u.user_gender, 
+			          p.*,  
+			 pt.post_text, 
+		  pt.post_subject, 
+		    pt.bbcode_uid, 
+		u.user_reputation
+        
+		FROM (" . POSTS_TABLE . " p, " . USERS_TABLE . " u, " . POSTS_TEXT_TABLE . " pt)
         WHERE p.topic_id = '$topic_id'
                 $limit_posts_time
                 AND pt.post_id = p.post_id
@@ -636,58 +649,45 @@ $sql = "SELECT u.username, u.user_id, u.user_posts, u.user_from, u.user_from_fla
  [ Mod:    Printer Topic                       v1.0.8 ]
  [ Mod:    Users Reputations System            v1.0.0 ]
  ******************************************************/
-if ( !($result = $db->sql_query($sql)) )
-{
-    message_die(GENERAL_ERROR, "Could not obtain post/user information.", '', __LINE__, __FILE__, $sql);
-}
+if(!($result = $db->sql_query($sql)))
+message_die(GENERAL_ERROR, "Could not obtain post/user information.", '', __LINE__, __FILE__, $sql);
 
 $postrow = array();
-if ($row = $db->sql_fetchrow($result))
-{
-        do
-        {
-                $postrow[] = $row;
-        }
-        while ($row = $db->sql_fetchrow($result));
-        $db->sql_freeresult($result);
 
+if ($row = $db->sql_fetchrow($result)):
+        do{
+        $postrow[] = $row;
+        }
+        while($row = $db->sql_fetchrow($result));
+        $db->sql_freeresult($result);
         $total_posts = count($postrow);
-}
-else
-{
+else:
    include("includes/functions_admin.php");
    sync('topic', $topic_id);
 
    message_die(GENERAL_MESSAGE, $lang['No_posts_topic']);
-}
+endif;
 
 $resync = FALSE;
-if ($forum_topic_data['topic_replies'] + 1 < $start + count($postrow))
-{
-   $resync = TRUE;
-}
-elseif ($start + $board_config['posts_per_page'] > $forum_topic_data['topic_replies'])
-{
-   $row_id = intval($forum_topic_data['topic_replies']) % intval($board_config['posts_per_page']);
-   if ($postrow[$row_id]['post_id'] != $forum_topic_data['topic_last_post_id'] || $start + count($postrow) < $forum_topic_data['topic_replies'])
-   {
-      $resync = TRUE;
-   }
-}
-elseif (count($postrow) < $board_config['posts_per_page'])
-{
-   $resync = TRUE;
-}
 
-if ($resync)
-{
+if($forum_topic_data['topic_replies'] + 1 < $start + count($postrow)):
+   $resync = TRUE;
+elseif($start + $board_config['posts_per_page'] > $forum_topic_data['topic_replies']):
+   $row_id = intval($forum_topic_data['topic_replies']) % intval($board_config['posts_per_page']);
+   if ($postrow[$row_id]['post_id'] != $forum_topic_data['topic_last_post_id'] || $start + count($postrow) < $forum_topic_data['topic_replies']):
+      $resync = TRUE;
+   endif;
+elseif(count($postrow) < $board_config['posts_per_page']):
+   $resync = TRUE;
+endif;
+
+if($resync):
    include("includes/functions_admin.php");
    sync('topic', $topic_id);
-
    $result = $db->sql_query('SELECT COUNT(post_id) AS total FROM ' . POSTS_TABLE . ' WHERE topic_id = ' . $topic_id);
    $row = $db->sql_fetchrow($result);
    $total_replies = $row['total'];
-}
+endif;
 
 /*****[BEGIN]******************************************
  [ Mod:    Multiple Ranks And Staff View       v2.0.3 ]
