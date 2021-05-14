@@ -705,68 +705,53 @@ $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
 
 # Was a highlight request part of the URI?
 $highlight_match = $highlight = '';
-if (isset($HTTP_GET_VARS['highlight']))
-{
-        // Split words and phrases
+if (isset($HTTP_GET_VARS['highlight'])):
+        # Split words and phrases
         $words = explode(' ', trim(htmlspecialchars($HTTP_GET_VARS['highlight'])));
-
-        for($i = 0; $i < count($words); $i++)
-        {
-                if (trim($words[$i]) != '')
-                {
-                        $highlight_match .= (($highlight_match != '') ? '|' : '') . str_replace('*', '\w*', preg_quote($words[$i], '#'));
-                }
-        }
+        for($i = 0; $i < count($words); $i++):
+          if (trim($words[$i]) != '')
+          $highlight_match .= (($highlight_match != '') ? '|' : '') . str_replace('*', '\w*', preg_quote($words[$i], '#'));
+        endfor;
         unset($words);
 
     $highlight = urlencode($HTTP_GET_VARS['highlight']);
         $highlight_match = phpbb_rtrim($highlight_match, "\\");
-}
+endif;
 
-//
-// Post, reply and other URL generation for
-// templating vars
-//
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
-$printer_topic_url = append_sid("viewtopic.$phpEx?printertopic=1&amp;" . POST_TOPIC_URL . "=$topic_id&amp;start=$start&amp;postdays=$post_days&amp;postorder=$post_order&amp;vote=viewresult");
-/*****[END]********************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
-$new_topic_url = append_sid("posting.$phpEx?mode=newtopic&amp;" . POST_FORUM_URL . "=$forum_id");
-$reply_topic_url = append_sid("posting.$phpEx?mode=reply&amp;" . POST_TOPIC_URL . "=$topic_id");
-/*****[BEGIN]******************************************
- [ Mod:    Thank You Mod                       v1.1.8 ]
- ******************************************************/
-$thank_topic_url = append_sid("posting.$phpEx?mode=thank&amp;" . POST_TOPIC_URL . "=$topic_id");
-/*****[END]********************************************
- [ Mod:    Thank You Mod                       v1.1.8 ]
- ******************************************************/
-$view_forum_url = append_sid("viewforum.$phpEx?" . POST_FORUM_URL . "=$forum_id");
-$view_prev_topic_url = append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;view=previous");
-$view_next_topic_url = append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;view=next");
 
-/*****[START]******************************************
- [ Base:    Who viewed a topic                 v1.0.3 ]
- ******************************************************/
+# Post, reply and other URL generation for
+# templating vars
+
+# Mod: Printer Topic v1.0.8 START
+$printer_topic_url = append_sid("viewtopic.$phpEx?printertopic=1&amp;".POST_TOPIC_URL."=$topic_id&amp;start=$start&amp;postdays=$post_days&amp;postorder=$post_order&amp;vote=viewresult");
+# Mod: Printer Topic v1.0.8 END
+
+$new_topic_url = append_sid("posting.$phpEx?mode=newtopic&amp;".POST_FORUM_URL."=$forum_id");
+$reply_topic_url = append_sid("posting.$phpEx?mode=reply&amp;".POST_TOPIC_URL."=$topic_id");
+
+# Mod: Thank You Mod v1.1.8 START
+$thank_topic_url = append_sid("posting.$phpEx?mode=thank&amp;".POST_TOPIC_URL."=$topic_id");
+# Mod: Thank You Mod v1.1.8 END
+
+$view_forum_url = append_sid("viewforum.$phpEx?".POST_FORUM_URL."=$forum_id");
+$view_prev_topic_url = append_sid("viewtopic.$phpEx?".POST_TOPIC_URL."=$topic_id&amp;view=previous");
+$view_next_topic_url = append_sid("viewtopic.$phpEx?".POST_TOPIC_URL."=$topic_id&amp;view=next");
+
+# Base: Who viewed a topic v1.0.3 START
 $who_has_viewed_topic = append_sid("viewtopic_whoview.$phpEx?".POST_TOPIC_URL."=$topic_id");
-/*****[END]********************************************
- [ Base:    Who viewed a topic                 v1.0.3 ]
- ******************************************************/
-//
-// Mozilla navigation bar
-//
+# Base: Who viewed a topic v1.0.3 END
+
+# Mozilla navigation bar
 $nav_links['prev'] = array(
-        'url' => $view_prev_topic_url,
+          'url' => $view_prev_topic_url,
         'title' => $lang['View_previous_topic']
 );
 $nav_links['next'] = array(
-        'url' => $view_next_topic_url,
+          'url' => $view_next_topic_url,
         'title' => $lang['View_next_topic']
 );
 $nav_links['up'] = array(
-        'url' => $view_forum_url,
+          'url' => $view_forum_url,
         'title' => $forum_name
 );
 
@@ -777,98 +762,63 @@ $post_alt = ( $forum_topic_data['forum_status'] == FORUM_LOCKED ) ? $lang['Forum
 $whoview_img = $images['icon_view'];
 $whoview_alt = $lang['Topic_view_users'];
 
-/*****[BEGIN]******************************************
- [ Mod:    Thank You Mod                       v1.1.8 ]
- ******************************************************/
+# Mod: Thank You Mod v1.1.8 START
 $thank_img = $images['thanks'];
 $thank_alt = $lang['thanks_alt'];
-/*****[END]********************************************
- [ Mod:    Thank You Mod                       v1.1.8 ]
- ******************************************************/
+# Mod: Thank You Mod v1.1.8 END
 
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+# Mod: Printer Topic v1.0.8 START
 $printer_img = $images['printer'];
 $printer_alt = $lang['printertopic_button'];
-/*****[END]********************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+# Mod: Printer Topic v1.0.8 END
 
-//
-// Set a cookie for this topic
-//
-if ( $userdata['session_logged_in'] )
-{
-        $tracking_topics = ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) ) ? unserialize($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) : array();
-        $tracking_forums = ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_f']) ) ? unserialize($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_f']) : array();
+# Set a cookie for this topic
+if( $userdata['session_logged_in']):
+   $tracking_topics = ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) ) ? unserialize($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) : array();
+   $tracking_forums = ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_f']) ) ? unserialize($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_f']) : array();
+   if(!empty($tracking_topics[$topic_id]) && !empty($tracking_forums[$forum_id]))
+      $topic_last_read = ($tracking_topics[$topic_id] > $tracking_forums[$forum_id]) ? $tracking_topics[$topic_id] : $tracking_forums[$forum_id];
+   elseif(!empty($tracking_topics[$topic_id]) || !empty($tracking_forums[$forum_id]))
+      $topic_last_read = ( !empty($tracking_topics[$topic_id]) ) ? $tracking_topics[$topic_id] : $tracking_forums[$forum_id];
+   else
+      $topic_last_read = $userdata['user_lastvisit'];
 
-        if ( !empty($tracking_topics[$topic_id]) && !empty($tracking_forums[$forum_id]) )
-        {
-                $topic_last_read = ( $tracking_topics[$topic_id] > $tracking_forums[$forum_id] ) ? $tracking_topics[$topic_id] : $tracking_forums[$forum_id];
-        }
-        else if ( !empty($tracking_topics[$topic_id]) || !empty($tracking_forums[$forum_id]) )
-        {
-                $topic_last_read = ( !empty($tracking_topics[$topic_id]) ) ? $tracking_topics[$topic_id] : $tracking_forums[$forum_id];
-        }
-        else
-        {
-                $topic_last_read = $userdata['user_lastvisit'];
-        }
-
-        if ( count($tracking_topics) >= 150 && empty($tracking_topics[$topic_id]) )
-        {
-                asort($tracking_topics);
-                unset($tracking_topics[key($tracking_topics)]);
-        }
+        if(count($tracking_topics) >= 150 && empty($tracking_topics[$topic_id])):
+           asort($tracking_topics);
+           unset($tracking_topics[key($tracking_topics)]);
+        endif;
 
         $tracking_topics[$topic_id] = time();
-
         setcookie($board_config['cookie_name'] . '_t', serialize($tracking_topics), 0, $board_config['cookie_path'], $board_config['cookie_domain'], $board_config['cookie_secure']);
-}
+endif;
 
-//
-// Load templates
-//
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
-if(isset($HTTP_GET_VARS['printertopic']))
-{
+# Load templates
+# Mod: Printer Topic v1.0.8 START
+if(isset($HTTP_GET_VARS['printertopic'])):
     $template->set_filenames(array(
         'body' => 'printertopic_body.tpl')
     );
-} else {
+else: 
 $template->set_filenames(array(
-/*****[BEGIN]******************************************
- [ Mod:     Super Quick Reply                  v1.3.2 ]
- ******************************************************/
+# Mod: Super Quick Reply v1.3.2 START
     'qrbody' => 'viewtopic_quickreply.tpl',
     'body' => 'viewtopic_body.tpl')
-/*****[END]********************************************
- [ Mod:     Super Quick Reply                  v1.3.2 ]
- ******************************************************/
 );
-}
-/*****[END]********************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+# Mod: Super Quick Reply v1.3.2 END
+endif;
+# Mod: Printer Topic v1.0.8 END
 
-/*****[BEGIN]******************************************
- [ Mod:    Simple Subforums                    v1.0.1 ]
- ******************************************************/
-//make_jumpbox('viewforum.'.$phpEx, $forum_id);
+# Mod: Simple Subforums v1.0.1 START
+# make_jumpbox('viewforum.'.$phpEx, $forum_id);
 $all_forums = array();
 make_jumpbox_ref('viewforum.'.$phpEx, $forum_id, $all_forums);
 
 $parent_id = 0;
-for( $i = 0; $i < count($all_forums); $i++ )
-{
+
+for( $i = 0; $i < count($all_forums); $i++ ):
 	if( $all_forums[$i]['forum_id'] == $forum_id )
-	{
 		$parent_id = $all_forums[$i]['forum_parent'];
-	}
-}
+endfor;
 
 if( $parent_id )
 {
@@ -884,54 +834,34 @@ if( $parent_id )
 		}
 	}
 }
-/*****[END]********************************************
- [ Mod:    Simple Subforums                    v1.0.1 ]
- ******************************************************/
+# Mod: Simple Subforums v1.0.1 END
 
-//
-// Output page header
-//
+# Output page header
 $page_title = $lang['View_topic'] .' - ' . $topic_title;
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+
+# Mod: Printer Topic v1.0.8 START
 if(isset($HTTP_GET_VARS['printertopic']))
-{
-    include('includes/page_header_printer.'.$phpEx);
-} else
-{
-    include("includes/page_header.$phpEx");
-}
-/*****[END]********************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+include('includes/page_header_printer.'.$phpEx);
+else
+include("includes/page_header.$phpEx");
+# Mod: Printer Topic v1.0.8 END
 
-/*****[BEGIN]******************************************
- [ Mod:     Smilies in Topic Titles            v1.0.0 ]
- [ Mod:     Smilies in Topic Titles Toggle     v1.0.0 ]
- ******************************************************/
+# Mod: Smilies in Topic Titles v1.0.0 START
+# Mod: Smilies in Topic Titles Toggle v1.0.0 START
 $topic_title = ($board_config['smilies_in_titles']) ? smilies_pass($topic_title) : $topic_title;
-/*****[END]********************************************
- [ Mod:     Smilies in Topic Titles Toggle     v1.0.0 ]
- [ Mod:     Smilies in Topic Titles            v1.0.0 ]
- ******************************************************/
+# Mod: Smilies in Topic Titles v1.0.0 END
+# Mod: Smilies in Topic Titles Toggle v1.0.0 END
 
-//
-// User authorisation levels output
-//
+# User authorisation levels output
 $s_auth_can = ( ( $is_auth['auth_post'] ) ? $lang['Rules_post_can'] : $lang['Rules_post_cannot'] ) . '<br />';
 $s_auth_can .= ( ( $is_auth['auth_reply'] ) ? $lang['Rules_reply_can'] : $lang['Rules_reply_cannot'] ) . '<br />';
 $s_auth_can .= ( ( $is_auth['auth_edit'] ) ? $lang['Rules_edit_can'] : $lang['Rules_edit_cannot'] ) . '<br />';
 $s_auth_can .= ( ( $is_auth['auth_delete'] ) ? $lang['Rules_delete_can'] : $lang['Rules_delete_cannot'] ) . '<br />';
 $s_auth_can .= ( ( $is_auth['auth_vote'] ) ? $lang['Rules_vote_can'] : $lang['Rules_vote_cannot'] ) . '<br />';
 
-/*****[BEGIN]******************************************
- [ Mod:    Attachment Mod                      v2.4.1 ]
- ******************************************************/
+# Mod: Attachment Mod v2.4.1 START
 attach_build_auth_levels($is_auth, $s_auth_can);
-/*****[END]********************************************
- [ Mod:    Attachment Mod                      v2.4.1 ]
- ******************************************************/
+# Mod: Attachment Mod v2.4.1 END
 
 $topic_mod = '';
 $delete_topic_url = $delete_topic_btn = '';
@@ -942,39 +872,48 @@ $merge_topic_url = $merge_topic_btn = '';
 
 if ( $is_auth['auth_mod'] )
 {
-        $s_auth_can .= sprintf($lang['Rules_moderate'], '<a href="' . append_sid("modcp.$phpEx?" . POST_FORUM_URL . "=$forum_id") . '">', '</a>');
+        $s_auth_can .= sprintf($lang['Rules_moderate'], '<a href="'.append_sid("modcp.$phpEx?".POST_FORUM_URL."=$forum_id").'">', '</a>');
 
-        $topic_mod .= '<a href="' . append_sid("modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=delete") . '"><img src="' . $images['topic_mod_delete'] . '" alt="' . $lang['Delete_topic'] . '" title="' . $lang['Delete_topic'] . '" border="0" /></a>&nbsp;';
+        $topic_mod .= '<a href="'.append_sid("modcp.$phpEx?".POST_TOPIC_URL."=$topic_id&amp;mode=delete").'"><img 
+		src="'.$images['topic_mod_delete'].'" alt="'.$lang['Delete_topic'].'" title="'. $lang['Delete_topic'].'" border="0" /></a>&nbsp;';
+		
         $delete_topic_url = append_sid("modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=delete");
         $delete_topic_btn = $lang['Delete_topic'];
 
-        $topic_mod .= '<a href="' . append_sid("modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move"). '"><img src="' . $images['topic_mod_move'] . '" alt="' . $lang['Move_topic'] . '" title="' . $lang['Move_topic'] . '" border="0" /></a>&nbsp;';
-        $move_topic_url = append_sid("modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move");
+        $topic_mod .= '<a href="'.append_sid("modcp.$phpEx?".POST_TOPIC_URL."=$topic_id&amp;mode=move").'"><img 
+		src="'.$images['topic_mod_move'].'" alt="'.$lang['Move_topic'].'" title="'.$lang['Move_topic'].'" border="0" /></a>&nbsp;';
+        
+		$move_topic_url = append_sid("modcp.$phpEx?".POST_TOPIC_URL."=$topic_id&amp;mode=move");
         $move_topic_btn = $lang['Move_topic'];
 
-        $topic_mod .= ( $forum_topic_data['topic_status'] == TOPIC_UNLOCKED ) ? '<a href="' . append_sid("modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=lock") . '"><img src="' . $images['topic_mod_lock'] . '" alt="' . $lang['Lock_topic'] . '" title="' . $lang['Lock_topic'] . '" border="0" /></a>&nbsp;' : '<a href="' . append_sid("modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unlock") . '"><img src="' . $images['topic_mod_unlock'] . '" alt="' . $lang['Unlock_topic'] . '" title="' . $lang['Unlock_topic'] . '" border="0" /></a>&nbsp;';
-        if ( $forum_topic_data['topic_status'] == TOPIC_UNLOCKED ):
-        	$lock_topic_url = append_sid("modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=lock");
+        $topic_mod .= ($forum_topic_data['topic_status'] == TOPIC_UNLOCKED ) ? '<a href="'.append_sid("modcp.$phpEx?".POST_TOPIC_URL."=$topic_id&amp;mode=lock").'"><img 
+		src="'.$images['topic_mod_lock'].'" alt="'.$lang['Lock_topic'].'" title="'.$lang['Lock_topic'].'" border="0" /></a>&nbsp;' : '<a 
+		href="'.append_sid("modcp.$phpEx?".POST_TOPIC_URL."=$topic_id&amp;mode=unlock").'"><img 
+		src="'.$images['topic_mod_unlock'].'" alt="'.$lang['Unlock_topic'].'" title="'.$lang['Unlock_topic'].'" border="0" /></a>&nbsp;';
+        
+		if($forum_topic_data['topic_status'] == TOPIC_UNLOCKED):
+        	$lock_topic_url = append_sid("modcp.$phpEx?".POST_TOPIC_URL."=$topic_id&amp;mode=lock");
         	$lock_topic_btn = $lang['Lock_topic'];
         	$lock_topic_status = 0;
         else:
-        	$lock_topic_url = append_sid("modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unlock");
+        	$lock_topic_url = append_sid("modcp.$phpEx?".POST_TOPIC_URL."=$topic_id&amp;mode=unlock");
         	$lock_topic_btn = $lang['Unlock_topic'];
         	$lock_topic_status = 1;
         endif;
 
-        $topic_mod .= '<a href="' . append_sid("modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=split") . '"><img src="' . $images['topic_mod_split'] . '" alt="' . $lang['Split_topic'] . '" title="' . $lang['Split_topic'] . '" border="0" /></a>&nbsp;';
-        $split_topic_url = append_sid("modcp.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;mode=split");
+        $topic_mod .= '<a href="'.append_sid("modcp.$phpEx?".POST_TOPIC_URL."=$topic_id&amp;mode=split").'"><img 
+		src="'.$images['topic_mod_split'].'" alt="'.$lang['Split_topic'].'" title="'. $lang['Split_topic'].'" border="0" /></a>&nbsp;';
+        
+		$split_topic_url = append_sid("modcp.$phpEx?".POST_TOPIC_URL."=$topic_id&amp;mode=split");
         $split_topic_btn = $lang['Split_topic'];
-/*****[BEGIN]******************************************
- [ Mod:    Simply Merge Threads                v1.0.1 ]
- ******************************************************/
-        $topic_mod .= '<a href="' . append_sid("merge.$phpEx?" . POST_TOPIC_URL . '=' . $topic_id) . '"><img src="' . $images['topic_mod_merge'] . '" alt="' . $lang['Merge_topics'] . '" title="' . $lang['Merge_topics'] . '" border="0" /></a>&nbsp;';
-        $merge_topic_url = append_sid("merge.$phpEx?" . POST_TOPIC_URL . '=' . $topic_id);
+		
+        # Mod: Simply Merge Threads v1.0.1 START
+        $topic_mod .= '<a href="' . append_sid("merge.$phpEx?" . POST_TOPIC_URL . '=' . $topic_id) . '"><img 
+		src="' . $images['topic_mod_merge'] . '" alt="' . $lang['Merge_topics'] . '" title="' . $lang['Merge_topics'] . '" border="0" /></a>&nbsp;';
+        
+		$merge_topic_url = append_sid("merge.$phpEx?" . POST_TOPIC_URL . '=' . $topic_id);
         $merge_topic_btn = $lang['Merge_topics'];
-/*****[END]********************************************
- [ Mod:    Simply Merge Threads                v1.0.1 ]
- ******************************************************/
+        # Mod: Simply Merge Threads v1.0.1 END
 }
 
 //
