@@ -6,7 +6,8 @@
 /***************************************************************************
  *                               viewtopic.php
  *                            -------------------
- *   begin                : Saturday, Feb 13, 2001
+ *   Updated              : Friday, May 14, 2021
+ *   Author               : Ernest Allen Buffington
  *   copyright            : (C) 2001 The phpBB Group
  *   email                : support@phpbb.com
  *
@@ -43,27 +44,27 @@
       At a Glance Options                      v1.0.0       08/17/2005
       Log Actions Mod - Topic Overview         v1.0.0       08/25/2005
       'View Newest Post'-Fix                   v1.0.2       08/25/2005
-      Super Quick Reply                        v1.3.2       09/08/2005
-      Smilies in Topic Titles Toggle           v1.0.0       09/10/2005
-      Log Actions Mod - Topic View             v2.0.0       09/18/2005
-      Bottom aligned signature                 v1.2.0       10/01/2005
-      Remote Avatar Resize                     v2.0.0       11/19/2005
-      Online/Offline/Hidden                    v2.2.7       01/24/2006
-      XData Date Conversion                    v0.1.1       05/04/2006
-      Display Poster Information Once          v2.0.0       06/12/2006
-	  Force Topic Read                         v1.0.3
-	  Member Country Flags                     v2.0.7
-	  Multiple Ranks And Staff View            v2.0.3
-	  Gender                                   v1.2.6
-	  Hide BBCode                              v1.2.0
-	  Birthdays                                v3.0.0
-	  Thank You Mod                            v1.1.8
-	  Post Icons                               v1.0.1
-	  Facebook Profile Image                   v1.0.0
-	  Inline Banner Ad                         v1.2.3       05/26/2009
-	  Email topic to friend                    v1.0.0       05/26/2009
-	  Related Topics                           v0.1.2       05/28/2009
-      Who viewed a topic                       v1.0.3
+      Super Quick Reply                        v1.3.3       05/14/2021
+      Smilies in Topic Titles Toggle           v1.0.1       05/14/2021
+      Log Actions Mod - Topic View             v2.0.1       05/14/2021
+      Bottom aligned signature                 v1.2.1       05/14/2021
+      Remote Avatar Resize                     v2.0.1       05/14/2021
+      Online/Offline/Hidden                    v2.2.8       05/14/2021
+      XData Date Conversion                    v1.0.1       05/14/2021
+      Display Poster Information Once          v2.0.1       05/14/2021
+	  Force Topic Read                         v1.0.3       05/14/2021 
+	  Member Country Flags                     v2.0.8       05/14/2021
+	  Multiple Ranks And Staff View            v2.0.4       05/14/2021
+	  Gender                                   v1.2.7       05/14/2021
+	  Hide BBCode                              v1.2.1       05/14/2021
+	  Birthdays                                v3.0.1       05/14/2021
+	  Thank You Mod                            v1.1.9       05/14/2021
+	  Post Icons                               v1.0.2       05/14/2021
+	  Facebook Profile Image                   v1.0.1       05/14/2021
+	  Inline Banner Ad                         v1.2.4       05/14/2021
+	  Email topic to friend                    v1.0.1       05/14/2021
+	  Related Topics                           v0.1.3       05/14/2021
+      Who viewed a topic                       v1.0.4       05/14/2021
  ************************************************************************/
 if (!defined('MODULE_FILE')) die ("You can't access this file directly...");
 
@@ -1358,8 +1359,8 @@ $show_qr_form =    false;
 $already_processed = array();
 # Mod: Display Poster Information Once    v2.0.0 END
 
-for($i = 0; $i < $total_posts; $i++)
-{
+for($i = 0; $i < $total_posts; $i++):
+
   # Mod: Display Poster Information Once v2.0.0 START
   $leave_out['show_sig_once'] = false;
   $leave_out['show_avatar_once'] = false;
@@ -2170,11 +2171,8 @@ for($i = 0; $i < $total_posts; $i++)
 		# Mod: Inline Banner Ad v1.2.3 END
 
 
-/*****[BEGIN]******************************************
- [ Mod:    Thank You Mod                       v1.1.8 ]
- ******************************************************/
-		if( ($show_thanks == FORUM_THANKABLE) && ($i == 0) && ($current_page == 1) && ($total_thank > 0))
-		{
+        # Mod: Thank You Mod v1.1.8 START
+		if(($show_thanks == FORUM_THANKABLE) && ($i == 0) && ($current_page == 1) && ($total_thank > 0)):
 			$template->assign_block_vars('postrow.thanks', array(
 			'THANKFUL' => $lang['thankful'],
 			'THANKED' => $lang['thanked'],
@@ -2183,219 +2181,150 @@ for($i = 0; $i < $total_posts; $i++)
 			'THANKS' => $thanks
 			)
 			);
-	
-		}
-/*****[END]********************************************
- [ Mod:    Thank You Mod                       v1.1.8 ]
- ******************************************************/
-/*****[BEGIN]******************************************
- [ Mod:   Log Actions Mod - Topic View         v2.0.0 ]
- ******************************************************/
+		endif;
+        # Mod: Thank You Mod v1.1.8 END
 
-/*****[BEGIN]******************************************
- [ Mod:     View/Disable Avatars/Signatures    v1.1.2 ]
- ******************************************************/
-	if ($userdata['user_showavatars'])
-   	{
-		$template->assign_block_vars('postrow.switch_showavatars', array());
-   	}
-/*****[END]********************************************
- [ Mod:     View/Disable Avatars/Signatures    v1.1.2 ]
- ******************************************************/
 
-$sql = "SELECT mode
-FROM ". LOGS_TABLE ."
-WHERE last_post_id = '". $postrow[$i]['post_id'] ."'
-ORDER BY log_id DESC LIMIT 1";
-if ( !$result = $db->sql_query($sql) )
-{
-message_die(GENERAL_ERROR, 'Could not get moved type', '', __LINE__, __FILE__, $sql);
-}
-$row = $db->sql_fetchrow($result);
-$moved_type = $row['mode'];
-$select = '';
+        # Mod: Log Actions Mod - Topic View v2.0.0 START
 
-if ( $moved_type == 'move' )
-{
-    $select = "mv.time, mv.last_post_id, f.forum_name AS forumparent, f2.forum_name AS forumtarget, u.username";
-    $from = "(". LOGS_TABLE ." mv, ". TOPICS_TABLE ." t, ". FORUMS_TABLE ." f, ". FORUMS_TABLE ." f2, ". USERS_TABLE ." u) ";
-    $where = "mv.last_post_id = '". $postrow[$i]['post_id'] ."'
-    AND mv.forum_id = f.forum_id
-    AND mv.new_forum_id = f2.forum_id
-    AND mv.user_id = u.user_id";
-}
+        # Mod: View/Disable Avatars/Signatures v1.1.2 START
+	    if ($userdata['user_showavatars'])
+	    $template->assign_block_vars('postrow.switch_showavatars', array());
+        # Mod: View/Disable Avatars/Signatures v1.1.2 START
 
-if ( $moved_type == 'split' )
-{
-    $select = "mv.time, mv.last_post_id, f.forum_name as forumparent, t2.topic_title, u.username";
-    $from = "(". LOGS_TABLE ." mv, ". TOPICS_TABLE ." t, ". TOPICS_TABLE ." t2, ". FORUMS_TABLE ." f, ". USERS_TABLE ." u) ";
-    $where = "mv.last_post_id = '". $postrow[$i]['post_id'] ."'
-    AND mv.forum_id = f.forum_id
-    AND mv.topic_id = t2.topic_id
-    AND mv.user_id = u.user_id";
-}
 
-if ( $moved_type == 'lock' || $moved_type == 'unlock' || $moved_type == 'edit')
-{
-    $select = "mv.time, mv.last_post_id,  u.username";
-    $from = "(". LOGS_TABLE ." mv,  ". USERS_TABLE ." u) ";
-    $where = "mv.last_post_id = '". $postrow[$i]['post_id'] ."'
-    AND mv.user_id = u.user_id";
-}
+        $sql = "SELECT mode
+        FROM ".LOGS_TABLE."
+        WHERE last_post_id = '".$postrow[$i]['post_id']."'
+        ORDER BY log_id DESC LIMIT 1";
 
-if (!empty($select))
-{
-    $sql = "SELECT $select
-    FROM $from
-    WHERE $where
-    ORDER BY mv.time DESC LIMIT 1";
-    if ( !$result = $db->sql_query($sql) )
-    {
-        message_die(GENERAL_ERROR, 'Could not get main move information', '', __LINE__, __FILE__, $sql);
-    }
-        $moved = $db->sql_fetchrow($result);
-    }
+        if(!$result = $db->sql_query($sql))
+        message_die(GENERAL_ERROR, 'Could not get moved type', '', __LINE__, __FILE__, $sql);
+        
+		$row = $db->sql_fetchrow($result);
+        $moved_type = $row['mode'];
+        $select = '';
 
-    $mini_icon = $images['icon_minipost'];
-    $move_date = (isset($moved['time'])) ? create_date($board_config['default_dateformat'], $moved['time'],$board_config['board_timezone']) : '';
-/*****[BEGIN]******************************************
- [ Mod:    Advanced Username Color             v1.0.5 ]
- ******************************************************/
-    $mover = (isset($moved['username'])) ? UsernameColor($moved['username']) : '';
-/*****[END]********************************************
- [ Mod:    Advanced Username Color             v1.0.5 ]
- ******************************************************/
-    $parent_topic = (isset($moved['topic_title'])) ? $moved['topic_title'] : '';
-    $parent_forum = (isset($moved['forumparent'])) ? $moved['forumparent'] : '';
-    $target_forum = (isset($moved['forumtarget'])) ? $moved['forumtarget'] : '';
+        if($moved_type == 'move'):
+          $select = "mv.time, mv.last_post_id, f.forum_name AS forumparent, f2.forum_name AS forumtarget, u.username";
+          $from = "(". LOGS_TABLE ." mv, ". TOPICS_TABLE ." t, ". FORUMS_TABLE ." f, ". FORUMS_TABLE ." f2, ". USERS_TABLE ." u) ";
+          $where = "mv.last_post_id = '". $postrow[$i]['post_id'] ."'
+          AND mv.forum_id = f.forum_id
+          AND mv.new_forum_id = f2.forum_id
+          AND mv.user_id = u.user_id";
+        endif;
 
-    if (allow_log_view($userdata['user_level'])) {
-        if ( $moved_type == 'move')
-        {
+        if($moved_type == 'split'):
+          $select = "mv.time, mv.last_post_id, f.forum_name as forumparent, t2.topic_title, u.username";
+          $from = "(". LOGS_TABLE ." mv, ". TOPICS_TABLE ." t, ". TOPICS_TABLE ." t2, ". FORUMS_TABLE ." f, ". USERS_TABLE ." u) ";
+          $where = "mv.last_post_id = '". $postrow[$i]['post_id'] ."'
+          AND mv.forum_id = f.forum_id
+          AND mv.topic_id = t2.topic_id
+          AND mv.user_id = u.user_id";
+        endif;
+
+       if($moved_type == 'lock' || $moved_type == 'unlock' || $moved_type == 'edit'):
+         $select = "mv.time, mv.last_post_id,  u.username";
+         $from = "(". LOGS_TABLE ." mv,  ". USERS_TABLE ." u) ";
+         $where = "mv.last_post_id = '". $postrow[$i]['post_id'] ."'
+         AND mv.user_id = u.user_id";
+       endif;
+
+       if(!empty($select)):
+         $sql = "SELECT $select
+         FROM $from
+         WHERE $where
+         ORDER BY mv.time DESC LIMIT 1";
+	     if ( !$result = $db->sql_query($sql) )
+          message_die(GENERAL_ERROR, 'Could not get main move information', '', __LINE__, __FILE__, $sql);
+		$moved = $db->sql_fetchrow($result);
+      endif;
+
+      $mini_icon = $images['icon_minipost'];
+      $move_date = (isset($moved['time'])) ? create_date($board_config['default_dateformat'], $moved['time'],$board_config['board_timezone']) : '';
+
+      # Mod: Advanced Username Color v1.0.5 START
+      $mover = (isset($moved['username'])) ? UsernameColor($moved['username']) : '';
+      # Mod: Advanced Username Color v1.0.5 END
+
+      $parent_topic = (isset($moved['topic_title'])) ? $moved['topic_title'] : '';
+      $parent_forum = (isset($moved['forumparent'])) ? $moved['forumparent'] : '';
+      $target_forum = (isset($moved['forumtarget'])) ? $moved['forumtarget'] : '';
+
+      if(allow_log_view($userdata['user_level'])): 
+        if($moved_type == 'move')
             $move_message = sprintf($lang['Move_move_message'], $move_date, $mover, $parent_forum, $target_forum);
-        }
-        if ( $moved_type == 'lock')
-        {
+	    if($moved_type == 'lock')
             $move_message = sprintf($lang['Move_lock_message'], $move_date, $mover);
-        }
-        if ( $moved_type == 'unlock')
-        {
+	    if($moved_type == 'unlock')
             $move_message = sprintf($lang['Move_unlock_message'], $move_date, $mover);
-        }
-        if ( $moved_type == 'split')
-        {
+	    if($moved_type == 'split')
             $move_message = sprintf($lang['Move_split_message'], $move_date, $mover, $parent_topic, $parent_forum);
-        }
-        if ( $moved_type == 'edit')
-        {
+	    if($moved_type == 'edit')
             $move_message = sprintf($lang['Move_edit_message'], $move_date, $mover);
-        }
-        if ( isset($moved) && ($moved['last_post_id'] == $postrow[$i]['post_id'] && show_log($moved_type)))
-        {
+	    if(isset($moved) && ($moved['last_post_id'] == $postrow[$i]['post_id'] && show_log($moved_type)))
             $template->assign_block_vars('postrow.move_message', array(
                 'MOVE_MESSAGE' => $move_message)
             );
-        }
         else
-        {
             $template->assign_block_vars('postrow.switch_spacer', array());
-        }
-}
-else
-{
-    $template->assign_block_vars('postrow.switch_spacer', array());
-}
-/*****[END]********************************************
- [ Mod:   Log Actions Mod - Topic View         v2.0.0 ]
- ******************************************************/
+      else:
+      $template->assign_block_vars('postrow.switch_spacer', array());
+     endif;
 
-/*****[BEGIN]******************************************
- [ Mod:    Attachment Mod                      v2.4.1 ]
- ******************************************************/
+# Mod: Log Actions Mod - Topic View v2.0.0 END
+
+     # Mod: Attachment Mod v2.4.1 START
      display_post_attachments($postrow[$i]['post_id'], $postrow[$i]['post_attachment']);
-/*****[END]********************************************
- [ Mod:    Attachment Mod                      v2.4.1 ]
- ******************************************************/
+     # Mod: Attachment Mod v2.4.1 END
 
-/*****[BEGIN]******************************************
- [ Mod:     XData                              v1.0.3 ]
- ******************************************************/
+     # Mod: XData v1.0.3 START
      @reset($xd_block);
-     while ( list($code_name, $value) = each($xd_block) )
-     {
+     while(list($code_name, $value) = each($xd_block)):
          $template->assign_block_vars( 'postrow.xdata', array(
              'NAME' => $xd_meta[$code_name]['field_name'],
              'VALUE' => $value
              )
          );
-     }
-
+     endwhile;
      @reset($xd_meta);
-     while ( list($code_name, $value) = each($xd_meta) )
-     {
-         if (isset($xd_root[$code_name]))
-         {
-             $template->assign_block_vars( "postrow.switch_$code_name", array() );
-         }
-            else
-            {
-                $template->assign_block_vars( "postrow.switch_no_$code_name", array() );
-            }
-     }
-/*****[END]********************************************
- [ Mod:     XData                              v1.0.3 ]
- ******************************************************/
+     while(list($code_name, $value) = each($xd_meta)):
+       if (isset($xd_root[$code_name]))
+       $template->assign_block_vars( "postrow.switch_$code_name", array() );
+       else
+       $template->assign_block_vars( "postrow.switch_no_$code_name", array() );
+     endwhile;
+     # Mod: XData v1.0.3 START
 
-}
+endfor;
 
-if(!isset($HTTP_GET_VARS['printertopic'])) {
+if(!isset($HTTP_GET_VARS['printertopic'])): 
+   # Base: At a Glance v2.2.1 START
+   # Mod: At a Glance Options v1.0.0 START
+   if(show_glance("topics")) 
+   include($phpbb_root_path.'glance.'.$phpEx);
+   # Base: At a Glance v2.2.1 START
+   # Mod: At a Glance Options v1.0.0 START
 
-/*****[BEGIN]******************************************
- [ Base:    At a Glance                        v2.2.1 ]
- [ Mod:     At a Glance Options                v1.0.0 ]
- ******************************************************/
-if (show_glance("topics")) {
-    include($phpbb_root_path . 'glance.'.$phpEx);
-}
-
-/*****[END]********************************************
- [ Mod:     At a Glance Options                v1.0.0 ]
- [ Base:    At a Glance                        v2.2.1 ]
- ******************************************************/
-
-/*****[BEGIN]******************************************
- [ Mod:     Super Quick Reply                  v1.3.2 ]
- ******************************************************/
-if ( $show_qr_form )
-{
+   # Mod: Super Quick Reply v1.3.2 START
+   if($show_qr_form):
     $template->assign_block_vars('switch_quick_reply', array());
     include("includes/viewtopic_quickreply.$phpEx");
-}
-/*****[END]********************************************
- [ Mod:     Super Quick Reply                  v1.3.2 ]
- ******************************************************/
- }
-/*****[BEGIN]******************************************
- [ Mod:     Related Topics                      v0.12 ]
-******************************************************/
+   endif;
+   # Mod: Super Quick Reply v1.3.2 START
+endif;
+ 
+# Mod: Related Topics v0.12 START
 include(NUKE_INCLUDE_DIR.'/functions_related.'.$phpEx);
 get_related_topics($topic_id);
-/*****[END]********************************************
- [ Mod:     Related Topics                      v0.12 ]
- ******************************************************/
- $template->pparse('body');
+# Mod: Related Topics v0.12 END
 
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+$template->pparse('body');
+
+# Mod: Printer Topic v1.0.8 START
 if(isset($HTTP_GET_VARS['printertopic']))
-{
-    $gen_simple_header = 1;
-} else {
-    include("includes/page_tail.$phpEx");
-}
-/*****[END]********************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
-
+$gen_simple_header = 1;
+else 
+include("includes/page_tail.$phpEx");
+# Mod: Printer Topic v1.0.8 END
 ?>
