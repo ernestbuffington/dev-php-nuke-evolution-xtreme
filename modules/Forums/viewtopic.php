@@ -1273,15 +1273,10 @@ if(!$db->sql_query($sql))
 message_die(GENERAL_ERROR, "Could not update topic views.", '', __LINE__, __FILE__, $sql);
 
 
-/*****[BEGIN]******************************************
- [ Mod:    Thank You Mod                       v1.1.8 ]
- ******************************************************/
-//
-// Get topic thanks
-//
-if ($show_thanks == FORUM_THANKABLE)
-{
-	// Select Format for the date
+# Mod: Thank You Mod v1.1.8 START
+# Get topic thanks
+if ($show_thanks == FORUM_THANKABLE):
+	# Select Format for the date
 	$timeformat = "d-m, G:i";
 
 	$sql = "SELECT u.user_id, u.username, t.thanks_time
@@ -1289,71 +1284,59 @@ if ($show_thanks == FORUM_THANKABLE)
 		 WHERE topic_id = $topic_id
 		 AND t.user_id = u.user_id";
 
-	if ( !($result = $db->sql_query($sql)) )
-	{
-		message_die(GENERAL_ERROR, "Could not obtain thanks information", '', __LINE__, __FILE__, $sql);
-	}
+	if(!($result = $db->sql_query($sql)))
+    message_die(GENERAL_ERROR, "Could not obtain thanks information", '', __LINE__, __FILE__, $sql);
 
 	$total_thank = $db->sql_numrows($result);
 	$thanksrow = array();
 	$thanksrow = $db->sql_fetchrowset($result);
 
-	for($i = 0; $i < $total_thank; $i++)
-	{
+	for($i = 0; $i < $total_thank; $i++):
 		$topic_thanks = $db->sql_fetchrow($result);
 		$thanker_id[$i] = $thanksrow[$i]['user_id'];
 		$thanker_name[$i] = $thanksrow[$i]['username'];
 		$thanks_date[$i] = $thanksrow[$i]['thanks_time'];
 
-		// Get thanks date
+		# Get thanks date
 		$thanks_date[$i] = create_date($timeformat, $thanks_date[$i], $board_config['board_timezone']);
 
-		// Make thanker profile link
+		# Make thanker profile link
 		$thanker_profile[$i] = append_sid("profile.$phpEx?mode=viewprofile&amp;" . POST_USERS_URL . "=$thanker_id[$i]");   
 		$thanks .= '<a href="' .$thanker_profile[$i] . '">' . UsernameColor($thanker_name[$i]) . '</a> (' . $thanks_date[$i] . '), ';
 		
 		if ($userdata['user_id'] == $thanksrow[$i]['user_id'])
-		{
-			$thanked = TRUE;
-		}
-	}
+	    $thanked = TRUE;
+	endfor;
 
 	$sql = "SELECT u.topic_poster, t.user_id, t.username
 			FROM " . TOPICS_TABLE . " u, " . USERS_TABLE . " t
 			WHERE topic_id = $topic_id
 			AND u.topic_poster = t.user_id";
 
-	if ( !($result = $db->sql_query($sql)) )
-	{
-		message_die(GENERAL_ERROR, "Could not obtain user information", '', __LINE__, __FILE__, $sql);
-	}
+	if(!($result = $db->sql_query($sql)))
+    message_die(GENERAL_ERROR, "Could not obtain user information", '', __LINE__, __FILE__, $sql);
 
 	if( !($autor = $db->sql_fetchrowset($result)) )
-	{
-		message_die(GENERAL_ERROR, "Could not obtain user information", '', __LINE__, __FILE__, $sql);
-	}	
+	message_die(GENERAL_ERROR, "Could not obtain user information", '', __LINE__, __FILE__, $sql);
 
 	$autor_name = $autor[0]['username'];
 	$thanks .= '<br /><br />'.$lang['thanks_to'].' '.UsernameColor($autor_name).' '.$lang['thanks_end'];
 
-	// Create button switch
-	if ($userdata['user_id'] != $autor['0']['user_id'] && !$thanked)
-	{
+	# Create button switch
+	if ($userdata['user_id'] != $autor['0']['user_id'] && !$thanked):
+	
 		$template->assign_block_vars('thanks_button', array(
 			 'THANK_IMG' => $thank_img,
 			 'U_THANK_TOPIC' => $thank_topic_url,
 			 'L_THANK_TOPIC' => $thank_alt
 		));
-	}	
+	endif;	
 
-}
-/*****[END]********************************************
- [ Mod:    Thank You Mod                       v1.1.8 ]
- ******************************************************/
+endif;
+# Mod: Thank You Mod v1.1.8 END
 
-/*****[BEGIN]******************************************
- [ Mod:     Super Quick Reply                  v1.3.2 ]
- ******************************************************/
+
+# Mod: Super Quick Reply v1.3.2 START
 $sqr_last_page = ((floor( $start / intval($board_config['posts_per_page']) ) + 1 ) == ceil( $total_replies / intval($board_config['posts_per_page'])));
 if ( $userdata['user_id'] != ANONYMOUS )
 {
@@ -1371,9 +1354,7 @@ else
 {
     $show_qr_form =    false;
 }
-/*****[END]********************************************
- [ Mod:     Super Quick Reply                  v1.3.2 ]
- ******************************************************/
+# Mod: Super Quick Reply v1.3.2 END
 
 //
 // Okay, let's do the loop, yeah come on baby let's do the loop
