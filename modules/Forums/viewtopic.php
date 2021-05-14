@@ -1459,32 +1459,22 @@ for($i = 0; $i < $total_posts; $i++)
         # Mod: Default avatar v1.1.0 END
         
         # Define the little post icon
-        if ( $userdata['session_logged_in'] && $postrow[$i]['post_time'] > $userdata['user_lastvisit'] && $postrow[$i]['post_time'] > $topic_last_read )
-        {
+        if($userdata['session_logged_in'] && $postrow[$i]['post_time'] > $userdata['user_lastvisit'] && $postrow[$i]['post_time'] > $topic_last_read):
             $mini_post_img = $images['icon_minipost_new'];
             $mini_post_alt = $lang['New_post'];
-        }
-        else
-        {
+        else:
             $mini_post_img = $images['icon_minipost'];
             $mini_post_alt = $lang['Post'];
-        }
+        endif;
 
         $mini_post_url = append_sid("viewtopic.$phpEx?" . POST_POST_URL . '=' . $postrow[$i]['post_id']) . '#' . $postrow[$i]['post_id'];
 		
-/*****[BEGIN]******************************************
- [ Mod:    Gender                              v1.2.6 ]
- ******************************************************/
+        # Mod: Gender v1.2.6 START
         $gender_image = ''; 
-/*****[END]********************************************
- [ Mod:    Gender                              v1.2.6 ]
- ******************************************************/
+        # Mod: Gender v1.2.6 END
 
-/*****[BEGIN]******************************************
- [ Mod:    Multiple Ranks And Staff View       v2.0.3 ]
- ******************************************************/
+        # Mod: Multiple Ranks And Staff View v2.0.3 START
 		$user_ranks = generate_ranks($postrow[$i], $ranks_sql);
-	
 		$user_rank_01 = ($user_ranks['rank_01'] == '') ? '' : ($user_ranks['rank_01'] . '<br />');
 		$user_rank_01_img = ($user_ranks['rank_01_img'] == '') ? '' : ($user_ranks['rank_01_img'] . '<br />');
 		$user_rank_02 = ($user_ranks['rank_02'] == '') ? '' : ($user_ranks['rank_02'] . '<br />');
@@ -1495,196 +1485,190 @@ for($i = 0; $i < $total_posts; $i++)
 		$user_rank_04_img = ($user_ranks['rank_04_img'] == '') ? '' : ($user_ranks['rank_04_img'] . '<br />');
 		$user_rank_05 = ($user_ranks['rank_05'] == '') ? '' : ($user_ranks['rank_05'] . '<br />');
 		$user_rank_05_img = ($user_ranks['rank_05_img'] == '') ? '' : ($user_ranks['rank_05_img'] . '<br />');
-/*****[END]********************************************
- [ Mod:    Multiple Ranks And Staff View       v2.0.3 ]
- ******************************************************/
+        # Mod: Multiple Ranks And Staff View v2.0.3 END
+
         {
         	$ranksrow = array();
-			for($j = 0; $j < count($ranksrow); $j++)
-			{
-				if ( $postrow[$i]['user_posts'] >= $ranksrow[$j]['rank_min'] && !$ranksrow[$j]['rank_special'] )
-				{
+			for($j = 0; $j < count($ranksrow); $j++):
+				if ( $postrow[$i]['user_posts'] >= $ranksrow[$j]['rank_min'] && !$ranksrow[$j]['rank_special']):
 					$poster_rank = $ranksrow[$j]['rank_title'];
-					$rank_image = ( $ranksrow[$j]['rank_image'] ) ? '<img src="' . $ranksrow[$j]['rank_image'] . '" alt="' . $poster_rank . '" title="' . $poster_rank . '" border="0" /><br />' : '';
-				}
-			}
+					$rank_image = ( $ranksrow[$j]['rank_image'] ) ? '<img src="'.$ranksrow[$j]['rank_image'].'" alt="'.$poster_rank.'" title="'.$poster_rank.'" border="0" /><br />' : '';
+				endif;
+			endfor;
         }
 
-        //
-        // Handle anon users posting with usernames
-        //
-        if ( $poster_id == ANONYMOUS && !empty($postrow[$i]['post_username']) )
-        {
+        
+        # Handle anon users posting with usernames
+        if ( $poster_id == ANONYMOUS && !empty($postrow[$i]['post_username'])):
                 $poster = $postrow[$i]['post_username'];
                 $user_rank_01 = $lang['Guest'] . '<br />';
-        }
+        endif;
 
         $temp_url = '';
-        if ( $poster_id != ANONYMOUS )
-        {
-                $temp_url = "modules.php?name=Profile&amp;mode=viewprofile&amp;" . POST_USERS_URL . "=$poster_id";
-                $profile_url = $temp_url;
-                $profile_lang = $lang['Read_profile'];
-                $profile_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_profile'] . '" alt="' . $lang['Read_profile'] . '" title="' . $lang['Read_profile'] . '" border="0" /></a>';
-                $profile = '<a href="' . $temp_url . '">' . $lang['Read_profile'] . '</a>';
 
-                $temp_url = append_sid("privmsg.$phpEx?mode=post&amp;" . POST_USERS_URL . "=$poster_id");
-                if (is_active("Private_Messages")) 
-				{
-                	$pm_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_pm'] . '" alt="' . sprintf($lang['Send_private_message'],$postrow[$i]['username']) . '" title="' . sprintf($lang['Send_private_message'],$postrow[$i]['username']) . '" border="0" /></a>';
+        if($poster_id != ANONYMOUS)
+        {
+          $temp_url = "modules.php?name=Profile&amp;mode=viewprofile&amp;" . POST_USERS_URL . "=$poster_id";
+          $profile_url = $temp_url;
+          $profile_lang = $lang['Read_profile'];
+          $profile_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_profile'] . '" alt="' . $lang['Read_profile'] . '" title="' . $lang['Read_profile'] . '" border="0" /></a>';
+          $profile = '<a href="' . $temp_url . '">' . $lang['Read_profile'] . '</a>';
+
+          $temp_url = append_sid("privmsg.$phpEx?mode=post&amp;" . POST_USERS_URL . "=$poster_id");
+          
+		  if (is_active("Private_Messages")): 
+		  
+           	 $pm_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_pm'].'" 
+			 alt="'.sprintf($lang['Send_private_message'],$postrow[$i]['username']).'" title="'.sprintf($lang['Send_private_message'],$postrow[$i]['username']) . '" border="0" /></a>';
                 	$pm = '<a href="' . $temp_url . '">' . $lang['Send_private_message'] . '</a>';
                   $pm_alt = sprintf($lang['Send_private_message'],$postrow[$i]['username']);
-                }
+          endif;
 				
-/*****[BEGIN]******************************************
- [ Mod:    Gender                              v1.2.6 ]
- ******************************************************/
-                switch ($postrow[$i]['user_gender'])
-                {
-                    case 1:
-                      $gender_image = $lang['Male'];
-                      break;
-                    
-                    case 2:
-                      $gender_image = $lang['Female'];
-                      break;
+          # Mod: Gender v1.2.6 START
+          switch ($postrow[$i]['user_gender']):
+            case 1:
+            $gender_image = $lang['Male'];
+            break;
+            case 2:
+            $gender_image = $lang['Female'];
+            break;
+            default : 
+            $gender_image = '';
+          endswitch; 
+          # Mod: Gender v1.2.6 END
 
-                   default : 
-                      $gender_image = '';
-                } 
-/*****[END]********************************************
- [ Mod:    Gender                              v1.2.6 ]
- ******************************************************/
+         if(!empty($postrow[$i]['user_viewemail']) || $is_auth['auth_mod']):
+         
+           $email_uri = ($board_config['board_email_form']) ? "modules.php?name=Profile&mode=email&amp;".POST_USERS_URL.'='.$poster_id : 'mailto:'.$postrow[$i]['user_email'];
+           $email_img = '<a href="'.$email_uri.'"><img src="'.$images['icon_email'].'" 
+		   alt="' . sprintf($lang['Send_email'],$postrow[$i]['username']).'" title="'.sprintf($lang['Send_email'],$postrow[$i]['username']).'" border="0" /></a>';
+           $email = '<a href="'.$email_uri.'">'.$lang['Send_email'].'</a>';
+           $email_alt = sprintf($lang['Send_email'],$postrow[$i]['username']);
+         
+         else:
+         
+            $email_img = '';
+            $email = '';
+            $email_alt = '';
+         endif;
+		 
+           // if (( $postrow[$i]['user_website'] == "http:///") || ( $postrow[$i]['user_website'] == "http://")){
+           //     $postrow[$i]['user_website'] =  "";
+           // }
+           // if (($postrow[$i]['user_website'] != "" ) && (substr($postrow[$i]['user_website'],0, 7) != "http://")) {
+           //     $postrow[$i]['user_website'] = "http://".$postrow[$i]['user_website'];
+           // }
 
-                if ( !empty($postrow[$i]['user_viewemail']) || $is_auth['auth_mod'] )
-                {
-                        $email_uri = ( $board_config['board_email_form'] ) ? "modules.php?name=Profile&mode=email&amp;" . POST_USERS_URL .'=' . $poster_id : 'mailto:' . $postrow[$i]['user_email'];
-
-                        $email_img = '<a href="' . $email_uri . '"><img src="' . $images['icon_email'] . '" alt="' . sprintf($lang['Send_email'],$postrow[$i]['username']) . '" title="' . sprintf($lang['Send_email'],$postrow[$i]['username']) . '" border="0" /></a>';
-                        $email = '<a href="' . $email_uri . '">' . $lang['Send_email'] . '</a>';
-                        $email_alt = sprintf($lang['Send_email'],$postrow[$i]['username']);
-                }
-                else
-                {
-                        $email_img = '';
-                        $email = '';
-                        $email_alt = '';
-                }
-                // if (( $postrow[$i]['user_website'] == "http:///") || ( $postrow[$i]['user_website'] == "http://")){
-                //     $postrow[$i]['user_website'] =  "";
-                // }
-                // if (($postrow[$i]['user_website'] != "" ) && (substr($postrow[$i]['user_website'],0, 7) != "http://")) {
-                //     $postrow[$i]['user_website'] = "http://".$postrow[$i]['user_website'];
-                // }
-
-                $www_img = ( $postrow[$i]['user_website'] ) ? '<a href="' . $postrow[$i]['user_website'] . '" target="_userwww"><img src="' . $images['icon_www'] . '" alt="' . $lang['Visit_website'] . '" title="' . $lang['Visit_website'] . '" border="0" /></a>' : '';
-                $www = ( $postrow[$i]['user_website'] ) ? '<a href="' . $postrow[$i]['user_website'] . '" target="_userwww">' . $lang['Visit_website'] . '</a>' : '';
+           $www_img = ($postrow[$i]['user_website']) ? '<a href="'.$postrow[$i]['user_website'].'" target="_userwww"><img 
+		   src="'.$images['icon_www'].'" alt="'.$lang['Visit_website'].'" title="'.$lang['Visit_website'].'" border="0" /></a>' : '';
+           
+		   $www = ($postrow[$i]['user_website']) ? '<a href="'.$postrow[$i]['user_website'].'" target="_userwww">'.$lang['Visit_website'].'</a>' : '';
 				
-/*****[BEGIN]******************************************
- [ Mod:    Birthdays                           v3.0.0 ]
- ******************************************************/
-				        $bday_month_day = floor($postrow[$i]['user_birthday'] / 10000);
-				        $bday_year_age = ( $postrow[$i]['birthday_display'] != BIRTHDAY_NONE && $postrow[$i]['birthday_display'] != BIRTHDAY_DATE ) ? $postrow[$i]['user_birthday'] - 10000*$bday_month_day : 0;
-				        $fudge = ( gmdate('md') < $bday_month_day ) ? 1 : 0;
-				        $age = ( $bday_year_age ) ? gmdate('Y')-$bday_year_age-$fudge : false;
-/*****[END]********************************************
- [ Mod:    Birthdays                           v3.0.0 ]
- ******************************************************/
-				
-                $facebook_img = ( $postrow[$i]['user_facebook'] ) ? '<a href="http://www.facebook.com/profile.php?id=' . $postrow[$i]['user_facebook'] . '" target="_userwww"><img src="' . $images['icon_facebook'] . '" alt="' . $lang['Visit_facebook'] . ': ' . 
-				$postrow[$i]['user_facebook'] . '" title="' . $lang['Visit_facebook'] . '" border="0" /></a>' : '';
-		            $facebook = ( $postrow[$i]['user_facebook'] ) ? '<a href="' . $temp_url . '">' . $lang['FACEBOOK'] . '</a>' : '';
-/*****[BEGIN]******************************************
- [ Mod:    Online/Offline/Hidden               v2.2.7 ]
- ******************************************************/
-                if ($postrow[$i]['user_session_time'] >= (time()-$board_config['online_time']))
-                {
-                    $images['icon_online'] = (isset($images['icon_online'])) ? $images['icon_online'] : '';
-                    $images['icon_hidden'] = (isset($images['icon_hidden'])) ? $images['icon_hidden'] : '';
-                    $images['icon_offline'] = (isset($images['icon_offline'])) ? $images['icon_offline'] : '';
-                    $online_color = (isset($online_color)) ? $online_color : '';
+           # Mod: Birthdays v3.0.0 START
+	       $bday_month_day = floor($postrow[$i]['user_birthday'] / 10000);
+		   $bday_year_age = ($postrow[$i]['birthday_display'] != BIRTHDAY_NONE && $postrow[$i]['birthday_display'] != BIRTHDAY_DATE ) ? $postrow[$i]['user_birthday'] - 10000*$bday_month_day : 0;
+		   $fudge = (gmdate('md') < $bday_month_day ) ? 1 : 0;
+		   $age = ($bday_year_age) ? gmdate('Y')-$bday_year_age-$fudge : false;
+           # Mod: Birthdays v3.0.0 END
+		
+		   # Mod: Facebook v1.0.0 START		
+           $facebook_img = ($postrow[$i]['user_facebook']) ? '<a href="http://www.facebook.com/'.$postrow[$i]['user_facebook'].'" target="_userwww"><img 
+		   src="'.$images['icon_facebook'].'" alt="'.$lang['Visit_facebook'].': '. 
+			
+		   $postrow[$i]['user_facebook'].'" title="'.$lang['Visit_facebook'].'" border="0" /></a>' : '';
+		   $facebook = ( $postrow[$i]['user_facebook'] ) ? '<a href="'.$temp_url.'">'.$lang['FACEBOOK'].'</a>' : '';
+		   # Mod: Facebook v1.0.0 END		
+           
+		   # Mod: Online/Offline/Hidden v2.2.7 START
+           if ($postrow[$i]['user_session_time'] >= (time()-$board_config['online_time']))
+           {
+              $images['icon_online'] = (isset($images['icon_online'])) ? $images['icon_online'] : '';
+              $images['icon_hidden'] = (isset($images['icon_hidden'])) ? $images['icon_hidden'] : '';
+              $images['icon_offline'] = (isset($images['icon_offline'])) ? $images['icon_offline'] : '';
+              $online_color = (isset($online_color)) ? $online_color : '';
 
-                    if ($postrow[$i]['user_allow_viewonline'])
-                    {
-                        $online_status_img = '<a href="' . append_sid("viewonline.$phpEx") . '"><img src="' . $images['icon_online'] . '" alt="' . sprintf($lang['is_online'], $poster) . '" title="' . sprintf($lang['is_online'], $poster) . '" /></a>&nbsp;';
-                        $online_status = '<a href="'.append_sid("viewonline.$phpEx").'" title="'.sprintf($lang['is_online'], $poster).'"'.$online_color.'>'.$lang['Online'].'</a>';
-                    }
-                    else if ( $is_auth['auth_mod'] || $userdata['user_id'] == $poster_id )
-                    {
-                        $online_status_img = '<a href="' . append_sid("viewonline.$phpEx") . '"><img src="' . $images['icon_hidden'] . '" alt="' . sprintf($lang['is_hidden'], $poster) . '" title="' . sprintf($lang['is_hidden'], $poster) . '" /></a>&nbsp;';
-                        $online_status = '<em><a href="'.append_sid("viewonline.$phpEx").'" title="'.sprintf($lang['is_hidden'], $poster).'"'.$hidden_color.'>'.$lang['Hidden'].'</a></em>';
-                    }
-                    else
-                    {
-                        $online_status_img = '<img src="' . $images['icon_offline'] . '" alt="' . sprintf($lang['is_offline'], $poster) . '" title="' . sprintf($lang['is_offline'], $poster) . '" />&nbsp;';
-                        $online_status = '<span title="'.sprintf($lang['is_offline'], $poster).'"'.$offline_color.'>'.$lang['Offline'].'</span>';
-                    }
-                }
-                else
-                {
-                    $online_status_img = '<img src="' . $images['icon_offline'] . '" alt="' . sprintf($lang['is_offline'], $poster) . '" title="' . sprintf($lang['is_offline'], $poster) . '" />&nbsp;';
-                    $online_status = '<span title="'.sprintf($lang['is_offline'], $poster).'"'.$offline_color.'>'.$lang['Offline'].'</span>';
-                }
-/*****[END]********************************************
- [ Mod:    Online/Offline/Hidden               v2.2.7 ]
- ******************************************************/
+              if ($postrow[$i]['user_allow_viewonline'])
+              {
+                  $online_status_img = '<a href="'.append_sid("viewonline.$phpEx").'"><img 
+				  src="'.$images['icon_online'].'" alt="'.sprintf($lang['is_online'], $poster).'" title="'.sprintf($lang['is_online'], $poster).'" /></a>&nbsp;';
+                  
+				  $online_status = '<a href="'.append_sid("viewonline.$phpEx").'" title="'.sprintf($lang['is_online'], $poster).'"'.$online_color.'>'.$lang['Online'].'</a>';
+              }
+              elseif($is_auth['auth_mod'] || $userdata['user_id'] == $poster_id)
+              {
+                $online_status_img = '<a href="'.append_sid("viewonline.$phpEx").'"><img 
+				src="'.$images['icon_hidden'].'" alt="'.sprintf($lang['is_hidden'], $poster).'" title="'.sprintf($lang['is_hidden'], $poster).'" /></a>&nbsp;';
+                
+				$online_status = '<em><a href="'.append_sid("viewonline.$phpEx").'" title="'.sprintf($lang['is_hidden'], $poster).'"'.$hidden_color.'>'.$lang['Hidden'].'</a></em>';
+              }
+              else
+              {
+                 $online_status_img = '<img src="'.$images['icon_offline'].'" alt="'.sprintf($lang['is_offline'], $poster).'" title="'.sprintf($lang['is_offline'], $poster).'" />&nbsp;';
+                 $online_status = '<span title="'.sprintf($lang['is_offline'], $poster).'"'.$offline_color.'>'.$lang['Offline'].'</span>';
+              }
+           }
+           else
+           {
+             $online_status_img = '<img src="'.$images['icon_offline'].'" alt="'.sprintf($lang['is_offline'], $poster).'" title="'.sprintf($lang['is_offline'], $poster).'" />&nbsp;';
+             $online_status = '<span title="'.sprintf($lang['is_offline'], $poster).'"'.$offline_color.'>'.$lang['Offline'].'</span>';
+           }
+		   # Mod: Online/Offline/Hidden v2.2.7 END
         }
         else
         {
-                $profile_url = '';
-                $$profile_lang = '';
-                $profile_img = '';
-                $profile = '';
-                $pm_img = '';
-                $pm = '';
-                $pm_alt = '';
-                $email_img = '';
-                $email = '';
-                $www_img = '';
-                $www = '';
-/*****[BEGIN]******************************************
- [ Mod:    Birthdays                           v3.0.0 ]
- ******************************************************/
-				        $age = false;
-/*****[END]********************************************
- [ Mod:    Birthdays                           v3.0.0 ]
- ******************************************************/
-				        $facebook_img = '';
-		            $facebook = '';
-/*****[BEGIN]******************************************
- [ Mod:    Online/Offline/Hidden               v2.2.7 ]
- ******************************************************/
-                $online_status_img = '';
-                $online_status = '';
-/*****[END]********************************************
- [ Mod:    Online/Offline/Hidden               v2.2.7 ]
- ******************************************************/
+           $profile_url = '';
+           $$profile_lang = '';
+           $profile_img = '';
+           $profile = '';
+           $pm_img = '';
+           $pm = '';
+           $pm_alt = '';
+           $email_img = '';
+           $email = '';
+           $www_img = '';
+           $www = '';
+           # Mod: Birthdays v3.0.0 START
+           $age = false;
+           # Mod: Birthdays v3.0.0 END
+ 
+		   # Mod: Facebook v1.0.0 START		
+		   $facebook_img = '';
+		   $facebook = '';
+		   # Mod: Facebook v1.0.0 END		
+
+           # Mod: Online/Offline/Hidden v2.2.7 START
+           $online_status_img = '';
+           $online_status = '';
+           # Mod: Online/Offline/Hidden v2.2.7 END
         }
 
-        $temp_url = append_sid("posting.$phpEx?mode=quote&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id']);
-        $quote_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_quote'] . '" alt="' . $lang['Reply_with_quote'] . '" title="' . $lang['Reply_with_quote'] . '" border="0" /></a>';
-        $quote = '<a href="' . $temp_url . '">' . $lang['Reply_with_quote'] . '</a>';
+        $temp_url = append_sid("posting.$phpEx?mode=quote&amp;".POST_POST_URL."=".$postrow[$i]['post_id']);
+        $quote_img = '<a href="'.$temp_url.'"><img src="'.$images['icon_quote'].'" alt="'.$lang['Reply_with_quote'].'" title="'.$lang['Reply_with_quote'].'" border="0" /></a>';
+        $quote = '<a href="'.$temp_url.'">'.$lang['Reply_with_quote'].'</a>';
 
         // $temp_url = "modules.php?name=Search&search_author=" . urlencode($postrow[$i]['username'] . "&amp;showresults=posts");
         $temp_url = "modules.php?name=Forums&file=search&search_author=" . urlencode($postrow[$i]['username']);
-        $search_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_search'] . '" alt="' . sprintf($lang['Search_user_posts'], $postrow[$i]['username']) . '" title="' . sprintf($lang['Search_user_posts'], $postrow[$i]['username']) . '" border="0" /></a>';
-        $search = '<a href="' . $temp_url . '">' . sprintf($lang['Search_user_posts'], $postrow[$i]['username']) . '</a>';
+        
+		$search_img = '<a href="'.$temp_url.'"><img src="'.$images['icon_search'].'" alt="'.sprintf($lang['Search_user_posts'], $postrow[$i]['username']).'" 
+		title="'.sprintf($lang['Search_user_posts'], $postrow[$i]['username']).'" border="0" /></a>';
+        
+		$search = '<a href="'.$temp_url.'">'.sprintf($lang['Search_user_posts'], $postrow[$i]['username']).'</a>';
         $search_alt = sprintf($lang['Search_user_posts'], $postrow[$i]['username']);
 
-        if ( ( $userdata['user_id'] == $poster_id && $is_auth['auth_edit'] ) || $is_auth['auth_mod'] )
+        if(($userdata['user_id'] == $poster_id && $is_auth['auth_edit']) || $is_auth['auth_mod'])
         {
-                $temp_url = append_sid("posting.$phpEx?mode=editpost&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id']);
-                $edit_url = $temp_url;
-                $edit_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_edit'] . '" alt="' . $lang['Edit_delete_post'] . '" title="' . $lang['Edit_delete_post'] . '" border="0" /></a>';
-                $edit = '<a href="' . $temp_url . '">' . $lang['Edit_delete_post'] . '</a>';
-                $edit_alt = $lang['Edit_delete_post'];
+          $temp_url = append_sid("posting.$phpEx?mode=editpost&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id']);
+          $edit_url = $temp_url;
+          $edit_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_edit'] . '" alt="' . $lang['Edit_delete_post'] . '" title="' . $lang['Edit_delete_post'] . '" border="0" /></a>';
+          $edit = '<a href="' . $temp_url . '">' . $lang['Edit_delete_post'] . '</a>';
+          $edit_alt = $lang['Edit_delete_post'];
         }
         else
         {
-            $edit_url = '';
-                $edit_img = '';
-                $edit = '';
-                $edit_alt = '';
+          $edit_url = '';
+          $edit_img = '';
+          $edit = '';
+          $edit_alt = '';
         }
 
 
