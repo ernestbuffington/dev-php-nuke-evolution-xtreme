@@ -913,7 +913,7 @@ if ( $is_auth['auth_mod'] )
         
 		$merge_topic_url = append_sid("merge.$phpEx?" . POST_TOPIC_URL . '=' . $topic_id);
         $merge_topic_btn = $lang['Merge_topics'];
-        # Mod: Simply Merge Threads v1.0.1 END
+        # Mod: Simply Merge Threads v1.0.1 END 
 }
 
 //
