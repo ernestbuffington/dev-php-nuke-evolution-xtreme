@@ -1497,7 +1497,6 @@ for($i = 0; $i < $total_posts; $i++)
 			endfor;
         }
 
-        
         # Handle anon users posting with usernames
         if ( $poster_id == ANONYMOUS && !empty($postrow[$i]['post_username'])):
                 $poster = $postrow[$i]['post_username'];
@@ -1506,8 +1505,7 @@ for($i = 0; $i < $total_posts; $i++)
 
         $temp_url = '';
 
-        if($poster_id != ANONYMOUS)
-        {
+        if($poster_id != ANONYMOUS):
           $temp_url = "modules.php?name=Profile&amp;mode=viewprofile&amp;" . POST_USERS_URL . "=$poster_id";
           $profile_url = $temp_url;
           $profile_lang = $lang['Read_profile'];
@@ -1517,7 +1515,6 @@ for($i = 0; $i < $total_posts; $i++)
           $temp_url = append_sid("privmsg.$phpEx?mode=post&amp;" . POST_USERS_URL . "=$poster_id");
           
 		  if (is_active("Private_Messages")): 
-		  
            	 $pm_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_pm'].'" 
 			 alt="'.sprintf($lang['Send_private_message'],$postrow[$i]['username']).'" title="'.sprintf($lang['Send_private_message'],$postrow[$i]['username']) . '" border="0" /></a>';
                 	$pm = '<a href="' . $temp_url . '">' . $lang['Send_private_message'] . '</a>';
@@ -1538,15 +1535,12 @@ for($i = 0; $i < $total_posts; $i++)
           # Mod: Gender v1.2.6 END
 
          if(!empty($postrow[$i]['user_viewemail']) || $is_auth['auth_mod']):
-         
            $email_uri = ($board_config['board_email_form']) ? "modules.php?name=Profile&mode=email&amp;".POST_USERS_URL.'='.$poster_id : 'mailto:'.$postrow[$i]['user_email'];
            $email_img = '<a href="'.$email_uri.'"><img src="'.$images['icon_email'].'" 
 		   alt="' . sprintf($lang['Send_email'],$postrow[$i]['username']).'" title="'.sprintf($lang['Send_email'],$postrow[$i]['username']).'" border="0" /></a>';
            $email = '<a href="'.$email_uri.'">'.$lang['Send_email'].'</a>';
            $email_alt = sprintf($lang['Send_email'],$postrow[$i]['username']);
-         
          else:
-         
             $email_img = '';
             $email = '';
             $email_alt = '';
@@ -1580,42 +1574,34 @@ for($i = 0; $i < $total_posts; $i++)
 		   # Mod: Facebook v1.0.0 END		
            
 		   # Mod: Online/Offline/Hidden v2.2.7 START
-           if ($postrow[$i]['user_session_time'] >= (time()-$board_config['online_time']))
-           {
+           if($postrow[$i]['user_session_time'] >= (time()-$board_config['online_time'])):
               $images['icon_online'] = (isset($images['icon_online'])) ? $images['icon_online'] : '';
               $images['icon_hidden'] = (isset($images['icon_hidden'])) ? $images['icon_hidden'] : '';
               $images['icon_offline'] = (isset($images['icon_offline'])) ? $images['icon_offline'] : '';
               $online_color = (isset($online_color)) ? $online_color : '';
 
-              if ($postrow[$i]['user_allow_viewonline'])
-              {
+              if($postrow[$i]['user_allow_viewonline']):
                   $online_status_img = '<a href="'.append_sid("viewonline.$phpEx").'"><img 
 				  src="'.$images['icon_online'].'" alt="'.sprintf($lang['is_online'], $poster).'" title="'.sprintf($lang['is_online'], $poster).'" /></a>&nbsp;';
                   
 				  $online_status = '<a href="'.append_sid("viewonline.$phpEx").'" title="'.sprintf($lang['is_online'], $poster).'"'.$online_color.'>'.$lang['Online'].'</a>';
-              }
-              elseif($is_auth['auth_mod'] || $userdata['user_id'] == $poster_id)
-              {
+              elseif($is_auth['auth_mod'] || $userdata['user_id'] == $poster_id):
                 $online_status_img = '<a href="'.append_sid("viewonline.$phpEx").'"><img 
 				src="'.$images['icon_hidden'].'" alt="'.sprintf($lang['is_hidden'], $poster).'" title="'.sprintf($lang['is_hidden'], $poster).'" /></a>&nbsp;';
                 
 				$online_status = '<em><a href="'.append_sid("viewonline.$phpEx").'" title="'.sprintf($lang['is_hidden'], $poster).'"'.$hidden_color.'>'.$lang['Hidden'].'</a></em>';
-              }
-              else
-              {
+              else:
                  $online_status_img = '<img src="'.$images['icon_offline'].'" alt="'.sprintf($lang['is_offline'], $poster).'" title="'.sprintf($lang['is_offline'], $poster).'" />&nbsp;';
                  $online_status = '<span title="'.sprintf($lang['is_offline'], $poster).'"'.$offline_color.'>'.$lang['Offline'].'</span>';
-              }
-           }
-           else
-           {
+              endif;
+           else:
              $online_status_img = '<img src="'.$images['icon_offline'].'" alt="'.sprintf($lang['is_offline'], $poster).'" title="'.sprintf($lang['is_offline'], $poster).'" />&nbsp;';
              $online_status = '<span title="'.sprintf($lang['is_offline'], $poster).'"'.$offline_color.'>'.$lang['Offline'].'</span>';
-           }
+           endif;
 		   # Mod: Online/Offline/Hidden v2.2.7 END
-        }
-        else
-        {
+        
+        else:
+        
            $profile_url = '';
            $$profile_lang = '';
            $profile_img = '';
@@ -1640,7 +1626,8 @@ for($i = 0; $i < $total_posts; $i++)
            $online_status_img = '';
            $online_status = '';
            # Mod: Online/Offline/Hidden v2.2.7 END
-        }
+        
+		endif;
 
         $temp_url = append_sid("posting.$phpEx?mode=quote&amp;".POST_POST_URL."=".$postrow[$i]['post_id']);
         $quote_img = '<a href="'.$temp_url.'"><img src="'.$images['icon_quote'].'" alt="'.$lang['Reply_with_quote'].'" title="'.$lang['Reply_with_quote'].'" border="0" /></a>';
@@ -1655,25 +1642,20 @@ for($i = 0; $i < $total_posts; $i++)
 		$search = '<a href="'.$temp_url.'">'.sprintf($lang['Search_user_posts'], $postrow[$i]['username']).'</a>';
         $search_alt = sprintf($lang['Search_user_posts'], $postrow[$i]['username']);
 
-        if(($userdata['user_id'] == $poster_id && $is_auth['auth_edit']) || $is_auth['auth_mod'])
-        {
+        if(($userdata['user_id'] == $poster_id && $is_auth['auth_edit']) || $is_auth['auth_mod']):
           $temp_url = append_sid("posting.$phpEx?mode=editpost&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id']);
           $edit_url = $temp_url;
           $edit_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_edit'] . '" alt="' . $lang['Edit_delete_post'] . '" title="' . $lang['Edit_delete_post'] . '" border="0" /></a>';
           $edit = '<a href="' . $temp_url . '">' . $lang['Edit_delete_post'] . '</a>';
           $edit_alt = $lang['Edit_delete_post'];
-        }
-        else
-        {
+        else:
           $edit_url = '';
           $edit_img = '';
           $edit = '';
           $edit_alt = '';
-        }
+        endif;
 
-
-
-        if ( $is_auth['auth_mod'] )
+        if($is_auth['auth_mod'])
         {
                 $temp_url = append_sid("modcp.$phpEx?mode=ip&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id'] . "&amp;" . POST_TOPIC_URL . "=" . $topic_id);
                 $ip_url = $temp_url;
