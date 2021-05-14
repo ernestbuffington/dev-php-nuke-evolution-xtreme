@@ -468,7 +468,8 @@ if($userdata['session_logged_in']):
                  $template->assign_vars(array(
                  'META' => '<meta http-equiv="refresh" content="3;url=' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;start=$start") . '">'));
 
-                 $message = $lang['No_longer_watching'] . '<br /><br />' . sprintf($lang['Click_return_topic'], '<a href="' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;start=$start") . '">', '</a>');
+                 $message = $lang['No_longer_watching'] . '<br /><br />' . sprintf($lang['Click_return_topic'], '<a 
+				 href="' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;start=$start") . '">', '</a>');
                  message_die(GENERAL_MESSAGE, $message);
            else:
               $is_watching_topic = TRUE;
@@ -585,23 +586,21 @@ endif;
 $select_post_order = '<select name="postorder">';
 
 if($post_time_order == 'ASC')
-$select_post_order .= '<option value="asc" selected="selected">' . $lang['Oldest_First'] . '</option><option value="desc">' . $lang['Newest_First'] . '</option>';
+$select_post_order .= '<option value="asc" selected="selected">'.$lang['Oldest_First'].'</option><option value="desc">'.$lang['Newest_First'].'</option>';
 else
-$select_post_order .= '<option value="asc">' . $lang['Oldest_First'] . '</option><option value="desc" selected="selected">' . $lang['Newest_First'] . '</option>';
+$select_post_order .= '<option value="asc">'.$lang['Oldest_First'].'</option><option value="desc" selected="selected">'.$lang['Newest_First'].'</option>';
 
 $select_post_order .= '</select>';
 
 
-# Go ahead and pull all data for this topic
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- [ Mod:    Online/Offline/Hidden               v2.2.7 ]
- [ Mod:    Member Country Flags                v2.0.7 ]
- [ Mod:    Multiple Ranks And Staff View       v2.0.3 ]
- [ Mod:    Gender                              v1.2.6 ]
- [ Mod:    Birthdays                           v3.0.0 ]
- [ Mod:    Users Reputations System            v1.0.0 ]
- ******************************************************/
+# Go ahead and pull all data for this fucking topic
+ # Mod: Printer Topic v1.0.8 START
+ # Mod: Online/Offline/Hidden v2.2.7 START
+ # Mod: Member Country Flags v2.0.7 START
+ # Mod: Multiple Ranks And Staff View v2.0.3 START
+ # Mod: Gender v1.2.6 START
+ # Mod: Birthdays v3.0.0 START
+ # Mod: Users Reputations System v1.0.0 START
 $sql = "SELECT u.username, 
                 u.user_id, 
 		     u.user_posts, 
