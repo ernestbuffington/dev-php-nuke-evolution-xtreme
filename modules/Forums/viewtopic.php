@@ -1337,133 +1337,102 @@ endif;
 
 
 # Mod: Super Quick Reply v1.3.2 START
-$sqr_last_page = ((floor( $start / intval($board_config['posts_per_page']) ) + 1 ) == ceil( $total_replies / intval($board_config['posts_per_page'])));
-if ( $userdata['user_id'] != ANONYMOUS )
-{
-    $sqr_user_display = (bool)( ($userdata['user_show_quickreply']==2) ? $sqr_last_page : $userdata['user_show_quickreply'] );
-}
+$sqr_last_page = ((floor( $start / intval($board_config['posts_per_page'])) + 1) == ceil($total_replies / intval($board_config['posts_per_page'])));
+if($userdata['user_id'] != ANONYMOUS)
+$sqr_user_display = (bool)( ($userdata['user_show_quickreply']==2) ? $sqr_last_page : $userdata['user_show_quickreply'] );
 else
-{
-    $sqr_user_display = (bool)( ($board_config['anonymous_show_sqr']==2) ? $sqr_last_page : $board_config['anonymous_show_sqr'] );
-}
-if ( ($board_config['allow_quickreply'] != 0) && (($forum_topic_data['forum_status'] != FORUM_LOCKED) || $is_auth['auth_mod'] ) && ( ($forum_topic_data['topic_status'] != TOPIC_LOCKED) || $is_auth['auth_mod'] ) && $sqr_user_display )
-{
-    $show_qr_form =    true;
-}
+$sqr_user_display = (bool)( ($board_config['anonymous_show_sqr']==2) ? $sqr_last_page : $board_config['anonymous_show_sqr'] );
+if(($board_config['allow_quickreply'] != 0) 
+&& (($forum_topic_data['forum_status'] != FORUM_LOCKED) 
+|| $is_auth['auth_mod']) 
+&& (($forum_topic_data['topic_status'] != TOPIC_LOCKED) 
+|| $is_auth['auth_mod']) && $sqr_user_display )
+$show_qr_form =    true;
 else
-{
-    $show_qr_form =    false;
-}
+$show_qr_form =    false;
 # Mod: Super Quick Reply v1.3.2 END
 
-//
-// Okay, let's do the loop, yeah come on baby let's do the loop
-// and it goes like this ...
-//
-/*****[BEGIN]******************************************
- [ Mod:     Display Poster Information Once    v2.0.0 ]
- ******************************************************/
+# Okay, let's do the loop
+
+# Mod: Display Poster Information Once    v2.0.0 START
 $already_processed = array();
-/*****[END]********************************************
- [ Mod:     Display Poster Information Once    v2.0.0 ]
- ******************************************************/
+# Mod: Display Poster Information Once    v2.0.0 END
+
 for($i = 0; $i < $total_posts; $i++)
 {
-/*****[BEGIN]******************************************
- [ Mod:     Display Poster Information Once    v2.0.0 ]
- ******************************************************/
-    	$leave_out['show_sig_once'] = false;
-    	$leave_out['show_avatar_once'] = false;
-    	$leave_out['show_rank_once'] = false;
-    	$leave_out['main'] = false;
-    	if( $postrow[$i]['user_id'] != ANONYMOUS )
-    	{
-    		reset($already_processed);
-    		while( list(, $v) = each($already_processed) )
-    		{
-    			if( $v == $postrow[$i]['user_id'] )
-    			{
-    				// We've already processed a post by this user on this page
-    				global $board_config;
-    				$leave_out['show_sig_once']     = $board_config['show_sig_once'];
-    				$leave_out['show_avatar_once']  = $board_config['show_avatar_once'];
-    				$leave_out['show_rank_once']    = $board_config['show_rank_once'];
-    				$leave_out['main'] = true;
-    				continue 1;
-    			}
-    		}
+  # Mod: Display Poster Information Once v2.0.0 START
+  $leave_out['show_sig_once'] = false;
+  $leave_out['show_avatar_once'] = false;
+  $leave_out['show_rank_once'] = false;
+  $leave_out['main'] = false;
+  if($postrow[$i]['user_id'] != ANONYMOUS):
+  	reset($already_processed);
+	while( list(, $v) = each($already_processed)):
+        if($v == $postrow[$i]['user_id']):
+        # We've already processed a post by this user on this page
+        global $board_config;
+    	$leave_out['show_sig_once']     = $board_config['show_sig_once'];
+    	$leave_out['show_avatar_once']  = $board_config['show_avatar_once'];
+    	$leave_out['show_rank_once']    = $board_config['show_rank_once'];
+    	$leave_out['main'] = true;
+    	continue 1;
+    	endif;
+    endwhile;
 
-    		if( !$leave_out['main'] )
-    		{
-    			// We're about to process the first post by a user on this page
-    			$already_processed[] = $postrow[$i]['user_id'];
-    		}
-    	}
-/*****[END]********************************************
- [ Mod:     Display Poster Information Once    v2.0.0 ]
- ******************************************************/
-        $poster_id = $postrow[$i]['user_id'];
-        $poster = ( $poster_id == ANONYMOUS ) ? $lang['Guest'] : $postrow[$i]['username'];
+    if(!$leave_out['main'] )
+    # We're about to process the first post by a user on this page
+    $already_processed[] = $postrow[$i]['user_id'];
+    
+ endif;
+    # Mod: Display Poster Information Once v2.0.0 START
+    $poster_id = $postrow[$i]['user_id'];
+    $poster = ( $poster_id == ANONYMOUS ) ? $lang['Guest'] : $postrow[$i]['username'];
 
-        $post_date = create_date($board_config['default_dateformat'], $postrow[$i]['post_time'], $board_config['board_timezone']);
+    $post_date = create_date($board_config['default_dateformat'], $postrow[$i]['post_time'], $board_config['board_timezone']);
 
-        $poster_posts = ( $postrow[$i]['user_id'] != ANONYMOUS ) ? $postrow[$i]['user_posts'] : '';
+    $poster_posts = ( $postrow[$i]['user_id'] != ANONYMOUS ) ? $postrow[$i]['user_posts'] : '';
 
-        $poster_from = ( $postrow[$i]['user_from'] && $postrow[$i]['user_id'] != ANONYMOUS ) ? $lang['Location'] . ': ' . $postrow[$i]['user_from'] : '';
-        // $poster_from = str_replace(".gif", "", $poster_from);
-/*****[BEGIN]******************************************
- [ Mod:     Member Country Flags               v2.0.7 ]
- ******************************************************/
-		    $poster_from_flag = ( $postrow[$i]['user_from_flag'] && $postrow[$i]['user_id'] != ANONYMOUS ) ? '<span class="countries '.str_replace('.png','',$postrow[$i]['user_from_flag']).'" style="float: right;"></span>' : '';
-/*****[END]********************************************
- [ Mod:     Member Country Flags               v2.0.7 ]
- ******************************************************/
-        $poster_joined = ( $postrow[$i]['user_id'] != ANONYMOUS ) ? $postrow[$i]['user_regdate'] : '';
+    $poster_from = ( $postrow[$i]['user_from'] && $postrow[$i]['user_id'] != ANONYMOUS ) ? $lang['Location'] . ': ' . $postrow[$i]['user_from'] : '';
+    // $poster_from = str_replace(".gif", "", $poster_from);
+    
+	# Mod: Member Country Flags               v2.0.7 START
+	$poster_from_flag = ( $postrow[$i]['user_from_flag'] 
+	&& $postrow[$i]['user_id'] != ANONYMOUS ) ? '<span class="countries '.str_replace('.png','',$postrow[$i]['user_from_flag']).'" style="float: right;"></span>' : '';
+	
+    # Mod: Member Country Flags v2.0.7 END
+    $poster_joined = ( $postrow[$i]['user_id'] != ANONYMOUS ) ? $postrow[$i]['user_regdate'] : '';
 
-/*****[BEGIN]******************************************
- [ Mod:     XData                              v1.0.3 ]
- ******************************************************/
-        $poster_xd = ( $postrow[$i]['user_id'] != ANONYMOUS ) ? get_user_xdata($postrow[$i]['user_id']) : array();
-/*****[END]********************************************
- [ Mod:     XData                              v1.0.3 ]
- ******************************************************/
+    # Mod: XData v1.0.3 START
+    $poster_xd = ( $postrow[$i]['user_id'] != ANONYMOUS ) ? get_user_xdata($postrow[$i]['user_id']) : array();
+    # Mod: XData v1.0.3 END
 
     $poster_avatar = '';
-/*****[BEGIN]******************************************
- [ Mod:     View/Disable Avatars/Signatures    v1.1.2 ] 
- [ Mod:     Display Poster Information Once    v2.0.0 ]
- ******************************************************/
-    if ( $postrow[$i]['user_avatar_type'] && $poster_id != ANONYMOUS && $postrow[$i]['user_allowavatar'] && $userdata['user_showavatars'] && !$leave_out['show_avatar_once'])
-/*****[END]********************************************
- [ Mod:     View/Disable Avatars/Signatures    v1.1.2 ]
- [ Mod:     Display Poster Information Once    v2.0.0 ]
- ******************************************************/
-    {
-        switch( $postrow[$i]['user_avatar_type'] ) 
-        {
+
+    # Mod: View/Disable Avatars/Signatures v1.1.2 START 
+    # Mod: Display Poster Information Once v2.0.0 START
+    if($postrow[$i]['user_avatar_type'] && $poster_id != ANONYMOUS && $postrow[$i]['user_allowavatar'] && $userdata['user_showavatars'] && !$leave_out['show_avatar_once']):
+    # Mod: View/Disable Avatars/Signatures v1.1.2 END 
+    # Mod: Display Poster Information Once v2.0.0 END
+    
+        switch($postrow[$i]['user_avatar_type']): 
             case USER_AVATAR_UPLOAD:
                 $poster_avatar = ( $board_config['allow_avatar_upload'] ) 
 				? '<img width="200" class="rounded-corners-forum" src="' . $board_config['avatar_path'] . '/' . $postrow[$i]['user_avatar'] . '" alt="" border="0" />' : '';
                 break; 
-/*****[BEGIN]******************************************
- [ Mod:     Remote Avatar Resize               v2.0.0 ] 
- ******************************************************/
+            # Mod: Remote Avatar Resize v2.0.0 START 
             case USER_AVATAR_REMOTE:
                 $poster_avatar = '<img width="200" class="rounded-corners-forum" src="' . resize_avatar($postrow[$i]['user_avatar']) . '" alt="" border="0" />';
                 break;
-/*****[END]********************************************
- [ Mod:     Remote Avatar Resize               v2.0.0 ]
- ******************************************************/
+            # Mod: Remote Avatar Resize v2.0.0 START 
             case USER_AVATAR_GALLERY:
                 $poster_avatar = ( $board_config['allow_avatar_local'] ) 
 				? '<img width="200" class="rounded-corners-forum" src="' . $board_config['avatar_gallery_path'] . '/' . (($postrow[$i]['user_avatar'] == 'blank.gif' 
 				|| $postrow[$i]['user_avatar'] == 'gallery/blank.gif') ? 'blank.png' : $postrow[$i]['user_avatar']) . '" alt="" border="0" />' : '';
                 break;
-        }
-    }
-/*****[BEGIN]******************************************
- [ Mod:     Default avatar                     v1.1.0 ]
- ******************************************************/
+        endswitch;
+    endif;
+   
+    # Mod: Default avatar v1.1.0 START
     if ((!$poster_avatar) && ($board_config['default_avatar_set'] != 3)){
         if (($board_config['default_avatar_set'] == 0) && ($poster_id == -1) && ($board_config['default_avatar_guests_url'])){
             $poster_avatar = '<img class="forum-avatar" src="' . $board_config['default_avatar_guests_url'] . '" alt="" border="0" />';
