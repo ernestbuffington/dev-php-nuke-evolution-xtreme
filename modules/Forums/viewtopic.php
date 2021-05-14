@@ -1433,44 +1433,32 @@ for($i = 0; $i < $total_posts; $i++)
     endif;
    
     # Mod: Default avatar v1.1.0 START
-    if ((!$poster_avatar) && ($board_config['default_avatar_set'] != 3)){
-        if (($board_config['default_avatar_set'] == 0) && ($poster_id == -1) && ($board_config['default_avatar_guests_url'])){
-            $poster_avatar = '<img class="forum-avatar" src="' . $board_config['default_avatar_guests_url'] . '" alt="" border="0" />';
-        }
-        else if (($board_config['default_avatar_set'] == 1) && ($poster_id != -1) && ($board_config['default_avatar_users_url']) ){
-            $poster_avatar = '<img class="forum-avatar" src="' . $board_config['default_avatar_users_url'] . '" alt="" border="0" />';
-        }
-        else if ($board_config['default_avatar_set'] == 2){
-            if (($poster_id == -1) && ($board_config['default_avatar_guests_url'])){
+    if((!$poster_avatar) && ($board_config['default_avatar_set'] != 3)):
+        if(($board_config['default_avatar_set'] == 0) && ($poster_id == -1) && ($board_config['default_avatar_guests_url'])):
+            $poster_avatar = '<img class="forum-avatar" src="'.$board_config['default_avatar_guests_url'].'" alt="" border="0" />';
+        elseif(($board_config['default_avatar_set'] == 1) && ($poster_id != -1) && ($board_config['default_avatar_users_url'])):
+            $poster_avatar = '<img class="forum-avatar" src="'.$board_config['default_avatar_users_url'].'" alt="" border="0" />';
+        elseif ($board_config['default_avatar_set'] == 2):
+		
+            if(($poster_id == -1) && ($board_config['default_avatar_guests_url']))
                 $poster_avatar = '<img class="forum-avatar" src="' . $board_config['default_avatar_guests_url'] . '" alt="" border="0" />';
-            }
-            else if (($poster_id != -1) && ($board_config['default_avatar_users_url'])){
+            elseif(($poster_id != -1) && ($board_config['default_avatar_users_url']))
                 $poster_avatar = '<img class="forum-avatar" src="' . $board_config['default_avatar_users_url'] . '" alt="" border="0" />';
-            }
-        }
-    }
-/*****[END]********************************************
- [ Mod:     Default avatar                     v1.1.0 ]
- ******************************************************/
+        endif;
+    endif;
+    # Mod: Default avatar v1.1.0 END
+
         $images['default_avatar'] = "modules/Forums/images/avatars/gallery/blank.gif";
         $images['guest_avatar'] = "modules/Forums/images/avatars/gallery/blank.gif";
-        //
-        // Default Avatar MOD - Begin
-        //
-        if ( empty($poster_avatar) && $poster_id != ANONYMOUS)
-        {
-                $poster_avatar = '<img class="forum-avatar" src="'.  $images['default_avatar'] .'" alt="" border="0" />';
-        }
-        if ( $poster_id == ANONYMOUS )
-        {
-                $poster_avatar = '<img class="forum-avatar" src="'.  $images['guest_avatar'] .'" alt="" border="0" />';
-        }
-        //
-        // Default Avatar MOD - End
-        //
-        //
-        // Define the little post icon
-        //
+        
+        # Mod: Default avatar v1.1.0 START
+        if(empty($poster_avatar) && $poster_id != ANONYMOUS)
+        $poster_avatar = '<img class="forum-avatar" src="'.$images['default_avatar'].'" alt="" border="0" />';
+        if($poster_id == ANONYMOUS) 
+        $poster_avatar = '<img class="forum-avatar" src="'.$images['guest_avatar'].'" alt="" border="0" />';
+        # Mod: Default avatar v1.1.0 END
+        
+        # Define the little post icon
         if ( $userdata['session_logged_in'] && $postrow[$i]['post_time'] > $userdata['user_lastvisit'] && $postrow[$i]['post_time'] > $topic_last_read )
         {
             $mini_post_img = $images['icon_minipost_new'];
