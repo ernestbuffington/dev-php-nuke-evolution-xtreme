@@ -593,7 +593,7 @@ $select_post_order .= '<option value="asc">'.$lang['Oldest_First'].'</option><op
 $select_post_order .= '</select>';
 
 
-# Go ahead and pull all data for this fucking topic
+# Go ahead and pull all the data for this fucking topic
  # Mod: Printer Topic v1.0.8 START
  # Mod: Online/Offline/Hidden v2.2.7 START
  # Mod: Member Country Flags v2.0.7 START
@@ -633,22 +633,21 @@ $sql = "SELECT u.username,
 		    pt.bbcode_uid, 
 		u.user_reputation
         
-		FROM (" . POSTS_TABLE . " p, " . USERS_TABLE . " u, " . POSTS_TEXT_TABLE . " pt)
+		FROM (".POSTS_TABLE." p, ".USERS_TABLE." u, ".POSTS_TEXT_TABLE." pt)
         WHERE p.topic_id = '$topic_id'
                 $limit_posts_time
                 AND pt.post_id = p.post_id
                 AND u.user_id = p.poster_id
         ORDER BY p.post_time $post_time_order
         LIMIT $start, ".(isset($finish)? ((($finish - $start) > 0)? ($finish - $start): -$finish): $board_config['posts_per_page']);
-/*****[END]********************************************
- [ Mod:    Birthdays                           v3.0.0 ]
- [ Mod:    Gender                              v1.2.6 ]
- [ Mod:    Multiple Ranks And Staff View       v2.0.3 ]
- [ Mod:    Member Country Flags                v2.0.7 ]
- [ Mod:    Online/Offline/Hidden               v2.2.7 ]
- [ Mod:    Printer Topic                       v1.0.8 ]
- [ Mod:    Users Reputations System            v1.0.0 ]
- ******************************************************/
+ # Mod: Printer Topic v1.0.8 END
+ # Mod: Online/Offline/Hidden v2.2.7 END
+ # Mod: Member Country Flags v2.0.7 END
+ # Mod: Multiple Ranks And Staff View v2.0.3 END
+ # Mod: Gender v1.2.6 END
+ # Mod: Birthdays v3.0.0 END
+ # Mod: Users Reputations System v1.0.0 END
+
 if(!($result = $db->sql_query($sql)))
 message_die(GENERAL_ERROR, "Could not obtain post/user information.", '', __LINE__, __FILE__, $sql);
 
