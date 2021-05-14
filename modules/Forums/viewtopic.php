@@ -689,33 +689,21 @@ if($resync):
    $total_replies = $row['total'];
 endif;
 
-/*****[BEGIN]******************************************
- [ Mod:    Multiple Ranks And Staff View       v2.0.3 ]
- ******************************************************/
+# Mod: Multiple Ranks And Staff View v2.0.3 START
 require_once(NUKE_INCLUDE_DIR.'functions_mg_ranks.'.$phpEx);
 $ranks_sql = query_ranks();
-/*****[END]********************************************
- [ Mod:    Multiple Ranks And Staff View       v2.0.3 ]
- ******************************************************/
+# Mod: Multiple Ranks And Staff View v2.0.3 END
 
-//
-// Define censored word matches
-//
+# Define censored word matches
 $orig_word = array();
 $replacement_word = array();
 obtain_word_list($orig_word, $replacement_word);
 
-//
-// Censor topic title
-//
-if ( count($orig_word) )
-{
-        $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
-}
+# Censor topic title
+if(count($orig_word))
+$topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
 
-//
-// Was a highlight request part of the URI?
-//
+# Was a highlight request part of the URI?
 $highlight_match = $highlight = '';
 if (isset($HTTP_GET_VARS['highlight']))
 {
