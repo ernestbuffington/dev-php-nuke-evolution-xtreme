@@ -1906,9 +1906,9 @@ for($i = 0; $i < $total_posts; $i++)
               $ad_no_groups = explode(",", $board_config['ad_no_groups']);
               $sql = "SELECT 1
                   FROM " . USER_GROUP_TABLE . "
-                  WHERE user_id=" . $userdata['user_id'] . " AND (group_id=0";
+                  WHERE user_id=".$userdata['user_id']." AND (group_id=0";
 		      for ($a=0; $a < count($ad_no_groups); $a++):
-              $sql .= " OR group_id=" . $ad_no_groups[$a];
+              $sql .= " OR group_id=".$ad_no_groups[$a];
               endfor;
               $sql .= ")";
 		      if(!($result = $db->sql_query($sql)))
@@ -1918,8 +1918,9 @@ for($i = 0; $i < $total_posts; $i++)
           endif;
 		  
 		  if ($userdata['user_id'] != ANONYMOUS && ($board_config['ad_post_threshold'] != '') && ($userdata['user_posts'] >= $board_config['ad_post_threshold']))
-             $display_ad = false;
-       endif;
+          $display_ad = false;
+        
+		endif;
 	  
         # check once more, for server performance
         if ($display_ad):
@@ -1966,171 +1967,122 @@ for($i = 0; $i < $total_posts; $i++)
              $xd_block[$code_name] = $value;
          endif;
        endwhile;
-       # Mod: XData v1.0.3 START
+       # Mod: XData v1.0.3 END
 
-/*****[BEGIN]******************************************
- [ Mod:     Super Quick Reply                  v1.3.2 ]
- ******************************************************/
+       # Mod: Super Quick Reply v1.3.2 START
        /* if ( $show_qr_form )
         {
              $poster = '<a href="javascript:pn(\''.$poster.'\');">'.$poster.'</a>'; 
         }*/
-/*****[END]********************************************
- [ Mod:     Super Quick Reply                  v1.3.2 ]
- ******************************************************/
+       # Mod: Super Quick Reply v1.3.2 END
 
-/*****[BEGIN]******************************************
- [ Mod:     Report Posts                       v1.0.2 ]
- ******************************************************/
-    if ( $userdata['session_logged_in'] )
-    {
-        $report_url = append_sid('viewtopic.'.$phpEx.'?report=true&amp;' . POST_POST_URL . '=' . $postrow[$i]['post_id']);
-        $report_img = '<a href="' . append_sid('viewtopic.'.$phpEx.'?report=true&amp;' . POST_POST_URL . '=' . $postrow[$i]['post_id']) . '"><img src="' . $images['icon_report'] . '" border="0" alt="' . $lang['Report_post'] . '" title="' . $lang['Report_post'] . '" /></a>';
-        $report_alt = $lang['Report_post'];
-    }
-    else
-    {
-        $report_url = '';
-        $report_img = '';
-        $report_alt = '';
-    }
+       # Mod: Report Posts v1.0.2 START
+       if($userdata['session_logged_in']):
+          $report_url = append_sid('viewtopic.'.$phpEx.'?report=true&amp;'.POST_POST_URL.'='.$postrow[$i]['post_id']);
+          $report_img = '<a href="'.append_sid('viewtopic.'.$phpEx.'?report=true&amp;'.POST_POST_URL.'='.$postrow[$i]['post_id']).'"><img 
+		  src="'.$images['icon_report'].'" border="0" alt="'.$lang['Report_post'].'" title="'.$lang['Report_post'].'" /></a>';
+          $report_alt = $lang['Report_post'];
+       else:
+          $report_url = '';
+          $report_img = '';
+          $report_alt = '';
+       endif;
 
-    /*--FNA #3--*/
-
-/*****[BEGIN]******************************************
- [ Mod:     Force Topic Read                   v1.0.3 ]
- ******************************************************/
-	if ( (!$userdata['user_ftr']) && ($userdata['user_id'] != ANONYMOUS) )
-	{
-		// They Have Clicked The Link & Are Viewing The Post, So Set Them As Read
-		if ($HTTP_GET_VARS['directed'] == 'ftr')
-		{
+       # Mod: Force Topic Read v1.0.3 START
+	   if((!$userdata['user_ftr']) && ($userdata['user_id'] != ANONYMOUS)):
+		  # They Have Clicked The Link & Are Viewing The Post, So Set Them As Read
+		  if ($HTTP_GET_VARS['directed'] == 'ftr'):
 			$q = "UPDATE ". USERS_TABLE ."
-				  SET user_ftr = '1', user_ftr_time = '". time() ."'
-				  WHERE user_id = '". $userdata['user_id'] ."'";
+				  SET user_ftr = '1', user_ftr_time = '".time()."'
+				  WHERE user_id = '".$userdata['user_id']."'";
 			$db->sql_query($q);
-		}
-		// They Have Not Clicked The Link Yet
-		else
-		{
-			include_once($phpbb_root_path .'language/lang_'. $board_config['default_lang'] .'/lang_ftr.'. $phpEx);		
+		  else: # They Have Not Clicked The Link Yet
+			include_once($phpbb_root_path.'language/lang_'.$board_config['default_lang'].'/lang_ftr.'.$phpEx);		
 			$force_message = $board_config['ftr_msg'];
 			$topic 		 = $board_config['ftr_topic'];
 			$installed 	 = $board_config['ftr_installed'];
 			$who		 = $board_config['ftr_who'];
 			$active		 = $board_config['ftr_active'];
-			
-			// Its On, Goto Work
-			if ($active == 1)
-			{
+			# Its On, Goto Work
+			if ($active == 1):
 				$q = "SELECT topic_title
-					  FROM ". TOPICS_TABLE ."
-					  WHERE topic_id = '". $topic ."'";
+					  FROM ".TOPICS_TABLE."
+					  WHERE topic_id = '".$topic."'";
 				$r 		= $db->sql_query($q);
 				$row 	= $db->sql_fetchrow($r);
 				$topic_title = $row['topic_title'];
-				
 				$msg = str_replace('*u*', $userdata['username'], $force_message);
 				$msg = str_replace('*t*', $topic_title, $msg);
-				$msg = str_replace('*l*', '<a href="'. append_sid('viewtopic.'. $phpEx .'?'. POST_TOPIC_URL .'='. $topic .'&amp;directed=ftr') .'" target="_self">'. $lang['ftr_here'] .'</a>', $msg);
-				
-				// New Only
-				if ($who == 1)
-				{
-					// They Have Joined Since FTR Was Installed
-					if ($userdata['user_regdate'] > $installed)
-					{
-						message_die(GENERAL_MESSAGE, $msg);
-					}
-				}
-				// New & Old
-				else
-				{
+				$msg = str_replace('*l*', '<a href="'.append_sid('viewtopic.'.$phpEx.'?'.POST_TOPIC_URL.'='.$topic.'&amp;directed=ftr').'" target="_self">'.$lang['ftr_here'].'</a>', $msg);
+				# New Only
+				if($who == 1):
+					# They Have Joined Since FTR Was Installed
+					if ($userdata['user_regdate'] > $installed):
 					message_die(GENERAL_MESSAGE, $msg);
-				}
-			}
-		}
-	}
-/*****[END]********************************************
- [ Mod:     Force Topic Read                   v1.0.3 ]
- ******************************************************/
+					endif;
+				else: # New & Old
+				message_die(GENERAL_MESSAGE, $msg);
+				endif;
+			endif;
+		 endif;
+	   endif;
+       # Mod: Force Topic Read v1.0.3 END
 
-/*****[BEGIN]******************************************
- [ Mod:     XData                              v1.0.3 ]
- ******************************************************/
+       # Mod: XData v1.0.3 START
         $template->assign_block_vars('postrow',array_merge( array(
                 'REPORT_URL' => $report_url,
                 'REPORT_IMG' => $report_img,
                 'REPORT_ALT' => $report_alt,
-/*****[END]********************************************
- [ Mod:     Report Posts                       v1.0.2 ]
- ******************************************************/
+				
+                # Mod: Report Posts v1.0.2 START
                 'ROW_COLOR' => '#' . $row_color,
                 'ROW_CLASS' => $row_class,
-/*****[BEGIN]******************************************
- [ Mod:    Advanced Username Color             v1.0.5 ]
- ******************************************************/
+                
+				# Mod: Advanced Username Color v1.0.5 START
                 'POSTER_NAME' => UsernameColor($poster),
-/*****[END]********************************************
- [ Mod:    Advanced Username Color             v1.0.5 ]
- ******************************************************/
-/*****[BEGIN]******************************************
- [ Mod:    Gender                              v1.2.6 ]
- ******************************************************/
+                # Mod: Advanced Username Color v1.0.5 END
+
+                # Mod: Gender v1.2.6 START
                 'POSTER_GENDER' => $gender_image,
-/*****[END]********************************************
- [ Mod:    Gender                              v1.2.6 ]
- ******************************************************/
-/*****[BEGIN]******************************************
- [ Mod:    Multiple Ranks And Staff View       v2.0.3 ]
- ******************************************************/
-        				'USER_RANK_01' => $user_rank_01,
-        				'USER_RANK_01_IMG' => $user_rank_01_img,
-        				'USER_RANK_02' => $user_rank_02,
-        				'USER_RANK_02_IMG' => $user_rank_02_img,
-        				'USER_RANK_03' => $user_rank_03,
-        				'USER_RANK_03_IMG' => $user_rank_03_img,
-        				'USER_RANK_04' => $user_rank_04,
-        				'USER_RANK_04_IMG' => $user_rank_04_img,
-        				'USER_RANK_05' => $user_rank_05,
-        				'USER_RANK_05_IMG' => $user_rank_05_img,
-/*****[END]********************************************
- [ Mod:    Multiple Ranks And Staff View       v2.0.3 ]
- ******************************************************/
+                # Mod: Gender v1.2.6 END
+
+                # Mod: Multiple Ranks And Staff View v2.0.3 START
+        		'USER_RANK_01' => $user_rank_01,
+        		'USER_RANK_01_IMG' => $user_rank_01_img,
+        		'USER_RANK_02' => $user_rank_02,
+        		'USER_RANK_02_IMG' => $user_rank_02_img,
+        		'USER_RANK_03' => $user_rank_03,
+        		'USER_RANK_03_IMG' => $user_rank_03_img,
+        		'USER_RANK_04' => $user_rank_04,
+        		'USER_RANK_04_IMG' => $user_rank_04_img,
+        		'USER_RANK_05' => $user_rank_05,
+        		'USER_RANK_05_IMG' => $user_rank_05_img,
+                # Mod: Multiple Ranks And Staff View v2.0.3 END
+
                 'POSTER_JOINED' => $poster_joined,
-/*****[BEGIN]******************************************
- [ Mod:    Birthdays                           v3.0.0 ]
- ******************************************************/
-				        'POSTER_AGE' => ( $age !== false ) ? sprintf($lang['Age'], $age) : '',
-/*****[END]********************************************
- [ Mod:    Birthdays                           v3.0.0 ]
- ******************************************************/
+                
+				# Mod: Birthdays v3.0.0 START
+				'POSTER_AGE' => ($age !== false) ? sprintf($lang['Age'], $age) : '',
+				# Mod: Birthdays v3.0.0 END
+
                 'POSTER_POSTS' => $poster_posts,
                 'POSTER_FROM' => $poster_from,
-/*****[BEGIN]******************************************
- [ Mod:     Users Reputations Systems          v1.0.0 ]
- ******************************************************/
+                
+				# Mod: Users Reputations Systems v1.0.0 START
                 'REPUTATION_ADD' => $reputation_add,
                 'REPUTATION' => $reputation,
-/*****[END]********************************************
- [ Mod:     Users Reputations System           v1.0.0 ]
- ******************************************************/				
-/*****[BEGIN]******************************************
- [ Mod:     Member Country Flags               v2.0.7 ]
- ******************************************************/
-				        'POSTER_FROM_FLAG' => $poster_from_flag,
-/*****[END]********************************************
- [ Mod:     Member Country Flags               v2.0.7 ]
- ******************************************************/
+				# Mod: Users Reputations Systems v1.0.0 END
+
+                # Mod: Member Country Flags v2.0.7 START
+				'POSTER_FROM_FLAG' => $poster_from_flag,
+                # Mod: Member Country Flags v2.0.7 END
+
                 'POSTER_AVATAR' => $poster_avatar,
-/*****[BEGIN]******************************************
- [ Mod:    Online/Offline/Hidden               v2.2.7 ]
- ******************************************************/
+
+                # Mod: Online/Offline/Hidden v2.2.7 START
                 'POSTER_ONLINE_STATUS_IMG' => $online_status_img,
                 'POSTER_ONLINE_STATUS' => $online_status,
-/*****[END]********************************************
- [ Mod:    Online/Offline/Hidden               v2.2.7 ]
- ******************************************************/
+                # Mod: Online/Offline/Hidden v2.2.7 END
 
 /*****[BEGIN]******************************************
  [ Mod:    Printer Topic                       v1.0.8 ]
