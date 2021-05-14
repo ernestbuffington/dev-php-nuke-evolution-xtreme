@@ -66,141 +66,96 @@
       Who viewed a topic                       v1.0.3
  ************************************************************************/
 
-if (!defined('MODULE_FILE')) {
-   die ("You can't access this file directly...");
-}
+if (!defined('MODULE_FILE')) die ("You can't access this file directly...");
 
-if ((!(isset($popup)) OR ($popup != "1")) && !isset($HTTP_GET_VARS['printertopic']))
-{
+if((!(isset($popup)) OR ($popup != "1")) && !isset($HTTP_GET_VARS['printertopic'])):
     $module_name = basename(dirname(__FILE__));
     require("modules/".$module_name."/nukebb.php");
-}
-else
-{
+else:
     $phpbb_root_path = NUKE_FORUMS_DIR;
-}
+endif;
 
 define('IN_PHPBB', true);
 include($phpbb_root_path . 'extension.inc');
 include($phpbb_root_path . 'common.'.$phpEx);
-/*****[BEGIN]******************************************
- [ Mod:     Super Quick Reply                  v1.3.2 ]
- ******************************************************/
+
+# Mod: Super Quick Reply v1.3.2 START
 include("includes/functions_post.php");
-/*****[END]********************************************
- [ Mod:     Super Quick Reply                  v1.3.2 ]
- ******************************************************/
+# Mod: Super Quick Reply v1.3.2 END
+
 include_once("includes/bbcode.php");
-/*****[BEGIN]******************************************
- [ Mod:     Users Reputations Systems          v1.0.0 ]
- ******************************************************/
+
+# Mod: Users Reputations Systems v1.0.0 START
 include($phpbb_root_path . 'reputation_common.'.$phpEx);
 include('includes/functions_reputation.'.$phpEx);
-/*****[END]********************************************
- [ Mod:     Users Reputations System           v1.0.0 ]
- ******************************************************/
-/*****[BEGIN]******************************************
- [ Mod:     Post Icons                         v1.0.1 ]
- ******************************************************/
-include('includes/posting_icons.'. $phpEx);
-/*****[END]********************************************
- [ Mod:     Post Icons                         v1.0.1 ]
- ******************************************************/
+# Mod: Users Reputations Systems v1.0.0 END
 
-//
-// Start initial var setup
-//
+# Mod: Post Icons v1.0.1 START
+include('includes/posting_icons.'. $phpEx);
+# Mod: Post Icons v1.0.1 END
+
+# Start initial var setup
 $topic_id = $post_id = 0;
-if ( isset($HTTP_GET_VARS[POST_TOPIC_URL]) )
-{
-        $topic_id = intval($HTTP_GET_VARS[POST_TOPIC_URL]);
-}
-else if ( isset($HTTP_GET_VARS['topic']) )
-{
-        $topic_id = intval($HTTP_GET_VARS['topic']);
-}
+if(isset($HTTP_GET_VARS[POST_TOPIC_URL]))
+$topic_id = intval($HTTP_GET_VARS[POST_TOPIC_URL]);
+elseif( isset($HTTP_GET_VARS['topic']))
+$topic_id = intval($HTTP_GET_VARS['topic']);
 
 $reply_topic_id = $topic_id;
 
-if ( isset($HTTP_GET_VARS[POST_POST_URL]))
-{
-        $post_id = intval($HTTP_GET_VARS[POST_POST_URL]);
-}
+if(isset($HTTP_GET_VARS[POST_POST_URL]))
+$post_id = intval($HTTP_GET_VARS[POST_POST_URL]);
 
-if ( $HTTP_GET_VARS['page'] ):
-	$start = ( isset($HTTP_GET_VARS['page']) ) ? intval($HTTP_GET_VARS['page']) : 0;
+if($HTTP_GET_VARS['page']):
+$start = (isset($HTTP_GET_VARS['page']) ) ? intval($HTTP_GET_VARS['page']) : 0;
 else:
-	$start = ( isset($HTTP_GET_VARS['start']) ) ? intval($HTTP_GET_VARS['start']) : 0;
+$start = (isset($HTTP_GET_VARS['start']) ) ? intval($HTTP_GET_VARS['start']) : 0;
 endif;
 $start = ($start < 0) ? 0 : $start;
 
-// $calc           = $board_config['topics_per_page'] * $page;
-// $start          = $calc - $board_config['topics_per_page'];
+# $calc           = $board_config['topics_per_page'] * $page;
+# $start          = $calc - $board_config['topics_per_page'];
 
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+# Mod: Printer Topic v1.0.8 START
 if(isset($HTTP_GET_VARS['printertopic']))
 {
     $start = ( isset($HTTP_GET_VARS['start_rel']) ) && ( isset($HTTP_GET_VARS['printertopic']) ) ? intval($HTTP_GET_VARS['start_rel']) - 1 : $start;
-    // $finish when positive indicates last message; when negative it indicates range; can't be 0
+	# $finish when positive indicates last message; when negative it indicates range; can't be 0
     if(isset($HTTP_GET_VARS['finish_rel']))
-    {
-        $finish = intval($HTTP_GET_VARS['finish_rel']);
-    }
+    $finish = intval($HTTP_GET_VARS['finish_rel']);
     if(($finish >= 0) && (($finish - $start) <=0))
-    {
     unset($finish);
-    }
 }
-/*****[END]********************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+# Mod: Printer Topic v1.0.8 END
 
 if (!$topic_id && !$post_id)
-{
-        message_die(GENERAL_MESSAGE, 'Topic_post_not_exist');
-}
+message_die(GENERAL_MESSAGE, 'Topic_post_not_exist');
 
-//
-// Find topic id if user requested a newer
-// or older topic
-//
+# Find topic id if user requested a newer
+# or older topic
+if(isset($HTTP_GET_VARS['view']) && empty($HTTP_GET_VARS[POST_POST_URL])):
 
-if ( isset($HTTP_GET_VARS['view']) && empty($HTTP_GET_VARS[POST_POST_URL]) )
-{
-   if ( $HTTP_GET_VARS['view'] == 'newest' )
-
-   {
-      if ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_sid']) || isset($HTTP_GET_VARS['sid']) )
-      {
+   if($HTTP_GET_VARS['view'] == 'newest'):
+   
+      if(isset($HTTP_COOKIE_VARS[$board_config['cookie_name'].'_sid']) || isset($HTTP_GET_VARS['sid'])):
+      
          $session_id = isset($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_sid']) ? $HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_sid'] : $HTTP_GET_VARS['sid'];
 
          if (!preg_match('/^[A-Za-z0-9]*$/', $session_id))
-         {
-            $session_id = '';
-         }
+         $session_id = '';
 
-         if ( $session_id )
-         {
-/*****[BEGIN]******************************************
- [ Mod:     'View Newest Post'-Fix             v1.0.2 ]
- ******************************************************/
+         if($session_id):
+         
+            # Mod: 'View Newest Post'-Fix v1.0.2 START
             $tracking_topics = ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) ) ? unserialize($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_t']) : array();
             $tracking_forums = ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_f']) ) ? unserialize($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_f']) : array();
 
-            if ( !empty($tracking_topics[$topic_id]) && !empty($tracking_forums[$forum_id]) )
-            {
-               $topic_last_read = ( $tracking_topics[$topic_id] > $tracking_forums[$forum_id] ) ? $tracking_topics[$topic_id] : $tracking_forums[$forum_id];
-            }
-            else if ( !empty($tracking_topics[$topic_id]) || !empty($tracking_forums[$forum_id]) )
-            {
-               $topic_last_read = ( !empty($tracking_topics[$topic_id]) ) ? $tracking_topics[$topic_id] : $tracking_forums[$forum_id];
-            }
+            if(!empty($tracking_topics[$topic_id]) && !empty($tracking_forums[$forum_id]))
+            $topic_last_read = ( $tracking_topics[$topic_id] > $tracking_forums[$forum_id] ) ? $tracking_topics[$topic_id] : $tracking_forums[$forum_id];
+            elseif(!empty($tracking_topics[$topic_id]) || !empty($tracking_forums[$forum_id]))
+            $topic_last_read = ( !empty($tracking_topics[$topic_id]) ) ? $tracking_topics[$topic_id] : $tracking_forums[$forum_id];
             else
-            {
-               $topic_last_read = 'u.user_lastvisit';
-            }
+            $topic_last_read = 'u.user_lastvisit';
 
             $sql = "SELECT p.post_id, p.post_time
             FROM (" . POSTS_TABLE . " p, " . SESSIONS_TABLE . " s,  " . USERS_TABLE . " u)
@@ -210,45 +165,32 @@ if ( isset($HTTP_GET_VARS['view']) && empty($HTTP_GET_VARS[POST_POST_URL]) )
             AND p.post_time >= " . $topic_last_read . "
             LIMIT 1";
 
-            if ( !($result = $db->sql_query($sql)) )
-            {
-               message_die(GENERAL_ERROR, 'Could not obtain newer/older topic information', '', __LINE__, __FILE__, $sql);
-            }
+            if(!($result = $db->sql_query($sql)))
+            message_die(GENERAL_ERROR, 'Could not obtain newer/older topic information', '', __LINE__, __FILE__, $sql);
 
-            if ( !($row = $db->sql_fetchrow($result)) )
-            {
+            if(!($row = $db->sql_fetchrow($result))):
                $sql = "SELECT topic_last_post_id as post_id FROM " . TOPICS_TABLE . " WHERE topic_id = " . intval($topic_id);
-               if ( !($result = $db->sql_query($sql)) )
-               {
-                  message_die(GENERAL_ERROR, 'Could not obtain newer/older topic information', '', __LINE__, __FILE__, $sql);
-               }
+               if(!($result = $db->sql_query($sql)))
+               message_die(GENERAL_ERROR, 'Could not obtain newer/older topic information', '', __LINE__, __FILE__, $sql);
 
-               if ( !($row = $db->sql_fetchrow($result)) )
-               {
-                  message_die(GENERAL_MESSAGE, 'No_new_posts_last_visit');
-               }
-            }
-/*****[END]********************************************
- [ Mod:     'View Newest Post'-Fix             v1.0.2 ]
- ******************************************************/
+               if(!($row = $db->sql_fetchrow($result)))
+               message_die(GENERAL_MESSAGE, 'No_new_posts_last_visit');
+            endif;
+            # Mod: 'View Newest Post'-Fix v1.0.2 END
 
             $post_id = $row['post_id'];
 
-            if (isset($HTTP_GET_VARS['sid']))
-            {
-               redirect(append_sid("viewtopic.$phpEx?sid=$session_id&" . POST_POST_URL . "=$post_id#$post_id", true));
-            }
+            if(isset($HTTP_GET_VARS['sid']))
+            redirect(append_sid("viewtopic.$phpEx?sid=$session_id&".POST_POST_URL."=$post_id#$post_id",true));
             else
-            {
-               redirect(append_sid("viewtopic.$phpEx?" . POST_POST_URL . "=$post_id#$post_id", true));
-            }
-         }
-      }
+            redirect(append_sid("viewtopic.$phpEx?".POST_POST_URL ."=$post_id#$post_id",true));
+         endif;
+      endif;
 
-      redirect(append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id", true));
-   }
-   else if ( $HTTP_GET_VARS['view'] == 'next' || $HTTP_GET_VARS['view'] == 'previous' )
-   {
+      redirect(append_sid("viewtopic.$phpEx?".POST_TOPIC_URL."=$topic_id",true));
+   
+   elseif($HTTP_GET_VARS['view'] == 'next' || $HTTP_GET_VARS['view'] == 'previous'):
+   
       $sql_condition = ( $HTTP_GET_VARS['view'] == 'next' ) ? '>' : '<';
       $sql_ordering = ( $HTTP_GET_VARS['view'] == 'next' ) ? 'ASC' : 'DESC';
 
@@ -261,149 +203,150 @@ if ( isset($HTTP_GET_VARS['view']) && empty($HTTP_GET_VARS[POST_POST_URL]) )
       AND t.topic_last_post_id $sql_condition t2.topic_last_post_id
       ORDER BY t.topic_last_post_id $sql_ordering
       LIMIT 1";
-      if ( !($result = $db->sql_query($sql)) )
-      {
-         message_die(GENERAL_ERROR, "Could not obtain newer/older topic information", '', __LINE__, __FILE__, $sql);
-      }
+      
+	  if(!($result = $db->sql_query($sql)))
+      message_die(GENERAL_ERROR, "Could not obtain newer/older topic information", '', __LINE__, __FILE__, $sql);
 
-      if ( $row = $db->sql_fetchrow($result) )
-      {
-         $topic_id = intval($row['topic_id']);
-      }
-      else
-      {
+      if ( $row = $db->sql_fetchrow($result)):
+      $topic_id = intval($row['topic_id']);
+      else:
          $message = ( $HTTP_GET_VARS['view'] == 'next' ) ? 'No_newer_topics' : 'No_older_topics';
          message_die(GENERAL_MESSAGE, $message);
-      }
-   }
-}
+      endif;
+   endif;
+endif;
 
-//
-// This rather complex gaggle of code handles querying for topics but
-// also allows for direct linking to a post (and the calculation of which
-// page the post is on and the correct display of viewtopic)
-//
-$join_sql_table = (!$post_id) ? '' : ", " . POSTS_TABLE . " p, " . POSTS_TABLE . " p2 ";
+
+# This rather complex gaggle of code handles querying for topics but
+# also allows for direct linking to a post (and the calculation of which
+# page the post is on and the correct display of viewtopic)
+$join_sql_table = (!$post_id) ? '' : ", ".POSTS_TABLE." p, ".POSTS_TABLE." p2 ";
+
 $join_sql = (!$post_id) ? "t.topic_id = '$topic_id'" : "p.post_id = '$post_id' AND t.topic_id = p.topic_id AND p2.topic_id = p.topic_id AND p2.post_id <= '$post_id'";
+
 $count_sql = (!$post_id) ? '' : ", COUNT(p2.post_id) AS prev_posts";
 
-$order_sql = (!$post_id) ? '' : "GROUP BY p.post_id, t.topic_id, t.topic_title, t.topic_status, t.topic_replies, t.topic_time, t.topic_type, t.topic_vote, t.topic_last_post_id, f.forum_name, f.forum_status, f.forum_id, f.auth_view, f.auth_read, f.auth_post, f.auth_reply, f.auth_edit, f.auth_delete, f.auth_sticky, f.auth_announce, f.auth_pollcreate, f.auth_vote, f.auth_attachments ORDER BY p.post_id ASC";
+$order_sql = (!$post_id) ? '' : "GROUP BY p.post_id, 
+                                         t.topic_id, 
+									  t.topic_title, 
+									 t.topic_status, 
+									t.topic_replies, 
+									   t.topic_time, 
+									   t.topic_type, 
+									   t.topic_vote, 
+							   t.topic_last_post_id, 
+							           f.forum_name, 
+									 f.forum_status, 
+									     f.forum_id, 
+										f.auth_view, 
+										f.auth_read, 
+										f.auth_post, 
+									   f.auth_reply, 
+									    f.auth_edit, 
+									  f.auth_delete, 
+									  f.auth_sticky, 
+									f.auth_announce, 
+								  f.auth_pollcreate, 
+								        f.auth_vote, 
+								 f.auth_attachments ORDER BY p.post_id ASC";
 
-$sql = "SELECT t.topic_id, t.topic_title, t.topic_status, t.topic_replies, t.topic_time, t.topic_type, t.topic_vote, t.topic_last_post_id, t.topic_poster, f.forum_name, f.forum_status, f.forum_password, f.forum_id, f.auth_view, f.auth_read, f.auth_post, f.auth_reply, f.auth_edit, f.auth_delete, f.auth_sticky, f.auth_announce, f.auth_pollcreate, f.auth_vote, f.auth_attachments" . $count_sql . "
-        FROM " . TOPICS_TABLE . " t, " . FORUMS_TABLE . " f" . $join_sql_table . "
-        WHERE $join_sql
-                AND f.forum_id = t.forum_id
-                $order_sql";
-/*****[BEGIN]******************************************
- [ Mod:    Attachment Mod                      v2.4.1 ]
- ******************************************************/
+$sql = "SELECT t.topic_id, 
+            t.topic_title, 
+		   t.topic_status, 
+		  t.topic_replies, 
+		     t.topic_time, 
+			 t.topic_type, 
+			 t.topic_vote, 
+	 t.topic_last_post_id, 
+	       t.topic_poster, 
+		     f.forum_name, 
+		   f.forum_status, 
+		 f.forum_password, 
+		       f.forum_id, 
+			  f.auth_view, 
+			  f.auth_read, 
+			  f.auth_post, 
+			 f.auth_reply, 
+			  f.auth_edit, 
+			f.auth_delete, 
+			f.auth_sticky, 
+		  f.auth_announce, 
+		f.auth_pollcreate, 
+		      f.auth_vote, 
+	   f.auth_attachments ".$count_sql." FROM ".TOPICS_TABLE." t, ".FORUMS_TABLE." f".$join_sql_table." WHERE $join_sql AND f.forum_id = t.forum_id $order_sql";
+				
+# Mod: Attachment Mod v2.4.1 START
 attach_setup_viewtopic_auth($order_sql, $sql);
-/*****[END]********************************************
- [ Mod:    Attachment Mod                      v2.4.1 ]
- ******************************************************/
-if ( !($result = $db->sql_query($sql)) )
-{
-        message_die(GENERAL_ERROR, "Could not obtain topic information", '', __LINE__, __FILE__, $sql);
-}
+# Mod: Attachment Mod v2.4.1 END
+
+if(!($result = $db->sql_query($sql)))
+message_die(GENERAL_ERROR, "Could not obtain topic information", '', __LINE__, __FILE__, $sql);
 
 if ( !($forum_topic_data = $db->sql_fetchrow($result)) )
-{
-        message_die(GENERAL_MESSAGE, 'Topic_post_not_exist');
-}
+message_die(GENERAL_MESSAGE, 'Topic_post_not_exist');
 
 $forum_id = intval($forum_topic_data['forum_id']);
-/*****[START]******************************************
- [ Base:    Who viewed a topic                 v1.0.3 ]
- ******************************************************/
+
+# Base: Who viewed a topic v1.0.3 START
 $topic_id = intval($forum_topic_data['topic_id']);
-/*****[END]********************************************
- [ Base:    Who viewed a topic                 v1.0.3 ]
- ******************************************************/
+# Base: Who viewed a topic v1.0.3 END
 
-/*****[BEGIN]******************************************
- [ Mod:    Thank You Mod                       v1.1.8 ]
- ******************************************************/
-	// Check if the Thanks feature is active for this forum
+# Mod: Thank You Mod v1.1.8 START
+# Check if the Thanks feature is active for this forum
 $sql = "SELECT `forum_thank` 
-		FROM " . FORUMS_TABLE . " 
-		WHERE  forum_id =$forum_id";
+		FROM ".FORUMS_TABLE." 
+		WHERE forum_id =$forum_id";
+		
 if ( !($result = $db->sql_query($sql)) )
-{
-	message_die(GENERAL_ERROR, "Could not obtain forum information", '', __LINE__, __FILE__, $sql);
-}
+message_die(GENERAL_ERROR, "Could not obtain forum information", '', __LINE__, __FILE__, $sql);
+
 if ( !($forum_thank_result = $db->sql_fetchrow($result)) )
-{
-	message_die(GENERAL_MESSAGE, $lang['thank_no_exist']);
-}
-	// Setting if feature is active or not 
+message_die(GENERAL_MESSAGE, $lang['thank_no_exist']);
 
-	$show_thanks = ($forum_thank_result['forum_thank'] == FORUM_THANKABLE) ? FORUM_THANKABLE : FORUM_UNTHANKABLE;
-/*****[END]********************************************
- [ Mod:    Thank You Mod                       v1.1.8 ]
- ******************************************************/
+# Setting if feature is active or not 
 
-//
-// Start session management
-//
+$show_thanks = ($forum_thank_result['forum_thank'] == FORUM_THANKABLE) ? FORUM_THANKABLE : FORUM_UNTHANKABLE;
+# Mod: Thank You Mod v1.1.8 END
+
+# Start session management
 $userdata = session_pagestart($user_ip, $forum_id);
 init_userprefs($userdata);
-//
-// End session management
-//
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+# End session management
+
+# Mod: Printer Topic v1.0.8 START
 if(!file_exists(@phpbb_realpath($phpbb_root_path . 'language/lang_' . $board_config['default_lang'] . '/lang_printertopic.'.$phpEx)))
-{
-    include($phpbb_root_path . 'language/lang_english/lang_printertopic.' . $phpEx);
-} else
-{
-    include($phpbb_root_path . 'language/lang_' . $board_config['default_lang'] . '/lang_printertopic.' . $phpEx);
-}
-/*****[END]********************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
-//
-// Start auth check
-//
+include($phpbb_root_path . 'language/lang_english/lang_printertopic.' . $phpEx);
+else
+include($phpbb_root_path . 'language/lang_' . $board_config['default_lang'] . '/lang_printertopic.' . $phpEx);
+# Mod: Printer Topic v1.0.8 END
+
+
+# auth check START
 $is_auth = array();
 $is_auth = auth(AUTH_ALL, $forum_id, $userdata, $forum_topic_data);
-
-if( !$is_auth['auth_view'] || !$is_auth['auth_read'] )
-{
-        if ( !$userdata['session_logged_in'] )
-        {
-                $redirect = ($post_id) ? POST_POST_URL . "=$post_id" : POST_TOPIC_URL . "=$topic_id";
-                $redirect .= ($start) ? "&start=$start" : '';
-                $header_location = ( @preg_match("/Microsoft|WebSTAR|Xitami/", $_SERVER["SERVER_SOFTWARE"]) ) ? "Refresh: 0; URL=" : "Location: ";
-                redirect(append_sid("modules.php?name=Your_Account&redirect=viewtopic&$redirect", true));
-                exit;
-        }
-
+if( !$is_auth['auth_view'] || !$is_auth['auth_read']):
+  if(!$userdata['session_logged_in']):
+     $redirect = ($post_id) ? POST_POST_URL . "=$post_id" : POST_TOPIC_URL . "=$topic_id";
+     $redirect .= ($start) ? "&start=$start" : '';
+     $header_location = ( @preg_match("/Microsoft|WebSTAR|Xitami/", $_SERVER["SERVER_SOFTWARE"]) ) ? "Refresh: 0; URL=" : "Location: ";
+     redirect(append_sid("modules.php?name=Your_Account&redirect=viewtopic&$redirect", true));
+     exit;
+  endif;
         $message = ( !$is_auth['auth_view'] ) ? $lang['Topic_post_not_exist'] : sprintf($lang['Sorry_auth_read'], $is_auth['auth_read_type']);
-
         message_die(GENERAL_MESSAGE, $message);
-}
-//
-// End auth check
-//
+endif;
+# auth check END
 
-/*****[START]******************************************
- [ Base:    Who viewed a topic                 v1.0.3 ]
- ******************************************************/
+# Base: Who viewed a topic v1.0.3 START
 $user_id=$userdata['user_id'];
 $sql='UPDATE '.TOPIC_VIEW_TABLE.' SET topic_id="'.$topic_id.'", view_time="'.time().'", view_count=view_count+1 WHERE topic_id='.$topic_id.' AND user_id='.$user_id;
 if ( !$db->sql_query($sql) || !$db->sql_affectedrows() )
 {
     $sql = 'INSERT IGNORE INTO '.TOPIC_VIEW_TABLE.' (topic_id, user_id, view_time,view_count) VALUES ('.$topic_id.', "'.$user_id.'", "'.time().'","1")';
     if ( !($db->sql_query($sql)) )
-    {
-        message_die(CRITICAL_ERROR, 'Error create user view topic information ', '', __LINE__, __FILE__, $sql);
-    }
+    message_die(CRITICAL_ERROR, 'Error create user view topic information ', '', __LINE__, __FILE__, $sql);
 }
-/*****[END]********************************************
- [ Base:    Who viewed a topic                 v1.0.3 ]
- ******************************************************/
+# Base: Who viewed a topic v1.0.3 END
 
 /**
  *  @since 2.0.9e001
@@ -416,71 +359,49 @@ $topic_title = $forum_topic_data['topic_title'];
 $topic_id = intval($forum_topic_data['topic_id']);
 $reply_topic_id = $topic_id;
 $topic_time = $forum_topic_data['topic_time'];
-//
-// Password check
-//
-if( !$is_auth['auth_mod'] && $userdata['user_level'] != ADMIN )
-{
+
+# Password check START
+if( !$is_auth['auth_mod'] && $userdata['user_level'] != ADMIN ):
 	$redirect = str_replace("&amp;", "&", preg_replace('#.*?([a-z]+?\.' . $phpEx . '.*?)$#i', '\1', htmlspecialchars($HTTP_SERVER_VARS['REQUEST_URI'])));
-
-	if( $HTTP_POST_VARS['cancel'] )
-	{
+	if( $HTTP_POST_VARS['cancel'] ):
 		redirect(append_sid("index.$phpEx"));
-	}
-	else if( $HTTP_POST_VARS['pass_login'] )
-	{
-		if( $forum_topic_data['topic_password'] != '' )
-		{
+	elseif($HTTP_POST_VARS['pass_login']):
+		if($forum_topic_data['topic_password'] != ''):
 			password_check('topic', $topic_id, $HTTP_POST_VARS['password'], $redirect);
-		}
-		else if( $forum_topic_data['forum_password'] != '' )
-		{
+		elseif($forum_topic_data['forum_password'] != ''):
 			password_check('forum', $forum_id, $HTTP_POST_VARS['password'], $redirect);
-		}
-	}
-
-	if( $forum_topic_data['topic_password'] != '' )
-	{
-		$passdata = ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_tpass']) ) ? unserialize(stripslashes($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_tpass'])) : '';
-		if( $passdata[$topic_id] != md5($forum_topic_data['topic_password']) )
-		{
-			password_box('topic', $redirect);
-		}
-	}
-	else if( $forum_topic_data['forum_password'] != '' )
-	{
-		$passdata = ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_fpass']) ) ? unserialize(stripslashes($HTTP_COOKIE_VARS[$board_config['cookie_name'] . '_fpass'])) : '';
-		if( $passdata[$forum_id] != md5($forum_topic_data['forum_password']) )
-		{
+	    endif;
+	endif;
+	if($forum_topic_data['topic_password'] != ''):
+		$passdata = ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'].'_tpass']) ) ? unserialize(stripslashes($HTTP_COOKIE_VARS[$board_config['cookie_name'].'_tpass'])) : '';
+		if($passdata[$topic_id] != md5($forum_topic_data['topic_password'])):
+	    password_box('topic', $redirect);
+		endif;
+	elseif($forum_topic_data['forum_password'] != '' ):
+		$passdata = ( isset($HTTP_COOKIE_VARS[$board_config['cookie_name'].'_fpass']) ) ? unserialize(stripslashes($HTTP_COOKIE_VARS[$board_config['cookie_name'].'_fpass'])) : '';
+		if($passdata[$forum_id] != md5($forum_topic_data['forum_password'])):
 			password_box('forum', $redirect);
-		}
-	}
-}
-//
-// END: Password check
-//
-if ($post_id)
-{
-        $start = floor(($forum_topic_data['prev_posts'] - 1) / intval($board_config['posts_per_page'])) * intval($board_config['posts_per_page']);
-}
+		endif;
 
-//
-// Is user watching this thread?
-//
-if( $userdata['session_logged_in'] )
-{
-/*****[BEGIN]******************************************
- [ Mod:     Report Posts                       v1.0.2 ]
- ******************************************************/
-if ( isset($HTTP_GET_VARS['report']) || isset($HTTP_POST_VARS['report']) )
-    {
+	endif;
+endif;
+# Password check START
+
+if($post_id)
+$start = floor(($forum_topic_data['prev_posts'] - 1) / intval($board_config['posts_per_page'])) * intval($board_config['posts_per_page']);
+
+# Is user watching this thread?
+if($userdata['session_logged_in']):
+
+    # Mod: Report Posts v1.0.2 START
+    if ( isset($HTTP_GET_VARS['report']) || isset($HTTP_POST_VARS['report'])):
+    
         include("includes/functions_report.php");
 
         $comments = ( !empty($HTTP_POST_VARS['comments']) ) ? htmlspecialchars(trim($HTTP_POST_VARS['comments'])) : '';
 
-        if ( empty($comments) )
-        {
-            // show form to add comments about topic
+        if(empty($comments)):
+            # show form to add comments about topic
             $page_title = $lang['Report_post'] . ' - ' . $topic_title;
             include("includes/page_header.php");
 
@@ -489,154 +410,115 @@ if ( isset($HTTP_GET_VARS['report']) || isset($HTTP_POST_VARS['report']) )
             );
 
             $template->assign_vars(array(
-                'TOPIC_TITLE'    => $topic_title,
-                'POST_ID'        => $post_id,
-                'U_VIEW_TOPIC'    => append_sid('viewtopic.'.$phpEx.'?' . POST_TOPIC_URL . '=' . $topic_id),
-
-                'L_REPORT_POST'    => $lang['Report_post'],
-                'L_COMMENTS'    => $lang['Comments'],
-                'L_SUBMIT'        => $lang['Submit'],
-
-                'S_ACTION'        => append_sid('viewtopic.'.$phpEx.'?report=true&amp;' . POST_POST_URL . '=' . $post_id))
+            'TOPIC_TITLE'    => $topic_title,
+            'POST_ID'        => $post_id,
+            'U_VIEW_TOPIC'   => append_sid('viewtopic.'.$phpEx.'?' . POST_TOPIC_URL . '=' . $topic_id),
+            'L_REPORT_POST'  => $lang['Report_post'],
+            'L_COMMENTS'     => $lang['Comments'],
+            'L_SUBMIT'       => $lang['Submit'],
+            'S_ACTION'       => append_sid('viewtopic.'.$phpEx.'?report=true&amp;' . POST_POST_URL . '=' . $post_id))
             );
 
             $template->pparse('body');
 
             include("includes/page_tail.php");
             exit;
-        }
-        else
-        {
-            if ( !report_flood() )
-            {
-                message_die(GENERAL_MESSAGE, $lang['Flood_Error']);
-            }
-            // insert the report
+        else:
+            if(!report_flood())
+            message_die(GENERAL_MESSAGE, $lang['Flood_Error']);
+            # insert the report
             insert_report($post_id, $comments);
-
-            // email the report if need to
-            if ( $board_config['report_email'] )
-            {
-                email_report($forum_id, $post_id, $topic_title, $comments);
-            }
+            # email the report if need to
+            if($board_config['report_email'])
+            email_report($forum_id, $post_id, $topic_title, $comments);
 
             $template->assign_vars(array(
                 'META' => '<meta http-equiv="refresh" content="3;url=' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id") . '">')
             );
+
             $message =  $lang['Post_reported'] . '<br /><br />' . sprintf($lang['Click_return_topic'], '<a href="' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id") . '">', '</a>');
             message_die(GENERAL_MESSAGE, $message);
-        }
-    }
-/*****[END]********************************************
- [ Mod:     Report Posts                       v1.0.2 ]
- ******************************************************/
+        endif;
+    endif;
+    # Mod: Report Posts v1.0.2 END
+
         $can_watch_topic = TRUE;
 
         $sql = "SELECT notify_status
-                FROM " . TOPICS_WATCH_TABLE . "
+                FROM ".TOPICS_WATCH_TABLE."
                 WHERE topic_id = '$topic_id'
-                        AND user_id = " . $userdata['user_id'];
-        if ( !($result = $db->sql_query($sql)) )
-        {
-                message_die(GENERAL_ERROR, "Could not obtain topic watch information", '', __LINE__, __FILE__, $sql);
-        }
+                AND user_id = ".$userdata['user_id'];
+        
+		if(!($result = $db->sql_query($sql)))
+        message_die(GENERAL_ERROR, "Could not obtain topic watch information", '', __LINE__, __FILE__, $sql);
 
-        if ( $row = $db->sql_fetchrow($result) )
-        {
-                if ( isset($HTTP_GET_VARS['unwatch']) )
-                {
-                        if ( $HTTP_GET_VARS['unwatch'] == 'topic' )
-                        {
-                                $is_watching_topic = 0;
+        if($row = $db->sql_fetchrow($result)):
+        
+           if(isset($HTTP_GET_VARS['unwatch'])):
+           
+              if($HTTP_GET_VARS['unwatch'] == 'topic'):
+                 $is_watching_topic = 0;
+                 $sql_priority = (SQL_LAYER == "mysql" || SQL_LAYER == "mysqli") ? "LOW_PRIORITY" : '';
+                 $sql = "DELETE $sql_priority FROM " . TOPICS_WATCH_TABLE . "
+                 WHERE topic_id = '$topic_id'
+                 AND user_id = " . $userdata['user_id'];
+                 
+				 if(!($result = $db->sql_query($sql)))
+                 message_die(GENERAL_ERROR, "Could not delete topic watch information", '', __LINE__, __FILE__, $sql);
+              endif;
+                 $template->assign_vars(array(
+                 'META' => '<meta http-equiv="refresh" content="3;url=' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;start=$start") . '">'));
 
-                                $sql_priority = (SQL_LAYER == "mysql" || SQL_LAYER == "mysqli") ? "LOW_PRIORITY" : '';
-                                $sql = "DELETE $sql_priority FROM " . TOPICS_WATCH_TABLE . "
-                                        WHERE topic_id = '$topic_id'
-                                                AND user_id = " . $userdata['user_id'];
-                                if ( !($result = $db->sql_query($sql)) )
-                                {
-                                        message_die(GENERAL_ERROR, "Could not delete topic watch information", '', __LINE__, __FILE__, $sql);
-                                }
-                        }
+                 $message = $lang['No_longer_watching'] . '<br /><br />' . sprintf($lang['Click_return_topic'], '<a href="' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;start=$start") . '">', '</a>');
+                 message_die(GENERAL_MESSAGE, $message);
+           else:
+              $is_watching_topic = TRUE;
+              if($row['notify_status']):
+                 $sql_priority = (SQL_LAYER == "mysql" || SQL_LAYER == "mysqli") ? "LOW_PRIORITY" : '';
+                 $sql = "UPDATE $sql_priority " . TOPICS_WATCH_TABLE . "
+                 SET notify_status = '0'
+                 WHERE topic_id = '$topic_id'
+                 AND user_id = " . $userdata['user_id'];
+                 
+				 if ( !($result = $db->sql_query($sql)) )
+                 message_die(GENERAL_ERROR, "Could not update topic watch information", '', __LINE__, __FILE__, $sql);
+              endif;
+           endif;
+        else:
+           if(isset($HTTP_GET_VARS['watch'])):
+              if($HTTP_GET_VARS['watch'] == 'topic'):
+                 $is_watching_topic = TRUE;
+                 $sql_priority = (SQL_LAYER == "mysql" || SQL_LAYER == "mysqli") ? "LOW_PRIORITY" : '';
+                 $sql = "INSERT $sql_priority INTO " . TOPICS_WATCH_TABLE . " (user_id, topic_id, notify_status)
+                 VALUES (" . $userdata['user_id'] . ", '$topic_id', '0')";
+		         if(!($result = $db->sql_query($sql)))
+                 message_die(GENERAL_ERROR, "Could not insert topic watch information", '', __LINE__, __FILE__, $sql);
+              endif;
+              $template->assign_vars(array('META' => '<meta http-equiv="refresh" content="3;url=' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;start=$start") . '">'));
+              $message = $lang['You_are_watching'].'<br /><br />'.sprintf($lang['Click_return_topic'], '<a href="'.append_sid("viewtopic.$phpEx?".POST_TOPIC_URL."=$topic_id&amp;start=$start").'">', '</a>');
+               message_die(GENERAL_MESSAGE, $message);
+           else:
+               $is_watching_topic = 0;
+           endif;
+        endif;
+else:
+   if(isset($HTTP_GET_VARS['unwatch'])):
+       if($HTTP_GET_VARS['unwatch'] == 'topic'):
+       $header_location = ( @preg_match("/Microsoft|WebSTAR|Xitami/", $_SERVER["SERVER_SOFTWARE"]) ) ? "Refresh: 0; URL=" : "Location: ";
+       redirect(append_sid("login.$phpEx?redirect=viewtopic.$phpEx&" . POST_TOPIC_URL . "=$topic_id&unwatch=topic", true));
+       exit;
+    endif;
+    else:
+       $can_watch_topic = 0;
+       $is_watching_topic = 0;
+   endif;
+endif;
 
-                        $template->assign_vars(array(
-                                'META' => '<meta http-equiv="refresh" content="3;url=' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;start=$start") . '">')
-                        );
 
-                        $message = $lang['No_longer_watching'] . '<br /><br />' . sprintf($lang['Click_return_topic'], '<a href="' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;start=$start") . '">', '</a>');
-                        message_die(GENERAL_MESSAGE, $message);
-                }
-                else
-                {
-                        $is_watching_topic = TRUE;
+# Generate a 'Show posts in previous x days' select box. If the postdays var is POSTed
+# then get it's value, find the number of topics with dates newer than it (to properly
+# handle pagination) and alter the main query
 
-                        if ( $row['notify_status'] )
-                        {
-                                $sql_priority = (SQL_LAYER == "mysql" || SQL_LAYER == "mysqli") ? "LOW_PRIORITY" : '';
-                                $sql = "UPDATE $sql_priority " . TOPICS_WATCH_TABLE . "
-                                        SET notify_status = '0'
-                                        WHERE topic_id = '$topic_id'
-                                                AND user_id = " . $userdata['user_id'];
-                                if ( !($result = $db->sql_query($sql)) )
-                                {
-                                        message_die(GENERAL_ERROR, "Could not update topic watch information", '', __LINE__, __FILE__, $sql);
-                                }
-                        }
-                }
-        }
-        else
-        {
-                if ( isset($HTTP_GET_VARS['watch']) )
-                {
-                        if ( $HTTP_GET_VARS['watch'] == 'topic' )
-                        {
-                                $is_watching_topic = TRUE;
-
-                                $sql_priority = (SQL_LAYER == "mysql" || SQL_LAYER == "mysqli") ? "LOW_PRIORITY" : '';
-                                $sql = "INSERT $sql_priority INTO " . TOPICS_WATCH_TABLE . " (user_id, topic_id, notify_status)
-                                        VALUES (" . $userdata['user_id'] . ", '$topic_id', '0')";
-                                if ( !($result = $db->sql_query($sql)) )
-                                {
-                                        message_die(GENERAL_ERROR, "Could not insert topic watch information", '', __LINE__, __FILE__, $sql);
-                                }
-                        }
-
-                        $template->assign_vars(array(
-                                'META' => '<meta http-equiv="refresh" content="3;url=' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;start=$start") . '">')
-                        );
-
-                        $message = $lang['You_are_watching'] . '<br /><br />' . sprintf($lang['Click_return_topic'], '<a href="' . append_sid("viewtopic.$phpEx?" . POST_TOPIC_URL . "=$topic_id&amp;start=$start") . '">', '</a>');
-                        message_die(GENERAL_MESSAGE, $message);
-                }
-                else
-                {
-                        $is_watching_topic = 0;
-                }
-        }
-}
-else
-{
-        if ( isset($HTTP_GET_VARS['unwatch']) )
-        {
-                if ( $HTTP_GET_VARS['unwatch'] == 'topic' )
-                {
-                        $header_location = ( @preg_match("/Microsoft|WebSTAR|Xitami/", $_SERVER["SERVER_SOFTWARE"]) ) ? "Refresh: 0; URL=" : "Location: ";
-                        redirect(append_sid("login.$phpEx?redirect=viewtopic.$phpEx&" . POST_TOPIC_URL . "=$topic_id&unwatch=topic", true));
-                        exit;
-                }
-        }
-        else
-        {
-                $can_watch_topic = 0;
-                $is_watching_topic = 0;
-        }
-}
-
-//
-// Generate a 'Show posts in previous x days' select box. If the postdays var is POSTed
-// then get it's value, find the number of topics with dates newer than it (to properly
-// handle pagination) and alter the main query
-//
 /*****[BEGIN]******************************************
  [ Mod:    Hide Mod                            v1.2.0 ]
  ******************************************************/
