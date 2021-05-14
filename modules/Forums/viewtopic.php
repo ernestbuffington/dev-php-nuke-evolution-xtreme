@@ -2084,14 +2084,10 @@ for($i = 0; $i < $total_posts; $i++)
                 'POSTER_ONLINE_STATUS' => $online_status,
                 # Mod: Online/Offline/Hidden v2.2.7 END
 
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+                # Mod: Printer Topic v1.0.8 START
                 'POST_NUMBER' => ($i + $start + 1),
                 'POST_ID' => $postrow[$i]['post_id'],
-/*****[BEGIN]******************************************
- [ Mod:    Printer Topic                       v1.0.8 ]
- ******************************************************/
+                # Mod: Printer Topic v1.0.8 END
 
                 'POST_DATE' => $post_date,
                 'POST_SUBJECT' => $post_subject,
@@ -2107,25 +2103,29 @@ for($i = 0; $i < $total_posts; $i++)
                 'PROFILE' => $profile,
                 'SEARCH_IMG' => $search_img,
                 'SEARCH' => $search,
-                'SEARCH_USER_POSTS' => 'modules.php?name=Forums&file=search&search_author=' . urlencode($postrow[$i]['username']),
+                'SEARCH_USER_POSTS' => 'modules.php?name=Forums&file=search&search_author='.urlencode($postrow[$i]['username']),
                 'SEARCH_ALT' => $search_alt,
                 'PM_IMG' => $pm_img,
                 'PM' => $pm,
-                'PM_URL' => ( is_active("Private_Messages") ) ? append_sid("privmsg.$phpEx?mode=post&amp;" . POST_USERS_URL . "=$poster_id") : '',
+                'PM_URL' => (is_active("Private_Messages")) ? append_sid("privmsg.$phpEx?mode=post&amp;".POST_USERS_URL."=$poster_id") : '',
                 'PM_ALT' => $pm_alt,
                 'EMAIL_IMG' => $email_img,
                 'EMAIL' => $email,
-                'EMAIL_USER' => ( !empty($postrow[$i]['user_viewemail']) || $is_auth['auth_mod'] ) ? 'mailto:' . $postrow[$i]['user_email'] : '',
+                'EMAIL_USER' => (!empty($postrow[$i]['user_viewemail']) || $is_auth['auth_mod'] ) ? 'mailto:'.$postrow[$i]['user_email'] : '',
                 'EMAIL_ALT' => $email_alt,
                 'WWW_IMG' => $www_img,
                 'WWW' => $www,
-				        'FACEBOOK_IMG' => $facebook_img,
-			          'FACEBOOK' => $facebook,
+		        
+				# Mod: Facebook v1.0.0 START		
+		        'FACEBOOK_IMG' => $facebook_img,
+	            'FACEBOOK' => $facebook,
+		        # Mod: Facebook v1.0.0 END		
+
                 'EDIT_URL' => $edit_url,
                 'EDIT_IMG' => $edit_img,
                 'EDIT_ALT' => $edit_alt,
                 'EDIT' => $edit,
-                'QUOTE_URL' => append_sid("posting.$phpEx?mode=quote&amp;" . POST_POST_URL . "=" . $postrow[$i]['post_id']),
+                'QUOTE_URL' => append_sid("posting.$phpEx?mode=quote&amp;".POST_POST_URL."=".$postrow[$i]['post_id']),
                 'QUOTE_IMG' => $quote_img,
                 'QUOTE_ALT' => $lang['Reply_with_quote'],
                 'QUOTE' => $quote,
@@ -2134,59 +2134,41 @@ for($i = 0; $i < $total_posts; $i++)
                 'IP' => $ip,
                 'IP_ALT' => $ip_alt,
 
-/*****[START]******************************************
- [ Base:    Who viewed a topic                 v1.0.3 ]
- ******************************************************/
+                # Base: Who viewed a topic v1.0.3 START
                 'TOPIC_VIEW_IMG' => $topic_view_img,
-/*****[END]********************************************
- [ Base:    Who viewed a topic                 v1.0.3 ]
- ******************************************************/
+                # Base: Who viewed a topic v1.0.3 END
+
                 'DELETE_URL' => $delpost_url,
                 'DELETE_IMG' => $delpost_img,
                 'DELETE_ALT' => $delpost_alt,
                 'DELETE' => $delpost,
 			
-/*****[BEGIN]*****************************************
-[ Mod: Inline Banner Ad                       v1.2.3 ]
-******************************************************/
+                # Mod: Inline Banner Ad v1.2.3 START
                 'L_SPONSOR' => $lang['Sponsor'],
                 'INLINE_AD' => $inline_ad_code,
-/*****[END]*******************************************
-[ Mod: Inline Banner Ad                       v1.2.3 ]
-******************************************************/			
+                # Mod: Inline Banner Ad v1.2.3 END
 				
-/*****[BEGIN]******************************************
- [ Mod:    Gender                              v1.2.6 ]
- ******************************************************/
+                # Mod: Gender v1.2.6 START
                 'L_GENDER' => $lang['Gender'],
-/*****[END]********************************************
- [ Mod:    Gender                              v1.2.6 ]
- ******************************************************/
+                # Mod: Gender v1.2.6 END
 
                 'L_MINI_POST_ALT' => $mini_post_alt,
 
                 'U_MINI_POST' => $mini_post_url,
                 'U_POST_ID' => $postrow[$i]['post_id']), $xd_root)
-/*****[END]********************************************
- [ Mod:     XData                              v1.0.3 ]
- ******************************************************/
+
+        # Mod: XData v1.0.3 END
         );
-/*****[BEGIN]*****************************************
-[ Mod: Inline Banner Ad                       v1.2.3 ]
-******************************************************/
-        if ($display_ad){
+        
+		# Mod: Inline Banner Ad v1.2.3 START
+        if ($display_ad):
           if (!$board_config['ad_old_style'] && $display_ad)
-          {
             $template->assign_block_vars('postrow.switch_ad',array());
-          }
           else
-          {
             $template->assign_block_vars('postrow.switch_ad_style2',array());
-          }
-        }
-/*****[END]*******************************************
-[ Mod: Inline Banner Ad                       v1.2.3 ]
-******************************************************/
+        endif;
+		# Mod: Inline Banner Ad v1.2.3 END
+
 
 /*****[BEGIN]******************************************
  [ Mod:    Thank You Mod                       v1.1.8 ]
