@@ -3,13 +3,13 @@
   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
 
-/***************************************************************************
+/************************************************************************
  *                              whoisplaying.php
  *                            -------------------
  *   PHPNuke Ported Arcade - http://www.nukearcade.com
  *   Original Arcade Mod phpBB by giefca - http://www.gf-phpbb.com
  *
- ***************************************************************************/
+ ************************************************************************/
 
 /*****[CHANGES]**********************************************************
 -=[Mod]=-
@@ -18,7 +18,7 @@
 if (!defined('IN_PHPBB')) die('Hacking attempt');
 
 if (!function_exists('get_arcade_categories')) 
-include('includes/functions_arcade.' . $phpEx);
+include('includes/functions_arcade.'.$phpEx);
 
 $template->set_filenames(array(
         'whoisplaying' => 'whoisplaying_body.tpl')
@@ -53,10 +53,10 @@ $sql = "SELECT u.username,
 				IN ($liste_cat_auth) 
 				ORDER BY gh.hash_date DESC";
 
-if (!($result = $db->sql_query($sql))) 
+if(!($result = $db->sql_query($sql))) 
 message_die(CRITICAL_ERROR, "Could not query games information", "", __LINE__, __FILE__, $sql);
 
-while ($row = $db->sql_fetchrow($result)):
+while($row = $db->sql_fetchrow($result)):
 $players[] = $row;
 endwhile;
 
