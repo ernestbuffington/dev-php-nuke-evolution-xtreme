@@ -196,7 +196,7 @@ else:
 $marquee_one .= ' login to our facebook app and you will be able to use the like and comments sections of this web portal...';
 endif;
 
-$date .= '::: Todays date <font color="'.$textcolor2.'">'.date('m-d-Y').'</font>';
+$date .= '::: QUOTE OF THE DAY "Stop Fixing Shit That Is Not Broken! by ErnStoy" ::: Todays date <font color="'.$textcolor2.'">'.date('m-d-Y').'</font>';
 
 if ($username === _ANONYMOUS)
 $moreuser_info .= '::: There is so much more here to see, it takes 30 seconds to register an account and we don\'t even verify with e-mail! Just register we promise you won\'t be sorry...';
