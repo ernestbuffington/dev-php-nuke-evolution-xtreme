@@ -3,7 +3,6 @@
   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
 
-
 /*********************************************
   CPG Dragonfly™ CMS
   ********************************************
@@ -87,7 +86,7 @@ class BBCode
 		# [s] and [/s] for striking through text.
 		$text = preg_replace_callback("(\[s\](.*?)\[/s\])is", function($m) { return '<span style="text-decoration: line-through;">'.$m[1].'</span>'; }, $text);
 
-		# colours
+		# colors
 		$text = preg_replace_callback("(\[color=(\#[0-9A-F]{6}|[a-z\-]+)\](.*?)\[/color\])is", function($m) { return '<span style="color:'.$m[1].'">'.$m[2].'</span>'; }, $text); 
 
 		# align
