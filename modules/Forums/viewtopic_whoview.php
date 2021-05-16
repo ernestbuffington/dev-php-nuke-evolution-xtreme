@@ -203,7 +203,8 @@ if($row = $db->sql_fetchrow($result)):
  		if(strlen($user_from) == 6)
 		$user_from = 'The InterWebs';
 		 
-        # Nobody gives a shit about Anonymous people
+		if (!is_admin())
+        # Nobody but the admin gives a shit about Anonymous people
 		if($username == 'Anonymous')
 		continue;
 		
