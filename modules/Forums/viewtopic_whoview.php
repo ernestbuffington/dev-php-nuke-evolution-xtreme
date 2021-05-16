@@ -185,9 +185,9 @@ if($row = $db->sql_fetchrow($result)):
        # This is broken in UK version
 	   # Mod: Online/Offline/Hidden v2.2.7 START
        if($row['user_session_time'] >= (time()-$board_config['online_time'])):
-         
+         $theme_name = get_theme();
 		 if($row['user_allow_viewonline']):
-         $online_status = '<a href="'.append_sid("viewonline.$phpEx").'" title="'.sprintf($lang['is_online'],$row['username']).'"'.$online_color.'><strong>'.$lang['Online'].'</strong></a>';
+         $online_status = '<a href="'.append_sid("viewonline.$phpEx").'" title="'.sprintf($lang['is_online'],$row['username']).'"'.$online_color.'><img alt="online" src="themes/'.$theme_name.'/forums/images/status/online_bgcolor_one.gif" /></a>';
          
 		 elseif($userdata['user_level'] == ADMIN || $userdata['user_id'] == $row['user_id'] ):
          $online_status = '<em><a href="'.append_sid("viewonline.$phpEx").'" title="'.sprintf($lang['is_hidden'],$profiledata['username']).'"'.$hidden_color.'>'.$lang['Hidden'].'</a></em>';
@@ -197,7 +197,7 @@ if($row = $db->sql_fetchrow($result)):
          endif;
 
        else:
-       $online_status = '<span title="'.sprintf($lang['is_offline'], $row['username']) . '"' . $offline_color . '><strong>'.$lang['Offline'].'</strong></span>';
+       $online_status = '<span title="'.sprintf($lang['is_offline'], $row['username']) . '"' . $offline_color . '><img alt="online" src="themes/'.$theme_name.'/forums/images/status/offline_bgcolor_one.gif" /></span>';
        endif;
        # Mod: Online/Offline/Hidden v2.2.7 END
  		if(strlen($user_from) == 6)
@@ -214,14 +214,14 @@ if($row = $db->sql_fetchrow($result)):
 			'FROM' 			=> $user_from,
 			'FLAG'			=> $user_flag,
 			'FACEBOOK'		=> $facebook,
-			'VIEW_TIME' 	=> $view_time,
+			'VIEW_TIME' 	=> '<i class="bi bi-calendar3"></i> '.$view_time,
 			'VIEW_COUNT' 	=> $view_count,
 			'PROFILE' 		=> $profile,
 			'PM' 			=> $pm,
 			'WWW' 			=> $www,
 			'ONLINE_STATUS' => $online_status,
-			'TOPICTITLE'    => $topic_title,
-			'TOPICLINK'     => $topic_link,
+			'TOPICTITLE'    => '<font size="3">'.$topic_title.'</font>',
+			'TOPICLINK'     => '<font size="3"><i class="bi bi-card-heading"></i> '.$topic_link.'</font>',
 			'U_VIEWPROFILE' => append_sid("profile.$phpEx?mode=viewprofile&amp;".POST_USERS_URL."=$user_id"))
 		);
 

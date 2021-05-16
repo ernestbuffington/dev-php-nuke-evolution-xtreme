@@ -40,11 +40,11 @@
   	<td class="row1 center">{memberrow.ROW_NUMBER}</td>
   	<td class="row1">
   		<span style="float: left; margin: 2px;"><a href="{memberrow.U_VIEWPROFILE}">{memberrow.USERNAME}</a></span>
-  		<span style="float: right;">{memberrow.WWW}{memberrow.FACEBOOK}{memberrow.PM}</span>
+  		<span style="float: right;"></span>
   	</td>
   	<td class="row1">{memberrow.FLAG}{memberrow.FROM}</td>
   	<td class="row1 center">{memberrow.VIEW_COUNT}</td>
-  	<td class="row1 center">Topic: <strong>{memberrow.TOPICLINK}</strong><br />Last Viewed {memberrow.VIEW_TIME}</td>
+  	<td class="row1 center"><strong>{memberrow.TOPICLINK}</strong><br />{memberrow.VIEW_TIME}</td>
   	<td class="row1 center">{memberrow.ONLINE_STATUS}</td>
   </tr>
   <!-- END memberrow -->
