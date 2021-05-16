@@ -1,4 +1,4 @@
-<?php
+<?php # JOHN 3:16 #
 /***************************************************************************
  *                            viewtopic_whoview.php 
  *                            -------------------
@@ -44,7 +44,7 @@ if(!$userdata['session_logged_in']):
 	exit;
 endif;
 
-# find the forum, in witch the topic are located
+# find the forum, in which the topic are located
 if(empty($topic_id))$topic_id = 0;
 $sql = "SELECT f.forum_id FROM ".TOPICS_TABLE." t, ".FORUMS_TABLE." f WHERE f.forum_id = t.forum_id AND t.topic_id=$topic_id";
 if(!($result = $db->sql_query($sql)))
@@ -52,6 +52,8 @@ message_die(GENERAL_ERROR, "Could not obtain topic information", '', __LINE__, _
 if(!($forum_topic_data = $db->sql_fetchrow($result)))
 message_die(GENERAL_MESSAGE, 'Topic_post_not_exist');
 $forum_id = $forum_topic_data['forum_id'];
+list($topic_title) = $db->sql_ufetchrow("SELECT `topic_title` FROM `".TOPICS_TABLE."` WHERE `topic_id`=$topic_id", SQL_NUM);
+$topic_link = '<a href="modules.php?name=Forums&file=viewtopic&t='.$topic_id.'" target="_self">'.$topic_title.'</a>';
 # End add - Who viewed a topic MOD
 
 $start = (isset($_GET['start'])) ? intval($_GET['start']) : 0;
@@ -76,7 +78,7 @@ $mode_types = array('user_id', 'username', 'joindate', 'topic_time', 'topic_coun
 $select_sort_mode = '<select name="mode">';
 for($i = 0; $i < count($mode_types_text); $i++):
 $selected = ( $mode == $mode_types[$i] ) ? ' selected="selected"' : '';
-$select_sort_mode .= '<option value="' . $mode_types[$i] . '"' . $selected . '>' . $mode_types_text[$i] . '</option>';
+$select_sort_mode .= '<option value="'.$mode_types[$i].'"'.$selected.'>'.$mode_types_text[$i].'</option>';
 endfor;
 $select_sort_mode .= '</select>';
 $select_sort_order = '<select name="order">';
@@ -107,25 +109,25 @@ $template->assign_vars(
 	)
 );
 
-switch( $mode ):
-	case 'joined':
-		$order_by = "u.user_regdate $sort_order LIMIT $start, ".$board_config['topics_per_page'];
-		break;
-	case 'username':
-		$order_by = "u.username $sort_order LIMIT $start, ".$board_config['topics_per_page'];
-		break;
-	case 'user_id':
-		$order_by = "u.user_id $sort_order LIMIT $start, ".$board_config['topics_per_page'];
-		break;
-	case 'topic_count':
-		$order_by = "tv.view_count $sort_order LIMIT $start, ".$board_config['topics_per_page'];
-		break;
-	case 'topic_time':
-		$order_by = "tv.view_time $sort_order LIMIT $start, ".$board_config['topics_per_page'];
-		break;
-	default:
-		$order_by = "u.user_id $sort_order LIMIT $start, ".$board_config['topics_per_page'];
-		break;
+switch($mode):
+ case 'joined':
+  $order_by = "u.user_regdate $sort_order LIMIT $start, ".$board_config['topics_per_page'];
+	break;
+  case 'username':
+   $order_by = "u.username $sort_order LIMIT $start, ".$board_config['topics_per_page'];
+	 break;
+  case 'user_id':
+   $order_by = "u.user_id $sort_order LIMIT $start, ".$board_config['topics_per_page'];
+	break;
+  case 'topic_count':
+   $order_by = "tv.view_count $sort_order LIMIT $start, ".$board_config['topics_per_page'];
+	break;
+  case 'topic_time':
+   $order_by = "tv.view_time $sort_order LIMIT $start, ".$board_config['topics_per_page'];
+	break;
+  default:
+   $order_by = "u.user_id $sort_order LIMIT $start, ".$board_config['topics_per_page'];
+	break;
 endswitch;
 
 $sql = "SELECT u.username, 
@@ -201,6 +203,10 @@ if($row = $db->sql_fetchrow($result)):
  		if(strlen($user_from) == 6)
 		$user_from = 'The InterWebs';
 		 
+        # Nobody gives a shit about Anonymous people
+		if($username == 'Anonymous')
+		continue;
+		
 		$template->assign_block_vars('memberrow', array(
 			'ROW_NUMBER' 	=> $i + ($_GET['start'] + 1),
 			'USERNAME' 		=> UsernameColor($username),
@@ -213,6 +219,8 @@ if($row = $db->sql_fetchrow($result)):
 			'PM' 			=> $pm,
 			'WWW' 			=> $www,
 			'ONLINE_STATUS' => $online_status,
+			'TOPICTITLE'    => $topic_title,
+			'TOPICLINK'     => $topic_link,
 			'U_VIEWPROFILE' => append_sid("profile.$phpEx?mode=viewprofile&amp;".POST_USERS_URL."=$user_id"))
 		);
 

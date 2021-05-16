@@ -44,12 +44,12 @@
   	</td>
   	<td class="row1">{memberrow.FLAG}{memberrow.FROM}</td>
   	<td class="row1 center">{memberrow.VIEW_COUNT}</td>
-  	<td class="row1 center">{memberrow.VIEW_TIME}</td>
+  	<td class="row1 center">Topic: <strong>{memberrow.TOPICLINK}</strong><br />Last Viewed {memberrow.VIEW_TIME}</td>
   	<td class="row1 center">{memberrow.ONLINE_STATUS}</td>
   </tr>
   <!-- END memberrow -->
   <tr>
-  	<td class="catBottom" colspan="6">&nbsp;</td>
+  	<td class="catBottom" colspan="6"><div align="center"><form><input type="button" value="Back to Topic" onclick="history.back()"></form></div></td>
   </tr>
 </table>
 </form>
