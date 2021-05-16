@@ -252,7 +252,7 @@ if($row = $db->sql_fetchrow($result)):
 			'VIEW_TIME' 	=> '<i class="bi bi-calendar3"></i> '.$view_time,
 			'VIEW_COUNT' 	=> $view_count,
 			'PROFILE' 		=> $profile,
-			'CURRENT_AVATAR' => '<img class="rounded-corners-header" width="30" src="'.$current_avatar.'">&nbsp;',
+			'CURRENT_AVATAR' => '<img class="rounded-corners-header" height="auto" width="30" src="'.$current_avatar.'">&nbsp;',
 			'PM' 			=> $pm,
 			'WWW' 			=> $www,
 			'ONLINE_STATUS' => $online_status,
