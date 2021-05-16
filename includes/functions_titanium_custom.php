@@ -372,7 +372,7 @@ function get_titanium_timeago( $ptime )
      if( $d >= 1 )
      {
        $r = round( $d );                                                                             // └════┘
-       return '<font color="orange"><div align="center"><strong><font color="lightgreen">'.$r.'</font></strong><br />' . ' ' . $str . ( $r > 1 ? 's' : '' ) . ' </font><br /><font color="gold"><i class="bi bi-alarm"></i></font> </div>';
+       return '<font color="orange"><div align="center"><strong><font color="lightgreen">'.$r.'</font></strong><br />'.' '.$str.($r > 1 ? 's' : '').' </font><br /><font color="gold"><i class="bi bi-alarm"></i></font> </div>';
         }
     }
 }

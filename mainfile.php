@@ -549,9 +549,10 @@ $more_styles = '';
 require_once(NUKE_INCLUDE_DIR.'functions_browser.php');
 require_once(NUKE_INCLUDE_DIR.'themes.php');
 include_once(NUKE_INCLUDE_DIR.'functions_tap.php');
-if (!defined('NO_SENTINEL')) {
-    require_once(NUKE_INCLUDE_DIR.'nukesentinel.php');
-}
+
+if(!defined('NO_SENTINEL')) 
+require_once(NUKE_INCLUDE_DIR.'nukesentinel.php');
+
 require_once(NUKE_CLASSES_DIR.'class.variables.php');
 include_once(NUKE_CLASSES_DIR.'class.wysiwyg.php');
 /*****[END]********************************************

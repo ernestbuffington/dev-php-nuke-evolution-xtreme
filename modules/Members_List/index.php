@@ -1,5 +1,4 @@
 <?php
-
 /*
 	Author: phpbb.com
 	Author Email: support@phpbb.com
@@ -13,7 +12,6 @@
 /*======================================================================= 
   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
-
 
 /***************************************************************************
  *                              memberlist.php
@@ -46,9 +44,6 @@
 	  Member Country Flags                     v2.0.7
 	  Birthdays                                v3.0.0
  ************************************************************************/
-
-
-
 if (!defined('MODULE_FILE')) {
    die('You can\'t access this file directly...');
 }

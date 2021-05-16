@@ -1834,6 +1834,8 @@ $lang['Related_topics'] = 'Related topics';
 /*****[START]******************************************
  [ Base:    Who viewed a topic                 v1.0.3 ]
  ******************************************************/
+$lang['WhoIsViewingThisTopic'] = 'Who viewed <i class="fas fa-arrow-right" style="font-size: 12px;"></i>';
+$lang['WhoViewedMemberlist'] = 'Who Has Viewed This Topic?';  
 $lang['Topic_view_users'] = 'List users that have viewed this topic';
 $lang['Topic_time'] = 'Last viewed';
 $lang['Topic_count'] = 'View count';

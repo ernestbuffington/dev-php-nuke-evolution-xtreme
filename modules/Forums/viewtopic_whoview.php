@@ -26,6 +26,17 @@ include($phpbb_root_path.'extension.inc');
 include($phpbb_root_path.'common.'.$phpEx);
 include('header.php');
 
+date_default_timezone_set('America/New_York');
+$info = getdate();
+$date = $info['mday'];
+$month = $info['mon'];
+$year = $info['year'];
+$hour = $info['hours'];
+$min = $info['minutes'];
+$sec = $info['seconds'];
+$current_date = "<i class=\"bi bi-calendar3\"></i>&nbsp;&nbsp;$month/$date/$year&nbsp;&nbsp;&nbsp;<i class=\"bi bi-alarm\"></i>&nbsp;$hour:$min:$sec";
+$actual_time = $current_date;
+
 # Start session management
 $userdata = session_pagestart($user_ip, PAGE_TOPIC_VIEW, $nukeuser);
 init_userprefs($userdata);
@@ -100,6 +111,10 @@ make_jumpbox('viewforum.'.$phpEx);
 
 $template->assign_vars(
 	array(
+	    'L_ACTUAL_TIME' => $actual_time,
+	    'L_LAST_VIEWED_TOPIC_LINK_PREFIX' => $lang['WhoIsViewingThisTopic'],
+	    'L_LAST_VIEWED_TOPIC_LINK' => $topic_link,
+		'L_LAST_VIEWED_TITLE' => $lang['WhoViewedMemberlist'],
 		'L_LAST_VIEWED' => $lang['Topic_time'],
 		'L_TOPIC_COUNT' => $lang['Topic_count'],
 		'L_AGE' => $lang['Sort_Age'], 
@@ -161,6 +176,26 @@ if($row = $db->sql_fetchrow($result)):
 		$user_from = ( !empty($row['user_from']) ) ? $row['user_from'] : '&nbsp;';
 		$joined	= $row['user_regdate'];
 		
+        /*****[BEGIN]******************************************
+        [ Mod:    Forum Index Avatar Mod                 v1.0]
+        ******************************************************/
+        switch($row['user_avatar_type'])
+        {
+           case USER_AVATAR_UPLOAD:
+           $current_avatar = $board_config['avatar_path'] . '/' . $row['user_avatar'];
+           break;
+           case USER_AVATAR_REMOTE:
+           $current_avatar = resize_avatar($row['user_avatar']);
+           break;
+           case USER_AVATAR_GALLERY:
+           $current_avatar = $board_config['avatar_gallery_path'] . '/' . (($row['user_avatar'] 
+			== 'blank.gif' || $row['user_avatar'] == 'gallery/blank.gif') ? 'blank.png' : $row['user_avatar']);
+           break;
+		}
+        /*****[END]********************************************
+        [ Mod:    Forum Index Avatar Mod                 v1.0]
+         ******************************************************/
+		
 		# Get the date and time the user last viewed the topic.
 		$view_time = ($row['view_time']) ? create_date($board_config['default_dateformat'],$row['view_time'], $board_config['board_timezone']) : $lang['Never_last_logon'];
 		
@@ -205,7 +240,7 @@ if($row = $db->sql_fetchrow($result)):
 		 
 		if (!is_admin())
         # Nobody but the admin gives a shit about Anonymous people
-		if($username == 'Anonymous')
+		if($username == 'Anonymous') 
 		continue;
 		
 		$template->assign_block_vars('memberrow', array(
@@ -217,6 +252,7 @@ if($row = $db->sql_fetchrow($result)):
 			'VIEW_TIME' 	=> '<i class="bi bi-calendar3"></i> '.$view_time,
 			'VIEW_COUNT' 	=> $view_count,
 			'PROFILE' 		=> $profile,
+			'CURRENT_AVATAR' => '<img class="rounded-corners-header" width="30" src="'.$current_avatar.'">&nbsp;',
 			'PM' 			=> $pm,
 			'WWW' 			=> $www,
 			'ONLINE_STATUS' => $online_status,
