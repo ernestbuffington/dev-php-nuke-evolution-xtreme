@@ -50,7 +50,6 @@ include($phpbb_root_path . 'extension.inc');
 include($phpbb_root_path . 'common.'.$phpEx);
 include_once('includes/bbcode.'.$phpEx);
 
-
 # Start initial var setup
 $topic_id = $post_id = 0;
 if(isset($HTTP_GET_VARS['p']))
@@ -69,7 +68,7 @@ if(isset($HTTP_GET_VARS['view'])):
 
     $sql = "SELECT topic_id, post_time FROM " . POSTS_TABLE . " WHERE post_id = " . $post_id . " LIMIT 1";
 
-    if ( !($result = $db->sql_query($sql)) )
+    if (!($result = $db->sql_query($sql)))
     message_die(GENERAL_ERROR, "Could not obtain newer/older post information", '', __LINE__, __FILE__, $sql);
 
     $row = $db->sql_fetchrow($result);
@@ -77,9 +76,9 @@ if(isset($HTTP_GET_VARS['view'])):
     $topic_id = $row['topic_id'];
     $post_time = $row['post_time'];
 
-    $sql = "SELECT post_id FROM " . POSTS_TABLE . "
+    $sql = "SELECT post_id FROM ".POSTS_TABLE."
             WHERE topic_id = $topic_id
-            AND post_time $sql_condition " . $post_time . "
+            AND post_time $sql_condition ".$post_time."
             ORDER BY post_time $sql_ordering
             LIMIT 1";
         
@@ -380,7 +379,7 @@ if($row = $db->sql_fetchrow($result)):
               $online_status_img = '<img src="'.$images['icon_offline'].'" alt="'.sprintf($lang['is_offline'], $poster).'" title="'.sprintf($lang['is_offline'], $poster).'" />&nbsp;';
               $online_status = '<br />'.$lang['Online_status'].': <span title="'.sprintf($lang['is_offline'], $poster).'"'.$offline_color.'><strong>'.$lang['Offline'].'</strong></span>';
             endif;
-            # Mod: Online/Offline/Hidden v2.2.7 START
+            # Mod: Online/Offline/Hidden v2.2.7 END
         
         else:
             $profile_img = '';
