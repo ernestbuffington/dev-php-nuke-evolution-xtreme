@@ -4,10 +4,15 @@
  =======================================================================*/
 
 /***************************************************************************
- *                               show_post.php
- *                            -------------------
+ *                            show_post.php
+ *                          -------------------
+ *   updated              : Monday, May 17, 2021
+ *   Author               : Ernest Allen Buffington
+ *   copyright            : (C) 2021 
+ *   email                : ernest.buffington@gmail.com
+ *
  *   begin                : Saturday, Nov 23, 2002
- *   copyright            : (C) 2002 Meik Sievertsen
+ *   original copyright   : (C) 2002 Meik Sievertsen
  *   email                : acyd.burn@gmx.de
  *
  ***************************************************************************/
