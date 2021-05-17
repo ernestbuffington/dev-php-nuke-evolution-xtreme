@@ -196,7 +196,8 @@ if ($username && isset($HTTP_POST_VARS['submituser'])):
 	if((strpos($search_author, '%') !== false) && (strlen(str_replace('%', '',$search_author)) < $board_config['search_min_chars']))
 	$search_author = '';
 
-	$sql = "SELECT username, 
+	$sql = "SELECT username,
+	                   name, 
 	  	        user_avatar, 
 	       user_avatar_type, 
 	       user_allowavatar, 
@@ -220,7 +221,8 @@ if ($username && isset($HTTP_POST_VARS['submituser'])):
     
 	# this is the original SQL queery START
 	$deprecated_sql = "SELECT username, 
-	        		       user_avatar, 
+	        		              name, 
+						   user_avatar, 
 	                  user_avatar_type, 
 	                  user_allowavatar, 
 	                           user_id, 
@@ -244,7 +246,8 @@ if ($username && isset($HTTP_POST_VARS['submituser'])):
 
 
 else:
-	$sql = "SELECT username, 
+	$sql = "SELECT username,
+	                   name, 
                 user_avatar, 
 	       user_avatar_type, 
 	       user_allowavatar, 
@@ -268,34 +271,40 @@ endif;
 if(!($result = $db->sql_query($sql)))
 message_die(GENERAL_ERROR, 'Could not query users', '', __LINE__, __FILE__, $sql);
 
+global $textcolor1;
+$theme_name = get_theme();
+
 if($row = $db->sql_fetchrow($result)):
 
 	$i = 0;
 	do
 	{
+		$realname = $row['name'];
 		$username = $row['username'];
 		$user_id = intval($row['user_id']);
 		
 		# Get the users location and flag
 		$user_from = (!empty($row['user_from'])) ? $row['user_from'] : '&nbsp;';
 
-		$deprecated_user_flag = (!empty($row['user_from_flag'])) ? "&nbsp;<img 
-		src=\"images/flags/".$row['user_from_flag']."\" alt=\"".$row['user_from_flag']."\">&nbsp;" : '&nbsp;<img src="images/flags/blank.png" alt="">&nbsp;';
-		
-		$deprecated_user_flag = (!empty($row['user_from_flag'])) ? 
-		"&nbsp;<span class=\"countries ".str_replace('.png','',$row['user_from_flag'])."\"></span>&nbsp;" : '&nbsp;<span class="countries unknown"></span>&nbsp;';
-		
 		$user_flag = (!empty($row['user_from_flag'])) ? 
 		'&nbsp;'.get_evo_icon('countries '.str_replace('.png','',$row['user_from_flag'])).'&nbsp;' : '&nbsp;'.get_evo_icon('countries unknown').'&nbsp;';
-
+		 
 		# Calculate the users age.
 		$bday_month_day = floor($row['user_birthday'] / 10000);
 		$bday_year_age = ($row['birthday_display'] != BIRTHDAY_NONE && $row['birthday_display'] != BIRTHDAY_DATE) ? $row['user_birthday'] - 10000*$bday_month_day : 0;
 		$fudge = (gmdate('md') < $bday_month_day) ? 1 : 0;
 		$age = ($bday_year_age) ? gmdate('Y')-$bday_year_age-$fudge : false;
 		
+		if(empty($age))
+		$age = 'Hidden';
+		else
+		$age .= ' yrs';
+		
 		# Website URL
-		$www = ($row['user_website']) ? '<a href="'.$row['user_website'].'" target="_userwww">'.get_evo_icon('evo-sprite globe tooltip', $lang['Visit_website']).'</a>&nbsp;' : '';
+		if(!empty($row['user_website']))
+		$www = '<a href="'.$row['user_website'].'" target="_blank"><img class="tooltip-html copyright" alt="Male" title="Visit '.$username.'\'s Web Portal" width="30"alt="online" src="themes/'.$theme_name.'/forums/images/status/icons8-website-512.png" /></a>';
+		else
+		$www = '';
 		
 		# Date Joined
 		$joined = $row['user_regdate'];
@@ -324,31 +333,23 @@ if($row = $db->sql_fetchrow($result)):
 		$posts = ($row['user_posts']) ? '<a href="modules.php?name=Forums&file=search&search_author='.$username.'">'.$row['user_posts'].'</a>' : 0;
 		
 		# Private message link
-		//$pm = '<a href="'.append_sid("privmsg.$phpEx?mode=post&amp;".POST_USERS_URL."=$user_id").'">'.get_evo_icon('evo-sprite mail tooltip', sprintf($lang['Send_private_message'],$username)).'</a>';
-		$pm ='PM';
+		$pm = '<a href="'.append_sid("privmsg.$phpEx?mode=post&amp;".POST_USERS_URL."=$user_id").'"><img class="tooltip-html copyright" alt="Male" title="Send A Private Message To '.$username.'" width="30"alt="online" src="themes/'.$theme_name.'/forums/images/status/icons8-send-80.png" /></a>';
 		
 		# does the person have a dick START
-		global $textcolor1;
-		if($row['user_gender'] == 0)
-		$gender = '<svg xmlns="http://www.w3.org/2000/svg" 
-		width="30" 
-		height="30" 
-		fill="'.$textcolor1.'" class="bi bi-gender-female" 
-		viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 
-		1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5z"></path></svg>';
+		if($row['user_gender'] ==1)
+		$gender = '<img class="tooltip-html copyright" alt="Male" title="Male" width="30"alt="online" src="themes/'.$theme_name.'/forums/images/status/icons8-person-male-skin-type-5-80.png" />';
+		elseif($row['user_gender'] == 2)
+		$gender = '<img class="tooltip-html copyright" alt="Female" title="Female" width="30"alt="online" src="themes/'.$theme_name.'/forums/images/status/icons8-person-female-80.png" />';
 		else
-		$gender = '<svg xmlns="http://www.w3.org/2000/svg" 
-		width="30" 
-		height="30" 
-		fill="'.$textcolor1.'" class="bi bi-gender-male" 
-		viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"></path></svg>';
+		$gender = '<img class="tooltip-html copyright" alt="Gay" title="Gay" width="30" src="themes/'.$theme_name.'/forums/images/status/icons8-rainbow-flag-96.png" />';
+		
 		# does the person have a dick END
 		
 		# facebook mod v1.0 START
-		$facebook = (($row['user_facebook']) ? '<a href="https://www.facebook.com/'.$row['user_facebook'].'" target="_blank">'.get_evo_icon('evo-sprite 
-		facebook tooltip', $lang['Visit_facebook']).'</a>&nbsp;' : '');
+		if(!empty($row['user_facebook']))
+		$facebook = '<a href="https://www.facebook.com/'.$row['user_facebook'].'" target="_blank"><img class="tooltip-html copyright" alt="Male" title="View '.$username.'\'s Facebook Page" width="30"alt="online" src="themes/'.$theme_name.'/forums/images/status/icons8-facebook-80.png" /></a>';
+		else
+		$facebook = '';
 		# facebook mod v1.0 END
 		
 		# USers last visit
@@ -356,25 +357,27 @@ if($row = $db->sql_fetchrow($result)):
 
        # This is broken in UK version
 	   # Mod: Online/Offline/Hidden v2.2.7 START
- 	   if($row['user_session_time'] >= (time()-$board_config['online_time'])):
-         $theme_name = get_theme();
-		 if($row['user_allow_viewonline']):
-         $online_status = '<a href="'.append_sid("viewonline.$phpEx").'" title="'.sprintf($lang['is_online'],$row['username']).'"'.$online_color.'><img 
-		 alt="online" src="themes/'.$theme_name.'/forums/images/status/online_bgcolor_one.gif" /></a>';
-         
-		 elseif($userdata['user_level'] == ADMIN || $userdata['user_id'] == $row['user_id'] ):
-         $online_status = '<em><a href="'.append_sid("viewonline.$phpEx").'" title="'.sprintf($lang['is_hidden'],$profiledata['username']).'"'.$hidden_color.'>'.$lang['Hidden'].'</a></em>';
-         
-		 else:
-         $online_status = '<span title="'.sprintf($lang['is_offline'],$row['username']).'"'.$offline_color.'><strong>'.$lang['Offline'].'</strong></span>';
-         endif;
-
-       else:
-       $online_status = '<span title="'.sprintf($lang['is_offline'],$row['username']).'"'.$offline_color.'><img 
+	   if(!$row['user_allow_viewonline']):
+	   $online_status = '<img class="tooltip-html copyright" alt="Hidden" title="Hidden" alt="Hidden" width="30" height="30" 
+	   src="themes/'.$theme_name.'/forums/images/status/icons8-invisible-512.png" />';
+   
+	   elseif($row['user_session_time'] >= (time()-$board_config['online_time'])):
+	   $theme_name = get_theme();
+	   $online_status = '<a class="tooltip-html copyright" href="'.append_sid("viewonline.$phpEx").'" title="'.sprintf($lang['is_online'],$row['username']).'"'.$online_color.'><img 
+	   alt="online" src="themes/'.$theme_name.'/forums/images/status/online_bgcolor_one.gif" /></a>';
+	   else:
+       $online_status = '<span class="tooltip-html copyright" title="'.sprintf($lang['is_offline'],$row['username']).'"'.$offline_color.'><img 
 	   alt="online" src="themes/'.$theme_name.'/forums/images/status/offline_bgcolor_one.gif" /></span>';
        endif;
        # Mod: Online/Offline/Hidden v2.2.7 END
+        
+		if(strlen($user_from) == 6)
+		$user_from = 'The InterWebs';
 
+        if (!is_admin())
+        if(!$row['user_allow_viewonline'])
+		continue;
+		
         # Alternate the row class
         $row_class = ( !($i % 2) ) ? 'row2' : 'row3';
 		$template->assign_block_vars('memberrow', array(
@@ -388,7 +391,7 @@ if($row = $db->sql_fetchrow($result)):
 			'POSTS' => $posts,
 			'PM' => $pm,
 			'WWW' => $www,
-			'GENDER' => $gender,
+			'GENDER' => $pm.' '.$www.' '.$facebook.' '.$gender,
 			'LAST_ACTIVE' => $last_visit,
 			'FACEBOOK' => $facebook,
 			'STATUS' => $online_status,
@@ -415,113 +418,72 @@ $sql1 		= "SELECT count(*) AS total FROM " . USERS_TABLE . " WHERE user_id <> " 
 $result1 	= $db->sql_query($sql1);
 $total 		= $db->sql_fetchrow($result1);
 
-if($total['total'] > $board_config['topics_per_page'] && $mode != 'topten' || $board_config['topics_per_page'] < 10)
-{
+if($total['total'] > $board_config['topics_per_page'] && $mode != 'topten' || $board_config['topics_per_page'] < 10):
 	if(isset($pageroot))
-		$page = intval($pageroot);
+	$page = intval($pageroot);
 	else
-		$page = 1;
-		
+	$page = 1;
 	$pagination = '';
-		
 	$redirect = 'modules.php?name=Members_List'.(($HTTP_GET_VARS['mode']) ? '&mode=letter&alphanum='.$HTTP_GET_VARS['alphanum'] : '');
-	if(isset($page))
-	{			
+	if(isset($page)):
 		$totalPages = ceil($total['total'] / $board_config['topics_per_page']);
-		
-		if ( $totalPages == 1 )
-			return '';
-		
+		if($totalPages == 1)
+		return '';
 		$on_page = floor($start / $board_config['topics_per_page']) + 1;
-		
-		if ($totalPages > 10)
-		{
+		if($totalPages > 10):
 			$init_page_max = ( $totalPages > 3 ) ? 3 : $totalPages;
-			
-			for($i = 1; $i < $init_page_max + 1; $i++)
-			{
+			for($i = 1; $i < $init_page_max + 1; $i++):
 				$pagination .= ( $i == $on_page ) ? '<span style="font-weight:bold; font-size:13px;">'.$i.'</span>' : '<a href="'.$redirect.'&amp;page='.$i.'"><span>'.$i.'</span></a>';
 				if ( $i <  $init_page_max )
-				{
-					$pagination .= "&nbsp;";
-				}
-			}
-			if ( $totalPages > 3 )
-			{
-				if ( $on_page > 1  && $on_page < $totalPages )
-				{
+				$pagination .= "&nbsp;";
+			endfor;
+			 if($totalPages > 3):
+				if($on_page > 1 && $on_page < $totalPages):
 					$pagination .= ( $on_page > 5 ) ? ' ... ' : '&nbsp;';
 					$init_page_min = ( $on_page > 4 ) ? $on_page : 5;
 					$init_page_max = ( $on_page < $totalPages - 4 ) ? $on_page : $totalPages - 4;
-
-					for($i = $init_page_min - 1; $i < $init_page_max + 2; $i++)
-					{
+					for($i = $init_page_min - 1; $i < $init_page_max + 2; $i++):
 						$pagination .= ($i == $on_page) ? '<span style="font-weight:bold; font-size:13px;">'.$i.'</span>' : '<a href="'.$redirect.'&amp;page='.$i.'"><span>'.$i.'</span></a>';
 						if ( $i <  $init_page_max + 1 )
-						{
 							$pagination .= '&nbsp;';
-						}
-					}
-
+					endfor;
 					$pagination .= ( $on_page < $totalPages - 4 ) ? ' ... ' : '&nbsp;';
-				}
-				else
-				{
+				else:
 					$pagination .= ' ... ';
-				}
-				for($i = $totalPages - 2; $i < $totalPages + 1; $i++)
-				{
+				endif;
+				for($i = $totalPages - 2; $i < $totalPages + 1; $i++):
 					$pagination .= ( $i == $on_page ) ? '<span style="font-weight:bold; font-size:13px;">'.$i.'</span>'  : '<a href="'.$redirect.'&amp;page='.$i.'"><span>'.$i.'</span></a>';
 					if( $i <  $totalPages )
-					{
 						$pagination .= "&nbsp;";
-					}
-				}		
-			}
-		}
-		else
-		{
-			for($i = 1; $i < $totalPages + 1; $i++)
-			{
+				endfor;		
+			endif;
+		else:
+			for($i = 1; $i < $totalPages + 1; $i++):
 				$pagination .= ( $i == $on_page ) ? '<span style="font-weight:bold; font-size:13px;">'.$i.'</span>' : '<a href="'.$redirect.'&amp;page='.$i.'"><span>'.$i.'</span></a>';
 				if ( $i <  $totalPages )
-				{
-					$pagination .= '&nbsp;';
-				}
-			}
-		}
-
-		if($page <= 1)
-		{
+			    $pagination .= '&nbsp;';
+			endfor;
+		endif;
+		if($page <= 1):
 			$pagination = '<span>'.$lang['Goto_page_prev'].'</span>&nbsp;'.$pagination.'&nbsp';
-		}
-		else
-		{
+		else:
 			$j = $page - 1;
 			$pagination = '<span><a href="'.$redirect.'&amp;page='.$j.'">'.$lang['Goto_page_prev'].'</a></span>&nbsp;'.$pagination.'&nbsp;';
-		}
-		
-		if($page == $totalPages )
-		{
+		endif;
+		if($page == $totalPages):
 			$pagination .= '<span>'.$lang['Goto_page_next'].'</span>';
-		}
-			else
-		{
+		else:
 			$j = $page + 1;
 			$pagination .= '<a href="'.$redirect.'&amp;page='.$j.'">'.$lang['Goto_page_next'].'</a>';
-		}
-	}
-
+		endif;
+	endif;
 	$template->assign_block_vars('pagination', array(
 		'PAGINATION'	=> $pagination,
 		'TOTAL' 		=> $total_found,
 		'PERPAGE'		=> $board_config['topics_per_page'])
 	);
-}
-//---------------------------------------------------------------------
-
+endif;
 $template->pparse('body');
-echo '<span style="float:right; padding-right:5px;"><a class="font-family" href="#module-copyright-popup" rel="modal:open">'.str_replace('_',' ',$name).' &#169;</a></span><br />';
+//echo '<span style="float:right; padding-right:5px;"><a class="font-family" href="#module-copyright-popup" rel="modal:open">'.str_replace('_',' ',$name).' &#169;</a></span><br />';
 include(NUKE_INCLUDE_DIR.'page_tail.php');
-
 ?>

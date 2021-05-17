@@ -56,12 +56,12 @@
               <!-- BEGIN memberrow -->
               <tr>
                 <td class="{memberrow.ROW_CLASS} acenter">{memberrow.ROW_NUMBER}</td>
-                <td class="{memberrow.ROW_CLASS}" width="125">
+                <td class="{memberrow.ROW_CLASS}" width="115">
                   <span style="float: left; margin: 2px;">{memberrow.CURRENT_AVATAR} <a href="{memberrow.U_VIEWPROFILE}">
 				  <strong>{memberrow.USERNAME}</strong></a></span>
                   <span style="float: right;"></span>
                 &nbsp;</td>
-                <td class="{memberrow.ROW_CLASS}" width="1%" align="right">
+                <td class="{memberrow.ROW_CLASS}" width="66" align="right">
                   <span style="float: right;">{memberrow.GENDER}</span></td>
                 <td class="{memberrow.ROW_CLASS}">{memberrow.FLAG}{memberrow.FROM}</td>
                 <td class="{memberrow.ROW_CLASS} acenter">{memberrow.AGE}</td>                
