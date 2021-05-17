@@ -16,17 +16,18 @@
         <li>Technocrat</li>
 	<li>killigan</li>
 	<li>JeFFb68CAM</li>
-	<li>AlphaClient</li>
-	<li>Shakey</li>
-	<li>TheGhost</li>
-	<li>ScottyBcoder</li>
+	<li>AlphaClient - Anthony Castellano</li>
+	<li>Shakey - Anna L Weese</li>
+	<li>TheGhost - Ernest Allen Buffington</li>
+	<li>ScottyBcoder - Truman Scott Buffington</li>
+	<li>acydburn - Meik Sievertsen</li>
 	<li>SgtLegend</li>
 	<li>Eyecu</li>
 	<li>Wolfstar</li>
         <li>Lonestar</li>
 	<li>CoRpSE</li>
-	<li>SeaBeast08</li> 
-	<li>Terrance Wolfe</li>
+	<li>SeaBeast08 - Sebastian Scott Buffington aka Allen Scott</li> 
+	<li>TheWolf - Terrance Wolfe</li>
 	<li>Richard van Oosterhout</li> 
 	<li>Peter Lindgren</li> 
 	<li>André V Escudero</li>
