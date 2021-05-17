@@ -324,10 +324,27 @@ if($row = $db->sql_fetchrow($result)):
 		$posts = ($row['user_posts']) ? '<a href="modules.php?name=Forums&file=search&search_author='.$username.'">'.$row['user_posts'].'</a>' : 0;
 		
 		# Private message link
-		$pm = '<a href="'.append_sid("privmsg.$phpEx?mode=post&amp;".POST_USERS_URL."=$user_id").'">'.get_evo_icon('evo-sprite mail tooltip', sprintf($lang['Send_private_message'],$username)).'</a>';
+		//$pm = '<a href="'.append_sid("privmsg.$phpEx?mode=post&amp;".POST_USERS_URL."=$user_id").'">'.get_evo_icon('evo-sprite mail tooltip', sprintf($lang['Send_private_message'],$username)).'</a>';
+		$pm ='PM';
 		
-		# does the person have a dick
-		$gender = (($row['user_gender'] == 0) ? '' : (($row['user_gender'] == 1) ? get_evo_icon('evo-sprite male').'&nbsp;' : get_evo_icon('evo-sprite female').'&nbsp;'));
+		# does the person have a dick START
+		global $textcolor1;
+		if($row['user_gender'] == 0)
+		$gender = '<svg xmlns="http://www.w3.org/2000/svg" 
+		width="30" 
+		height="30" 
+		fill="'.$textcolor1.'" class="bi bi-gender-female" 
+		viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 
+		1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5z"></path></svg>';
+		else
+		$gender = '<svg xmlns="http://www.w3.org/2000/svg" 
+		width="30" 
+		height="30" 
+		fill="'.$textcolor1.'" class="bi bi-gender-male" 
+		viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"></path></svg>';
+		# does the person have a dick END
 		
 		# facebook mod v1.0 START
 		$facebook = (($row['user_facebook']) ? '<a href="https://www.facebook.com/'.$row['user_facebook'].'" target="_blank">'.get_evo_icon('evo-sprite 

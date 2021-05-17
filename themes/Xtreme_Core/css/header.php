@@ -68,6 +68,10 @@ input[type="radio"]{
     vertical-align: bottom;
 }
 
+.fixitjimmy{
+    vertical-align: bottom;
+}
+
 /*---------------------------------------------------------------*/
 /* Forum Attachements                                            */
 /*---------------------------------------------------------------*/
