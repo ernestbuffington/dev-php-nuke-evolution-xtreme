@@ -56,7 +56,7 @@
               <tr>
                 <td class="{memberrow.ROW_CLASS} acenter">{memberrow.ROW_NUMBER}</td>
                 <td class="{memberrow.ROW_CLASS}">
-                  <span style="float: left; margin: 2px;"><a href="{memberrow.U_VIEWPROFILE}">{memberrow.USERNAME}</a></span>
+                  <span style="float: left; margin: 2px;"><a href="{memberrow.U_VIEWPROFILE}">{memberrow.CURRENT_AVATAR} {memberrow.USERNAME}</a></span>
                   <span style="float: right;">{memberrow.GENDER}{memberrow.WWW}{memberrow.FACEBOOK}{memberrow.PM}</span>
                 </td>
                 <td class="{memberrow.ROW_CLASS}">{memberrow.FLAG}{memberrow.FROM}</td>

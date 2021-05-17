@@ -190,14 +190,16 @@ endswitch;
 # search switch END
 
 $username = (!empty($HTTP_POST_VARS['username'])) ? $HTTP_POST_VARS['username'] : '';
-if ($username && isset($HTTP_POST_VARS['submituser']))
-{
+if ($username && isset($HTTP_POST_VARS['submituser'])):
     # search for users with a wildcard
 	$search_author = str_replace('*', '%', trim($username));
-	if(( strpos($search_author, '%') !== false ) && (strlen(str_replace('%', '',$search_author)) < $board_config['search_min_chars']))
+	if((strpos($search_author, '%') !== false) && (strlen(str_replace('%', '',$search_author)) < $board_config['search_min_chars']))
 	$search_author = '';
 
 	$sql = "SELECT username, 
+	  	        user_avatar, 
+	       user_avatar_type, 
+	       user_allowavatar, 
 	                user_id, 
 				 user_posts, 
 				user_gender, 
@@ -218,6 +220,9 @@ if ($username && isset($HTTP_POST_VARS['submituser']))
     
 	# this is the original SQL queery START
 	$deprecated_sql = "SELECT username, 
+	        		       user_avatar, 
+	                  user_avatar_type, 
+	                  user_allowavatar, 
 	                           user_id, 
 							user_posts, 
 						   user_gender, 
@@ -237,84 +242,152 @@ if ($username && isset($HTTP_POST_VARS['submituser']))
 	AND user_id <> ".ANONYMOUS." LIMIT 1";
 	# this is the original SQL queery END
 
-}
-else
-	$sql = "SELECT username, user_id, user_posts, user_gender, user_facebook, user_birthday, birthday_display, user_regdate, user_from, user_from_flag, user_website, user_allow_viewonline, user_session_time, user_lastvisit FROM " . USERS_TABLE . " WHERE user_id <> ".ANONYMOUS."".$where." ORDER BY $order_by";
 
-if( !($result = $db->sql_query($sql)) )
-	message_die(GENERAL_ERROR, 'Could not query users', '', __LINE__, __FILE__, $sql);
+else:
+	$sql = "SELECT username, 
+                user_avatar, 
+	       user_avatar_type, 
+	       user_allowavatar, 
+	                user_id, 
+				 user_posts, 
+				user_gender, 
+			  user_facebook, 
+			  user_birthday, 
+		   birthday_display, 
+		       user_regdate, 
+			      user_from, 
+			 user_from_flag, 
+			   user_website, 
+	  user_allow_viewonline, 
+	      user_session_time, 
+		     user_lastvisit 
+			 
+    FROM ".USERS_TABLE." WHERE user_id <> ".ANONYMOUS."".$where." ORDER BY $order_by";
+endif;
 
-if ( $row = $db->sql_fetchrow($result) )
-{
+if(!($result = $db->sql_query($sql)))
+message_die(GENERAL_ERROR, 'Could not query users', '', __LINE__, __FILE__, $sql);
+
+if($row = $db->sql_fetchrow($result)):
+
 	$i = 0;
 	do
 	{
-		$username 			= $row['username'];
-		$user_id 			= intval($row['user_id']);
+		$username = $row['username'];
+		$user_id = intval($row['user_id']);
+		
 		# Get the users location and flag
-		$user_from 			= ( !empty($row['user_from']) ) ? $row['user_from'] : '&nbsp;';
+		$user_from = (!empty($row['user_from'])) ? $row['user_from'] : '&nbsp;';
 
-		// $user_flag 			= ( !empty($row['user_from_flag']) ) ? "&nbsp;<img src=\"images/flags/". $row['user_from_flag'] ."\" alt=\"". $row['user_from_flag'] ."\">&nbsp;" : '&nbsp;<img src="images/flags/blank.png" alt="">&nbsp;';
-		// $user_flag 			= ( !empty($row['user_from_flag']) ) ? "&nbsp;<span class=\"countries ".str_replace('.png','',$row['user_from_flag'])."\"></span>&nbsp;" : '&nbsp;<span class="countries unknown"></span>&nbsp;';
-		$user_flag 			= ( !empty($row['user_from_flag']) ) ? '&nbsp;'.get_evo_icon('countries '.str_replace('.png','',$row['user_from_flag'])).'&nbsp;' : '&nbsp;'.get_evo_icon('countries unknown').'&nbsp;';
+		$deprecated_user_flag = (!empty($row['user_from_flag'])) ? "&nbsp;<img 
+		src=\"images/flags/".$row['user_from_flag']."\" alt=\"".$row['user_from_flag']."\">&nbsp;" : '&nbsp;<img src="images/flags/blank.png" alt="">&nbsp;';
+		
+		$deprecated_user_flag = (!empty($row['user_from_flag'])) ? 
+		"&nbsp;<span class=\"countries ".str_replace('.png','',$row['user_from_flag'])."\"></span>&nbsp;" : '&nbsp;<span class="countries unknown"></span>&nbsp;';
+		
+		$user_flag = (!empty($row['user_from_flag'])) ? 
+		'&nbsp;'.get_evo_icon('countries '.str_replace('.png','',$row['user_from_flag'])).'&nbsp;' : '&nbsp;'.get_evo_icon('countries unknown').'&nbsp;';
 
 		# Calculate the users age.
-		$bday_month_day 	= floor($row['user_birthday'] / 10000);
-		$bday_year_age 		= ( $row['birthday_display'] != BIRTHDAY_NONE && $row['birthday_display'] != BIRTHDAY_DATE ) ? $row['user_birthday'] - 10000*$bday_month_day : 0;
-		$fudge 				= ( gmdate('md') < $bday_month_day ) ? 1 : 0;
-		$age 				= ( $bday_year_age ) ? gmdate('Y')-$bday_year_age-$fudge : false;
+		$bday_month_day = floor($row['user_birthday'] / 10000);
+		$bday_year_age = ($row['birthday_display'] != BIRTHDAY_NONE && $row['birthday_display'] != BIRTHDAY_DATE) ? $row['user_birthday'] - 10000*$bday_month_day : 0;
+		$fudge = (gmdate('md') < $bday_month_day) ? 1 : 0;
+		$age = ($bday_year_age) ? gmdate('Y')-$bday_year_age-$fudge : false;
+		
 		# Website URL
-		$www 				= ( $row['user_website'] ) ? '<a href="'.$row['user_website'].'" target="_userwww">'.get_evo_icon('evo-sprite globe tooltip', $lang['Visit_website']).'</a>&nbsp;' : '';
-		$joined 			= $row['user_regdate'];
-		$posts 				= ( $row['user_posts'] ) ? '<a href="modules.php?name=Forums&file=search&search_author='.$username.'">'.$row['user_posts'].'</a>' : 0;
-		$pm 				= '<a href="'.append_sid("privmsg.$phpEx?mode=post&amp;" . POST_USERS_URL . "=$user_id").'">'.get_evo_icon('evo-sprite mail tooltip', sprintf($lang['Send_private_message'],$username)).'</a>';
-		$gender 			= (($row['user_gender'] == 0) ? '' : (($row['user_gender'] == 1) ? get_evo_icon('evo-sprite male').'&nbsp;' : get_evo_icon('evo-sprite female').'&nbsp;'));
-		$facebook 			= (($row['user_facebook']) ? '<a href="https://www.facebook.com/'.$row['user_facebook'].'" target="_blank">'.get_evo_icon('evo-sprite facebook tooltip', $lang['Visit_facebook']).'</a>&nbsp;' : '');
-		$last_visit 		= ($row['user_lastvisit'] == 0) ? '' : formatTimestamp($row['user_lastvisit'],'M d, Y');
-
-		# The users current status
-        if ($row['user_session_time'] >= (time()-$board_config['online_time']))
+		$www = ($row['user_website']) ? '<a href="'.$row['user_website'].'" target="_userwww">'.get_evo_icon('evo-sprite globe tooltip', $lang['Visit_website']).'</a>&nbsp;' : '';
+		
+		# Date Joined
+		$joined = $row['user_regdate'];
+		
+        /*****[BEGIN]******************************************
+        [ Mod:    Forum Index Avatar Mod                 v1.0]
+        ******************************************************/
+        switch($row['user_avatar_type'])
         {
-            if ($row['user_allow_viewonline'])
-                $online_status = '<a href="' . append_sid("viewonline.$phpEx") . '" class="tooltip" title="' . sprintf($lang['is_online'], $username) . '"' . $online_color . '>' . $lang['Online'] . '</a>';
-            else if ($userdata['user_level'] == ADMIN || $userdata['user_id'] == $user_id)
-                $online_status = '<em><a class="tooltip" href="' . append_sid("viewonline.$phpEx") . '" title="' . sprintf($lang['is_hidden'], $username) . '"' . $hidden_color . '>' . $lang['Hidden'] . '</a></em>';
-            else
-                $online_status = '<span class="tooltip" title="'.sprintf($lang['is_offline'], $username).'"'.$offline_color.'>'.$lang['Offline'].'</span>';
-        }
-        else
-            $online_status = '<span class="tooltip" title="'.sprintf($lang['is_offline'], $username).'"'.$offline_color.'>'.$lang['Offline'].'</span>';
+           case USER_AVATAR_UPLOAD:
+           $current_avatar = $board_config['avatar_path'] . '/' . $row['user_avatar'];
+           break;
+           case USER_AVATAR_REMOTE:
+           $current_avatar = resize_avatar($row['user_avatar']);
+           break;
+           case USER_AVATAR_GALLERY:
+           $current_avatar = $board_config['avatar_gallery_path'] . '/' . (($row['user_avatar'] 
+			== 'blank.gif' || $row['user_avatar'] == 'gallery/blank.gif') ? 'blank.png' : $row['user_avatar']);
+           break;
+		}
+        /*****[END]********************************************
+        [ Mod:    Forum Index Avatar Mod                 v1.0]
+         ******************************************************/
+		
+		# Number of Posts
+		$posts = ($row['user_posts']) ? '<a href="modules.php?name=Forums&file=search&search_author='.$username.'">'.$row['user_posts'].'</a>' : 0;
+		
+		# Private message link
+		$pm = '<a href="'.append_sid("privmsg.$phpEx?mode=post&amp;".POST_USERS_URL."=$user_id").'">'.get_evo_icon('evo-sprite mail tooltip', sprintf($lang['Send_private_message'],$username)).'</a>';
+		
+		# does the person have a dick
+		$gender = (($row['user_gender'] == 0) ? '' : (($row['user_gender'] == 1) ? get_evo_icon('evo-sprite male').'&nbsp;' : get_evo_icon('evo-sprite female').'&nbsp;'));
+		
+		# facebook mod v1.0 START
+		$facebook = (($row['user_facebook']) ? '<a href="https://www.facebook.com/'.$row['user_facebook'].'" target="_blank">'.get_evo_icon('evo-sprite 
+		facebook tooltip', $lang['Visit_facebook']).'</a>&nbsp;' : '');
+		# facebook mod v1.0 END
+		
+		# USers last visit
+		$last_visit = ($row['user_lastvisit'] == 0) ? '' : formatTimestamp($row['user_lastvisit'],'M d, Y');
+
+       # This is broken in UK version
+	   # Mod: Online/Offline/Hidden v2.2.7 START
+ 	   if($row['user_session_time'] >= (time()-$board_config['online_time'])):
+         $theme_name = get_theme();
+		 if($row['user_allow_viewonline']):
+         $online_status = '<a href="'.append_sid("viewonline.$phpEx").'" title="'.sprintf($lang['is_online'],$row['username']).'"'.$online_color.'><img 
+		 alt="online" src="themes/'.$theme_name.'/forums/images/status/online_bgcolor_one.gif" /></a>';
+         
+		 elseif($userdata['user_level'] == ADMIN || $userdata['user_id'] == $row['user_id'] ):
+         $online_status = '<em><a href="'.append_sid("viewonline.$phpEx").'" title="'.sprintf($lang['is_hidden'],$profiledata['username']).'"'.$hidden_color.'>'.$lang['Hidden'].'</a></em>';
+         
+		 else:
+         $online_status = '<span title="'.sprintf($lang['is_offline'],$row['username']).'"'.$offline_color.'><strong>'.$lang['Offline'].'</strong></span>';
+         endif;
+
+       else:
+       $online_status = '<span title="'.sprintf($lang['is_offline'],$row['username']).'"'.$offline_color.'><img 
+	   alt="online" src="themes/'.$theme_name.'/forums/images/status/offline_bgcolor_one.gif" /></span>';
+       endif;
+       # Mod: Online/Offline/Hidden v2.2.7 END
 
         # Alternate the row class
         $row_class = ( !($i % 2) ) ? 'row2' : 'row3';
 		$template->assign_block_vars('memberrow', array(
-			'ROW_NUMBER' 			=> $i + ( $start + 1 ),
-			'ROW_CLASS' 			=> $row_class,
-			'USERNAME' 				=> UsernameColor($row['username']),
-			'FROM' 					=> $user_from,
-			'FLAG' 					=> $user_flag,
-			'JOINED' 				=> $joined,
-			'AGE' 					=> $age,
-			'POSTS' 				=> $posts,
-			'PM' 					=> $pm,
-			'WWW' 					=> $www,
-			'GENDER' 				=> $gender,
-			'LAST_ACTIVE'			=> $last_visit,
-			'FACEBOOK'				=> $facebook,
-			'STATUS'				=> $online_status,
-			'U_VIEWPROFILE' 		=> "modules.php?name=Profile&mode=viewprofile&amp;" . POST_USERS_URL . "=$user_id")
+			'ROW_NUMBER' => $i + ( $start + 1 ),
+			'ROW_CLASS' => $row_class,
+			'USERNAME' => UsernameColor($row['username']),
+			'FROM' => $user_from,
+			'FLAG' => $user_flag,
+			'JOINED' => $joined,
+			'AGE' => $age,
+			'POSTS' => $posts,
+			'PM' => $pm,
+			'WWW' => $www,
+			'GENDER' => $gender,
+			'LAST_ACTIVE' => $last_visit,
+			'FACEBOOK' => $facebook,
+			'STATUS' => $online_status,
+			'CURRENT_AVATAR' => '<img class="rounded-corners-header" height="auto" width="30" src="'.$current_avatar.'">&nbsp;',
+			'U_VIEWPROFILE' => "modules.php?name=Profile&mode=viewprofile&amp;" . POST_USERS_URL . "=$user_id")
 		);
 		$i++;
 	} 
 	while ( $row = $db->sql_fetchrow($result) );
 	$db->sql_freeresult($result);
-}
-else
-{
+
+else:
 	$template->assign_block_vars('no_username', array(
 		'NO_USER_ID_SPECIFIED' => $lang['No_user_id_specified'])
 	);
-}
+endif;
 
 $total_found = $db->sql_unumrows($sql);
 
