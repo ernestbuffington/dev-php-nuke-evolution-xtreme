@@ -4,10 +4,19 @@
  *                            -------------------
  *   begin                : Staurday, May 15, 2021
  *   Author               : Ernest Allen Buffington
- *   copyright            : (C) 2001 The phpBB Group
- *   email                : support@phpbb.com
+ *   email                : ernest.buffington@gmail.com
+ *   copyright            : (C) 2021 The 86it Developers Network
  *
- *   $Id: memberlist.php,v 1.36.2.8 2003/06/09 13:06:19 psotfx Exp $
+ *   $Id: viewtopic_whoview.php, v1.0.0 05/16/2021 04:17:00 TheGhost 
+ *
+ *   This mod is based on the Members List and a very incomplete version
+ *   of viewtopic_whoview.php. This was the case of the version found in
+ *   the UK 2.0.9e version of Nuke Evolution.
+ *
+ *   This version is very different in terms of the fact that we are 
+ *   desperatly trying to keep this framework as close to the original
+ *   beloved layout of the phpBB forums as possible.
+ *
  *
  ***************************************************************************/
 
