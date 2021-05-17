@@ -26,7 +26,7 @@
 	<li>Wolfstar</li>
         <li>Lonestar</li>
 	<li>CoRpSE</li>
-	<li>SeaBeast08</li> 
+	<li>SeaBeast08 - Sebastian Scott Buffington aka Allen Scott</li> 
 	<li>TheWolf - Terrance Wolfe</li>
 	<li>Richard van Oosterhout</li> 
 	<li>Peter Lindgren</li> 
