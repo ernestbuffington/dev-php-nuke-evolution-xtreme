@@ -189,18 +189,54 @@ switch($mode):
 endswitch;
 # search switch END
 
-$username = ( !empty($HTTP_POST_VARS['username']) ) ? $HTTP_POST_VARS['username'] : '';
-if ( $username && isset($HTTP_POST_VARS['submituser']) )
+$username = (!empty($HTTP_POST_VARS['username'])) ? $HTTP_POST_VARS['username'] : '';
+if ($username && isset($HTTP_POST_VARS['submituser']))
 {
-//---------------------------------------------------------------------
-//	SEARCH FOR A USER, USING A WILDCARD
-//---------------------------------------------------------------------
+    # search for users with a wildcard
 	$search_author = str_replace('*', '%', trim($username));
-	if( ( strpos($search_author, '%') !== false ) && ( strlen(str_replace('%', '', $search_author)) < $board_config['search_min_chars'] ) )
-		$search_author = '';
-//---------------------------------------------------------------------
-	$sql = "SELECT username, user_id, user_posts, user_gender, user_facebook, user_birthday, birthday_display, user_regdate, user_from, user_from_flag, user_website, user_allow_viewonline, user_session_time, user_lastvisit FROM " . USERS_TABLE . " WHERE username LIKE '" . str_replace("\'", "''", $search_author) . "' AND user_id <> " . ANONYMOUS . " LIMIT 1";
-    // $sql = "SELECT username, user_id, user_posts, user_gender, user_facebook, user_birthday, birthday_display, user_regdate, user_from, user_from_flag, user_website, user_allow_viewonline, user_session_time, user_lastvisit FROM " . USERS_TABLE . " WHERE username = '$username' AND user_id <> " . ANONYMOUS . " LIMIT 1";
+	if(( strpos($search_author, '%') !== false ) && (strlen(str_replace('%', '',$search_author)) < $board_config['search_min_chars']))
+	$search_author = '';
+
+	$sql = "SELECT username, 
+	                user_id, 
+				 user_posts, 
+				user_gender, 
+			  user_facebook, 
+			  user_birthday, 
+		   birthday_display, 
+		       user_regdate, 
+			      user_from, 
+			 user_from_flag, 
+			   user_website, 
+	  user_allow_viewonline, 
+	      user_session_time, 
+		     user_lastvisit 
+	
+	FROM ".USERS_TABLE." 
+	WHERE username LIKE '".str_replace("\'", "''",$search_author)."' 
+	AND user_id <> ".ANONYMOUS." LIMIT 1";
+    
+	# this is the original SQL queery START
+	$deprecated_sql = "SELECT username, 
+	                           user_id, 
+							user_posts, 
+						   user_gender, 
+						 user_facebook, 
+						 user_birthday, 
+					  birthday_display, 
+					      user_regdate, 
+						     user_from, 
+					    user_from_flag, 
+						  user_website, 
+				 user_allow_viewonline, 
+				     user_session_time, 
+					    user_lastvisit 
+						
+	FROM ".USERS_TABLE." 
+	WHERE username = '$username' 
+	AND user_id <> ".ANONYMOUS." LIMIT 1";
+	# this is the original SQL queery END
+
 }
 else
 	$sql = "SELECT username, user_id, user_posts, user_gender, user_facebook, user_birthday, birthday_display, user_regdate, user_from, user_from_flag, user_website, user_allow_viewonline, user_session_time, user_lastvisit FROM " . USERS_TABLE . " WHERE user_id <> ".ANONYMOUS."".$where." ORDER BY $order_by";
