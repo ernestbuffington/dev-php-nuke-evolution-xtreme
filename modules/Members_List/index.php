@@ -1,14 +1,4 @@
 <?php
-/*
-	Author: phpbb.com
-	Author Email: support@phpbb.com
-	Copyright Header: Module Copyright © Information
-	Module Description: Display's all registered user's.
-	Module Name: Members List	
-	Module Version: 1.36.2.10
-	Modifications: Lonestar (http://lonestar-modules.com)	
-*/
-
 /*======================================================================= 
   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
@@ -16,11 +6,22 @@
 /***************************************************************************
  *                              memberlist.php
  *                            -------------------
+ *   update               : Monday, May 17, 2021
+ *   copyright            : (C) 2001 Ernest Allen Buffington
+ *   email                : ernest.buffington@gmail.com
+ *	 version              : 2.0
+ *
+ *
  *   begin                : Friday, May 11, 2001
  *   copyright            : (C) 2001 The phpBB Group
  *   email                : support@phpbb.com
  *
  *   $Id: memberlist.php,v 1.36.2.10 2004/07/11 16:46:15 acydburn Exp $
+ *
+ *	Module Description: Display's all registered user's.
+ *	Module Name: Members List	
+ *	Module Version: 1.36.2.10
+ *	Original Modifications: Lonestar (http://lonestar-modules.com)	
  *
  ***************************************************************************/
 
@@ -44,9 +45,7 @@
 	  Member Country Flags                     v2.0.7
 	  Birthdays                                v3.0.0
  ************************************************************************/
-if (!defined('MODULE_FILE')) {
-   die('You can\'t access this file directly...');
-}
+if (!defined('MODULE_FILE'))die('You can\'t access this file directly...');
 
 $module_name = basename(dirname(__FILE__));
 require(NUKE_FORUMS_DIR.'/nukebb.php');
@@ -59,19 +58,26 @@ include($phpbb_root_path.'common.'.$phpEx);
 $userdata = session_pagestart($user_ip, PAGE_VIEWMEMBERS);
 init_userprefs($userdata);
 
-$pageroot       = (!empty($HTTP_GET_VARS['page'])) ? $HTTP_GET_VARS['page'] : 1;
-$page           = (isset($pageroot)) ? intval($pageroot) : 1;
+$pageroot = (!empty($HTTP_GET_VARS['page'])) ? $HTTP_GET_VARS['page'] : 1;
+$page = (isset($pageroot)) ? intval($pageroot) : 1;
 
-$calc           = $board_config['topics_per_page'] * $page;
-$start          = $calc - $board_config['topics_per_page'];
+$calc = $board_config['topics_per_page'] * $page;
+$start = $calc - $board_config['topics_per_page'];
 
-// if ( isset($HTTP_GET_VARS['mode']) || isset($HTTP_POST_VARS['mode']) )
-// 	$mode = ( isset($HTTP_POST_VARS['mode']) ) ? htmlspecialchars($HTTP_POST_VARS['mode']) : htmlspecialchars($HTTP_GET_VARS['mode']);
+# just another instance where code is changed without explanation START
+
+# it appears as if a new function was created called get_query_var and
+# was used to replace the original code.
+// if(isset($HTTP_GET_VARS['mode']) || isset($HTTP_POST_VARS['mode']))
+// 	$mode = (isset($HTTP_POST_VARS['mode'])) ? htmlspecialchars($HTTP_POST_VARS['mode']) : htmlspecialchars($HTTP_GET_VARS['mode']);
 // else
 // 	$mode = 'joined';
-$mode           = get_query_var('mode', '_REQUEST', 'string', 'joined');
-$sort_order     = get_query_var('order', '_REQUEST', 'string');
-$sort_order     = ($sort_order == 'DESC') ? $sort_order : 'ASC';
+
+# just another instance where code is changed without explanation END
+
+$mode = get_query_var('mode', '_REQUEST', 'string', 'joined');
+$sort_order = get_query_var('order', '_REQUEST', 'string');
+$sort_order = ($sort_order == 'DESC') ? $sort_order : 'ASC';
 
 $page_title = $lang['Memberlist'];
 include(NUKE_INCLUDE_DIR.'page_header.php');
@@ -81,87 +87,107 @@ $template->set_filenames(array(
 );
 
 $template->assign_vars(array(
-	'L_PAGE_TITLE' 			=> $lang['Memberlist'],
-	'L_SELECT_SORT_METHOD' 	=> $lang['Select_sort_method'],
-	'L_EMAIL' 				=> $lang['Email'],
-	'L_WEBSITE' 			=> $lang['Website'],
-	'L_FROM' 				=> $lang['Location'],
-	'L_ORDER' 				=> $lang['Order'],
-	'L_LOOK_UP' 			=> $lang['Look_up_User'],
-	'L_FIND_USERNAME' 		=> $lang['Find_username'],
-	'U_SEARCH_USER' 		=> "modules.php?name=Forums&amp;file=search&amp;mode=searchuser&amp;popup=1", // modules.php?name=Forums&file=search&search_author=Lonestar
-	'U_SEARCH_EXPLAIN'		=> $lang['Search_author_explain'],
-	'L_GO'					=> $lang['Sort_Go'],
-	'L_JOINED' 				=> $lang['Joined'],
-	'L_AGE' 				=> $lang['Sort_Age'],
-	'L_POSTS' 				=> $lang['Posts'],
-	'L_ONLINE_STATUS' 		=> $lang['Online_status'],
-	'L_LAST_VISIT' 			=> $lang['User_last_visit'],
-/*****[BEGIN]******************************************
- [ Mod:    Selection Order                     v1.0.0 ]
- [ Mod:    Birthdays                           v3.0.0 ]
- ******************************************************/
-	'S_MODE_SELECT' 		=> select_box('mode',$mode,array('joined' => $lang['Sort_Joined'], 'username' => $lang['Sort_Username'], 'location' => $lang['Sort_Location'], 'posts' => $lang['Sort_Posts'], 'age' => $lang['Sort_Age'], 'email' => $lang['Sort_Email'], 'website' => $lang['Sort_Website'], 'topten' => $lang['Sort_Top_Ten'], 'online' => $lang['Current_status'])),
-/*****[END]********************************************
- [ Mod:    Birthdays                           v3.0.0 ]
- [ Mod:    Selection Order                     v1.0.0 ]
- ******************************************************/
+	'L_PAGE_TITLE' => $lang['Memberlist'],
+	'L_SELECT_SORT_METHOD' => $lang['Select_sort_method'],
+	'L_EMAIL' => $lang['Email'],
+	'L_WEBSITE' => $lang['Website'],
+	'L_FROM' => $lang['Location'],
+	'L_ORDER' => $lang['Order'],
+	'L_LOOK_UP' => $lang['Look_up_User'],
+	'L_FIND_USERNAME' => $lang['Find_username'],
+	'U_SEARCH_USER' => "modules.php?name=Forums&amp;file=search&amp;mode=searchuser&amp;popup=1", 
+	'U_SEARCH_EXPLAIN' => $lang['Search_author_explain'],
+	'L_GO' => $lang['Sort_Go'],
+	'L_JOINED' => $lang['Joined'],
+	'L_AGE' => $lang['Sort_Age'],
+	'L_POSTS' => $lang['Posts'],
+	'L_ONLINE_STATUS' => $lang['Online_status'],
+	'L_LAST_VISIT' => $lang['User_last_visit'],
+    
+	# Mod: Selection Order v1.0.0 START
+    # Mod: Birthdays v3.0.0 START
+	'S_MODE_SELECT' => select_box('mode',$mode,array('joined' => 
+	                          $lang['Sort_Joined'],'username' => 
+						   $lang['Sort_Username'], 'location' => 
+						      $lang['Sort_Location'], 'posts' => 
+							       $lang['Sort_Posts'], 'age' => 
+								   $lang['Sort_Age'], 'email' => 
+							   $lang['Sort_Email'], 'website' => 
+							  $lang['Sort_Website'], 'topten' => 
+							  $lang['Sort_Top_Ten'], 'online' => 
+							           $lang['Current_status'])),
+	# Mod: Selection Order v1.0.0 END
+    # Mod: Birthdays v3.0.0 END
+
 	'S_ORDER_SELECT' 		=> select_box('order',$sort_order,array('ASC' => $lang['Sort_Ascending'], 'DESC' => $lang['Sort_Descending'])),
 	'S_MODE_ACTION' 		=> append_sid("memberlist.$phpEx"))
-	// 'L_PM' 					=> $lang['Private_Message'])
 );
 
-//---------------------------------------------------------------------
-//	SEARCH FOR USERS VIA THE ALPHABET LISTING
-//---------------------------------------------------------------------
+# SEARCH FOR USERS VIA THE ALPHABET LISTING - START
 $alpha_range = array();
 $alpha_letters = array();
 $alpha_letters = range('A','Z');
 $alpha_start = array('All','#');
 $alpha_range = array_merge($alpha_start, $alpha_letters);
 $i = 0;
-while( $i < count($alpha_range) )
-{
-	if ($alpha_range[$i] != 'All') {
+while($i < count($alpha_range)):
+	if ($alpha_range[$i] != 'All'): 
 		$temp = ($alpha_range[$i] != '#') ? strtolower($alpha_range[$i]) : 'num';
 		$alphanum_search_url = 'modules.php?name='.basename(dirname(__FILE__)).'&amp;mode=letter&amp;alphanum='.$temp;
-	} else {
+	else: 
 		$alphanum_search_url = 'modules.php?name='.basename(dirname(__FILE__));
-	}
-
+	endif;
 	$template->assign_block_vars('alphanumsearch', array(
 		'SEARCH_SIZE' 	=> floor(100/count($alpha_range)) . '%',
 		'SEARCH_TERM' 	=> $alpha_range[$i],
 		'SEARCH_LINK' 	=> $alphanum_search_url)
 	);
 	$i++;
-}
-//---------------------------------------------------------------------
+endwhile;
+# SEARCH FOR USERS VIA THE ALPHABET LISTING - END
 
-switch( $mode )
-{
+# search switch START
+switch($mode):
 	case 'letter':
-		$alphanum 	= ( isset($HTTP_POST_VARS['alphanum']) ) ? htmlspecialchars($HTTP_POST_VARS['alphanum']) : htmlspecialchars($HTTP_GET_VARS['alphanum']);
-		$alphanum 	= str_replace("\'", "''", $alphanum);
-		$where 		= ( $alphanum == 'num' ) ? " AND `username` NOT RLIKE '^[A-Z]' " : " AND `username` LIKE '".$alphanum."%' ";
-		$order_by 	= 'user_id '.$sort_order.' LIMIT '.$start.', '.$board_config['topics_per_page']; break;
-		break;
+	$alphanum = (isset($HTTP_POST_VARS['alphanum'])) ? htmlspecialchars($HTTP_POST_VARS['alphanum']) : htmlspecialchars($HTTP_GET_VARS['alphanum']);
+	$alphanum = str_replace("\'", "''",$alphanum);
+	$where = ($alphanum == 'num') ? " AND `username` NOT RLIKE '^[A-Z]' " : " AND `username` LIKE '".$alphanum."%' ";
+	$order_by = 'user_id '.$sort_order.' LIMIT '.$start.', '.$board_config['topics_per_page']; break;
+	break;
 	case 'age':
-		$age_order 	= $sort_order == 'ASC' ? 'DESC' : 'ASC';
-		$order_by  	= 'coalesce(user_birthday2,';
-		$order_by  .= ($age_order == 'ASC') ? '99999999' : '0';
-		$order_by  .= ") $age_order LIMIT $start, " . $board_config['topics_per_page'];
-		break;
-	case 'joined': 		$order_by = 'user_id '.$sort_order.' LIMIT '.$start.', '.$board_config['topics_per_page']; break;
-	case 'username': 	$order_by = 'username '.$sort_order.' LIMIT '.$start.', '.$board_config['topics_per_page']; break;
-	case 'location': 	$order_by = 'user_from '.$sort_order.' LIMIT '.$start.', '.$board_config['topics_per_page']; break;
-	case 'posts': 		$order_by = 'user_posts '.$sort_order.' LIMIT '.$start.', '.$board_config['topics_per_page']; break;
-	case 'email': 		$order_by = 'user_email '.$sort_order.' LIMIT '.$start.', '.$board_config['topics_per_page']; break;
-	case 'website': 	$order_by = 'user_website '.$sort_order.' LIMIT '.$start.', '.$board_config['topics_per_page']; break;
-	case 'topten': 		$order_by = 'user_posts '.$sort_order.' LIMIT 10'; break;
-	case 'online': 		$order_by = 'user_session_time '.$sort_order.' LIMIT '.$start.', '.$board_config['topics_per_page']; break;
-	default: 			$order_by = 'user_id '.$sort_order.' LIMIT '.$start.', '.$board_config['topics_per_page']; break;
-}
+	$age_order = $sort_order == 'ASC' ? 'DESC' : 'ASC';
+	$order_by = 'coalesce(user_birthday2,';
+	$order_by.= ($age_order == 'ASC') ? '99999999' : '0';
+	$order_by.= ") $age_order LIMIT $start, ".$board_config['topics_per_page'];
+	break;
+	case 'joined': 		
+	$order_by = 'user_id '.$sort_order.' LIMIT '.$start.', '.$board_config['topics_per_page']; 
+	break;
+	case 'username': 	
+	$order_by = 'username '.$sort_order.' LIMIT '.$start.', '.$board_config['topics_per_page']; 
+	break;
+	case 'location': 	
+	$order_by = 'user_from '.$sort_order.' LIMIT '.$start.', '.$board_config['topics_per_page']; 
+	break;
+	case 'posts': 		
+	$order_by = 'user_posts '.$sort_order.' LIMIT '.$start.', '.$board_config['topics_per_page']; 
+	break;
+	case 'email': 		
+	$order_by = 'user_email '.$sort_order.' LIMIT '.$start.', '.$board_config['topics_per_page']; 
+	break;
+	case 'website': 	
+	$order_by = 'user_website '.$sort_order.' LIMIT '.$start.', '.$board_config['topics_per_page']; 
+	break;
+	case 'topten': 		
+	$order_by = 'user_posts '.$sort_order.' LIMIT 10'; 
+	break;
+	case 'online': 		
+	$order_by = 'user_session_time '.$sort_order.' LIMIT '.$start.', '.$board_config['topics_per_page']; 
+	break;
+	default: 			
+	$order_by = 'user_id '.$sort_order.' LIMIT '.$start.', '.$board_config['topics_per_page']; break;
+endswitch;
+# search switch END
 
 $username = ( !empty($HTTP_POST_VARS['username']) ) ? $HTTP_POST_VARS['username'] : '';
 if ( $username && isset($HTTP_POST_VARS['submituser']) )
