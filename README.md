@@ -130,6 +130,8 @@ If you need help with an install do not hesitate to submit a request by clicking
 
 # Note : This repo does not carry the same code used in other countries. This is strictly the US version of Nuke-Evolution Xtreme!
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0cfc2ea1fcf74154919aa46befadec31)](https://app.codacy.com/gh/ernestbuffington/dev-php-nuke-evolution-xtreme?utm_source=github.com&utm_medium=referral&utm_content=ernestbuffington/dev-php-nuke-evolution-xtreme&utm_campaign=Badge_Grade_Settings)
+
 <h2>Warranty</h2>
 
 <p>Because PHP-Nuke Evolution Xtreme is licensed free of charge, there is no warranty for the package, to the extent permitted by applicable law. Except when otherwise stated in writing, the PHP-Nuke Evolution Xtreme Team provides PHP-Nuke Evolution Xtreme &quot;as is&quot; without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose. The entire risk as to the quality and performance of the package is with you. Should the package prove defective, you assume the cost of all necessary servicing, repair, or correction.</p>
