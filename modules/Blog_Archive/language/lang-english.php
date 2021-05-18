@@ -19,7 +19,6 @@
 /* so your entry will look like: This is \"double quoted\" text.          */
 /* And, if you use HTML code, please double check it.                     */
 /**************************************************************************/
-
 define("_PRINTER","Printer Friendly Blog Post View");
 define("_FRIEND","Send this Blog post to a Friend");
 define("_ARTICLES","Blog Posts");
@@ -33,5 +32,4 @@ define("_ARCHIVESINDEX","Blog Posts Archive Index");
 define("_ALLSTORIESARCH","All Blog Posts");
 define("_NEXTPAGE","Next Blog Post");
 define("_PREVIOUSPAGE","Previous Blog Post");
-
 ?>
