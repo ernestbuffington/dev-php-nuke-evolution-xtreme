@@ -16,21 +16,25 @@
 $Header: /cvsroot/nukebookmarks/nukebookmarks/Bookmarks/language/lang-english.php,v 1.4 2003/07/11 16:35:45 dmoulton Exp $
 */
 
+define ("_OBIT_WEBSITE","Memorial Website");
+define ("_CEMETERY","My Personal Virtual Cemetery");
 define ("_BOOKMARKS","Bookmarks");
-define ("_MARKSTITLE","Personal Bookmarks");
-define ("_CATEGORIES","Categories");
-define ("_CATEGORY","Category");
-define ("_NEWCATEGORY","New Category");
-define ("_NEWBOOKMARK","New Bookmark");
-define ("_NAME","Name");
-define ("_COMMENT","Comment");
+define ("_MARKSTITLE","Virtual Cemetery and Headstones");
+define ("_CATEGORIES","Head Stones");
+define ("_CATEGORY","Headstone Category");
+define ("_NEWCATEGORY","New Virtual Cemetery");
+define ("_NEWBOOKMARK","New Headstone");
+define ("_NAME","Deceased Name");
+define ("_CEMETERY_NAME","Cemetery Category");
+define ("_CEMETERY_CATEGORY_DESCRIPTION","Cemetery Description");
+define ("_COMMENT","Headstone Description");
 define ("_MODIFIED","Modified");
 define ("_DELETE","Delete");
 define ("_EDIT","Edit");
-define ("_URL","URL");
+define ("_URL","Headstone URL");
 define ("_POPUP","Pop up a new window for this link");
-define ("_ADDOREDITBOOKMARK","Add or Edit a Bookmark");
-define ("_ADDOREDITCATEGORY","Add or Edit a Category");
+define ("_ADDOREDITBOOKMARK","Add or Edit a Headstone");
+define ("_ADDOREDITCATEGORY","Add or Edit a Cemetery Category");
 define ("_SAVE","Save");
 define ("_YES","Yes");
 define ("_NO","No");

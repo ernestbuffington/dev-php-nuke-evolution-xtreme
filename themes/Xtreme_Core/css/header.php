@@ -68,8 +68,8 @@ input[type="radio"]{
     vertical-align: bottom;
 }
 
-.fixitjimmy{
-    vertical-align: bottom;
+.absmiddle{
+    vertical-align: absmiddle;
 }
 
 /*---------------------------------------------------------------*/
