@@ -11,7 +11,8 @@
 <h2>Developers</h2>
 
 <ul>
-	<li>Francisco Burzi</li> 
+	<li>Francisco Burzi</li>
+	<li>Marco Ledingue</li>
         <li>Bob Marion</li> 
         <li>Technocrat</li>
 	<li>killigan</li>
