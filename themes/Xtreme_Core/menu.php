@@ -304,6 +304,7 @@ if (is_user())
     echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                     #
     echo '         <li><strong><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">Message Center</a></strong></li>';            #
     echo '         <li><strong><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmarks</a></strong></li>';             #
+    echo '         <li><strong><a href="modules.php?name=Network_Cemetery" class="btn btn-primary dropbtn" role="button">My Cemetery</a></strong></li>';               #
     echo '         <li><strong><a href="modules.php?name=Image_Repository" class="btn btn-primary dropbtn" role="button">My Images</a></strong></li>';                 #
                                                                                                                                                                        #
     echo '         <li><strong><a href="modules.php?name=Groups" class="btn btn-primary dropbtn" role="button">My Groups</a></strong></li>';                           #
@@ -413,6 +414,7 @@ if (is_user())
     echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                     #
     echo '         <li><strong><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">Message Center</a></strong></li>';            #
     echo '         <li><strong><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmarks</a></strong></li>';             #
+    echo '         <li><strong><a href="modules.php?name=Network_Cemetery" class="btn btn-primary dropbtn" role="button">My Cemetery</a></strong></li>';               #
     echo '         <li><strong><a href="modules.php?name=Image_Repository" class="btn btn-primary dropbtn" role="button">My Images</a></strong></li>';                 #
                                                                                                                                                                        #
     echo '         <li><strong><a href="modules.php?name=Groups" class="btn btn-primary dropbtn" role="button">My Groups</a></strong></li>';                           #
@@ -522,6 +524,7 @@ if (is_user())
     echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                     #
     echo '         <li><strong><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">Message Center</a></strong></li>';            #
     echo '         <li><strong><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmarks</a></strong></li>';             #
+    echo '         <li><strong><a href="modules.php?name=Network_Cemetery" class="btn btn-primary dropbtn" role="button">My Cemetery</a></strong></li>';               #
     echo '         <li><strong><a href="modules.php?name=Image_Repository" class="btn btn-primary dropbtn" role="button">My Images</a></strong></li>';                 #
                                                                                                                                                                        #
     echo '         <li><strong><a href="modules.php?name=Groups" class="btn btn-primary dropbtn" role="button">My Groups</a></strong></li>';                           #
@@ -631,6 +634,7 @@ if (is_user())
     echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                     #
     echo '         <li><strong><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">Message Center</a></strong></li>';            #
     echo '         <li><strong><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmarks</a></strong></li>';             #
+    echo '         <li><strong><a href="modules.php?name=Network_Cemetery" class="btn btn-primary dropbtn" role="button">My Cemetery</a></strong></li>';               #
     echo '         <li><strong><a href="modules.php?name=Image_Repository" class="btn btn-primary dropbtn" role="button">My Images</a></strong></li>';                 #
                                                                                                                                                                        #
     echo '         <li><strong><a href="modules.php?name=Groups" class="btn btn-primary dropbtn" role="button">My Groups</a></strong></li>';                           #
@@ -740,6 +744,7 @@ if (is_user())
     echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                     #
     echo '         <li><strong><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">Message Center</a></strong></li>';            #
     echo '         <li><strong><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmarks</a></strong></li>';             #
+    echo '         <li><strong><a href="modules.php?name=Network_Cemetery" class="btn btn-primary dropbtn" role="button">My Cemetery</a></strong></li>';               #
     echo '         <li><strong><a href="modules.php?name=Image_Repository" class="btn btn-primary dropbtn" role="button">My Images</a></strong></li>';                 #
                                                                                                                                                                        #
     echo '         <li><strong><a href="modules.php?name=Groups" class="btn btn-primary dropbtn" role="button">My Groups</a></strong></li>';                           #
@@ -849,6 +854,7 @@ echo '<div class="btn-group">';
     echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                     #
     echo '         <li><strong><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">Message Center</a></strong></li>';            #
     echo '         <li><strong><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmarks</a></strong></li>';             #
+    echo '         <li><strong><a href="modules.php?name=Network_Cemetery" class="btn btn-primary dropbtn" role="button">My Cemetery</a></strong></li>';               #
     echo '         <li><strong><a href="modules.php?name=Image_Repository" class="btn btn-primary dropbtn" role="button">My Images</a></strong></li>';                 #
                                                                                                                                                                        #
     echo '         <li><strong><a href="modules.php?name=Groups" class="btn btn-primary dropbtn" role="button">My Groups</a></strong></li>';                           #
