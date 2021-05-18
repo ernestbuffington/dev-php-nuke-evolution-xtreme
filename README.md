@@ -11,7 +11,8 @@
 <h2>Developers</h2>
 
 <ul>
-	<li>Francisco Burzi</li> 
+	<li>Francisco Burzi</li>
+	<li>Marco Ledingue</li>
         <li>Bob Marion</li> 
         <li>Technocrat</li>
 	<li>killigan</li>
@@ -128,6 +129,8 @@ If you need help with an install do not hesitate to submit a request by clicking
 <a href="https://dev-php-nuke-evolution-xtreme.86it.us/index.php" rel="nofollow">http://dev-php-nuke-evolution-xtreme.86it.us/index.php</a></p>
 
 # Note : This repo does not carry the same code used in other countries. This is strictly the US version of Nuke-Evolution Xtreme!
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0cfc2ea1fcf74154919aa46befadec31)](https://app.codacy.com/gh/ernestbuffington/dev-php-nuke-evolution-xtreme?utm_source=github.com&utm_medium=referral&utm_content=ernestbuffington/dev-php-nuke-evolution-xtreme&utm_campaign=Badge_Grade_Settings)
 
 <h2>Warranty</h2>
 
