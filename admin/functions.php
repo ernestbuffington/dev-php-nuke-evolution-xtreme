@@ -351,7 +351,7 @@ function track_evo_version()
 	$version_refresh = get_query_var( 'check-version', 'get', 'string', false );
 	$version_check_cache = cache_json_data('https://dev-php-nuke-evolution-xtreme.86it.us/versions/evo-version.json', dirname(__FILE__).'/version.cache', $version_refresh); 
 
-	if ( $version_check_cache['version'] == NUKE_EVO ):
+	if($version_check_cache['version'] == NUKE_EVO):
 
 		$version_desc = $admlang['admin']['version_is_current'];
 		$new_version_number = NUKE_EVO;
@@ -366,8 +366,8 @@ function track_evo_version()
 	endif;
 
 	$return .= '  <tr>'."\n";
-	$return .= '    <td style="height:15px; font-size: 13px; width:65%;">'.$new_version_number.' - '.$version_desc.'</td>'."\n";
-	$return .= '    <td style="height:15px; font-size: 13px; width:25%; text-align:center;"><a href="'.$update_url.'">Check</a></td>'."\n";
+	$return .= '    <td style="height:15px; font-size: 13px; width:65%;">PHP-Nuke Evoultion Xtreme '.$new_version_number.'&nbsp;&nbsp;<font size="1">'.$version_desc.'</font></td>'."\n";
+	$return .= '    <td style="height:15px; font-size: 13px; width:25%; text-align:center;"><a href="'.$update_url.'">Check Version</a></td>'."\n";
 	$return .= '  </tr>'."\n";
 
 	return $return;
@@ -379,8 +379,9 @@ function track_evo_version()
 function GraphicAdmin($pos=1)
 {
 	global $aid, $admingraphic, $cache, $language, $admin, $prefix, $user_prefix, $db, $counter, $admin_file, $admin_pos, $radminsuper, $admlang;   
+	
 	if ($pos != $admin_pos)
-		return;
+	return;
 
 	$radminsuper = is_mod_admin();
 
@@ -391,29 +392,28 @@ function GraphicAdmin($pos=1)
 	echo '  <tr>';
 
 	/*
-    | START | LIVE NEWS FEED DIRECTLY FROM The 86it Developers Network
+    | START | LIVE NEWS FEED DIRECTLY FROM https://dev-php-nuke-evolution-xtreme.86it.us
     */
-    echo '    <td style="vertical-align: top; width: 64%;">';
-    echo '      <table style="width: 100%;" border="0" cellpadding="3" cellspacing="1" class="forumline">';
-    echo '        <tr>';
-    echo '          <td class="catHead" style="height:30px; letter-spacing: 1px;" class="catHead">'.$admlang['livefeed']['header'].'</td>';
-    echo '        </tr>';
-    echo '        <tr>';
-    echo '          <td class="row1">';
-    echo '            <div style="height: 14.8em; overflow: auto;">';
+	global $domain;
+
+    echo '<td style="vertical-align: top; width: 64%;">';
+    echo '<table style="width: 100%;" border="0" cellpadding="3" cellspacing="1" class="forumline">';
+    echo '<tr>';
+    echo '<td class="catHead" style="height:30px; letter-spacing: 1px;" class="catHead">'.$admlang['livefeed']['header'].'</td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<td class="row1">';
+    echo '<div style="height: 14.8em; overflow: auto;">';
     
 	echo '<table style="font-family: monospace !important; width: 100%;" border="0" cellpadding="3" cellspacing="1" class="livefeed">';
     
-	global $domain;
 	$agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36';
-    $curl=curl_init('https://dev-php-nuke-evolution-xtreme.86it.us/versions/feed.php');
+    $curl = curl_init('https://dev-php-nuke-evolution-xtreme.86it.us/versions/feed.php');
     curl_setopt($curl, CURLOPT_USERAGENT, $agent);
-	
     curl_setopt($curl, CURLOPT_USERAGENT, $agent);
     curl_setopt($curl, CURLOPT_REFERER, 'https://'.$domain.'/');
-	
     $dir = NUKE_BASE_DIR.'includes/log';
-    $config['cookie_file'] = $dir . '/' .$_SERVER['REMOTE_ADDR'].'.txt';
+    $config['cookie_file'] = $dir.'/'.$_SERVER['REMOTE_ADDR'].'.txt';
     curl_setopt($curl, CURLOPT_COOKIEFILE, $config['cookie_file']);
     curl_setopt($curl, CURLOPT_COOKIEJAR, $config['cookie_file']);
 	curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
@@ -422,13 +422,13 @@ function GraphicAdmin($pos=1)
 	echo $page;
 	
 	echo '</table>';
-	echo '            </div>';
-    echo '          </td>';
-    echo '        </tr>';
-    echo '      </table>';
-    echo '    </td>';
+	echo '</div>';
+    echo '</td>';
+    echo '</tr>';
+    echo '</table>';
+    echo '</td>';
     /*
-    | END | LIVE NEWS FEED DIRECTLY FROM The 86it Developers Network
+    | END | LIVE NEWS FEED DIRECTLY FROM https://dev-php-nuke-evolution-xtreme.86it.us
     */
 	
 	/**
@@ -437,41 +437,50 @@ function GraphicAdmin($pos=1)
 	$version_refresh = get_query_var( 'check-version', 'get', 'string', false );
 	$live_news_feed_cache = cache_json_data('https://dev-php-nuke-evolution-xtreme.86it.us/versions/evolution-xtreme-live-feed.json', dirname(__FILE__).'/live-feed.cache', $version_refresh);
 
-	echo '    <td style="vertical-align: top; width: 36%;">';
-	echo '      <table style="width: 100%;" border="0" cellpadding="3" cellspacing="1" class="forumline">';
-	echo '        <tr>';
-	echo '          <td class="catHead" style="height:30px; letter-spacing: 1px;" class="catHead">'.$admlang['admin']['important'].'</td>';
-	echo '        </tr>';
-	echo '        <tr>';
-	echo '          <td class="row1">';
-	echo '            <div>';
-	echo '            <table style="width: 100%;" border="0" cellpadding="4" cellspacing="1">';
+	echo '<td style="vertical-align: top; width: 36%;">';
+	
+	echo '<table style="width: 100%;" border="0" cellpadding="3" cellspacing="1" class="forumline">';
+	echo '<tr>';
+
+	echo '<td class="catHead" style="height:30px; letter-spacing: 1px;" class="catHead">'.$admlang['admin']['important'].'</td>';
+
+	echo '</tr>';
+	echo '<tr>';
+	
+	echo '<td class="row1">';
+	echo '<div>';
+	echo '<table style="width: 100%;" border="0" cellpadding="4" cellspacing="1">';
 	echo track_admin_intrusion();
 	echo track_sql_errors();
 	echo track_evo_version();
-	echo '              <tr>';
-	echo '                <td style="height: 15px; font-size: 13px;">'.$admlang['admin']['ip_lock'].'</td>';
-	echo '                <td style="height: 15px; font-size: 13px; text-align: center;">'.((defined('ADMIN_IP_LOCK')) ? $admlang['global']['enabled'] : $admlang['global']['disabled']).'</a></td>';
-	echo '              </tr>';
-	echo '              <tr>';
-	echo '                <td style="height: 15px; font-size: 13px;">'.$admlang['admin']['filter'].'</td>';
-	echo '                <td style="height: 15px; font-size: 13px; text-align: center;">'.$admlang['global']['enabled'].'</td>';
-	echo '              </tr>';
-	echo '              <tr>';
-	echo '                <td style="height: 15px; font-size: 13px;">'._AB_NUKESENTINEL.'</td>';
-	echo '                <td style="height: 15px; font-size: 13px; text-align: center;">'.((defined('NUKESENTINEL_IS_LOADED')) ? $admlang['global']['enabled'] : $admlang['global']['disabled']).'</td>';
-	echo '              </tr>';
-	echo '              <tr>';
-	echo '                <td style="height: 15px; font-size: 13px;">'.$admlang['admin']['waiting_users'].'</td>';
-	echo '                <td style="height: 15px; font-size: 13px; text-align: center;"><a href="modules.php?name=Your_Account&file=admin&op=listpending">'.$waiting_users.'</a></td>';
-	echo '              </tr>';
-	echo '            </table>';
-	echo '            </div>';
-	echo '          </td>';
-	echo '        </tr>';
-	echo '      </table>';
-	echo '    </td>';
-	echo '  </tr>';
+
+	echo '<tr>';
+
+	echo '<td style="height: 15px; font-size: 13px;">'.$admlang['admin']['ip_lock'].'</td>';
+	echo '<td style="height: 15px; font-size: 13px; text-align: center;">'.((defined('ADMIN_IP_LOCK')) ? $admlang['global']['enabled'] : $admlang['global']['disabled']).'</a></td>';
+	echo '</tr>';
+	echo '<tr>';
+
+	echo '<td style="height: 15px; font-size: 13px;">'.$admlang['admin']['filter'].'</td>';
+	echo '<td style="height: 15px; font-size: 13px; text-align: center;">'.$admlang['global']['enabled'].'</td>';
+
+	echo '</tr>';
+	echo '<tr>';
+
+	echo '<td style="height: 15px; font-size: 13px;">'._AB_NUKESENTINEL.'</td>';
+	echo '<td style="height: 15px; font-size: 13px; text-align: center;">'.((defined('NUKESENTINEL_IS_LOADED')) ? $admlang['global']['enabled'] : $admlang['global']['disabled']).'</td>';
+	echo '</tr>';
+	echo '<tr>';
+	echo '<td style="height: 15px; font-size: 13px;">'.$admlang['admin']['waiting_users'].'</td>';
+	echo '<td style="height: 15px; font-size: 13px; text-align: center;"><a href="modules.php?name=Your_Account&file=admin&op=listpending">'.$waiting_users.'</a></td>';
+	echo '</tr>';
+	echo '</table>';
+	echo '</div>';
+	echo '</td>';
+	echo '</tr>';
+	echo '</table>';
+	echo '</td>';
+	echo '</tr>';
 	echo '</table>';
 
 	echo '<table style="width: 100%;" border="0" cellpadding="4" cellspacing="1">'; // remove this to go back to normal

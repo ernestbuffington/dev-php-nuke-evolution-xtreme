@@ -421,7 +421,7 @@ $admlang['admin']['admin_intrusion'] 	= 'Admin Intrusion';
 $admlang['admin']['admin_error_log'] 	= 'Error Log';
 $admlang['admin']['admin_honey_pot'] 	= 'Honey Pot';
 $admlang['admin']['honey_pot_bots_stopped'] = 'stopped %s bots!';
-$admlang['admin']['version_is_current'] = 'You have the current version';
+$admlang['admin']['version_is_current'] = '(Up To Date)';
 $admlang['admin']['version_is_out-of-date'] = 'New Version Available';
 
 # VERSION CHECKER
