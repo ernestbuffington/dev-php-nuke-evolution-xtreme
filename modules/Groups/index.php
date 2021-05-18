@@ -3,7 +3,6 @@
   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
 
-
 /***************************************************************************
  *                               groupcp.php
  *                            -------------------
@@ -36,9 +35,7 @@ Remote Avatar Resize                     v2.0.0       11/19/2005
 Online/Offline/Hidden                    v2.2.7       01/24/2006
 Auto Group                               v1.2.2       11/06/2006
 ************************************************************************/
-
-if (!defined('NUKE_EVO'))
-    exit;
+if(!defined('NUKE_EVO')) exit;
 
 $module_name = basename(dirname(__FILE__));
 require(NUKE_FORUMS_DIR . 'nukebb.php');
@@ -46,12 +43,29 @@ define('IN_PHPBB', true);
 include(NUKE_FORUMS_DIR . 'extension.inc');
 include(NUKE_FORUMS_DIR . 'common.php');
 
-// -------------------------
-//
 /*****[BEGIN]******************************************
 [ Mod:    Online/Offline/Hidden               v2.2.7 ]
 ******************************************************/
-function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$joined, &$poster_avatar, &$profile_img, &$profile, &$search_img, &$search, &$pm_img, &$pm, &$email_img, &$email, &$www_img, &$www, &$userdata, &$online_status_img, &$online_status)
+function generate_user_info(&$row, 
+                     $date_format, 
+					   $group_mod, 
+					       &$from, 
+						  &$posts, 
+						 &$joined, 
+				  &$poster_avatar, 
+				    &$profile_img, 
+					    &$profile, 
+					 &$search_img, 
+					     &$search, 
+						 &$pm_img, 
+						     &$pm, 
+					  &$email_img, 
+					      &$email, 
+						&$www_img, 
+						    &$www, 
+					   &$userdata, 
+			  &$online_status_img, 
+			      &$online_status)
 {
     global $lang, $images, $board_config, $online_color, $offline_color, $hidden_color;
     
@@ -59,7 +73,8 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
     $joined        = create_date($date_format, $row['user_regdate'], $board_config['board_timezone']);
     $posts         = ($row['user_posts']) ? $row['user_posts'] : 0;
     $poster_avatar = '';
-    if ($row['user_avatar_type'] && $row['user_id'] != ANONYMOUS && $row['user_allowavatar']) {
+    
+	if ($row['user_avatar_type'] && $row['user_id'] != ANONYMOUS && $row['user_allowavatar']) {
         switch ($row['user_avatar_type']) {
             case USER_AVATAR_UPLOAD:
                 $poster_avatar = ($board_config['allow_avatar_upload']) ? '<img src="' . $board_config['avatar_path'] . '/' . $row['user_avatar'] . '" alt="" border="0" />' : '';
@@ -1285,5 +1300,4 @@ if (isset($_POST['groupstatus']) && $group_id) {
 }
 
 include(NUKE_INCLUDE_DIR . 'page_tail.' . $phpEx);
-
 ?>

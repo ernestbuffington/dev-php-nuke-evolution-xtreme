@@ -34,7 +34,7 @@ $lang_new[$module_name]['link_us_link'] = 'Link to Us';
 //Index
 $lang_new[$module_name]['ADD_LINK_BUTTON'] = 'Add Link Button';
 $lang_new[$module_name]['ADMIN_CONFIG'] = 'Admin Config';
-$lang_new[$module_name]['ADMINISTRATION'] = 'PHP-Nuke Evolution Xtreme Link-Us :: Modules Admin Panel';
+$lang_new[$module_name]['ADMINISTRATION'] = 'Link-Us :: Modules Admin Panel';
 $lang_new[$module_name]['MAIN_ADMINISTRATION'] = 'Main Administration';
 $lang_new[$module_name]['CONFIG_ERROR'] = 'Cannot read Configuration Table';
 $lang_new[$module_name]['MODULE_CONFIG'] ='Module Config';

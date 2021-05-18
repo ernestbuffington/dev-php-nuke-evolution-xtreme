@@ -59,7 +59,7 @@ define("_ADDNEWLINK","Add a New Link");
 define("_DESCRIPTION255","Description: (255 characters max)");
 define("_MODCATEGORY","Modify a Category");
 define("_MODLINK","Modify a Link");
-define("_WEBLINKS_ADMIN_HEADER", "Nuke-Evolution Web Links :: Modules Admin Panel");
+define("_WEBLINKS_ADMIN_HEADER", "Web Links :: Modules Admin Panel");
 define("_WEBLINKS_RETURNMAIN", "Return to Main Administration");
 define("_WEBLINKSADMIN","Web Links Administration");
 define("_ADDEDITORIAL","Add Editorial");

@@ -823,8 +823,7 @@ if ($old_school_imagedropdown==0)
 
     global $admin_file;
 	
-	echo"<div align=\"center\">[<a href=\"$admin_file.php\"> Back To Main Admin Area</a>]</div>"
-	."<div class=\"red\" align=\"center\"><br>"._MENU_ATTNSUPPRCAT."<br></div>";
+	echo"<div align=\"center\">[<a href=\"$admin_file.php\"> Back To Main Admin Area</a>]</div>";
 
 	echo ""
 	."<form action=\"".$admin_file.".php?op=menu&amp;go=send\" method=\"post\" name=\"form_menu\">"

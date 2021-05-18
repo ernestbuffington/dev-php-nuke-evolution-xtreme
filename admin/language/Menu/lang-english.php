@@ -154,4 +154,5 @@ define("_MENU_CLOSE","Close the window");
 define("_MENU_TARGETBLANK","Link opened in a new window. To open in the same window, begin url with HTTP:// (uppercase)");
 define("_MENU_TARGETNONE","Link opened in the same window. To open in a new window, begin url with http:// (lowercase)");
 define("_MENU_NOTABLEPB","Titanium Portal Menu is unable to access its database tables.Please verify that you have installed correctly, and READ THE FAQ !");
+define("_MENU_ATTNSUPPRCAT","<strong>Portal Menu</strong>");
 ?>

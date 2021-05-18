@@ -395,7 +395,7 @@ define("_USEACTIVATE","Use Email Activation?");
 define("_USEGFXCHECK","Use Security Code?");
 define("_USENDPRIVATEMSG","Send a Private Message to");
 define("_USERACCOUNT","The user account");
-define("_USER_ADMIN_HEADER", "Nuke-Evolution Your Account :: Modules Admin Panel");
+define("_USER_ADMIN_HEADER", "Your Account :: Modules Admin Panel");
 define("_USER_RETURNMAIN", "Return to Main Administration");
 define("_USERADMIN","User's Administration");
 define("_USERAPPFINALSTEP","New User Application: Final Step");

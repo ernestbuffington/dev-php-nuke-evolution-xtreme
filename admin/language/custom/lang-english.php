@@ -112,7 +112,7 @@ define("_POLLRANDOM", "Show a random Survey");
 /*****[BEGIN]******************************************
  [ Mod:     Evolution Version Checker          v1.0.0 ]
  ******************************************************/
-// define("_ADMIN_VER_TITLE","Nuke-Evolution Xtreme Version Checker");
+// define("_ADMIN_VER_TITLE","PHP-Nuke Evolution Xtreme Xtreme Version Checker");
 // define("_ADMIN_VER_ERRCON","Could not connect to www.evolution-xtreme.com");
 // define("_ADMIN_VER_ERRSQL","Could not retrieve version from Database");
 // define("_ADMIN_VER_CHG","There is a new version of Evolution-Xtreme");
@@ -121,7 +121,7 @@ define("_POLLRANDOM", "Show a random Survey");
 // define("_CHECKVER", "Click Here to check version");
 // define("_VER_ERR_CON","Could not connect to <a href='http://www.evolution-xtreme.com'>Evolution-Xtreme</a>");
 // define("_VER_ERR_CHG","There was a problem with accessing the Changed Log");
-// define("_VER_TITLE","Nuke-Evolution Xtreme Version");
+// define("_VER_TITLE","PHP-Nuke Evolution Xtreme Xtreme Version");
 // define("_VER_VER","The current version is:");
 // define("_VER_YOURVER","Your version is:");
 // define("_VER_CHGLOG","Evolution-Xtreme Version Changed Log");
@@ -386,7 +386,7 @@ define("_PHP_QUICKS", "Quick Stats:");
 define("_PHP_EXT_STATUS", "Extended Status:");
 define("_PHP_SPACER", "&nbsp;");
 define("_INFO_GENERAL", "General");
-define("_INFO_ADMIN_HEADER", "Nuke-Evolution System Info :: Admin Panel");
+define("_INFO_ADMIN_HEADER", "System Info :: Admin Panel");
 define("_INFO_RETURNMAIN", "Return to Main Administration");
 define("_INFO_SERVER_V", "Server Version");
 define("_INFO_CLIENT_V", "Client Version");

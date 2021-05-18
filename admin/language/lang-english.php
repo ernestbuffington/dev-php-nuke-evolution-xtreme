@@ -302,9 +302,9 @@ $admlang['logs']['admin_chmod'] 		= 'Your file is not writeable. Did you do the 
 $admlang['logs']['admin_fine'] 			= 'Admin log has not changed';
 // define('_ADMIN_LOG_FINE','Admin log has not changed');
 
-$admlang['logs']['error_chmod'] 				= 'Your file is not writeable. Did you do the CHMOD?';
+$admlang['logs']['error_chmod'] 		= 'Your file is not writeable. Did you do the CHMOD?';
 // define('_ERROR_LOG_CHMOD','Your file is not writeable. Did you do the CHMOD?');
-$admlang['logs']['error_changed'] 			= 'Error log %sHAS%s changed';
+$admlang['logs']['error_changed'] 		= 'Error log %sHAS%s changed';
 // define('_ERROR_LOG_CHANGED','Error log <strong>HAS</strong> changed');
 $admlang['logs']['error_fine'] 			= 'Error log has not changed';
 // define('_ERROR_LOG_FINE','Error log has not changed');
@@ -400,7 +400,7 @@ $admlang['admin']['ip_lock'] 			= 'Admin IP Lock';
 $admlang['admin']['filter'] 			= 'Input Filter';
 // define('_INPUT_FILTER','Input Filter');
 $admlang['admin']['waiting_users'] 		= 'Waiting Users';
-$admlang['admin']['registered_users'] 		= 'Registered Users';
+$admlang['admin']['registered_users'] 	= 'Registered Users';
 
 $admlang['admin']['forums_overview'] 	= 'Forums Overview';
 $admlang['admin']['total_forums'] 		= 'Forums';
@@ -427,7 +427,7 @@ $admlang['admin']['version_is_out-of-date'] = 'New Version Available';
 # VERSION CHECKER
 $admlang['admin']['version_check_run'] 	= 'Run Now';
 // define('_RUNNOW','Run Now');
-$admlang['admin']['version_check'] 		= 'PHP-Nuke Evolution Xtreme Version Checker';
+$admlang['admin']['version_check'] 		= 'Version Checker';
 // define('_VERSION_CHECK','Evolution Xtreme Version Checker');
 $admlang['admin']['no_rights'] 	= 'Sorry %s but you have been given no administration rights. Please contact the site administrator if you feel this is a mistake!';
 // define("_NO_ADMIN_RIGHTS","Sorry %s but you have been given no administration rights. Please contact the site administrator if you feel this is a mistake!");
