@@ -48,7 +48,14 @@ function main() {
     title($sitename.': '._NSINDEXLEGAL);
     if (file_exists(NUKE_MODULES_DIR.$module_name.'/copyright.php')) {
         OpenTable();
-        echo "<br /><br /><div align=\"justify\">";
+	    # space at the top of header inside graphics area!
+        echo '<div align="center" style="padding-top:10px;">';
+        echo '</div>';
+
+		echo '<div align="center"><h1>The 86it Developers Network Disclaimer</h1></div>';
+        
+		
+		echo "<br /><br /><div align=\"justify\">";
         echo "<strong>$sitename</strong> "._NSINDEX1." <strong>$sitename</strong> "._NSINDEX2."<br /><br />";
         echo ""._NSINDEX3." <strong>$sitename</strong> "._NSINDEX4."<br /><br />";
         echo ""._NSINDEX5." ";
@@ -56,10 +63,14 @@ function main() {
         echo "</div><br /><br />";
         ns_doc_links();
         CloseTable();
-        } else {
+        } 
+		else 
+		{
         OpenTable();
-        echo ""._NSNOCOPY."";
-        CloseTable();
+        
+		echo ""._NSNOCOPY."";
+        
+		CloseTable();
     }
   include_once(NUKE_BASE_DIR.'footer.php');
 }
