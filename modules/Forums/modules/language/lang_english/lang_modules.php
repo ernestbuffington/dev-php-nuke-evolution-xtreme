@@ -42,14 +42,12 @@ $admin_statistics = array();
 
 // Administrative Statistics
 $admin_statistics['module_name'] = 'Administrative Statistics';
-
 $admin_statistics['Board_Up_Days'] = 'Board Up Days';
 $admin_statistics['Latest_Reg_User'] = 'Latest User Registered';
 $admin_statistics['Latest_Reg_User_Date'] = 'Latest User Registered Date';
 $admin_statistics['Most_Ever_Online'] = 'Most Users Ever Online';
 $admin_statistics['Most_Ever_Online_Date'] = 'Most Users Ever Online Date';
 $admin_statistics['Disk_usage'] = 'Disk Usage';
-
 // [/admin_statistics]
 
 // [most_active_topicstarter]
@@ -161,17 +159,7 @@ $top_posters['module_name'] = 'Top Posters';
 // [admin_statistics]
 $admin_statistics = array();
 
-// Administrative Statistics
-$admin_statistics['module_name'] = 'Administrative Statistics';
 
-$admin_statistics['Board_Up_Days'] = 'Board Up Days';
-$admin_statistics['Latest_Reg_User'] = 'Latest User Registered';
-$admin_statistics['Latest_Reg_User_Date'] = 'Latest User Registered Date';
-$admin_statistics['Most_Ever_Online'] = 'Most Users Ever Online';
-$admin_statistics['Most_Ever_Online_Date'] = 'Most Users Ever Online Date';
-$admin_statistics['Disk_usage'] = 'Disk Usage';
-
-// [/admin_statistics]
 
 // [most_viewed_topics]
 $most_viewed_topics = array();
@@ -320,5 +308,4 @@ $most_active_topics['module_name'] = 'Most Active Topics';
 $most_active_topics['Hidden_from_public_view'] = 'This topic is hidden from public view';
 
 // [/most_active_topics]
-
 ?>

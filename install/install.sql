@@ -1678,7 +1678,7 @@ INSERT INTO `nuke_blocks` (`bid`, `bkey`, `title`, `content`, `url`, `bposition`
 (3, '', 'Survey', '', '', 'r', 4, 0, 3600, '', '', 'block-Survey.php', '0'),
 (4, '', 'Information', '<br /><center><span class=\"content\">\r\n<a href=\"http://phpnuke.org\"><img src=\"images/powered/powered8.jpg\" border=\"0\" alt=\"Powered by PHP-Nuke\" title=\"Powered by PHP-Nuke\" width=\"88\" height=\"31\" /></a>\r\n<br /><br />\r\n<a href=\"http://validator.w3.org/check/referer\"><img src=\"images/html401.gif\" width=\"88\" height=\"31\" alt=\"Valid HTML 4.01!\" title=\"Valid HTML 4.01!\" border=\"0\" /></a>\r\n<br /><br />\r\n<a href=\"http://jigsaw.w3.org/css-validator\"><img src=\"images/css.gif\" width=\"88\" height=\"31\" alt=\"Valid CSS!\" title=\"Valid CSS!\" border=\"0\" /></a></span></center><br />', '', 'r', 5, 0, 0, '', '', '', '0'),
 (5, '', 'User Info', '', '', 'l', 0, 1, 0, '', '', 'block-Evo_User_Info.php', '0'),
-(6, '', 'Nuke-Evolution', '', '', 'c', 2, 0, 0, '', '', 'block-Nuke-Evolution.php', '0'),
+(6, '', 'PHP-Nuke Evolution Xtreme', '', '', 'c', 2, 0, 0, '', '', 'block-Nuke-Evolution.php', '0'),
 (8, '', 'Top 10 Links', '', '', 'r', 6, 1, 3600, '', '', 'block-Top10_Links.php', '0'),
 (9, '', 'Forums', '', '', 'c', 0, 1, 3600, '', '', 'block-Forums.php', '0'),
 (10, '', 'Submissions', '', '', 'l', 6, 0, 0, '', '', 'block-Submissions.php', '4'),
