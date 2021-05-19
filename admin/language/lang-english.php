@@ -107,8 +107,8 @@ $admlang['authors']['superwarn']		= 'WARNING: If Super Admin is checked, the use
 // define("_NOFUNCTIONS","---------");
 // define("_PASSWDNOMATCH","Sorry, the new passwords doesn't match. Go Back and Try Again");
 
-$admlang['referers']['header']			= 'PHP-Nuke Evolution Xtreme HTTP Referers :: Admin Panel';
-$admlang['referers']['linking']			= 'Who\'s linking our site?';
+$admlang['referers']['header']			= 'HTTP Referers Admin Panel';
+$admlang['referers']['linking']			= 'Who\'s linking to ';
 $admlang['referers']['delete']			= 'Delete Referers';
 $admlang['referers']['date']			= 'Visited Date';
 $admlang['referers']['link']			= 'URL of Referer';
