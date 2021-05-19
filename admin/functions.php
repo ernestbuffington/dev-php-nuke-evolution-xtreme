@@ -39,29 +39,23 @@
 	  Auto First User Login                    v1.0.0       08/27/2005
 	  Persistent Admin Login                   v2.0.0       12/10/2005
  ************************************************************************/
-
-if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) 
-{
-	exit('Access Denied');
-}
+if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) exit('Access Denied');
 
 /*****[BEGIN]******************************************
  [ Other:   Need To Delete                     v1.0.0 ]
  ******************************************************/
 function need_delete($file, $dir=false) 
 {
-  // will be uncommented for release
-  if (!$dir) {
-	if(!is_file($file)) {
-		return;
-	}
+  # will be uncommented for release
+  if (!$dir): 
+	if(!is_file($file)) 
+	return;
 	DisplayError("<span style='color: red; font-size: 24pt'>"._NEED_DELETE." ".$file."</span>");
-  } else {
-	if(!is_dir($file)) {
-		return;
-	}
+  else: 
+	if(!is_dir($file)) 
+	return;
 	DisplayError("<span style='color: red; font-size: 24pt'>"._NEED_DELETE." the folder \"".$file."\"</span>");
-  }
+  endif;
 }
 /*****[END]********************************************
  [ Other:   Need To Delete                     v1.0.0 ]
@@ -75,20 +69,17 @@ function login()
 	get_header();
 	title( $admlang['admin_login_header'] );
 
-	if ( get_evo_option( 'admin_fc_status' ) == "1" ):
-
+	if(get_evo_option('admin_fc_status') == "1"):
 		$ip     = get_user_IP();
 		$fcdate = date("mdYHi");
 		$fc     = dburow("SELECT * FROM `"._FAILED_LOGIN_INFO_TABLE."` WHERE fc_ip = '$ip'");
 		$fc_datetime = $fcdate - $fc['fc_datetime'];
 		$fc_lefttime = get_evo_option( 'admin_fc_timeout' ) - $fc_datetime; 
 
-		if ( $fc['fc_attempts'] <= get_evo_option( 'admin_fc_attempts' )  && $fc['fc_attempts'] != "0" && $fc_datetime <= get_evo_option( 'admin_fc_timeout' )) 
-		{
-			$fctotal = get_evo_option( 'admin_fc_attempts' ) - $fc['fc_attempts'];
-			title($admlang['adminfail']['you_have'].'&nbsp;'.$fctotal.'&nbsp;'.$admlang['adminfail']['attempts'].'&nbsp;'.get_evo_option( 'admin_fc_timeout' ).'&nbsp;'.$admlang['adminfail']['min']);
-		}
-
+		if ( $fc['fc_attempts'] <= get_evo_option( 'admin_fc_attempts' )  && $fc['fc_attempts'] != "0" && $fc_datetime <= get_evo_option( 'admin_fc_timeout' )): 
+		$fctotal = get_evo_option( 'admin_fc_attempts' ) - $fc['fc_attempts'];
+		title($admlang['adminfail']['you_have'].'&nbsp;'.$fctotal.'&nbsp;'.$admlang['adminfail']['attempts'].'&nbsp;'.get_evo_option('admin_fc_timeout').'&nbsp;'.$admlang['adminfail']['min']);
+		endif;
 	endif;
 
 	opentable();
@@ -96,11 +87,10 @@ function login()
 	/**
 	 * Delete the old attempt when the timeout hits 0.
 	 */
-	if ($fc['fc_attempts'] >= "1" && $fc_datetime >= get_evo_option( 'admin_fc_timeout' ))
-	{
+	if ($fc['fc_attempts'] >= "1" && $fc_datetime >= get_evo_option( 'admin_fc_timeout' )):
 		dbquery("DELETE FROM `"._FAILED_LOGIN_INFO_TABLE."` WHERE fc_ip = '$ip'");
 		dbquery("OPTIMIZE TABLE "._FAILED_LOGIN_INFO_TABLE);
-	}
+	endif;
 
 	?>
 
@@ -243,15 +233,15 @@ function adminmenu($url, $title, $image)
 {
 	global $counter, $admingraphic, $admin, $module_folder_name;
 
-	if ( file_exists('modules/'.$module_folder_name.'/images/admin/'.$image) ):
+	if(file_exists('modules/'.$module_folder_name.'/images/admin/'.$image)):
 		$image = 'modules/'.$module_folder_name.'/images/admin/'.$image;
-	elseif ( file_exists('modules/'.$module_folder_name.'/images/'.$image) ):
+	elseif(file_exists('modules/'.$module_folder_name.'/images/'.$image)):
 		$image = 'modules/'.$module_folder_name.'/images/'.$image;
 	else:
 		$image = 'images/admin/'.$image;
 	endif;
 
-	if ( $admingraphic ):
+	if ($admingraphic):
 		// $image = '<img src="'.$image.'" border="0" alt="'.$title.'" title="'.$title.'" width="32" height="32" />';
 		$image_file = '<img src="'.$image.'" border="0" alt="'.$title.'" title="'.$title.'" width="40" height="40" />';
 	else:
@@ -260,7 +250,7 @@ function adminmenu($url, $title, $image)
 
 	if (!is_god($admin) && ($title == 'Edit Admins' || $title == 'Nuke Sentinel(tm)'))
 	{
-		if ( defined('BOOTSTRAP') ):
+		if(defined('BOOTSTRAP')):
 		?>
 			<a style="pointer-events: none" href="<?php echo $url ?>">
 				<h3 style="font-size: 17px; margin: 0; text-decoration: line-through"><?php echo $title ?></h3>
@@ -403,7 +393,7 @@ function GraphicAdmin($pos=1)
     echo '</tr>';
     echo '<tr>';
     echo '<td class="row1">';
-    echo '<div style="height: 14.8em; overflow: auto;">';
+    echo '<div style="height: 15.0em; overflow: auto;">';
     
 	echo '<table style="font-family: monospace !important; width: 100%;" border="0" cellpadding="3" cellspacing="1" class="livefeed">';
     
@@ -422,11 +412,14 @@ function GraphicAdmin($pos=1)
 	echo $page;
 	
 	echo '</table>';
+	
 	echo '</div>';
     echo '</td>';
     echo '</tr>';
-    echo '</table>';
-    echo '</td>';
+    
+	echo '</table>';
+    
+	echo '</td>';
     /*
     | END | LIVE NEWS FEED DIRECTLY FROM https://dev-php-nuke-evolution-xtreme.86it.us
     */
@@ -438,43 +431,81 @@ function GraphicAdmin($pos=1)
 	$live_news_feed_cache = cache_json_data('https://dev-php-nuke-evolution-xtreme.86it.us/versions/evolution-xtreme-live-feed.json', dirname(__FILE__).'/live-feed.cache', $version_refresh);
 
 	echo '<td style="vertical-align: top; width: 36%;">';
-	
 	echo '<table style="width: 100%;" border="0" cellpadding="3" cellspacing="1" class="forumline">';
-	echo '<tr>';
 
+    # table header message
+	echo '<tr>';
 	echo '<td class="catHead" style="height:30px; letter-spacing: 1px;" class="catHead">'.$admlang['admin']['important'].'</td>';
-
 	echo '</tr>';
+
 	echo '<tr>';
-	
 	echo '<td class="row1">';
 	echo '<div>';
+    echo '<div style="height: 15.0em; overflow: auto;">';
+	
 	echo '<table style="width: 100%;" border="0" cellpadding="4" cellspacing="1">';
+	
+	# admin log
 	echo track_admin_intrusion();
+	
+	# error log
 	echo track_sql_errors();
+	
+	# check evo version
 	echo track_evo_version();
 
+    # admin ip lock enabled/disabled
 	echo '<tr>';
-
 	echo '<td style="height: 15px; font-size: 13px;">'.$admlang['admin']['ip_lock'].'</td>';
 	echo '<td style="height: 15px; font-size: 13px; text-align: center;">'.((defined('ADMIN_IP_LOCK')) ? $admlang['global']['enabled'] : $admlang['global']['disabled']).'</a></td>';
 	echo '</tr>';
-	echo '<tr>';
 
+    # Input Filter enabled/disabled
+	echo '<tr>';
 	echo '<td style="height: 15px; font-size: 13px;">'.$admlang['admin']['filter'].'</td>';
 	echo '<td style="height: 15px; font-size: 13px; text-align: center;">'.$admlang['global']['enabled'].'</td>';
-
 	echo '</tr>';
-	echo '<tr>';
 
+    # NukeSentinel enabled/disabled
+	echo '<tr>';
 	echo '<td style="height: 15px; font-size: 13px;">'._AB_NUKESENTINEL.'</td>';
 	echo '<td style="height: 15px; font-size: 13px; text-align: center;">'.((defined('NUKESENTINEL_IS_LOADED')) ? $admlang['global']['enabled'] : $admlang['global']['disabled']).'</td>';
 	echo '</tr>';
+
+    # waiting users - shows number of users waiting!
 	echo '<tr>';
 	echo '<td style="height: 15px; font-size: 13px;">'.$admlang['admin']['waiting_users'].'</td>';
 	echo '<td style="height: 15px; font-size: 13px; text-align: center;"><a href="modules.php?name=Your_Account&file=admin&op=listpending">'.$waiting_users.'</a></td>';
 	echo '</tr>';
+
+    # waiting users - shows number of users waiting!
+	echo '<tr>';
+	echo '<td style="height: 15px; font-size: 13px;">Waitng Links</td>';
+	echo '<td style="height: 15px; font-size: 13px; text-align: center;"><a href="modules.php?name=Your_Account&file=admin&op=listpending">0</a></td>';
+	echo '</tr>';
+
+    # waiting users - shows number of users waiting!
+	echo '<tr>';
+	echo '<td style="height: 15px; font-size: 13px;">Shit Head Girl Friends</td>';
+	echo '<td style="height: 15px; font-size: 13px; text-align: center;"><a href="modules.php?name=Your_Account&file=admin&op=listpending">1</a></td>';
+	echo '</tr>';
+
+    # waiting users - shows number of users waiting!
+	echo '<tr>';
+	echo '<td style="height: 15px; font-size: 13px;">Noisy Pups</td>';
+	echo '<td style="height: 15px; font-size: 13px; text-align: center;"><a href="modules.php?name=Your_Account&file=admin&op=listpending">1</a></td>';
+	echo '</tr>';
+
+    # waiting users - shows number of users waiting!
+	echo '<tr>';
+	echo '<td style="height: 15px; font-size: 13px;">Days Without Ciggs</td>';
+	echo '<td style="height: 15px; font-size: 13px; text-align: center;"><a href="modules.php?name=Your_Account&file=admin&op=listpending">0</a></td>';
+	echo '</tr>';
+
+
 	echo '</table>';
+
+	echo '</div>';
 	echo '</div>';
 	echo '</td>';
 	echo '</tr>';
@@ -484,7 +515,7 @@ function GraphicAdmin($pos=1)
 	echo '</table>';
 
 	echo '<table style="width: 100%;" border="0" cellpadding="4" cellspacing="1">'; // remove this to go back to normal
-	if (is_mod_admin('super'))
+	if(is_mod_admin('super'))
 	{
 		echo '  <tr>';
 		echo '    <td colspan="6">';
@@ -560,13 +591,18 @@ function GraphicAdmin($pos=1)
 	$themes_row = $db->sql_fetchrowset( $result2 );
 	$db->sql_freeresult($result2);
 
-	if ( count( $themes_row ) > 0 ):
+	if (count($themes_row) > 0 ):
 
 		echo '  <tr>';
 		echo '    <td colspan="6">';
 		echo '      <table style="text-align: center; width: 100%;" border="0" cellpadding="0" cellspacing="1" class="forumline">';
 		echo '        <tr>';
+		if (file_exists(NUKE_THEMES_DIR.$theme['theme_name']."/admin/index.php") 
+		AND file_exists(NUKE_THEMES_DIR.$theme['theme_name']."/admin/links.php") AND file_exists(NUKE_THEMES_DIR.$theme['theme_name']."/admin/case.php")):
 		echo '          <td class="catHead">Theme Administration</td>';
+        else:
+		echo '          <td class="catHead"></td>';
+		endif;
 		echo '        </tr>';
 		echo '      </table>';
 		echo '    </td>';
@@ -575,8 +611,8 @@ function GraphicAdmin($pos=1)
 		
 		foreach( $themes_row as $theme ):
 
-			if (file_exists(NUKE_THEMES_DIR.$theme['theme_name']."/admin/index.php") AND file_exists(NUKE_THEMES_DIR.$theme['theme_name']."/admin/links.php") AND file_exists(NUKE_THEMES_DIR.$theme['theme_name']."/admin/case.php")):
-			
+			if (file_exists(NUKE_THEMES_DIR.$theme['theme_name']."/admin/index.php") 
+			AND file_exists(NUKE_THEMES_DIR.$theme['theme_name']."/admin/links.php") AND file_exists(NUKE_THEMES_DIR.$theme['theme_name']."/admin/case.php")):
 				include(NUKE_THEMES_DIR.$theme['theme_name'].'/admin/links.php');
 
 			endif;
@@ -738,7 +774,7 @@ function administration_panel( $pos = 1 )
 							<dd class="news-feed-message"><?php echo $value['message']; ?></dd>
 						</tr>
 						<?php endforeach; ?>
-					</table>                  
+					</table>
 				</div>
 			</div>
 
