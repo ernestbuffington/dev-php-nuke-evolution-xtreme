@@ -21,6 +21,13 @@
 /* And, if you use HTML code, please double check it.                     */
 /**************************************************************************/
 
+# Modules group mod v1.0 START
+define('_GAINACCESS',' group to gain access!');
+define('_MUSTJOIN','You must join the ');
+define('_CREDENTIALS','You do not have the necessary credentials<br />to access the ');
+define('_AREA','Area!');
+# Modules group mod v1.0 END
+
 define('_EMPTY_MESSAGE','You must enter a message first');
 define('_YOUHAVE_1_MSGS','You Have <strong><span class="blink-one">%s</span></strong> New Private Message');
 define('_YOUHAVE_X_MSGS','You Have <strong><span class="blink-one">%s</span></strong> New Private Messages');
