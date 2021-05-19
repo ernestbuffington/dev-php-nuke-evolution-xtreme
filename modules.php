@@ -102,14 +102,14 @@ if($name):
 			    endforeach;
 
 			    if(!$ingroup)
-                  $result = $db->sql_query('SELECT group_name
-			                                FROM '.$prefix.'_bbgroups 
+                  $result = $db->sql_query('SELECT `group_name`
+			                                FROM  '.$prefix.'_bbgroups 
 											WHERE group_id = '.$group.'
 				                            ORDER BY group_id'); 
 				 
 				  if($db->sql_numrows($result)): 
 	              
-                     while($row = $db->sql_fetchrow($result)): 
+                     while(($row = $db->sql_fetchrow($result)) AND (!$ingroup)): 
                      
 						 # this is so you can add a custom message to any groups on your portal
 						 # just add the special group id number where it says 9999
@@ -140,7 +140,8 @@ if($name):
                            $error .= '</div>';
 					     
 						 else:
-						 
+						   
+						   # this is the default message foe users that do not have group access to a module
 						   $error  = '<div align="center" style="padding-top:6px;">';
                            $error .= '</div>';
 
