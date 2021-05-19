@@ -111,21 +111,36 @@ if($name):
 	              
                      while($row = $db->sql_fetchrow($result)): 
                      
+						 # this is so you can add a custom message to any groups on your portal
+						 # just add the special group id number where it says 9999
 						 if($group == 9999):
 						 
-					       $error  = '<h1>You do not have the credentials to access the '.$module_title.' Module.</h1>';
-						   $error  .= '<img class="icons" align="absmiddle" width="200" src="'.img('unknown-error.png','error').'"><br />'; 
-                           $error .= '<strong><font size="4">'.GroupColor($row['group_name']).' Area!';
+						   $error  = '<div align="center" style="padding-top:6px;">';
+                           $error .= '</div>';
+
+						   $error .= '<h1>'._CREDENTIALS.''.$module_title.' '._AREA.'</h1>';
+						   $error .= '<img class="icons" align="absmiddle" width="200" src="'.img('unknown-error.png','error').'"><br />'; 
+                           $error .= '<strong><font size="4">'._MUSTJOIN.''.$row['group_name'].''._GAINACCESS;
+
+						   $error .= '<div align="center" style="padding-top:6px;">';
+                           $error .= '</div>';
 						 
+						 # this is so you can add a custom message to any groups on your portal
+						 # just add the special group id number where it says 99999
 						 elseif($group == 99999):
 						 
-					       $error  = '<h1>You do not have the credentials to access the '.$module_title.' Module.</h1>';
-						   $error  .= '<img class="icons" align="absmiddle" width="200" src="'.img('unknown-error.png','error').'"><br />'; 
-                           $error .= '<strong><font size="4">'.GroupColor($row['group_name']).' Area!';
+						   $error  = '<div align="center" style="padding-top:6px;">';
+                           $error .= '</div>';
+
+						   $error .= '<h1>'._CREDENTIALS.''.$module_title.' '._AREA.'</h1>';
+						   $error .= '<img class="icons" align="absmiddle" width="200" src="'.img('unknown-error.png','error').'"><br />'; 
+                           $error .= '<strong><font size="4">'._MUSTJOIN.''.$row['group_name'].''._GAINACCESS;
+
+						   $error .= '<div align="center" style="padding-top:6px;">';
+                           $error .= '</div>';
 					     
 						 else:
 						 
-					       
 						   $error  = '<div align="center" style="padding-top:6px;">';
                            $error .= '</div>';
 
@@ -141,7 +156,6 @@ if($name):
 					 endwhile;
         
                   endif;
-                 
 				 $db->sql_freeresult($result);
 			endif;
 		endif;
