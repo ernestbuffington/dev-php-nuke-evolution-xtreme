@@ -598,7 +598,8 @@ function GraphicAdmin($pos=1)
 		echo '      <table style="text-align: center; width: 100%;" border="0" cellpadding="0" cellspacing="1" class="forumline">';
 		echo '        <tr>';
 		if (file_exists(NUKE_THEMES_DIR.$theme['theme_name']."/admin/index.php") 
-		AND file_exists(NUKE_THEMES_DIR.$theme['theme_name']."/admin/links.php") AND file_exists(NUKE_THEMES_DIR.$theme['theme_name']."/admin/case.php")):
+		AND file_exists(NUKE_THEMES_DIR.$theme['theme_name']."/admin/links.php") 
+		AND file_exists(NUKE_THEMES_DIR.$theme['theme_name']."/admin/case.php")):
 		echo '          <td class="catHead">Theme Administration</td>';
         else:
 		echo '          <td class="catHead"></td>';
@@ -612,9 +613,9 @@ function GraphicAdmin($pos=1)
 		foreach( $themes_row as $theme ):
 
 			if (file_exists(NUKE_THEMES_DIR.$theme['theme_name']."/admin/index.php") 
-			AND file_exists(NUKE_THEMES_DIR.$theme['theme_name']."/admin/links.php") AND file_exists(NUKE_THEMES_DIR.$theme['theme_name']."/admin/case.php")):
-				include(NUKE_THEMES_DIR.$theme['theme_name'].'/admin/links.php');
-
+			AND file_exists(NUKE_THEMES_DIR.$theme['theme_name']."/admin/links.php") 
+			AND file_exists(NUKE_THEMES_DIR.$theme['theme_name']."/admin/case.php")):
+			include(NUKE_THEMES_DIR.$theme['theme_name'].'/admin/links.php');
 			endif;
 
 		endforeach;
