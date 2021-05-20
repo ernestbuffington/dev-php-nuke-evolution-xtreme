@@ -1618,7 +1618,7 @@ echo "<!--  END Titanium Portal Menu Javascript Functions v5.01 -->\n\n\n\n";
 							{
 								$flagmenu = $flagmenu+1;
 							
-								if($flagmenu==1) 
+								if($flagmenu == 1) 
 								{
 									$content .="<hr><div align=\"center\">"._MENU_ADMINVIEWALLMODULES."</div><br />";   
 								}

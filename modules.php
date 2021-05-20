@@ -61,11 +61,11 @@ if($name):
 	endif;
 	
 	if($module['active'] || is_mod_admin($module_name)):
-        if (!isset($file) OR $file != $_REQUEST['file']) 
-		 $file='index';
-	    if (isset($open)) 
-         if ($open != $_REQUEST['open']) 
-		  $open = '';
+      if (!isset($file) OR $file != $_REQUEST['file']) 
+		$file='index';
+	     if (isset($open)) 
+          if ($open != $_REQUEST['open']) 
+		   $open = '';
         
 		if((isset($file) && stristr($file,"..")) || (isset($mop) && stristr($mop,"..")) || (isset($open) && stristr($open,".."))) 
 		die('You are so cool...');
