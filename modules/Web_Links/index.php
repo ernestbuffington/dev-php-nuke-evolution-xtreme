@@ -250,7 +250,7 @@ function index()
     $numrows = intval($numrows);
     $catnum = intval($catnum);
     
-	echo "<center><span class=\"content\">"._THEREARE." <strong>$numrows</strong> "._LINKS." "._AND." <strong>$catnum</strong> "._CATEGORIES." "._INDB."</span></center>";
+	echo "<div align=\"center\"><span class=\"content\">"._THEREARE." <strong>$numrows</strong> "._LINKS." "._AND." <strong>$catnum</strong> "._CATEGORIES." "._INDB."</span></div>";
 
     # stop using <br /> use a div tag with padding whenever it's possible!
 	print '<div align="center" style="padding-top:6px;">'."\n";
