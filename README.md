@@ -21,6 +21,7 @@
 	<li>TheGhost - Ernest Allen Buffington</li>
 	<li>ScottyBcoder - Truman Scott Buffington</li>
 	<li>AcydBurn - Meik Sievertsen - https://phpBB.com</li>
+	<li>Mighty_Y</li>
 	<li>SgtLegend</li>
 	<li>Eyecu</li>
 	<li>Wolfstar</li>
@@ -36,6 +37,57 @@
 	<li>Evaders99</li>
 	<li>chatserv</li>
 	<li>André V Escudero</li>
+	<li>Daniel Morris</li>
+	<li>jhsolorz</li>
+	<li>aUsTiN</li>
+	<li>wGEric</li>
+	<li>Greg Schoper</li>
+	<li>markus_petrux</li>
+	<li>Acid</li>
+	<li>blulegend</li>
+	<li>netclectic</li>
+	<li>Ptirhiik</li>
+	<li>Disturbed One</li>
+	<li>AL Tnen</li>
+	<li>Niels</li>
+	<li>hayk</li>
+	<li>Suisse</li>
+	<li>GPHemsley</li>
+	<li>Renegade88</li>
+	<li>Christian Fecteau</li>
+	<li>r6untouchable</li>
+	<li>Douglas Bell</li>
+	<li>EGO2000</li>
+	<li>bobosola</li>
+	<li>chris_blessing</li>
+	<li>Aiencran</li>
+	<li>mkiefer</li>
+	<li>Nivisec</li>
+	<li>trof - Alexey Trofimov</li>
+	<li>Nazgul</li>
+	<li>Verteron</li>
+	<li>Dimitri Seitz</li>
+	<li>Sko22</li>
+	<li>Erisar</li>
+	<li>-=ET=-</li>
+	<li>AbelaJohnB</li>
+	<li>Fubonis</li>
+	<li>DJ Maze</li>
+	<li>Svyatozar</li>
+	<li>OXPUS</li>
+	<li>ErDrRon</li>
+	<li>Civphp</li>
+	<li>morpheus2matrix</li>
+	<li>zayin</li>
+	<li>Viperal</li>
+	<li>Shedrock</li>
+	<li>kooky</li>
+	<li>diediedie</li>
+	<li>Frederico Caldeira Knabben</li>
+	<li>Heshy Shayovitz</li>
+	<li>Daniel Morris</li>
+	<li>SlashDot</li>
+	<li>Effectica</li>
 </ul>
 
 <h2>PHP-Nuke Evolution Xtreme Contributors</h2>
