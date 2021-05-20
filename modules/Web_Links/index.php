@@ -58,7 +58,7 @@ function weblinks_parent($parentid,$title)
 {
     global $prefix, $db;
     $parentid = intval($parentid);
-    $row = $db->sql_fetchrow($db->sql_query("SELECT cid, title, parentid from ".$prefix."_links_categories where cid='$parentid'"));
+    $row = $db->sql_fetchrow($db->sql_query("SELECT `cid`, `title`, `parentid` FROM ".$prefix."_links_categories WHERE cid='$parentid'"));
     $cid = intval($row['cid']);
     $ptitle = stripslashes(check_html($row['title'], "nohtml"));
     $pparentid = intval($row['parentid']);
@@ -76,7 +76,7 @@ function weblinks_parentlink($parentid,$title)
     global $prefix, $db, $module_name;
     
 	$parentid = intval($parentid);
-    $row = $db->sql_fetchrow($db->sql_query("SELECT cid, title, parentid from ".$prefix."_links_categories where cid='$parentid'"));
+    $row = $db->sql_fetchrow($db->sql_query("SELECT `cid`, `title`, `parentid` FROM ".$prefix."_links_categories WHERE cid='$parentid'"));
     $cid = intval($row['cid']);
     $ptitle = stripslashes(check_html($row['title'], "nohtml"));
     $pparentid = intval($row['parentid']);
@@ -199,7 +199,7 @@ function index()
       echo "<br />"; 
       endif;
     
-	  $result2 = $db->sql_query("SELECT cid, title from ".$prefix."_links_categories where parentid='$cid' order by title limit 0,3");
+	  $result2 = $db->sql_query("SELECT `cid`, `title` FROM ".$prefix."_links_categories where parentid='$cid' ORDER BY title limit 0,3");
       $space = 0;
     
 	  while($row2 = $db->sql_fetchrow($result2)):
@@ -296,9 +296,9 @@ function AddLink()
 			
         echo "<i class=\"bi bi-info-square\"></i> "._CATEGORY.": <select name=\"cat\">";
         
-		$result = $db->sql_query("SELECT cid, 
-		                               title, 
-									parentid FROM ".$prefix."_links_categories order by parentid,title");
+		$result = $db->sql_query("SELECT `cid`, 
+		                               `title`, 
+									`parentid` FROM ".$prefix."_links_categories order by parentid,title");
 									
         while ($row = $db->sql_fetchrow($result)): 
 		
@@ -345,7 +345,7 @@ function AddLink()
 
 function Add($title, $url, $auth_name, $cat, $description, $email) {
     global $prefix, $db, $user, $cookie, $cache;
-    $result = $db->sql_query("SELECT url from ".$prefix."_links_links where url='$url'");
+    $result = $db->sql_query("SELECT `url` FROM ".$prefix."_links_links WHERE url='$url'");
     $numrows = $db->sql_numrows($result);
 /*****[BEGIN]******************************************
  [ Mod:    Advanced Security Code Control      v2.0.0 ] added 5/6/2021 (Someone fucked this up so I fixed it)
@@ -545,16 +545,16 @@ function NewLinksDate($selectdate)
     echo "<div align=\"center\"><span class=\"option\"><strong><h1>$dateView - $totallinks "._NEWLINKS."</h1></strong></span></div>"
     ."<table width=\"100%\" cellspacing=\"0\" cellpadding=\"10\" border=\"0\"><tr><td><span class=\"content\">";
 
-    $result2 = $db->sql_query("SELECT lid, 
-	                                  cid, 
-									  sid, 
-									title, 
-							  description, 
-							         date, 
-									 hits, 
-						linkratingsummary, 
-						       totalvotes, 
-							totalcomments FROM ".$prefix."_links_links 
+    $result2 = $db->sql_query("SELECT `lid`, 
+	                                  `cid`, 
+									  `sid`, 
+									`title`, 
+							  `description`, 
+							         `date`, 
+									 `hits`, 
+						`linkratingsummary`, 
+						       `totalvotes`, 
+							`totalcomments` FROM ".$prefix."_links_links 
 							             WHERE date 
 										  LIKE '%$newlinkDB%' 
 										 ORDER by title ASC");
@@ -1001,25 +1001,25 @@ function viewlink($cid, $min, $orderby, $show)
 	if(!is_numeric($min))
     $min=0;
     
-    $result4 = $db->sql_query("SELECT lid, 
-	                                title, 
-							  description, 
-							         date, 
-									 hits, 
-						linkratingsummary, 
-						       totalvotes, 
-							totalcomments FROM ".$prefix."_links_links 
+    $result4 = $db->sql_query("SELECT `lid`, 
+	                                `title`, 
+							  `description`, 
+							         `date`, 
+									 `hits`, 
+						`linkratingsummary`, 
+						       `totalvotes`, 
+							`totalcomments` FROM ".$prefix."_links_links 
 							             WHERE cid='$cid' 
 										 ORDER by $orderby limit $min,$perpage");
     
-	$fullcountresult = $db->sql_query("SELECT lid, 
-	                                        title, 
-									  description, 
-									         date, 
-											 hits, 
-								linkratingsummary, 
-								       totalvotes, 
-									totalcomments FROM ".$prefix."_links_links 
+	$fullcountresult = $db->sql_query("SELECT `lid`, 
+	                                        `title`, 
+									  `description`, 
+									         `date`, 
+											 `hits`, 
+								`linkratingsummary`, 
+								       `totalvotes`, 
+									`totalcomments` FROM ".$prefix."_links_links 
 									             WHERE cid='$cid'");
     
 	$totalselectedlinks = $db->sql_numrows($fullcountresult);
@@ -1315,7 +1315,7 @@ function visit($lid)
     global $prefix, $db;
     $lid = intval($lid);
     $db->sql_query("update ".$prefix."_links_links set hits=hits+1 where lid='$lid'");
-    $row = $db->sql_fetchrow($db->sql_query("SELECT url from ".$prefix."_links_links where lid='$lid'"));
+    $row = $db->sql_fetchrow($db->sql_query("SELECT `url` FROM ".$prefix."_links_links WHERE lid='$lid'"));
     $url = stripslashes($row['url']);
     redirect("$url");
 }
@@ -1346,17 +1346,17 @@ function search($query, $min, $orderby, $show)
     if(!is_numeric($linksresults) AND $linksresults==0)
     $linksresults=10;
 
-    $result = $db->sql_query("SELECT lid, 
-	                                 cid, 
-									 sid, 
-								   title, 
-								     url, 
-						     description, 
-							        date, 
-									hits, 
-					   linkratingsummary, 
-					          totalvotes, 
-						   totalcomments FROM ".$prefix."_links_links 
+    $result = $db->sql_query("SELECT `lid`, 
+	                                 `cid`, 
+									 `sid`, 
+								   `title`, 
+								     `url`, 
+						     `description`, 
+							        `date`, 
+									`hits`, 
+					   `linkratingsummary`, 
+					          `totalvotes`, 
+						   `totalcomments` FROM ".$prefix."_links_links 
 						                WHERE title 
 										 LIKE '%$query%' 
 										   OR description 
@@ -1364,14 +1364,14 @@ function search($query, $min, $orderby, $show)
 										ORDER BY $orderby 
 										LIMIT ".intval($min).",$linksresults");
     
-	$fullcountresult = $db->sql_query("SELECT lid, 
-	                                        title, 
-									  description, 
-									         date, 
-											 hits, 
-							    linkratingsummary, 
-								       totalvotes, 
-									totalcomments FROM ".$prefix."_links_links 
+	$fullcountresult = $db->sql_query("SELECT `lid`, 
+	                                        `title`, 
+									  `description`, 
+									         `date`, 
+											 `hits`, 
+							    `linkratingsummary`, 
+								       `totalvotes`, 
+									`totalcomments` FROM ".$prefix."_links_links 
 									             WHERE title 
 												  LIKE '%$query%' 
 												    OR description 
@@ -1391,7 +1391,7 @@ function search($query, $min, $orderby, $show)
 		echo "<span class=\"option\">"._SEARCHRESULTS4.": <strong>$the_query</strong></span><br /><br />"
             ."<table width=\"100%\" bgcolor=\"$bgcolor2\"><tr><td><span class=\"option\"><strong>"._USUBCATEGORIES."</strong></span></td></tr></table>";
             
-			$result2 = $db->sql_query("SELECT cid, title from ".$prefix."_links_categories where title LIKE '%$query%' ORDER BY title DESC");
+			$result2 = $db->sql_query("SELECT `cid`, `title` FROM ".$prefix."_links_categories WHERE title LIKE '%$query%' ORDER BY title DESC");
             
 			while ($row2 = $db->sql_fetchrow($result2)):
             $cid = intval($row2['cid']);
@@ -1636,10 +1636,10 @@ function viewlinkcomments($lid, $ttitle)
     menu(1);
     $lid = intval(trim($lid));
 
-    $result = $db->sql_query("SELECT ratinguser, 
-	                                     rating, 
-							     ratingcomments, 
-								ratingtimestamp FROM ".$prefix."_links_votedata 
+    $result = $db->sql_query("SELECT `ratinguser`, 
+	                                     `rating`, 
+							     `ratingcomments`, 
+								`ratingtimestamp` FROM ".$prefix."_links_votedata 
 								               WHERE ratinglid = '$lid' 
 											     AND ratingcomments != '' 
 											   ORDER by ratingtimestamp 
@@ -1677,7 +1677,7 @@ function viewlinkcomments($lid, $ttitle)
         $formatted_date = date("F j, Y", $timestamp);
         
 		/* Individual user information */
-        $result2 = $db->sql_query("SELECT rating FROM ".$prefix."_links_votedata WHERE ratinguser = '$ratinguser'");
+        $result2 = $db->sql_query("SELECT `rating` FROM ".$prefix."_links_votedata WHERE ratinguser = '$ratinguser'");
         $usertotalcomments = $db->sql_numrows($result2);
         $useravgrating = 0;
     
@@ -1744,7 +1744,7 @@ function viewlinkdetails($lid, $ttitle)
     menu(1);
 
     $lid = intval($lid);
-    $voteresult = $db->sql_query("SELECT rating, ratinguser, ratingcomments FROM ".$prefix."_links_votedata WHERE ratinglid = '$lid'");
+    $voteresult = $db->sql_query("SELECT `rating`, `ratinguser`, `ratingcomments` FROM ".$prefix."_links_votedata WHERE ratinglid = '$lid'");
     $totalvotesDB = $db->sql_numrows($voteresult);
     $anonvotes = 0;
     $anonvoteval = 0;
@@ -2302,7 +2302,7 @@ function brokenlink($lid)
     $ratinguser = $cookie[1];
     menu(1);
     $lid = intval($lid);
-    $row = $db->sql_fetchrow($db->sql_query("SELECT cid, title, url, description from ".$prefix."_links_links where lid='$lid'"));
+    $row = $db->sql_fetchrow($db->sql_query("SELECT `cid`, `title`, `url`, `description` FROM ".$prefix."_links_links WHERE lid='$lid'"));
     $cid = intval($row['cid']);
     $title = stripslashes(check_html($row['title'], "nohtml"));
     $url = stripslashes($row['url']);
@@ -2415,7 +2415,7 @@ function modifylinkrequest($lid)
     
 	if ($blocknow != 1): 
 	
-        $result = $db->sql_query("SELECT cid, sid, title, url, description from ".$prefix."_links_links where lid='$lid'");
+        $result = $db->sql_query("SELECT `cid`, `sid`, `title`, `url`, `description` FROM ".$prefix."_links_links WHERE lid='$lid'");
     
 	    echo "<div align=\"center\"><span class=\"option\"><strong><h1>"._REQUESTLINKMOD."</h1></strong></span></div><br /><span class=\"content\">";
     
@@ -2437,7 +2437,7 @@ function modifylinkrequest($lid)
         ."<input type=\"hidden\" name=\"modifysubmitter\" value=\"$ratinguser\">"
         .""._CATEGORY.": <select name=\"cat\">";
     
-	$result2 = $db->sql_query("SELECT cid, title, parentid from ".$prefix."_links_categories ORDER by title");
+	$result2 = $db->sql_query("SELECT `cid`, `title`, `parentid` FROM ".$prefix."_links_categories ORDER by title");
     
 	while($row2 = $db->sql_fetchrow($result2)): 
 	
@@ -2561,7 +2561,7 @@ function rateinfo($lid)
 {
     global $prefix, $db;
     $lid = intval($lid);
-    $db->sql_query("update ".$prefix."_links_links set hits=hits+1 where lid='$lid'");
+    $db->sql_query("UPDATE ".$prefix."_links_links set hits=hits+1 WHERE lid='$lid'");
     $row = $db->sql_fetchrow($db->sql_query("SELECT url from ".$prefix."_links_links where lid='$lid'"));
     $url = stripslashes($row['url']);
     redirect("$url");
@@ -2593,7 +2593,7 @@ function addrating($ratinglid, $ratinguser, $rating, $ratinghost_name, $ratingco
     $ip = identify::get_ip();
     
 	/* Check if Rating is Null */
-    if ($rating=="--"):
+    if ($rating == "--"):
     $error = "nullerror";
     completevote($error);
     $passtest = "no";
@@ -2604,7 +2604,7 @@ function addrating($ratinglid, $ratinguser, $rating, $ratinghost_name, $ratingco
       $result2 = $db->sql_query("SELECT submitter from ".$prefix."_links_links where lid='$ratinglid'");
       while ($row2 = $db->sql_fetchrow($result2)):
       $ratinguserDB = $row2['submitter'];
-            if ($ratinguserDB==$ratinguser):
+            if ($ratinguserDB == $ratinguser):
             $error = "postervote";
             completevote($error);
             $passtest = "no";
@@ -2719,7 +2719,7 @@ function completevotefooter($lid, $ttitle, $ratinguser)
 	include(NUKE_MODULES_DIR.$module_name.'/l_config.php');
     
 	$lid = intval($lid);
-    $row = $db->sql_fetchrow($db->sql_query("SELECT url FROM ".$prefix."_links_links WHERE lid='$lid'"));
+    $row = $db->sql_fetchrow($db->sql_query("SELECT `url` FROM ".$prefix."_links_links WHERE lid='$lid'"));
     $url = stripslashes($row['url']);
 
     echo "<span class=\"content\">"._THANKSTOTAKETIME." $sitename. "._LETSDECIDE."</span><br /><br /><br />";
