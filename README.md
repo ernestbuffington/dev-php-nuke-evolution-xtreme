@@ -6,7 +6,7 @@
 <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme.svg?type=shield"/></a>
 
 
-<h2>PHP-Nuke Evolution Xtreme Developers</h2> May 20th 2021
+<h2>PHP-Nuke Evolution Xtreme Developers</h2> 2021 Nightly Builds Repository<br />
 
 <ul>
 	<li>Francisco Burzi</li>
