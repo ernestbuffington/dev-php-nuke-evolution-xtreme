@@ -47,7 +47,13 @@ if($name):
     # Mod: Lock Modules v1.0.0 START
     global $db, $prefix, $user, $lock_modules;
 
-    if(($lock_modules && $name != 'Your_Account') && !is_admin() && !is_user() && ($name != 'Profile' && $mode == 'register' && (isset($check_num) || isset($HTTP_POST_VARS['submit'])))) 
+    if(($lock_modules && $name != 'Your_Account') 
+	&& !is_admin() 
+	&& !is_user() 
+	&& ($name != 'Profile' 
+	&& $mode == 'register' 
+	&& (isset($check_num) 
+	|| isset($HTTP_POST_VARS['submit'])))) 
     include(NUKE_MODULES_DIR.'Your_Account/index.php');
     # Mod: Lock Modules v1.0.0 END
 
