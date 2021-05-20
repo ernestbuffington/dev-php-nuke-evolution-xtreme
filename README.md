@@ -107,7 +107,7 @@
 
 <p>Hopefully, you will never have to visit the admin panel for Nuke Sentinel (tm) as 99% of all web hosts now have DDOS protection and many more security features which prevent attacks and such.</p>
 
-<h2>Help</h2>
+<h2>PHP-Nuke Evolution Xtreme Help</h2>
 
 <p>If you are having issues with your installation please do not hesitate to submit a report by clicking <a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=RequestSubmit&amp;project_id=77" target="_tab">HERE</a><br />
 If you need help with an install do not hesitate to submit a request by clicking <a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=RequestSubmit&amp;project_id=77" target="_tab">HERE</a></p>
