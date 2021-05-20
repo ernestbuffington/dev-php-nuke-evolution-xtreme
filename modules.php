@@ -1,23 +1,20 @@
 <?php
-/*======================================================================= 
-  PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
- =======================================================================*/
-
-/************************************************************************/
-/* PHP-NUKE: Advanced Content Management System                         */
-/* ============================================                         */
-/*                                                                      */
-/* Copyright (c) 2002 by Francisco Burzi                                */
-/* http://phpnuke.org                                                   */
-/*                                                                      */
-/* This program is free software. You can redistribute it and/or modify */
-/* it under the terms of the GNU General Public License as published by */
-/* the Free Software Foundation; either version 2 of the License.       */
-/*                                                                      */
-/************************************************************************/
-/* Additional security checking code 2003 by chatserv                   */
-/* http://www.nukefixes.com -- http://www.nukeresources.com             */
-/************************************************************************/
+##########################################################################
+# PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System #
+##########################################################################
+# PHP-NUKE: Advanced Content Management System                           #
+#                                                                        #
+# Copyright (c) 2002 by Francisco Burzi                                  #
+# http://phpnuke.org                                                     #
+#                                                                        #
+# This program is free software. You can redistribute it and/or modify   #
+# it under the terms of the GNU General Public License as published by   #
+# the Free Software Foundation; either version 2 of the License.         #
+##########################################################################
+# Additional security checking code 2003 by chatserv                     #
+# Old web address http://www.nukefixes.com                               #
+# Old web address http://www.nukeresources.com                           #
+##########################################################################
 
 /*****[CHANGES]**********************************************************
 -=[Base]=-
