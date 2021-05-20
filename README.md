@@ -10,6 +10,7 @@
 <h2>PHP-Nuke Evolution Xtreme Developers</h2> 
 
 <ul>
+	<li>TheGhost - Ernest Allen Buffington (Lead Developer)</li>
 	<li>Francisco Burzi</li>
 	<li>Marco Ledingue</li>
         <li>Bob Marion</li> 
@@ -18,7 +19,6 @@
 	<li>JeFFb68CAM</li>
 	<li>AlphaClient - Anthony Castellano</li>
 	<li>Shakey - Anna L Weese</li>
-	<li>TheGhost - Ernest Allen Buffington</li>
 	<li>ScottyBcoder - Truman Scott Buffington</li>
 	<li>AcydBurn - Meik Sievertsen - https://phpBB.com</li>
 	<li>Mighty_Y</li>
@@ -88,6 +88,11 @@
 	<li>Daniel Morris</li>
 	<li>SlashDot</li>
 	<li>Effectica</li>
+	<li>Rob Bergman</li>
+	<li>Cyril</li>
+	<li>LordSpartacus</li>
+	<li>Mario</li>
+
 </ul>
 
 <h2>PHP-Nuke Evolution Xtreme Contributors</h2>
