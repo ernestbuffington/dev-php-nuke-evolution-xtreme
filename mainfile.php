@@ -161,8 +161,8 @@ elseif (strlen($rel_path['file']) > strlen($_SERVER['DOCUMENT_ROOT']))
 } 
 else 
 {
-    $href_path='https://'.$_SERVER['SERVER_NAME'];
-	$href_path_http='http://'.$_SERVER['SERVER_NAME'];
+    $href_path = 'https://'.$_SERVER['SERVER_NAME'];
+	$href_path_http = 'http://'.$_SERVER['SERVER_NAME'];
 }
 
 unset ($rel_path);
