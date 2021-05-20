@@ -17,7 +17,7 @@ function modadmin_title()
     CloseTable();
 }
 
-function modadmin_get_modules ($mid='') 
+function modadmin_get_modules ($mid = '') 
 {
     global $prefix, $db, $admlang;
 
@@ -113,7 +113,7 @@ function modadmin_dispaly_modules($modadmin_modules)
       }
 
       # Fixed by TheGhost 3/26/2021
-	  # this boggled my miond years ago, I added this to remove the .. module that did not really exists!
+	  # this boggled my mind years ago, I added this to remove the .. module that did not really exists!
 	  # do not pase the index as a module in the moodules list
       if(substr($module['title'],0,2) == '..') 
       {
@@ -150,7 +150,6 @@ function modadmin_dispaly_modules($modadmin_modules)
          $active     = (intval($module['active'])) ? '<a href="'.$admin_file.'.php?op=modules&amp;a='.$module['mid'].'">'.get_evo_icon('evo-sprite ok', $admlang['global']['active']).'</a>' : '<a href="'.$admin_file.'.php?op=modules&amp;a='.$module['mid'].'">'.get_evo_icon('evo-sprite cancel', $admlang['global']['inactive']).'</a>';
          $title      =  (!intval($module['inmenu'])) ? "[&nbsp;<big><strong>&middot;</strong></big>&nbsp;]&nbsp;".$module['title'] : $module['title'];
       }
-
 
       if(isset($module['blocks'])) 
       {
@@ -196,15 +195,23 @@ function modadmin_dispaly_modules($modadmin_modules)
 function modadmin_edit_module($module) 
 {
    global $prefix, $db, $admin_file, $cache, $admlang;
+   
    $main_module = main_module();
+   
    $ingroups = array();
+   
    $o1 = $o2 = $o3 = $o4 = $o6 = '';
+   
    switch ($module['view']) 
    {
-      case 1: $o1 = 'SELECTED'; break;
-      case 2: $o2 = 'SELECTED'; break;
-      case 3: $o3 = 'SELECTED'; break;
-      case 4: $o4 = 'SELECTED'; break;
+      case 1: $o1 = 'SELECTED'; 
+	  break;
+      case 2: $o2 = 'SELECTED'; 
+	  break;
+      case 3: $o3 = 'SELECTED'; 
+	  break;
+      case 4: $o4 = 'SELECTED'; 
+	  break;
       case 6:
          $o6 = 'SELECTED';
          $ingroups = explode('-', $module['groups']);
@@ -223,8 +230,10 @@ function modadmin_edit_module($module)
       echo '</tr>';
       echo '<tr>';
       echo '<td class="row1" style="width: 50%;">'.$admlang['global']['title_custom'].'</td>';
-      echo '<td class="row1" style="width: 50%;"><input style="height: 24px; padding-left: 3px; padding-right: 3px; width: 99%;" type="text" name="custom_title" id="custom_title" value="'.$module['custom_title'].'" maxlength="255" /></td>';
-      echo '</tr>';
+      echo '<td class="row1" style="width: 50%;"><input style="height: 24px; padding-left: 3px; padding-right: 3px; width: 99%;" 
+	  type="text" name="custom_title" id="custom_title" value="'.$module['custom_title'].'" maxlength="255" /></td>';
+      
+	  echo '</tr>';
 
       echo '<tr>';
       echo '<td class="row1" style="width: 50%;">'.$admlang['global']['who_view'].'</td>';
