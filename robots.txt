@@ -23,4 +23,4 @@ Disallow: /nconfig.php
 Disallow: /ips.php
 Disallow: /trap.php
 
-Sitemap: https://yourwebsite.com/xmls/sitemap/sitemap-index.xml
+Sitemap: https://dev-php-nuke-evolution-xtreme.86it.us/xmls/sitemap/sitemap-index.xml

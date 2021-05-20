@@ -4,7 +4,7 @@
   <loc>https://dev-php-nuke-evolution-xtreme.86it.us/</loc>
   <priority>1.0</priority>
   <changefreq>daily</changefreq>
-  <lastmod>2021-05-12</lastmod>
+  <lastmod>2021-05-20</lastmod>
  </url>
 </urlset>
 <url>
@@ -21,6 +21,30 @@
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Advertising&amp;op=client</loc>
+ <priority>0.8</priority>
+ <changefreq>monthly</changefreq>
+ <lastmod>2021-06-25</lastmod>
+</url>
+<url>
+ <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Blog&amp;file=article&amp;sid=25</loc>
+ <priority>0.8</priority>
+ <changefreq>monthly</changefreq>
+ <lastmod>2021-06-25</lastmod>
+</url>
+<url>
+ <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Blog&amp;file=article&amp;sid=24</loc>
+ <priority>0.8</priority>
+ <changefreq>monthly</changefreq>
+ <lastmod>2021-06-25</lastmod>
+</url>
+<url>
+ <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Blog&amp;file=article&amp;sid=23</loc>
+ <priority>0.8</priority>
+ <changefreq>monthly</changefreq>
+ <lastmod>2021-06-25</lastmod>
+</url>
+<url>
+ <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Blog&amp;file=article&amp;sid=22</loc>
  <priority>0.8</priority>
  <changefreq>monthly</changefreq>
  <lastmod>2021-06-25</lastmod>
@@ -137,13 +161,13 @@
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Blog_Top</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Blog_Topics</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Blog_Topics&amp;cid=10</loc>
@@ -188,12 +212,6 @@
  <lastmod>2021-06-25</lastmod>
 </url>
 <url>
- <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Content</loc>
- <priority>0.8</priority>
- <changefreq>monthly</changefreq>
- <lastmod>2021-06-25</lastmod>
-</url>
-<url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Docs</loc>
  <priority>0.8</priority>
  <changefreq>monthly</changefreq>
@@ -221,18 +239,6 @@
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Docs&amp;file=terms</loc>
  <priority>0.8</priority>
  <changefreq>monthly</changefreq>
- <lastmod>2021-06-25</lastmod>
-</url>
-<url>
- <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Donations</loc>
- <priority>0.8</priority>
- <changefreq>yearly</changefreq>
- <lastmod>2021-06-25</lastmod>
-</url>
-<url>
- <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=ECalendar</loc>
- <priority>0.8</priority>
- <changefreq>yearly</changefreq>
  <lastmod>2021-06-25</lastmod>
 </url>
 <url>
@@ -272,154 +278,148 @@
  <lastmod>2021-06-25</lastmod>
 </url>
 <url>
- <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=HTML_Newsletter</loc>
- <priority>0.8</priority>
- <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
-</url>
-<url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Image_Repository</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Link_Us</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
- <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Loan</loc>
+ <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=22</loc>
  <priority>0.8</priority>
- <changefreq>yearly</changefreq>
- <lastmod>2021-06-05</lastmod>
+ <changefreq>daily</changefreq>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=21</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=20</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=19</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=18</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=17</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=16</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=15</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=14</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=13</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=12</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=11</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=10</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=9</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=8</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=7</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=6</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=5</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=4</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=3</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=2</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile&amp;mode=viewprofile&amp;u=1</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Advertising&amp;op=network_ad_terms</loc>
@@ -476,82 +476,82 @@
  <lastmod>2021-06-25</lastmod>
 </url>
 <url>
- <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=70</loc>
- <priority>0.8</priority>
- <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
-</url>
-<url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=76</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
-</url>
-<url>
- <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=71</loc>
- <priority>0.8</priority>
- <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
-</url>
-<url>
- <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=72</loc>
- <priority>0.8</priority>
- <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
-</url>
-<url>
- <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=74</loc>
- <priority>0.8</priority>
- <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
-</url>
-<url>
- <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=75</loc>
- <priority>0.8</priority>
- <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
-</url>
-<url>
- <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=68</loc>
- <priority>0.8</priority>
- <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
-</url>
-<url>
- <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=78</loc>
- <priority>0.8</priority>
- <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
-</url>
-<url>
- <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=69</loc>
- <priority>0.8</priority>
- <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
-</url>
-<url>
- <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=73</loc>
- <priority>0.8</priority>
- <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=77</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
+</url>
+<url>
+ <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=70</loc>
+ <priority>0.8</priority>
+ <changefreq>daily</changefreq>
+ <lastmod>2021-05-20</lastmod>
+</url>
+<url>
+ <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=71</loc>
+ <priority>0.8</priority>
+ <changefreq>daily</changefreq>
+ <lastmod>2021-05-20</lastmod>
+</url>
+<url>
+ <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=72</loc>
+ <priority>0.8</priority>
+ <changefreq>daily</changefreq>
+ <lastmod>2021-05-20</lastmod>
+</url>
+<url>
+ <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=74</loc>
+ <priority>0.8</priority>
+ <changefreq>daily</changefreq>
+ <lastmod>2021-05-20</lastmod>
+</url>
+<url>
+ <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=75</loc>
+ <priority>0.8</priority>
+ <changefreq>daily</changefreq>
+ <lastmod>2021-05-20</lastmod>
+</url>
+<url>
+ <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=68</loc>
+ <priority>0.8</priority>
+ <changefreq>daily</changefreq>
+ <lastmod>2021-05-20</lastmod>
+</url>
+<url>
+ <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=78</loc>
+ <priority>0.8</priority>
+ <changefreq>daily</changefreq>
+ <lastmod>2021-05-20</lastmod>
+</url>
+<url>
+ <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=69</loc>
+ <priority>0.8</priority>
+ <changefreq>daily</changefreq>
+ <lastmod>2021-05-20</lastmod>
+</url>
+<url>
+ <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=73</loc>
+ <priority>0.8</priority>
+ <changefreq>daily</changefreq>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=79</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=80</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Profile</loc>
@@ -560,34 +560,22 @@
  <lastmod>2021-06-25</lastmod>
 </url>
 <url>
- <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Recommend_Us</loc>
- <priority>0.8</priority>
- <changefreq>yearly</changefreq>
- <lastmod>2021-06-05</lastmod>
-</url>
-<url>
- <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Reviews</loc>
- <priority>0.8</priority>
- <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
-</url>
-<url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Search</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Statistics</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Surveys</loc>
  <priority>0.8</priority>
  <changefreq>daily</changefreq>
- <lastmod>2021-05-12</lastmod>
+ <lastmod>2021-05-20</lastmod>
 </url>
 <url>
  <loc>https://dev-php-nuke-evolution-xtreme.86it.us/modules.php?name=Your_Account</loc>

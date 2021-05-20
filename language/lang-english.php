@@ -3,7 +3,6 @@
   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
 
-
 /**************************************************************************/
 /* PHP-NUKE: Advanced Content Management System                           */
 /* ============================================                           */
@@ -20,19 +19,16 @@
 /* so your entry will look like: This is \"double quoted\" text.          */
 /* And, if you use HTML code, please double check it.                     */
 /**************************************************************************/
-
 # Modules group mod v1.0 START
 define('_GAINACCESS',' group to gain access!');
 define('_MUSTJOIN','You must join the ');
 define('_CREDENTIALS','You do not have the necessary credentials<br />to access the ');
 define('_AREA','Area!');
 # Modules group mod v1.0 END
-
 define('_EMPTY_MESSAGE','You must enter a message first');
 define('_YOUHAVE_1_MSGS','You Have <strong><span class="blink-one">%s</span></strong> New Private Message');
 define('_YOUHAVE_X_MSGS','You Have <strong><span class="blink-one">%s</span></strong> New Private Messages');
 define('_YOUHAVE_NO_MSGS','You Have <strong><span class="blink-one">0</span></strong> NEW Messages, Nobody Likes You!');
-
 // new common language defines.
 define('_S_ADMIN_PANEL','Admin Panel');
 define('_L_ADMIN_PANEL','Administration');
@@ -41,10 +37,8 @@ define('_YOUHAVE_X_MSGS','You Have <strong><span class="blink-one">%s</span></st
 define('_WATCH_YOUTUBE','Watch this video on YouTube');
 define("_POSTEDBY","Posted by");
 define("_ON","on");
-
 define("_CHARSET","UTF-8");
 define("_LANG_DIRECTION","ltr");
-
 define('_INVISIBLEMODULES', 'Invisible Modules');
 define('_NOACTIVEMODULES', 'Inactive Modules');
 define('_NONE', 'None');
@@ -72,63 +66,43 @@ define('_MVIEWANON', 'View: Anonymous Users Only');
 define('_MVIEWGROUP', 'View: Groups Only');
 define('_MVIEWALL', 'View: All Visitors');
 define('_MODULESGROUP', 'We are Sorry but this section of our site is for <i>Group Members</i> of the following groups only.');
-
 define("_HOUR","Hour");
 define("_HOURS","Hours");
-
 define("_MODULEDOESNOTEXIST","Sorry... but this module does not exist!");
 define("_MODULENOTACTIVE","Sorry, this Module isn't active!");
-
 define("_NICKNAME","Nickname");
 define("_PASSWORD","Password");
 define("_LOGIN","Login");
-
 define("_NOBIGSTORY","There isn't a Biggest Story for Today, yet.");
-
 define("_BLOCKPROBLEM","There is a problem right now with this block.");
 define("_BLOCKPROBLEM2","There isn't content right now for this block.");
-
 define("_SELECTGUILANG","Select Interface Language:");
 define("_COMMENTS","comments");
 define("_READS","reads");
 define("_MORENEWS","More in News Section");
-
 define("_NEWSLETTERBLOCKSUBSCRIBED", "You are subscribed to the newsletter");
 define("_NEWSLETTERBLOCKREGISTER", "You must register to receive the newsletter");
 define("_NEWSLETTERBLOCKREGISTERNOW", "Click to register");
 define("_NEWSLETTERBLOCKNOTSUBSCRIBED", "You are not subscribed to the newsletter");
 define("_NEWSLETTERBLOCKSUBSCRIBE", "Click to subscribe");
 define("_NEWSLETTERBLOCKUNSUBSCRIBE", "Click to unsubscribe");
-
 define("_PASTARTICLES","Past Articles");
 define("_OLDERARTICLES","Older Articles");
-
 define('_DATESTRING','%A, %B %d, %Y (%H:%M:%S)');
 define('_DATESTRING2','%A, %B %d');
 define('_DATESTRING3','%d-%b-%Y');
 define('_DATESTRING4','%1$s, %2$s %3$s');
 define("_DATE","Date");
-
 define("_SEARCH","Search");
-
 define("_FORADMINTESTS","(for Admin tests)");
 define("_ACTIVEBUTNOTSEE","(Active but invisible link)");
-
 define("_PAGESVIEWS","page views since");
 define("_WERECEIVED","We received");
-
 define("_WRITES","writes");
-
 define("_GOBACK","[ <a href=\"javascript:history.go(-1)\">Go Back</a> ]");
-
 define("_LASTIP","Last user IP:");
 define("_BANTHIS","Ban This IP");
-
-
-
 define("_POSTEDON","Posted on");
-
-
 define("_WELCOMETO","Welcome to");
 define("_POSTEDBY","Posted by");
 define("_BY","by");
@@ -258,10 +232,8 @@ define("_NOW","now!");
 define("_ADMSUB","Subscribed User!");
 define("_ADMNOTSUB","User NOT Subscribed");
 define("_ADMSUBEXPIREIN","Subscription Expire in:");
-
 define("_LASTVISIT","Last visit:");
 define("_LASTNA","N/A");
-
 define("_CZ_SECURITYCODE","Security Code: ");
 define("_CZ_TYPESECCODE","Type Security Code Here: ");
 define("_ADMIN_BLOCK_DENIED", "You are not allowed to view this block");
