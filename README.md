@@ -1,5 +1,5 @@
-<div class="border rounded-2 repository-og-image js-repository-image-container" style="background-image: url(&quot;https://repository-images.githubusercontent.com/356110895/a50a0280-b8ff-11eb-8a87-7b529221c281&quot;);"></div>
-<img class="border rounded-2 repository-og-image js-repository-image-container" src="https://repository-images.githubusercontent.com/356110895/a50a0280-b8ff-11eb-8a87-7b529221c281" alt="PHP-Nuke Evolution Xtreme (US Version)" width="640" height="320">
+<div class="border rounded-2 repository-og-image js-repository-image-container" style="background-image: url(&quot;https://repository-images.githubusercontent.com/356110895/07b1cd00-b905-11eb-8daa-fa23876568cf&quot;);"></div>
+<img class="border rounded-2 repository-og-image js-repository-image-container" src="https://repository-images.githubusercontent.com/356110895/07b1cd00-b905-11eb-8daa-fa23876568cf" alt="PHP-Nuke Evolution Xtreme (US Version)" width="640" height="320">
 </div>
 <br />
 <a href="https://www.codacy.com/gh/ernestbuffington/dev-php-nuke-evolution-xtreme/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ernestbuffington/dev-php-nuke-evolution-xtreme&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/85bb9842a64a45098c17e5cb600ba42f"/></a> 
