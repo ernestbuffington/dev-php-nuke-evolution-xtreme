@@ -486,7 +486,9 @@ $httpref = intval($httpref);
 $httprefmax = intval($httprefmax);
 $domain = str_replace('http://', '', $nukeurl);
 
-if(isset($default_Theme)) $Default_Theme = $default_Theme;
+if(isset($default_Theme)) 
+$Default_Theme = $default_Theme;
+
 if (CAN_MOD_INI) ini_set('sendmail_from', $adminmail);
 
 /*****[BEGIN]******************************************
