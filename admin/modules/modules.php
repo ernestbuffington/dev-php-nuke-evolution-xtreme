@@ -194,7 +194,7 @@ function modadmin_dispaly_modules($modadmin_modules)
 
 function modadmin_edit_module($module) 
 {
-   global $prefix, $db, $admin_file, $cache, $admlang;
+   global $prefix, $db, $admin_file, $admlang;
    
    $main_module = main_module();
    
