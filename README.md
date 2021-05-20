@@ -20,7 +20,7 @@
 	<li>Shakey - Anna L Weese</li>
 	<li>TheGhost - Ernest Allen Buffington</li>
 	<li>ScottyBcoder - Truman Scott Buffington</li>
-	<li>acydburn - Meik Sievertsen</li>
+	<li>AcydBurn - Meik Sievertsen - https://phpBB.com</li>
 	<li>SgtLegend</li>
 	<li>Eyecu</li>
 	<li>Wolfstar</li>
