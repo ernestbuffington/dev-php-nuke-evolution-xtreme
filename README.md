@@ -11,6 +11,13 @@
 
 <ul>
 	<li>TheGhost - Ernest Allen Buffington (Lead Developer)</li>
+	<li>SeaBeast08 - Sebastian Scott Buffington aka Allen Scott</li>
+	<li>Jhonnie Rotten R.I.P.</li>
+	<li>Melissa Daponte R.I.P.</li>
+	<li>Tara Ross R.I.P.</li>
+	<li>Timothy V Trela R.I.P.</li>
+	<li>ScottyBcoder - Truman Scott Buffington</li>
+	<li>Shakey - Anna L Weese</li>
 	<li>Francisco Burzi</li>
 	<li>Marco Ledingue</li>
         <li>Bob Marion</li> 
@@ -18,8 +25,6 @@
 	<li>killigan</li>
 	<li>JeFFb68CAM</li>
 	<li>AlphaClient - Anthony Castellano</li>
-	<li>Shakey - Anna L Weese</li>
-	<li>ScottyBcoder - Truman Scott Buffington</li>
 	<li>AcydBurn - Meik Sievertsen - https://phpBB.com</li>
 	<li>Mighty_Y</li>
 	<li>SgtLegend</li>
@@ -27,7 +32,6 @@
 	<li>Wolfstar</li>
         <li>Lonestar - Shaun</li>
 	<li>coRpSE</li>
-	<li>SeaBeast08 - Sebastian Scott Buffington aka Allen Scott</li>
 	<li>Quake</li>
 	<li>Edward Eliot</li>
 	<li>Reconix</li>
@@ -94,12 +98,6 @@
 	<li>Mario</li>
 	<li>Renee Rhon</li>
 	<li>Tara Clemmer</li>
-	<li>Jhonnie Rotten R.I.P.</li>
-	<li>Melissa Daponte R.I.P.</li>
-	<li>Tara Ross R.I.P.</li>
-	<li>Timothy V Trela R.I.P.</li>
-
-
 </ul>
 
 <h2>PHP-Nuke Evolution Xtreme Contributors</h2>
