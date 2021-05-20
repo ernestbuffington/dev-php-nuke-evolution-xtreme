@@ -22,7 +22,11 @@
 	  Titanium Patched                         v1.0.0       05/19/2021
 -=[Mod]=-
       Lock Modules                             v1.0.0       08/04/2005
-	  Groups Mod                               v1.0.0       05/19/2021
+	  
+	  Groups Permissiond Mod                   v1.0.0       05/19/2021
+	  This mod adds a stop sign and message for the user when they try
+	  to access a module that is assigned to a group that they are not
+	  a member of.
  ************************************************************************/
 define('MODULE_FILE', true);
 if (isset($_GET['file']) && $_GET['file'] == 'posting') 
