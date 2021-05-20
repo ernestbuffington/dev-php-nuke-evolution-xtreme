@@ -1464,7 +1464,9 @@ echo "<!--  END Titanium Portal Menu Javascript Functions v5.01 -->\n\n\n\n";
 				# sublevels - showhide
 				if($keyinthisgroup<count($moduleinthisgroup[$som_groupmenu])-1 && $sublevelinthisgroup[$som_groupmenu][$keyinthisgroup]<$sublevelinthisgroup[$som_groupmenu][$keyinthisgroup+1]) 
 				{
-					$ligne=($som_dynamic=='on') ? "<tr style=\"cursor: pointer;\" onclick=\"menu_showhide('menusublevel-$som_groupmenu-".($keyinthisgroup+1)."','ok','menuupdown-sublevel-$som_groupmenu-".($keyinthisgroup+1)."');\">" : "<tr>"; // onclick=\"menu_showhide('menusublevel-$som_groupmenu-$keyinthisgroup','ok','menuupdown-sublevel-$som_groupmenu-$keyinthisgroup');\"
+					$ligne=($som_dynamic=='on') ? "<tr style=\"cursor: pointer;\" 
+					onclick=\"menu_showhide('menusublevel-$som_groupmenu-".($keyinthisgroup+1)."','ok','menuupdown-sublevel-$som_groupmenu-".($keyinthisgroup+1)."');\">" : "<tr>"; 
+					
 					$id_sublevel="menusublevel-$som_groupmenu-".($keyinthisgroup+1);
 					$id_sublevel_img="menuupdown-sublevel-$som_groupmenu-".($keyinthisgroup+1);
 					$ferme_sublevels.= ($som_dynamic=='on') ? "menu_showhide('$id_sublevel','nok','$id_sublevel_img');" : "" ;
@@ -1618,19 +1620,22 @@ echo "<!--  END Titanium Portal Menu Javascript Functions v5.01 -->\n\n\n\n";
 							
 								if($flagmenu==1) 
 								{
-									$content .="<hr><div align=\"center\">"._MENU_ADMINVIEWALLMODULES."</div><br>";   // si il y a des modules affichés en rubrique 99, on affiche avant une ligne horizontale
+									$content .="<hr><div align=\"center\">"._MENU_ADMINVIEWALLMODULES."</div><br />";   
 								}
 								
-								$urldumodule99 = ($gt_url[$z]!="") ? $gt_url[$z] : "modules.php?name=".$module[$z] ; // GT-NextGen
+								$urldumodule99 = ($gt_url[$z]!="") ? $gt_url[$z] : "modules.php?name=".$module[$z] ; 
 								
-								if(($newpms[0]) AND ($module[$z]=="Private_Messages")) 
+								if(($newpms[0]) AND ($module[$z]=="Private_Messages"))  
 								{ 
-									$content .= "<strong><big>&middot;</big></strong><img src=\"images/blocks/email-y.gif\" height=\"10\" width=\"14\" alt=\""._MENU_NEWPM."\" title=\""._MENU_NEWPM."\"><a href=\"".$urldumodule99."\">$customtitle2</a><br>\n";
+									$content .= "<strong><big>&middot;</big></strong><img src=\"images/blocks/email-y.gif\"  
+									height=\"10\" width=\"14\" alt=\""._MENU_NEWPM."\" title=\""._MENU_NEWPM."\"><a href=\"".$urldumodule99."\">$customtitle2</a><br>\n";
 								}
 								else 
 								{
-									$content .= "<strong><big>&middot;</big></strong>&nbsp;<a href=\"".$urldumodule99."\">$customtitle2</a><br>\n";
+				                    $content .= "<strong><big><i class=\"bi bi-eye-slash\"></i></big></strong>&nbsp;<a href=\"".$urldumodule99."\">$customtitle2</a><br>\n";
 								}
+								
+								$content .= '';
 							}
 						}
 					}
