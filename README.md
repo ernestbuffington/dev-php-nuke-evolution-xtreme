@@ -92,6 +92,13 @@
 	<li>Cyril</li>
 	<li>LordSpartacus</li>
 	<li>Mario</li>
+	<li>Renee Rhon</li>
+	<li>Tara Clemmer</li>
+	<li>Jhonnie Rotten R.I.P.</li>
+	<li>Melissa Daponte R.I.P.</li>
+	<li>Tara Ross R.I.P.</li>
+	<li>Timothy V Trela R.I.P.</li>
+
 
 </ul>
 
