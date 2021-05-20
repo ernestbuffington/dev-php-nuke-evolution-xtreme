@@ -76,7 +76,12 @@ if($name):
           if ($open != $_REQUEST['open']) 
 		   $open = '';
         
-		if((isset($file) && stristr($file,"..")) || (isset($mop) && stristr($mop,"..")) || (isset($open) && stristr($open,".."))) 
+		if((isset($file) 
+		&& stristr($file,"..")) 
+		|| (isset($mop) 
+		&& stristr($mop,"..")) 
+		|| (isset($open) 
+		&& stristr($open,".."))) 
 		die('You are so cool...');
 		
 		$showblocks = $module['blocks'];
