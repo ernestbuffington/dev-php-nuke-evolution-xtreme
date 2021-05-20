@@ -29,7 +29,8 @@
 	  a member of.
  ************************************************************************/
 define('MODULE_FILE', true);
-if (isset($_GET['file']) && $_GET['file'] == 'posting') 
+
+if(isset($_GET['file']) && $_GET['file'] == 'posting') 
 define('MEDIUM_SECURITY', true);
 
 if(isset($_GET['Action']) && $_GET['Action'] == 'AJAX')
