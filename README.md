@@ -33,6 +33,8 @@
 	<li>TheWolf - Terrance Wolfe</li>
 	<li>Richard van Oosterhout</li> 
 	<li>Peter Lindgren</li> 
+	<li>Evaders99</li>
+	<li>chatserv</li>
 	<li>André V Escudero</li>
 </ul>
 
