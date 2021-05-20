@@ -24,7 +24,7 @@
 	<li>SgtLegend</li>
 	<li>Eyecu</li>
 	<li>Wolfstar</li>
-        <li>Lonestar</li>
+        <li>Lonestar - Shaun</li>
 	<li>coRpSE</li>
 	<li>SeaBeast08 - Sebastian Scott Buffington aka Allen Scott</li>
 	<li>Reconix</li>
