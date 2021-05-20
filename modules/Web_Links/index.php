@@ -659,20 +659,18 @@ function TopRated($ratenum, $ratetype)
         ."<a href=\"modules.php?name=$module_name&amp;l_op=TopRated&amp;ratenum=5&amp;ratetype=percent\">5%</a> - "
         ."<a href=\"modules.php?name=$module_name&amp;l_op=TopRated&amp;ratenum=10&amp;ratetype=percent\">10%</a> ]</div><br /><br /></td></tr>";
     
-	$result = $db->sql_query("SELECT lid, 
-	                                 cid, 
-									 sid, 
-								   title, 
-							 description, 
-							        date, 
-									hits, 
-					   linkratingsummary, 
-					          totalvotes, 
-						   totalcomments FROM ".$prefix."_links_links 
+	$result = $db->sql_query("SELECT `lid`, 
+	                                 `cid`, 
+									 `sid`, 
+								   `title`, 
+							 `description`, 
+							        `date`, 
+									`hits`, 
+					   `linkratingsummary`, 
+					          `totalvotes`, 
+						   `totalcomments` FROM ".$prefix."_links_links 
 						   
-						   WHRE linkratingsummary !=0 
-						   AND totalvotes >= ".$linkvotemin." 
-						   ORDER by linkratingsummary DESC limit 0,$toplinks");
+						   WHRE linkratingsummary !=0 AND totalvotes >=$linkvotemin ORDER by linkratingsummary DESC limit 0,$toplinks");
     echo "<tr><td>";
     
 	while($row = $db->sql_fetchrow($result)): 
@@ -786,16 +784,16 @@ function MostPopular($ratenum, $ratetype)
 	if(!is_numeric($mostpoplinks)) 
     $mostpoplinks=10;
     
-	$result3 = $db->sql_query("SELECT lid, 
-	                                  cid, 
-									  sid, 
-									title, 
-							  description, 
-							         date, 
-									 hits, 
-						linkratingsummary, 
-						       totalvotes, 
-							totalcomments FROM ".$prefix."_links_links 
+	$result3 = $db->sql_query("SELECT `lid`, 
+	                                  `cid`, 
+									  `sid`, 
+									`title`, 
+							  `description`, 
+							         `date`, 
+									 `hits`, 
+						`linkratingsummary`, 
+						       `totalvotes`, 
+							`totalcomments` FROM ".$prefix."_links_links 
 							             ORDER by hits 
 										  DESC limit 0,$mostpoplinks");
     echo "<tr><td>";
