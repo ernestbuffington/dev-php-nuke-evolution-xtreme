@@ -32,7 +32,7 @@
 	<li>André V Escudero</li>
 </ul>
 
-<h2>Contributors</h2>
+<h2>PHP-Nuke Evolution Xtreme Contributors</h2>
 
 <ul>
 
@@ -44,7 +44,7 @@
 
 </ul>
 
-<h2>Test and Translation</h2>
+<h2>PHP-Nuke Evolution Xtreme Testing and Translation</h2>
 
 <ul>
 <li>Aleagi</li>
@@ -62,7 +62,7 @@
 <li>ylhor</li>
 </ul>
 
-<h2>Major Changes in the US Version of Nuke Evolution Xtreme</h2>
+<h2>PHP-Nuke Evolution Xtreme US Version</h2>
 
 <ul>
 	<li>Blog Signature Mod v1</li>
@@ -73,7 +73,7 @@
 </ul>
 
 
-<h2>Server Requirements</h2>
+<h2>PHP-Nuke Evolution Xtreme Server Requirements</h2>
 
 <ul>
 	<li>EasyApache 4</li>
@@ -88,7 +88,7 @@
 	<li>Minimum of 5 GB/s bandwidth (5 TB/s or unmetered is recommended)</li>
 </ul>
 
-<h2>Local Development</h2>
+<h2>PHP-Nuke Evolution Xtreme Local Development</h2>
 
 <p>PHP-Nuke Evolution Xtreme while advanced can be easily installed using local development servers including MAMP, WAMP, and XAMPP but you can also use IIS or compile your own AMP (Apache, MySQL, PHP) server if you wish to. Please ensure that your local server meets the first 3 server requirements in order to achieve the best possible development results when building your custom add-ons, modules, and mods.</p>
 
@@ -101,7 +101,7 @@
 <p><a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=77" rel="nofollow" target="_tab">Fresh install</a><br />
 <a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=Project&amp;project_id=77" rel="nofollow" target="_tab">Upgrade</a></p>
 
-<h2>Security</h2>
+<h2>PHP-Nuke Evolution Xtreme Security</h2>
 
 <p>Security is the top priority for this CMS, the core of PHP-Nuke Evolution Xtreme uses a comprehensive integrated module called Nuke Sentinel (tm). Nuke Sentinel (tm) protects your website against DDOS, CLIKE, Union, and many more attacks, Nuke Sentinel (tm) is so advanced you don&#39;t even have to worry about protecting your admin panel as it watches for failed logins and can ban anonymous users automatically from your website.</p>
 
@@ -112,7 +112,7 @@
 <p>If you are having issues with your installation please do not hesitate to submit a report by clicking <a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=RequestSubmit&amp;project_id=77" target="_tab">HERE</a><br />
 If you need help with an install do not hesitate to submit a request by clicking <a href="https://www.86it.us/modules.php?name=Network_Projects&amp;op=RequestSubmit&amp;project_id=77" target="_tab">HERE</a></p>
 
-<h2>Feedback, Bugs, and Improvements</h2>
+<h2>PHP-Nuke Evolution Xtreme Feedback, Bugs, and Improvements</h2>
 
 <p>If you have any suggestions, feedback, or ideas you feel will be a nice contribution to PHP-Nuke Evolution Xtreme please use the following links</p>
 
@@ -130,6 +130,6 @@ If you need help with an install do not hesitate to submit a request by clicking
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0cfc2ea1fcf74154919aa46befadec31)](https://app.codacy.com/gh/ernestbuffington/dev-php-nuke-evolution-xtreme?utm_source=github.com&utm_medium=referral&utm_content=ernestbuffington/dev-php-nuke-evolution-xtreme&utm_campaign=Badge_Grade_Settings)
 
-<h2>Warranty</h2>
+<h2>PHP-Nuke Evolution Xtreme Warranty</h2>
 
 <p>Because PHP-Nuke Evolution Xtreme is licensed free of charge, there is no warranty for the package, to the extent permitted by applicable law. Except when otherwise stated in writing, the PHP-Nuke Evolution Xtreme Team provides PHP-Nuke Evolution Xtreme &quot;as is&quot; without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose. The entire risk as to the quality and performance of the package is with you. Should the package prove defective, you assume the cost of all necessary servicing, repair, or correction.</p>
