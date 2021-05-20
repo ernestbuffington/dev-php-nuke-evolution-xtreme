@@ -61,7 +61,8 @@ if($name):
 	
 	$module_name = $module['title'];
 	
-	if ($module_name == 'Your_Account' || $module_name == main_module()): 
+	if ($module_name == 'Your_Account' 
+	|| $module_name == main_module()): 
 		$module['active'] = true;
 		$view = 0;
 	else: 
