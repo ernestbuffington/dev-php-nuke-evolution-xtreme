@@ -27,6 +27,8 @@
         <li>Lonestar - Shaun</li>
 	<li>coRpSE</li>
 	<li>SeaBeast08 - Sebastian Scott Buffington aka Allen Scott</li>
+	<li>Quake</li>
+	<li>Edward Eliot</li>
 	<li>Reconix</li>
 	<li>TheWolf - Terrance Wolfe</li>
 	<li>Richard van Oosterhout</li> 
