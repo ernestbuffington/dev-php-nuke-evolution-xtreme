@@ -585,11 +585,11 @@ endif;
 /*****[BEGIN]******************************************
  [ Base:    Admin File Check                   v3.0.0 ]
  ******************************************************/
-if (!defined('FORUM_ADMIN')) :
+if(!defined('FORUM_ADMIN')):
     global $admin_file;
     if(!isset($admin_file) || empty($admin_file)) 
         die('You must set a value for $admin_file in config.php');
-    elseif (!empty($admin_file) && !file_exists(NUKE_BASE_DIR.$admin_file.'.php'))
+    elseif(!empty($admin_file) && !file_exists(NUKE_BASE_DIR.$admin_file.'.php'))
         die('The $admin_file you defined in config.php does not exist');
 endif;
 

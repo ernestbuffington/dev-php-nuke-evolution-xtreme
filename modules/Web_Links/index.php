@@ -670,7 +670,7 @@ function TopRated($ratenum, $ratetype)
 					          `totalvotes`, 
 						   `totalcomments` FROM ".$prefix."_links_links 
 						   
-						   WHRE linkratingsummary !=0 AND totalvotes >=$linkvotemin ORDER by linkratingsummary DESC limit 0,$toplinks");
+						   WHERE linkratingsummary !=0 AND totalvotes >=$linkvotemin ORDER by linkratingsummary DESC limit 0,$toplinks");
     echo "<tr><td>";
     
 	while($row = $db->sql_fetchrow($result)): 
