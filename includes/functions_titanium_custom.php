@@ -366,22 +366,20 @@ function get_titanium_timeago($ptime)
 	  $d = $estimate_time / $secs;
      if($d >= 1):
        $r = round($d);                                                                             
-       
+         # default calendar icon       
          $icon_string = '<font color="orange"><div align="center"><strong><font color="lightgreen">'.$r.'</font></strong><br />'.' '.$str.($r > 1 ? 's' : '').' </font><br /><font 
 	     color="gold"><i class="bi bi-calendar3"></i></font> </div>';
-
+        # change the icon into a clock if less than or equal to 24 hours
 	    if($estimate_time <= 86400):
          $icon_string = '<font color="orange"><div align="center"><strong><font color="lightgreen">'.$r.'</font></strong><br />'.' '.$str.($r > 1 ? 's' : '').' </font><br /><font 
 	     color="gold"><i class="bi bi-alarm"></i></font> </div>';
 	    endif;
-	   
+	    # change the icon into a stopwatch if less than 60 seconds
         if($estimate_time <= 60):
          $icon_string = '<font color="orange"><div align="center"><strong><font color="lightgreen">'.$r.'</font></strong><br />'.' '.$str.($r > 1 ? 's' : '').' </font><br /><font 
 	     color="gold"><i class="bi bi-smartwatch"></i></font> </div>';
 	    endif;
-	   
 	  return $icon_string;
-     
 	 endif;
    endforeach;
 }
