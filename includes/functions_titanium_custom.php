@@ -348,14 +348,11 @@ function get_titanium_version_information($version_check_url, $local_cache_locat
 	return $jsonobject;
 }
 
-function get_titanium_timeago( $ptime ) 
+function get_titanium_timeago($ptime) 
 {
     $estimate_time = time() - $ptime;
-
-
-    if( $estimate_time < 1 )
-        return 'Secs';
-
+    if($estimate_time < 1)
+    return 'Secs';
     $condition = array( 
                 12 * 30 * 24 * 60 * 60  =>  'Year',
                 30 * 24 * 60 * 60       =>  'Month',
@@ -365,15 +362,27 @@ function get_titanium_timeago( $ptime )
                 1                       =>  'Sec'
     );
 
-    foreach( $condition as $secs => $str )
-    {
-        $d = $estimate_time / $secs;
+    foreach($condition as $secs => $str ):
+	  $d = $estimate_time / $secs;
+     if($d >= 1):
+       $r = round($d);                                                                             
+       
+         $icon_string = '<font color="orange"><div align="center"><strong><font color="lightgreen">'.$r.'</font></strong><br />'.' '.$str.($r > 1 ? 's' : '').' </font><br /><font 
+	     color="gold"><i class="bi bi-calendar3"></i></font> </div>';
 
-     if( $d >= 1 )
-     {
-       $r = round( $d );                                                                             // └════┘
-       return '<font color="orange"><div align="center"><strong><font color="lightgreen">'.$r.'</font></strong><br />'.' '.$str.($r > 1 ? 's' : '').' </font><br /><font color="gold"><i class="bi bi-alarm"></i></font> </div>';
-        }
-    }
+	    if($estimate_time <= 86400):
+         $icon_string = '<font color="orange"><div align="center"><strong><font color="lightgreen">'.$r.'</font></strong><br />'.' '.$str.($r > 1 ? 's' : '').' </font><br /><font 
+	     color="gold"><i class="bi bi-alarm"></i></font> </div>';
+	    endif;
+	   
+        if($estimate_time <= 60):
+         $icon_string = '<font color="orange"><div align="center"><strong><font color="lightgreen">'.$r.'</font></strong><br />'.' '.$str.($r > 1 ? 's' : '').' </font><br /><font 
+	     color="gold"><i class="bi bi-smartwatch"></i></font> </div>';
+	    endif;
+	   
+	  return $icon_string;
+     
+	 endif;
+   endforeach;
 }
 ?>
