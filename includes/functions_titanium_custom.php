@@ -1,6 +1,6 @@
 <?php
 # all facebook div tags should have the ampersand encoded from & to &amp;
-# do not encode script tags with from & to &amp; - leave theme alone,
+# do not encode script tags from & to &amp; - leave theme alone,
 function facebook_likes()
 {
 if ( defined('facebook') ):	
@@ -310,9 +310,9 @@ function title_and_meta_tags()
  */
 function get_titanium_version_information($version_check_url, $local_cache_location, $force_refresh=false) 
 {
-	$url   			= $version_check_url;
-	$cache 			= $local_cache_location.'json.cache';
-	$refresh		= 24 * 60 * 60; # check for a new version once a day. // 24 * 60 * 60
+	$url = $version_check_url;
+	$cache = $local_cache_location.'json.cache';
+	$refresh = 24 * 60 * 60; # check for a new version once a day. // 24 * 60 * 60
 
 	if ($force_refresh || ((time() - filectime($cache)) > ($refresh) || 0 == filesize($cache))):
 
@@ -320,31 +320,31 @@ function get_titanium_version_information($version_check_url, $local_cache_locat
 		$ch = curl_init();
 
 		# set URL and other appropriate options
-		curl_setopt( $ch, CURLOPT_URL, $url );
-		curl_setopt( $ch, CURLOPT_FAILONERROR, true );
-		curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
-		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-		curl_setopt( $ch, CURLOPT_TIMEOUT, 7 );
+		curl_setopt($ch,CURLOPT_URL,$url);
+		curl_setopt($ch,CURLOPT_FAILONERROR,true);
+		curl_setopt($ch,CURLOPT_FOLLOWLOCATION,true);
+		curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+		curl_setopt($ch,CURLOPT_TIMEOUT,7);
 
 		# grab URL and pass it to the browser
-		$response = curl_exec( $ch );
+		$response = curl_exec($ch);
 
 		# close cURL resource, and free up system resources
-		curl_close( $ch );
+		curl_close($ch);
 
 		$jsoncache 	= $response;
 
 		# Insert json information into a locally stored file, This will prevent slow page load time from slow hosts.
-		$handle 	= fopen( $cache, 'wb' ) or die( 'no fopen' );	
-		fwrite( $handle, $jsoncache );
-		fclose( $handle );
+		$handle = fopen($cache,'wb') or die('no fopen');	
+		fwrite($handle,$jsoncache);
+		fclose($handle);
 
 	else:
 		# Retrieve the json cache from the locally stored file
-		$jsoncache = file_get_contents( $cache );
+		$jsoncache = file_get_contents($cache);
 	endif;
 
-	$jsonobject = json_decode( $jsoncache, true );
+	$jsonobject = json_decode($jsoncache,true);
 	return $jsonobject;
 }
 
