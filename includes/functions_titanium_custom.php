@@ -43,8 +43,6 @@ function title_and_meta_tags()
 	
 	# if the user is visiting a module, change the page title to the module name.
 	else:
-	   if ($appID > 0): # This will not load if there is not a facebook app id.
-	      
 		            $facebookappid = "<meta property=\"fb:app_id\" content=\"".$appID."\" />\n";
 		           $facebook_admin = '<meta property="fb:admins" content="3788797984541781" />'."\n"; # TheGhost's facebook user ID
 	           $facebook_page_type = "<meta property=\"og:type\" content=\"website\" />\n";
@@ -78,7 +76,6 @@ function title_and_meta_tags()
 			# PHP-Nuke Titanium Shout Box Module v1.0 -------------------------------------------------------------------------------------------------
 			
 			
-
 			# PHP-Nuke Titanium Google Site Map Module v1.0 --------------------------------------------------------------------------------------------
 			elseif($module_name == "Google-Site-Map"):
 			
@@ -105,8 +102,7 @@ function title_and_meta_tags()
 			# PHP-Nuke Titanium Google Site Map Module v1.0 --------------------------------------------------------------------------------------------
 
 
-            
-			else:
+		else:
 			
 			if (@file_exists(NUKE_MODULES_DIR.$module_name.'/images/logo.png')): 
 		   $facebook_ogimage_normal = '<meta property="og:image" content="'.HTTP.'modules/'.$module_name.'/images/logo.png" />'."\n";
@@ -122,7 +118,7 @@ function title_and_meta_tags()
 		         $facebookimage_alt = '<meta property="og:image:alt" content="Title png File" />'."\n";
 			        $facebook_ogurl = "<meta property=\"og:url\" content=\"".HTTPS."modules.php?name=$name\" />\n";
 
-			endif;
+		endif;
 	        
 			
             if ($file == 'article' && isset($sid) && is_numeric($sid)):
@@ -131,7 +127,7 @@ function title_and_meta_tags()
     
 	          if ($top) 
 		      {
-             list($top, $topicimage) = $db->sql_ufetchrow("SELECT `topictext`,`topicimage` FROM `".$prefix."_topics` WHERE `topicid`='".$top."'", SQL_NUM);
+                 list($top, $topicimage) = $db->sql_ufetchrow("SELECT `topictext`,`topicimage` FROM `".$prefix."_topics` WHERE `topicid`='".$top."'", SQL_NUM);
 
                  if ($sitename == $top):
 			           $newpagetitle = "$sitename $item_delim $art";
@@ -200,6 +196,8 @@ function title_and_meta_tags()
                    $structured_data .= '</script>'."\n";
 
             }
+			
+			
 			endif; 			
 			   if (@file_exists(TITANIUM_THEMES_DIR.'/includes/facebook/'.$module_name.'/'.$module_name.'.php')): # Added by Ernest Buffington
 	           include(TITANIUM_THEMES_DIR.'/includes/facebook/'.$module_name.'/'.$module_name.'.php');           # Load extra meta settings from each module
@@ -273,7 +271,7 @@ function title_and_meta_tags()
 	        include(TITANIUM_THEMES_DIR.'/includes/facebook/Index/Index.php');           # Load extra meta settings for Index
 		    endif;
 		  endif;
-	   endif;
+	   
 	   $newpagetitle = ($module_name) ? $item_delim .' '.$module_name_str : '';
     endif;
 	
@@ -281,6 +279,7 @@ function title_and_meta_tags()
 	
 	if ($appID > 0):
 	print $facebook_admin;
+	endif;
 	print $facebook_page_type;
     print $facebookappid;
     print $facebook_ogimage_normal;
@@ -296,7 +295,6 @@ function title_and_meta_tags()
     print $facebookimagetype;
 	print $facebook_ogdescription;
 	print $facebook_og_title;
-	endif;
 	
 	print '<title>'.$sitename.' '.$newpagetitle.'</title>'."\n";
 	
