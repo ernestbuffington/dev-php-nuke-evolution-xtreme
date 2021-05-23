@@ -1,6 +1,9 @@
+<!-- BEGIN groups title -->
+{GROUPS_TITLE}
+<!-- END groups title -->
 <table width="100%" cellspacing="2" cellpadding="2" border="0" align="center">
   <tr> 
-    <td align="left"><span class="nav"><a href="{U_INDEX}">{L_INDEX}</a></span></td>
+    <td></td>
   </tr>
 </table>
 

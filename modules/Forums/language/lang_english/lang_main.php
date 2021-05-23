@@ -884,7 +884,7 @@ $lang['Add_member'] = 'Add Member';
 $lang['Not_group_moderator'] = 'You are not this group\'s moderator, therefore you cannot perform that action.';
 
 $lang['Login_to_join'] = 'Log in to join or manage group memberships';
-$lang['This_open_group'] = 'This is an open group: click to request membership';
+$lang['This_open_group'] = '';
 /*****[BEGIN]******************************************
  [ Mod:    Auto Group                          v1.2.2 ]
  ******************************************************/
@@ -996,7 +996,8 @@ $lang['Online_explain'] = 'Based on users active over the past ' . ( ($board_con
 
 $lang['Forum_Location'] = 'Forum Location';
 $lang['Last_updated'] = 'Last Updated';
-
+$lang['Group_List_Info'] = 'Group Information';
+$lang['Group_List_Title'] = '<h1>Available Member Groups</h1>';
 $lang['Forum_index'] = 'Forum index';
 $lang['Logging_on'] = 'Logging on';
 $lang['Posting_message'] = 'Posting a message';
