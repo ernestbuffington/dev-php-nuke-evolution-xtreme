@@ -10,6 +10,8 @@
  *   copyright            : (C) 2001 The 86it Developers Network
  *   email                : support@86it.us
  *
+ *   Id: auth.php,v 2.0.2.3n 2021/05/23 18:00:00 psotfx Exp
+ *
  *   begin                : Saturday, Feb 13, 2001
  *   copyright            : (C) 2001 The phpBB Group
  *   email                : support@phpbb.com
@@ -73,34 +75,33 @@
 if (!defined('IN_PHPBB'))
 exit('Hacking attempt');
 
-/*
-        $type's accepted (pre-pend with AUTH_):
-        VIEW, READ, POST, REPLY, EDIT, DELETE, STICKY, ANNOUNCE, VOTE, POLLCREATE
+# $type's accepted (pre-pend with AUTH_):
+# VIEW, READ, POST, REPLY, EDIT, DELETE, STICKY, ANNOUNCE, VOTE, POLLCREATE
+#
+# Possible options ($type/forum_id combinations):
+#
+# * If you include a type and forum_id then a specific lookup will be done and
+# the single result returned
+#
+# * If you set type to AUTH_ALL and specify a forum_id an array of all auth types
+# will be returned
+#
+# * If you provide a forum_id a specific lookup on that forum will be done
+#
+# * If you set forum_id to AUTH_LIST_ALL and specify a type an array listing the
+# results for all forums will be returned
+#
+# * If you set forum_id to AUTH_LIST_ALL and type to AUTH_ALL a multidimensional
+# array containing the auth permissions for all types and all forums for that
+# user is returned
+#
+# All results are returned as associative arrays, even when a single auth type is
+# specified.
+#
+# If available you can send an array (either one or two dimensional) containing the
+# forum auth levels, this will prevent the auth function having to do its own
+# lookup
 
-        Possible options ($type/forum_id combinations):
-
-        * If you include a type and forum_id then a specific lookup will be done and
-        the single result returned
-
-        * If you set type to AUTH_ALL and specify a forum_id an array of all auth types
-        will be returned
-
-        * If you provide a forum_id a specific lookup on that forum will be done
-
-        * If you set forum_id to AUTH_LIST_ALL and specify a type an array listing the
-        results for all forums will be returned
-
-        * If you set forum_id to AUTH_LIST_ALL and type to AUTH_ALL a multidimensional
-        array containing the auth permissions for all types and all forums for that
-        user is returned
-
-        All results are returned as associative arrays, even when a single auth type is
-        specified.
-
-        If available you can send an array (either one or two dimensional) containing the
-        forum auth levels, this will prevent the auth function having to do its own
-        lookup
-*/
 function auth($type, $forum_id, $userdata, $f_access = '')
 {
    global $db, $lang;
