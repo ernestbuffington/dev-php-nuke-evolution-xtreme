@@ -1,5 +1,4 @@
 <?php
-
 /***************************************************************************
  *                           functions_admin_rebuild_search.php
  *                           ----------------------------------
@@ -19,7 +18,6 @@
  *   (at your option) any later version.
  *
  ***************************************************************************/
-
 function get_db_sizes()
 {
   global $db, $table_prefix, $dbname;
