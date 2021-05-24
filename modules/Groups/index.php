@@ -69,7 +69,8 @@ function generate_user_info(&$row,
 {
     global $lang, $theme_name, $images, $board_config, $online_color, $offline_color, $hidden_color;
     
-    $from = $row['user_from'].'&nbsp;';
+    $username = $row['username'];
+	$from = $row['user_from'].'&nbsp;';
     $joined = create_date($date_format, $row['user_regdate'], $board_config['board_timezone']);
     $posts = ($row['user_posts']) ? $row['user_posts'] : 0;
     
@@ -95,7 +96,8 @@ function generate_user_info(&$row,
 
 	if(!empty($row['user_viewemail']) || $group_mod): 
         $email_uri = ($board_config['board_email_form']) ? append_sid("profile.$phpEx?mode=email&amp;".POST_USERS_URL.'='.$row['user_id']) : 'mailto:'.$row['user_email'];
-		$email_img = '<a href="'.$email_uri.'"><img src="'.$images['icon_email'].'" alt="'.sprintf($lang['Send_email'],$row['username']).'" 
+		$email_img = '<a href="'.$email_uri.'"><img 
+		class="tooltip-html copyright" title="Send an e-mail message to '.$username.'" src="'.$images['icon_email'].'" alt="'.sprintf($lang['Send_email'],$row['username']).'" 
 		title="'.sprintf($lang['Send_email'],$row['username']).'" border="0" /></a>';
 		$email     = '<a href="' . $email_uri . '">' . $lang['Send_email'] . '</a>';
 	else: 
@@ -108,11 +110,13 @@ function generate_user_info(&$row,
     $profile = '<a href="'.$temp_url.'">'.$lang['Read_profile'].'</a>';
     
     $temp_url = "modules.php?name=Private_Messages&amp;mode=post&amp;".POST_USERS_URL."=".$row['user_id'];
-    $pm_img = '<a href="'.$temp_url.'"><img src="'.$images['icon_pm'].'" alt="'.sprintf($lang['Send_private_message'],$row['username']).'" 
+    $pm_img = '<a href="'.$temp_url.'"><img class="tooltip-html copyright" title="Send a Private Message to '.$username.'" 
+	src="'.$images['icon_pm'].'" alt="'.sprintf($lang['Send_private_message'],$row['username']).'" 
 	title="'.sprintf($lang['Send_private_message'],$row['username']).'" border="0" /></a>';
 	$pm = '<a href="'.$temp_url.'">'.$lang['Send_private_message'].'</a>';
     
-	$www_img = ($row['user_website']) ? '<a href="'.$row['user_website'].'" target="_userwww"><img src="'.$images['icon_www'].'" alt="'.$lang['Visit_website'].'" 
+	$www_img = ($row['user_website']) ? '<a href="'.$row['user_website'].'" target="_userwww"><img 
+	class="tooltip-html copyright" title="Visit '.$username.'\'s Personal Portal or Website" src="'.$images['icon_www'].'" alt="'.$lang['Visit_website'].'" 
 	title="'.$lang['Visit_website'].'" border="0" /></a>' : '';
     $www = ($row['user_website']) ? '<a href="'.$row['user_website'].'" target="_userwww">'.$lang['Visit_website'].'</a>' : '';
     
@@ -128,8 +132,8 @@ function generate_user_info(&$row,
 		 
 		 if($row['user_allow_viewonline']):
          
-		 $online_status = '<a href="'.append_sid("viewonline.php").'" title="'.sprintf($lang['is_online'],$row['username']).'"'
-		 .$online_color.'><img alt="online" src="themes/'.$theme_name.'/forums/images/status/online_bgcolor_one.gif" /></a>';
+		 $online_status = '<a href="'.append_sid("viewonline.php").'" '
+		 .$online_color.'><img class="tooltip-html copyright" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$username.' is Currently Online<br /> CLICK TO VIEW ONLINE USER LIST!" alt="online" src="themes/'.$theme_name.'/forums/images/status/online_bgcolor_one.gif" /></a>';
 		 $online_status_img = $online_status;
 		 
 		 elseif($userdata['user_level'] == ADMIN || $userdata['user_id'] == $row['user_id'] ):
@@ -193,7 +197,7 @@ if(isset($_POST['groupstatus']) && $group_id)
     if (!is_user()) 
     redirect(append_sid("login.$phpEx?redirect=groupcp.$phpEx&" . POST_GROUPS_URL . "=$group_id", true));
     
-    $sql = "SELECT group_moderator FROM " . GROUPS_TABLE . " WHERE group_id = '$group_id'";
+    $sql = "SELECT group_moderator FROM ".GROUPS_TABLE." WHERE group_id = '$group_id'";
     
 	if (!($result = $db->sql_query($sql))) 
     message_die(GENERAL_ERROR, 'Could not obtain user and group information', '', __LINE__, __FILE__, $sql);
@@ -520,9 +524,14 @@ elseif($group_id)
                     $subject = $lang['Group_added'];
                     $content = str_replace('{SITENAME}', $board_config['sitename'], $lang['group_added_template'] );
                     $content = str_replace('{GROUP_NAME}', $group_name, $content );
-                    $content = str_replace('{EMAIL_SIG}', ((!empty($board_config['board_email_sig'])) ? str_replace('<br />', "\n", "-- \n" . $board_config['board_email_sig']) : ''), $content );
-                    $content = str_replace('{U_GROUPCP}', '<a href="'.$server_url.'&'.POST_GROUPS_URL.'='.$group_id.'">'.$server_url.'&'.POST_GROUPS_URL.'='.$group_id.'</a>', $content );
-                    $headers = array('Content-Type: text/html; charset=UTF-8', 'From: '.$board_config['board_email'], 'Reply-To: '.$board_config['board_email'], 'Return-Path: '
+                    
+					$content = str_replace('{EMAIL_SIG}', ((!empty($board_config['board_email_sig'])) 
+					? str_replace('<br />', "\n", "-- \n" . $board_config['board_email_sig']) : ''), $content );
+                    
+					$content = str_replace('{U_GROUPCP}', '<a href="'.$server_url.'&'.POST_GROUPS_URL.'='.$group_id.'">'.$server_url.'&'.POST_GROUPS_URL.'='.
+					$group_id.'</a>', $content );
+                    
+					$headers = array('Content-Type: text/html; charset=UTF-8', 'From: '.$board_config['board_email'], 'Reply-To: '.$board_config['board_email'], 'Return-Path: '
 					.$board_config['board_email']);
                     evo_phpmailer($row['user_email'],$subject,$content,$headers);
                  
@@ -692,9 +701,14 @@ elseif($group_id)
                         $group_name = $group_name_row['group_name'];
                         $content = str_replace('{SITENAME}', $board_config['sitename'], $lang['group_approved_template'] );
                         $content = str_replace('{GROUP_NAME}', $group_name, $content );
-                        $content = str_replace('{EMAIL_SIG}', ((!empty($board_config['board_email_sig'])) ? str_replace('<br />', "\n", "-- \n".$board_config['board_email_sig']) : ''), $content );
-                        $content = str_replace('{U_GROUPCP}', '<a href="'.$server_url.'&'.POST_GROUPS_URL.'='.$group_id.'">'.$server_url.'&'.POST_GROUPS_URL.'='.$group_id.'</a>', $content );
-                        $subject = $lang['Group_approved'];
+                        
+						$content = str_replace('{EMAIL_SIG}', ((!empty($board_config['board_email_sig'])) 
+						? str_replace('<br />', "\n", "-- \n".$board_config['board_email_sig']) : ''), $content );
+                        
+						$content = str_replace('{U_GROUPCP}', '<a href="'.$server_url.'&'.POST_GROUPS_URL.'='.$group_id.'">'.$server_url.'&'.
+						POST_GROUPS_URL.'='.$group_id.'</a>', $content );
+                        
+						$subject = $lang['Group_approved'];
 						
                         for($i = 0; $i < count($bcc_list); $i++):
                             $headers[] = 'From: '.$board_config['board_email'];
@@ -921,29 +935,24 @@ elseif($group_id)
     
 	$the_flag = substr($userdata['user_from_flag'], 0, -4);
 	$user_flag = '<span class="countries '.$the_flag.'"></span> ';
-	
-	/*****[BEGIN]******************************************
-    [ Mod:    Forum Index Avatar Mod                 v1.0]
-     ******************************************************/
-    switch($userdata['user_avatar_type'])
+    
+	# set the moderators avatar START	
+    switch($group_moderator['user_avatar_type'])
     {
       case USER_AVATAR_UPLOAD:
-      $current_avatar = $board_config['avatar_path'] . '/' . $userdata['user_avatar'];
+      $modavatar = $board_config['avatar_path'] . '/' . $group_moderator['user_avatar'];
       break;
       case USER_AVATAR_REMOTE:
-      $current_avatar = resize_avatar($userdata['user_avatar']);
+      $modavatar = resize_avatar($group_moderator['user_avatar']);
       break;
       case USER_AVATAR_GALLERY:
-      $current_avatar = $board_config['avatar_gallery_path'] . '/' . (($userdata['user_avatar'] 
-	  == 'blank.gif' || $row['user_avatar'] == 'gallery/blank.gif') ? 'blank.png' : $userdata['user_avatar']);
+      $modavatar = $board_config['avatar_gallery_path'] . '/' . (($group_moderator['user_avatar'] 
+	  == 'blank.gif' || $row['user_avatar'] == 'gallery/blank.gif') ? 'blank.png' : $group_moderator['user_avatar']);
       break;
 	}
+	$mod_avatar = '<img class="rounded-corners-header" height="auto" width="30" src="'.$modavatar.'">&nbsp;';
+	# set the moderators avatar END	
 	
-	$mod_avatar = '<img class="rounded-corners-header" height="auto" width="30" src="'.$current_avatar.'">&nbsp;';
-     /*****[END]********************************************
-     [ Mod:    Forum Index Avatar Mod                 v1.0]
-     ******************************************************/
-    
 	# Mod: Online/Offline/Hidden v2.2.7 START
     generate_user_info($group_moderator, 
 	$board_config['default_dateformat'], 
@@ -998,7 +1007,6 @@ elseif($group_id)
         'L_REMOVE_SELECTED' => $lang['Remove_selected'],
         'L_ADD_MEMBER' => $lang['Add_member'],
         'L_FIND_USERNAME' => $lang['Find_username'],
-        
         'GROUP_NAME' => GroupColor($group_info['group_name']),
         'GROUP_DESC' => $group_info['group_description'] . "&nbsp;",
         'GROUP_DETAILS' => $group_details,
@@ -1046,19 +1054,27 @@ elseif($group_id)
     # Dump out the remaining users
     for ($i = $start; $i < min($board_config['topics_per_page'] + $start, $members_count); $i++): 
 	
-        # Mod: Advanced Username Color v1.0.5 START
-        $username = UsernameColor($group_members[$i]['username']);
-        # Mod: Advanced Username Color v1.0.5 END
+    # remove this user from public viewing, only admins can see the person exist
+	if (!is_admin())
+    if(!$group_members[$i]['user_allow_viewonline']) # is user is does not allow profile viewing then skip to next person in the list
+	continue;
 		
-        $user_id  = $group_members[$i]['user_id'];
+	# Mod: Advanced Username Color v1.0.5 START
+    $username = UsernameColor($group_members[$i]['username']);
+    # Mod: Advanced Username Color v1.0.5 END
+		
+    $user_id  = $group_members[$i]['user_id'];
     
+	# the Location to The InterWebs is the user has not listed a location
 	if(empty($group_members[$i]['user_from']))
 	$user_from = 'The InterWebs';
 	else
 	$user_from = $group_members[$i]['user_from'];
 	
+	# set the flag for the moderator
 	$the_flag = substr($group_members[$i]['user_from_flag'], 0, -4);
 	$user_flag = '<span class="countries '.$the_flag.'"></span> ';
+	
 	
 	/*****[BEGIN]******************************************
     [ Mod:    Forum Index Avatar Mod                 v1.0]
@@ -1104,6 +1120,23 @@ elseif($group_id)
 						   $online_status_img, 
 						       $online_status);
         # Mod: Online/Offline/Hidden v2.2.7 END
+
+       # This is broken in UK version
+	   # Mod: Online/Offline/Hidden v2.2.7 START
+	   if(!$group_members[$i]['user_allow_viewonline']):
+	   $online_status = '<img class="tooltip-html copyright" alt="Hidden" title="Hidden" alt="Hidden" width="30" height="30" 
+	   src="themes/'.$theme_name.'/forums/images/status/icons8-invisible-512.png" />';
+   
+	   elseif($group_members[$i]['user_session_time'] >= (time()-$board_config['online_time'])):
+	   $theme_name = get_theme();
+	   $online_status = '<a class="tooltip-html copyright" href="'.append_sid("viewonline.$phpEx").'" 
+	   title="'.sprintf($lang['is_online'],$group_members[$i]['username']).'"'.$online_color.'><img 
+	   alt="online" src="themes/'.$theme_name.'/forums/images/status/online_bgcolor_one.gif" /></a>';
+	   else:
+       $online_status = '<span class="tooltip-html copyright" title="'.sprintf($lang['is_offline'],$group_members[$i]['username']).'"'.$offline_color.'><img 
+	   alt="online" src="themes/'.$theme_name.'/forums/images/status/offline_bgcolor_one.gif" /></span>';
+       endif;
+       # Mod: Online/Offline/Hidden v2.2.7 END
   
         if($group_info['group_type'] != GROUP_HIDDEN || $is_group_member || $is_moderator): 
 		

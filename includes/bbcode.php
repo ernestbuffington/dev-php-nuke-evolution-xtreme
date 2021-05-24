@@ -3,25 +3,25 @@
   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
 
-
 /***************************************************************************
  *                              bbcode.php
  *                            -------------------
+ *   update               : Sunday, May 23, 2021
+ *   copyright            : (C) 2001 The 86it Developer Network
+ *   email                : support@86it.us
+ *
  *   begin                : Saturday, Feb 13, 2001
  *   copyright            : (C) 2001 The phpBB Group
  *   email                : support@phpbb.com
  *
  *   Id: bbcode.php,v 1.36.2.35 2005/07/19 20:01:10 acydburn Exp
- *
  ***************************************************************************/
 
 /***************************************************************************
- *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
  *   the Free Software Foundation; either version 2 of the License, or
  *   (at your option) any later version.
- *
  ***************************************************************************/
 
 /*****[CHANGES]**********************************************************
@@ -44,42 +44,34 @@
 	  Lytebox Resize Images                    v3.2.2
 	  Hide BBCode                              v1.2.0
  ************************************************************************/
-
 if (!defined('IN_PHPBB'))
-{
-    die('Hacking attempt');
-}
+exit('Hacking attempt');
 
 define("BBCODE_UID_LEN", 10);
-
-// global that holds loaded-and-prepared bbcode templates, so we only have to do
-// that stuff once.
+# global that holds loaded-and-prepared bbcode templates, so we only have to do
+# that stuff once.
 
 $bbcode_tpl = null;
-/**
- * Loads bbcode templates from the bbcode.tpl file of the current template set.
- * Creates an array, keys are bbcode names like "b_open" or "url", values
- * are the associated template.
- * Probably pukes all over the place if there's something really screwed
- * with the bbcode.tpl file.
- *
- * Nathan Codding, Sept 26 2001.
- */
-
+# Loads bbcode templates from the bbcode.tpl file of the current template set.
+# Creates an array, keys are bbcode names like "b_open" or "url", values
+# are the associated template.
+# Probably pukes all over the place if there's something really screwed
+# with the bbcode.tpl file.
+# Nathan Codding, Sept 26 2001.
 function load_bbcode_template()
 {
     global $template;
     $tpl_filename = $template->make_filename('bbcode.tpl');
     $tpl = fread(fopen($tpl_filename, 'r'), filesize($tpl_filename));
 
-    // replace \ with \\ and then ' with \'.
+    # replace \ with \\ and then ' with \'.
     $tpl = str_replace('\\', '\\\\', $tpl);
     $tpl  = str_replace('\'', '\\\'', $tpl);
 
-    // strip newlines.
+    # strip newlines.
     $tpl  = str_replace("\n", '', $tpl);
 
-    // Turn template blocks into PHP assignment statements for the values of $bbcode_tpls..
+    # Turn template blocks into PHP assignment statements for the values of $bbcode_tpls..
     $tpl = preg_replace('#<!-- BEGIN (.*?) -->(.*?)<!-- END (.*?) -->#', "\n" . '$bbcode_tpls[\'\\1\'] = \'\\2\';', $tpl);
 
     $bbcode_tpls = array();
@@ -88,61 +80,52 @@ function load_bbcode_template()
 
     return $bbcode_tpls;
 }
-/**
- * Prepares the loaded bbcode templates for insertion into preg_replace()
- * or str_replace() calls in the bbencode_second_pass functions. This
- * means replacing template placeholders with the appropriate preg backrefs
- * or with language vars. NOTE: If you change how the regexps work in
- * bbencode_second_pass(), you MUST change this function.
- *
- * Nathan Codding, Sept 26 2001
- *
- */
+# Prepares the loaded bbcode templates for insertion into preg_replace()
+# or str_replace() calls in the bbencode_second_pass functions. This
+# means replacing template placeholders with the appropriate preg backrefs
+# or with language vars. NOTE: If you change how the regexps work in
+# bbencode_second_pass(), you MUST change this function.
+# Nathan Codding, Sept 26 2001
 function prepare_bbcode_template($bbcode_tpl)
 {
     global $lang, $db;
 
-    $bbcode_tpl['olist_open'] = str_replace('{LIST_TYPE}', '\\1', $bbcode_tpl['olist_open']);
+    $bbcode_tpl['olist_open'] = str_replace('{LIST_TYPE}','\\1',$bbcode_tpl['olist_open']);
 
-    $bbcode_tpl['color_open'] = str_replace('{COLOR}', '\\1', $bbcode_tpl['color_open']);
-    /* ----- new bbcode addition to v3 ----- */
-    $bbcode_tpl['highlight_open'] = str_replace('{COLOR}', '\\1', $bbcode_tpl['highlight_open']);
-    /* ----- new bbcode addition to v3 ----- */
+    $bbcode_tpl['color_open'] = str_replace('{COLOR}','\\1',$bbcode_tpl['color_open']);
+    # ----- new bbcode addition to v3 ----- START
+    $bbcode_tpl['highlight_open'] = str_replace('{COLOR}','\\1',$bbcode_tpl['highlight_open']);
+    # ----- new bbcode addition to v3 ----- END
 
     // $bbcode_tpl['size_open'] = str_replace('{SIZE}', '\\1', $bbcode_tpl['size_open']);
-
     // $bbcode_tpl['quote_open'] = str_replace('{L_QUOTE}', $lang['Quote'], $bbcode_tpl['quote_open']);
-
-    $bbcode_tpl['quote_username_open'] = str_replace('{L_QUOTE}', $lang['Quote'], $bbcode_tpl['quote_username_open']);
-    $bbcode_tpl['quote_username_open'] = str_replace('{L_WROTE}', $lang['wrote'], $bbcode_tpl['quote_username_open']);
-    $bbcode_tpl['quote_username_open'] = str_replace('{USERNAME}', UsernameColor('\\1'), $bbcode_tpl['quote_username_open']);
-
+    $bbcode_tpl['quote_username_open'] = str_replace('{L_QUOTE}',$lang['Quote'],$bbcode_tpl['quote_username_open']);
+    $bbcode_tpl['quote_username_open'] = str_replace('{L_WROTE}',$lang['wrote'],$bbcode_tpl['quote_username_open']);
+    $bbcode_tpl['quote_username_open'] = str_replace('{USERNAME}',UsernameColor('\\1'),$bbcode_tpl['quote_username_open']);
     // $bbcode_tpl['quote_close'] = str_replace('{USERNAME}', UsernameColor('\\1'), $bbcode_tpl['quote_close']);
 
-/*****[BEGIN]******************************************
- [ Mod:     Extended Quote Tag                 v1.0.0 ]
- ******************************************************/
-    $bbcode_tpl['quote_post_open'] = str_replace('{L_QUOTE}', $lang['Quote'], $bbcode_tpl['quote_post_open']);
+    # Mod: Extended Quote Tag v1.0.0 START
+    $bbcode_tpl['quote_post_open'] = str_replace('{L_QUOTE}',$lang['Quote'],$bbcode_tpl['quote_post_open']);
     $temp_url = append_sid('show_post.php?p=\\1');
-    $bbcode_tpl['quote_post_open'] = str_replace('{U_VIEW_POST}', '<a href="' . $temp_url . '" onClick="javascript:open_postreview( \'' . $temp_url . '\' );">' . $lang['View_post'] . '</a>', $bbcode_tpl['quote_post_open']);
+    
+	$bbcode_tpl['quote_post_open'] = str_replace('{U_VIEW_POST}', '<a href="'.$temp_url.'" onClick=
+	"javascript:open_postreview( \''.$temp_url.'\' );">'.$lang['View_post'].'</a>', $bbcode_tpl['quote_post_open']);
 
-    $bbcode_tpl['quote_username_post_open'] = str_replace('{L_QUOTE}', $lang['Quote'], $bbcode_tpl['quote_username_post_open']);
-    $bbcode_tpl['quote_username_post_open'] = str_replace('{L_WROTE}', $lang['wrote'], $bbcode_tpl['quote_username_post_open']);
-    $bbcode_tpl['quote_username_post_open'] = str_replace('{USERNAME}', '\\1', $bbcode_tpl['quote_username_post_open']);
+    $bbcode_tpl['quote_username_post_open'] = str_replace('{L_QUOTE}',$lang['Quote'],$bbcode_tpl['quote_username_post_open']);
+    $bbcode_tpl['quote_username_post_open'] = str_replace('{L_WROTE}', $lang['wrote'],$bbcode_tpl['quote_username_post_open']);
+    $bbcode_tpl['quote_username_post_open'] = str_replace('{USERNAME}','\\1',$bbcode_tpl['quote_username_post_open']);
     $temp_url = append_sid('show_post.php?p=\\2');
-    $bbcode_tpl['quote_username_post_open'] = str_replace('{U_VIEW_POST}', '<a href="' . $temp_url . '" onClick="javascript:open_postreview( \'' . $temp_url . '\' );">' . $lang['View_post'] . '</a>', $bbcode_tpl['quote_username_post_open']);
-/*****[BEGIN]******************************************
- [ Mod:     Advanced Username Color            v1.0.5 ]
- ******************************************************/
+    $bbcode_tpl['quote_username_post_open'] = str_replace('{U_VIEW_POST}', '<a href="'.$temp_url.'" onClick=
+	"javascript:open_postreview( \''.$temp_url.'\' );">'.$lang['View_post'] . '</a>',$bbcode_tpl['quote_username_post_open']);
+
+    # Mod: Advanced Username Color v1.0.5 START
     $bbcode_tpl['quote_username_post_open'] = str_replace('{USERNAME}', UsernameColor('\\1'), $bbcode_tpl['quote_username_post_open']);
-/*****[END]********************************************
- [ Mod:     Advanced Username Color            v1.0.5 ]
- ******************************************************/
+    # Mod: Advanced Username Color v1.0.5 END
+
     $temp_url = append_sid('show_post.php?p=\\2');
-    $bbcode_tpl['quote_username_post_open'] = str_replace('{U_VIEW_POST}', '<a href="#_somewhat" onClick="javascript:open_postreview( \'' . $temp_url . '\' );">' . $lang['View_post'] . '</a>', $bbcode_tpl['quote_username_post_open']);
-/*****[END]********************************************
- [ Mod:     Extended Quote Tag                 v1.0.0 ]
- ******************************************************/
+    $bbcode_tpl['quote_username_post_open'] = str_replace('{U_VIEW_POST}', '<a href="#_somewhat" onClick=
+	"javascript:open_postreview( \''.$temp_url.'\' );">'.$lang['View_post'].'</a>', $bbcode_tpl['quote_username_post_open']);
+    # Mod: Extended Quote Tag v1.0.0 END
 
     $bbcode_tpl['code_open'] = str_replace('{L_CODE}', $lang['Code'], $bbcode_tpl['code_open']);
 
@@ -887,29 +870,27 @@ function evo_parse_video_callback($matches)
 }
 
 
-/**
- * $text - The text to operate on.
- * $uid - The UID to add to matching tags.
- * $open_tag - The opening tag to match. Can be an array of opening tags.
- * $close_tag - The closing tag to match.
- * $close_tag_new - The closing tag to replace with.
- * $mark_lowest_level - boolean - should we specially mark the tags that occur
- *                     at the lowest level of nesting? (useful for [code], because
- *                        we need to match these tags first and transform HTML tags
- *                        in their contents..
- * $func - This variable should contain a string that is the name of a function.
- *                That function will be called when a match is found, and passed 2
- *                parameters: ($text, $uid). The function should return a string.
- *                This is used when some transformation needs to be applied to the
- *                text INSIDE a pair of matching tags. If this variable is FALSE or the
- *                empty string, it will not be executed.
- * If open_tag is an array, then the pda will try to match pairs consisting of
- * any element of open_tag followed by close_tag. This allows us to match things
- * like [list=A]...[/list] and [list=1]...[/list] in one pass of the PDA.
- *
- * NOTES:    - this function assumes the first character of $text is a space.
- *                - every opening tag and closing tag must be of the [...] format.
- */
+# $text - The text to operate on.
+# $uid - The UID to add to matching tags.
+# $open_tag - The opening tag to match. Can be an array of opening tags.
+# $close_tag - The closing tag to match.
+# $close_tag_new - The closing tag to replace with.
+# $mark_lowest_level - boolean - should we specially mark the tags that occur
+# at the lowest level of nesting? (useful for [code], because
+# we need to match these tags first and transform HTML tags
+# in their contents..
+# $func - This variable should contain a string that is the name of a function.
+# That function will be called when a match is found, and passed 2
+# parameters: ($text, $uid). The function should return a string.
+# This is used when some transformation needs to be applied to the
+# text INSIDE a pair of matching tags. If this variable is FALSE or the
+# empty string, it will not be executed.
+# If open_tag is an array, then the pda will try to match pairs consisting of
+# any element of open_tag followed by close_tag. This allows us to match things
+# like [list=A]...[/list] and [list=1]...[/list] in one pass of the PDA.
+#
+# NOTES:  - this function assumes the first character of $text is a space.
+#         - every opening tag and closing tag must be of the [...] format.
 function bbencode_first_pass_pda($text, $uid, $open_tag, $close_tag, $close_tag_new, $mark_lowest_level, $func, $open_regexp_replace = false)
 {
     $open_tag_count = 0;
@@ -1697,5 +1678,4 @@ if(!function_exists('get_code_lang'))
         return ($array[$var] != '') ? $array[$var] : $var;
     }
 }
-
 ?>
