@@ -337,5 +337,4 @@ define("_HSH7","Here you can see any restrictions setted in this forum.");
 define("_LOCALDATE","%d-%m-%Y");
 
 // define('_EMPTY_MESSAGE','You must enter a message when posting.');
-
 ?>

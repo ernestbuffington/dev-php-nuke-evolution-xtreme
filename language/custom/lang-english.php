@@ -324,5 +324,4 @@ define("_THEMES_QUNINSTALLED", "Uninstalled");
 define("_THEMES", "Themes");
 define("_THEMES_DEFAULT", "Default Theme");
 define("_THEMES_BACKUP", "Backup");
-
 ?>

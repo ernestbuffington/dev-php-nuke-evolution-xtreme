@@ -3,7 +3,6 @@
   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
 
-
 /***************************************************************************
  *                            lang_main.php [English]
  *                              -------------------
@@ -12,16 +11,13 @@
  *     email                : support@phpbb.com
  *
  *     $Id: lang_main.php,v 1.1 2005/05/09 17:44:47 chatserv Exp $
- *
  ****************************************************************************/
 
 /***************************************************************************
- *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
  *   the Free Software Foundation; either version 2 of the License, or
  *   (at your option) any later version.
- *
  ***************************************************************************/
 
 /*****[CHANGES]**********************************************************
@@ -79,7 +75,7 @@
 	  Admin User Notes                         v1.0.0       05/28/2009
 	  Related Topics                           v0.1.2       05/28/2009
 	  Arcade                                   v3.0.2       05/29/2009
-        Who viewed a topic                       v1.0.3
+      Who viewed a topic                       v1.0.3
  ************************************************************************/
 
 //
@@ -287,8 +283,8 @@ $lang['Last_Post'] = 'Last Post';
 /*****[END]********************************************
  [ Mod:     Resize Posted Images               v2.4.5 ]
  ******************************************************/
-$lang['Moderator'] = 'Moderator';
-$lang['Moderators'] = 'Moderators';
+$lang['Moderator'] = 'Mod Group:';
+$lang['Moderators'] = 'Mod Groups:';
 
 //
 // Stats block text

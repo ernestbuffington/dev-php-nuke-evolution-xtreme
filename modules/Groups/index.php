@@ -74,9 +74,7 @@ function generate_user_info(&$row,
     $joined = create_date($date_format, $row['user_regdate'], $board_config['board_timezone']);
     $posts = ($row['user_posts']) ? $row['user_posts'] : 0;
     
-    /*****[BEGIN]******************************************
-    [ Mod:    Forum Index Avatar Mod                 v1.0]
-     ******************************************************/
+        # Mod: Forum Index Avatar Mod v3.0.0 START
         switch($row['user_avatar_type'])
         {
            case USER_AVATAR_UPLOAD:
@@ -90,16 +88,14 @@ function generate_user_info(&$row,
 			== 'blank.gif' || $row['user_avatar'] == 'gallery/blank.gif') ? 'blank.png' : $row['user_avatar']);
            break;
 		}
-     /*****[END]********************************************
-     [ Mod:    Forum Index Avatar Mod                 v1.0]
-     ******************************************************/
+        # Mod: Forum Index Avatar Mod v3.0.0 END
 
 	if(!empty($row['user_viewemail']) || $group_mod): 
         $email_uri = ($board_config['board_email_form']) ? append_sid("profile.$phpEx?mode=email&amp;".POST_USERS_URL.'='.$row['user_id']) : 'mailto:'.$row['user_email'];
 		$email_img = '<a href="'.$email_uri.'"><img 
 		class="tooltip-html copyright" title="Send an e-mail message to '.$username.'" src="'.$images['icon_email'].'" alt="'.sprintf($lang['Send_email'],$row['username']).'" 
 		title="'.sprintf($lang['Send_email'],$row['username']).'" border="0" /></a>';
-		$email     = '<a href="' . $email_uri . '">' . $lang['Send_email'] . '</a>';
+		$email = '<a href="'.$email_uri.'">'.$lang['Send_email'].'</a>';
 	else: 
         $email_img = '&nbsp;';
         $email     = '&nbsp;';
@@ -125,38 +121,38 @@ function generate_user_info(&$row,
 	title="'.sprintf($lang['Search_user_posts'], $row['username']).'" border="0" /></a>';
     $search = '<a href="'.$temp_url.'">'.sprintf($lang['Search_user_posts'], $row['username']).'</a>';
  
-       # This is broken in UK version
-	   # Mod: Online/Offline/Hidden v2.2.7 START
+       # Mod: Online/Offline/Hidden v3.0.0 START
        if($row['user_session_time'] >= (time()-$board_config['online_time'])):
          $theme_name = get_theme();
 		 
-		 if($row['user_allow_viewonline']):
-         
-		 $online_status = '<a href="'.append_sid("viewonline.php").'" '
-		 .$online_color.'><img class="tooltip-html copyright" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$username.' is Currently Online<br /> CLICK TO VIEW ONLINE USER LIST!" alt="online" src="themes/'.$theme_name.'/forums/images/status/online_bgcolor_one.gif" /></a>';
-		 $online_status_img = $online_status;
-		 
-		 elseif($userdata['user_level'] == ADMIN || $userdata['user_id'] == $row['user_id'] ):
-         $online_status = '<em><a href="'.append_sid("viewonline.php").'" title="'.sprintf($lang['is_hidden'],$profiledata['username']).'"'.$hidden_color.'>'.$lang['Hidden'].'</a></em>';
-		 $online_status_img = $online_status;
-         
+	     if(!$row['user_allow_viewonline']):
+		 $online_status = '<img class="tooltip-html copyright" title="'.$row['username'].' is Hidden" alt="offline" 
+		 width="30" height="30" src="themes/'.$theme_name.'/forums/images/status/icons8-invisible-512.png" />';
+	     $online_status_img = $online_status; 
 		 else:
-         $online_status = '<span title="'.sprintf($lang['is_offline'], $row['username']).'"'.$offline_color.'><strong>'.$lang['Offline'].'</strong></span>';
+		 $online_status = '<a href="'.append_sid("viewonline.php").'" '
+		 .$online_color.'><img class="tooltip-html copyright" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$row['username']
+		 .' is Currently Online<br /> CLICK TO VIEW ONLINE USER LIST!" alt="online" src="themes/'.$theme_name.'/forums/images/status/online_bgcolor_one.gif" /></a>';
 		 $online_status_img = $online_status;
-         endif;
+		 endif;
 
        else:
        
-	   $online_status = '<span title="'.sprintf($lang['is_offline'], $row['username']).'"'
-	   .$offline_color.'><img alt="offline" src="themes/'.$theme_name.'/forums/images/status/offline_bgcolor_one.gif" /></span>';
+	   $online_status = '<img class="tooltip-html copyright" 
+	   title="'.$row['username'].' is Offline"alt="offline" src="themes/'.$theme_name.'/forums/images/status/offline_bgcolor_one.gif" /></span>';
 	   $online_status_img = $online_status; 
+
+	     if(!$row['user_allow_viewonline']):
+		 $online_status = '<img class="tooltip-html copyright" title="'.$row['username'].' is Hidden" alt="offline" 
+		 width="30" height="30" src="themes/'.$theme_name.'/forums/images/status/icons8-invisible-512.png" />';
+	     $online_status_img = $online_status;
+		 endif; 
        
 	   endif;
-       # Mod: Online/Offline/Hidden v2.2.7 END
-    return;
+       # Mod: Online/Offline/Hidden v3.0.0 END
+    
+	return;
 }
-//
-// --------------------------
 
 global $cache;
 
@@ -165,11 +161,11 @@ $userdata = session_pagestart($user_ip, PAGE_GROUPCP);
 init_userprefs($userdata);
 # End session management
 
-$script_name     = 'modules.php?name=' . $module_name;
-$server_name     = trim($board_config['server_name']);
+$script_name = 'modules.php?name=' . $module_name;
+$server_name = trim($board_config['server_name']);
 $server_protocol = ($board_config['cookie_secure']) ? 'https://' : 'http://';
-$server_port     = ($board_config['server_port'] <> 80) ? ':' . trim($board_config['server_port']) . '/' : '/';
-$server_url      = $server_protocol . $server_name . $server_port . $script_name;
+$server_port = ($board_config['server_port'] <> 80) ? ':' . trim($board_config['server_port']) . '/' : '/';
+$server_url = $server_protocol . $server_name . $server_port . $script_name;
 
 if(isset($_GET[POST_GROUPS_URL]) || isset($_POST[POST_GROUPS_URL])) 
 $group_id = (isset($_POST[POST_GROUPS_URL])) ? intval($_POST[POST_GROUPS_URL]) : intval($_GET[POST_GROUPS_URL]);
@@ -194,17 +190,17 @@ $is_moderator = FALSE;
 
 if(isset($_POST['groupstatus']) && $group_id) 
 {
-    if (!is_user()) 
+    if(!is_user()) 
     redirect(append_sid("login.$phpEx?redirect=groupcp.$phpEx&" . POST_GROUPS_URL . "=$group_id", true));
     
     $sql = "SELECT group_moderator FROM ".GROUPS_TABLE." WHERE group_id = '$group_id'";
     
-	if (!($result = $db->sql_query($sql))) 
+	if(!($result = $db->sql_query($sql))) 
     message_die(GENERAL_ERROR, 'Could not obtain user and group information', '', __LINE__, __FILE__, $sql);
     
     $row = $db->sql_fetchrow($result);
     
-	if ($row['group_moderator'] != $userdata['user_id'] && $userdata['user_level'] != ADMIN): 
+	if($row['group_moderator'] != $userdata['user_id'] && $userdata['user_level'] != ADMIN): 
         $template->assign_vars(array(
             'META' => '<meta http-equiv="refresh" content="3;url='.append_sid("index.$phpEx").'">'
         ));
@@ -250,13 +246,9 @@ elseif(isset($_POST['joingroup']) && $group_id)
   message_die(GENERAL_ERROR, 'Could not obtain user and group information', '', __LINE__, __FILE__, $sql);
 
     # Mod: Auto Group v1.2.2 START
-    //if ( $row = $db->sql_fetchrow($result) ) {
-    //if ( $row['group_type'] == GROUP_OPEN ) {
     if($row = $db->sql_fetchrow($result)): 
-	
       $is_autogroup_enable = ($row['group_count'] <= $userdata['user_posts'] && $row['group_count_max'] > $userdata['user_posts']) ? true : false;
       if ($row['group_type'] == GROUP_OPEN || $is_autogroup_enable): 
-	  
     # Mod: Auto Group v1.2.2 END
             do 
 			{
@@ -311,8 +303,11 @@ elseif(isset($_POST['joingroup']) && $group_id)
 	  .$group_id.'&validate=true</a>', $content );
       
 	  $subject = $lang['Group_request'];
-      $headers = array('Content-Type: text/html; charset=UTF-8', 'From: '.$board_config['board_email'], 'Reply-To: '.$board_config['board_email'], 'Return-Path: '.$board_config['board_email']);
-      evo_phpmailer( $moderator['user_email'], $subject, $content, $headers );
+      
+	  $headers = array('Content-Type: text/html; charset=UTF-8', 'From: '.$board_config['board_email'], 'Reply-To: '.$board_config['board_email'], 'Return-Path: '.
+	  $board_config['board_email']);
+      
+	  evo_phpmailer( $moderator['user_email'], $subject, $content, $headers );
     endif;
     
     $template->assign_vars(array(
@@ -330,16 +325,16 @@ elseif(isset($_POST['unsub']) || isset($_POST['unsubpending']) && $group_id)
     if($cancel) 
     redirect(append_sid("groupcp.$phpEx", true));
 	elseif(!is_user() || !$userdata['session_logged_in']) 
-    redirect('modules.php?name=Your_Account&amp;redirect=groupcp.php&amp;' . POST_GROUPS_URL . '=' . $group_id);
+    redirect('modules.php?name=Your_Account&amp;redirect=groupcp.php&amp;'.POST_GROUPS_URL.'='.$group_id);
 	elseif ($sid !== $userdata['session_id']) 
     message_die(GENERAL_ERROR, $lang['Session_invalid']);
     
     if($confirm): 
 	
         # Mod: Group Colors and Ranks v1.0.0 START
-        $sql = "UPDATE " . USERS_TABLE . " SET user_color_gc = '', user_color_gi  = '', user_rank = 0 WHERE user_id = " . $userdata['user_id'];
+        $sql = "UPDATE ".USERS_TABLE." SET user_color_gc = '', user_color_gi  = '', user_rank = 0 WHERE user_id = ".$userdata['user_id'];
     
-	    if (!$db->sql_query($sql)) 
+	    if(!$db->sql_query($sql)) 
         message_die(GENERAL_ERROR, 'Could not remove color from user', '', __LINE__, __FILE__, $sql);
 
         # Base: Caching System v3.0.0 START
@@ -380,11 +375,11 @@ elseif(isset($_POST['unsub']) || isset($_POST['unsubpending']) && $group_id)
 	
         $unsub_msg = (isset($_POST['unsub'])) ? $lang['Confirm_unsub'] : $lang['Confirm_unsub_pending'];
         
-        $s_hidden_fields = '<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" /><input type="hidden" name="unsub" value="1" />';
-        $s_hidden_fields .= '<input type="hidden" name="sid" value="' . $userdata['session_id'] . '" />';
+        $s_hidden_fields = '<input type="hidden" name="'.POST_GROUPS_URL.'" value="'.$group_id.'" /><input type="hidden" name="unsub" value="1" />';
+        $s_hidden_fields .= '<input type="hidden" name="sid" value="'.$userdata['session_id'].'" />';
         
         $page_title = $lang['Group_Control_Panel'];
-        include(NUKE_INCLUDE_DIR . 'page_header.' . $phpEx);
+        include(NUKE_INCLUDE_DIR.'page_header.'.$phpEx);
         
         $template->set_filenames(array(
             'confirm' => 'confirm_body.tpl'
@@ -661,7 +656,7 @@ elseif($group_id)
                         endif;
 
                         # Mod: Group Colors and Ranks v1.0.0 START
-                        $sql = "UPDATE " . USERS_TABLE . " SET user_color_gc = '', user_color_gi  = '', user_rank = 0 WHERE user_id IN ($sql_in)";
+                        $sql = "UPDATE ".USERS_TABLE." SET user_color_gc = '', user_color_gi  = '', user_rank = 0 WHERE user_id IN ($sql_in)";
                         if (!$db->sql_query($sql)) 
                         message_die(GENERAL_ERROR, 'Could not remove color from user', '', __LINE__, __FILE__, $sql);
                         # Base: Caching System v3.0.0 START
@@ -740,7 +735,7 @@ elseif($group_id)
     message_die(GENERAL_MESSAGE, $lang['Group_not_exist']);
     
     # Get moderator details for this group
-    # Mod: Online/Offline/Hidden v2.2.7 START
+    # Mod: Online/Offline/Hidden v3.0.0 START
     $sql = "SELECT username, 
 	                user_id, 
 			 user_viewemail, 
@@ -757,7 +752,7 @@ elseif($group_id)
 	      user_session_time
            FROM ".USERS_TABLE."
            WHERE user_id = ".$group_info['group_moderator'];
-    # Mod: Online/Offline/Hidden v2.2.7 END
+    # Mod: Online/Offline/Hidden v3.0.0 END
 	
     if(!($result = $db->sql_query($sql))) 
     message_die(GENERAL_ERROR, 'Error getting user list for group', '', __LINE__, __FILE__, $sql);
@@ -804,7 +799,8 @@ elseif($group_id)
    	$members_count = 0;
     $db->sql_freeresult($result);
 
-    # Mod: Online/Offline/Hidden v2.2.7 START
+    # get the information for the users that are pending for a group
+    # Mod: Online/Offline/Hidden v3.0.0 START
     $sql = "SELECT u.username, 
 	                u.user_id, 
 		     u.user_viewemail, 
@@ -826,7 +822,7 @@ elseif($group_id)
            AND ug.user_pending = '1'
            AND u.user_id = ug.user_id
            ORDER BY u.username";
-    # Mod: Online/Offline/Hidden v2.2.7 END
+    # Mod: Online/Offline/Hidden v3.0.0 END
     
 	if(!($result = $db->sql_query($sql))) 
     message_die(GENERAL_ERROR, 'Error getting user pending information', '', __LINE__, __FILE__, $sql);
@@ -852,7 +848,7 @@ elseif($group_id)
     $is_group_pending_member = 0;
 	
     # Mod: Auto Group v1.2.2 START
-    $is_autogroup_enable     = ($group_info['group_count'] <= $userdata['user_posts'] && $group_info['group_count_max'] > $userdata['user_posts']) ? true : false;
+    $is_autogroup_enable = ($group_info['group_count'] <= $userdata['user_posts'] && $group_info['group_count_max'] > $userdata['user_posts']) ? true : false;
     # Mod: Auto Group v1.2.2 END
 
     if($modgroup_pending_count): 
@@ -924,7 +920,7 @@ elseif($group_id)
         'info' => 'groupcp_info_body.tpl',
         'pendinginfo' => 'groupcp_pending_info.tpl'
     ));
-    //make_jumpbox('viewforum.' . $phpEx); WE DO NeeD A JUMP BOX FOR THE GROUP MEMBERSHIP AREA !!!
+    make_jumpbox('viewforum.'.$phpEx); 
     
     # Add the moderator
     # Mod: Advanced Username Color v1.0.5 START
@@ -933,27 +929,32 @@ elseif($group_id)
 	
     $user_id  = $group_moderator['user_id'];
     
-	$the_flag = substr($userdata['user_from_flag'], 0, -4);
-	$user_flag = '<span class="countries '.$the_flag.'"></span> ';
-    
+	# user flag hack
+	if((!empty($userdata['user_from_flag']) && ($userdata['user_from_flag'] != 'blank'))):
+	$user_flag = '<span class="countries '.substr($userdata['user_from_flag'], 0, -4).'"></span> ';
+	else:
+	$user_flag = '<span class="countries unknown"></span> ';
+	endif;
+	
 	# set the moderators avatar START	
     switch($group_moderator['user_avatar_type'])
     {
       case USER_AVATAR_UPLOAD:
-      $modavatar = $board_config['avatar_path'] . '/' . $group_moderator['user_avatar'];
+      $modavatar = $board_config['avatar_path'].'/'.$group_moderator['user_avatar'];
       break;
       case USER_AVATAR_REMOTE:
       $modavatar = resize_avatar($group_moderator['user_avatar']);
       break;
       case USER_AVATAR_GALLERY:
-      $modavatar = $board_config['avatar_gallery_path'] . '/' . (($group_moderator['user_avatar'] 
+      $modavatar = $board_config['avatar_gallery_path'].'/'.(($group_moderator['user_avatar'] 
 	  == 'blank.gif' || $row['user_avatar'] == 'gallery/blank.gif') ? 'blank.png' : $group_moderator['user_avatar']);
       break;
 	}
 	$mod_avatar = '<img class="rounded-corners-header" height="auto" width="30" src="'.$modavatar.'">&nbsp;';
 	# set the moderators avatar END	
 	
-	# Mod: Online/Offline/Hidden v2.2.7 START
+	# get the moderators information
+	# Mod: Online/Offline/Hidden v3.0.0 START
     generate_user_info($group_moderator, 
 	$board_config['default_dateformat'], 
 	                      $is_moderator, 
@@ -974,7 +975,8 @@ elseif($group_id)
 							  $userdata, 
 					 $online_status_img, 
 					     $online_status);
-    # Mod: Online/Offline/Hidden v2.2.7 END
+    # Mod: Online/Offline/Hidden v3.0.0 END
+	
  	$s_hidden_fields .= '<input type="hidden" name="sid" value="'.$userdata['session_id'].'" />';
 	
     $template->assign_vars(array(
@@ -1028,15 +1030,16 @@ elseif($group_id)
         'MOD_EMAIL' => $email,
         'MOD_WWW_IMG' => $www_img,
         'MOD_WWW' => $www,
-        # Mod: Online/Offline/Hidden v2.2.7 START
+        
+		# Mod: Online/Offline/Hidden v3.0.0 START
         'MOD_ONLINE_STATUS_IMG' => $online_status_img,
         'MOD_ONLINE_STATUS' => $online_status,
 		'MOD_CURRENT_AVATAR' => $mod_avatar,
 		
         'L_ONLINE_STATUS' => $lang['Online_status'],
-        # Mod: Online/Offline/Hidden v2.2.7 END
+        # Mod: Online/Offline/Hidden v3.0.0 END
         
-        'U_MOD_VIEWPROFILE' => append_sid("profile.$phpEx?mode=viewprofile&amp;" . POST_USERS_URL . "=$user_id"),
+        'U_MOD_VIEWPROFILE' => append_sid("profile.$phpEx?mode=viewprofile&amp;".POST_USERS_URL."=$user_id"),
         'U_SEARCH_USER' => append_sid("search.$phpEx?mode=searchuser&popup=1"),
         
         'S_GROUP_OPEN_TYPE' => GROUP_OPEN,
@@ -1051,12 +1054,12 @@ elseif($group_id)
         'S_GROUPCP_ACTION' => append_sid("groupcp.$phpEx?" . POST_GROUPS_URL . "=$group_id")
     ));
     
-    # Dump out the remaining users
+    # Dump out the remaining users - THIS EXCLUDES THE MODERATOR
     for ($i = $start; $i < min($board_config['topics_per_page'] + $start, $members_count); $i++): 
 	
     # remove this user from public viewing, only admins can see the person exist
 	if (!is_admin())
-    if(!$group_members[$i]['user_allow_viewonline']) # is user is does not allow profile viewing then skip to next person in the list
+    if(!$group_members[$i]['user_allow_viewonline']) # if user is does not allow profile viewing then skip to next person in the list
 	continue;
 		
 	# Mod: Advanced Username Color v1.0.5 START
@@ -1065,20 +1068,21 @@ elseif($group_id)
 		
     $user_id  = $group_members[$i]['user_id'];
     
-	# the Location to The InterWebs is the user has not listed a location
+	# the Location to The InterWebs if the user has not listed a location
 	if(empty($group_members[$i]['user_from']))
 	$user_from = 'The InterWebs';
 	else
 	$user_from = $group_members[$i]['user_from'];
 	
 	# set the flag for the moderator
-	$the_flag = substr($group_members[$i]['user_from_flag'], 0, -4);
-	$user_flag = '<span class="countries '.$the_flag.'"></span> ';
+	# user flag hack
+	if((!empty($group_members[$i]['user_from_flag']) && ($group_members[$i]['user_from_flag'] != 'blank'))):
+	$user_flag = '<span class="countries '.substr($group_members[$i]['user_from_flag'], 0, -4).'"></span> ';
+	else:
+	$user_flag = '<span class="countries unknown"></span> ';
+	endif;
 	
-	
-	/*****[BEGIN]******************************************
-    [ Mod:    Forum Index Avatar Mod                 v1.0]
-     ******************************************************/
+    # Mod: Forum Index Avatar Mod v3.0.0 START
     switch($group_members[$i]['user_avatar_type'])
     {
       case USER_AVATAR_UPLOAD:
@@ -1092,13 +1096,10 @@ elseif($group_id)
 	  == 'blank.gif' || $row['user_avatar'] == 'gallery/blank.gif') ? 'blank.png' : $group_members[$i]['user_avatar']);
       break;
 	}
-	
-	 $user_avatar = '<img class="rounded-corners-header" height="auto" width="30" src="'.$current_avatar.'">&nbsp;';
-     /*****[END]********************************************
-     [ Mod:    Forum Index Avatar Mod                 v1.0]
-     ******************************************************/
+	$user_avatar = '<img class="rounded-corners-header" height="auto" width="30" src="'.$current_avatar.'">&nbsp;';
+    # Mod: Forum Index Avatar Mod v3.0.0 END
         
-        # Mod: Online/Offline/Hidden v2.2.7 START
+        # Mod: Online/Offline/Hidden v3.0.0 START
         generate_user_info($group_members[$i], 
 		  $board_config['default_dateformat'], 
 		                        $is_moderator, 
@@ -1119,24 +1120,36 @@ elseif($group_id)
 									$userdata, 
 						   $online_status_img, 
 						       $online_status);
-        # Mod: Online/Offline/Hidden v2.2.7 END
+       # Mod: Online/Offline/Hidden v3.0.0 END
 
-       # This is broken in UK version
-	   # Mod: Online/Offline/Hidden v2.2.7 START
-	   if(!$group_members[$i]['user_allow_viewonline']):
-	   $online_status = '<img class="tooltip-html copyright" alt="Hidden" title="Hidden" alt="Hidden" width="30" height="30" 
-	   src="themes/'.$theme_name.'/forums/images/status/icons8-invisible-512.png" />';
-   
-	   elseif($group_members[$i]['user_session_time'] >= (time()-$board_config['online_time'])):
-	   $theme_name = get_theme();
-	   $online_status = '<a class="tooltip-html copyright" href="'.append_sid("viewonline.$phpEx").'" 
-	   title="'.sprintf($lang['is_online'],$group_members[$i]['username']).'"'.$online_color.'><img 
-	   alt="online" src="themes/'.$theme_name.'/forums/images/status/online_bgcolor_one.gif" /></a>';
-	   else:
-       $online_status = '<span class="tooltip-html copyright" title="'.sprintf($lang['is_offline'],$group_members[$i]['username']).'"'.$offline_color.'><img 
-	   alt="online" src="themes/'.$theme_name.'/forums/images/status/offline_bgcolor_one.gif" /></span>';
-       endif;
-       # Mod: Online/Offline/Hidden v2.2.7 END
+       if($group_members[$i]['user_session_time'] >= (time()-$board_config['online_time'])):
+         $theme_name = get_theme();
+		 
+	     if(!$group_members[$i]['user_allow_viewonline']):
+		 $online_status = '<img class="tooltip-html copyright" title="'.$group_members[$i]['username'].' is Hidden" alt="offline" 
+		 width="30" height="30" src="themes/'.$theme_name.'/forums/images/status/icons8-invisible-512.png" />';
+	     $online_status_img = $online_status; 
+		 else:
+		 $online_status = '<a href="'.append_sid("viewonline.php").'" '
+		 .$online_color.'><img class="tooltip-html copyright" title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$group_members[$i]['username']
+		 .' is Currently Online<br /> CLICK TO VIEW ONLINE USER LIST!" alt="online" src="themes/'.$theme_name.'/forums/images/status/online_bgcolor_one.gif" /></a>';
+		 $online_status_img = $online_status;
+		 endif;
+
+       else:
+       
+	   $online_status = '<img class="tooltip-html copyright" 
+	   title="'.$group_members[$i]['username'].' is Offline"alt="offline" src="themes/'.$theme_name.'/forums/images/status/offline_bgcolor_one.gif" /></span>';
+	   $online_status_img = $online_status; 
+
+	     if(!$group_members[$i]['user_allow_viewonline']):
+		 $online_status = '<img class="tooltip-html copyright" title="'.$group_members[$i]['username'].' is Hidden" alt="offline" 
+		 width="30" height="30" src="themes/'.$theme_name.'/forums/images/status/icons8-invisible-512.png" />';
+	     $online_status_img = $online_status;
+		 endif; 
+       
+	   endif;
+       # Mod: Online/Offline/Hidden v3.0.0 END
   
         if($group_info['group_type'] != GROUP_HIDDEN || $is_group_member || $is_moderator): 
 		
@@ -1144,7 +1157,7 @@ elseif($group_id)
             $row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
             
             $template->assign_block_vars('member_row', array(
-                'ROW_COLOR' => '#' . $row_color,
+                'ROW_COLOR' => '#'.$row_color,
                 'ROW_CLASS' => $row_class,
                 'USERNAME' => $username,
                 'FROM' => $user_flag.$user_from,
@@ -1157,17 +1170,16 @@ elseif($group_id)
                 'EMAIL' => $email,
                 'WWW_IMG' => $www_img,
                 'WWW' => $www,
-                # Mod: Online/Offline/Hidden v2.2.7 START
+                # Mod: Online/Offline/Hidden v3.0.0 START
                 'ONLINE_STATUS' => $online_status,
-                # Mod: Online/Offline/Hidden v2.2.7 END
-                'U_VIEWPROFILE' => append_sid("profile.$phpEx?mode=viewprofile&amp;" . POST_USERS_URL . "=$user_id")
+                # Mod: Online/Offline/Hidden v3.0.0 END
+                'U_VIEWPROFILE' => append_sid("profile.$phpEx?mode=viewprofile&amp;".POST_USERS_URL."=$user_id")
             ));
             
-           if ($is_moderator) 
+           if($is_moderator) 
           $template->assign_block_vars('member_row.switch_mod_option', array());
        endif;
     endfor;
-	
 	
 	if(!$members_count): 
         # No group members
@@ -1177,11 +1189,10 @@ elseif($group_id)
         ));
     endif;
     
-    
 	$current_page = (!$members_count) ? 1 : ceil($members_count / $board_config['topics_per_page']);
     
     $template->assign_vars(array(
-        'PAGINATION' => generate_pagination("groupcp.$phpEx?" . POST_GROUPS_URL . "=$group_id", $members_count, $board_config['topics_per_page'], $start),
+        'PAGINATION' => generate_pagination("groupcp.$phpEx?".POST_GROUPS_URL."=$group_id", $members_count, $board_config['topics_per_page'], $start),
         'PAGE_NUMBER' => sprintf($lang['Page_of'], (floor($start / $board_config['topics_per_page']) + 1), $current_page),
         
         'L_GOTO_PAGE' => $lang['Goto_page']
@@ -1196,13 +1207,13 @@ elseif($group_id)
     endif;
     
     # We've displayed the members who belong to the group, now we
-    # do that pending memebers...
+    # do the pending memebers...
     if($is_moderator) 
 	{
         # Users pending in ONLY THIS GROUP (which is moderated by this user)
         if($modgroup_pending_count) 
 		{
-            for ($i = 0; $i < $modgroup_pending_count; $i++) 
+            for($i = 0; $i < $modgroup_pending_count; $i++) 
 			{
                 $username = UsernameColor($modgroup_pending_list[$i]['username']);
                 $user_id  = $modgroup_pending_list[$i]['user_id'];
@@ -1212,30 +1223,30 @@ elseif($group_id)
 	            else
 	            $user_from = $modgroup_pending_list[$i]['user_from'];
 	
-	           $the_flag = substr($modgroup_pending_list[$i]['user_from_flag'], 0, -4);
-	           $user_flag = '<span class="countries '.$the_flag.'"></span> ';
-	
-	          /*****[BEGIN]******************************************
-              [ Mod:    Forum Index Avatar Mod                 v1.0]
-               ******************************************************/
-               switch($modgroup_pending_list[$i]['user_avatar_type'])
-               {
+	            # user flag hack
+				if((!empty($modgroup_pending_list[$i]['user_from_flag']) && ($modgroup_pending_list[$i]['user_from_flag'] != 'blank'))):
+	            $user_flag = '<span class="countries '.substr($modgroup_pending_list[$i]['user_from_flag'], 0, -4).'"></span> ';
+	            else:
+	            $user_flag = '<span class="countries unknown"></span> ';
+	            endif;
+
+              # Mod: Forum Index Avatar Mod v3.0.0 START
+              switch($modgroup_pending_list[$i]['user_avatar_type'])
+              {
                   case USER_AVATAR_UPLOAD:
-                  $current_avatar = $board_config['avatar_path'] . '/' . $modgroup_pending_list[$i]['user_avatar'];
+                  $current_avatar = $board_config['avatar_path'].'/'.$modgroup_pending_list[$i]['user_avatar'];
                   break;
                   case USER_AVATAR_REMOTE:
                   $current_avatar = resize_avatar($modgroup_pending_list[$i]['user_avatar']);
                   break;
                   case USER_AVATAR_GALLERY:
-                  $current_avatar = $board_config['avatar_gallery_path'] . '/' . (($modgroup_pending_list[$i]['user_avatar'] 
+                  $current_avatar = $board_config['avatar_gallery_path'].'/'.(($modgroup_pending_list[$i]['user_avatar'] 
 	              == 'blank.gif' || $row['user_avatar'] == 'gallery/blank.gif') ? 'blank.png' : $modgroup_pending_list[$i]['user_avatar']);
                   break;
-	            }
+	          }
 	
-	            $pending_user_avatar = '<img class="rounded-corners-header" height="auto" width="30" src="'.$current_avatar.'">&nbsp;';
-               /*****[END]********************************************
-               [ Mod:    Forum Index Avatar Mod                 v1.0]
-                ******************************************************/
+	          $pending_user_avatar = '<img class="rounded-corners-header" height="auto" width="30" src="'.$current_avatar.'">&nbsp;';
+              # Mod: Forum Index Avatar Mod v3.0.0 END
 	            
                 # Mod: Online/Offline/Hidden v2.2.7 START
                 generate_user_info($modgroup_pending_list[$i], 
@@ -1259,9 +1270,9 @@ elseif($group_id)
 										   $online_status_img, 
 										       $online_status);
                 # Mod: Online/Offline/Hidden v2.2.7 END
-                //global $bgcolor1, $bgcolor2;
-                //$row_color = (!($i % 2)) ? $bgcolor1 : $bgcolor2;
-                //$row_class = (!($i % 2)) ? $bgcolor2 : $bgcolor1;
+
+                $row_color = (!($i % 2)) ? $theme['td_color1'] : $theme['td_color2'];
+                $row_class = (!($i % 2)) ? $theme['td_class1'] : $theme['td_class2'];
                 
                 $user_select = '<input type="checkbox" name="member[]" value="' . $user_id . '">';
                 

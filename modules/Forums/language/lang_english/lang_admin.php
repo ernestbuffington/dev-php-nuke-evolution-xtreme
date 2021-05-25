@@ -3,7 +3,6 @@
   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
 
-
 /***************************************************************************
  *                            lang_admin.php [English]
  *                              -------------------
@@ -12,16 +11,13 @@
  *     email                : support@phpbb.com
  *
  *     $Id: lang_admin.php,v 1.35.2.10 2005/02/21 18:38:17 acydburn Exp $
- *
  ****************************************************************************/
 
 /***************************************************************************
- *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
  *   the Free Software Foundation; either version 2 of the License, or
  *   (at your option) any later version.
- *
  ***************************************************************************/
 
 /*****[CHANGES]**********************************************************

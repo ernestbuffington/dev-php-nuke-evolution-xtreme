@@ -36,7 +36,7 @@
 	  <a{catrow.forumrow.FORUM_COLOR} href="{catrow.forumrow.U_VIEWFORUM}"<!-- IF catrow.forumrow.FORUM_LINK_COUNT --> target="_blank"<!-- ENDIF -->>{catrow.forumrow.FORUM_NAME}</a><br />
 	  <span class="cattitle">{catrow.forumrow.FORUM_DESC}</span>
 	  <!-- IF catrow.forumrow.MODERATORS -->
-	  <br />{catrow.forumrow.L_MODERATOR}: {catrow.forumrow.MODERATORS}<br />
+	  <br />{catrow.forumrow.L_MODERATOR} {catrow.forumrow.MODERATORS}<br />
     <!-- ELSE -->
     <br />
 	  <!-- ENDIF -->
