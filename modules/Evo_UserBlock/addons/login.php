@@ -77,9 +77,9 @@ if (!is_user())
 {
     evouserinfo_login();
 
-    if(isset($appID)): 
+    if(defined('facebook')): 
     
-	  if(isset($_COOKIE['fbsr_' . $appID])):
+	  if(isset($_COOKIE['fbsr_'.$appID])):
 	  // do nothing
 	  else:
 	    $evouserinfo_login .= '<div class="myFblogin">';
@@ -93,21 +93,49 @@ if (!is_user())
 } 
 else 
 {
-    $evouserinfo_login .= '<div style="padding-left: 10px;">';
-    $evouserinfo_login .= '  <font color="violet"><i class="fas fa-sign-out-alt" aria-hidden="true"></i></font>&nbsp;&nbsp;<a href="modules.php?name=Your_Account&amp;op=logout">'.$lang_evo_userblock['BLOCK']['LOGIN']['LOGOUT'].'</a>';
+	global $userinfo, $bgcolor1, $bgcolor2;
+
+	$evouserinfo_login .= '<div style="padding-left: 11px;">';
+    $evouserinfo_login .= '  <font color="#3498DB"><i class="far fa-file-image" aria-hidden="true"></i></font> <a 
+	href="modules.php?name=Image_Repository">'.$lang_evo_userblock['BLOCK']['LOGIN']['MYHOSTEDIMAGES'].'</a>';
+    $evouserinfo_login .= '</div>';
+    
+	$evouserinfo_login .= '<div style="padding-left: 8px;">';
+    $evouserinfo_login .= '  <font color="darkgreen"><i class="fas fa-link" aria-hidden="true"></i></font> <a 
+	href="modules.php?name=Network_Bookmarks">'.$lang_evo_userblock['BLOCK']['LOGIN']['MYBOOKMARKS'].'</a>';
     $evouserinfo_login .= '</div>';
 
     $evouserinfo_login .= '<div style="padding-left: 10px;">';
-    $evouserinfo_login .= '  <font color="red"><i class="fas fa-user-times"></i></font>&nbsp;<a href="modules.php?name=Your_Account&op=delete">'.$lang_evo_userblock['BLOCK']['LOGIN']['DELETE'].'</a>';
+    $evouserinfo_login .= '  <font color="#EC7063"><i class="fas fa-user" aria-hidden="true"></i></font> <a 
+	href="modules.php?name=Profile&mode=viewprofile&u='.$userinfo['user_id'].'">'.$lang_evo_userblock['BLOCK']['LOGIN']['MYPROFILE'].'</a>';
+    $evouserinfo_login .= '</div>';
+
+    $evouserinfo_login .= '<div style="padding-left: 8px;">';
+    $evouserinfo_login .= '  <font color="#EC7063"><i class="far fa-edit" aria-hidden="true"></i></font> <a 
+	href="modules.php?name=Profile">'.$lang_evo_userblock['BLOCK']['LOGIN']['EDITMYPROFILE'].'</a>';
+    $evouserinfo_login .= '</div>';
+
+    $evouserinfo_login .= '<div style="padding-left: 8px;">';
+    $evouserinfo_login .= '  <font color="#45B39D"><i class="far fa-edit" aria-hidden="true"></i></font> <a 
+	href="modules.php?name=Your_Account&op=chgtheme">'.$lang_evo_userblock['BLOCK']['LOGIN']['CHANGEMYTHEME'].'</a>';
     $evouserinfo_login .= '</div>';
 
     $evouserinfo_login .= '<div style="padding-left: 10px;">';
-    $evouserinfo_login .= '  <font color="tan"><i class="fas fa-cookie" aria-hidden="true"></i></font>&nbsp;&nbsp;<a href="modules.php?name=Your_Account&op=ShowCookiesRedirect">'.   $lang_evo_userblock['BLOCK']['LOGIN']['COOKIES'].'</a>';
+    $evouserinfo_login .= '  <font color="violet"><i class="fas fa-sign-out-alt" aria-hidden="true"></i></font> <a href="modules.php?name=Your_Account&amp;op=logout">'.    $lang_evo_userblock['BLOCK']['LOGIN']['LOGOUT'].'</a>';
     $evouserinfo_login .= '</div>';
 
-    if(isset($appID)): 
+    $evouserinfo_login .= '<div style="padding-left: 10px;">';
+    $evouserinfo_login .= '  <font color="red"><i class="fas fa-user"></i></font> <a href="modules.php?name=Your_Account&op=delete">'.
+	$lang_evo_userblock['BLOCK']['LOGIN']['DELETE'].'</a>';
+    $evouserinfo_login .= '</div>';
+
+    $evouserinfo_login .= '<div style="padding-left: 10px;">';
+    $evouserinfo_login .= '  <font color="tan"><i class="fas fa-cookie" aria-hidden="true"></i></font> <a href="modules.php?name=Your_Account&op=ShowCookiesRedirect">'.    $lang_evo_userblock['BLOCK']['LOGIN']['COOKIES'].'</a>';
+    $evouserinfo_login .= '</div>';
+
+    if(defined('facebook')): 
 	  
-	  if(isset($_COOKIE['fbsr_' . $appID])):
+	  if(isset($_COOKIE['fbsr_'.$appID])):
 	  // do nothing
 	  else:
         $evouserinfo_login .= '<hr>';

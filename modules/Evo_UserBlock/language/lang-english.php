@@ -29,6 +29,11 @@ $lang_evo_userblock['BLOCK']['LOGIN']['COOKIES'] = 'View My Cookies';
 $lang_evo_userblock['BLOCK']['LOGIN']['DELETE'] = 'Deactivate Account';
 
 //Online
+$lang_evo_userblock['BLOCK']['LOGIN']['CHANGEMYTHEME'] = 'Change My Theme';
+$lang_evo_userblock['BLOCK']['LOGIN']['MYHOSTEDIMAGES'] = 'My Hosted Images';
+$lang_evo_userblock['BLOCK']['LOGIN']['MYBOOKMARKS'] = 'My Bookmark Vault';
+$lang_evo_userblock['BLOCK']['LOGIN']['MYPROFILE'] = 'View My Profile';
+$lang_evo_userblock['BLOCK']['LOGIN']['EDITMYPROFILE'] = 'Edit My Profile';
 $lang_evo_userblock['BLOCK']['ONLINE']['BREAK'] = ':';
 $lang_evo_userblock['BLOCK']['ONLINE']['HIDDEN'] = 'Hidden';
 $lang_evo_userblock['BLOCK']['ONLINE']['VISIBLE'] = 'Visible';

@@ -920,7 +920,7 @@ elseif($group_id)
         'info' => 'groupcp_info_body.tpl',
         'pendinginfo' => 'groupcp_pending_info.tpl'
     ));
-    make_jumpbox('viewforum.'.$phpEx); 
+    //make_jumpbox('viewforum.'.$phpEx); 
     
     # Add the moderator
     # Mod: Advanced Username Color v1.0.5 START
@@ -1407,7 +1407,7 @@ else
         $template->set_filenames(array(
             'user' => 'groupcp_user_body.tpl'
         ));
-        make_jumpbox('viewforum.' . $phpEx);
+        //make_jumpbox('viewforum.' . $phpEx);
         
         if($s_pending_groups_opt != '' || $s_member_groups_opt != '') 
         $template->assign_block_vars('switch_groups_joined', array());
