@@ -29,6 +29,7 @@ $lang_evo_userblock['BLOCK']['LOGIN']['COOKIES'] = 'View My Cookies';
 $lang_evo_userblock['BLOCK']['LOGIN']['DELETE'] = 'Deactivate Account';
 
 //Online
+$lang_evo_userblock['BLOCK']['LOGIN']['SETBLOGPOSTS'] = 'Set Blog Posts';
 $lang_evo_userblock['BLOCK']['LOGIN']['CHANGEMYTHEME'] = 'Change My Theme';
 $lang_evo_userblock['BLOCK']['LOGIN']['MYHOSTEDIMAGES'] = 'My Hosted Images';
 $lang_evo_userblock['BLOCK']['LOGIN']['MYBOOKMARKS'] = 'My Bookmark Vault';

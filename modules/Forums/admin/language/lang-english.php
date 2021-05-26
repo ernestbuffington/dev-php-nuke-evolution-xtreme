@@ -737,7 +737,7 @@ define("_MUSTBEINIMG","must be in /images/ directory. Valid only for AvantGo mod
 define("_USERSOPTIONS","Users Options");
 define("_BROADCASTMSG","Activate Broadcast Messages?");
 define("_MYHEADLINES","Activate Headlines Reader?");
-define("_USERSHOMENUM","Let users change News number in Home?");
+define("_USERSHOMENUM","Let users change Blog Posts number in Home?");
 define("_CENSOROPTIONS","Censure Options");
 define("_CENSORMODE","Censor Mode");
 define("_NOFILTERING","No filtering");

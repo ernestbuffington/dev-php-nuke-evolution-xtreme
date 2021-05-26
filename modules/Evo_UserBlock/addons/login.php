@@ -2,8 +2,6 @@
 /*======================================================================= 
   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
-
-
 /************************************************************************
    Nuke-Evolution: Server Info Administration
    ============================================
@@ -16,10 +14,8 @@
 
    Notes         : Evo User Block Login Module
 ************************************************************************/
-
-if(!defined('NUKE_EVO')) {
-   die ("Illegal File Access");
-}
+if(!defined('NUKE_EVO')) 
+exit ("Illegal File Access");
 
 global $evouserinfo_login, $lang_evo_userblock, $appID;
 
@@ -39,8 +35,11 @@ function evouserinfo_login () {
     $evouserinfo_login .= "</td></tr>\n<tr><td align=\"center\">\n";
     
     //Login
-    $evouserinfo_login .= $lang_evo_userblock['BLOCK']['LOGIN']['USERNAME']."<br /><input class=\"evo-login-username-field\" type=\"text\" name=\"username\" size=\"15\" maxlength=\"25\"></td></tr>\n";
-    $evouserinfo_login .= "<tr><td align=\"center\">".$lang_evo_userblock['BLOCK']['LOGIN']['PASSWORD']."<br /><input class=\"evo-login-password-field\" type=\"password\" name=\"user_password\" size=\"15\" maxlength=\"20\" autocomplete=\"on\">\n";
+    $evouserinfo_login .= $lang_evo_userblock['BLOCK']['LOGIN']['USERNAME']."<br /><input class=\"evo-login-username-field\" 
+	type=\"text\" name=\"username\" size=\"15\" maxlength=\"25\"></td></tr>\n";
+    
+	$evouserinfo_login .= "<tr><td align=\"center\">".$lang_evo_userblock['BLOCK']['LOGIN']['PASSWORD']."<br /><input 
+	class=\"evo-login-password-field\" type=\"password\" name=\"user_password\" size=\"15\" maxlength=\"20\" autocomplete=\"on\">\n";
     /*****[BEGIN]******************************************
     [ Mod:     Advanced Security Code Control     v1.0.0 ]
     ******************************************************/
@@ -120,8 +119,14 @@ else
 	href="modules.php?name=Your_Account&op=chgtheme">'.$lang_evo_userblock['BLOCK']['LOGIN']['CHANGEMYTHEME'].'</a>';
     $evouserinfo_login .= '</div>';
 
+    $evouserinfo_login .= '<div style="padding-left: 8px;">';
+    $evouserinfo_login .= '  <font color="#D4AC0D"><i class="far fa-edit" aria-hidden="true"></i></font> <a 
+	href="modules.php?name=Your_Account&op=edithome">'.$lang_evo_userblock['BLOCK']['LOGIN']['SETBLOGPOSTS'].'</a>';
+    $evouserinfo_login .= '</div>';
+
     $evouserinfo_login .= '<div style="padding-left: 10px;">';
-    $evouserinfo_login .= '  <font color="violet"><i class="fas fa-sign-out-alt" aria-hidden="true"></i></font> <a href="modules.php?name=Your_Account&amp;op=logout">'.    $lang_evo_userblock['BLOCK']['LOGIN']['LOGOUT'].'</a>';
+    $evouserinfo_login .= '  <font color="violet"><i class="fas fa-sign-out-alt" aria-hidden="true"></i></font> <a 
+	href="modules.php?name=Your_Account&amp;op=logout">'.$lang_evo_userblock['BLOCK']['LOGIN']['LOGOUT'].'</a>';
     $evouserinfo_login .= '</div>';
 
     $evouserinfo_login .= '<div style="padding-left: 10px;">';
@@ -130,7 +135,8 @@ else
     $evouserinfo_login .= '</div>';
 
     $evouserinfo_login .= '<div style="padding-left: 10px;">';
-    $evouserinfo_login .= '  <font color="tan"><i class="fas fa-cookie" aria-hidden="true"></i></font> <a href="modules.php?name=Your_Account&op=ShowCookiesRedirect">'.    $lang_evo_userblock['BLOCK']['LOGIN']['COOKIES'].'</a>';
+    $evouserinfo_login .= '  <font color="tan"><i class="fas fa-cookie" aria-hidden="true"></i></font> <a 
+	href="modules.php?name=Your_Account&op=ShowCookiesRedirect">'.$lang_evo_userblock['BLOCK']['LOGIN']['COOKIES'].'</a>';
     $evouserinfo_login .= '</div>';
 
     if(defined('facebook')): 

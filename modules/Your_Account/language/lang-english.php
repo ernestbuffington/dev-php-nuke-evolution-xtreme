@@ -238,7 +238,7 @@ define("_NAMERESTRICTED","ERROR: Your selected username contains a restricted st
 define("_NEEDTOCOMPLETE","You need to complete all required fields");
 define("_NESTED","Nested");
 define("_NEWEST","Newest First");
-define("_NEWSINHOME","News Number in Home");
+define("_BLOGPOSTSINHOME","Set Blog Posts Number on Index Page");
 define("_NEWSLETTER","Newsletter");
 define("_NEWUSER","New User");
 define("_NEWUSERERROR","New User Creation Error!");
