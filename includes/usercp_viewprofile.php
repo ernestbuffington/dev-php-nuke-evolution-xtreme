@@ -2,8 +2,6 @@
 /*======================================================================= 
   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
-
-
 /***************************************************************************
  *                           usercp_viewprofile.php
  *                            -------------------
@@ -12,18 +10,13 @@
  *   email                : support@phpbb.com
  *
  *   Id: usercp_viewprofile.php,v 1.5.2.5 2005/07/19 20:01:16 acydburn Exp
- *
  ***************************************************************************/
-
 /***************************************************************************
- *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
  *   the Free Software Foundation; either version 2 of the License, or
  *   (at your option) any later version.
- *
  ***************************************************************************/
-
 /*****[CHANGES]**********************************************************
 -=[Base]=-
       Nuke Patched                             v3.0.0       06/07/2005
@@ -49,44 +42,42 @@
 	  Arcade                                   v3.0.2       05/29/2009
 	  Admin delete users & posts               v1.0.5       05/29/2009
  ************************************************************************/
-
 if (!defined('IN_PHPBB'))
-{
-    die('Hacking attempt');
-}
+exit('Hacking attempt');
 
-if ( empty($HTTP_GET_VARS[POST_USERS_URL]) || $HTTP_GET_VARS[POST_USERS_URL] == ANONYMOUS )
-{
-    message_die(GENERAL_MESSAGE, $lang['No_user_id_specified']);
-}
+if(empty($HTTP_GET_VARS[POST_USERS_URL]) || $HTTP_GET_VARS[POST_USERS_URL] == ANONYMOUS)
+message_die(GENERAL_MESSAGE, $lang['No_user_id_specified']);
+
 $profiledata = get_userdata($HTTP_GET_VARS[POST_USERS_URL]);
 /*****[BEGIN]******************************************
  [ Mod:     Show Groups                        v1.0.1 ]
  ******************************************************/
-if (isset($profiledata['user_id']) && !empty($profiledata['user_id'])) {
-    $sql = "SELECT group_name FROM ".GROUPS_TABLE." LEFT JOIN ".USER_GROUP_TABLE." on ".USER_GROUP_TABLE.".group_id=".GROUPS_TABLE.".group_id WHERE ".USER_GROUP_TABLE.".user_id=".$profiledata['user_id'];
-    if ( !($result = $db->sql_query($sql)) ){
-            $groups = "SQL Failed to obtain last visit";
-    }
-    else {
-        if($db->sql_numrows($result) == 0){
-            $groups = "None";
-        } else {
-            while($row = $db->sql_fetchrow($result)){
+if(isset($profiledata['user_id']) && !empty($profiledata['user_id'])): 
+    $sql = "SELECT group_name 
+	        FROM ".GROUPS_TABLE." 
+			LEFT JOIN ".USER_GROUP_TABLE." on ".USER_GROUP_TABLE.".group_id=".GROUPS_TABLE.".group_id 
+			WHERE ".USER_GROUP_TABLE.".user_id=".$profiledata['user_id'];
+			
+    if(!($result = $db->sql_query($sql))):
+    $groups = "SQL Failed to obtain last visit";
+    else: 
+        if($db->sql_numrows($result) == 0):
+        $groups = "None";
+         
+		else: 
+            while($row = $db->sql_fetchrow($result)):
                 $groups .= $row['group_name'] . "<br />";
-            }
-        }
+            endwhile;
+        endif;
         $db->sql_freeresult($result);
-    }
-}
+    endif;
+endif;
 /*****[END]********************************************
  [ Mod:     Show Groups                        v1.0.1 ]
  ******************************************************/
 
-if (!$profiledata)
-{
-    message_die(GENERAL_MESSAGE, $lang['No_user_id_specified']);
-}
+if(!$profiledata)
+message_die(GENERAL_MESSAGE, $lang['No_user_id_specified']);
 
 /*****[BEGIN]******************************************
  [ Mod:    Multiple Ranks And Staff View       v2.0.3 ]
@@ -103,9 +94,12 @@ $ranks_sql = query_ranks();
 $template->set_filenames(array(
     'body' => 'profile_view_body.tpl')
 );
-if (is_active("Forums")) {
+
+if(is_active("Forums")) 
+{
     make_jumpbox('viewforum.'.$phpEx);
 }
+
 //
 // Calculate the number of days this user has been a member ($memberdays)
 // Then calculate their posts per day
@@ -126,37 +120,33 @@ else
     $percentage = 0;
 }
 
+# avatar on users profile page START
 $avatar_img = '';
-if ( $profiledata['user_avatar_type'] && $profiledata['user_allowavatar'] )
-{
-    switch( $profiledata['user_avatar_type'] )
-    {
+if($profiledata['user_avatar_type'] && $profiledata['user_allowavatar']):
+    switch( $profiledata['user_avatar_type']):
         case USER_AVATAR_UPLOAD:
-            $avatar_img = ( $board_config['allow_avatar_upload'] ) ? '<img style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '.$board_config['avatar_max_width'].'px;" src="' . $board_config['avatar_path'] . '/' . $profiledata['user_avatar'] . '" alt="" border="0" />' : '';
+            $avatar_img = ($board_config['allow_avatar_upload']) ? '<img class="rounded-corners-profile" style="max-height: 200px; 
+			max-width: 200px;" src="'.$board_config['avatar_path']. '/'. $profiledata['user_avatar'] . '" alt="" border="0" />' : '';
             break;
-/*****[BEGIN]******************************************
- [ Mod:     Remote Avatar Resize               v2.0.0 ]
- ******************************************************/
         case USER_AVATAR_REMOTE:
-            $avatar_img = '<img style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '.$board_config['avatar_max_width'].'px;" src="' . resize_avatar($profiledata['user_avatar']) . '" alt="" border="0" />';
+            $avatar_img = '<img style="max-height: 200px; max-width: 200px;" s
+			rc="' . resize_avatar($profiledata['user_avatar']) . '" alt="" border="0" />';
             break;
-/*****[END]********************************************
- [ Mod:     Remote Avatar Resize               v2.0.0 ]
- ******************************************************/
         case USER_AVATAR_GALLERY:
-            $avatar_img = ( $board_config['allow_avatar_local'] ) ? '<img style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '.$board_config['avatar_max_width'].'px;" src="' . $board_config['avatar_gallery_path'] . '/' . (($profiledata['user_avatar'] == 'blank.gif' || $profiledata['user_avatar'] == 'gallery/blank.gif') ? 'blank.png' : $profiledata['user_avatar']) . '" alt="" border="0" />' : '';
+            $avatar_img = ( $board_config['allow_avatar_local'] ) ? '<img style="max-height: 200px; max-width: 
+			200px;" src="' . $board_config['avatar_gallery_path'] . '/' 
+			. (($profiledata['user_avatar'] == 'blank.gif' || $profiledata['user_avatar'] == 'gallery/blank.gif') ? 'blank.png' : $profiledata['user_avatar']) 
+			. '" alt="" border="0" />' : '';
             break;
-    }
-}
-/*****[BEGIN]******************************************
- [ Mod:     Default avatar                     v1.1.0 ]
- ******************************************************/
-    if ((!$avatar_img) && (($board_config['default_avatar_set'] == 1) || ($board_config['default_avatar_set'] == 2)) && ($board_config['default_avatar_users_url'])){
-        $avatar_img = '<img style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '.$board_config['avatar_max_width'].'px;" src="' . $board_config['default_avatar_users_url'] . '" alt="" border="0" />';
-    }
-/*****[END]********************************************
- [ Mod:     Default avatar                     v1.1.0 ]
- ******************************************************/
+    endswitch;
+endif;
+# Mod: Default avatar v1.1.0 START
+if((!$avatar_img) && (($board_config['default_avatar_set'] == 1) 
+|| ($board_config['default_avatar_set'] == 2)) && ($board_config['default_avatar_users_url'])):
+  $avatar_img = '<img style="max-height: 200px; max-width: 200px;" src="'.$board_config['default_avatar_users_url'].'" alt="" border="0" />';
+endif;
+# Mod: Default avatar v1.1.0 END
+# avatar on users profile page END
 
 /*****[BEGIN]******************************************
  [ Mod:    Multiple Ranks And Staff View       v2.0.3 ]
@@ -178,7 +168,8 @@ if ( $profiledata['user_avatar_type'] && $profiledata['user_allowavatar'] )
  ******************************************************/
 
 $temp_url = append_sid("privmsg.$phpEx?mode=post&amp;" . POST_USERS_URL . "=" . $profiledata['user_id']);
-if (is_active("Private_Messages")) 
+
+if(is_active("Private_Messages")) 
 {
 	$pm_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['Send_private_message'] . '" title="' . $lang['Send_private_message'] . '" border="0" /></a>';
 	// $pm = '<a href="' . $temp_url . '">' . $lang['Send_private_message'] . '</a>';
@@ -188,21 +179,17 @@ if (is_active("Private_Messages"))
 /*****[BEGIN]******************************************
  [ Mod:     Member Country Flags               v2.0.7 ]
  ******************************************************/
-// $location = ( !empty($profiledata['user_from_flag']) ) ? "<img src=\"images/flags/" . $profiledata['user_from_flag'] . "\" alt=\"" . $profiledata['user_from_flag'] . "\">&nbsp;" : "&nbsp;";
-$location = ( !empty($profiledata['user_from_flag']) ) ? '<span class="countries '.str_replace('.png','',$profiledata['user_from_flag']).'"></span>&nbsp;' : '&nbsp;';
-$location .= ( $profiledata['user_from'] ) ? $profiledata['user_from'] : '';
+$location = (!empty($profiledata['user_from_flag']) ) ? '<span class="countries '.str_replace('.png','',$profiledata['user_from_flag']).'"></span>&nbsp;' : '&nbsp;';
+$location .= ($profiledata['user_from']) ? $profiledata['user_from'] : '';
 /*****[END]********************************************
  [ Mod:     Member Country Flags               v2.0.7 ]
  ******************************************************/
 
-
-
-if ( !empty($profiledata['user_viewemail']) || ($profiledata['username'] == $userdata['username']) || $userdata['user_level'] == ADMIN )
+if (!empty($profiledata['user_viewemail']) || ($profiledata['username'] == $userdata['username']) || $userdata['user_level'] == ADMIN)
 {
-    $email_uri = ( $board_config['board_email_form'] ) ? append_sid("profile.$phpEx?mode=email&amp;" . POST_USERS_URL .'=' . $profiledata['user_id']) : 'mailto:' . $profiledata['user_email'];
-
+    $email_uri = ( $board_config['board_email_form'] ) ? append_sid("profile.$phpEx?mode=email&amp;".POST_USERS_URL
+	.'='.$profiledata['user_id']) : 'mailto:' .$profiledata['user_email'];
     $email_img = '<a href="' . $email_uri . '"><img src="' . $images['icon_email'] . '" alt="' . $lang['Send_email'] . '" title="' . $lang['Send_email'] . '" border="0" /></a>';
-    // $email = '<a href="' . $email_uri . '">' . $lang['Send_email'] . '</a>';
     $email = '<a href="' . $email_uri . '">' . sprintf($lang['Send_email'], $profiledata['username']) . '</a>';
 }
 else
@@ -210,7 +197,7 @@ else
     $email_img = '&nbsp;';
     $email = '';
 }
-if (isset($profiledata['user-website'])) 
+if(isset($profiledata['user-website'])) 
 {
     if (( $profiledata['user-website'] == "http:///") || ( $profiledata['user_website'] == "http://"))
 	{

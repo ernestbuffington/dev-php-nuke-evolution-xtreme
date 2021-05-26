@@ -23,10 +23,8 @@ function evouserinfo_rank()
 {
     global $evouserinfo_addons, $db, $prefix, $userinfo, $evouserinfo_rank;
    # Mod: Multiple Ranks And Staff View v2.0.3 START
-   if (!function_exists('generate_ranks')):
    require_once(NUKE_INCLUDE_DIR.'functions_mg_ranks.php');
    $ranks_sql = query_ranks();
-   endif;
 
    $user_ranks = generate_ranks($userinfo, $ranks_sql);
 
@@ -64,7 +62,7 @@ function evouserinfo_rank()
    $evouserinfo_rank .= '</div>';
 }
 
-if (is_user()) 
+if(is_user()) 
 evouserinfo_rank();
 else 
 $evouserinfo_rank = '';

@@ -67,7 +67,8 @@ if (!is_user())
        echo '    <a href="index.php" class="btn btn-primary dropbtn" role="button">Home</a>';
        echo '    <a href="modules.php?name=Forums" class="btn btn-primary adropbtn" role="button">Forum Index</a>';
        echo '    <a href="modules.php?name=Forums&file=search&search_id=newposts" class="btn btn-primary dropbtn" role="button">New Posts</a>';
-       echo '    <a href="modules.php?name=Forums&file=search&search_id=unanswered" class="btn btn-primary dropbtn" role="button">Unanswered Topics</a>';
+       echo '    <a href="modules.php?name=Forums&file=search&search_id=unanswered" class="btn btn-primary dropbtn" role="button">Unanswered</a>';
+       echo '    <a href="modules.php?name=Forums&file=search&search_id=egosearch" class="btn btn-primary dropbtn" role="button">My Posts</a>';
        echo '    <a href="modules.php?name=Forums&file=search" class="btn btn-primary dropbtn" role="button">Search</a>';
        echo '  </div>';
 
@@ -140,22 +141,61 @@ if (is_user())
     ############################################################################################################################################################### 
     ############################################################################################################################################################### 
     ############################################################################################################################################################### 
-    # logged in Forums module ##########################################################################################################################
-	if ($name == 'Forums'):                                                                                                                            #
-                                                                                                                                                       #
-	echo '<div align="center">';                                                                                                                       #
-    echo '<div class="btn-group">';                                                                                                                    #
-                                                                                                                                                       #
-    echo ' <div class="btn-group">';                                                                                                                   #
-    echo '    <a href="index.php" class="btn btn-primary dropbtn" role="button">Home</a>';                                                             #
-    echo '    <a href="modules.php?name=Forums" class="btn btn-primary adropbtn" role="button">Forum Index</a>';                                       #
-    echo '    <a href="modules.php?name=Forums&file=search&search_id=newposts" class="btn btn-primary dropbtn" role="button">New Posts</a>';           #
-    echo '    <a href="modules.php?name=Forums&file=search&search_id=unanswered" class="btn btn-primary dropbtn" role="button">Unanswered Topics</a>'; #
-    echo '    <a href="modules.php?name=Forums&file=search" class="btn btn-primary dropbtn" role="button">Search</a>';                                 #
-    echo '  </div>';                                                                                                                                   #
-                                                                                                                                                       #
-    echo '</div></div>';                                                                                                                               #
-	####################################################################################################################################################
+    # logged in Forums module #########################################################################################################################
+	if($name == 'Forums'):                                                                                                                            #
+                                                                                                                                                      #
+    if(isset($_POST['file']) || isset($_GET['file']))                                                                                                 #
+        $file = (isset($_POST['file']) ) ? $_POST['file'] : $_GET['file'];                                                                            #
+                                                                                                                                                      #
+		if(is_string($file)):                                                                                                                         #
+        $file = htmlspecialchars($file);                                                                                                              #
+        else:                                                                                                                                         #
+        $file = '';                                                                                                                                   #
+        endif;                                                                                                                                        #
+                                                                                                                                                      #
+    if(isset($_POST['search_id']) || isset($_GET['search_id']))                                                                                       #
+        $search_id = (isset($_POST['search_id']) ) ? $_POST['search_id'] : $_GET['search_id'];                                                        #
+                                                                                                                                                      #
+		if(is_string($search_id)):                                                                                                                    #
+        $search_id = htmlspecialchars($search_id);                                                                                                    #
+        else:                                                                                                                                         #
+        $search_id = '';                                                                                                                              #
+        endif;                                                                                                                                        #
+                                                                                                                                                      #
+	echo '<div align="center">';                                                                                                                      #
+    echo '<div class="btn-group">';                                                                                                                   #
+                                                                                                                                                      #
+    echo '<div class="btn-group">';                                                                                                                   #
+    echo '<a href="index.php" class="btn btn-primary dropbtn" role="button">Home</a>';                                                                #
+	                                                                                                                                                  #
+	if($search_id == '' && $file == '')                                                                                                               #
+    echo '<a href="modules.php?name=Forums" class="btn btn-primary adropbtn" role="button">Forum Index</a>';                                          #
+	else                                                                                                                                              #
+	echo '<a href="modules.php?name=Forums" class="btn btn-primary dropbtn" role="button">Forum Index</a>';                                           #
+                                                                                                                                                      #
+	if($search_id == 'newposts' && $file == 'search')                                                                                                 #
+	echo '<a href="modules.php?name=Forums&file=search&search_id=newposts" class="btn btn-primary adropbtn" role="button">New Posts</a>';             #
+    else                                                                                                                                              #
+	echo '<a href="modules.php?name=Forums&file=search&search_id=newposts" class="btn btn-primary dropbtn" role="button">New Posts</a>';              #
+                                                                                                                                                      #
+	if($search_id == 'unanswered' && $file == 'search')                                                                                               #
+	echo '<a href="modules.php?name=Forums&file=search&search_id=unanswered" class="btn btn-primary adropbtn" role="button">Unanswered Topics</a>';   #
+    else                                                                                                                                              #
+	echo '<a href="modules.php?name=Forums&file=search&search_id=unanswered" class="btn btn-primary dropbtn" role="button">Unanswered Topics</a>';    #
+                                                                                                                                                      #
+	if($search_id == 'egosearch' && $file == 'search')                                                                                                #
+    echo '<a href="modules.php?name=Forums&file=search&search_id=egosearch" class="btn btn-primary adropbtn" role="button">My Posts</a>';             #
+    else                                                                                                                                              #
+    echo '<a href="modules.php?name=Forums&file=search&search_id=egosearch" class="btn btn-primary dropbtn" role="button">My Posts</a>';              #
+                                                                                                                                                      #
+	if($search_id == '' && $file == 'search')                                                                                                         #                                                                                                                                                      #
+	echo '<a href="modules.php?name=Forums&file=search" class="btn btn-primary adropbtn" role="button">Search</a>';                                   #
+	else                                                                                                                                              #
+	echo '<a href="modules.php?name=Forums&file=search" class="btn btn-primary dropbtn" role="button">Search</a>';                                    #
+	echo '</div>';                                                                                                                                    #
+                                                                                                                                                      #
+    echo '</div></div>';                                                                                                                              #
+	###################################################################################################################################################
 	
     ######################################################################################################################################## 
     # logged in Private Messages START	                                                                                                   #

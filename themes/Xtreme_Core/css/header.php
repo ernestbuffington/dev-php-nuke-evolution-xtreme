@@ -123,30 +123,6 @@ a.redalert:hover {text-decoration: underline; color: green;}
   width: 100%;
 }
 
-img.rounded-corners-header { 
-  border-radius: 3px; 
-}
-
-img.rounded-corners-last-post { 
-  border-radius: 9px; 
-}
-
-img.rounded-corners-forum {
-  border-radius: 20px; 
-}
-
-img.rounded-corners {
-  border-radius: 20px; 
-}
-
-img.rounded-corners-last-vistors {
-  border-radius: 9px; 
-}
-
-img.rounded-corners-user-info {
-  border-radius: 20px; 
-}
-
 fieldset 
 {
 	display: block; 

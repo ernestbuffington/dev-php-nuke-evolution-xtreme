@@ -2,8 +2,6 @@
 /*======================================================================= 
   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
-
-
 /***************************************************************************
  *                                profile.php
  *                            -------------------
@@ -12,18 +10,14 @@
  *   email                : support@phpbb.com
  *
  *   Id: profile.php,v 1.193.2.5 2004/11/18 17:49:37 acydburn Exp
- *
  ***************************************************************************/
-
 /***************************************************************************
- *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
  *   the Free Software Foundation; either version 2 of the License, or
  *   (at your option) any later version.
  *
  ***************************************************************************/
-
 /*****[CHANGES]**********************************************************
 -=[Base]=-
       Nuke Patched                             v3.1.0       06/26/2005
@@ -33,10 +27,8 @@
       Birthdays                                v3.0.0
       Admin delete users & posts               v1.0.5       05/29/2009
  ************************************************************************/
-
-if (!defined('MODULE_FILE')) {
-   die('You can\'t access this file directly...');
-}
+if (!defined('MODULE_FILE')) 
+exit('You can\'t access this file directly...');
 
 if ($popup != "1"){
     $module_name = basename(dirname(__FILE__));
@@ -132,26 +124,29 @@ function gen_rand_string($hash)
                     exit;
                 }
         }
-        if ( $mode == 'viewprofile' )
+        if($mode == 'viewprofile')
         {
-                include(NUKE_INCLUDE_DIR.'usercp_viewprofile.php');
-                exit;
-        } else if ( $mode == 'register' && ($check_num || isset($HTTP_POST_VARS['submit']))) {
+          include(NUKE_INCLUDE_DIR.'usercp_viewprofile.php');
+          exit;
+        }
+		elseif($mode == 'register' && ($check_num || isset($HTTP_POST_VARS['submit']))) 
+		{
                 include(NUKE_INCLUDE_DIR.'usercp_register.php');
                 exit;
-        } else if ( $mode == 'register' && !$check_num) {
+        } 
+		elseif($mode == 'register' && !$check_num) 
+		{
                 redirect('modules.php?name=Your_Account&op=new_user');
-        } else if ( $mode == 'editprofile')
+        } 
+		else if($mode == 'editprofile')
         {
-                if ( !is_user() && $mode == 'editprofile' )
-                {
-                        $header_location = ( @preg_match("/Microsoft|WebSTAR|Xitami/", $_SERVER["SERVER_SOFTWARE"]) ) ? "Refresh: 0; URL=" : "Location: ";
-                        redirect(append_sid("login.$phpEx?redirect=profile.$phpEx&mode=editprofile", true));
-                        exit;
-                }
-
-                include("includes/usercp_register.php");
-                exit;
+           if(!is_user() && $mode == 'editprofile'):
+              $header_location = (@preg_match("/Microsoft|WebSTAR|Xitami/",$_SERVER["SERVER_SOFTWARE"])) ? "Refresh: 0; URL=" : "Location: ";
+              redirect(append_sid("login.$phpEx?redirect=profile.$phpEx&mode=editprofile", true));
+              exit;
+           endif;
+         include("includes/usercp_register.php");
+         exit;
         }
 /*****[BEGIN]******************************************
  [ Mod:     Signature Editor/Preview Deluxe    v1.0.0 ]

@@ -122,6 +122,11 @@ function head()
     echo "\n\n<!-- END uploadcare -->\n\n";
 	# START uploadcare PLUGIN for CKeditor 4 - 09/07/2019
 
+    # FlyKit Mod v1.0.0 START
+	# used to add rounded corners to user avatars!
+	addPHPCSSToHead(NUKE_BASE_DIR.'includes/css/cms_css.php','file');
+    # FlyKit Mod v1.0.0 END
+
     # START Load current theme. - 09/07/2019
     echo "\n\n<!-- START Load current theme. -->\n\n";
     include_once(NUKE_THEMES_DIR.$ThemeSel.'/theme.php');

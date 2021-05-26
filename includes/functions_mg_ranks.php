@@ -7,10 +7,7 @@
  *   website              : http://www.mightygorgon.com
  *   email                : mightygorgon@mightygorgon.com
  *   version              : 1.1.0
- *
- *
- ***************************************************************************/
-
+  ***************************************************************************/
 /***************************************************************************
  *
  *   This program is free software; you can redistribute it and/or modify
@@ -19,14 +16,12 @@
  *   (at your option) any later version.
  *
  ***************************************************************************/
-
-
 function query_ranks()
 {
 	global $db;
 
 	$sql = "SELECT ban_userid FROM ".BANLIST_TABLE." ORDER BY ban_userid ASC";
-	if (!($result = $db->sql_query($sql)))
+	if(!($result = $db->sql_query($sql)))
 	message_die(GENERAL_ERROR, "Could not obtain banned users information.", '', __LINE__, __FILE__, $sql);
 	
 	$ranks_sql = array();
@@ -35,7 +30,7 @@ function query_ranks()
 
 	$sql = "SELECT * FROM ".RANKS_TABLE." ORDER BY rank_special ASC, rank_min ASC";
 
-	if (!($result = $db->sql_query($sql)))
+	if(!($result = $db->sql_query($sql)))
 	message_die(GENERAL_ERROR, "Could not obtain ranks information.", '', __LINE__, __FILE__, $sql);
 
 	while($row = $db->sql_fetchrow($result)):
@@ -105,18 +100,18 @@ function generate_ranks($user_row, $ranks_sql)
 
 			for($k = 0; $k < count($user_fields_array); $k++):
 			
-				switch ($ranks_sql['ranksrow'][$j]['rank_special']):
+				switch($ranks_sql['ranksrow'][$j]['rank_special']):
 					case '1':
-						if ($user_row[$user_fields_array[$k]] == $ranks_sql['ranksrow'][$j]['rank_id'])
-							$rank_sw = true;
+						if($user_row[$user_fields_array[$k]] == $ranks_sql['ranksrow'][$j]['rank_id'])
+						$rank_sw = true;
 						break;
 					case '0':
-						if (($user_row[$user_fields_array[$k]] == '0') && ($user_row['user_posts'] >= $ranks_sql['ranksrow'][$j]['rank_min']))
-							$rank_sw = true;
+						if(($user_row[$user_fields_array[$k]] == '0') && ($user_row['user_posts'] >= $ranks_sql['ranksrow'][$j]['rank_min']))
+						$rank_sw = true;
 						break;
 					case '-1':
-						if (($user_row[$user_fields_array[$k]] == '-1') && ($day_diff >= $ranks_sql['ranksrow'][$j]['rank_min']))
-							$rank_sw = true;
+						if(($user_row[$user_fields_array[$k]] == '-1') && ($day_diff >= $ranks_sql['ranksrow'][$j]['rank_min']))
+						$rank_sw = true;
 						break;
 					default:
 						break;

@@ -2,7 +2,6 @@
 /*=======================================================================
  PHP-Nuke Titanium v3.0.0 : Enhanced PHP-Nuke Web Portal System
  =======================================================================*/
-
 /************************************************************************
    Nuke-Evolution: Server Info Administration
    ============================================
@@ -15,14 +14,13 @@
 
    Notes         : Evo User Block Forum Posts Module
 ************************************************************************/
-
-if(!defined('NUKE_EVO')) {
-   die ("Illegal File Access");
-}
+if(!defined('NUKE_EVO')) 
+exit ("Illegal File Access");
 
 global $evouserinfo_addons, $evouserinfo_posts;
 
-function evouserinfo_total_posts () {
+function evouserinfo_total_posts() 
+{
     global $db, $prefix;
     
     $sql = "SELECT COUNT(*) FROM ".$prefix."_bbposts";
@@ -33,7 +31,8 @@ function evouserinfo_total_posts () {
     return (isset($row[0])) ? $row[0] : '?';
 }
 
-function evouserinfo_total_topics () {
+function evouserinfo_total_topics() 
+{
     global $db, $prefix;
     
     $sql = "SELECT COUNT(*) FROM ".$prefix."_bbtopics";
@@ -44,7 +43,8 @@ function evouserinfo_total_topics () {
     return (isset($row[0])) ? $row[0] : '?';
 }
 
-function evouserinfo_ur_total_topics () {
+function evouserinfo_ur_total_topics() 
+{
     global $db, $prefix, $userinfo;
     
     $sql = "SELECT COUNT(*) FROM ".$prefix."_bbtopics WHERE topic_poster='".$userinfo['user_id']."'";
@@ -55,7 +55,8 @@ function evouserinfo_ur_total_topics () {
     return (isset($row[0])) ? number_format($row[0]) : '?';
 }
 
-function evouserinfo_posts () {
+function evouserinfo_posts() 
+{
     global $evouserinfo_posts, $lang_evo_userblock, $userinfo;
     
     $topics = evouserinfo_total_topics();
@@ -82,12 +83,12 @@ function evouserinfo_posts () {
 
       $evouserinfo_posts .= '<div style="padding-left: 10px;">';
       $evouserinfo_posts .= '  <font color="orange"><i class="fas fa-chart-bar" 
-	  aria-hidden="true"></i></font>&nbsp;'.$lang_evo_userblock['BLOCK']['POSTS']['UR_POSTS'].'<span style="float:right">'.number_format($userinfo['user_posts']).'&nbsp;&nbsp;</span>';
+	  aria-hidden="true"></i></font>&nbsp;<a href="modules.php?name=Forums&file=search&search_id=egosearch">'.$lang_evo_userblock['BLOCK']['POSTS']['UR_POSTS'].
+	  '</a><span style="float:right">'.number_format($userinfo['user_posts']).'&nbsp;&nbsp;</span>';
       $evouserinfo_posts .= '</div>';
 
     endif;
 
 }
-
 evouserinfo_posts();
 ?>
