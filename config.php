@@ -51,7 +51,7 @@ $dbuname = 'nukeevo_user';
 |                                                         |
 | Default: null                                           |
 ---------------------------------------------------------*/
-$dbpass = '';  
+$dbpass = 'your_database_password';  
 
 /*----[ $dbtype ] ----------------------------------------
 | The type of SQL server you prefer to use                |
