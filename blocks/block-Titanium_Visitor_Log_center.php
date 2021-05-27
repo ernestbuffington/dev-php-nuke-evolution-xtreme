@@ -351,6 +351,5 @@ $content .= '	</tr>';
 $content .= '</table>';
 endif;
 
-
 $content .= '</div>';
 ?>
