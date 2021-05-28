@@ -39,7 +39,7 @@ while($whosbeen = $db->sql_fetchrow($row1_result)):
 
 	if($whosbeen['user_allow_viewonline'] == 0):
 	$whosbeen['username'] = 'Hidden';
-	$whosbeen['user_avatar'] = 'icons8-invisible-512.png';
+	$whosbeen['user_avatar'] = 'invisible.png';
 	$whosbeen['user_id'] = 0;
 	endif;
 	
