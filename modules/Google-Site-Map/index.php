@@ -773,12 +773,15 @@ while ($row2 = $db->sql_fetchrow($result2)):
 
 		case 'Members_List':
 		
-			$result11 = $db->sql_query('SELECT `username`, `user_id` FROM `'.$user_prefix.'_users` ORDER BY `user_id` DESC LIMIT 0,'.$nuser);
+			$result11 = $db->sql_query('SELECT `username`, `user_id`, user_allow_viewonline FROM `'.$user_prefix.'_users` ORDER BY `user_id` DESC LIMIT 0,'.$nuser);
 		
 		if ($show): 
 		
 			   while ($row11 = $db->sql_fetchrow($result11)): 
-			   
+			    
+				if(($row11['user_allow_viewonline'] == 0) OR ($row11['username'] == 'Anonymous'))
+			    continue;
+				
 				$user=$row11['username'];
 			
 				$ciduser=$row11['user_id'];

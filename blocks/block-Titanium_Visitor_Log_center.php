@@ -26,7 +26,7 @@ $max_height = '59';
 $max_width = '59';
 
 $z = 3;
-$row1_result = $db->sql_query("SELECT * FROM `".$prefix."_users_who_been` as whb, `".USERS_TABLE."` as u WHERE whb.username = u.username AND whb.username != '".$userinfo['user_allow_viewonline']."' !=0 ORDER BY `last_visit` DESC LIMIT ".$z."");
+$row1_result = $db->sql_query("SELECT * FROM `".$prefix."_users_who_been` as whb, `".USERS_TABLE."` as u WHERE whb.username = u.username AND whb.username != '".$userinfo['username']."' ORDER BY `last_visit` DESC LIMIT ".$z."");
 
 $row1   = '<div align="center">';
 $row1  .= '<table bgcolor="'.$bgcolor4.'" border="0" width="200">';
@@ -36,11 +36,12 @@ $row1  .= '<td align="center">';
 $row1  .= '<table bgcolor="'.$bgcolor4.'" border="1" cellpadding="0" cellspacing="1" class="visitorlog">';
 
 while($whosbeen = $db->sql_fetchrow($row1_result)):
-
+    
+	if(!is_admin())
 	if($whosbeen['user_allow_viewonline'] == 0):
 	$whosbeen['username'] = 'Hidden';
 	$whosbeen['user_avatar'] = 'invisible.png';
-	$whosbeen['user_id'] = 0;
+	$whosbeen['user_id'] = -1;
 	endif;
 	
 	if($whosbeen['user_from_flag'] ):
@@ -115,6 +116,13 @@ $row2  .= '<table border="1" cellpadding="0" cellspacing="1" class="visitorlog">
 
 while($whosbeen = $db->sql_fetchrow($row2_result)):
 
+	if(!is_admin())
+	if($whosbeen['user_allow_viewonline'] == 0):
+	$whosbeen['username'] = 'Hidden';
+	$whosbeen['user_avatar'] = 'invisible.png';
+	$whosbeen['user_id'] = -1;
+	endif;
+	
 	if($whosbeen['user_from_flag'] ):
 	$whosbeen['user_from_flag'] = str_replace('.png','',$whosbeen['user_from_flag']);
 	else:
@@ -187,6 +195,13 @@ $row3  .= '<table border="1" cellpadding="0" cellspacing="1" class="visitorlog">
 
 while($whosbeen = $db->sql_fetchrow($row3_result)):
 
+	if(!is_admin())
+	if($whosbeen['user_allow_viewonline'] == 0):
+	$whosbeen['username'] = 'Hidden';
+	$whosbeen['user_avatar'] = 'invisible.png';
+	$whosbeen['user_id'] = -1;
+	endif;
+	
 	if($whosbeen['user_from_flag'] ):
 	$whosbeen['user_from_flag'] = str_replace('.png','',$whosbeen['user_from_flag']);
 	else:
@@ -259,7 +274,13 @@ $row4  .= '<table bgcolor="'.$bgcolor4.'" border="1" cellpadding="0" cellspacing
 
 while($whosbeen = $db->sql_fetchrow($row4_result)):
 
-
+	if(!is_admin())
+	if($whosbeen['user_allow_viewonline'] == 0):
+	$whosbeen['username'] = 'Hidden';
+	$whosbeen['user_avatar'] = 'invisible.png';
+	$whosbeen['user_id'] = -1;
+	endif;
+	
 	if($whosbeen['user_from_flag']):
 	$whosbeen['user_from_flag'] = str_replace('.png','',$whosbeen['user_from_flag']);
 	else:
