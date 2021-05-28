@@ -25,7 +25,8 @@ global $evouserinfo_avatar, $board_config, $userinfo, $bgcolor4;
 $max_height = '59';
 $max_width = '59';
 
-$row1_result = $db->sql_query("SELECT * FROM `".$prefix."_users_who_been` as whb, `".USERS_TABLE."` as u WHERE whb.username = u.username AND whb.username != '".$userinfo['username']."' ORDER BY `last_visit` DESC LIMIT 3");
+$z = 3;
+$row1_result = $db->sql_query("SELECT * FROM `".$prefix."_users_who_been` as whb, `".USERS_TABLE."` as u WHERE whb.username = u.username AND whb.username != '".$userinfo['user_allow_viewonline']."' !=0 ORDER BY `last_visit` DESC LIMIT ".$z."");
 
 $row1   = '<div align="center">';
 $row1  .= '<table bgcolor="'.$bgcolor4.'" border="0" width="200">';
@@ -36,6 +37,12 @@ $row1  .= '<table bgcolor="'.$bgcolor4.'" border="1" cellpadding="0" cellspacing
 
 while($whosbeen = $db->sql_fetchrow($row1_result)):
 
+	if($whosbeen['user_allow_viewonline'] == 0):
+	$whosbeen['username'] = 'Hidden';
+	$whosbeen['user_avatar'] = 'icons8-invisible-512.png';
+	$whosbeen['user_id'] = 0;
+	endif;
+	
 	if($whosbeen['user_from_flag'] ):
 	$whosbeen['user_from_flag'] = str_replace('.png','',$whosbeen['user_from_flag']);
 	else:
@@ -81,7 +88,7 @@ while($whosbeen = $db->sql_fetchrow($row1_result)):
 	<strong>&nbsp;&nbsp;'.UsernameColor($whosbeen['username']).'<br />&nbsp;&nbsp;<a style="text-decoration: none;" href="modules.php?name=Private_Messages&mode=post&u='.$whosbeen['user_id'].'"><font size="5" color="orange"><i class="bi bi-envelope"></i><font color="gold" size="5"><i class="bi bi-arrow-right-short"></i><i class="bi bi-mailbox"></i></font></font>
 	
 	&nbsp;<br />
-	&nbsp;&nbsp;<font size="5" color="gold"><i class="bi bi-arrow-up-short"></i></font><font class="gensmall-visitorlog">SEND PM </font></span>
+	&nbsp;&nbsp;<font size="5" color="gold"><i class="bi bi-arrow-up-short"></i></font><font class="gensmall">SEND PM </font></span>
 	</a></td>';
 	$row1 .= '<td align="center"><div align="top" style="padding-left:10px;">'.get_titanium_timeago($whosbeen['last_visit']).'</div>';
     $row1 .= '</td>';
@@ -97,7 +104,7 @@ $row1 .= '</td>';
 	$row1 .= '</table>';
 $row1 .= '</div>';
 
-$row2_result = $db->sql_query("SELECT * FROM `".$prefix."_users_who_been` as whb, `".USERS_TABLE."` as u WHERE whb.username = u.username AND whb.username != '".$userinfo['username']."' ORDER BY `last_visit` DESC LIMIT 3, 3");
+$row2_result = $db->sql_query("SELECT * FROM `".$prefix."_users_who_been` as whb, `".USERS_TABLE."` as u WHERE whb.username = u.username AND whb.username != '".$userinfo['username']."' ORDER BY `last_visit` DESC LIMIT 3, ".$z."");
 
 $row2   = '<div align="center">';
 $row2  .= '<table bgcolor="'.$bgcolor4.'" border="0" width="200">';
@@ -153,7 +160,7 @@ while($whosbeen = $db->sql_fetchrow($row2_result)):
 	<strong>&nbsp;&nbsp;'.UsernameColor($whosbeen['username']).'<br />&nbsp;&nbsp;<a style="text-decoration: none;" href="modules.php?name=Private_Messages&mode=post&u='.$whosbeen['user_id'].'"><font size="5" color="orange"><i class="bi bi-envelope"></i><font color="gold" size="5"><i class="bi bi-arrow-right-short"></i><i class="bi bi-mailbox"></i></font></font>
 	
 	&nbsp;<br />
-	&nbsp;&nbsp;<font size="5" color="gold"><i class="bi bi-arrow-up-short"></i></font><font class="gensmall-visitorlog">SEND PM </font></span>
+	&nbsp;&nbsp;<font size="5" color="gold"><i class="bi bi-arrow-up-short"></i></font><font class="gensmall">SEND PM </font></span>
 	</a></td>';
 	$row2 .= '<td align="center"><div align="top" style="padding-left:10px;">'.get_titanium_timeago($whosbeen['last_visit']).'</div>';
     $row2 .= '</td>';
@@ -169,7 +176,7 @@ $row2 .= '</td>';
 	$row2 .= '</table>';
 $row2 .= '</div>';
 
-$row3_result = $db->sql_query("SELECT * FROM `".$prefix."_users_who_been` as whb, `".USERS_TABLE."` as u WHERE whb.username = u.username AND whb.username != '".$userinfo['username']."' ORDER BY `last_visit` DESC LIMIT 6, 3");
+$row3_result = $db->sql_query("SELECT * FROM `".$prefix."_users_who_been` as whb, `".USERS_TABLE."` as u WHERE whb.username = u.username AND whb.username != '".$userinfo['username']."' ORDER BY `last_visit` DESC LIMIT 6, ".$z."");
 
 $row3   = '<div align="center">';
 $row3  .= '<table bgcolor="'.$bgcolor4.'" border="0" width="200">';
@@ -225,7 +232,7 @@ while($whosbeen = $db->sql_fetchrow($row3_result)):
 	<strong>&nbsp;&nbsp;'.UsernameColor($whosbeen['username']).'<br />&nbsp;&nbsp;<a style="text-decoration: none;" href="modules.php?name=Private_Messages&mode=post&u='.$whosbeen['user_id'].'"><font size="5" color="orange"><i class="bi bi-envelope"></i><font color="gold" size="5"><i class="bi bi-arrow-right-short"></i><i class="bi bi-mailbox"></i></font></font>
 	
 	&nbsp;<br />
-	&nbsp;&nbsp;<font size="5" color="gold"><i class="bi bi-arrow-up-short"></i></font><font class="gensmall-visitorlog">SEND PM </font></span>
+	&nbsp;&nbsp;<font size="5" color="gold"><i class="bi bi-arrow-up-short"></i></font><font class="gensmall">SEND PM </font></span>
 	</a></td>';
 	$row3 .= '<td align="center"><div align="top" style="padding-left:10px;">'.get_titanium_timeago($whosbeen['last_visit']).'</div>';
     $row3 .= '</td>';
@@ -241,7 +248,7 @@ $row3 .= '</td>';
 	$row3 .= '</table>';
 $row3 .= '</div>';
 
-$row4_result = $db->sql_query("SELECT * FROM `".$prefix."_users_who_been` as whb, `".USERS_TABLE."` as u WHERE whb.username = u.username AND whb.username != '".$userinfo['username']."' ORDER BY `last_visit` DESC LIMIT 9, 3");
+$row4_result = $db->sql_query("SELECT * FROM `".$prefix."_users_who_been` as whb, `".USERS_TABLE."` as u WHERE whb.username = u.username AND whb.username != '".$userinfo['username']."' ORDER BY `last_visit` DESC LIMIT 9, ".$z."");
 
 $row4   = '<div align="center">';
 $row4  .= '<table bgcolor="'.$bgcolor4.'" border="0" width="200">';
@@ -252,7 +259,8 @@ $row4  .= '<table bgcolor="'.$bgcolor4.'" border="1" cellpadding="0" cellspacing
 
 while($whosbeen = $db->sql_fetchrow($row4_result)):
 
-	if($whosbeen['user_from_flag'] ):
+
+	if($whosbeen['user_from_flag']):
 	$whosbeen['user_from_flag'] = str_replace('.png','',$whosbeen['user_from_flag']);
 	else:
 	$whosbeen['user_from_flag'] = 'unknown';
@@ -297,7 +305,7 @@ while($whosbeen = $db->sql_fetchrow($row4_result)):
 	<strong>&nbsp;&nbsp;'.UsernameColor($whosbeen['username']).'<br />&nbsp;&nbsp;<a style="text-decoration: none;" href="modules.php?name=Private_Messages&mode=post&u='.$whosbeen['user_id'].'"><font size="5" color="orange"><i class="bi bi-envelope"></i><font color="gold" size="5"><i class="bi bi-arrow-right-short"></i><i class="bi bi-mailbox"></i></font></font>
 	
 	&nbsp;<br />
-	&nbsp;&nbsp;<font size="5" color="gold"><i class="bi bi-arrow-up-short"></i></font><font class="gensmall-visitorlog">SEND PM </font></span>
+	&nbsp;&nbsp;<font size="5" color="gold"><i class="bi bi-arrow-up-short"></i></font><font class="gensmall">SEND PM </font></span>
 	</a></td>';
 	$row4 .= '<td align="center"><div align="top" style="padding-left:10px;">'.get_titanium_timeago($whosbeen['last_visit']).'</div>';
     $row4 .= '</td>';
@@ -350,6 +358,7 @@ $content .= '		<td width="251" valign="top">&nbsp;</td>';
 $content .= '	</tr>';
 $content .= '</table>';
 endif;
+
 
 $content .= '</div>';
 ?>
