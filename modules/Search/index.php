@@ -309,7 +309,7 @@ switch($op) {
                 }
 
             } elseif ($type == 'comments') {
-                $result8 = $db->sql_query("SELECT `tid`, `sid`, `subject`, `date`, `name` FROM `".$prefix."_comments` WHERE (`subject` LIKE '%$query%' OR `comment` LIKE '%$query%') ORDER BY `date` DESC LIMIT $min,$offset");
+                $result8 = $db->sql_query("SELECT `tid`, `sid`, `subject`, `datePublished`, `name` FROM `".$prefix."_comments` WHERE (`subject` LIKE '%$query%' OR `comment` LIKE '%$query%') ORDER BY `datePublished` DESC LIMIT $min,$offset");
                 $nrows = $db->sql_numrows($result8);
                 $x=0;
                 if (!empty($query)) {

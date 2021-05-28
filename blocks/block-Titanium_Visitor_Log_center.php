@@ -39,8 +39,8 @@ while($whosbeen = $db->sql_fetchrow($row1_result)):
     
 	if(!is_admin())
 	if($whosbeen['user_allow_viewonline'] == 0):
-	$whosbeen['username'] = 'Hidden';
-	$whosbeen['user_avatar'] = 'invisible.png';
+	$whosbeen['username'] = 'Ghost Mode';
+	$whosbeen['user_avatar'] = 'hidden.png';
 	$whosbeen['user_id'] = -1;
 	endif;
 	
