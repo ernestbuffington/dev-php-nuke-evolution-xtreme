@@ -3,6 +3,7 @@
 </div>
 <br />
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/1d6a7e19c6534d15b4f89704c81cbddc)](https://www.codacy.com/gh/ernestbuffington/dev-php-nuke-evolution-xtreme/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ernestbuffington/dev-php-nuke-evolution-xtreme&amp;utm_campaign=Badge_Grade)
+
 <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme.svg?type=shield"/></a>
 
 
