@@ -1,3 +1,19 @@
+User-agent: ia_archiver
+Disallow: /admin/
+Disallow: /install/
+Disallow: /blocks/
+Disallow: /cgi-bin/
+Disallow: /images/
+Disallow: /includes/
+Disallow: /language/
+Disallow: /modules/
+Disallow: /themes/
+Disallow: /admin.php
+Disallow: /config.php
+Disallow: /fbconfig.php
+Disallow: /ips.php
+Disallow: /trap.php
+
 User-agent: Baidu
 Disallow: /
 
@@ -23,4 +39,4 @@ Disallow: /nconfig.php
 Disallow: /ips.php
 Disallow: /trap.php
 
-Sitemap: https://dev-php-nuke-evolution-xtreme.86it.us/xmls/sitemap/sitemap-index.xml
+Sitemap: https://www.dev-php-nuke-evolution-xtreme.86it.us/xmls/sitemap/sitemap.xml
