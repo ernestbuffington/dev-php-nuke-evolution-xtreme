@@ -14,18 +14,18 @@
 if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) 
 exit('Access Denied');
 
-define('facebook', 'enabled');
+//define('facebook', 'enabled');
 if ( defined('facebook') ):
 global $fb, $appID, $api_version, $appSecret, $my_url;
 require_once __DIR__ . '/includes/Facebook/autoload.php';
 # Your domain name i.e yoursite.com
-$my_url = 'dev-php-nuke-evolution-xtreme.86it.us';
+$my_url = 'www.dev-php-nuke-evolution-xtreme.86it.us';
 # you facebook app secret
 $appSecret = '';
 # your facebook app ID
 $appID = '';
 # The api version you have selected on your facebook app
-$api_version = 'v10.0';
+$api_version = 'v14.0';
 
 $fb = new Facebook\Facebook([
   'app_id' => $appID,
