@@ -34,6 +34,9 @@ exit('Access Denied');
 
 require_once(dirname(__FILE__).'/mainfile.php');
 
+global $eighty_six_it;
+$eighty_six_it = '<a class = "small" href="https://www.86it.us" target="_self">Programmers Making Connections. Coders Making a Difference.</a>';
+
 function head() 
 {
     global $define_theme_xtreme_209e,
@@ -52,9 +55,6 @@ function head()
 
 	$ThemeSel = get_theme();
 	
-    global $eighty_six_it;
-	$eighty_six_it = '<a class = "small" href="https://www.86it.us" target="_self">Programmers Making Connections. Coders Making a Difference.</a>';
-    
 	# Auto MimeType v1.0.0 START
 	if (@file_exists(NUKE_THEMES_DIR.$ThemeSel.'/includes/mimetype.php')):  
     include(NUKE_THEMES_DIR.$ThemeSel.'/includes/mimetype.php');
