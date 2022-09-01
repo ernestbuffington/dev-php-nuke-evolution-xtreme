@@ -2,10 +2,10 @@
 <img class="border rounded-2 repository-og-image js-repository-image-container" src="https://repository-images.githubusercontent.com/356110895/07b1cd00-b905-11eb-8daa-fa23876568cf" alt="PHP-Nuke Evolution Xtreme (US Version)" width="640" height="320">
 </div>
 <br />
-<a href="https://www.codacy.com/gh/ernestbuffington/dev-php-nuke-evolution-xtreme/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ernestbuffington/dev-php-nuke-evolution-xtreme&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/85bb9842a64a45098c17e5cb600ba42f"/></a> 
 <a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fernestbuffington%2Fdev-php-nuke-evolution-xtreme.svg?type=shield"/></a>
+<a href="https://www.codacy.com/gh/ernestbuffington/dev-php-nuke-evolution-xtreme/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ernestbuffington/dev-php-nuke-evolution-xtreme&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/1d6a7e19c6534d15b4f89704c81cbddc"></a>
 
-<h1>2021 Nightly Builds Repository</h1>
+<h1>2022 Nightly Builds Repository</h1>
 
 <h2>PHP-Nuke Evolution Xtreme Developers</h2> 
 
