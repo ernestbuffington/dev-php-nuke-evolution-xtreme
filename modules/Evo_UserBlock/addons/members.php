@@ -32,13 +32,13 @@ function evouserinfo_members ()
     $in_group = array();
     
 	# Select all groups where the user is a member
-    if (isset($userinfo['groups'])) 
+    if(isset($userinfo['groups'])) 
 	{
 	   foreach ($userinfo['groups'] as $id1 => $name) 
 	   {
           $in_group[] = $id1;
     
-	      if (!empty($name))
+	      if(!empty($name))
 		  {
 		    $group_name = GroupColor($name);
 			$evouserinfo_members .= '<div style="padding-left: 10px;">';
@@ -47,6 +47,12 @@ function evouserinfo_members ()
             $evouserinfo_members .= '<a class="tooltip-html-side-interact tooltipstered" 
 			title="'.$name.'" href="modules.php?name=Groups&amp;g='.$id1 . '"><strong>' . $group_name . '</strong></a><br />';
 			$evouserinfo_members .= '</div>';
+            
+			# Group Cookie Control START
+			$groupcookie = str_replace(" ", "_", $name);
+			if(!isset($_COOKIE[$groupcookie]))
+			setcookie($groupcookie, $id1, time()+2*24*60*60);  
+			# Group Cookie Control END
         
 		  }
        }

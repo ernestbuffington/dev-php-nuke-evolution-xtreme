@@ -58,11 +58,11 @@ if((defined('NUKE_EVO')) || (defined('NUKE_TITANIUM')))return;
 if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME']))exit('Access Denied');
 
 # Define File
-define_once('NUKE_EVO', '3.0.1b');
+define_once('NUKE_EVO', '4.0.0');
 # Network Support
-define_once('NUKE_TITANIUM', '4.0.0a');
+define_once('NUKE_TITANIUM', '4.0.0');
 # Network Support
-define_once('TITANIUM_BUILD', '4021');
+define_once('TITANIUM_BUILD', '4022');
 define_once('CUR_EVO', 'NUKE_EVO');
 # Network Support
 define_once('CUR_TITANIUM', 'NUKE_TITANIUM');
@@ -317,8 +317,16 @@ endif;
 # Enable 86it Network Support START
 if (@file_exists(NUKE_BASE_DIR.'nconfig.php')):  
 @require_once(NUKE_BASE_DIR.'nconfig.php');
-  if ( defined('network') ):
-
+global $dbpass2, $dbhost2, $dbname2, $dbuname2, $db2, $network_prefix;
+  if(defined('network')):
+  if(!isset($dbname2) || empty($dbname2)) 
+  die('$dbname2 <- your network database name is not configured in your ROOT nbconfig.php file!');
+  if(!isset($dbuname2) || empty($dbuname2)) 
+  die('$dbuname2 <- your network database user name is not configured in your ROOT nbconfig.php file!');
+  if(!isset($dbpass2) || empty($dbpass2)) 
+  die('$dbpass2 <- your network database password is not configured in your ROOT nbconfig.php file!');
+  if(!isset($network_prefix) || empty($network_prefix)) 
+  die('$network_prefix <- your network prefix is not configured in your ROOT nbconfig.php file!');
   endif;
 endif;
 # Enable 86it Network Support END 
@@ -329,13 +337,13 @@ if (@file_exists(NUKE_BASE_DIR.'fbconfig.php')):
   if ( defined('facebook') ):
   global $fb, $appID, $api_version, $appSecret, $my_url;
   if(!isset($my_url) || empty($my_url)) 
-  die('$my_url <- your domain is not set in your fbconfig.php file!');
+  die('$my_url <- your domain is not set in your ROOT fbconfig.php file!');
   if(!isset($appSecret) || empty($appSecret)) 
-  die('$appSecret <- your facebook appSecret is not defined in your fbconfig.php file!');
+  die('$appSecret <- your facebook appSecret is not defined in your ROOT fbconfig.php file!');
   if(!isset($appID) || empty($appID)) 
-  die('$appID <- your facebook appID is not defined in your fbconfig.php file!');
+  die('$appID <- your facebook appID is not defined in your ROOT fbconfig.php file!');
   if(!isset($api_version) || empty($api_version)) 
-  die('$api_version <- your facebook api_version is not defined in your fbconfig.php file!');
+  die('$api_version <- your facebook api_version is not defined in your ROOT fbconfig.php file!');
   endif;
 endif;
 # facebook SDK Mod END
@@ -436,7 +444,7 @@ redirect(str_replace('.php/', '.php', $_SERVER['REQUEST_URI']));
 
 include_once(NUKE_MODULES_DIR.'Your_Account/includes/mainfileend.php');
 
-if (isset($_POST['clear_cache']))
+if(isset($_POST['clear_cache']))
 $cache->clear();
 
 define('NUKE_FILE', true);
@@ -446,7 +454,7 @@ $sitekey = md5($_SERVER['HTTP_HOST']);
 $gfx_chk = 0;
 $tipath = 'modules/Blog/images/topics/';
 $reasons = array('As Is', 'Offtopic', 'Flamebait', 'Troll', 'Redundant', 'Insighful', 'Interesting', 'Informative', 'Funny', 'Overrated', 'Underrated');
-$AllowableHTML = array('b'=>1, 'i'=>1, 'a'=>2, 'em'=>1, 'br'=>1, 'strong'=>1, 'blockquote'=>1, 'tt'=>1, 'li'=>1, 'ol'=>1, 'ul'=>1, 'pre'=>1);
+$AllowableHTML = array('p'=>1,'b'=>1, 'i'=>1, 'a'=>2, 'em'=>1, 'br'=>1, 'strong'=>1, 'blockquote'=>1, 'tt'=>1, 'li'=>1, 'ol'=>1, 'ul'=>1, 'pre'=>1);
 
 $nukeconfig = load_nukeconfig();
 
@@ -722,7 +730,7 @@ function title($text)
       $icon = img('NetworkAdvertisingFixed.png', $name); 
     else:
 
-       if ($name == ''):
+	   if(!isset($name) || empty($name)):
        # Index Hack as images were not showing up	   
 	   else:
 	   $icon = img($name.'.png', $name); 
@@ -730,7 +738,7 @@ function title($text)
 
 	endif;
 
-    if ($name == ''):
+    if(!isset($name) || empty($name)):
 	# Index Hack as images were not showing up
     else:
     OpenTable();
@@ -1404,6 +1412,8 @@ function network_ads($position)
 {
     global $network_prefix, $db2, $sitename, $adminmail, $nukeurl, $banners;
 
+    if(defined('network')):
+
     echo "\n\n\n<!-- function network_ads START -->\n";
     echo "<!-- function network_ads LOADING -->\n";
 	
@@ -1494,6 +1504,7 @@ function network_ads($position)
 	endif;
     echo "<!-- function network_ads DONE -->\n\n\n";
   return $ads;
+  endif;
 }
 
 /*

@@ -73,9 +73,9 @@ if(isset($has_echoed) && $has_echoed == 1) return;
 
 # powered by information and credits START
 global $powered_by;
-$powered_by = '<font size="3">PHP-Nuke Evolution Xtreme (US Version) Copyright &copy; 2010 2021<br /> by Ernest Allen Buffington and The 86it Developers Network.<br /> 
+$powered_by = '<font size="3">Nuke-Evolution Xtreme (US Version) Copyright &copy; 2010 2021<br /> by Ernest Allen Buffington and The 86it Developers Network.<br /> 
  All logos, trademarks and posts in this site are property of their respective owners, all the rest <br />&copy; '.date('l jS \of F Y h:i:s A').' by Brandon Maintenance Management, LLC.<br />
- Powered by PHP-Nuke Evolution Xtreme v3.0.1b (US Version)<br /><br />
+ Powered by PHP-Nuke Titanium v4.0.0b (US Version)<br /><br />
  <strong>CREDITS</strong><br />
  PHP-Nuke Copyright &copy; 2006 by Francisco Burzi.<br /> 
  Bob Marion of NukeScripts.Net<br />  
@@ -83,7 +83,6 @@ $powered_by = '<font size="3">PHP-Nuke Evolution Xtreme (US Version) Copyright &
  PHP-Nuke Evolution Basic<br /> 
  PHP-Nuke Evolution Xtreme UK Version<br />
  PHP-Nuke Evolution Xtreme US Version<br />
- PHP-Nuke Titanium US Version<br />
  </font>
  ';
 # powered by information and credits END
@@ -115,13 +114,13 @@ endif;
 # DO NOT REMOVE THE FOLLOWING COPYRIGHT LINES. YOU'RE NOT ALLOWED TO REMOVE NOR EDIT THIS.
 # IF YOU NEED TO REMOVE IT AND HAVE MY WRITTEN AUTHORIZATION YOU CAN:
 # PLAY FAIR AND SUPPORT THE DEVELOPERS, PLEASE!
-global $theme_title, $theme_author, $theme_date, $theme_name, $theme_download_link, $name; 
+global $theme_business, $theme_title, $theme_author, $theme_date, $theme_name, $theme_download_link, $name; 
 if(($name) && $name === 'Forums'):
 $footmsg .= '<br />';
 $footmsg .= 'Forums Powered by <a href="http://dev-phpbb2.86it.us/" target="_tab">phpBB Titanium v2.0.23n</a> | Core &copy; 2001, 2019 phpBB Group<br />';
 endif;
-$footmsg .= '<a class="tooltip-html copyright" href="'.$theme_download_link.'" data-toggle="modal" data-target="'.$theme_download_link.'" title="'.$theme_title.' Theme'; 
-$footmsg .= '<br/>Designed By '.$theme_author.'<br />Created '.$theme_date.'<br />&copy; '.$theme_author.'<br/>All Rights Reserved">'.$theme_title.' theme &copy; copyright</a><br/><br/>';
+$footmsg .= '<a class="tooltip-html copyright" href="'.$theme_download_link.'" data-toggle="modal" data-target="'.$theme_download_link.'" title="'.$theme_title; 
+$footmsg .= '<br/>Designed By '.$theme_author.'<br />Created '.$theme_date.'<br />'.$theme_business.'<br/>All Rights Reserved">'.$theme_title.'</a><br/><br/>';
 # Copyright Information END
 		
 # Network About us START
@@ -199,13 +198,12 @@ endif;
     $footmsg .= $total_time."<br />\n</span>\n";
 
     # START Debugger v1.0.0
-    if(is_admin() && $debugger->debug && count($debugger->errors) > 0) 
-	{
+    if(is_admin() && $debugger->debug && count($debugger->errors) > 0): 
        $footmsg .= "<br /><div align=\"center\"><strong>Debugging:</strong></div>";
        $footmsg .= "<table border='0' width='80%' align='center'><tr><td>";
        $footmsg .= $debugger->return_errors();
        $footmsg .= "</td></tr></table>";
-    }
+    endif;
     
 	if (is_admin()) 
 	{
@@ -247,7 +245,7 @@ endif;
 
 
 echo "\n<!-- START facebook connector -->\n";
-if ( defined('facebook') ):
+if(defined('facebook')):
 echo '<div id="status">'."\n";
 echo '</div>'."\n";
 echo '<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>'."\n";

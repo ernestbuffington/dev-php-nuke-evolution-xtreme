@@ -63,26 +63,27 @@
 if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) 
 exit('Access Denied');
 
-global $screen_res, 
-       $textcolor1, 
-	   $textcolor2, 
-	     $bgcolor1,
-		 $bgcolor2,
-		 $bgcolor3,
-		 $bgcolor4,
-		 $bgcolor5,  
-		 $sitename, 
-		   $slogan, 
-		     $name, 
-		  $banners, 
-		       $db, 
-	  $user_prefix, 
-	       $prefix, 
-	   $admin_file, 
-	     $userinfo, 
-		$ThemeInfo,
- $titanium_browser, 
-	   $theme_name;
+global $locked_width,
+         $screen_res, 
+         $textcolor1, 
+	     $textcolor2, 
+	       $bgcolor1,
+		   $bgcolor2,
+		   $bgcolor3,
+		   $bgcolor4,
+		   $bgcolor5,  
+		   $sitename, 
+		     $slogan, 
+		       $name, 
+		    $banners, 
+		         $db, 
+	    $user_prefix, 
+	         $prefix, 
+	     $admin_file, 
+	       $userinfo, 
+		  $ThemeInfo,
+   $titanium_browser, 
+	     $theme_name;
 
 echo "\n\n<!-- THEME HEADER START -->\n"; # set background here in themes/Inferno/css/maintable.php
 
@@ -228,15 +229,75 @@ $marquee_two = '
 
 # This is where we set the poster background and full screen video START
 echo '<div class="fullscreen-bg">';
-echo '<video loop autoplay poster="themes/'.$theme_name.'/images/BACKGROUNDS/1e1e1e.png" class="fullscreen-bg__video">';
-echo '<source src="themes/'.$theme_name.'/video/none.mp4" type="video/mp4">';
+echo '<video muted loop autoplay poster="themes/'.$theme_name.'/images/BACKGROUNDS/1e1e1e.png" class="fullscreen-bg__video">';
+//echo '<source src="themes/'.$theme_name.'/video/spinning_black_wave_lines.mp4" type="video/mp4">';
+//echo '<source src="themes/'.$theme_name.'/video/abstract_liquid.mp4" type="video/mp4">'; // Ypp slow but pretty
+//echo '<source src="themes/'.$theme_name.'/video/abstract_geometric_grid.mp4" type="video/mp4">';
+//echo '<source src="themes/'.$theme_name.'/video/abstract_red_neon_frame.mp4" type="video/mp4">'; ### Very Cool ###
+//echo '<source src="themes/'.$theme_name.'/video/abstract_blue_neon_frame.mp4" type="video/mp4">'; ### Very Cool ###
+//echo '<source src="themes/'.$theme_name.'/video/abstract_purple_green_neon_frame.mp4" type="video/mp4">'; ### Very Cool ###
+//echo '<source src="themes/'.$theme_name.'/video/abstract_retro_laser_neon_flourescent_line_beams_geometric_motion_moving.mp4" type="video/mp4">'; ### 1 to 10  THis is a 10 ###
+//echo '<source src="themes/'.$theme_name.'/video/neon_lines_saber_abstract_background_animated.mp4" type="video/mp4">'; ### 1 to 10  This is a 2 ###
+//echo '<source src="themes/'.$theme_name.'/video/retro_neon_hypnotic_orange_white.mp4" type="video/mp4">'; ### 1 to 10  This is a 9 ###
+//echo '<source src="themes/'.$theme_name.'/video/abstract_x_neon.mp4" type="video/mp4">'; ### 1 to 10  This is a 1 ###
+
+#### PHP-Nuke Titanium
+echo '<source src="themes/'.$theme_name.'/video/aqua_fresh.mp4" type="video/mp4">'; // $$$ Top 10 - 01
+//echo '<source src="themes/'.$theme_name.'/video/abstract_neon_reflections_circular_particles_3D_light_moving.mp4" type="video/mp4">'; ### 1 to 10  This is a 8 ### Bad Ass
+//echo '<source src="themes/'.$theme_name.'/video/abstract_modern_Liquid_U_trend_aurora_gradien.mp4" type="video/mp4">'; ### 1 to 10  This is a 5 ###
+//echo '<source src="themes/'.$theme_name.'/video/futuristic_gold_abstract_3D_tunnel_1.49gb.mp4" type="video/mp4">'; ### 1 to 10  This is a 10 ### BEST SO FAR
+//echo '<source src="themes/'.$theme_name.'/video/abstract_bright_neon_moving_geometric_lines_gradient.mp4" type="video/mp4">'; ### 1 to 10  This is a 6 ### 
+//echo '<source src="themes/'.$theme_name.'/video/abstract_3D_tunnel_motion.mp4" type="video/mp4">'; ### 1 to 10  This is a 5 ### 
+//echo '<source src="themes/'.$theme_name.'/video/abstract_trendy_gradient_glowing_pink_moving_geometric_circles_spheres.mp4" type="video/mp4">'; ### 1 to 10  This is a 7 ### VEry Cool
+//echo '<source src="themes/'.$theme_name.'/video/abstract_retro_laser_neon_flourescent_line_beams_geometric_motion_moving_02.mp4" type="video/mp4">'; ### 1 to 10 This is a 10 ### Bad as fuck 
+
+### Electrical field frame - Maybe good for a theme that could be built arounf the way it looks
+//echo '<source src="themes/'.$theme_name.'/video/electrical_frame.mp4" type="video/mp4">'; ### 1 to 10 This is a 10 ### Bad as fuck  
+
+
+//echo '<source src="themes/'.$theme_name.'/video/futuristic_crystal_landscape_abstract_3D_neon.mp4" type="video/mp4">'; ### 1 to 10  This is a 4 ### 
+//echo '<source src="themes/'.$theme_name.'/video/red_glowing_neon_frame_border_twitching_lines.mp4" type="video/mp4">'; ### 1 to 10  This is a 7 ### VEry Cool
+//echo '<source src="themes/'.$theme_name.'/video/trending_abstract_blue_gradient_moving_geometric_circle_sphere.mp4" type="video/mp4">'; ### 1 to 10  This is a 7 ### VEry Cool
+
+//echo '<source src="themes/'.$theme_name.'/video/abstract_gaming_animated_digital_grid_tech_neon_moving.mp4" type="video/mp4">'; ### 1 to 4  This is a 8 ok
+//echo '<source src="themes/'.$theme_name.'/video/abstract_hexagonal_geometric_animated_neon.mp4" type="video/mp4">'; ### 1 to 10  This is a 8 ### Bad Ass MAybe FOr ANother Color Theme
+//echo '<source src="themes/'.$theme_name.'/video/red_neon_abstract_moving_geometric_circles.mp4" type="video/mp4">'; ### 1 to 10 This is a 5 ###  
+
+//echo '<source src="themes/'.$theme_name.'/video/cinematic_motion_2020.mp4" type="video/mp4">'; ### 1 to 10 This is a 10 ### GEars SPinning - More for a bronze theme  VEry Cools
+
+//echo '<source src="themes/'.$theme_name.'/video/techno_matrix_numbers.mp4" type="video/mp4">'; ### 1 to 10 This is a 6 ### GEars SPinning - More for a green theme 
+//echo '<source src="themes/'.$theme_name.'/video/birthday.mp4" type="video/mp4">'; ### 1 to 10 This is a 6 ### GEars SPinning - lightning no audio 
+
+## Best out of all - American Flag 
+//echo '<source src="themes/'.$theme_name.'/video/USA_Flag.mp4" type="video/mp4">'; ### 1 to 10 This is a 10 ### FLAG - BAd As Fuck 
+
+## Raining Money
+//echo '<source src="themes/'.$theme_name.'/video/money_falling.mp4" type="video/mp4">'; ### 1 to 10 This is a 10 ### Bad As Fuck - Riaing Money
+
+## Music Videos
+//echo '<source src="themes/'.$theme_name.'/video/Blackway_and_Black_Caviar_Whats_Up_Danger.mp4" type="video/mp4">'; ### 1 to 10 This is a 6 ### GEars SPinning - BAd as Fuck 
+//echo '<source src="themes/'.$theme_name.'/video/Arctic_Monkeys_-_Do_I_Wanna_Know.mp4" type="video/mp4">'; ### 1 to 10 This is a 10 ### Bad As Fuck 
+
+## Loading Screens
+//echo '<source src="themes/'.$theme_name.'/video/Loading_Screen_001.mp4" type="video/mp4">'; ### 1 to 10 This is a 10 ### Loading Screen Only - Video has to be loop off ### cool as fauck 
+
+//echo '<source src="themes/'.$theme_name.'/video/black_psychedelic_abstract.mp4" type="video/mp4">'; ### 1 to 0 This is a 10 ### jumps NOT A LOOP
+
+## Hacker at computer - Hacking Music
+//echo '<source src="themes/'.$theme_name.'/video/Programming_Coding_Hacking_music_vol.18_ANONYMOUS_HEADQUARTERS.mp4" type="video/mp4">'; ### 1 to 0 This is a 10 ### jumps NOT A LOOP
+
+## Red Cross
+//echo '<source src="themes/'.$theme_name.'/video/red_cross_motion.mp4" type="video/mp4">'; ### 1 to 10 This is a 10 ### Bad as fuck 
+
+
 echo '</video>';
 echo '</div>';
 # This is where we set the poster background and full screen video END
 
 # This is the flex container used to resize the layout START
 echo '<section id="flex-container">';
-echo '<div class="container" style="width: '.theme_width.'">';
+//echo '<div class="container" style="width: '.theme_width.'">';
+echo '<div class="container" style="width: '.$locked_width.'">';
 
 
 
@@ -313,6 +374,7 @@ echo '</td>';
 echo '<td align="center" valign="top" rowspan="4">';
 
 # space at the top of header inside graphics area!
+if($_COOKIE["titanium_resolution_width"] > 1366):
 echo '<div align="center" style="padding-top:10px;">';
 echo '</div>';
 ?>
@@ -333,17 +395,20 @@ echo '</div>';
 </svg>
 </div>
 <?
+endif;
+if($_COOKIE["titanium_resolution_width"] > 1366):
 global $eighty_six_it, $my_welcome_message;
 echo '<div align="center"><strong><font color="#e48e00"></font>'.$my_welcome_message.'</strong></div>';
 echo '<div align="center"><strong><font color="#1572b6">'.$eighty_six_it.'</font></strong></div>';
 echo '<div align="center" style="padding-top:5px;">';
 echo '</div>';
+endif;
 # MENU SYSTEM
 #######################################################################################################################################################
-//echo '<div class="box_bottom" style="width: 100%; height: 45px;>';                                                                                    #
+//echo '<div class="box_bottom" style="width: 100%; height: 45px;>';                                                                                  #
 include(theme_dir.'menu.php');                                                                                                                        #
-//echo '</div>';                                                                                                                                        #
-######################################################################################################################################################
+//echo '</div>';                                                                                                                                      #
+#######################################################################################################################################################
 
 # logo end
 echo '</td>';
@@ -361,46 +426,9 @@ echo '</tr>';
 echo '<tr>';
 echo '<td align="left" height="30" width="25%" valign="middle">   </td>';
 
-global $avatar_overide_size, $make_xtreme_avatar_small, $board_config, $userinfo;
-// START - this was added for the very whimpy small themes that have no block width! by Ernest Buffington 08/06/2019
-if ($make_xtreme_avatar_small == true)
-{
-  $board_config['avatar_max_height'] = 20;
-  $board_config['avatar_max_width'] = 20;
-}
-// END - this was added for the very whimpy small themes that have no block width! by Ernest Buffington 08/06/2019
-if(is_user() && $userinfo['user_avatar']):
 
-  switch( $userinfo['user_avatar_type']):
-		# user_allowavatar = 1
-		case USER_AVATAR_UPLOAD:
-			$headeruserinfo_avatar .= ( $board_config['allow_avatar_upload'] ) 
-			? '<img class="rounded-corners-header" style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '.$board_config['avatar_max_width'].'px;" src="' 
-			. $board_config['avatar_path'] . '/' . $userinfo['user_avatar'] . '" alt="" border="0" />' : '';
-			break;
-		# user_allowavatar = 2
-		case USER_AVATAR_REMOTE:
-			$headeruserinfo_avatar .= '<img class="rounded-corners-header" style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '.$board_config['avatar_max_width'].'px;" src="
-			'.avatar_resize($userinfo['user_avatar']).'" alt="" border="0" />';
-			break;
-		# user_allowavatar = 3
-		case USER_AVATAR_GALLERY:
-			$headeruserinfo_avatar .= ( $board_config['allow_avatar_local'] ) ? '<img class="rounded-corners-header" style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '
-			.$board_config['avatar_max_width'].'px;" src="' . $board_config['avatar_gallery_path'] . '/' . (($userinfo['user_avatar'] == 'blank.gif' || $userinfo['user_avatar'] 
-			== 'gallery/blank.gif') ? 'blank.png' : $userinfo['user_avatar']) . '" alt="" border="0" />' : '';
-			break;
 
-  endswitch;
-else:
-$headeruserinfo_avatar .= '<img class="rounded-corners-header" style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '
-.$board_config['avatar_max_width'].'px;" src="'.$board_config['default_avatar_users_url'].'" alt="" border="0" />';
-endif;
-
-if(is_user()):
-echo '<td align="left" width="25%" valign="middle">'.$headeruserinfo_avatar.' '.$userinfo['username'].'</td>';
-else:
 echo '<td align="left" width="25%" valign="middle"></td>';
-endif;
 
 echo '</tr>';
 

@@ -46,7 +46,8 @@ if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) exit('Access De
  ******************************************************/
 function need_delete($file, $dir=false) 
 {
-  # will be uncommented for release
+# will be uncommented for release
+if (!is_Admin): 
   if (!$dir): 
 	if(!is_file($file)) 
 	return;
@@ -56,6 +57,7 @@ function need_delete($file, $dir=false)
 	return;
 	DisplayError("<span style='color: red; font-size: 24pt'>"._NEED_DELETE." the folder \"".$file."\"</span>");
   endif;
+endif;
 }
 /*****[END]********************************************
  [ Other:   Need To Delete                     v1.0.0 ]
@@ -339,7 +341,7 @@ function track_evo_version()
 	 * Version checker json
 	 */
 	$version_refresh = get_query_var( 'check-version', 'get', 'string', false );
-	$version_check_cache = cache_json_data('https://dev-php-nuke-evolution-xtreme.86it.us/versions/evo-version.json', dirname(__FILE__).'/version.cache', $version_refresh); 
+	$version_check_cache = cache_json_data('https://www.dev-php-nuke-evolution-xtreme.86it.us/versions/xtreme-version.json', dirname(__FILE__).'/version.cache', $version_refresh); 
 
 	if($version_check_cache['version'] == NUKE_EVO):
 
@@ -356,7 +358,7 @@ function track_evo_version()
 	endif;
 
 	$return .= '  <tr>'."\n";
-	$return .= '    <td style="height:15px; font-size: 13px; width:65%;">PHP-Nuke Evoultion Xtreme '.$new_version_number.'&nbsp;&nbsp;<font size="1">'.$version_desc.'</font></td>'."\n";
+	$return .= '    <td style="height:15px; font-size: 13px; width:65%;">Nuke-Evolution Xtreme '.$new_version_number.'&nbsp;&nbsp;<font size="1">'.$version_desc.'</font></td>'."\n";
 	$return .= '    <td style="height:15px; font-size: 13px; width:25%; text-align:center;"><a href="'.$update_url.'">Check Version</a></td>'."\n";
 	$return .= '  </tr>'."\n";
 
@@ -398,7 +400,7 @@ function GraphicAdmin($pos=1)
 	echo '<table style="font-family: monospace !important; width: 100%;" border="0" cellpadding="3" cellspacing="1" class="livefeed">';
     
 	$agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36';
-    $curl = curl_init('https://dev-php-nuke-evolution-xtreme.86it.us/versions/feed.php');
+    $curl = curl_init('https://www.dev-php-nuke-evolution-xtreme.86it.us/versions/feed.php');
     curl_setopt($curl, CURLOPT_USERAGENT, $agent);
     curl_setopt($curl, CURLOPT_USERAGENT, $agent);
     curl_setopt($curl, CURLOPT_REFERER, 'https://'.$domain.'/');
@@ -421,14 +423,14 @@ function GraphicAdmin($pos=1)
     
 	echo '</td>';
     /*
-    | END | LIVE NEWS FEED DIRECTLY FROM https://dev-php-nuke-evolution-xtreme.86it.us
+    | END | LIVE NEWS FEED DIRECTLY FROM https://www.dev-php-nuke-evolution-xtreme.86it.us
     */
 	
 	/**
 	 * Retrieve the live news json feed
 	 */
 	$version_refresh = get_query_var( 'check-version', 'get', 'string', false );
-	$live_news_feed_cache = cache_json_data('https://dev-php-nuke-evolution-xtreme.86it.us/versions/evolution-xtreme-live-feed.json', dirname(__FILE__).'/live-feed.cache', $version_refresh);
+	$live_news_feed_cache = cache_json_data('https://www.dev-php-nuke-evolution-xtreme.86it.us/versions/xtreme-live-feed.json', dirname(__FILE__).'/live-feed.cache', $version_refresh);
 
 	echo '<td style="vertical-align: top; width: 36%;">';
 	echo '<table style="width: 100%;" border="0" cellpadding="3" cellspacing="1" class="forumline">';
@@ -486,20 +488,20 @@ function GraphicAdmin($pos=1)
 
     # waiting users - shows number of users waiting!
 	echo '<tr>';
-	echo '<td style="height: 15px; font-size: 13px;">Shit Head Girl Friends</td>';
-	echo '<td style="height: 15px; font-size: 13px; text-align: center;"><a href="modules.php?name=Your_Account&file=admin&op=listpending">1</a></td>';
+	echo '<td style="height: 15px; font-size: 13px;">Starlink Passthru</td>';
+	echo '<td style="height: 15px; font-size: 13px; text-align: center;"><a href="modules.php?name=Your_Account&file=admin&op=listpending">on</a></td>';
 	echo '</tr>';
 
     # waiting users - shows number of users waiting!
 	echo '<tr>';
-	echo '<td style="height: 15px; font-size: 13px;">Noisy Pups</td>';
-	echo '<td style="height: 15px; font-size: 13px; text-align: center;"><a href="modules.php?name=Your_Account&file=admin&op=listpending">1</a></td>';
+	echo '<td style="height: 15px; font-size: 13px;">Tor Network Decryption</td>';
+	echo '<td style="height: 15px; font-size: 13px; text-align: center;"><a href="modules.php?name=Your_Account&file=admin&op=listpending">on</a></td>';
 	echo '</tr>';
 
     # waiting users - shows number of users waiting!
 	echo '<tr>';
-	echo '<td style="height: 15px; font-size: 13px;">Days Without Ciggs</td>';
-	echo '<td style="height: 15px; font-size: 13px; text-align: center;"><a href="modules.php?name=Your_Account&file=admin&op=listpending">0</a></td>';
+	echo '<td style="height: 15px; font-size: 13px;">Pionen Data Access Blocker</td>';
+	echo '<td style="height: 15px; font-size: 13px; text-align: center;"><a href="modules.php?name=Your_Account&file=admin&op=listpending">on</a></td>';
 	echo '</tr>';
 
 
@@ -698,7 +700,7 @@ function track_evo_version_bs()
 	 * Version checker json
 	 */
 	$version_refresh = get_query_var( 'check-version', 'get', 'string', false );
-	$version_check_cache = cache_json_data('https://evolution-xtreme.co.uk/versions/evo-version.json', dirname(__FILE__).'/version.cache', $version_refresh); 
+	$version_check_cache = cache_json_data('https://www.dev-php-nuke-evolution-xtreme.86it.us/versions/xtreme-version.json', dirname(__FILE__).'/version.cache', $version_refresh); 
 
 	if ( $version_check_cache['version'] == NUKE_EVO ):
 
@@ -763,7 +765,7 @@ function administration_panel( $pos = 1 )
 				</h3>
 				<div class="feed-Bx">
 						
-					<?php $live_news_feed_cache = cache_json_data('https://dev-php-nuke-evolution-xtreme.86it.us//versions/evolution-xtreme-live-feed.json', dirname(__FILE__).'/live-feed.cache', $refresh_feed); ?>
+					<?php $live_news_feed_cache = cache_json_data('https://www.dev-php-nuke-evolution-xtreme.86it.us/versions/xtreme-live-feed.json', dirname(__FILE__).'/live-feed.cache', $refresh_feed); ?>
 					<table style="width: 100%;" border="0" cellpadding="3" cellspacing="1">                                             
 						<?php foreach( array_reverse($live_news_feed_cache) as $key => $value ): $color_title = ($value['color']) ? ' style="color:'.$value['color'].'"' : ''; ?>
 

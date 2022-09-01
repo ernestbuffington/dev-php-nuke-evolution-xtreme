@@ -2,31 +2,26 @@
 /*=======================================================================
  PHP-Nuke Titanium v3.0.0 : Enhanced PHP-Nuke Web Portal System
  =======================================================================*/
-
 /************************************************************************/
 /* PHP-NUKE: Web Portal System                                          */
 /* ===========================                                          */
-/*                                                                      */
 /* Copyright (c) 2002 by Francisco Burzi                                */
 /* http://phpnuke.org                                                   */
 /*                                                                      */
 /* This program is free software. You can redistribute it and/or modify */
 /* it under the terms of the GNU General Public License as published by */
 /* the Free Software Foundation; either version 2 of the License.       */
-/*                                                                      */
 /************************************************************************/
 /* Additional security checking code 2003 by chatserv                   */
 /* http://www.nukefixes.com -- http://www.nukeresources.com             */
 /************************************************************************/
-
 /*****[CHANGES]**********************************************************
 -=[Base]=-
       Nuke Patched                             v3.1.0       06/26/2005
 	  Titanium Updated                         v3.0.0       08/26/2019
  ************************************************************************/
-
 if (!defined('MODULE_FILE'))
-die('You can\'t access this file directly...');
+exit('You can\'t access this file directly...');
 
 $module_name = basename(dirname(__FILE__));
 
@@ -39,22 +34,19 @@ global $prefix, $db, $textcolor1;
 
 title($sitename.' '.'Blog Top 10');
 
-if ($multilingual == 1) 
-{
+if($multilingual == 1): 
     $queryalang = "WHERE (alanguage='$currentlang' OR alanguage='')"; /* top stories */
     $querya1lang = "WHERE (alanguage='$currentlang' OR alanguage='') AND"; /* top stories */
     $queryslang = "WHERE slanguage='$currentlang' "; /* top section articles */
     $queryplang = "WHERE planguage='$currentlang' "; /* top polls */
     $queryrlang = "WHERE rlanguage='$currentlang' "; /* top reviews */
-} 
-else 
-{
+else: 
     $queryalang = '';
     $querya1lang = 'WHERE';
     $queryslang = '';
     $queryplang = '';
     $queryrlang = '';
-}
+endif;
 
 OpenTable();
 
@@ -65,7 +57,7 @@ $top = '10';
 echo '<br />';
 
 echo '<fieldset style="border-color: '.$fieldset_color.'; border-width: '.$fieldset_border_width.'; border-style: solid;">';
-echo '<legend align="center" id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px; font-weight: bold;"><font color="'.$textcolor1.'">'.$top.' '._READSTORIES.'</font></strong></legend>';
+echo '<legend align="center" id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px; font-weight: bold;"><font color="'.$textcolor1.'">'.$top.' '._MOST_READ_BLOG_POSTS.'</font></strong></legend>';
 echo '<br />';
 $result = $db->sql_query("SELECT sid, title, counter FROM ".$prefix."_stories $queryalang ORDER BY counter DESC LIMIT 0,$top");
 
@@ -81,7 +73,7 @@ if ($db->sql_numrows($result) > 0)
 
 	    if($counter>0) 
 		{
-            echo '<li><img class="icons" align="absmiddle" width="16" src="'.img('reads-icon-16.png','Blog_Top').'"> <a href="modules.php?name=Blog&amp;file=article&amp;sid='.$sid.'">'.$title.'</a> - ( <strong><font color="'.$digits_color.'">'.$counter.'</font></strong> '._READS.' )</li>';
+            echo '<li><img class="icons" align="absmiddle" width="16" src="'.img('reads-icon-16.png','Blog_Top').'"> <a href="modules.php?name=Blog&amp;file=article&amp;sid='.$sid.'">'.$title.'</a> - ( <strong><font color="'.$digits_color.'">'.$counter.'</font></strong> '.BLOG_POST_READS.' )</li>';
         }
     }
     
@@ -99,7 +91,7 @@ if ($db->sql_numrows($result2) > 0)
 {
 
 echo '<fieldset style="border-color: '.$fieldset_color.'; border-width: '.$fieldset_border_width.'; border-style: solid;">';
-echo '<legend align="center" id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px; font-weight: bold;"><font color="'.$textcolor1.'">'.$top.' '._MOSTVOTEDSTORIES.'<</font></strong></legend>';
+echo '<legend align="center" id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px; font-weight: bold;"><font color="'.$textcolor1.'">'.$top.' '._MOST_VOTED_ON_BLOG_POSTS.'</font></strong></legend>';
 echo '<br />';
 
     echo "<div style=\"padding: 0px;\"><span class=\"option\"></span>";
@@ -127,7 +119,7 @@ if ($db->sql_numrows($result3) > 0)
 {
 
 echo '<fieldset style="border-color: '.$fieldset_color.'; border-width: '.$fieldset_border_width.'; border-style: solid;">';
-echo '<legend align="center" id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px; font-weight: bold;"><font color="'.$textcolor1.'">'.$top.' '._BESTRATEDSTORIES.'</font></strong></legend>';
+echo '<legend align="center" id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px; font-weight: bold;"><font color="'.$textcolor1.'">'.$top.' '._BEST_RATED_BLOG_POSTS.'</font></strong></legend>';
 echo '<br />';
 
     echo "<div style=\"padding: 0px;\"><span class=\"option\"></span>";
@@ -158,9 +150,9 @@ if ($articlecomm == 1)
 
     if ($db->sql_numrows($result4) > 0) 
 	{
-        //echo "<div style=\"padding: 10px;\"><span class=\"option\"><strong>$top "._COMMENTEDSTORIES."</strong></span><ol>\n";
+        //echo "<div style=\"padding: 10px;\"><span class=\"option\"><strong>$top "._MOST_COMMENTED_ON_BLOG_POSTS."</strong></span><ol>\n";
        echo '<fieldset style="border-color: '.$fieldset_color.'; border-width: '.$fieldset_border_width.'; border-style: solid;">';
-       echo '<legend align="center" id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px; font-weight: bold;"><font color="'.$textcolor1.'">'.$top.' '._COMMENTEDSTORIES.'</font></strong></legend>';
+       echo '<legend align="center" id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px; font-weight: bold;"><font color="'.$textcolor1.'">'.$top.' '._MOST_COMMENTED_ON_BLOG_POSTS.'</font></strong></legend>';
        echo '<br />';    
 
        echo "<div style=\"padding: 0px;\"><span class=\"option\"></span>";
@@ -174,7 +166,7 @@ if ($articlecomm == 1)
         
 		    if($comments>0) 
 			{
-                echo '<li><img class="icons" align="absmiddle" width="16" src="'.img('comments-16.png','Blog_Top').'"> <a href="modules.php?name=Blog&amp;file=article&amp;sid='.$sid.'">'.$title.'</a> - ( <strong><font color="'.$digits_color.'">'.$comments.'</font></strong> '._COMMENTS.' )</li>';
+                echo '<li><img class="icons" align="absmiddle" width="16" src="'.img('comments-16.png','Blog_Top').'"> <a href="modules.php?name=Blog&amp;file=article&amp;sid='.$sid.'">'.$title.'</a> - ( <strong><font color="'.$digits_color.'">'.$comments.'</font></strong> '.BLOG_COMMENTS.' )</li>';
             }
         }
         echo "</ol></div></legend></fieldset>";
@@ -192,10 +184,10 @@ $result5 = $db->sql_query("SELECT catid, title, counter FROM ".$prefix."_stories
 
 if ($db->sql_numrows($result5) > 0) 
 {
-    //echo "<div style=\"padding: 10px;\"><span class=\"option\"><strong>$top "._ACTIVECAT."</strong></span><ol>\n";
+    //echo "<div style=\"padding: 10px;\"><span class=\"option\"><strong>$top "._MOST_ACTIVE_BLOG_POST_CATEGORIES."</strong></span><ol>\n";
 
     echo '<fieldset style="border-color: '.$fieldset_color.'; border-width: '.$fieldset_border_width.'; border-style: solid;">';
-    echo '<legend align="center" id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px; font-weight: bold;"><font color="'.$textcolor1.'">'.$top.' '._ACTIVECAT.'</font></strong></legend>';
+    echo '<legend align="center" id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px; font-weight: bold;"><font color="'.$textcolor1.'">'.$top.' '._MOST_ACTIVE_BLOG_POST_CATEGORIES.'</font></strong></legend>';
     echo '<br />';
     echo "<div style=\"padding: 0px;\"><span class=\"option\"></span>";
     echo '<ol>';
@@ -225,7 +217,8 @@ $result7 = $db->sql_query("SELECT username, counter FROM ".$user_prefix."_users 
 if ($db->sql_numrows($result7) > 0) 
 {
     echo '<fieldset style="border-color: '.$fieldset_color.'; border-width: '.$fieldset_border_width.'; border-style: solid;">';
-    echo '<legend align="center" id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px; font-weight: bold;"><font color="'.$textcolor1.'">'.$top.' '._NEWSSUBMITTERS.'</font></strong></legend>';
+    echo '<legend align="center" id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px; font-weight: bold;"><font 
+	color="'.$textcolor1.'">'.$top.' '._MOST_ACTIVE_BLOG_AUTHORS.'</font></strong></legend>';
     echo '<br />';
 
     echo "<div style=\"padding: 0px;\"><span class=\"option\"></span>";
@@ -238,7 +231,10 @@ if ($db->sql_numrows($result7) > 0)
     
 	    if($counter>0) 
 		{
-            echo '<li><img class="icons" align="absmiddle" width="16" src="'.img('submit-icon-16.png','Blog_Top').'"> <a href="modules.php?name=Your_Account&amp;op=userinfo&amp;username=$uname">'.$uname.'</a> - ( <strong><font color="'.$digits_color.'">'.$counter,'</font></strong> '._NEWSSENT.' )</li>';
+            echo '<li><img class="icons" align="absmiddle" width="16" 
+			src="'.img('submit-icon-16.png','Blog_Top').'"> <a 
+			href="modules.php?name=Your_Account&amp;op=userinfo&amp;username=$uname">'.$uname.'</a> - ( <strong><font color="'.$digits_color.'">'.$counter,'</font></strong> '
+			._BLOG_POSTS_SENT.' )</li>';
         }
     }
     
@@ -308,7 +304,8 @@ $result11 = $db->sql_query("SELECT aid, counter FROM ".$prefix."_authors ORDER B
 if ($db->sql_numrows($result11) > 0) 
 {
     echo '<fieldset style="border-color: '.$fieldset_color.'; border-width: '.$fieldset_border_width.'; border-style: solid;">';
-    echo '<legend align="center" id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px; font-weight: bold;"><font color="'.$textcolor1.'">'.$top.' '._MOSTACTIVEAUTHORS.'</font></strong></legend>';
+    echo '<legend align="center" id="Legend5" runat="server" visible="true" style="width:auto; margin-bottom: 0px; font-weight: bold;"><font 
+	color="'.$textcolor1.'">'.$top.' '._MOST_ACTIVE_BLOG_AUTHORS.'</font></strong></legend>';
     echo '<br />';
     
 	echo "<div style=\"padding: 0px;\"><span class=\"option\"></span>";
@@ -340,7 +337,7 @@ $db->sql_freeresult($result11);
 //        $title = stripslashes(check_html($row12['title'], "nohtml"));
 //        $hits = intval($row12['hits']);
 //        if($hits>0) {
-//            echo "<li><a href=\"modules.php?name=Reviews&amp;op=showcontent&amp;id=$id\">$title</a> - ($hits "._READS.")</li>\n";
+//            echo "<li><a href=\"modules.php?name=Reviews&amp;op=showcontent&amp;id=$id\">$title</a> - ($hits ".BLOG_POST_READS.")</li>\n";
 //        }
 //    }
 //    echo "</ol></div>\n";
@@ -361,7 +358,7 @@ $db->sql_freeresult($result11);
 //            $row_res = $db->sql_fetchrow($db->sql_query("SELECT title FROM ".$prefix."_nsngd_categories WHERE cid='$cid'"));
 //            $ctitle = stripslashes(check_html($row_res['title'], "nohtml"));
 //            $utitle = str_replace(" ", "_", $title);
-//            echo "<li><a href=\"modules.php?name=Downloads&amp;d_op=viewdownloaddetails&amp;lid=$lid&amp;ttitle=$utitle\">$title</a> ("._CATEGORY.": $ctitle) - ($hits "._LDOWNLOADS.")</li>\n";
+//            echo "<li><a href=\"modules.php?name=Downloads&amp;d_op=viewdownloaddetails&amp;lid=$lid&amp;ttitle=$utitle\">$title</a> ("._BLOG_POST_CATEGORY.": $ctitle) - ($hits "._LDOWNLOADS.")</li>\n";
 //        }
 //    }
 //    echo "</ol></div>\n\n";
@@ -377,7 +374,7 @@ $db->sql_freeresult($result11);
 //        $title = stripslashes(check_html($row14['title'], "nohtml"));
 //        $counter = intval($row14['counter']);
 //        if($counter>0) {
-//            echo "<li><a href=\"modules.php?name=Content&amp;pa=showpage&amp;pid=$pid\">$title</a> ($counter "._READS.")</li>\n";
+//            echo "<li><a href=\"modules.php?name=Content&amp;pa=showpage&amp;pid=$pid\">$title</a> ($counter ".BLOG_POST_READS.")</li>\n";
 //        }
 //    }
 //    echo "</ol></div>\n\n";

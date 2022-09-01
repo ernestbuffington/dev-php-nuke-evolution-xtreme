@@ -35,6 +35,6 @@ $invisble_facebook_block = true;
 // Now show it
 $content  = '<div class="fb-customerchat"';
 $content .= 'attribution="page_inbox"';
-$content .= 'page_id="106619144916289">';
+$content .= 'page_id="">';
 $content .= '</div>';
-?>
+?> 

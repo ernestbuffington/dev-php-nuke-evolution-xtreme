@@ -156,7 +156,7 @@ function SelectCategory($cat)
     global $prefix, $db, $admin_file;
     $selcat = $db->sql_query("select catid, title from ".$prefix."_stories_cat order by title");
     $a = 1;
-    echo "<strong>"._CATEGORY."</strong> ";
+    echo "<strong>"._BLOG_POST_CATEGORY."</strong> ";
     echo "<select name=\"catid\">";
 
     if ($cat == 0) 

@@ -76,6 +76,7 @@ $lang_evo_userblock['BLOCK']['USERS']['MEMBERSHIPS'] = 'Memberships';
 $lang_evo_userblock['BLOCK']['USERS']['NEW_TODAY'] = 'New Today';
 $lang_evo_userblock['BLOCK']['USERS']['NEW_YESTERDAY'] = 'New Yesterday';
 $lang_evo_userblock['BLOCK']['USERS']['WAITING'] = 'Waiting';
+$lang_evo_userblock['BLOCK']['USERS']['HIDDEN'] = 'Ghost Mode';
 $lang_evo_userblock['BLOCK']['USERS']['TOTAL'] = 'Total';
 $lang_evo_userblock['BLOCK']['USERS']['LATEST'] = 'Latest';
 

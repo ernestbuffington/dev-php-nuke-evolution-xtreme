@@ -82,11 +82,11 @@ global $domain;
         <h1 class="modal-title" id="CenterTitle">
         <font size="2" class="display-1" color="#000000"><i class="bi bi-arrow-right-square-fill"></i> Theme Name: <?=THEME?>
                  <br /><i class="bi bi-arrow-right-square-fill"></i> Markup Language: XHTML
-                 <br /><i class="bi bi-arrow-right-square-fill"></i> Copyright: <i class="far fa-copyright"></i> 2021 The 86it Developers Network
+                 <br /><i class="bi bi-arrow-right-square-fill"></i> Copyright: <i class="far fa-copyright"></i> Brandon Maintenance Management
                  <br /><i class="bi bi-arrow-right-square-fill"></i> Creation Date: <?=THEME_DATE?> 
                  <br /><i class="bi bi-arrow-right-square-fill"></i> Author: <?=THEME_AUTHOR?>
                  <br /><i class="bi bi-arrow-right-square-fill"></i> License: GNU General Public License
-                 <br /><i class="bi bi-arrow-right-square-fill"></i> Core Support: Nuke-Evolution Xtreme v3.0.0b <> v3.0.1b
+                 <br /><i class="bi bi-arrow-right-square-fill"></i> Core Support: Nuke-Evolution Xtreme v3.0.0b <> v4.0.0b
         </font>
         </h1>
       </div>
@@ -98,7 +98,7 @@ global $domain;
 
   <div class="lead">
   <font size="2" color="black"><strong>
-  This PHP-Nuke Evolution Xtreme theme is using Bootstrap v3.4.1 and XHTML. By default it has Video Background support and 2 scrolling marguee's in the header.   
+  This PHP-Nuke Titanium theme is using Bootstrap v3.4.1 and XHTML. By default it has Video Background support and 2 scrolling marguee's in the header.   
   </div></font></strong>
 
   <div class="card-header">

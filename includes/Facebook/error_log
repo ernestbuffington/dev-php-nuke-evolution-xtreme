@@ -1,0 +1,64 @@
+[23-Aug-2022 16:00:58 UTC] PHP Fatal error:  Uncaught Error: Class 'Facebook\FacebookRequest' not found in /home/dev4/public_html/includes/Facebook/FacebookBatchRequest.php:37
+Stack trace:
+#0 {main}
+  thrown in /home/dev4/public_html/includes/Facebook/FacebookBatchRequest.php on line 37
+[23-Aug-2022 16:00:59 UTC] PHP Fatal error:  Uncaught Error: Class 'Facebook\FacebookResponse' not found in /home/dev4/public_html/includes/Facebook/FacebookBatchResponse.php:35
+Stack trace:
+#0 {main}
+  thrown in /home/dev4/public_html/includes/Facebook/FacebookBatchResponse.php on line 35
+[23-Aug-2022 16:00:59 UTC] PHP Fatal error:  Uncaught Error: Class 'Facebook\FacebookRequest' not found in /home/dev4/public_html/includes/Facebook/FacebookBatchRequest.php:37
+Stack trace:
+#0 {main}
+  thrown in /home/dev4/public_html/includes/Facebook/FacebookBatchRequest.php on line 37
+[23-Aug-2022 16:01:00 UTC] PHP Fatal error:  Uncaught Error: Class 'Facebook\FacebookResponse' not found in /home/dev4/public_html/includes/Facebook/FacebookBatchResponse.php:35
+Stack trace:
+#0 {main}
+  thrown in /home/dev4/public_html/includes/Facebook/FacebookBatchResponse.php on line 35
+[23-Aug-2022 16:01:01 UTC] PHP Fatal error:  Uncaught Error: Class 'Facebook\FacebookRequest' not found in /home/dev4/public_html/includes/Facebook/FacebookBatchRequest.php:37
+Stack trace:
+#0 {main}
+  thrown in /home/dev4/public_html/includes/Facebook/FacebookBatchRequest.php on line 37
+[23-Aug-2022 16:01:02 UTC] PHP Fatal error:  Uncaught Error: Class 'Facebook\FacebookRequest' not found in /home/dev4/public_html/includes/Facebook/FacebookBatchRequest.php:37
+Stack trace:
+#0 {main}
+  thrown in /home/dev4/public_html/includes/Facebook/FacebookBatchRequest.php on line 37
+[23-Aug-2022 16:01:02 UTC] PHP Fatal error:  Uncaught Error: Class 'Facebook\FacebookResponse' not found in /home/dev4/public_html/includes/Facebook/FacebookBatchResponse.php:35
+Stack trace:
+#0 {main}
+  thrown in /home/dev4/public_html/includes/Facebook/FacebookBatchResponse.php on line 35
+[23-Aug-2022 16:01:02 UTC] PHP Fatal error:  Uncaught Error: Class 'Facebook\FacebookRequest' not found in /home/dev4/public_html/includes/Facebook/FacebookBatchRequest.php:37
+Stack trace:
+#0 {main}
+  thrown in /home/dev4/public_html/includes/Facebook/FacebookBatchRequest.php on line 37
+[23-Aug-2022 16:01:03 UTC] PHP Fatal error:  Uncaught Error: Class 'Facebook\FacebookResponse' not found in /home/dev4/public_html/includes/Facebook/FacebookBatchResponse.php:35
+Stack trace:
+#0 {main}
+  thrown in /home/dev4/public_html/includes/Facebook/FacebookBatchResponse.php on line 35
+[23-Aug-2022 16:01:03 UTC] PHP Fatal error:  Uncaught Error: Class 'Facebook\FacebookResponse' not found in /home/dev4/public_html/includes/Facebook/FacebookBatchResponse.php:35
+Stack trace:
+#0 {main}
+  thrown in /home/dev4/public_html/includes/Facebook/FacebookBatchResponse.php on line 35
+[23-Aug-2022 16:01:05 UTC] PHP Fatal error:  Uncaught Error: Class 'Facebook\FacebookRequest' not found in /home/dev4/public_html/includes/Facebook/FacebookBatchRequest.php:37
+Stack trace:
+#0 {main}
+  thrown in /home/dev4/public_html/includes/Facebook/FacebookBatchRequest.php on line 37
+[23-Aug-2022 16:01:06 UTC] PHP Fatal error:  Uncaught Error: Class 'Facebook\FacebookResponse' not found in /home/dev4/public_html/includes/Facebook/FacebookBatchResponse.php:35
+Stack trace:
+#0 {main}
+  thrown in /home/dev4/public_html/includes/Facebook/FacebookBatchResponse.php on line 35
+[23-Aug-2022 16:01:06 UTC] PHP Fatal error:  Uncaught Error: Class 'Facebook\FacebookRequest' not found in /home/dev4/public_html/includes/Facebook/FacebookBatchRequest.php:37
+Stack trace:
+#0 {main}
+  thrown in /home/dev4/public_html/includes/Facebook/FacebookBatchRequest.php on line 37
+[23-Aug-2022 16:01:07 UTC] PHP Fatal error:  Uncaught Error: Class 'Facebook\FacebookResponse' not found in /home/dev4/public_html/includes/Facebook/FacebookBatchResponse.php:35
+Stack trace:
+#0 {main}
+  thrown in /home/dev4/public_html/includes/Facebook/FacebookBatchResponse.php on line 35
+[23-Aug-2022 16:01:09 UTC] PHP Fatal error:  Uncaught Error: Class 'Facebook\FacebookRequest' not found in /home/dev4/public_html/includes/Facebook/FacebookBatchRequest.php:37
+Stack trace:
+#0 {main}
+  thrown in /home/dev4/public_html/includes/Facebook/FacebookBatchRequest.php on line 37
+[23-Aug-2022 16:01:10 UTC] PHP Fatal error:  Uncaught Error: Class 'Facebook\FacebookResponse' not found in /home/dev4/public_html/includes/Facebook/FacebookBatchResponse.php:35
+Stack trace:
+#0 {main}
+  thrown in /home/dev4/public_html/includes/Facebook/FacebookBatchResponse.php on line 35

@@ -43,7 +43,7 @@ else:
 	$content .= '<br />'.sprintf($blockslang['honeypot']['bots_stopped'],'<span class="textbold">', $blocksession[1]['count'], '</span>');
 endif;
 
-$content .= '<br /><br /><font size ="1"><a data-toggle="btn-tooltip" data-placement="top" data-html="true" title="Nuke Honey Pot v2.2&#013;By CoRpSe&#013;" href="https://www.headshotdomain.net" target="_blank"><i class="far fa-copyright"></i> Nuke Honey Pot v2.2</a></font>';
+$content .= '<br /><br /><div align="center"><a class="tooltip-html copyright tooltipstered" title="Nuke Honey Pot v2.2 By CoRpSE<br /><center>CLICK TO VISIT HIS WEBSITE</center>" href="https://www.headshotdomain.net" target="_blank"><i class="far fa-copyright"></i> Nuke HoneyPot v2.2</a></div>';
 $content .= '</div>';
 
 ?>

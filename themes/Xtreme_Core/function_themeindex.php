@@ -107,7 +107,7 @@ print '<tr><td width="39" style="background: repeat-x; background-image: url('.H
 
 print '<img src="'.HTTPS.'themes/'.$theme_name.'/images/BLOG/top_left_corner.png" border="0" width="39" height="50"></td>'."\n";
 
-print '<td valign="top" align="center" style="background: repeat-x; background-image: url('.HTTPS.'themes/'.$theme_name.'/images/BLOG/top_middle_piece.png);"><br>PHP-Nuke Evolution Xtreme (US Version)</td>'."\n";
+print '<td valign="top" align="center" style="background: repeat-x; background-image: url('.HTTPS.'themes/'.$theme_name.'/images/BLOG/top_middle_piece.png);"><br>Nuke-Evolution Xtreme (US Version)</td>'."\n";
 
 print '<td align="right" width="39">'."\n";
 

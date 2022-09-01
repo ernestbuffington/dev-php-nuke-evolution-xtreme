@@ -2,7 +2,6 @@
 /*=======================================================================
  PHP-Nuke Titanium v3.0.0 : Enhanced PHP-Nuke Web Portal System
  =======================================================================*/
-
 /************************************************************************
    Nuke-Evolution: Server Info Administration
    ============================================
@@ -15,18 +14,17 @@
 
    Notes         : Evo User Block Who Is Online Module
 ************************************************************************/
-
 // ONLINE STATS
 
-if(!defined('NUKE_EVO')) {
-   die ("Illegal File Access");
-}
+if(!defined('NUKE_EVO')) 
+exit ("Illegal File Access");
 
 global $evouserinfo_addons, $evouserinfo_online;
 
-function evouserinfo_get_members_online () 
+function evouserinfo_get_members_online() 
 {
     global $prefix, $db, $lang_evo_userblock, $evouserinfo_addons, $user_prefix, $userinfo, $board_config, $Default_Theme;
+
     $sql = "SELECT w.uname, 
 	              w.module, 
 				     w.url, 
@@ -63,14 +61,14 @@ function evouserinfo_get_members_online ()
     
 	while ($session = $db->sql_fetchrow($result)) 
     {                                   # spacer
-        $num 			= ($i < 10) ? '&nbsp;&nbsp;'.'0'.$i : $i;
+        $num 			= ($i < 10) ? ''.'0'.$i : $i;
 		$uname 			= $session['uname'];
         $uname_color 	= UsernameColor($session['uname']);
         $level 			= $session['user_level'];
         $module 		= $session['module'];
         $url 			= $session['url'];
         $url 			= str_replace("&", "&amp;", $url);
-        $where 			= '<a href="'.$url.'" alt="'.$module.'" title="'.$module.'">'.$num.'</a>.&nbsp;';
+        $where 			= '&nbsp;&nbsp;<a href="'.$url.'" alt="'.$module.'" title="'.$module.'">'.$num.'</a>.&nbsp;';
         $where 			= (is_admin()) ? $where : $num.'.&nbsp;';
         $user_from 		= $session['user_from'];
         $user_flag 		= str_replace('.png','',$session['user_from_flag']);
@@ -198,7 +196,7 @@ function evouserinfo_get_members_online ()
     return $out;
 }
 
-function evouserinfo_get_guests_online ($start) 
+function evouserinfo_get_guests_online($start) 
 {
     global $prefix, $db, $lang_evo_userblock, $identify;
     $result = $db->sql_query("SELECT uname, url, module, host_addr FROM ".$prefix."_session WHERE guest='1' OR guest='3'");
@@ -214,19 +212,20 @@ function evouserinfo_get_guests_online ($start)
         $url = str_replace("&", "&amp;", $url);
            //$where = '<a data-user-country="'.$session['host_addr'].'" href="'.$url.'" alt="'.$module.'" title="'.$module.'">'.$num.'</a>.&nbsp;';
            //$where = (is_admin()) ? $where : $num.'.&nbsp;';
-        $where 			= '<a href="'.$url.'" alt="'.$module.'" title="'.$module.'">&nbsp;&nbsp;'.$num.'</a>.&nbsp;';
+        
+		$where 			= '&nbsp;&nbsp;<a class="tooltip-html-side-interact tooltipstered" href="'.$url.'" alt="'.$module.'" title="'.$url.'">'.$num.'.&nbsp;';
         $where 			= (is_admin()) ? $where : '&nbsp;&nbsp;'.$num.'.&nbsp;';
         
 		if(!is_admin()):
-            $out['text'] .= $where.$lang_evo_userblock['BLOCK']['ONLINE']['GUEST']."<br />\n";
+            $out['text'] .= $where.$lang_evo_userblock['BLOCK']['ONLINE']['GUEST']."</a><br />\n";
         else:
         
             $user_agent = $identify->identify_agent();
             if($user_agent['engine'] == 'bot'):
-                $out['text'] .= $where.$user_agent['ua']."<br />\n";
+                $out['text'] .= $where.$user_agent['ua']."</a><br />\n";
             else:
                 // $out['text'] .= "<br />".$where.$session['uname']."\n";
-                $out['text'] .= $where.$session['uname']."<br />\n";
+                $out['text'] .= $where.$session['uname']."</a><br />\n";
             endif;
         
         endif;
@@ -237,7 +236,7 @@ function evouserinfo_get_guests_online ($start)
     return $out;
 }
 
-function evouserinfo_online_display ($members, $guests) 
+function evouserinfo_online_display($members, $guests) 
 {
     global $lang_evo_userblock, $evouserinfo_addons, $userinfo;
     $out = '';
@@ -302,5 +301,4 @@ function evouserinfo_online_display ($members, $guests)
 $evouserinfo_online_members = evouserinfo_get_members_online();
 $evouserinfo_online_guests = evouserinfo_get_guests_online($evouserinfo_online_members['total']+1);
 $evouserinfo_online = evouserinfo_online_display($evouserinfo_online_members, $evouserinfo_online_guests);
-
 ?>

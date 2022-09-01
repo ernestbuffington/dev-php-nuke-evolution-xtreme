@@ -65,15 +65,18 @@ exit('Access Denied');
 #-----------------------------#
 # Theme Copyright Information #
 #-----------------------------#
-global $theme_title, $theme_author, $theme_date, $theme_name, $theme_download_link;
+global $locked_width, $theme_business, $theme_title, $theme_author, $theme_date, $theme_name, $theme_download_link;
+//$locked_width = "1633px"; is as small as this theme can go without messing things up
+$locked_width = "1840px";
+$theme_business = 'Brandon Maintenance Management, LLC';
 # Theme Name
-$theme_title = 'Xtreme Core v1.0';
+$theme_title = '<u>Nuke-Evolution Xtreme Template Theme v1.3 &copy; 2022</u>';
 define('THEME', $theme_title);
 # Theme Author
 $theme_author = 'Ernest Allen Buffington';
 define('THEME_AUTHOR', $theme_author);
 # Theme creation date
-$theme_date = '05/04/2021';
+$theme_date = '05/04/2021 <> 09/01/2022';
 define('THEME_DATE', $theme_date);
 $theme_download_link = '#myCopyRight';
 define('THEME_DOWNLOAD_LINK', $theme_download_link);
@@ -110,7 +113,7 @@ $make_xtreme_avatar_small,
 # be sure and set your user number in the config.php file.
 //$my_welcome_message = '<a class = "welcome" href="'.$domain.'">Welcome to The 86it Developers Network</a>';
 //$my_welcome_message = '<a class = "welcome" href="'.$domain.'">Welcome to '.$portaladminname.'\'s 86it Portal</a>';
-$my_welcome_message = '<a class = "welcome" href="'.HTTPS.'">Welcome to PHP-Nuke Evolution Xtreme <font color="#FF9900" size="1">(US Version)</font></a>';
+$my_welcome_message = '<a class = "welcome" href="'.HTTPS.'">Nuke-Evolution Xtreme <font color="#FF9900" size="1">(US Version)</font></a>';
 
 # This is to tell the main portal menu to look for the images
 # in the theme dir "theme_name/images/menu"

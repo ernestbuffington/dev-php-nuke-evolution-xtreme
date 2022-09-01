@@ -893,7 +893,8 @@ function evo_parse_video_callback($matches)
 #         - every opening tag and closing tag must be of the [...] format.
 function bbencode_first_pass_pda($text, $uid, $open_tag, $close_tag, $close_tag_new, $mark_lowest_level, $func, $open_regexp_replace = false)
 {
-    $open_tag_count = 0;
+    
+	$open_tag_count = 0;
 
     if (!$close_tag_new || (empty($close_tag_new)))
     {

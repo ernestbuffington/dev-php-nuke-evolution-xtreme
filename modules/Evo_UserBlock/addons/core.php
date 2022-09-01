@@ -24,7 +24,7 @@ $module_name = basename(dirname(dirname(__FILE__)));
 
 get_lang($module_name);
 
-function evouserinfo_get_addon_all () 
+function evouserinfo_get_addon_all() 
 {
     global $prefix, $db, $lang_evo_userblock;
 

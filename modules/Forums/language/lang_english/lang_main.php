@@ -648,7 +648,7 @@ $lang['User_post_pct_stats'] = '%.2f%% of total posts'; // 1.25% of total
 $lang['User_post_day_stats'] = '%.2f per day'; // 1.5 posts per day
 $lang['Search_user_posts'] = 'Find all posts by %s'; // Find all posts by username
 
-$lang['No_user_id_specified'] = 'Sorry, but that user does not exist.';
+$lang['No_user_id_specified'] = 'The user you are looking for is in Ghost Mode!<br />- THIS USER DOES NOT WANT TO BE FOUND -';
 $lang['Wrong_Profile'] = 'You cannot modify a profile that is not your own.';
 
 $lang['Only_one_avatar'] = 'Only one type of avatar can be specified';
@@ -734,7 +734,7 @@ $lang['Current_Image'] = 'Current Image';
 $lang['Notify_on_privmsg'] = 'Notify on new Private Message';
 $lang['Popup_on_privmsg'] = 'Pop up window on new Private Message';
 $lang['Popup_on_privmsg_explain'] = 'Some templates may open a new window to inform you when new private messages arrive.';
-$lang['Hide_user'] = 'Hide your online status';
+$lang['Hide_user'] = 'Ghost Mode (Hide your membership and online status)';
 
 $lang['Profile_updated'] = 'Your profile has been updated';
 $lang['Profile_updated_inactive'] = 'Your profile has been updated. However, you have changed vital details, thus your account is now inactive. Check your e-mail to find out how to reactivate your account, or if admin activation is required, wait for the administrator to reactivate it.';

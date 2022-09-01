@@ -33,14 +33,14 @@ $row1  .= '<table bgcolor="'.$bgcolor4.'" border="0" width="200">';
 $row1  .= '<tr>';
 $row1  .= '<td align="center">';
 
-$row1  .= '<table bgcolor="'.$bgcolor4.'" border="1" cellpadding="0" cellspacing="1" class="visitorlog">';
+$row1  .= '<table bgcolor="'.$bgcolor4.'" border="0" cellpadding="0" cellspacing="0" class="visitorlog">';
 
 while($whosbeen = $db->sql_fetchrow($row1_result)):
     
 	if(!is_admin())
 	if($whosbeen['user_allow_viewonline'] == 0):
 	$whosbeen['username'] = 'Ghost Mode';
-	$whosbeen['user_avatar'] = 'hidden.png';
+	$whosbeen['user_avatar'] = 'invisible.png';
 	$whosbeen['user_id'] = -1;
 	endif;
 	
@@ -112,13 +112,13 @@ $row2  .= '<table bgcolor="'.$bgcolor4.'" border="0" width="200">';
 $row2  .= '<tr>';
 $row2  .= '<td align="center">';
 
-$row2  .= '<table border="1" cellpadding="0" cellspacing="1" class="visitorlog">';
+$row2  .= '<table border="1" cellpadding="0" cellspacing="0" class="visitorlog">';
 
 while($whosbeen = $db->sql_fetchrow($row2_result)):
 
 	if(!is_admin())
 	if($whosbeen['user_allow_viewonline'] == 0):
-	$whosbeen['username'] = 'Hidden';
+	$whosbeen['username'] = 'Ghost Mode';
 	$whosbeen['user_avatar'] = 'invisible.png';
 	$whosbeen['user_id'] = -1;
 	endif;
@@ -164,10 +164,10 @@ while($whosbeen = $db->sql_fetchrow($row2_result)):
 	
 	
 	$row2 .= '<td align="center" width="45px"><a href="modules.php?name=Profile&mode=viewprofile&u='.$whosbeen['user_id'].'">'.$avatar.'</a></td>';
-    $row2 .= '<td align="left"><a class="turdball" style="text-decoration: none;" href="modules.php?name=Profile&mode=viewprofile&u='.$whosbeen['user_id'].'">
+    // fixed row 2 it was not aligned 8/21/2022 TheGhost
+	$row2 .= '<td align="left"><a class="turdball" style="text-decoration: none;" href="modules.php?name=Profile&mode=viewprofile&u='.$whosbeen['user_id'].'">
 	<strong>&nbsp;&nbsp;'.UsernameColor($whosbeen['username']).'<br />&nbsp;&nbsp;<a style="text-decoration: none;" href="modules.php?name=Private_Messages&mode=post&u='.$whosbeen['user_id'].'"><font size="5" color="orange"><i class="bi bi-envelope"></i><font color="gold" size="5"><i class="bi bi-arrow-right-short"></i><i class="bi bi-mailbox"></i></font></font>
-	
-	&nbsp;<br />
+    <br />
 	&nbsp;&nbsp;<font size="5" color="gold"><i class="bi bi-arrow-up-short"></i></font><font class="gensmall">SEND PM </font></span>
 	</a></td>';
 	$row2 .= '<td align="center"><div align="top" style="padding-left:10px;">'.get_titanium_timeago($whosbeen['last_visit']).'</div>';
@@ -197,7 +197,7 @@ while($whosbeen = $db->sql_fetchrow($row3_result)):
 
 	if(!is_admin())
 	if($whosbeen['user_allow_viewonline'] == 0):
-	$whosbeen['username'] = 'Hidden';
+	$whosbeen['username'] = 'Ghost Mode';
 	$whosbeen['user_avatar'] = 'invisible.png';
 	$whosbeen['user_id'] = -1;
 	endif;
@@ -246,7 +246,7 @@ while($whosbeen = $db->sql_fetchrow($row3_result)):
     $row3 .= '<td align="left"><a class="turdball" style="text-decoration: none;" href="modules.php?name=Profile&mode=viewprofile&u='.$whosbeen['user_id'].'">
 	<strong>&nbsp;&nbsp;'.UsernameColor($whosbeen['username']).'<br />&nbsp;&nbsp;<a style="text-decoration: none;" href="modules.php?name=Private_Messages&mode=post&u='.$whosbeen['user_id'].'"><font size="5" color="orange"><i class="bi bi-envelope"></i><font color="gold" size="5"><i class="bi bi-arrow-right-short"></i><i class="bi bi-mailbox"></i></font></font>
 	
-	&nbsp;<br />
+	<br />
 	&nbsp;&nbsp;<font size="5" color="gold"><i class="bi bi-arrow-up-short"></i></font><font class="gensmall">SEND PM </font></span>
 	</a></td>';
 	$row3 .= '<td align="center"><div align="top" style="padding-left:10px;">'.get_titanium_timeago($whosbeen['last_visit']).'</div>';
@@ -276,7 +276,7 @@ while($whosbeen = $db->sql_fetchrow($row4_result)):
 
 	if(!is_admin())
 	if($whosbeen['user_allow_viewonline'] == 0):
-	$whosbeen['username'] = 'Hidden';
+	$whosbeen['username'] = 'Ghost Mode';
 	$whosbeen['user_avatar'] = 'invisible.png';
 	$whosbeen['user_id'] = -1;
 	endif;
@@ -325,7 +325,7 @@ while($whosbeen = $db->sql_fetchrow($row4_result)):
     $row4 .= '<td align="left"><a class="turdball" style="text-decoration: none;" href="modules.php?name=Profile&mode=viewprofile&u='.$whosbeen['user_id'].'">
 	<strong>&nbsp;&nbsp;'.UsernameColor($whosbeen['username']).'<br />&nbsp;&nbsp;<a style="text-decoration: none;" href="modules.php?name=Private_Messages&mode=post&u='.$whosbeen['user_id'].'"><font size="5" color="orange"><i class="bi bi-envelope"></i><font color="gold" size="5"><i class="bi bi-arrow-right-short"></i><i class="bi bi-mailbox"></i></font></font>
 	
-	&nbsp;<br />
+	<br />
 	&nbsp;&nbsp;<font size="5" color="gold"><i class="bi bi-arrow-up-short"></i></font><font class="gensmall">SEND PM </font></span>
 	</a></td>';
 	$row4 .= '<td align="center"><div align="top" style="padding-left:10px;">'.get_titanium_timeago($whosbeen['last_visit']).'</div>';
@@ -365,10 +365,10 @@ endif;
 if($screen_width >= 1920):
 $content .= '<table bgcolor="'.$bgcolor4.'" border="1" width="100%">';
 $content .= '	<tr>';
-$content .= '		<td width="251" valign="top">'.$row1.'</td>';
-$content .= '		<td width="251" valign="top">'.$row2.'</td>';
-$content .= '		<td width="251" valign="top">'.$row3.'</td>';
-$content .= '		<td width="251" valign="top">'.$row4.'</td>';
+$content .= '		<td width="25%" valign="top">'.$row1.'</td>';
+$content .= '		<td width="25%" valign="top">'.$row2.'</td>';
+$content .= '		<td width="25%" valign="top">'.$row3.'</td>';
+$content .= '		<td width="25%" valign="top">'.$row4.'</td>';
 $content .= '	</tr>';
 
 $content .= '	<tr>';

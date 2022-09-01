@@ -56,6 +56,40 @@ if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])){ exit('Access D
 
 global $bgcolor1, $bgcolor2, $bgcolor3, $bgcolor4, $user, $cookie, $prefix, $sitekey, $db, $name, $banners, $user_prefix, $userinfo, $admin, $admin_file, $ThemeInfo;
 
+global $headeruserinfo_avatar, $avatar_overide_size, $make_xtreme_avatar_small, $board_config, $userinfo;
+# START - this was added for the very whimpy small themes that have no block width! by Ernest Buffington 08/06/2019
+if($make_xtreme_avatar_small == true):
+  $board_config['avatar_max_height'] = 18;
+  $board_config['avatar_max_width'] = 18;
+endif;
+# END - this was added for the very whimpy small themes that have no block width! by Ernest Buffington 08/06/2019
+if(is_user() && $userinfo['user_avatar']):
+  switch( $userinfo['user_avatar_type']):
+		# user_allowavatar = 1
+		case USER_AVATAR_UPLOAD:
+			$headeruserinfo_avatar .= ( $board_config['allow_avatar_upload'] ) 
+			? '<img class="rounded-corners-header" style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '.$board_config['avatar_max_width'].'px;" src="' 
+			. $board_config['avatar_path'] . '/' . $userinfo['user_avatar'] . '" alt="" border="0" />' : '';
+			break;
+		# user_allowavatar = 2
+		case USER_AVATAR_REMOTE:
+			$headeruserinfo_avatar .= '<img class="rounded-corners-header" style="max-height: '.$board_config['avatar_max_height'].'px; 
+			max-width: '.$board_config['avatar_max_width'].'px;" src="
+			'.avatar_resize($userinfo['user_avatar']).'" alt="" border="0" />';
+			break;
+		# user_allowavatar = 3
+		case USER_AVATAR_GALLERY:
+			$headeruserinfo_avatar .= ( $board_config['allow_avatar_local'] ) ? '<img class="rounded-corners-header" 
+			style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '
+			.$board_config['avatar_max_width'].'px;" src="' . $board_config['avatar_gallery_path'] . '/' . (($userinfo['user_avatar'] == 'blank.gif' || $userinfo['user_avatar'] 
+			== 'gallery/blank.gif') ? 'blank.png' : $userinfo['user_avatar']) . '" alt="" border="0" />' : '';
+			break;
+  endswitch;
+else:
+$headeruserinfo_avatar .= '<img class="rounded-corners-header" style="max-height: '.$board_config['avatar_max_height'].'px; max-width: '
+.$board_config['avatar_max_width'].'px;" src="'.$board_config['default_avatar_users_url'].'" alt="" border="0" />';
+endif;
+if($_COOKIE["titanium_resolution_width"] > 1366):
 if (!is_user()) 
 {
    # not logged in FORUMS menu START	
@@ -126,13 +160,14 @@ else:
    echo '</div>';
 
    echo '<div class="btn-group">';
-   echo '       <a href="modules.php?name=Your_Account" class="btn btn-primary dropbtn" role="button">My Account</a>';
+   echo '       <a href="modules.php?name=Your_Account" class="btn btn-primary dropbtn" role="button">'.$headeruserinfo_avatar.' '.$userinfo['username'].'</a>';
    echo '</div>';
    
    
    echo '</div></div>';
 
 endif;
+
 } 
 
 
@@ -278,32 +313,32 @@ if (is_user())
    echo '</div>';                                                                                                                                                 #
    ################################################################################################################################################################ 
 
-    # File_Repository ######################################################################################################################################################################## 
-    echo '<div class="btn-group">';                                                                                                                                                          #
-    echo ' <a class="btn adropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Downloads</a>';                                                                          #
-    echo '   <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                                               #
-                                                                                                                                                                                             #
-    if (is_mod_admin('super')):                                                                                                                                                              #
-	echo '      <li><strong><a href="admin.php?op=file_repository&action=settings" class="btn btn-danger adropbtn-admin" role="button">Download Settings</a></strong></li>';                 #
-	echo '      <li><strong><a href="admin.php?op=file_repository&action=addfile" class="btn btn-danger adropbtn-admin" role="button">Add New Download</a></strong></li>';                   #
-	echo '      <li><strong><a href="admin.php?op=file_repository&action=files" class="btn btn-danger adropbtn-admin" role="button">View Downloads File List</a></strong></li>';             #
-	echo '      <li><strong><a href="admin.php?op=file_repository&action=newcat" class="btn btn-danger adropbtn-admin" role="button">Add Download Category</a></strong></li>';               #
-	echo '      <li><strong><a href="admin.php?op=file_repository&action=categories" class="btn btn-danger adropbtn-admin" role="button">View Download Categories List</a></strong></li>';   #
-	echo '      <li><strong><a href="admin.php?op=file_repository&action=clientuploads" class="btn btn-danger adropbtn-admin" role="button">View New Uploads</a></strong></li>';             #
-	echo '      <li><strong><a href="admin.php?op=file_repository&action=brokenfiles" class="btn btn-danger adropbtn-admin" role="button">Check Broken Downloads</a></strong></li>';         #
-	endif;                                                                                                                                                                                   #
-	                                                                                                                                                                                         #
-	echo '      <li><strong><a href="modules.php?name=File_Repository" class="btn btn-primary dropbtn" role="button">Main Downloads</a></strong></li>';                                      #
-    echo '      <li><strong><a href="modules.php?name=File_Repository&action=newdownloads" class="btn btn-primary dropbtn" role="button">New Downloads</a></strong></li>';                   #
-    echo '      <li><strong><a href="modules.php?name=File_Repository&action=mostpopular" class="btn btn-primary dropbtn" role="button">Popular Downloads</a></strong></li>';                #
-    echo '      <li><strong><a href="modules.php?name=File_Repository&action=statistics" class="btn btn-primary dropbtn" role="button">Download Statistics</a></strong></li>';               #
-    echo '      <li><strong><a href="modules.php?name=File_Repository&action=search" class="btn btn-primary dropbtn" role="button">Search Downloads</a></strong></li>';                      #
-    if (!is_mod_admin('super')):                                                                                                                                                             #
-	echo '      <li><strong><a href="modules.php?name=File_Repository&action=submitdownload" class="btn btn-primary dropbtn" role="button">Upload A File</a></strong></li>';                 #
-	endif;                                                                                                                                                                                   #
-    echo '   </ul>';                                                                                                                                                                         #
-    echo '</div>';                                                                                                                                                                           #
-	##########################################################################################################################################################################################
+    # File_Repository ################################################################################################################################################################## 
+    echo '<div class="btn-group">';                                                                                                                                                    #
+    echo '<a class="btn adropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">Downloads</a>';                                                                     #
+    echo '<ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                                            #
+                                                                                                                                                                                       #
+    if(is_mod_admin('super')):                                                                                                                                                         #
+	echo '<li><strong><a href="admin.php?op=file_repository&action=settings" class="btn btn-danger adropbtn-admin" role="button">Download Settings</a></strong></li>';                 #
+	echo '<li><strong><a href="admin.php?op=file_repository&action=addfile" class="btn btn-danger adropbtn-admin" role="button">Add New Download</a></strong></li>';                   #
+	echo '<li><strong><a href="admin.php?op=file_repository&action=files" class="btn btn-danger adropbtn-admin" role="button">View Downloads File List</a></strong></li>';             #
+	echo '<li><strong><a href="admin.php?op=file_repository&action=newcat" class="btn btn-danger adropbtn-admin" role="button">Add Download Category</a></strong></li>';               #
+	echo '<li><strong><a href="admin.php?op=file_repository&action=categories" class="btn btn-danger adropbtn-admin" role="button">View Download Categories List</a></strong></li>';   #
+	echo '<li><strong><a href="admin.php?op=file_repository&action=clientuploads" class="btn btn-danger adropbtn-admin" role="button">View New Uploads</a></strong></li>';             #
+	echo '<li><strong><a href="admin.php?op=file_repository&action=brokenfiles" class="btn btn-danger adropbtn-admin" role="button">Check Broken Downloads</a></strong></li>';         #
+	endif;                                                                                                                                                                             #
+	                                                                                                                                                                                   #
+	echo '<li><strong><a href="modules.php?name=File_Repository" class="btn btn-primary dropbtn" role="button">Main Downloads</a></strong></li>';                                      #
+    echo '<li><strong><a href="modules.php?name=File_Repository&action=newdownloads" class="btn btn-primary dropbtn" role="button">New Downloads</a></strong></li>';                   #
+    echo '<li><strong><a href="modules.php?name=File_Repository&action=mostpopular" class="btn btn-primary dropbtn" role="button">Popular Downloads</a></strong></li>';                #
+    echo '<li><strong><a href="modules.php?name=File_Repository&action=statistics" class="btn btn-primary dropbtn" role="button">Download Statistics</a></strong></li>';               #
+    echo '<li><strong><a href="modules.php?name=File_Repository&action=search" class="btn btn-primary dropbtn" role="button">Search Downloads</a></strong></li>';                      #
+    if(!is_mod_admin('super')):                                                                                                                                                        #
+	echo '<li><strong><a href="modules.php?name=File_Repository&action=submitdownload" class="btn btn-primary dropbtn" role="button">Upload A File</a></strong></li>';                 #
+	endif;                                                                                                                                                                             #
+    echo '</ul>';                                                                                                                                                                      #
+    echo '</div>';                                                                                                                                                                     #
+	####################################################################################################################################################################################
 
     # Blog module buttin set ###########################################################################################################################################
     echo '<div class="btn-group">';                                                                                                                                    #
@@ -340,7 +375,7 @@ if (is_user())
 
    # Logged in My Account ##############################################################################################################################################
    echo '<div class="btn-group">';                                                                                                                                     #
-    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">My Account</a>';                                              #
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">'.$headeruserinfo_avatar.' '.$userinfo['username'].'</a>';    #
     echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                     #
     echo '         <li><strong><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">Message Center</a></strong></li>';            #
     echo '         <li><strong><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmarks</a></strong></li>';             #
@@ -450,7 +485,7 @@ if (is_user())
 
    # Logged in My Account ##############################################################################################################################################
    echo '<div class="btn-group">';                                                                                                                                     #
-    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">My Account</a>';                                              #
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">'.$headeruserinfo_avatar.' '.$userinfo['username'].'</a>';    #
     echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                     #
     echo '         <li><strong><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">Message Center</a></strong></li>';            #
     echo '         <li><strong><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmarks</a></strong></li>';             #
@@ -560,7 +595,7 @@ if (is_user())
 
    # Logged in My Account ##############################################################################################################################################
    echo '<div class="btn-group">';                                                                                                                                     #
-    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">My Account</a>';                                              #
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">'.$headeruserinfo_avatar.' '.$userinfo['username'].'</a>';    #
     echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                     #
     echo '         <li><strong><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">Message Center</a></strong></li>';            #
     echo '         <li><strong><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmarks</a></strong></li>';             #
@@ -670,7 +705,7 @@ if (is_user())
 
    # Logged in My Account ##############################################################################################################################################
    echo '<div class="btn-group">';                                                                                                                                     #
-    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">My Account</a>';                                              #
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">'.$headeruserinfo_avatar.' '.$userinfo['username'].'</a>';    #
     echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                     #
     echo '         <li><strong><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">Message Center</a></strong></li>';            #
     echo '         <li><strong><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmarks</a></strong></li>';             #
@@ -778,24 +813,21 @@ if (is_user())
    echo '</div>';                                                                                                                                              #
    #############################################################################################################################################################
 
-   # Logged in My Account ##############################################################################################################################################
-   echo '<div class="btn-group">';                                                                                                                                     #
-    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">My Account</a>';                                              #
-    echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                     #
-    echo '         <li><strong><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">Message Center</a></strong></li>';            #
-    echo '         <li><strong><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmarks</a></strong></li>';             #
-    echo '         <li><strong><a href="modules.php?name=Network_Cemetery" class="btn btn-primary dropbtn" role="button">My Cemetery</a></strong></li>';               #
-    echo '         <li><strong><a href="modules.php?name=Image_Repository" class="btn btn-primary dropbtn" role="button">My Images</a></strong></li>';                 #
-                                                                                                                                                                       #
-    echo '         <li><strong><a href="modules.php?name=Groups" class="btn btn-primary dropbtn" role="button">My Groups</a></strong></li>';                           #
-                                                                                                                                                                       #
-    echo '         <li><strong><a href="modules.php?name=Your_Account" class="btn btn-primary dropbtn" role="button">View Pofile</a></strong></li>';                   #
-    echo '         <li><strong><a href="modules.php?name=Profile&mode=editprofile" class="btn btn-primary dropbtn" role="button">Edit Pofile</a></strong></li>';       #
-    echo '         <li><strong><a href="modules.php?name=Your_Account&op=chgtheme" class="btn btn-primary dropbtn" role="button">Theme Selection</a></strong></li>';   #
-                                                                                                                                                                       #
-    echo '       </ul>';                                                                                                                                               #
-   echo '</div>';                                                                                                                                                      #
-   ##################################################################################################################################################################### 
+   # Logged in My Account #######################################################################################################################################
+    echo '<div class="btn-group">';                                                                                                                             #
+    echo '<a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">'.$headeruserinfo_avatar.' '.$userinfo['username'].'</a>';    # 
+	echo '<ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                     #
+    echo '<li><strong><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">Message Center</a></strong></li>';              #
+    echo '<li><strong><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmarks</a></strong></li>';               #
+    echo '<li><strong><a href="modules.php?name=Network_Cemetery" class="btn btn-primary dropbtn" role="button">My Cemetery</a></strong></li>';                 #
+    echo '<li><strong><a href="modules.php?name=Image_Repository" class="btn btn-primary dropbtn" role="button">My Images</a></strong></li>';                   #
+    echo '<li><strong><a href="modules.php?name=Groups" class="btn btn-primary dropbtn" role="button">My Groups</a></strong></li>';                             #
+    echo '<li><strong><a href="modules.php?name=Your_Account" class="btn btn-primary dropbtn" role="button">View Pofile</a></strong></li>';                     #
+    echo '<li><strong><a href="modules.php?name=Profile&mode=editprofile" class="btn btn-primary dropbtn" role="button">Edit Pofile</a></strong></li>';         #
+    echo '<li><strong><a href="modules.php?name=Your_Account&op=chgtheme" class="btn btn-primary dropbtn" role="button">Theme Selection</a></strong></li>';     #
+    echo '</ul>';                                                                                                                                               #
+   echo '</div>';                                                                                                                                               #
+   ############################################################################################################################################################## 
     # logged in Blog END	
               # -------------------------------------------------------------------------------------------------------------------------------------------------------------
             #
@@ -887,10 +919,10 @@ echo '<div class="btn-group">';
    endif;                                                                                                                                                      #
    echo '</div>';                                                                                                                                              #
    ############################################################################################################################################################# 
-   
+  
    # Logged in My Account ##############################################################################################################################################
    echo '<div class="btn-group">';                                                                                                                                     #
-    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">My Account</a>';                                              #
+    echo '       <a class="btn dropbtn btn-primary dropdown-toggle" data-toggle="dropdown" role="button">'.$headeruserinfo_avatar.' '.$userinfo['username'].'</a>';    #
     echo '       <ul class="dropdown-menu dropbtn dropdown-content" role="menu">';                                                                                     #
     echo '         <li><strong><a href="modules.php?name=Private_Messages" class="btn btn-primary dropbtn" role="button">Message Center</a></strong></li>';            #
     echo '         <li><strong><a href="modules.php?name=Network_Bookmarks" class="btn btn-primary dropbtn" role="button">My Bookmarks</a></strong></li>';             #
@@ -911,7 +943,7 @@ echo '</div>';
  echo '</div>';
 endif;
 }
-
+endif;
 echo '<div align="center" style="padding-top:8px;">';
 echo '</div>';
 ?>

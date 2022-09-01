@@ -301,33 +301,34 @@ function get_db_stat($mode)
     {
         case 'usercount':
             $sql = "SELECT COUNT(user_id) AS total
-                FROM " . USERS_TABLE . "
-                WHERE user_id <> " . ANONYMOUS;
+                FROM ".USERS_TABLE."
+                WHERE user_id <> ".ANONYMOUS;
             break;
-
+        # If THE LATEST REGISTERED USER IS IN GHOST MODE 
+		# DO NOT SHOW THEM AS THE LATEST REGISTERED USER.
         case 'newestuser':
             $sql = "SELECT user_id, username
-                FROM " . USERS_TABLE . "
-                WHERE user_id <> " . ANONYMOUS . "
-                ORDER BY user_id DESC
+                FROM ".USERS_TABLE."
+                WHERE user_id <> ".ANONYMOUS."
+                AND user_allow_viewonline = 1 ORDER BY user_id DESC
                 LIMIT 1";
             break;
 
         case 'postcount':
         case 'topiccount':
             $sql = "SELECT SUM(forum_topics) AS topic_total, SUM(forum_posts) AS post_total
-                FROM " . FORUMS_TABLE;
+                FROM ".FORUMS_TABLE;
             break;
     }
 
-    if ( !($result = $db->sql_query($sql)) )
+    if(!($result = $db->sql_query($sql)))
     {
         return false;
     }
 
     $row = $db->sql_fetchrow($result);
 
-    switch ( $mode )
+    switch($mode)
     {
         case 'usercount':
             return $row['total'];
@@ -361,7 +362,7 @@ function phpbb_clean_username($username)
 */
 function phpbb_ltrim($str, $charlist = false)
 {
-    if ($charlist === false)
+    if($charlist === false)
     {
         return ltrim($str);
     }
@@ -369,9 +370,9 @@ function phpbb_ltrim($str, $charlist = false)
     $php_version = explode('.', PHP_VERSION);
 
     // php version < 4.1.0
-    if ((int) $php_version[0] < 4 || ((int) $php_version[0] == 4 && (int) $php_version[1] < 1))
+    if((int)$php_version[0] < 4 || ((int) $php_version[0] == 4 && (int) $php_version[1] < 1))
     {
-        while ($str[0] == $charlist)
+        while($str[0] == $charlist)
         {
             $str = substr($str, 1);
         }
@@ -386,7 +387,7 @@ function phpbb_ltrim($str, $charlist = false)
 // added at phpBB 2.0.12 to fix a bug in PHP 4.3.10 (only supporting charlist in php >= 4.1.0)
 function phpbb_rtrim($str, $charlist = false)
 {
-    if ($charlist === false)
+    if($charlist === false)
     {
         return rtrim($str);
     }
@@ -394,9 +395,9 @@ function phpbb_rtrim($str, $charlist = false)
     $php_version = explode('.', PHP_VERSION);
 
     // php version < 4.1.0
-    if ((int) $php_version[0] < 4 || ((int) $php_version[0] == 4 && (int) $php_version[1] < 1))
+    if((int)$php_version[0] < 4 || ((int) $php_version[0] == 4 && (int) $php_version[1] < 1))
     {
-        while ($str[strlen($str)-1] == $charlist)
+        while($str[strlen($str)-1] == $charlist)
         {
             $str = substr($str, 0, strlen($str)-1);
         }
@@ -430,7 +431,7 @@ function dss_rand()
 			config_value = '" . $board_config['rand_seed'] . "'
 			WHERE config_name = 'rand_seed'";
 
-		if( !$db->sql_query($sql) )
+		if(!$db->sql_query($sql))
 		{
 			message_die(GENERAL_ERROR, "Unable to reseed PRNG", "", __LINE__, __FILE__, $sql);
 		}
@@ -443,15 +444,17 @@ function dss_rand()
 //
 // Get Userdata, $user can be username or user_id. If force_str is true, the username will be forced.
 //
-function get_userdata($user, $force_str = false) {
+function get_userdata($user, $force_str = false) 
+{
     global $db;
     $user = (!is_numeric($user) || $force_str) ? phpbb_clean_username($user) : intval($user);
-    $sql = "SELECT * FROM " . USERS_TABLE . " WHERE ";
-    $sql .= ( ( is_integer($user) ) ? "user_id = $user" : "username = '" .  str_replace("\'", "''", $user) . "'" ) . " AND user_id <> " . ANONYMOUS;
-    if ( !($result = $db->sql_query($sql)) ) {
+    $sql = "SELECT * FROM ".USERS_TABLE." WHERE ";
+    $sql .= (( is_integer($user)) ? "user_id = $user" : "username = '".str_replace("\'", "''", $user)."'" )." AND user_id <> ".ANONYMOUS;
+    if(!($result = $db->sql_query($sql))) 
+	{
         message_die(GENERAL_ERROR, 'Tried obtaining data for a non-existent user', '', __LINE__, __FILE__, $sql);
     }
-    return ( $row = $db->sql_fetchrow($result) ) ? $row : false;
+    return ($row = $db->sql_fetchrow($result)) ? $row : false;
 }
 
 /*****[BEGIN]******************************************
@@ -480,42 +483,42 @@ function set_user_xdata($user, $which_xdata, $value)
     $user_is_name = (!is_numeric($user)) ? true : false;
 	$xd_is_name = (!is_numeric($which_xdata)) ? true : false;
 
-    if ($user_is_name)
+    if($user_is_name)
     {
         $user = phpbb_clean_username($user);
     }
 
-    $user_where = ($user_is_name) ? ('u.username = \'' . $user . '\'') : ('u.user_id = ' . $user );
-	$field_where = ($xd_is_name) ? ('xf.code_name = \'' . $which_xdata . '\'') : ('xf.field_id = ' . $which_xdata);
+    $user_where = ($user_is_name) ? ('u.username = \''.$user.'\'') : ('u.user_id = '.$user);
+	$field_where = ($xd_is_name) ? ('xf.code_name = \''.$which_xdata.'\'') : ('xf.field_id = '.$which_xdata);
 
     $sql = "SELECT u.user_id, xf.field_id FROM ("
-        . USERS_TABLE . " AS u, " . XDATA_FIELDS_TABLE . " AS xf)
-        WHERE " . $user_where . " AND " . $field_where . "
+        .USERS_TABLE. " AS u, ".XDATA_FIELDS_TABLE." AS xf)
+        WHERE " .$user_where. " AND ".$field_where."
         LIMIT 1";
 
-    if ( !($result = $db->sql_query($sql)) )
+    if(!($result = $db->sql_query($sql)))
     {
         message_die(GENERAL_ERROR, $lang['XData_error_obtaining_userdata'], '', __LINE__, __FILE__, $sql);
     }
 
      $row = $db->sql_fetchrow($result);
 
-    $sql = "DELETE FROM " . XDATA_DATA_TABLE . "
-        WHERE user_id = " . $row['user_id'] . " AND field_id = " . $row['field_id'] . "
+    $sql = "DELETE FROM ".XDATA_DATA_TABLE."
+        WHERE user_id = ".$row['user_id']." AND field_id = ".$row['field_id']."
         LIMIT 1";
 
-    if ( !($db->sql_query($sql)) )
+    if(!($db->sql_query($sql)))
     {
         message_die(GENERAL_ERROR, $lang['XData_failure_removing_data'], '', __LINE__, __FILE__, $sql);
     }
 
-    if ($value !== '')
+    if($value !== '')
     {
-        $sql = "INSERT INTO " . XDATA_DATA_TABLE . "
+        $sql = "INSERT INTO ".XDATA_DATA_TABLE."
             (user_id, field_id, xdata_value)
-            VALUES (" . $row['user_id'] . ", " . $row['field_id'] . ", '" . $value . "')";
+            VALUES (" . $row['user_id'] . ", ".$row['field_id'].", '".$value."')";
 
-        if ( !($db->sql_query($sql)) )
+        if(!($db->sql_query($sql)))
         {
                message_die(GENERAL_ERROR, $lang['XData_failure_inserting_data'], '', __LINE__, __FILE__, $sql);
         }
@@ -541,34 +544,34 @@ function get_user_xdata($user, $force_str = false)
 
     if(!isset($user) || empty($user)) return '';
 
-    if ($is_name)
+    if($is_name)
     {
         $user = trim(htmlspecialchars($user));
         $user = substr(str_replace("\\'", "'", $user), 0, 25);
         $user = str_replace("'", "\\'", $user);
 
         $sql = "SELECT xf.field_type, xf.code_name, xd.xdata_value
-				FROM " . XDATA_DATA_TABLE . " xd, " . USERS_TABLE . " u, " . XDATA_FIELDS_TABLE . " xf
- 				WHERE xf.field_id = xd.field_id AND xd.user_id = u.user_id AND u.username = '" . $user . "'";
+				FROM ".XDATA_DATA_TABLE." xd, ".USERS_TABLE." u, ".XDATA_FIELDS_TABLE." xf
+ 				WHERE xf.field_id = xd.field_id AND xd.user_id = u.user_id AND u.username = '".$user."'";
     }
     else
     {
         $user = intval($user);
 
         $sql = "SELECT xf.field_type, xf.code_name, xd.xdata_value
-				FROM " . XDATA_DATA_TABLE . " xd, " . XDATA_FIELDS_TABLE . " xf
-				WHERE xf.field_id = xd.field_id AND xd.user_id = " . $user;
+				FROM ".XDATA_DATA_TABLE." xd, ".XDATA_FIELDS_TABLE." xf
+				WHERE xf.field_id = xd.field_id AND xd.user_id = ".$user;
     }
 
-    if ( !($result = $db->sql_query($sql)) )
+    if(!($result = $db->sql_query($sql)))
     {
         message_die(GENERAL_ERROR, $lang['XData_error_obtaining_user_xdata'], '', __LINE__, __FILE__, $sql);
     }
 
     $data = array();
-    while ( $row = $db->sql_fetchrow($result) )
+    while($row = $db->sql_fetchrow($result))
     {
-        $data[$row['code_name']] = ( $row['field_type'] != 'checkbox') ? $row['xdata_value'] : ( ( $row['xdata_value'] == 1 ) ? $lang['true'] : $lang['false']);
+        $data[$row['code_name']] = ($row['field_type'] != 'checkbox') ? $row['xdata_value'] : (($row['xdata_value'] == 1) ? $lang['true'] : $lang['false']);
     }
     $db->sql_freeresult($result);
 
@@ -590,7 +593,7 @@ function get_xd_metadata($force_refresh = false)
     global $db;
     static $meta = false;
 
-    if ( !is_array($meta) || $force_refresh )
+    if(!is_array($meta) || $force_refresh)
     {
         $sql = "SELECT
                 field_id,
@@ -615,18 +618,18 @@ function get_xd_metadata($force_refresh = false)
             FROM " . XDATA_FIELDS_TABLE . "
             ORDER BY field_order ASC";
 
-        if ( !($result = $db->sql_query($sql)) )
+        if(!($result = $db->sql_query($sql)))
         {
             message_die(GENERAL_ERROR, $lang['XData_failure_obtaining_field_data'], '', __LINE__, __FILE__, $sql);
         }
 
         $data = array();
 
-        while ( $row = $db->sql_fetchrow($result) )
+        while($row = $db->sql_fetchrow($result))
         {
             $data[$row['code_name']] = $row;
 
-            if ($row['field_values'] != '')
+            if($row['field_values'] != '')
             {
                 $data[$row['code_name']]['values_array'] = array('toast');
 				$values = array();
@@ -664,24 +667,24 @@ function xdata_auth($fields, $userid, $meta = false)
         $fields_sql = "xf.code_name = '$fields'";
     }
 
-    if ($meta == false)
+    if($meta == false)
     {
-        $sql = "SELECT xf.default_auth AS default_auth, xf.code_name AS code_name FROM " . XDATA_FIELDS_TABLE . " xf
+        $sql = "SELECT xf.default_auth AS default_auth, xf.code_name AS code_name FROM ".XDATA_FIELDS_TABLE." xf
 				WHERE $field_sql";
-        if (!($result = $db->sql_query($sql)))
+        if(!($result = $db->sql_query($sql)))
         {
             message_die(GENERAL_ERROR, $lang['XData_failure_obtaining_field_data'], '', __LINE__, __FILE__, $sql);
         }
 
         $meta = array();
-        while ($data = $db->sql_fetchrow($result))
+        while($data = $db->sql_fetchrow($result))
         {
             $meta[$data['code_name']]['default_auth'] = $data['default_auth'];
         }
     }
 
     $sql = "SELECT xf.code_name, xa.auth_value, g.group_single_user
-			FROM " . XDATA_FIELDS_TABLE . " xf, " . XDATA_AUTH_TABLE . " xa, " . USER_GROUP_TABLE . " ug, " . GROUPS_TABLE . " g
+			FROM ".XDATA_FIELDS_TABLE." xf, ".XDATA_AUTH_TABLE." xa, ".USER_GROUP_TABLE." ug, ".GROUPS_TABLE." g
 			WHERE xf.field_id = xa.field_id
 			  AND xa.group_id = ug.group_id
 			  AND xa.group_id = g.group_id
@@ -689,7 +692,7 @@ function xdata_auth($fields, $userid, $meta = false)
 			  AND $field_sql
 			ORDER BY g.group_single_user ASC";
 
-   if (!($result = $db->sql_query($sql)))
+   if(!($result = $db->sql_query($sql)))
    {
         message_die(GENERAL_ERROR, $lang['XData_failure_obtaining_field_auth'], '', __LINE__, __FILE__, $sql);
    }
@@ -705,7 +708,7 @@ function xdata_auth($fields, $userid, $meta = false)
         $auth[$data['code_name']] = ( $data['auth_value'] == XD_AUTH_ALLOW);
    }
 
-   if (!is_array($fields))
+   if(!is_array($fields))
    {
         return $auth[$fields];
    }
@@ -742,7 +745,7 @@ function make_jumpbox_ref($action, $match_forum_id, &$forums_list)
  [ Mod:     Forumtitle as Weblink              v1.2.2 ]
  ******************************************************/
     $sql = "SELECT c.cat_id, c.cat_title, c.cat_order
-        FROM (" . CATEGORIES_TABLE . " c, " . FORUMS_TABLE . " f)
+        FROM (".CATEGORIES_TABLE." c, ".FORUMS_TABLE." f)
         WHERE f.cat_id = c.cat_id
 		AND f.title_is_link = 0
         ".(($userdata['user_level'] == ADMIN)? "" : " AND c.cat_id<>'".HIDDEN_CAT."'" )."
@@ -760,21 +763,22 @@ function make_jumpbox_ref($action, $match_forum_id, &$forums_list)
  [ Mod:    Forumtitle as Weblink               v1.2.2 ]
  ******************************************************/ 
         $sql = "SELECT *
-            FROM " . FORUMS_TABLE . "
+            FROM ".FORUMS_TABLE."
 			WHERE title_is_link = 0
             ORDER BY cat_id, forum_order";
 /*****[END]********************************************
  [ Mod:    Forumtitle as Weblink               v1.2.2 ]
  ******************************************************/ 
-        if ( !($result = $db->sql_query($sql)) )
+        if(!($result = $db->sql_query($sql)))
         {
             message_die(GENERAL_ERROR, 'Could not obtain forums information', '', __LINE__, __FILE__, $sql);
         }
 
-        $boxstring = '<select name="' . POST_FORUM_URL . '" onchange="if(this.options[this.selectedIndex].value != -1){ forms[\'jumpbox\'].submit() }"><option value="-1">' . $lang['Select_forum'] . '</option>';
+        $boxstring = '<select name="'.POST_FORUM_URL.'" onchange="if(this.options[this.selectedIndex].value 
+		!= -1){ forms[\'jumpbox\'].submit() }"><option value="-1">'.$lang['Select_forum'].'</option>';
 
         $forum_rows = array();
-        while ( $row = $db->sql_fetchrow($result) )
+        while($row = $db->sql_fetchrow($result))
         {
             $forum_rows[] = $row;
 /*****[BEGIN]******************************************
@@ -787,7 +791,7 @@ function make_jumpbox_ref($action, $match_forum_id, &$forums_list)
         }
         $db->sql_freeresult($result);
 
-        if ( $total_forums = count($forum_rows) )
+        if($total_forums = count($forum_rows))
         {
             for($i = 0; $i < $total_categories; $i++)
             {

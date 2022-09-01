@@ -111,8 +111,15 @@ if($name):
 			    global $userinfo;
 
 			    foreach($groups as $group): 
-    			     if(isset($userinfo['groups'][$group])) 
-   			         $ingroup = true;
+    			     if(isset($userinfo['groups'][$group])):
+					 $ingroup = true;
+                 	 # Group Cookie Control START
+					 list($groupname) = $db->sql_ufetchrow("SELECT `group_name` FROM ".$prefix."_bbgroups WHERE `group_id`=".$group."", SQL_NUM);
+   			         $groupcookie = str_replace(" ", "_", $groupname);
+					 if(!isset($_COOKIE[$groupcookie]))
+					 setcookie($groupcookie, $group, time()+2*24*60*60);
+			         # Group Cookie Control END
+					 endif;
 			    endforeach;
 
 			    if(!$ingroup)

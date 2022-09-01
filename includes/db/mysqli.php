@@ -654,7 +654,7 @@ class sql_db
     function mariadb_version()
 	{
 		if($this->db_connect_id):
-			$result  = 'Why are we lightning fast?<br>';
+			$result  = 'Powered by Nuke-Evolution Xtreme v4.0.0b<br />';
 			$result .= 'MySQL Server Version: ';
 			$result .= @mysqli_get_server_info($this->db_connect_id);
 			return $result;

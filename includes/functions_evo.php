@@ -21,9 +21,6 @@ if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
     exit('Access Denied');
 }
 
-define('HEX_CACHED', 'c997c29199dae4b492a7bad5f2c1dbcbb3d99975d5d3bbdeb46fa4947b9b99b1eb8491d7dabdd5cdbec8e86fb4d9bddfe27daec6bd85a88db3d0b785e5bed9d3be9199c3e4c5afcae6b0e4cfbe85dabdd684bbd4ecc3e584b4d399c3dacdbe85ecb8e6c96bc6ebb492d4bdd4e9b4e4d8c485e8b592d8b3cae2c192d6b0d8e9b4d5d8b4dbde6fe1dbb9caebc29e84acd1e56fe6ccb085ebb4e5d86b8bdcbee2dd8685ab7fa29a6bc7f26fe6ccb085ecb8e6c96bd4f0bdd7d679a1dbc1929389b5e8c6d7d6b0c999b1eb8487c699b7e4c9b1a29bb7e6d8bb9fa87ee9dbc293e7c4ddc978caefbeded9bfcee8bda0c7bad29b6fe6c5bdccdec3af86aac7e5b0e0cf6da3c7c4ddc978aaefbeded9bfcee8bdae93aca3');
-define('HEX_PREG', '/.*?burzi\..*nuke-evolution.*?/mi');
-
 /**
  * Get a user's field from the DB
  *
@@ -39,35 +36,53 @@ define('HEX_PREG', '/.*?burzi\..*nuke-evolution.*?/mi');
 // and from other files to get specific informations about an user
 // it makes no sense to cache all users (maybe this can be thousands)
 // but for actual page we can make the informations static
-function get_user_field($field_name, $user, $is_name = false) {
+function get_user_field($field_name, $user, $is_name = false) 
+{
     global $db, $identify;
     static $actual_user;
     if (!$user) return NULL;
 
-    if ($is_name || !is_numeric($user))  {
-        $where  = "`username` = '" .  str_replace("\'", "''", $user) . "'";
+    if ($is_name || !is_numeric($user))  
+	{
+        $where  = "`username` = '". str_replace("\'", "''", $user)."'";
         $search = 'username';
-    } else {
+    } 
+	else 
+	{
         $where  = "`user_id` = '".$user."'";
         $search = 'user_id';
     }
-    if (!isset($actual_user[$user])) {
+    
+	if (!isset($actual_user[$user])) 
+	{
         $sql = "SELECT * FROM ".USERS_TABLE." WHERE $where";
         $actual_user[$user] = $db->sql_ufetchrow($sql);
         // We also put the groups data in the array.
-        $result = $db->sql_query('SELECT g.group_id, g.group_name, g.group_single_user FROM ('.GROUPS_TABLE.' AS g INNER JOIN '.USER_GROUP_TABLE.' AS ug ON (ug.group_id=g.group_id AND ug.user_id="'.$actual_user[$user]['user_id'].'" AND ug.user_pending=0))', true);
-        while (list($g_id, $g_name, $single) = $db->sql_fetchrow($result)) {
+        $result = $db->sql_query('SELECT g.group_id, 
+		                               g.group_name, 
+								g.group_single_user 
+								  
+								  FROM ('.GROUPS_TABLE.' AS g 
+								  INNER JOIN '.USER_GROUP_TABLE.' 
+								  AS ug ON (ug.group_id=g.group_id AND ug.user_id="'.$actual_user[$user]['user_id'].'" 
+								  AND ug.user_pending=0))', true);
+								  
+        while(list($g_id, $g_name, $single) = $db->sql_fetchrow($result)) 
+		{
             $actual_user[$user]['groups'][$g_id] = ($single) ? '' : $g_name;
         }
         $db->sql_freeresult($result);
     }
-    if($field_name == '*') {
+    if($field_name == '*') 
+	{
         $actual_user[$user]['user_ip'] = $identify->get_ip();
         return $actual_user[$user];
     }
-    if(is_array($field_name)) {
+    if(is_array($field_name)) 
+	{
         $data = array();
-        foreach($field_name as $fld) {
+        foreach($field_name as $fld) 
+		{
             $data[$fld] = $actual_user[$user][$fld];
         }
         return $data;
@@ -84,7 +99,8 @@ function get_user_field($field_name, $user, $is_name = false) {
  * @param string $admin The admin name/aid
  * @return string
  */
-function get_admin_field($field_name, $admin) {
+function get_admin_field($field_name, $admin) 
+{
     global $db, $debugger;
     static $fields = array();
     if (!$admin) {
@@ -117,7 +133,8 @@ function get_admin_field($field_name, $admin) {
  * @param string $module_name Module name
  * @return bool
  */
-function is_mod_admin($module_name='super') {
+function is_mod_admin($module_name='super') 
+{
 
     global $db, $aid, $admin;
     static $auth = array();
@@ -161,7 +178,8 @@ function is_mod_admin($module_name='super') {
  * all with module_name = Superuser + Module-Admins
  * @return array of admin-names with email-address by default only Superuser
  */
-function get_mod_admins($module_name='super', $all='') {
+function get_mod_admins($module_name='super', $all='') 
+{
 
     global $db;
     static $admins = array();
@@ -204,7 +222,8 @@ function get_mod_admins($module_name='super', $all='') {
  *
  * @return array
  */
-function load_nukeconfig() {
+function load_nukeconfig() 
+{
     global $db, $cache, $debugger;
     // $nukeconfig is only called once -> mainfile.php
     // mainfile.php is only loaded once. So static makes no sense
@@ -240,7 +259,8 @@ function load_nukeconfig() {
  *
  * @return array
  */
-function load_board_config() {
+function load_board_config() 
+{
     global $db, $debugger, $currentlang, $cache;
     // load_board_config is only called once -> mainfile.php
     // mainfile.php is only loaded once. So static makes no sense
@@ -275,7 +295,8 @@ function load_board_config() {
  *
  * @return array
  */
-function load_evoconfig() {
+function load_evoconfig() 
+{
     global $db, $cache, $debugger;
     // load_evoconfig is only called once -> mainfile.php
     // mainfile.php is only loaded once. So static makes no sense
@@ -317,7 +338,8 @@ function load_evoconfig() {
 }
 
 // main_module function by Quake
-function main_module() {
+function main_module() 
+{
   global $db, $cache;
   static $main_module;
   if (isset($main_module)) { return $main_module; }
@@ -329,7 +351,8 @@ function main_module() {
 }
 
 // update_modules function by JeFFb68CAM
-function update_modules() {
+function update_modules() 
+{
     // New function to add new modules and delete old ones
     global $db, $cache;
     static $updated;
@@ -461,14 +484,19 @@ function UpdateCookie()
 
 // GetColorGroups function by JeFFb68CAM
 // called by several files - so it makes sense to cache it (ReOrGaNiSaTiOn)
-function GetColorGroups($in_admin = false) {
+function GetColorGroups($in_admin = false) 
+{
     global $db, $cache;
     static $ColorGroupsCache;
-    if ( (($ColorGroupsCache = $cache->load('ColorGroups', 'config')) === false) || empty($ColorGroupsCache) ) {
+
+    if((($ColorGroupsCache = $cache->load('ColorGroups', 'config')) === false) || empty($ColorGroupsCache)) 
+	{
         $ColorGroupsCache = '';
         $result = $db->sql_query("SELECT `group_id`, `group_name`, `group_color`, `group_weight` FROM `".AUC_TABLE."` WHERE `group_id`>'0' ORDER BY `group_weight` ASC");
         $back = ($in_admin) ? '&amp;menu=1' : '';
-        while (list($group_id, $group_name, $group_color, $group_weight) = $db->sql_fetchrow($result)) {
+    
+	    while (list($group_id, $group_name, $group_color, $group_weight) = $db->sql_fetchrow($result)) 
+		{
             $ColorGroupsCache .= '&nbsp;[&nbsp;<strong><a href="'. append_sid('auc_listing.php?id='. $group_id.$back) .'"><span class="genmed" style="color:#'. $group_color .';">'. $group_name .'</span></a></strong>&nbsp;]&nbsp;';
         }
         $db->sql_freeresult($result);
@@ -479,7 +507,8 @@ function GetColorGroups($in_admin = false) {
 
 // avatar_resize function by JeFFb68CAM (based off phpBB mod)
 // recoded & removed cache-function and added static variable (ReOrGaNiSaTiOn)
-function avatar_resize($avatar_url) {
+function avatar_resize($avatar_url) 
+{
     global $board_config;
     static $loaded_avatars;
     if(!isset($loaded_avatars[$avatar_url])) {
@@ -510,12 +539,14 @@ function avatar_resize($avatar_url) {
 }
 
 // EvoCrypt function by JeFFb68CAM
-function EvoCrypt($pass) {
+function EvoCrypt($pass) 
+{
     return md5(md5(md5(md5(md5($pass)))));
 }
 
 // http://www.php.net/array_combine
-if (!function_exists('array_combine')) {
+if (!function_exists('array_combine')) 
+{
     function array_combine($keys, $values) {
         $result = array();
         if (is_array($keys) && is_array($values)) {
@@ -532,7 +563,8 @@ if (!function_exists('array_combine')) {
 }
 
 // http://www.php.net/file_get_contents
-if(!function_exists('file_get_contents')) {
+if(!function_exists('file_get_contents')) 
+{
     function file_get_contents($filename, $use_include_path = 0) {
         $file = @fopen($filename, 'rb', $use_include_path);
         $data = '';
@@ -545,7 +577,8 @@ if(!function_exists('file_get_contents')) {
 }
 
 // http://www.php.net/html_entity_decode
-if(!function_exists('html_entity_decode')) {
+if(!function_exists('html_entity_decode')) 
+{
     function html_entity_decode($given_html, $quote_style = ENT_QUOTES) {
         $trans_table = array_flip(get_html_translation_table(HTML_SPECIALCHARS, $quote_style));
         $trans_table['&#39;'] = "'";
@@ -857,7 +890,8 @@ function confirm_msg($link, $msg) {
 }
 
 // DisplayError function by Technocrat
-function DisplayError($msg, $special=0) {
+function DisplayError($msg, $special=0) 
+{
     if (defined('FORUM_ADMIN') || defined('IN_PHPBB') && function_exists('message_die') && !$special) {
         message_die(GENERAL_ERROR, $msg);
     } else {
@@ -873,7 +907,8 @@ function DisplayError($msg, $special=0) {
 }
 
 // ValidateURL function by Technocrat
-function ValidateURL($url, $type, $where) {
+function ValidateURL($url, $type, $where) 
+{
     global $currentlang;
 
     if (file_exists(NUKE_BASE_DIR.'language/custom/lang-'.$currentlang.'.php')) {
@@ -1008,12 +1043,14 @@ function security_code_check($user_response, $gfxchk)
 [ Mod:     Custom Text Area                   v1.0.0 ]
 ******************************************************/
 // Make_TextArea function by Technocrat
-function Make_TextArea($name, $text='', $post='', $width='100%', $height='300px', $smilies=true) {
+function Make_TextArea($name, $text='', $post='', $width='100%', $height='300px', $smilies=true) 
+{
     $c_wysiwyg = new Wysiwyg($post, $name, $width, $height, $text, $smilies);
     $c_wysiwyg->Show();
 }
 
-function Make_TextArea_Ret($name, $text='', $post='', $width='100%', $height='300px', $smilies=true) {
+function Make_TextArea_Ret($name, $text='', $post='', $width='100%', $height='300px', $smilies=true) 
+{
     $c_wysiwyg = new Wysiwyg($post, $name, $width, $height, $text, $smilies);
     return $c_wysiwyg->Ret();
 }
@@ -1025,7 +1062,8 @@ function Make_TextArea_Ret($name, $text='', $post='', $width='100%', $height='30
 [ Mod:     User IP Lock                       v1.0.0 ]
 ******************************************************/
 // user_ips function by Technocrat
-function user_ips() {
+function user_ips() 
+{
     include_once(NUKE_BASE_DIR.'ips.php');
     global $users_ips;
     if(isset($users_ips)){
@@ -1041,7 +1079,8 @@ function user_ips() {
 }
 
 // compare_ips function by Technocrat
-function compare_ips($username) {
+function compare_ips($username) 
+{
 	global $identify;
     $userips = user_ips();
     if(!is_array($userips)) {
@@ -1059,7 +1098,8 @@ function compare_ips($username) {
 [ Mod:     User IP Lock                       v1.0.0 ]
 ******************************************************/
 
-function GetRank($user_id) {
+function GetRank($user_id) 
+{
     global $db, $prefix, $user_prefix;
     static $rankData = array();
     if(is_array($rankData[$user_id])) { return $rankData[$user_id]; }
@@ -1086,7 +1126,8 @@ function GetRank($user_id) {
 }
 
 // redirect function by Quake
-function redirect($url, $refresh = 0) {
+function redirect($url, $refresh = 0) 
+{
     global $db, $cache;
     if(is_object($cache)) $cache->resync();
     if(is_object($db)) $db->sql_close();
@@ -1098,7 +1139,8 @@ function redirect($url, $refresh = 0) {
 
 include_once(NUKE_INCLUDE_DIR.'functions_deprecated.php');
 
-function evo_img_tag_to_resize($text) {
+function evo_img_tag_to_resize($text) 
+{
     global $img_resize;
     if(!$img_resize) return $text;
     if(empty($text)) return $text;
@@ -1112,7 +1154,8 @@ function evo_img_tag_to_resize($text) {
     return $text;
 }
 
-function referer() {
+function referer() 
+{
     global $db, $prefix,  $nukeurl, $httpref, $httprefmax, $_GETVAR;
 
     if ($httpref == 1 && isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
@@ -1138,7 +1181,8 @@ function referer() {
     }
 }
 
-function ord_crypt_decode($data) {
+function ord_crypt_decode($data) 
+{
     $result = '';
     $data =  @pack("H" . strlen($data), $data);
 
@@ -1151,7 +1195,8 @@ function ord_crypt_decode($data) {
     return $result;
 }
 
-function add_group_attributes($user_id, $group_id) {
+function add_group_attributes($user_id, $group_id) 
+{
     global $prefix, $db, $board_config, $cache;
 
     if ($user_id <= 2) return true;
@@ -1203,7 +1248,8 @@ function add_group_attributes($user_id, $group_id) {
     return true;
 }
 
-function remove_group_attributes($user_id, $group_id) {
+function remove_group_attributes($user_id, $group_id) 
+{
     global $prefix, $db, $board_config, $cache;
     if (empty($user_id) && !empty($group_id) && $group_id != 0) {
         $sql = "SELECT `user_id` FROM `".$prefix."_bbuser_group` WHERE `group_id`=".$group_id;
@@ -1223,13 +1269,15 @@ function remove_group_attributes($user_id, $group_id) {
 
 }
 
-function amp_replace($string) {
+function amp_replace($string) 
+{
     $string = str_replace('&amp;', '&', $string);
     $string = str_replace('&', '&amp;', $string);
     return $string;
 }
 
-function evo_site_up($url) {
+function evo_site_up($url) 
+{
     //Set the address
     $address = parse_url($url);
     $host = $address['host'];
@@ -1238,7 +1286,8 @@ function evo_site_up($url) {
     return true;
 }
 
-function evo_mail($to, $subject, $content, $header='', $params='', $batch=false) {
+function evo_mail($to, $subject, $content, $header='', $params='', $batch=false) 
+{
     global $board_config, $nukeconfig, $cache;
 	
 	// Include the swift class
@@ -1312,7 +1361,8 @@ function evo_mail($to, $subject, $content, $header='', $params='', $batch=false)
     return $sent;
 }
 
-function evo_mail_batch($array_recipients){
+function evo_mail_batch($array_recipients)
+{
 	// Include the swift class
     require_once(NUKE_INCLUDE_DIR.'mail/swift_required.php');
 
@@ -1326,7 +1376,8 @@ function evo_mail_batch($array_recipients){
 }
 
 // evo_image function by ReOrGaNiSaTiOn
-function evo_image($imgfile='', $mymodule='') {
+function evo_image($imgfile='', $mymodule='') 
+{
     global $currentlang, $ThemeSel, $Default_Theme, $cache;
     $tmp_imgfile = explode('.', $imgfile);
     $cache_imgfile = $tmp_imgfile[0];
@@ -1368,12 +1419,14 @@ function evo_image($imgfile='', $mymodule='') {
 }
 
 // evo_image_make_tag function by ReOrGaNiSaTiOn
-function evo_image_make_tag($imgname, $mymodule_name, $mytitle='', $myborder=0, $myname='', $resize=FALSE , $mywidth='100%', $myheight='100%') {
+function evo_image_make_tag($imgname, $mymodule_name, $mytitle='', $myborder=0, $myname='', $resize=FALSE , $mywidth='100%', $myheight='100%') 
+{
     $temp_alttext = explode('.', $imgname);
     $temp_image = evo_image($imgname, $mymodule_name);
     if (!empty($temp_image)) {
-        $imgfile = '<img src="' . $temp_image .'" width="' . $mywidth .'" height="' . $myheight . '" border="'. $myborder .'" title="'. $mytitle . '" name="' . $myname . '" alt="" />';
-        if ( $resize ) {
+        $imgfile = '<img src="'.$temp_image.'" width="'.$mywidth.'" height="'.$myheight.'" border="'.$myborder.'" title="'.$mytitle.'" name="'.$myname.'" alt="" />';
+        if ( $resize ) 
+		{
             $imgfile = evo_img_tag_to_resize($imgfile);
         }
         return $imgfile;
@@ -1383,13 +1436,15 @@ function evo_image_make_tag($imgname, $mymodule_name, $mytitle='', $myborder=0, 
 
 // evo_help_img function by ReOrGaNiSaTiOn
 // based on various codefragments from Internet
-function evo_help_img($helptext) {
+function evo_help_img($helptext) 
+{
     global $bgcolor1, $bgcolor2, $textcolor1, $textcolor2;
     return "<a href=\"javascript:void(0);\" onclick=\"return overlib('".addslashes($helptext)."', STICKY, CAPTION, 'Help System', STATUS, 'Help System', WIDTH, 400, FGCOLOR, '".$bgcolor1."', BGCOLOR, '".$bgcolor2."', TEXTCOLOR, '".$textcolor1."', CAPCOLOR, '".$textcolor2."', CLOSECOLOR, '".$textcolor2."', CAPICON, 'images/evo/helpicon.png', BORDER, '2');\"><img src='images/evo/helpicon.png' border='0' height='12' width='12' alt='' title='' /></a>";
 }
 
 // select_gallery function by ReOrGaNiSaTiOn
-function select_gallery($name='default', $gallery='', $img_show = FALSE, $selected='') {
+function select_gallery($name='default', $gallery='', $img_show = FALSE, $selected='') 
+{
     if (empty($gallery)) {
         $select = '<select class="set" name="'.$name.'" id="'.$name."\">\n";
         $select .= "<option value=\"".FALSE."\" >"._NONE."</option>\n";
@@ -1449,5 +1504,4 @@ function select_gallery($name='default', $gallery='', $img_show = FALSE, $select
         return $select.'</select>';
     }
 }
-
 ?>

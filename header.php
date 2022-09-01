@@ -2,7 +2,6 @@
 /*======================================================================= 
   PHP-Nuke Titanium | Nuke-Evolution Xtreme : PHP-Nuke Web Portal System
  =======================================================================*/
-
 /************************************************************************/
 /* PHP-NUKE: Advanced Content Management System                         */
 /* ============================================                         */
@@ -14,7 +13,6 @@
 /* it under the terms of the GNU General Public License as published by */
 /* the Free Software Foundation; either version 2 of the License.       */
 /************************************************************************/
-
 /*****[CHANGES]**********************************************************
 -=[Base]=-
       NukeSentinel                             v2.5.00      07/11/2006
@@ -79,9 +77,9 @@ function head()
     include_once(NUKE_INCLUDE_DIR.'meta.php');
 
     # START function to grab the page title. - 09/07/2019
-    echo "<!-- START title_and_meta_tags(); -->\n";
+ 	echo "\n\n<!-- START title_and_meta_tags(); -->\n";
  	title_and_meta_tags();
-    echo "<!-- END title_and_meta_tags(); -->\n\n";
+    echo "<!-- END title_and_meta_tags(); -->\n\n\n\n\n\n";
     # END function to grab the page title. - 09/07/2019
 
 	################################################################
@@ -156,14 +154,12 @@ function head()
 
     global $browser;
     
-	if(isset($modheader)) 
-	echo $modheader; 
-
     echo "\n\n<!-- START writeHEAD() -->\n\n";
     writeHEAD();
     echo "\n<!-- END writeHEAD() -->\n\n";
 
-    echo "\n\n<!-- START custom_head -->\n\n";
+    /*
+	echo "\n\n<!-- START custom_head -->\n\n";
 	if ((($custom_head = $cache->load('custom_head', 'config')) === false) || empty($custom_head)): 
         $custom_head = array();
 	    if (file_exists(NUKE_INCLUDE_DIR.'custom_files/custom_head.php')) 
@@ -184,8 +180,9 @@ function head()
         endif;
     endif;
     echo "\n<!-- END custom_head -->\n\n";
-
-    /* ----- as you can probably tell this is used for IE compatibility ----- */
+    */
+    
+	/* ----- as you can probably tell this is used for IE compatibility ----- */
     echo '<!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script><![endif]-->'."\n";
     echo "</head>\n";
     echo "\n<!-- END </head> -->\n\n";
@@ -195,6 +192,10 @@ function head()
 	echo "<!-- END Top Primary Body Tags -->\n\n";
 
     themeheader();
+
+	// used for class ckeditor
+	if(isset($modheader)) 
+	echo $modheader; 
 
 /*****[BEGIN]******************************************
  [ Base:    NukeSentinel                      v2.5.00 ]
@@ -206,6 +207,8 @@ function head()
  ******************************************************/
 }
 
+head();
+
 function online() 
 {
     global $prefix, $db, $name, $board_config, $userinfo, $identify;
@@ -215,21 +218,20 @@ function online()
     $guest = 1;
     $user_agent = $identify->identify_agent();
 	
-	if (is_user()):
-		$uname = $userinfo['username'];
-        $guest = 0;
-/*****[BEGIN]******************************************
- [ Base:    Advanced Security Extension        v1.0.0 ]
- ******************************************************/
-    elseif($user_agent['engine'] == 'bot'):
-        $uname = $user_agent['bot'];
-		$guest = 3;
-/*****[END]********************************************
- [ Base:    Advanced Security Extension        v1.0.0 ]
- ******************************************************/
-    elseif($user_agent['engine'] == ''):
+	if(is_user()):
+	$uname = $userinfo['username'];
+    $guest = 0;
+	else:
 
+    //if(($user_agent['engine'] == 'bot')):
+    //$uname = $user_agent['bot'];
+	//$guest = 3;
+    //endif;
+    
+	//if(($user_agent['engine'] == '')):
+	//endif;
     # Facebook IP Range
+
 	if( 
 	   ($ip == '173.252.127.24') 
 	|| ($ip == '173.252.127.12') 
@@ -267,10 +269,6 @@ function online()
     || ($ip == '69.171.251.11')	
     || ($ip == '69.171.251.116')	
     || ($ip == '69.171.251.22')
-
-    || ($ip == '54.36.149.13')	
-	|| ($ip == '13.66.139.107')
-	|| ($ip == '92.118.160.61')
 	){
 
         $uname = 'Facebook';
@@ -284,6 +282,16 @@ function online()
 		$guest = 3;
 
 	}
+
+    # This is SoftLayer Technologies Inc.
+	if($ip == '92.118.160.61'){
+
+        $uname = 'SoftLayer Tech';
+		$guest = 3;
+
+	}
+
+
     # This is Apple Bot
 	if($ip == '17.58.99.233'){
 
@@ -292,7 +300,7 @@ function online()
 
 	}
     # This is a Tor Exit Router
-	if($ip == '	199.16.157.183'){
+	if($ip == '199.16.157.183'){
 
         $uname = 'Twitter Bot';
 		$guest = 3;
@@ -313,11 +321,26 @@ function online()
 		$guest = 3;
 
 	}
+
+	# FRANCE 
+	# The Project Honey Pot system has detected behavior from the IP address consistent with that of a rule breaker.
+	if(($ip == '54.36.149.40') 
+    || ($ip == '54.36.149.13')
+	|| ($ip == '54.36.149.71')
+	|| ($ip == '54.36.149.13')
+	|| ($ip == '54.36.149.36')	
+	|| ($ip == '54.36.148.112'))
+	{
+
+        $uname = '<img src="https://www.projecthoneypot.org/images/flags/fr.png" title="France" alt="France">&nbsp;France Gangster Spider';
+		$guest = 3;
+
+	}
+
 	# Bing Bot - The MSN Bot retired in 2010 
 	# Perhaps Facebook bought Bing Bot or ended up with the IP some how?
 	if(($ip == '13.66.139.157') 
 	|| ('13.66.139.19')
-	|| ('157.55.39.150')
 	){
 
         $uname = 'Bing Bot';
@@ -353,8 +376,40 @@ function online()
 		$guest = 3;
 
 	}	
-	endif;
 
+	# Hetzner Online GmbH
+	if(($ip == '157.90.203.58')
+	|| ($ip == '116.202.175.208')
+	|| ($ip == '94.130.143.149')
+	)
+	{
+
+        $uname = 'Hetzner Online GmbH';
+		$guest = 3;
+
+	}	
+
+	# Microsoft Corporation
+	if(($ip == '13.66.139.107')
+	|| ('157.55.39.150')
+	|| ($ip == '13.68.247.245'))
+	{
+
+        $uname = 'Microsoft Corp';
+		$guest = 3;
+
+	}	
+
+	# PRTG Network Monitor
+	if($ip == '162.244.33.25'){
+
+        $uname = 'PRTG Network Monitor';
+		$guest = 3;
+
+	}
+	
+	endif;
+	
     $custom_title = $name;
     $url = str_replace("&amp;", "&", $url);
 	$url = addslashes($url);
@@ -397,7 +452,6 @@ function online()
 }
 
 online();
-head();
 
 /*****[BEGIN]******************************************
  [ Mod:    NSN Center Blocks                   v2.2.1 ]
